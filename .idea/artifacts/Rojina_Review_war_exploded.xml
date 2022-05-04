@@ -13,6 +13,12 @@
         <element id="directory" name="classes">
           <element id="module-output" name="Rojina Review" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.28" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-jdbc:10.0.17" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-juli:10.0.17" />
+        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/RojinaReview-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
