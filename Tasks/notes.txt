@@ -1,0 +1,2 @@
+null in StatoProdotto.numero (chiave esterna di ordine) significa che il prodotto di quel carrello non specifica
+un ordine e quel prodotto appartiene al carrello di qualcuno

@@ -1,0 +1,10 @@
+Andrea:
+1.Gestione servlet loadOnStartup
+2. Revisione beans
+
+Carmine:
+1.Gestione database
+
+
+Carlo:
+1.Prima stesura parte front-end grafica
