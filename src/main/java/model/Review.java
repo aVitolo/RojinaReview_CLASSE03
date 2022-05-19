@@ -1,14 +1,17 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class Review {
     private String giornalista;
-    private String gioco;
     private String titolo;
+    private String sottotitolo;
     private float voto;
     private Date dataCaricamento;
+    private Game gioco;
+    private ArrayList<Commento> commenti;
 
     /*
     Possibili altri attributi:
@@ -27,15 +30,25 @@ public class Review {
         return giornalista;
     }
 
+    public String getSottotitolo() { return sottotitolo; }
+
+    public void setSottotitolo(String sottotitolo) { this.sottotitolo = sottotitolo; }
+
+    public Game getGioco() { return gioco; }
+
+    public ArrayList<Commento> getCommenti() { return commenti; }
+
+    public void setCommenti(ArrayList<Commento> commenti) { this.commenti = commenti; }
+
     public void setGiornalista(String giornalista) {
         this.giornalista = giornalista;
     }
 
-    public String getGioco() {
+    public Game getGiocGo() {
         return gioco;
     }
 
-    public void setGioco(String gioco) {
+    public void setGioco(Game gioco) {
         this.gioco = gioco;
     }
 

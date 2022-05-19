@@ -1,2 +1,11 @@
+18/05/2022
+
 null in StatoProdotto.numero (chiave esterna di ordine) significa che il prodotto di quel carrello non specifica
 un ordine e quel prodotto appartiene al carrello di qualcuno
+
+19/05/2022
+
+Riflessione sui commenti
+
+Dobbiamo capire bene come creare la tabella commenti in modo tale che l'attributo atricolo si riferisca ad una recensione o ad un articolo
+

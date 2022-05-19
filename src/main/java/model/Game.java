@@ -1,6 +1,8 @@
 package model;
 
+import java.sql.Array;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class Game {
@@ -9,19 +11,17 @@ public class Game {
     private String casaDiSviluppo;
     private float mediaVoto;
     private int numeroVoti;
-
+    private ArrayList<String> piattaforme;
+    private ArrayList<String> categorie;
     /*
     Possibili altri attributi:
         -copertina del gioco
-
      */
 
     /*
     Considerazioni:
-        Un gioco appartendo potendo appartenere a piu categorie e giocabile su piu piattaforme
-        a livello di DB porta a delle rieficazione e quindi alla interrogazione di altre tabelle
-        e di conseguenza all'utilizzo di due liste.
-        Per evitare di creare un'ulteriore beans a DAO potremmo aggiungere le lista tra gli attributi di questo beans
+       Al posto di creare due beans, Piattaforme e Categorie, definiamo due array di stringhe.
+       Credo sia giusto creare due array, Piattaform e Categorie, nel servlet context da utilizzare per i filtri di ricerca.
      */
 
     /* Constructor */
@@ -67,7 +67,13 @@ public class Game {
         return numeroVoti;
     }
 
-    public void setNumeroVoti(int numeroVoti) {
-        this.numeroVoti = numeroVoti;
-    }
+    public void setNumeroVoti(int numeroVoti) { this.numeroVoti = numeroVoti; }
+
+    public ArrayList<String> getPiattaforme() { return piattaforme; }
+
+    public void setPiattaforme(ArrayList<String> piattaforme) { this.piattaforme = piattaforme; }
+
+    public ArrayList<String> getCategorie() { return categorie; }
+
+    public void setCategorie(ArrayList<String> categorie) { this.categorie = categorie; }
 }
