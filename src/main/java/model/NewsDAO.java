@@ -4,15 +4,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class NewsDAO {
 
     /*
-    Considerazioni
-    -Aggiungere Corpo e Sottoticolo alla tabella Notizia
-    -Aggiungere la tabella Commento al DB
-
+        Considerazioni
+        -Aggiungere Corpo e Sottoticolo alla tabella Notizia
+        -Aggiungere la tabella Commento al DB
      */
+
     public News doRetrieveByTitle(String titolo) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
@@ -41,14 +42,12 @@ public class NewsDAO {
                 }
 
                 /*
-
                     Aggiungere singolarmnete i commenti
-
                     Eseguendo la seguente query ottengo tutti i commenti connessi alla recensione
                     Quindi ad ogni riga corrisponde un beans che vado ad aggiungere alla lista dei commenti
+                */
 
-                 */
-
+                /*
                 ps = con.prepareStatement("SELECT Testo, Data, User FROM commento WHERE Articolo=?");
                 ps.setString(1, titolo);
                 rs = ps.executeQuery();
@@ -60,13 +59,14 @@ public class NewsDAO {
                     c.setUser(rs.getString(3));
                     n.getCommenti().add(c);
                 }
+                */
 
                 /*
                     Aggiungere direttamente tutti i commenti
+                */
 
-                    CommentoDAO cDAO = new CommentoDAO();
-                    r.getCommenti().add(cDAO.getCommentByArticol(titolo));
-                 */
+                CommentoDAO cDAO = new CommentoDAO();
+                n.setCommenti(cDAO.getCommentByArticol(titolo));
 
                 return n;
             }
@@ -76,4 +76,7 @@ public class NewsDAO {
         }
     }
 
+    public ArrayList<News> doRetrieveLast() {
+        return null;
+    }
 }
