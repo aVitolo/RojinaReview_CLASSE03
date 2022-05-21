@@ -1,11 +1,10 @@
 package model;
 
-import java.sql.Array;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 public class Game {
+
     private String titolo;
     private Date DataDiRilascio;
     private String casaDiSviluppo;

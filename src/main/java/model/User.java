@@ -8,6 +8,7 @@ public class User {
     private String nickname;
     private String nome;
     private String cognome;
+    // private Strin passrword; // Da valutare
     private int eta;
     private ArrayList<String> address;
     private ArrayList<String> cellNumbers;
@@ -56,5 +57,13 @@ public class User {
     public ArrayList<Ordine> getOrdini() { return ordini; }
 
     public void setOrdini(ArrayList<Ordine> ordini) { this.ordini = ordini; }
+
+    public int getEta() {return eta;}
+
+    public void setEta(int eta) {this.eta = eta;}
+
+    public ArrayList<PaymentMethod> getMetodiPagamento() { return metodiPagamento;}
+
+    public void setMetodiPagamento(ArrayList<PaymentMethod> metodiPagamento) { this.metodiPagamento = metodiPagamento;}
 
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Carrello {
 
     private ArrayList<Product> carrello;
+    private Float total; //Da valutare
 
     /* Constructor */
 

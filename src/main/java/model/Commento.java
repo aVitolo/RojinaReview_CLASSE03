@@ -3,11 +3,16 @@ package model;
 import java.util.Date;
 
 public class Commento {
+
     private String testo;
     private String user;
     private Date data;
 
+    /* Constructor */
+
     public Commento() {};
+
+    /* Getter & Setter */
 
     public String getTesto() { return testo; }
 

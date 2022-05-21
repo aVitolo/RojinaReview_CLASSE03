@@ -11,7 +11,7 @@ public class News {
     private String corpo;
     private String sottotitolo;
     private ArrayList<Commento> commenti;
-    private ArrayList<Game> giochi;
+    private ArrayList<Game> giochi; // da valutare
 /*
     Possibili altri attributi:
         -immagine di copertina
