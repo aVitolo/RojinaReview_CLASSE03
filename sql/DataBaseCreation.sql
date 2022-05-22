@@ -4,11 +4,10 @@ create database RojinaReview;
 use RojinaReview;
 
 create table Giornalista(
-                            cf 				varchar(16),
+                            id 				tinyint auto_increment,
                             nome 			varchar(30) not null,
                             cognome 		varchar(30) not null,
-                            check (cf regexp '[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]'),
-    check (nome regexp '[a-zA-Z ]{1,30}'),
+                            check (nome regexp '[a-zA-Z ]{1,30}'),
     check (cognome regexp '[a-zA-Z\' ]{1,30}'),
 	primary key(cf)
 );
@@ -19,54 +18,55 @@ create table Gioco(
 	casaDiSviluppo	varchar(30) not null,
 	mediaVoto		float(4,2) not null,
 	numeroVoti		int not null,
+    copertina		blob,
 	primary key(titolo)
 );
 
 create table Recensione(
-	codice			int auto_increment,
-    testo			varchar(100),
+	id				int auto_increment,
+    testo			text,
 	giornalista		varchar(16),
 	gioco   		varchar(50),
 	titolo 			varchar(100) unique,
 	voto 			float not null,
 	dataCaricamento	date not null,
 	foreign key(giornalista)
-				references Giornalista(cf)
+				references Giornalista(id)
 				on update cascade,
 	foreign key(gioco)
 				references Gioco(titolo)
-				on delete cascade
+				on delete set null
 				on update cascade,
-	primary key(codice),
+	primary key(id),
 	check (voto<=10 and voto>=1)
 );
 
 create table Notizia(
-	codice			int auto_increment,
-    testo   		varchar(100),
+	id				int auto_increment,
+    testo   		text,
 	giornalista  	varchar(30),
 	titolo			varchar(100) unique,
 	dataCaricamento	date not null,
 	foreign key(giornalista)
-				references Giornalista(cf)
+				references Giornalista(id)
 				on update cascade,
-	primary key(codice)
+	primary key(id)
 );
 
-create table Informare(
-	giornalista		varchar(30),
-	notizia 		varchar(100),
+create table Gioco_Notizia(
+	giornalista		tinyint,
+	notizia 		tinyint,
 	gioco 			varchar(50),
 	foreign key(giornalista)
-				references Giornalista(cf)
+				references Giornalista(id)
 				on update cascade,
 	foreign key(notizia)
-				references Notizia(titolo)
-				on delete cascade
+				references Notizia(id)
+				on delete set null
 				on update cascade,
 	foreign key(gioco)
 				references Gioco(titolo)
-				on delete cascade
+				on delete set null
 				on update cascade,
 	primary key(giornalista, notizia, gioco)
 );
@@ -82,30 +82,30 @@ create table Tipologia(
 	primary key(nome)
 );
 
-create table Giocare(
+create table Gioco_Piattaforma(
 	gioco			varchar(50),
 	piattaforma		varchar(30),
 	foreign key(gioco)
 				references Gioco(titolo)
-				on delete cascade
+				on delete set null
 				on update cascade,
 	foreign key(piattaforma)
 				references Piattaforma(nome)
-				on delete cascade
+				on delete set null
 				on update cascade,
 	primary key(gioco, piattaforma)
 );
 
-create table Appartenere(
+create table Gioco_Tipologia(
 	gioco			varchar(50),
 	tipologia		varchar(30),
  	foreign	key(gioco)
 				references Gioco(titolo)
-				on delete cascade
+				on delete set null
 				on update cascade,
    	foreign key(tipologia)
 				references  Tipologia(nome)
-				on delete cascade
+				on delete set null
 				on update cascade,
 	primary key(Gioco, Tipologia)
 );
@@ -113,26 +113,65 @@ create table Appartenere(
 create table Utente(
 	email 			varchar(30),
 	nickname 		varchar(30) not null unique,
-	pass 			varchar(30) not null,
-   	abbonato		boolean not null,
+	pass 			varchar(2500) not null, -- da criptare
 	nome			varchar(30),
 	cognome			varchar(30),
 	età				tinyint,
 	primary key(email)
 );
 
-create table Commento(
-	utente			varchar(30),
-    testo			varchar(100),
-    dataScrittura   datetime,
-    codiceR			int,
-    codiceN			int,
+create table Indirizzo(
+	utente 			varchar(30),
+	via				varchar(30),
+	numeroCivico	smallint,
+	città			varchar(30),
+	cap				varchar(6),
     foreign key(utente)
-				references Utente(email),
-	foreign key(codiceR)
-				references Recensione(codice),
-	foreign key(codiceN)
-				references Notizia(codice),
+				references Utente(email)
+                on delete cascade
+                on update cascade,
+	primary key(utente, via, numeroCivico, città, cap)
+);
+
+create table Telefono(
+	utente 			varchar(30),
+	numero 			varchar(10),
+	foreign key(utente)
+				references Utente(email)
+				on delete cascade
+				on update cascade, -- da aggiungere regexp
+	primary key(utente,numero)
+);
+
+create table CommentoNotizia(
+	utente			varchar(30),
+    testo			tinytext,
+    dataScrittura   datetime,
+    notizia			tinyint,
+    foreign key(utente)
+				references Utente(email)
+                on delete cascade
+				on update cascade,
+	foreign key(notizia)
+				references Notizia(id)
+                on delete cascade
+				on update cascade,
+	primary key(utente, dataScrittura)
+);
+
+create table CommentoRecensione(
+	utente 			varchar(30),
+    testo			tinytext,
+    dataScrittura	datetime,
+	recensione		tinyint,
+    foreign key(utente)
+				references Utente(email)
+                on delete cascade
+				on update cascade,
+	foreign key(recensione)
+				references Recensione(id)
+                on delete cascade
+				on update cascade,
 	primary key(utente, dataScrittura)
 );
 
@@ -147,40 +186,21 @@ create table Voto(
 				on update cascade,
 	foreign key(utente)
 				references Utente(email)
+                on delete set null
 				on update cascade,
 	primary key(gioco,utente,dataVotazione),
 	check (voto<=10 and voto>=1)
 );
 
 create table Pagamento(
+	nome			varchar(30),
+    cognome			varchar(30),
 	utente			varchar(30),
     numeroCarta		varchar(20),
     dataScadenza	date,
-    cvv				varchar(4),
     foreign key(utente)
 				references Utente(email),
 	primary key(utente, numeroCarta)
-);
-
-create table Indirizzo(
-	utente 			varchar(30),
-	via				varchar(30),
-	numeroCivico	smallint,
-	città			varchar(30),
-	cap				varchar(6),
-    foreign key(utente)
-				references Utente(email),
-	primary key(utente, via, numeroCivico, città, cap)
-);
-
-create table Telefono(
-	utente 			varchar(30),
-	numero 			varchar(10),
-	foreign key(utente)
-				references Utente(email)
-				on delete cascade
-				on update cascade,
-	primary key(utente,numero)
 );
 
 create table Ordine(
@@ -206,9 +226,10 @@ create table Ordine(
 create table Prodotto(
 	id				int auto_increment,
     nome			varchar(30),
-    descrizione		varchar(100), -- inteso come path al file di testo
+    descrizione		tinytext, -- inteso come path al file di testo
 	disponibilità  	int,
     prezzo			float,
+    sconto 			tinyint,
 	primary key(id)
 );
 

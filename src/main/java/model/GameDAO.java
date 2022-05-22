@@ -56,3 +56,7 @@ public class GameDAO {
     }
 
 }
+
+/* aggiornamento voto: la servlet invia il nuovo voto al DAO, questo controlla
+se il voto è già presente o meno e quindi fare insert o update
+ */

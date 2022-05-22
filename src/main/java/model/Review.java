@@ -7,7 +7,6 @@ import java.util.GregorianCalendar;
 public class Review {
     private String giornalista;
     private String titolo;
-    private String sottotitolo;
     private float voto;
     private Date dataCaricamento;
     private Game gioco;
