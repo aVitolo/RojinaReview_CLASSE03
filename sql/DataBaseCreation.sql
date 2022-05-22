@@ -4,171 +4,260 @@ create database RojinaReview;
 use RojinaReview;
 
 create table Giornalista(
-	CF 		varchar(16),
-	Nome 		varchar(30) 
-			not null,
-	Cognome 	varchar(30) 
-			not null,
-	check (CF regexp '[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]'),
-    check (Nome regexp '[a-zA-Z ]{1,30}'),
-    check (Cognome regexp '[a-zA-Z\' ]{1,30}'),
-	primary 	key(CF)
+                            cf 				varchar(16),
+                            nome 			varchar(30) not null,
+                            cognome 		varchar(30) not null,
+                            check (cf regexp '[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]'),
+    check (nome regexp '[a-zA-Z ]{1,30}'),
+    check (cognome regexp '[a-zA-Z\' ]{1,30}'),
+	primary key(cf)
 );
 
-create table Utente(
-	Email 		varchar(30),
-	Nickname 	varchar(30) 
-			not null
-			unique,
-	Pass 		varchar(30) 
-			not null,
-   	Abbonato	boolean 
-			not null,
-	    	
-	Nome		varchar(30) , 
-	Cognome	varchar(30) , 
-	Età		tinyint,	
-	Via		varchar(30), 	
-	Numero_Civico	smallint, 
-	Città		varchar(30), 
-	Cap		varchar(5),
-	primary 	key(Email)
-);
-create table Telefono(
-	Utente 		varchar(30),
-	Numero 	varchar(10),
-	foreign 		key (Utente)
-	 		references Utente(Email)
-			on delete cascade
-			on update cascade,
-	primary 	key(Utente,Numero)
-);
 create table Gioco(
-	Titolo 		varchar(50),
-	DataDiRilascio 	date,
-	CasaDiSviluppo	varchar(30) 
-			not null,
-	MediaVoto	float(4,2)
-			not null,
-	NumeroVoti	int
-			not null,
-	primary 	key(Titolo)
+	titolo 			varchar(50),
+	dataDiRilascio 	date,
+	casaDiSviluppo	varchar(30) not null,
+	mediaVoto		float(4,2) not null,
+	numeroVoti		int not null,
+	primary key(titolo)
 );
-create table Piattaforma(
-	Nome		varchar(30),
-	primary		key(Nome)
-);
-create table Tipologia(
-	Descrizione	varchar(30),
-	primary 	key(Descrizione)
-);
+
 create table Recensione(
-	Giornalista		varchar(16),
-	Gioco   		varchar(50),
-	Titolo 			varchar(100) unique,
-	Voto 			float 
-				not null,
-	DataCaricamento	date 
-				not null,
-	foreign 			key(Giornalista)
-				references Giornalista(CF)
+	codice			int auto_increment,
+    testo			varchar(100),
+	giornalista		varchar(16),
+	gioco   		varchar(50),
+	titolo 			varchar(100) unique,
+	voto 			float not null,
+	dataCaricamento	date not null,
+	foreign key(giornalista)
+				references Giornalista(cf)
 				on update cascade,
-	foreign 			key(Gioco)
-				references Gioco(Titolo)
+	foreign key(gioco)
+				references Gioco(titolo)
 				on delete cascade
 				on update cascade,
-	primary 		key(Giornalista, Gioco, Titolo),
-	check 			(Voto<=10 and voto>=1)
+	primary key(codice),
+	check (voto<=10 and voto>=1)
 );
 
 create table Notizia(
-	Giornalista  		varchar(30),
-	Titolo			varchar(100) unique,
-	DataCaricamento	date 
-				not null,
-	foreign 			key(Giornalista)
-				references Giornalista(CF)
+	codice			int auto_increment,
+    testo   		varchar(100),
+	giornalista  	varchar(30),
+	titolo			varchar(100) unique,
+	dataCaricamento	date not null,
+	foreign key(giornalista)
+				references Giornalista(cf)
 				on update cascade,
-	primary 		key(Titolo,Giornalista)
+	primary key(codice)
 );
 
 create table Informare(
-	Giornalista	varchar(30),
-	Notizia 		varchar(100),
-	Gioco 		varchar(50),
-	foreign 		key (Giornalista)
-			references Giornalista(CF)
-			on update cascade,
-	foreign 		key  (Notizia)
-			references Notizia(Titolo)
-			on delete cascade
-			on update cascade,
-	foreign 		key (Gioco)  
-			references Gioco(Titolo)
-			on delete cascade
-			on update cascade,
-	primary 	key(Giornalista, Notizia, Gioco)
-);
-
-create table Voto(
-	Gioco  			varchar(50),
-	Utente  			varchar(30),
-	Voto 			float not null,
-	DataVotazione		date,     
-	foreign 			key (Gioco) 	
-				references Gioco(Titolo)
+	giornalista		varchar(30),
+	notizia 		varchar(100),
+	gioco 			varchar(50),
+	foreign key(giornalista)
+				references Giornalista(cf)
+				on update cascade,
+	foreign key(notizia)
+				references Notizia(titolo)
 				on delete cascade
 				on update cascade,
-	foreign 			key (Utente)         
-				references Utente(Email)
+	foreign key(gioco)
+				references Gioco(titolo)
+				on delete cascade
 				on update cascade,
-	primary 		key(Gioco,Utente,DataVotazione),
-	check 			(Voto<=10 and Voto>=1)
+	primary key(giornalista, notizia, gioco)
+);
+
+create table Piattaforma(
+	nome			varchar(30),
+    brand 			varchar(30),
+	primary	key(nome)
+);
+
+create table Tipologia(
+	nome			varchar(30),
+	primary key(nome)
 );
 
 create table Giocare(
-	Gioco		varchar(50),
-	Piattaforma	varchar(30),
-	foreign 		key (Gioco) 
-			references Gioco(Titolo)
-			on delete cascade
-			on update cascade,
-	foreign 		key (Piattaforma) 
-			references  Piattaforma(Nome)
-			on delete cascade
-			on update cascade,
-	primary key(Gioco, Piattaforma)
+	gioco			varchar(50),
+	piattaforma		varchar(30),
+	foreign key(gioco)
+				references Gioco(titolo)
+				on delete cascade
+				on update cascade,
+	foreign key(piattaforma)
+				references Piattaforma(nome)
+				on delete cascade
+				on update cascade,
+	primary key(gioco, piattaforma)
 );
 
 create table Appartenere(
-	Gioco		varchar(50),
-	Tipologia	varchar(30),  
- 	foreign		key (Gioco)
-			references Gioco(Titolo) 
-            			on delete cascade
-			on update cascade,
-   	foreign 		key (Tipologia) 
-			references  Tipologia(Descrizione)
-			on delete cascade
-			on update cascade,
-	primary 	key(Gioco, Tipologia)
+	gioco			varchar(50),
+	tipologia		varchar(30),
+ 	foreign	key(gioco)
+				references Gioco(titolo)
+				on delete cascade
+				on update cascade,
+   	foreign key(tipologia)
+				references  Tipologia(nome)
+				on delete cascade
+				on update cascade,
+	primary key(Gioco, Tipologia)
+);
+
+create table Utente(
+	email 			varchar(30),
+	nickname 		varchar(30) not null unique,
+	pass 			varchar(30) not null,
+   	abbonato		boolean not null,
+	nome			varchar(30),
+	cognome			varchar(30),
+	età				tinyint,
+	primary key(email)
+);
+
+create table Commento(
+	utente			varchar(30),
+    testo			varchar(100),
+    dataScrittura   datetime,
+    codiceR			int,
+    codiceN			int,
+    foreign key(utente)
+				references Utente(email),
+	foreign key(codiceR)
+				references Recensione(codice),
+	foreign key(codiceN)
+				references Notizia(codice),
+	primary key(utente, dataScrittura)
+);
+
+create table Voto(
+	gioco  			varchar(50),
+	utente  		varchar(30),
+	voto 			float not null,
+	dataVotazione	date,
+	foreign key(gioco)
+				references Gioco(titolo)
+				on delete cascade
+				on update cascade,
+	foreign key(utente)
+				references Utente(email)
+				on update cascade,
+	primary key(gioco,utente,dataVotazione),
+	check (voto<=10 and voto>=1)
+);
+
+create table Pagamento(
+	utente			varchar(30),
+    numeroCarta		varchar(20),
+    dataScadenza	date,
+    cvv				varchar(4),
+    foreign key(utente)
+				references Utente(email),
+	primary key(utente, numeroCarta)
+);
+
+create table Indirizzo(
+	utente 			varchar(30),
+	via				varchar(30),
+	numeroCivico	smallint,
+	città			varchar(30),
+	cap				varchar(6),
+    foreign key(utente)
+				references Utente(email),
+	primary key(utente, via, numeroCivico, città, cap)
+);
+
+create table Telefono(
+	utente 			varchar(30),
+	numero 			varchar(10),
+	foreign key(utente)
+				references Utente(email)
+				on delete cascade
+				on update cascade,
+	primary key(utente,numero)
+);
+
+create table Ordine(
+	numero			int auto_increment,
+    stato			varchar(30),
+    tracking		varchar(50), -- link che porta al sito tracking
+    dataOrdine		date,
+    pagamento    	varchar(20),
+    utente			varchar(30),
+    viaI			varchar(30),
+    numeroCivicoI	smallint,
+    cittàI 			varchar(30),
+    capI			varchar(6),
+    foreign key(utente, pagamento)
+				references Pagamento(utente, numeroCarta),
+	foreign key(utente)
+				references Utente(email),
+	foreign key(utente, viaI, numeroCivicoI, cittàI, capI)
+				references Indirizzo(utente, via, numeroCivico, città, cap),
+    primary key(numero)
+);
+
+create table Prodotto(
+	id				int auto_increment,
+    nome			varchar(30),
+    descrizione		varchar(100), -- inteso come path al file di testo
+	disponibilità  	int,
+    prezzo			float,
+	primary key(id)
+);
+
+create table Categoria(
+	nome			varchar(30),
+    descrizione		varchar(200), -- ???
+    primary key(nome)
+);
+
+create table Riferire(
+	prodotto		int,
+    categoria		varchar(30),
+    foreign key(prodotto)
+				references Prodotto(id),
+	foreign key(categoria)
+				references Categoria(nome),
+	primary key(prodotto, categoria)
+);
+
+create table StatoProdotto(
+	prodotto		int,
+    utente 			varchar(30),
+    sconto			tinyint,
+    quantità		tinyint,
+    ordine			int,
+    foreign key(utente)
+				references Utente(email),
+    foreign key(prodotto)
+				references Prodotto(id),
+	foreign key(ordine)
+				references Ordine(numero),
+	primary key(prodotto, utente)
 );
 
 DELIMITER //
 create trigger AggiornaVoto
-before insert on Voto 
-for each row 
+before insert on Voto
+for each row
 begin
 if (select count(*) from Voto where new.Utente=Utente and new.Gioco=Gioco) = 0 then
 
-update Gioco 
-set  MediaVoto = (MediaVoto*NumeroVoti + new.Voto) / (NumeroVoti+1), NumeroVoti = NumeroVoti+1 
+update Gioco
+set  MediaVoto = (MediaVoto*NumeroVoti + new.Voto) / (NumeroVoti+1), NumeroVoti = NumeroVoti+1
 where new.Gioco=Titolo;
 
-else 
+else
 
-update Gioco 
-set  MediaVoto = ( MediaVoto*NumeroVoti - (select Voto from Voto where (Gioco,Utente,DataVotazione) in (select Gioco,Utente,max(DataVotazione) from Voto where new.Utente=Utente and new.Gioco=Gioco group by Gioco,Utente)) + new.Voto) / NumeroVoti 
+update Gioco
+set  MediaVoto = ( MediaVoto*NumeroVoti - (select Voto from Voto where (Gioco,Utente,DataVotazione) in (select Gioco,Utente,max(DataVotazione) from Voto where new.Utente=Utente and new.Gioco=Gioco group by Gioco,Utente)) + new.Voto) / NumeroVoti
 where new.Gioco=Titolo;
 end if;
 end//
@@ -186,16 +275,16 @@ insert into Giornalista values
 ("PRHBSV36R01F020X","Paolo", "Franca");
 
 insert into Utente values
-("venebroguppeu@yopmail.com","GamaOnix","J7uFRF8C", false, "Paolo", "Dell'Orca", 20, "via mattarella", 14, "Nola", "80070"),
-("jaunnureudeilla@yopmail.com","AimZero","4W6dJAbp", false, "Giovanna", "Bianchi", 25, null, null, null, null),
-("frefimeitromo@yopmail.com","ZeroVirus","g4RxfPpT", false, "Pio", "Verdi", null, null, null, null, null),
-("ceuprofraucoudi@yopmail.com","ShadowWait","V3mvYtD2", false, "Franco", "Neri", 19, null, null, null, null),
-("ceubujotawo@yopmail.com","PhantomEagle","9BS58XcD", true, null, null, null, null, null, null, null),
-("gralameiddauquau@yopmail.com","GhostSteel","5ho2hDjG", false, "Lorenza", "Gialli", 18, "via pertini", 120, "Pontecagnano", "80020"),
-("febremoulaqui@yopmail.com","PredatorBeta","f2qXbPz8", false, "Christian", "Rosati", 26, null, null, null, null),
-("zindre@yopmail.com","BlackDeath","7BSB8XcD", true,  null, null, null, null, null, null, null),
-("cazzare@yopmail.com","AbyssWalker","5hoho2hDjG", true,  "Carmine", "Franca", 22, "via xxiv maggio", 386, "Striano", "80040"),
-("oefo@yopmail.com","Papiciacra","fonzqfoXbPz8", true, "Fonz", "Cretoso", 20, "via caduti", 250, "Poggiomarino", "80040");
+("venebroguppeu@yopmail.com","GamaOnix","J7uFRF8C", false, "Paolo", "Dell'Orca", 20),
+("jaunnureudeilla@yopmail.com","AimZero","4W6dJAbp", false, "Giovanna", "Bianchi", 25),
+("frefimeitromo@yopmail.com","ZeroVirus","g4RxfPpT", false, "Pio", "Verdi", null),
+("ceuprofraucoudi@yopmail.com","ShadowWait","V3mvYtD2", false, "Franco", "Neri", 19),
+("ceubujotawo@yopmail.com","PhantomEagle","9BS58XcD", true, null, null, null),
+("gralameiddauquau@yopmail.com","GhostSteel","5ho2hDjG", false, "Lorenza", "Gialli", 18),
+("febremoulaqui@yopmail.com","PredatorBeta","f2qXbPz8", false, "Christian", "Rosati", 26),
+("zindre@yopmail.com","BlackDeath","7BSB8XcD", true,  null, null, null),
+("cazzare@yopmail.com","AbyssWalker","5hoho2hDjG", true,  "Carmine", "Franca", 22),
+("oefo@yopmail.com","Papiciacra","fonzqfoXbPz8", true, "Fonz", "Cretoso", 20);
 
 
 insert into Telefono values
@@ -208,23 +297,23 @@ insert into Telefono values
 
 
 insert into Piattaforma values
-("Game Boy"),
-("Game Boy Color"),
-("Game Boy Advance"),
-("Nintendo DS"),
-("Nintendo 3DS"),
-("Wii"),
-("Wii U"),
-("Nintendo Switch"),
-("PlayStation"),
-("PlayStation 2"),
-("PlayStation 3"),
-("PlayStation 4"),
-("PlayStation 5"),
-("Xbox"),
-("Xbox 360"),
-("Xbox One"),
-("Xbox Series X/S");
+("Game Boy", "Nintendo"),
+("Game Boy Color", "Nintendo"),
+("Game Boy Advance", "Nintendo"),
+("Nintendo DS", "Nintendo"),
+("Nintendo 3DS", "Nintendo"),
+("Wii", "Nintendo"),
+("Wii U", "Nintendo"),
+("Nintendo Switch", "Nintendo"),
+("PlayStation", "Sony"),
+("PlayStation 2", "Sony"),
+("PlayStation 3", "Sony"),
+("PlayStation 4", "Sony"),
+("PlayStation 5", "Sony"),
+("Xbox", "Microsoft"),
+("Xbox 360", "Microsoft"),
+("Xbox One", "Microsoft"),
+("Xbox Series X/S", "Microsoft");
 
 insert into Tipologia values
 ("Altro"),
@@ -357,7 +446,7 @@ insert into Appartenere values
 ("Halo Infinite","Multiplayer Online");
 
 insert into Recensione values
-("RFLMMV41B21G788A","Dark Souls","Recensione Dark Souls",8.7,"2011-10-22"),
+("C:\Users\felin\OneDrive\Desktop\Carmine\darkSouls.txt","RFLMMV41B21G788A","Dark Souls","Recensione Dark Souls",8.7,"2011-10-22"),
 ("RTZLHG79T12F569T","Dark Souls II","Dark Souls torna a colpire",9,"2014-04-11"),
 ("YPPCTD47P66H695P","Dark Souls III","Recensione Darl Souls III",9,"2016-05-12"),
 ("THTWDD89D51D869A","Sekiro: Shadows Die Twice","Il gioco From Software più difficile di sempre",9,"2019-04-22"),
@@ -425,3 +514,57 @@ insert into Voto values
 ("Halo 4","ceubujotawo@yopmail.com",7,"2022-01-28"),
 ("Halo 5","ceubujotawo@yopmail.com",7,"2022-01-25"),
 ("Halo Infinite","ceubujotawo@yopmail.com",9,"2022-01-29");
+
+insert into Commento values
+("zindre@yopmail.com", "path1", "2022-04-15 22:58:20", 1, null),
+("cazzare@yopmail.com", "path2", "2021-04-15 12:58:20", null, 2),
+("zindre@yopmail.com", "path3", "2022-05-15 13:58:20", 1, null);
+
+insert into Pagamento values
+("cazzare@yopmail.com", "123456", "2024-05-11", "324"),
+("zindre@yopmail.com", "432442", "2025-05-11", "231"),
+("oefo@yopmail.com", "523521", "2027-03-11", "222");
+
+insert into Indirizzo values
+("cazzare@yopmail.com", "xxiv maggio", 342, "Poggiomarino", "80040"),
+("oefo@yopmail.com", "mattarella", 232, "Striano", "80040"),
+("zindre@yopmail.com", "cavour", 342, "Pontecagnano", "80020");
+
+insert into Telefono values
+("cazzare@yopmail.com","3215674357"),
+("oefo@yopmail.com","4212674357"),
+("zindre@yopmail.com","3115644357");
+
+insert into Ordine values
+("in consegna", "tracking1", "2022-05-12", "523521", "oefo@yopmail.com", "mattarella", "232", "Striano", "80040"),
+("in transito", "tracking2", "2022-04-12", "123456", "cazzare@yopmail.com", "xxiv maggio", "342", "Poggiomarino", "80040"),
+("consegnato", "tracking3", "2022-05-03", "432442", "zindre@yopmail.com", "cavour", "342", "Pontecagnano", "80020");
+
+insert into Prodotto values
+("Tazza Dark Souls", "path 1", 30, 15.00),
+("Pupazzo Super Mario", "path 2", 10, 25.00),
+("T-shirt Zelda", "path 3", 20, 30.00),
+("Bracciale Bloodborne", "path 4", 50, 13.00),
+("Pendente Elden Ring", "path 5", 70, 18.00);
+
+insert into Categoria values
+("Casa", "path 1"),
+("Giocattoli", "path 2"),
+("Abbigliamento", "path 3");
+
+insert into Riferire values
+(1, "Casa"),
+(2, "Giocattoli"),
+(3, "Abbigliamento"),
+(4, "Abbigliamento"),
+(5, "Abbigliamento");
+
+insert into StatoProdotto values
+("3", "cazzare@yopmail.com", 0, 3, null),
+("1", "cazzare@yopmail.com", 0, 1, null),
+("3", "oefo@yopmail.com", 0, 3, 1),
+("5", "cazzare@yopmail.com", 0, 1, null),
+("1", "zindre@yopmail.com", 0, 1, 3),
+("4", "zindre@yopmail.com", 30, 2, 3),
+("3", "zindre@yopmail.com", 0, 5, null),
+("4", "cazzare@yopmail.com", 0, 3, 2);
