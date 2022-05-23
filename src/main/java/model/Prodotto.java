@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class Product {
+public class Prodotto {
 
     private String id;
     private String nome;
@@ -14,7 +14,7 @@ public class Product {
 
     /* Construct */
 
-    public Product() {}
+    public Prodotto() {}
 
     /* Getter & Setter*/
 

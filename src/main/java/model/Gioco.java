@@ -3,29 +3,24 @@ package model;
 import java.sql.Date;
 import java.util.ArrayList;
 
-public class Game {
+public class Gioco {
 
     private String titolo;
-    private Date DataDiRilascio;
+    private Date dataDiRilascio;
     private String casaDiSviluppo;
     private float mediaVoto;
     private int numeroVoti;
     private ArrayList<String> piattaforme;
     private ArrayList<String> categorie;
+
     /*
     Possibili altri attributi:
         -copertina del gioco
      */
 
-    /*
-    Considerazioni:
-       Al posto di creare due beans, Piattaforme e Categorie, definiamo due array di stringhe.
-       Credo sia giusto creare due array, Piattaform e Categorie, nel servlet context da utilizzare per i filtri di ricerca.
-     */
-
     /* Constructor */
 
-    public Game() {
+    public Gioco() {
     }
 
     /* Getter and Setter */
@@ -39,11 +34,11 @@ public class Game {
     }
 
     public Date getDataDiRilascio() {
-        return DataDiRilascio;
+        return dataDiRilascio;
     }
 
     public void setDataDiRilascio(Date dataDiRilascio) {
-        DataDiRilascio = dataDiRilascio;
+        dataDiRilascio = dataDiRilascio;
     }
 
     public String getCasaDiSviluppo() {

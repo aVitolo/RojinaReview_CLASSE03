@@ -4,17 +4,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-public class ProductDAO {
+public class ProdottoDAO {
 
-    public Product doRetriveById(String id) {
+    public Prodotto doRetriveById(String id) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("SELECT * FROM product WHERE Id=?");
             ps.setString(1, id);
             ResultSet rs = ps.executeQuery();
-            Product p = new Product();
+            Prodotto p = new Prodotto();
             if (rs.next()) {
                 p.setId(rs.getString(1));
                 p.setNome(rs.getString(2));

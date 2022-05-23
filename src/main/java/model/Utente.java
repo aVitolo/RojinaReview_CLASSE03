@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class User {
+public class Utente {
 
     private String email;
     private String nickname;
@@ -12,13 +12,13 @@ public class User {
     private int eta;
     private ArrayList<String> address;
     private ArrayList<String> cellNumbers;
-    private ArrayList<PaymentMethod> metodiPagamento;
+    private ArrayList<MetodoPagemento> metodiPagamento;
     private Carrello carello;
     private ArrayList<Ordine> ordini;
 
     /* Costructor */
 
-    public User(){}
+    public Utente(){}
 
     /* Getter & Setter */
 
@@ -62,8 +62,8 @@ public class User {
 
     public void setEta(int eta) {this.eta = eta;}
 
-    public ArrayList<PaymentMethod> getMetodiPagamento() { return metodiPagamento;}
+    public ArrayList<MetodoPagemento> getMetodiPagamento() { return metodiPagamento;}
 
-    public void setMetodiPagamento(ArrayList<PaymentMethod> metodiPagamento) { this.metodiPagamento = metodiPagamento;}
+    public void setMetodiPagamento(ArrayList<MetodoPagemento> metodiPagamento) { this.metodiPagamento = metodiPagamento;}
 
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Ordine {
 
-    private ArrayList<Product> products;
+    private ArrayList<Prodotto> products;
     private String state;
     private Date data;
     private String id;
@@ -16,9 +16,9 @@ public class Ordine {
 
     /* Getter & Setter */
 
-    public ArrayList<Product> getProducts() { return products; }
+    public ArrayList<Prodotto> getProducts() { return products; }
 
-    public void setProducts(ArrayList<Product> products) { this.products = products; }
+    public void setProducts(ArrayList<Prodotto> products) { this.products = products; }
 
     public String getState() { return state; }
 

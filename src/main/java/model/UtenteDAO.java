@@ -6,15 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class UserDAO {
-    public User doRetriveByEmail(String email) {
+public class UtenteDAO {
+    public Utente doRetriveByEmail(String email) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("SELECT * FROM Utente WHERE email=?");
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                User u = new User();
+                Utente u = new Utente();
                 u.setNickname(rs.getString(1));
                 u.setEmail(rs.getString(2));
                 u.setNome(rs.getString(3));
@@ -44,9 +44,9 @@ public class UserDAO {
                 ps = con.prepareStatement("SELECT * FROM pagamento WHERE utente=?");
                 ps.setString(1, email);
                 rs = ps.executeQuery();
-                ArrayList<PaymentMethod> pagamenti = new ArrayList<>();
+                ArrayList<MetodoPagemento> pagamenti = new ArrayList<>();
                 while(rs.next()) {
-                    PaymentMethod p = new PaymentMethod();
+                    MetodoPagemento p = new MetodoPagemento();
                     p.setNumeroCarta(rs.getString(1));
                     p.setDataScadenza(rs.getDate(2));
                     pagamenti.add(p);

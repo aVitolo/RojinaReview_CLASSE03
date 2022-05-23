@@ -2,14 +2,14 @@ package model;
 
 import java.util.Date;
 
-public class PaymentMethod {
+public class MetodoPagemento {
 
     private Date dataScadenza;
     private String numeroCarta;
 
     /* Constructor */
 
-    public PaymentMethod() {}
+    public MetodoPagemento() {}
 
     /* Getter & Setter */
 

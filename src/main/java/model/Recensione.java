@@ -2,14 +2,16 @@ package model;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
-public class Review {
+public class Recensione {
+
+    private int id;
+    private String testo;
     private String giornalista;
     private String titolo;
     private float voto;
     private Date dataCaricamento;
-    private Game gioco;
+    private Gioco gioco;
     private ArrayList<Commento> commenti;
 
     /*
@@ -20,34 +22,34 @@ public class Review {
 
     /* Constructor */
 
-    public Review() {
+    public Recensione() {
     }
 
     /* Getter and Setter */
 
-    public String getGiornalista() {
-        return giornalista;
-    }
+    public int getId() {return id;}
 
-    public String getSottotitolo() { return sottotitolo; }
+    public void setId(int id) {this.id = id;}
 
-    public void setSottotitolo(String sottotitolo) { this.sottotitolo = sottotitolo; }
+    public String getTesto() {return testo;}
 
-    public Game getGioco() { return gioco; }
+    public void setTesto(String testo) {this.testo = testo;}
 
     public ArrayList<Commento> getCommenti() { return commenti; }
 
     public void setCommenti(ArrayList<Commento> commenti) { this.commenti = commenti; }
 
+    public String getGiornalista() {
+        return giornalista;
+    }
+
     public void setGiornalista(String giornalista) {
         this.giornalista = giornalista;
     }
 
-    public Game getGiocGo() {
-        return gioco;
-    }
+    public Gioco getGioco() {return gioco;}
 
-    public void setGioco(Game gioco) {
+    public void setGioco(Gioco gioco) {
         this.gioco = gioco;
     }
 

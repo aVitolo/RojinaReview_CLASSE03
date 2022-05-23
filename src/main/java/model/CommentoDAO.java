@@ -8,11 +8,31 @@ import java.util.ArrayList;
 
 public class CommentoDAO {
 
-    public ArrayList<Commento> getCommentByNotizia(String titolo) {
+    public ArrayList<Commento> getCommentByIdNotizia(int id) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT Testo, Data, User FROM commento WHERE codiceN=?");
-            ps.setString(1, titolo);
+                    con.prepareStatement("SELECT testo, dataScrittura, utente FROM commentonotizia WHERE notizia=?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            ArrayList<Commento> commenti = new ArrayList();
+            while (rs.next()) {
+                Commento c = new Commento();
+                c.setTesto(rs.getString(1));
+                c.setData(rs.getDate(2));
+                c.setUser(rs.getString(3));
+                commenti.add(c);
+            }
+            return commenti;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Commento> getCommentByIdRecensione(int id) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT testo, dataScrittura, utente FROM commentorecensione WHERE recensione=?");
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             ArrayList<Commento> commenti = new ArrayList();
             while (rs.next()) {

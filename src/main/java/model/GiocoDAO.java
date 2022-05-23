@@ -4,10 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-public class GameDAO {
+public class GiocoDAO {
 
-    public Game doRetrieveByTitle(String titolo) {
+    public Gioco doRetrieveByTitle(String titolo) {
 
         /*
         Considerazione
@@ -19,11 +20,11 @@ public class GameDAO {
 
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT Titolo, DataDiRilascio, MediaVoto, NumeroVoti FROM gioco WHERE Titolo=?");
+                    con.prepareStatement("SELECT * FROM gioco WHERE titolo=?");
             ps.setString(1, titolo);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Game g = new Game();
+                Gioco g = new Gioco();
                 g.setTitolo(rs.getString(1));
                 g.setDataDiRilascio(rs.getDate(2));
                 g.setCasaDiSviluppo(rs.getString(3));
@@ -34,13 +35,13 @@ public class GameDAO {
                     Essendo l'array di Piattaforme e Tipologia di tipo stringa mi basta eseguire le due query per ottenere i dati necessari
                  */
 
-                ps = con.prepareStatement("SELECT Piattaforma FROM giocare WHERE Gioco=?");
+                ps = con.prepareStatement("SELECT piattaforma FROM gioco_piattaforma WHERE gioco=?");
                 ps.setString(1, titolo);
                 rs = ps.executeQuery();
                 while (rs.next())
                     g.getPiattaforme().add(rs.getString(1));
 
-                ps = con.prepareStatement("SELECT Tipologia FROM appartenere WHERE Gioco=?");
+                ps = con.prepareStatement("SELECT tipologia FROM gioco_tipologia WHERE gioco=?");
                 ps.setString(1, titolo);
                 rs = ps.executeQuery();
                 while (rs.next())
@@ -49,6 +50,23 @@ public class GameDAO {
                 return g;
             }
             return null;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Gioco> getGiocoByIdNotizia(int id) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT gioco FROM gioco_notizia WHERE notizia=?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            ArrayList<Gioco> g = new ArrayList<>();
+            while (rs.next()) {
+
+            }
+            return g;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
