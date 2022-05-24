@@ -185,6 +185,40 @@ create table Voto(
 	check (voto<=10 and voto>=1)
 );
 
+create table Prodotto(
+	id				int auto_increment,
+    nome			varchar(30),
+    descrizione		tinytext, -- inteso come path al file di testo
+	disponibilità  	int,
+    prezzo			float,
+	primary key(id)
+);
+
+create table Sconto(
+	nome			varchar(5), -- nome e percentuale vanno in coppia, esempio nome = 30%, percentuale = 0,70 per fare una semplice moltiplicazione
+    percentuale     decimal(3, 2),
+    prodotto		int,
+    foreign key(prodotto)
+				references Prodotto(id),
+	primary key(nome, prodotto)
+);
+
+create table Categoria(
+	nome			varchar(30),
+    descrizione		varchar(200), -- ???
+    primary key(nome)
+);
+
+create table Prodotto_Categoria(
+	prodotto		int,
+    categoria		varchar(30),
+    foreign key(prodotto)
+				references Prodotto(id),
+	foreign key(categoria)
+				references Categoria(nome),
+	primary key(prodotto, categoria)
+);
+
 create table Pagamento(
 	nome			varchar(30),
     cognome			varchar(30),
@@ -197,10 +231,11 @@ create table Pagamento(
 );
 
 create table Ordine(
-	numero			int auto_increment,
+	id				int auto_increment,
     stato			varchar(30),
     tracking		varchar(50), -- link che porta al sito tracking
     dataOrdine		date,
+    totale			float,
     pagamento    	varchar(20),
     utente			varchar(30),
     viaI			varchar(30),
@@ -213,48 +248,36 @@ create table Ordine(
 				references Utente(email),
 	foreign key(utente, viaI, numeroCivicoI, cittàI, capI)
 				references Indirizzo(utente, via, numeroCivico, città, cap),
-    primary key(numero)
+    primary key(id)
 );
 
-create table Prodotto(
-	id				int auto_increment,
-    nome			varchar(30),
-    descrizione		tinytext, -- inteso come path al file di testo
-	disponibilità  	int,
-    prezzo			float,
-    sconto 			tinyint,
-	primary key(id)
-);
-
-create table Categoria(
-	nome			varchar(30),
-    descrizione		varchar(200), -- ???
-    primary key(nome)
-);
-
-create table Riferire(
+create table Prodotto_Ordine(
 	prodotto		int,
-    categoria		varchar(30),
-    foreign key(prodotto)
-				references Prodotto(id),
-	foreign key(categoria)
-				references Categoria(nome),
-	primary key(prodotto, categoria)
-);
-
-create table StatoProdotto(
-	prodotto		int,
-    utente 			varchar(30),
-    sconto			tinyint,
-    quantità		tinyint,
     ordine			int,
-    foreign key(utente)
-				references Utente(email),
     foreign key(prodotto)
 				references Prodotto(id),
 	foreign key(ordine)
-				references Ordine(numero),
-	primary key(prodotto, utente)
+				references Ordine(id),
+	primary key(prodotto, ordine)
+);
+
+create table Carrello(
+	totale			float,
+    utente 			varchar(30),
+    foreign key(utente)
+			references Utente(email),
+	primary key(utente)
+);
+
+create table Prodotto_Carrello(
+	utente			varchar(30),
+    prodotto		int,
+    quantità 		tinyint,
+    foreign key(utente)
+				references Carrello(utente),
+	foreign key(prodotto)
+				references Prodotto(id),
+	primary key(utente, prodotto)
 );
 
 DELIMITER //
