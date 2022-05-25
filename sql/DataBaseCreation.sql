@@ -3,10 +3,23 @@ create database rojina;
 
 use rojina;
 
+create table Amministratore(
+                               id 				tinyint auto_increment,
+                               nome 			varchar(30) not null,
+                               cognome 		varchar(30) not null,
+                               email			varchar(30),
+                               pass			varchar(2500),
+                               check (nome regexp '[a-zA-Z ]{1,30}'),
+                               check (cognome regexp '[a-zA-Z\' ]{1,30}'),
+                               primary key(id)
+);
+
 create table Giornalista(
                             id 				tinyint auto_increment,
                             nome 			varchar(30) not null,
                             cognome 		varchar(30) not null,
+                            email			varchar(30),
+                            pass			varchar(2500),
                             check (nome regexp '[a-zA-Z ]{1,30}'),
                             check (cognome regexp '[a-zA-Z\' ]{1,30}'),
                             primary key(id)
@@ -216,7 +229,6 @@ create table Sconto(
 
 create table Categoria(
                           nome			varchar(30),
-                          descrizione		tinytext, -- da mettere?
                           primary key(nome)
 );
 
@@ -313,6 +325,11 @@ begin
 end//
 DELIMITER ;
 
+insert into Amministratore (nome, cognome, email, pass) values
+                                                            ("Andrea", "Vitolo", "zindrè@gmail.com", "papapa"),
+                                                            ("Carmine", "Iemmino", "carmineiemmino@gmail.com", "lalala"),
+                                                            ("Carlo", "Colizzi", "carletto@gmail.com", "bobobobo");
+
 insert into Giornalista (nome, cognome) values
                                             ("Mario", "Dell'Orca"),
                                             ("Carla", "Bianchi"),
@@ -395,8 +412,8 @@ insert into Tipologia values
                           ("Wargame");
 
 insert into Gioco values
-                      ("Dark Souls","2011-09-22","FromSoftware", 0, 0, load_file('C:\ProgramData\MySQL\MySQL Server 8.0\Uploads\darksouls.jpg')),
-                      ("Dark Souls II","2014-03-11","FromSoftware", 0, 0, load_file('darksouls.jpg')),
+                      ("Dark Souls","2011-09-22","FromSoftware", 0, 0, null),
+                      ("Dark Souls II","2014-03-11","FromSoftware", 0, 0, null),
                       ("Dark Souls III","2016-04-12","FromSoftware", 0, 0, null),
                       ("Sekiro: Shadows Die Twice","2019-03-22","FromSoftware", 0, 0, null),
                       ("FIFA 20","2019-09-27","EA", 0, 0, null),
@@ -602,9 +619,9 @@ insert into Sconto values
                        ("22%", 0.78, 4);
 
 insert into Categoria values
-                          ("Casa", "articoli per la casa..."),
-                          ("Giocattoli", "giocattoli per adulti e bambini..."),
-                          ("Abbigliamento", "vestiario a tema videogames...");
+                          ("Casa"),
+                          ("Giocattoli"),
+                          ("Abbigliamento");
 
 insert into Prodotto_Categoria values
                                    (1, "Casa"),
@@ -628,16 +645,16 @@ insert into Prodotto_Carrello values
                                   (4, "cazzare@yopmail.com", 2);
 
 insert into Ordine (stato, tracking, dataOrdine, totale, pagamento, utente, viaI, numeroCivicoI, cittàI, capI) values
-("in consegna", "tracking1", "2022-05-12", 31.00, "523521", "oefo@yopmail.com", "mattarella", "232", "Striano", "80040"),
-("in transito", "tracking2", "2022-04-12", 24.30, "123456", "cazzare@yopmail.com", "xxiv maggio", "342", "Poggiomarino", "80040"),
-("consegnato", "tracking3", "2022-05-03", 42.20, "432442", "zindre@yopmail.com", "cavour", "342", "Pontecagnano", "80020");
+                                                                                                                   ("in consegna", "tracking1", "2022-05-12", 31.00, "523521", "oefo@yopmail.com", "mattarella", "232", "Striano", "80040"),
+                                                                                                                   ("in transito", "tracking2", "2022-04-12", 24.30, "123456", "cazzare@yopmail.com", "xxiv maggio", "342", "Poggiomarino", "80040"),
+                                                                                                                   ("consegnato", "tracking3", "2022-05-03", 42.20, "432442", "zindre@yopmail.com", "cavour", "342", "Pontecagnano", "80020");
 
 insert into Prodotto_Ordine values
-(3, 1, 12.00, 2),
-(1, 1, 9.40, 3),
-(3, 3, 13.30, 1),
-(5, 1, 14.50, 2),
-(1, 2, 22.10, 1),
-(4, 2, 11.20, 4),
-(3, 2, 6.90, 1),
-(4, 3, 8.80, 2);
+                                (3, 1, 12.00, 2),
+                                (1, 1, 9.40, 3),
+                                (3, 3, 13.30, 1),
+                                (5, 1, 14.50, 2),
+                                (1, 2, 22.10, 1),
+                                (4, 2, 11.20, 4),
+                                (3, 2, 6.90, 1),
+                                (4, 3, 8.80, 2);
