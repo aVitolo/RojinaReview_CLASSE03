@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Prodotto {
 
-    private String id;
+    private int id;
     private String nome;
     private String descrizione;
     private float prezzo;
-    private float sconto;
-    private String disponibilità;
+    private Sconto sconto;
+    private int disponibilità;
     private ArrayList<String> categorie;
 
     /* Construct */
@@ -18,9 +18,9 @@ public class Prodotto {
 
     /* Getter & Setter*/
 
-    public String getId() {return id;}
+    public int getId() {return id;}
 
-    public void setId(String id) {this.id = id;}
+    public void setId(int id) {this.id = id;}
 
     public String getNome() {return nome;}
 
@@ -34,15 +34,31 @@ public class Prodotto {
 
     public void setPrezzo(float prezzo) {this.prezzo = prezzo;}
 
-    public float getSconto() {return sconto;}
+    public Sconto getSconto() {return sconto;}
 
-    public void setSconto(float sconto) {this.sconto = sconto;}
+    public void setSconto(Sconto sconto) {this.sconto = sconto;}
 
-    public String getDisponibilità() {return disponibilità;}
+    public int getDisponibilità() {return disponibilità;}
 
-    public void setDisponibilità(String disponibilità) {this.disponibilità = disponibilità;}
+    public void setDisponibilità(int disponibilità) {this.disponibilità = disponibilità;}
 
     public ArrayList<String> getCategorie() {return categorie;}
 
     public void setCategorie(ArrayList<String> categorie) {this.categorie = categorie;}
+
+    public class Sconto{
+
+        private String nome;
+        private float percetuale;
+
+        public Sconto(){};
+
+        public String getNome() { return this.nome; }
+
+        public void setNome(String string) {this.nome=nome;}
+
+        public float getPercetuale() {return this.percetuale;}
+
+        public void setPercetuale(float aFloat) {this.percetuale=percetuale;}
+    }
 }

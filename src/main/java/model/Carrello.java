@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Carrello {
 
-    private ArrayList<Prodotto> carrello;
-    private Float total; //Da valutare
+    private ArrayList<Prodotto> prodotti;
+    private Float totale;
 
     /* Constructor */
 
@@ -13,7 +13,11 @@ public class Carrello {
 
     /* Getter & Setter */
 
-    public ArrayList<Prodotto> getCarrello() { return carrello; }
+    public ArrayList<Prodotto> getCarrello() { return prodotti; }
 
-    public void setCarrello(ArrayList<Prodotto> carrello) { this.carrello = carrello; }
+    public void setCarrello(ArrayList<Prodotto> prodotti) { this.prodotti = prodotti; }
+
+    public Float getTotale() {return totale;}
+
+    public void setTotale(float aFloat) {this.totale=totale;}
 }

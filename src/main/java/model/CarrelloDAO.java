@@ -8,44 +8,23 @@ import java.util.ArrayList;
 
 public class CarrelloDAO {
 
-    public ArrayList<Prodotto> getProductByOrder(String id) {
+    public Carrello doRetrieveByUser(String user) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT * FROM carrello WHERE Order=?");
-            ps.setString(1, id);
+                    con.prepareStatement("SELECT totale FROM carrello WHERE utente=?");
+            ps.setString(1, user);
             ResultSet rs = ps.executeQuery();
-            ArrayList<Prodotto> products = new ArrayList<>();
+            Carrello c = new Carrello();
+            c.setTotale(rs.getFloat(1));
+            ps = con.prepareStatement("SELECT prodotto FROM prodotto_carrello pc join prodotto p on pc.prodotto = p.id WHERE utente=?");
             ProdottoDAO prodottoDAO = new ProdottoDAO();
-            while(rs.next()) {
-                Prodotto p = new Prodotto();
-                p = prodottoDAO.doRetriveById(rs.getString(1)); /*definrie indice colonna di prodotto */
-                p.setSconto(rs.getFloat(2)); /* definire indice colonna sconto */
-                p.setPrezzo(rs.getFloat(3)); /* definire indice colonna prezzo */
-                products.add(p);
-            }
-            return products;
+            while(rs.next())
+                c.getCarrello().add(new ProdottoDAO().doRetriveById(rs.getInt(1)));
+            return c;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public ArrayList<Prodotto> getUserCart(String user) {
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps =
-                    con.prepareStatement("SELECT * FROM carrello WHERE Order=null and User=?");
-            ps.setString(1, user);
-            ResultSet rs = ps.executeQuery();
-            ArrayList<Prodotto> products = new ArrayList<>();
-            ProdottoDAO prodottoDAO = new ProdottoDAO();
-            while(rs.next()) {
-                Prodotto p = new Prodotto();
-                p = prodottoDAO.doRetriveById(rs.getString(1)); /*definrie indice colonna di prodotto */
-                products.add(p);
-            }
-            return products;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
 }

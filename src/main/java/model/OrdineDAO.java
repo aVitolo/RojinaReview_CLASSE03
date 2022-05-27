@@ -11,17 +11,34 @@ public class OrdineDAO {
     public ArrayList<Ordine> doRetrieveByUser(String user) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT Stato, Data, Numero FROM ordine WHERE Utente=?");
+                    con.prepareStatement("SELECT id, stato, tracking, dataOrdine, totale, pagamento, via, numeroCivico, città, cap FROM ordine WHERE utente=?");
             ps.setString(1, user);
             ResultSet rs = ps.executeQuery();
             ArrayList<Ordine> ordini = new ArrayList<>();
-            CarrelloDAO carelloDAO = new CarrelloDAO();
             while(rs.next()) {
                 Ordine o = new Ordine();
-                o.setState(rs.getString(1));
-                o.setData(rs.getDate(2));
-                o.setId(rs.getString(3));
-                o.setProducts(carelloDAO.getProductByOrder(o.getId()));
+                o.setId(rs.getInt(1));
+                o.setStato(rs.getString(2));
+                o.setTracking(rs.getString(3));
+                o.setDataOrdine(rs.getDate(4));
+                o.setTotale(rs.getFloat(5));
+                o.setPagamento(rs.getString(6));
+                o.setIndirizzo(rs.getString(7) + " " +
+                        rs.getString(8) + " " +
+                        rs.getString(9) + " " +
+                        rs.getString(10));
+
+                ps = con.prepareStatement("SELECT po.prodotto, po.prezzo, po.quantità FROM prodotto_ordine po join ordine o on po.ordine = o.id WHERE utente=?");
+                ps.setString(1, user);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    Ordine.ProdottoOrdine p = o.new ProdottoOrdine();
+                    p.setProdotto(new ProdottoDAO().doRetriveById(rs.getInt(1)));
+                    p.setPrezzo(rs.getFloat(2));
+                    p.setQuantita(rs.getInt(3));
+                    o.getProdotti().add(p);
+                }
+                ordini.add(o);
             }
             return ordini;
         } catch (SQLException e) {
