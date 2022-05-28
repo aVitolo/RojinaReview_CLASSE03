@@ -7,9 +7,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Gioco;
-import model.Notizia;
-import model.Recensione;
+import model.beans.Gioco;
+import model.beans.Notizia;
+import model.beans.Recensione;
 
 import java.io.IOException;
 import java.util.ArrayList;

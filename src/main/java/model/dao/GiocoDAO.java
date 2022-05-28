@@ -1,4 +1,6 @@
-package model;
+package model.dao;
+
+import model.beans.Gioco;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

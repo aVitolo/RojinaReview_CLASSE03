@@ -1,8 +1,8 @@
-package model;
+package model.beans;
 
 import java.util.Date;
 
-public class Pagemento {
+public class Pagamento {
 
     private String nome;
     private String cognome;
@@ -11,7 +11,7 @@ public class Pagemento {
 
     /* Constructor */
 
-    public Pagemento() {}
+    public Pagamento() {}
 
     /* Getter & Setter */
 

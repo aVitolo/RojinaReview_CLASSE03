@@ -1,4 +1,6 @@
-package model;
+package model.dao;
+
+import model.beans.Prodotto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

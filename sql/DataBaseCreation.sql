@@ -19,7 +19,7 @@ create table Giornalista(
                             nome 			varchar(30) not null,
                             cognome 		varchar(30) not null,
                             email			varchar(30),
-                            pass			varchar(2500),
+                            pass			varchar(256),
                             check (nome regexp '[a-zA-Z ]{1,30}'),
                             check (cognome regexp '[a-zA-Z\' ]{1,30}'),
                             primary key(id)
@@ -128,7 +128,7 @@ create table Gioco_Tipologia(
 create table Utente(
                        email 			varchar(30),
                        nickname 		varchar(30) not null unique,
-                       pass 			varchar(2500) not null, -- da criptare
+                       pass 			varchar(256) not null,
                        nome			varchar(30),
                        cognome			varchar(30),
                        età				tinyint,
@@ -342,16 +342,16 @@ insert into Giornalista (nome, cognome) values
                                             ("Paolo", "Franca");
 
 insert into Utente values
-                       ("venebroguppeu@yopmail.com","GamaOnix","J7uFRF8C", "Paolo", "Dell'Orca", 20),
-                       ("jaunnureudeilla@yopmail.com","AimZero","4W6dJAbp", "Giovanna", "Bianchi", 25),
-                       ("frefimeitromo@yopmail.com","ZeroVirus","g4RxfPpT", "Pio", "Verdi", null),
-                       ("ceuprofraucoudi@yopmail.com","ShadowWait","V3mvYtD2", "Franco", "Neri", 19),
-                       ("ceubujotawo@yopmail.com","PhantomEagle","9BS58XcD", null, null, null),
-                       ("gralameiddauquau@yopmail.com","GhostSteel","5ho2hDjG", "Lorenza", "Gialli", 18),
-                       ("febremoulaqui@yopmail.com","PredatorBeta","f2qXbPz8", "Christian", "Rosati", 26),
-                       ("zindre@yopmail.com","BlackDeath","7BSB8XcD", null, null, null),
-                       ("cazzare@yopmail.com","AbyssWalker","5hoho2hDjG", "Carmine", "Franca", 22),
-                       ("oefo@yopmail.com","Papiciacra","fonzqfoXbPz8", "Fonz", "Cretoso", 20);
+                       ("venebroguppeu@yopmail.com","GamaOnix",SHA2('oemfshif',256), "Paolo", "Dell'Orca", 20),
+                       ("jaunnureudeilla@yopmail.com","AimZero",SHA2('efkmfeug',256), "Giovanna", "Bianchi", 25),
+                       ("frefimeitromo@yopmail.com","ZeroVirus",SHA2('vwnjviecwo',256), "Pio", "Verdi", null),
+                       ("ceuprofraucoudi@yopmail.com","ShadowWait",SHA2('nfhuofewoj',256), "Franco", "Neri", 19),
+                       ("ceubujotawo@yopmail.com","PhantomEagle",SHA2('obufewgou',256), null, null, null),
+                       ("gralameiddauquau@yopmail.com","GhostSteel",SHA2('nefihouefwpoj',256), "Lorenza", "Gialli", 18),
+                       ("febremoulaqui@yopmail.com","PredatorBeta",SHA2('fnkebouewf',256), "Christian", "Rosati", 26),
+                       ("zindre@yopmail.com","BlackDeath",SHA2('jofhouefwpoj',256), null, null, null),
+                       ("cazzare@yopmail.com","AbyssWalker",SHA2('pmiwefhoufpewj',256), "Carmine", "Franca", 22),
+                       ("oefo@yopmail.com","Papiciacra",SHA2('piefwhouefoj',256), "Fonz", "Cretoso", 20);
 
 insert into Indirizzo values
                           ("cazzare@yopmail.com", "xxiv maggio", 342, "Poggiomarino", "80040"),
