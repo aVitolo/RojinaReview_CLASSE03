@@ -10,54 +10,52 @@ public class UtenteDAO {
     public Utente doRetriveByEmail(String email) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT * FROM Utente WHERE email=?");
+                    con.prepareStatement("SELECT * FROM utente WHERE email=?");
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 Utente u = new Utente();
-                u.setNickname(rs.getString(1));
-                u.setEmail(rs.getString(2));
-                u.setNome(rs.getString(3));
-                u.setCognome(rs.getString(4));
-                u.setEtà(rs.getInt(5));
+                u.setNickname(rs.getString(2));
+                u.setEmail(rs.getString(1));
+                u.setPassword(rs.getString(3));
+                u.setNome(rs.getString(4));
+                u.setCognome(rs.getString(5));
+                u.setEta(rs.getInt(6));
+                u.setOrdini(new OrdineDAO().doRetrieveByUser(email));
+                u.setCarello(new CarrelloDAO().doRetrieveByUser(email));
 
-                ps = con.prepareStatement("SELECT * FROM indirizzo WHERE utente=?");
+                ps = con.prepareStatement("SELECT via, numeroCivico, città, cap FROM indirizzo WHERE utente=?");
                 ps.setString(1, email);
                 rs = ps.executeQuery();
                 ArrayList<String> indirizzi = new ArrayList<>();
                 while(rs.next())
-                    indirizzi.add(  rs.getString(1)+" "+    //indirizzo
-                                    rs.getString(2)+" "+    //numero
-                                    rs.getString(3)+" "+    //cap
-                                    rs.getString(4)+" "+    //citta
-                                    rs.getString(5));  //provincia
-                u.setAddress(indirizzi);
+                    indirizzi.add(  rs.getString(1)+" "+
+                                    rs.getString(2)+" "+
+                                    rs.getString(3)+" "+
+                                    rs.getString(4));
+                u.setIndirizzi(indirizzi);
 
-                ps = con.prepareStatement("SELECT Numero FROM telefono WHERE utente=?");
+                ps = con.prepareStatement("SELECT numero FROM telefono WHERE utente=?");
                 ps.setString(1, email);
                 rs = ps.executeQuery();
                 ArrayList<String> telefoni = new ArrayList<>();
                 while(rs.next())
                     telefoni.add(rs.getString(1));
-                u.setCellNumbers(telefoni);
+                u.setTelefoni(telefoni);
 
-                ps = con.prepareStatement("SELECT * FROM pagamento WHERE utente=?");
+                ps = con.prepareStatement("SELECT nome, cognome, numeroCarta, dataScadenza FROM pagamento WHERE utente=?");
                 ps.setString(1, email);
                 rs = ps.executeQuery();
-                ArrayList<MetodoPagemento> pagamenti = new ArrayList<>();
+                ArrayList<Pagemento> pagamenti = new ArrayList<>();
                 while(rs.next()) {
-                    MetodoPagemento p = new MetodoPagemento();
-                    p.setNumeroCarta(rs.getString(1));
-                    p.setDataScadenza(rs.getDate(2));
+                    Pagemento p = new Pagemento();
+                    p.setNome(rs.getString(1));
+                    p.setCognome(rs.getString(2));
+                    p.setNumeroCarta(rs.getString(3));
+                    p.setDataScadenza(rs.getDate(4));
                     pagamenti.add(p);
                 }
-                u.setMetodiPagamento(pagamenti);
-
-                u.setOrdini(new OrdineDAO().doRetrieveByUser(email));
-
-                Carrello c = new Carrello();
-                c.setCarrello(new CarrelloDAO().getUserCart(email));
-                u.setCarello(c);
+                u.setPagamenti(pagamenti);
 
                 return u;
             }

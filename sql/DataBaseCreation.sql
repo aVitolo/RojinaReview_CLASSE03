@@ -256,20 +256,20 @@ create table Pagamento(
 create table Ordine(
                        id				int auto_increment,
                        stato			varchar(30),
-                       tracking		varchar(50), -- link che porta al sito tracking
+                       tracking		     varchar(50), -- link che porta al sito tracking
                        dataOrdine		date,
                        totale			float,
                        pagamento    	varchar(20),
                        utente			varchar(30),
-                       viaI			varchar(30),
-                       numeroCivicoI	smallint,
-                       cittàI 			varchar(30),
-                       capI			varchar(6),
+                       via			varchar(30),
+                       numeroCivico	smallint,
+                       città			varchar(30),
+                       cap			varchar(6),
                        foreign key(utente, pagamento)
                            references Pagamento(utente, numeroCarta),
                        foreign key(utente)
                            references Utente(email),
-                       foreign key(utente, viaI, numeroCivicoI, cittàI, capI)
+                       foreign key(utente, via, numeroCivico, città, cap)
                            references Indirizzo(utente, via, numeroCivico, città, cap),
                        primary key(id)
 );
@@ -288,7 +288,7 @@ create table Prodotto_Ordine(
 
 create table Carrello(
                          totale			float,
-                         utente 			varchar(30),
+                         utente 		varchar(30),
                          foreign key(utente)
                              references Utente(email),
                          primary key(utente)
