@@ -22,7 +22,7 @@ public class UtenteDAO {
                 u.setCognome(rs.getString(5));
                 u.setEta(rs.getInt(6));
                 u.setOrdini(new OrdineDAO().doRetrieveByUser(email));
-                u.setCarello(new CarrelloDAO().doRetrieveByUser(email));
+                u.setCarrello(new CarrelloDAO().doRetrieveByUser(email));
 
                 ps = con.prepareStatement("SELECT via, numeroCivico, città, cap FROM indirizzo WHERE utente=?");
                 ps.setString(1, email);

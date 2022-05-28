@@ -10,7 +10,7 @@ public class PagementoDAO {
     public Pagemento doRetrieveByUser(String user) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT Data, Numero FROM pagamento WHERE Utente=?");
+                    con.prepareStatement("SELECT numeroCarta, dataScadenza FROM pagamento WHERE Utente=?");
             ps.setString(1, user);
             ResultSet rs = ps.executeQuery();
             if(rs.next()) {

@@ -49,7 +49,7 @@ public class Prodotto {
     public class Sconto{
 
         private String nome;
-        private float percetuale;
+        private float percentuale;
 
         public Sconto(){};
 
@@ -57,8 +57,8 @@ public class Prodotto {
 
         public void setNome(String string) {this.nome=nome;}
 
-        public float getPercetuale() {return this.percetuale;}
+        public float getPercentuale() {return this.percentuale;}
 
-        public void setPercetuale(float aFloat) {this.percetuale=percetuale;}
+        public void setPercentuale(float aFloat) {this.percentuale=percentuale;}
     }
 }

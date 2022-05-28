@@ -18,16 +18,16 @@ public class ProdottoDAO {
                 p.setId(rs.getInt(1));
                 p.setNome(rs.getString(2));
                 p.setDescrizione(rs.getString(3));
-                p.setPrezzo(rs.getFloat(4));
-                p.setDisponibilità(rs.getInt(6));
+                p.setPrezzo(rs.getFloat(4)); //prezzo colonna 5?
+                p.setDisponibilità(rs.getInt(6)); //disponibilità colonna 4?
 
                 p.setSconto(null);
-                if(rs.getInt(6)==1){
+                if(rs.getInt(6)==1){ //manca new Sconto() ?
                     ps = con.prepareStatement("SELECT nome, percentuale FROM sconto WHERE prodotto=?");
                     ps.setInt(1, id);
                     rs = ps.executeQuery();
                     p.getSconto().setNome(rs.getString(1));
-                    p.getSconto().setPercetuale(rs.getFloat(2));
+                    p.getSconto().setPercentuale(rs.getFloat(2));
                 }
 
                 ps = con.prepareStatement("SELECT categoria FROM prodotto_categoria WHERE prodotto=?");

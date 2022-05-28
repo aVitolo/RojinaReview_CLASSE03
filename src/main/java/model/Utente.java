@@ -14,7 +14,7 @@ public class Utente {
     private ArrayList<String> telefoni;
     private ArrayList<Pagemento> pagamenti;
     private ArrayList<Ordine> ordini;
-    private Carrello carello;
+    private Carrello carrello;
 
     /* Costructor */
 
@@ -62,7 +62,7 @@ public class Utente {
 
     public void setOrdini(ArrayList<Ordine> ordini) {this.ordini = ordini;}
 
-    public Carrello getCarello() {return carello;}
+    public Carrello getCarrello() {return carrello;}
 
-    public void setCarello(Carrello carello) {this.carello = carello;}
+    public void setCarrello(Carrello carrello) {this.carrello = carrello;}
 }
