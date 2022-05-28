@@ -26,7 +26,7 @@ public class RecensioneDAO {
                 r.setDataCaricamento(rs.getDate(7));
                 r.setGioco(new GiocoDAO().doRetrieveByTitle(rs.getString(8)));
                 r.setImmagine(rs.getBytes(9));
-                r.setCommenti(new CommentoDAO().getCommentByIdRecensione(r.getId()));
+                r.setCommenti(new CommentoDAO().getCommentById(r.getId(),"commentorecensione"));
                 return r;
             }
             return null;

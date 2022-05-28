@@ -5,23 +5,38 @@ import java.util.ArrayList;
 
 public class Gioco {
 
-    private String titolo;
+    /* Attributes */
+
+    private byte[] copertina;
+    private ArrayList<Piattaforma> piattaforme;
+    private ArrayList<Tipologia> tipologie;
     private Date dataDiRilascio;
-    private String casaDiSviluppo;
     private float mediaVoto;
     private int numeroVoti;
-    private byte[] copertina;
-    private ArrayList<String> piattaforme;
-    private ArrayList<String> categorie;
-
-    /*
-    Possibili altri attributi:
-        -copertina del gioco
-     */
+    private String titolo;
+    private String casaDiSviluppo;
 
     /* Constructor */
 
     public Gioco() {
+    }
+
+    public Gioco(String titolo,
+                 String casaDiSviluppo,
+                 int numeroVoti,
+                 float mediaVoto,
+                 Date dataDiRilascio,
+                 byte[] copertina,
+                 ArrayList<Piattaforma> piattaforme,
+                 ArrayList<Tipologia> tipologie) {
+        this.titolo = titolo;
+        this.dataDiRilascio = dataDiRilascio;
+        this.casaDiSviluppo = casaDiSviluppo;
+        this.mediaVoto = mediaVoto;
+        this.numeroVoti = numeroVoti;
+        this.copertina = copertina;
+        this.piattaforme = piattaforme;
+        this.tipologie = tipologie;
     }
 
     /* Getter and Setter */
@@ -62,19 +77,33 @@ public class Gioco {
         return numeroVoti;
     }
 
-    public void setNumeroVoti(int numeroVoti) { this.numeroVoti = numeroVoti; }
+    public void setNumeroVoti(int numeroVoti) {
+        this.numeroVoti = numeroVoti;
+    }
 
-    public byte[] getCopertina() { return copertina; }
+    public byte[] getCopertina() {
+        return copertina;
+    }
 
-    public void setCopertina(byte[] copertina) { this.copertina = copertina; }
+    public void setCopertina(byte[] copertina) {
+        this.copertina = copertina;
+    }
 
-    public ArrayList<String> getPiattaforme() { return piattaforme; }
+    public ArrayList<Piattaforma> getPiattaforme() {
+        return piattaforme;
+    }
 
-    public void setPiattaforme(ArrayList<String> piattaforme) { this.piattaforme = piattaforme; }
+    public void setPiattaforme(ArrayList<Piattaforma> piattaforme) {
+        this.piattaforme = piattaforme;
+    }
 
-    public ArrayList<String> getCategorie() { return categorie; }
+    public ArrayList<Tipologia> getTipologie() {
+        return tipologie;
+    }
 
-    public void setCategorie(ArrayList<String> categorie) { this.categorie = categorie; }
+    public void setTipologie(ArrayList<Tipologia> tipologie) {
+        this.tipologie = tipologie;
+    }
 
 
 }

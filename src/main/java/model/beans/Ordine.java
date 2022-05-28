@@ -5,19 +5,38 @@ import java.util.Date;
 
 public class Ordine {
 
-    private int id;
-    private String stato;
-    private String tracking;
+    /* Attributes */
+
+    private ArrayList<ProdottoOrdine> prodotti;
     private Date dataOrdine;
     private Float totale;
-    private String pagamento;
-    private String indirizzo;
-    private ArrayList<ProdottoOrdine> prodotti;
+    private int id;
+    private Indirizzo indirizzo;
+    private Pagamento pagamento;
+    private String stato;
+    private String tracking;
 
     /* Costructor */
 
     public Ordine(){}
 
+    public Ordine(ArrayList<ProdottoOrdine> prodotti,
+                  Date dataOrdine,
+                  Float totale,
+                  int id,
+                  Indirizzo indirizzo,
+                  Pagamento pagamento,
+                  String stato,
+                  String tracking) {
+        this.prodotti = prodotti;
+        this.dataOrdine = dataOrdine;
+        this.totale = totale;
+        this.id = id;
+        this.pagamento = pagamento;
+        this.indirizzo = indirizzo;
+        this.stato = stato;
+        this.tracking = tracking;
+    }
     /* Getter & Setter */
 
     public int getId() {return id;}
@@ -30,47 +49,91 @@ public class Ordine {
 
     public String getTracking() {return tracking;}
 
-    public void setTracking(String tracking) {this.tracking = tracking;}
+    public void setTracking(String tracking) {
+        this.tracking = tracking;
+    }
 
-    public Date getDataOrdine() {return dataOrdine;}
+    public Date getDataOrdine() {
+        return dataOrdine;
+    }
 
-    public void setDataOrdine(Date dataOrdine) {this.dataOrdine = dataOrdine;}
+    public void setDataOrdine(Date dataOrdine) {
+        this.dataOrdine = dataOrdine;
+    }
 
-    public Float getTotale() {return totale;}
+    public Float getTotale() {
+        return totale;
+    }
 
-    public void setTotale(Float totale) {this.totale = totale;}
+    public void setTotale(Float totale) {
+        this.totale = totale;
+    }
 
-    public String getPagamento() {return pagamento;}
+    public Pagamento getPagamento() {
+        return pagamento;
+    }
 
-    public void setPagamento(String pagamento) {this.pagamento = pagamento;}
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
+    }
 
-    public String getIndirizzo() {return indirizzo;}
+    public Indirizzo getIndirizzo() {
+        return indirizzo;
+    }
 
-    public void setIndirizzo(String indirizzo) {this.indirizzo = indirizzo;}
+    public void setIndirizzo(Indirizzo indirizzo) {
+        this.indirizzo = indirizzo;
+    }
 
-    public ArrayList<ProdottoOrdine> getProdotti() {return prodotti;}
+    public ArrayList<ProdottoOrdine> getProdotti() {
+        return prodotti;
+    }
 
-    public void setProdotti(ArrayList<ProdottoOrdine> prodotti) {this.prodotti = prodotti;}
+    public void setProdotti(ArrayList<ProdottoOrdine> prodotti) {
+        this.prodotti = prodotti;
+    }
+
+    /* Inner Class */
 
     public class ProdottoOrdine{
 
-        public Prodotto prodotto;
-        public float prezzo;
+        /* Attributes */
+
         public int quantita;
+        public float prezzoAcquisto;
+        public Prodotto prodotto;
+
+        /* Constructors */
 
         public ProdottoOrdine(){}
 
-        public void setProdotto(Prodotto prodotto) {this.prodotto=prodotto;}
 
-        public Prodotto getProdotto() {return this.prodotto;}
 
-        public float getPrezzo() {return prezzo;}
+        /* Getter & Setter */
 
-        public void setPrezzo(float prezzo) {this.prezzo = prezzo;}
+        public void setProdotto(Prodotto prodotto) {
+            this.prodotto=prodotto;
+        }
 
-        public int getQuantita() {return quantita;}
+        public Prodotto getProdotto() {
+            return this.prodotto;
+        }
 
-        public void setQuantita(int quantita) {this.quantita = quantita;}
+        public float getPrezzoAcquisto() {
+            return prezzoAcquisto;
+        }
+
+        public void setPrezzoAcquisto(float prezzoAcquisto) {
+            this.prezzoAcquisto = prezzoAcquisto;
+        }
+
+        public int getQuantita() {
+            return quantita;
+        }
+
+        public void setQuantita(int quantita) {
+            this.quantita = quantita;
+        }
 
     }
 

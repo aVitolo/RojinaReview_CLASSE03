@@ -1,20 +1,30 @@
 package model.beans;
 
 public class Indirizzo {
-    String via;
+
+    /* Attributes */
+
     int numeroCivico;
+    String via;
     String città;
     String cap;
+
+    /* Costructor */
 
     public Indirizzo() {
     }
 
-    public Indirizzo(String via, int numeroCivico, String città, String cap) {
+    public Indirizzo(String via,
+                     String città,
+                     String cap,
+                     int numeroCivico) {
         this.via = via;
         this.numeroCivico = numeroCivico;
         this.città = città;
         this.cap = cap;
     }
+
+    /* Getter & Setter */
 
     public String getVia() {
         return via;

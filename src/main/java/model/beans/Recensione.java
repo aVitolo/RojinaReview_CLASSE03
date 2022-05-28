@@ -5,25 +5,41 @@ import java.util.ArrayList;
 
 public class Recensione {
 
+    /* Attributes */
+
+    private ArrayList<Commento> commenti;
+    private byte[] immagine;
+    private Date dataCaricamento;
+    private float voto;
+    private Gioco gioco;
     private int id;
     private String testo;
     private String giornalista;
     private String titolo;
-    private float voto;
-    private Date dataCaricamento;
-    private Gioco gioco;
-    private byte[] immagine;
-    private ArrayList<Commento> commenti;
-
-    /*
-    Possibili altri attributi:
-        -immagine di copertina
-        -link video recensione
-     */
 
     /* Constructor */
 
     public Recensione() {
+    }
+
+    public Recensione(ArrayList<Commento> commenti,
+                      byte[] immagine,
+                      Date dataCaricamento,
+                      float voto,
+                      Gioco gioco,
+                      int id,
+                      String testo,
+                      String giornalista,
+                      String titolo) {
+        this.commenti = commenti;
+        this.immagine = immagine;
+        this.dataCaricamento = dataCaricamento;
+        this.voto = voto;
+        this.gioco = gioco;
+        this.id = id;
+        this.testo = testo;
+        this.giornalista = giornalista;
+        this.titolo = titolo;
     }
 
     /* Getter and Setter */

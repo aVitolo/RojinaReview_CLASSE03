@@ -30,7 +30,7 @@ public class NotiziaDAO {
                 n.setTesto(rs.getString(5));
                 n.setDataCaricamento(rs.getDate(6));
                 n.setImmagine(rs.getBytes(7));
-                n.setCommenti(new CommentoDAO().getCommentByIdNotizia(id));
+                n.setCommenti(new CommentoDAO().getCommentById(id,"commentonotizia"));
                 n.setGiochi(new GiocoDAO().getGiocoByIdNotizia(id));
                 return n;
             }

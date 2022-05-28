@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ProdottoDAO {
 
@@ -22,8 +23,9 @@ public class ProdottoDAO {
                 p.setDescrizione(rs.getString(3));
                 p.setPrezzo(rs.getFloat(4)); //prezzo colonna 5?
                 p.setDisponibilità(rs.getInt(6)); //disponibilità colonna 4?
-
+                p.setCategorie(new CategoriaDAO().doRetrieveByProductId(id));
                 p.setSconto(null);
+
                 if(rs.getInt(6)==1){ //manca new Sconto() ?
                     ps = con.prepareStatement("SELECT nome, percentuale FROM sconto WHERE prodotto=?");
                     ps.setInt(1, id);
@@ -32,10 +34,7 @@ public class ProdottoDAO {
                     p.getSconto().setPercentuale(rs.getFloat(2));
                 }
 
-                ps = con.prepareStatement("SELECT categoria FROM prodotto_categoria WHERE prodotto=?");
-                rs = ps.executeQuery();
-                while (rs.next())
-                    p.getCategorie().add(rs.getString(1));
+
 
                 return p;
             }
@@ -44,5 +43,7 @@ public class ProdottoDAO {
             throw new RuntimeException(e);
         }
     }
+
+
 
 }

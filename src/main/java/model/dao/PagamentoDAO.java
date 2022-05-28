@@ -6,22 +6,26 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class PagamentoDAO {
 
-    public Pagamento doRetrieveByUser(String user) {
+    public ArrayList<Pagamento> doRetrieveByUser(String user) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT numeroCarta, dataScadenza FROM pagamento WHERE Utente=?");
+                    con.prepareStatement("SELECT nome, cognome, numeroCarta, dataScadenza FROM pagamento WHERE utente=?");
             ps.setString(1, user);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()) {
+            ArrayList<Pagamento> pagamenti = new ArrayList<>();
+            while(rs.next()) {
                 Pagamento p = new Pagamento();
-                p.setNumeroCarta(rs.getString(1));
-                p.setDataScadenza(rs.getDate(2));
-                return p;
+                p.setNome(rs.getString(1));
+                p.setCognome(rs.getString(2));
+                p.setNumeroCarta(rs.getString(3));
+                p.setDataScadenza(rs.getDate(4));
+                pagamenti.add(p);
             }
-            return null;
+            return pagamenti;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

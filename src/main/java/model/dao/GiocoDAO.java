@@ -1,6 +1,7 @@
 package model.dao;
 
 import model.beans.Gioco;
+import model.beans.Piattaforma;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,46 +12,21 @@ import java.util.ArrayList;
 public class GiocoDAO {
 
     public Gioco doRetrieveByTitle(String titolo) {
-
-        /*
-        Considerazione
-            Ha senso creare, per rendere più leggibile il codice, tre funzioni distinti
-            -setInfo
-            -setTipologie
-            -setCategorie
-         */
-
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("SELECT * FROM gioco WHERE titolo=?");
             ps.setString(1, titolo);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Gioco g = new Gioco();
-                g.setTitolo(rs.getString(1));
-                g.setDataDiRilascio(rs.getDate(2));
-                g.setCasaDiSviluppo(rs.getString(3));
-                g.setMediaVoto(rs.getFloat(4));
-                g.setNumeroVoti(rs.getInt(5));
-                g.setCopertina(rs.getBytes(6));
-
-                /*
-                    Essendo l'array di Piattaforme e Tipologia di tipo stringa mi basta eseguire le due query per ottenere i dati necessari
-                 */
-
-                ps = con.prepareStatement("SELECT piattaforma FROM gioco_piattaforma WHERE gioco=?");
-                ps.setString(1, titolo);
-                rs = ps.executeQuery();
-                while (rs.next())
-                    g.getPiattaforme().add(rs.getString(1));
-
-                ps = con.prepareStatement("SELECT tipologia FROM gioco_tipologia WHERE gioco=?");
-                ps.setString(1, titolo);
-                rs = ps.executeQuery();
-                while (rs.next())
-                    g.getCategorie().add(rs.getString(1));
-
-                return g;
+                return new Gioco(
+                    rs.getString(1),
+                    rs.getString(3),
+                    rs.getInt(5),
+                    rs.getInt(4),
+                    rs.getDate(2),
+                    rs.getBytes(6),
+                    new PiattaformaDAO().doRetriveByGame(titolo),
+                    new TipologiaDAO().doRetriveByGame(titolo));
             }
             return null;
 
@@ -62,13 +38,20 @@ public class GiocoDAO {
     public ArrayList<Gioco> getGiocoByIdNotizia(int id) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT gioco FROM gioco_notizia WHERE notizia=?");
+                    con.prepareStatement("SELECT g.* FROM gioco g join gioco_notizia gn on  g.titolo=gn.gioco WHERE notizia=?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             ArrayList<Gioco> g = new ArrayList<>();
-            while (rs.next()) {
-
-            }
+            while (rs.next())
+                g.add(new Gioco(
+                    rs.getString(1),
+                    rs.getString(3),
+                    rs.getInt(5),
+                    rs.getInt(4),
+                    rs.getDate(2),
+                    rs.getBytes(6),
+                    new PiattaformaDAO().doRetriveByGame(rs.getString(1)),
+                    new TipologiaDAO().doRetriveByGame(rs.getString(1))));
             return g;
 
         } catch (SQLException e) {
@@ -77,7 +60,3 @@ public class GiocoDAO {
     }
 
 }
-
-/* aggiornamento voto: la servlet invia il nuovo voto al DAO, questo controlla
-se il voto è già presente o meno e quindi fare insert o update
- */

@@ -6,23 +6,39 @@ import java.util.ArrayList;
 
 public class Notizia {
 
+    /* Attributes */
+
+    private byte[] immagine;
+    private ArrayList<Commento> commenti;
+    private ArrayList<Gioco> giochi;
+    private Date dataCaricamento;
     private int id;
     private String testo;
     private String titolo;
-    private Date dataCaricamento;
     private String giornalista;
-    private byte[] immagine;
-    private ArrayList<Commento> commenti;
-    private ArrayList<Gioco> giochi; // da valutare
-/*
-    Possibili altri attributi:
-        -immagine di copertina
-        -link video notiza
-     */
+
 
     /* Constructor */
 
     public Notizia() {
+    }
+
+    public Notizia(ArrayList<Commento> commenti,
+                   ArrayList<Gioco> giochi,
+                   byte[] immagine,
+                   Date dataCaricamento,
+                   int id,
+                   String testo,
+                   String titolo,
+                   String giornalista) {
+        this.immagine = immagine;
+        this.commenti = commenti;
+        this.giochi = giochi;
+        this.dataCaricamento = dataCaricamento;
+        this.id = id;
+        this.testo = testo;
+        this.titolo = titolo;
+        this.giornalista = giornalista;
     }
 
     /* Getter and Setter */
@@ -51,23 +67,43 @@ public class Notizia {
         this.dataCaricamento = dataCaricamento;
     }
 
-    public int getId() {return id;}
+    public int getId() {
+        return id;
+    }
 
-    public void setId(int id) {this.id = id;}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public String getTesto() {return testo;}
+    public String getTesto() {
+        return testo;
+    }
 
-    public void setTesto(String testo) {this.testo = testo;}
+    public void setTesto(String testo) {
+        this.testo = testo;
+    }
 
-    public void setCommenti(ArrayList<Commento> commenti) { this.commenti = commenti; }
+    public void setCommenti(ArrayList<Commento> commenti) {
+        this.commenti = commenti;
+    }
 
-    public ArrayList<Commento> getCommenti() { return commenti; }
+    public ArrayList<Commento> getCommenti() {
+        return commenti;
+    }
 
-    public ArrayList<Gioco> getGiochi() { return giochi; }
+    public ArrayList<Gioco> getGiochi() {
+        return giochi;
+    }
 
-    public void setGiochi(ArrayList<Gioco> giochi) { this.giochi = giochi; }
+    public void setGiochi(ArrayList<Gioco> giochi) {
+        this.giochi = giochi;
+    }
 
-    public byte[] getImmagine() { return immagine; }
+    public byte[] getImmagine() {
+        return immagine;
+    }
 
-    public void setImmagine(byte[] immagine) { this.immagine = immagine; }
+    public void setImmagine(byte[] immagine) {
+        this.immagine = immagine;
+    }
 }

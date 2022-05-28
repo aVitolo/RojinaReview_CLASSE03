@@ -8,17 +8,17 @@ import java.util.ArrayList;
 
 public class Utente {
 
+    private ArrayList<Indirizzo> indirizzi;
+    private ArrayList<Telefono> telefoni;
+    private ArrayList<Pagamento> pagamenti;
+    private ArrayList<Ordine> ordini;
+    private Carrello carrello;
     private int eta;
     private String email;
     private String nickname;
     private String nome;
     private String cognome;
     private String password;
-    private ArrayList<Indirizzo> indirizzi;
-    private ArrayList<String> telefoni;
-    private ArrayList<Pagamento> pagamenti;
-    private ArrayList<Ordine> ordini;
-    private Carrello carrello;
 
     /* Costructor */
 
@@ -27,15 +27,30 @@ public class Utente {
 
     /* Contructor for insert in DB */
 
-    public Utente(int eta, String email, String nickname, String nome, String cognome, String password, Indirizzo indirizzo, String telefono) throws UnsupportedEncodingException {
+    public Utente(int eta,
+                  String email,
+                  String nickname,
+                  String nome,
+                  String cognome,
+                  String password,
+                  ArrayList<Indirizzo> indirizzi,
+                  ArrayList<Telefono> telefoni,
+                  ArrayList<Pagamento> pagamenti,
+                  ArrayList<Ordine> ordini,
+                  Carrello carello)
+            throws UnsupportedEncodingException {
         this.eta = eta;
         this.email = email;
         this.nickname = nickname;
         this.nome = nome;
         this.cognome = cognome;
         this.password = Utente.calcolaHash(password);
-        this.indirizzi.add(indirizzo);
-        this.telefoni.add(telefono);
+        this.indirizzi = indirizzi;
+        this.telefoni = telefoni;
+        this.pagamenti = pagamenti;
+        this.ordini = ordini;
+        this.carrello = carrello;
+
     }
 
     /* Getter & Setter */
@@ -96,11 +111,11 @@ public class Utente {
         this.indirizzi = indirizzi;
     }
 
-    public ArrayList<String> getTelefoni() {
+    public ArrayList<Telefono> getTelefoni() {
         return telefoni;
     }
 
-    public void setTelefoni(ArrayList<String> telefoni) {
+    public void setTelefoni(ArrayList<Telefono> telefoni) {
         this.telefoni = telefoni;
     }
 
@@ -127,6 +142,8 @@ public class Utente {
     public void setCarrello(Carrello carrello) {
         this.carrello = carrello;
     }
+
+    /* Password Hashing */
 
     public static String calcolaHash(String password) throws UnsupportedEncodingException {
         String passwordAfterHash;

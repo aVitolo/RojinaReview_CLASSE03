@@ -1,6 +1,8 @@
 package model.dao;
 
+import model.beans.Indirizzo;
 import model.beans.Ordine;
+import model.beans.Pagamento;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,22 +15,28 @@ public class OrdineDAO {
     public ArrayList<Ordine> doRetrieveByUser(String user) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT id, stato, tracking, dataOrdine, totale, pagamento, via, numeroCivico, città, cap FROM ordine WHERE utente=?");
+                    con.prepareStatement(
+                            "SELECT o.id, stato, o.tracking, o.dataOrdine, o.totale, o.pagamento, o.via, o.numeroCivico, o.città, o.cap, p.nome, p.cognome, p.numeroCarta, p.dataScadenza " +
+                            "FROM ordine o join pagamento p on  o.pagamento = p.numeroCarta and o.utente and o.utente = p.utente WHERE utente=?");
             ps.setString(1, user);
             ResultSet rs = ps.executeQuery();
             ArrayList<Ordine> ordini = new ArrayList<>();
             while(rs.next()) {
-                Ordine o = new Ordine();
-                o.setId(rs.getInt(1));
-                o.setStato(rs.getString(2));
-                o.setTracking(rs.getString(3));
-                o.setDataOrdine(rs.getDate(4));
-                o.setTotale(rs.getFloat(5));
-                o.setPagamento(rs.getString(6));
-                o.setIndirizzo(rs.getString(7) + " " +
-                        rs.getString(8) + " " +
-                        rs.getString(9) + " " +
-                        rs.getString(10));
+                Ordine o = new Ordine(
+                null,
+                rs.getDate(4),
+                rs.getFloat(5),
+                rs.getInt(1),
+                new Indirizzo(  rs.getString(8),
+                                rs.getString(10),
+                                rs.getString(11),
+                                rs.getInt(9)),
+                new Pagamento(  rs.getString(12),
+                                rs.getString(13),
+                                rs.getString(14),
+                                rs.getDate(15)),
+                rs.getString(rs.getString(2)),
+                rs.getString(rs.getString(3)));
 
                 ps = con.prepareStatement("SELECT po.prodotto, po.prezzo, po.quantità FROM prodotto_ordine po join ordine o on po.ordine = o.id WHERE utente=?");
                 ps.setString(1, user);
@@ -36,7 +44,7 @@ public class OrdineDAO {
                 while (rs.next()) {
                     Ordine.ProdottoOrdine p = o.new ProdottoOrdine();
                     p.setProdotto(new ProdottoDAO().doRetriveById(rs.getInt(1)));
-                    p.setPrezzo(rs.getFloat(2));
+                    p.setPrezzoAcquisto(rs.getFloat(2));
                     p.setQuantita(rs.getInt(3));
                     o.getProdotti().add(p);
                 }
@@ -47,5 +55,4 @@ public class OrdineDAO {
             throw new RuntimeException(e);
         }
     }
-
 }
