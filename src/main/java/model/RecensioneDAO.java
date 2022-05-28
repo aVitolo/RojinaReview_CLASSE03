@@ -11,7 +11,7 @@ public class RecensioneDAO {
     public Recensione doRetrieveById(int id) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT g.nome, g.cognome, r.id, r.titolo, r.testo, r.voto, r.DataCaricamento, r.gioco FROM recensione r JOIN giornalista g on g.id = r.giornalista WHERE r.id=?");
+                    con.prepareStatement("SELECT g.nome, g.cognome, r.id, r.titolo, r.testo, r.voto, r.DataCaricamento, r.gioco, r.immagine FROM recensione r JOIN giornalista g on g.id = r.giornalista WHERE r.id=?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -23,6 +23,7 @@ public class RecensioneDAO {
                 r.setVoto(rs.getFloat(6));
                 r.setDataCaricamento(rs.getDate(7));
                 r.setGioco(new GiocoDAO().doRetrieveByTitle(rs.getString(8)));
+                r.setImmagine(rs.getBytes(9));
                 r.setCommenti(new CommentoDAO().getCommentByIdRecensione(r.getId()));
                 return r;
             }

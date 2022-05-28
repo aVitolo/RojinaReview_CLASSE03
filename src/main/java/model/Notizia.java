@@ -11,6 +11,7 @@ public class Notizia {
     private String titolo;
     private Date dataCaricamento;
     private String giornalista;
+    private byte[] immagine;
     private ArrayList<Commento> commenti;
     private ArrayList<Gioco> giochi; // da valutare
 /*
@@ -65,4 +66,8 @@ public class Notizia {
     public ArrayList<Gioco> getGiochi() { return giochi; }
 
     public void setGiochi(ArrayList<Gioco> giochi) { this.giochi = giochi; }
+
+    public byte[] getImmagine() { return immagine; }
+
+    public void setImmagine(byte[] immagine) { this.immagine = immagine; }
 }

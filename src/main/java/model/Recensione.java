@@ -12,6 +12,7 @@ public class Recensione {
     private float voto;
     private Date dataCaricamento;
     private Gioco gioco;
+    private byte[] immagine;
     private ArrayList<Commento> commenti;
 
     /*
@@ -76,4 +77,8 @@ public class Recensione {
     public void setDataCaricamento(Date dataCaricamento) {
         this.dataCaricamento = dataCaricamento;
     }
+
+    public byte[] getImmagine() { return immagine; }
+
+    public void setImmagine(byte[] immagine) { this.immagine = immagine; }
 }

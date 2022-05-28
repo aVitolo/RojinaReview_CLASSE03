@@ -17,7 +17,7 @@ public class NotiziaDAO {
     public Notizia doRetrieveById(int id ) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT g.Nome,g.Cognome, n.id, n.titolo, n.testo, n.dataCaricamento FROM notizia n JOIN giornalista g on g.id = n.giornalista WHERE n.id=?");
+                    con.prepareStatement("SELECT g.Nome,g.Cognome, n.id, n.titolo, n.testo, n.dataCaricamento, n.immagine FROM notizia n JOIN giornalista g on g.id = n.giornalista WHERE n.id=?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -27,6 +27,7 @@ public class NotiziaDAO {
                 n.setTitolo(rs.getString(4));
                 n.setTesto(rs.getString(5));
                 n.setDataCaricamento(rs.getDate(6));
+                n.setImmagine(rs.getBytes(7));
                 n.setCommenti(new CommentoDAO().getCommentByIdNotizia(id));
                 n.setGiochi(new GiocoDAO().getGiocoByIdNotizia(id));
                 return n;

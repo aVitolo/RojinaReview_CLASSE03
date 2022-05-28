@@ -10,6 +10,7 @@ public class Gioco {
     private String casaDiSviluppo;
     private float mediaVoto;
     private int numeroVoti;
+    private byte[] copertina;
     private ArrayList<String> piattaforme;
     private ArrayList<String> categorie;
 
@@ -63,6 +64,10 @@ public class Gioco {
 
     public void setNumeroVoti(int numeroVoti) { this.numeroVoti = numeroVoti; }
 
+    public byte[] getCopertina() { return copertina; }
+
+    public void setCopertina(byte[] copertina) { this.copertina = copertina; }
+
     public ArrayList<String> getPiattaforme() { return piattaforme; }
 
     public void setPiattaforme(ArrayList<String> piattaforme) { this.piattaforme = piattaforme; }
@@ -70,4 +75,6 @@ public class Gioco {
     public ArrayList<String> getCategorie() { return categorie; }
 
     public void setCategorie(ArrayList<String> categorie) { this.categorie = categorie; }
+
+
 }

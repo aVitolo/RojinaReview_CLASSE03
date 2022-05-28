@@ -30,6 +30,7 @@ public class GiocoDAO {
                 g.setCasaDiSviluppo(rs.getString(3));
                 g.setMediaVoto(rs.getFloat(4));
                 g.setNumeroVoti(rs.getInt(5));
+                g.setCopertina(rs.getBytes(6));
 
                 /*
                     Essendo l'array di Piattaforme e Tipologia di tipo stringa mi basta eseguire le due query per ottenere i dati necessari
