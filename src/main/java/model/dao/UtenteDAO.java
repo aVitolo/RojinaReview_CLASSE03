@@ -12,6 +12,10 @@ import java.util.ArrayList;
 public class UtenteDAO {
     Connection con;
 
+    public UtenteDAO(Connection con){
+        this.con=con;
+    }
+
     public UtenteDAO() throws SQLException {
         this.con = ConPool.getConnection();
     }

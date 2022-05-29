@@ -1,12 +1,4 @@
-18/05/2022
-
-Andrea:
-1.Gestione servlet loadOnStartup
-2. Revisione beans
-
-Carmine:
-1.Gestione database
-
-
-Carlo:
-1.Prima stesura parte front-end grafica
+- JSP notizie, recensioni, prodotti, header, footer, login/registrazione
+- Testare recupero immagine da beans
+- Modificare costrutttori DAO
+- Polimorfismo utenti UTENTE/CLIENTE/GIORNALIST/AMMINISTRATORE

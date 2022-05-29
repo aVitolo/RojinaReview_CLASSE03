@@ -21,8 +21,8 @@ public class ProdottoDAO {
                 p.setId(rs.getInt(1));
                 p.setNome(rs.getString(2));
                 p.setDescrizione(rs.getString(3));
-                p.setPrezzo(rs.getFloat(4)); //prezzo colonna 5?
-                p.setDisponibilità(rs.getInt(6)); //disponibilità colonna 4?
+                p.setPrezzo(rs.getFloat(5)); //prezzo colonna 5?
+                p.setDisponibilità(rs.getInt(4)); //disponibilità colonna 4?
                 p.setCategorie(new CategoriaDAO().doRetrieveByProductId(id));
                 p.setSconto(null);
 
