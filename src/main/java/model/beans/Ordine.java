@@ -18,7 +18,8 @@ public class Ordine {
 
     /* Costructor */
 
-    public Ordine(){}
+    public Ordine() {
+    }
 
     public Ordine(ArrayList<ProdottoOrdine> prodotti,
                   Date dataOrdine,
@@ -39,15 +40,25 @@ public class Ordine {
     }
     /* Getter & Setter */
 
-    public int getId() {return id;}
+    public int getId() {
+        return id;
+    }
 
-    public void setId(int id) {this.id = id;}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public String getStato() {return stato;}
+    public String getStato() {
+        return stato;
+    }
 
-    public void setStato(String stato) {this.stato = stato;}
+    public void setStato(String stato) {
+        this.stato = stato;
+    }
 
-    public String getTracking() {return tracking;}
+    public String getTracking() {
+        return tracking;
+    }
 
     public void setTracking(String tracking) {
         this.tracking = tracking;
@@ -95,7 +106,11 @@ public class Ordine {
 
     /* Inner Class */
 
-    public class ProdottoOrdine{
+    public class ProdottoOrdine {
+        /*
+            Valutare se modificare a class  per riutilizzo in Carrello e Ordine
+            o estendere prodotto
+        */
 
         /* Attributes */
 
@@ -105,14 +120,15 @@ public class Ordine {
 
         /* Constructors */
 
-        public ProdottoOrdine(){}
+        public ProdottoOrdine() {
+        }
 
 
 
         /* Getter & Setter */
 
         public void setProdotto(Prodotto prodotto) {
-            this.prodotto=prodotto;
+            this.prodotto = prodotto;
         }
 
         public Prodotto getProdotto() {

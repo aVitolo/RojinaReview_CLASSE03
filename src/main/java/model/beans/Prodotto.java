@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Prodotto {
 
     private ArrayList<Categoria> categorie;
+    private byte[] immagine;
     private int disponibilità;
     private int id;
     private float prezzo;
@@ -15,7 +16,7 @@ public class Prodotto {
     /* Construct */
 
     public Prodotto() {
-
+        this.sconto = new Sconto();
     }
 
     /* Getter & Setter*/
@@ -66,6 +67,14 @@ public class Prodotto {
 
     public void setDisponibilità(int disponibilità) {
         this.disponibilità = disponibilità;
+    }
+
+    public byte[] getImmagine() {
+        return immagine;
+    }
+
+    public void setImmagine(byte[] immagine) {
+        this.immagine = immagine;
     }
 
     public ArrayList<Categoria> getCategorie() {

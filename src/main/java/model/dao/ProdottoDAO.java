@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 public class ProdottoDAO {
 
+    // Valutare se gestire lo sconto con left join
+
     public Prodotto doRetriveById(int id) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
@@ -24,17 +26,14 @@ public class ProdottoDAO {
                 p.setPrezzo(rs.getFloat(5)); //prezzo colonna 5?
                 p.setDisponibilità(rs.getInt(4)); //disponibilità colonna 4?
                 p.setCategorie(new CategoriaDAO().doRetrieveByProductId(id));
-                p.setSconto(null);
-
-                if(rs.getInt(6)==1){ //manca new Sconto() ?
+                p.setImmagine(rs.getBytes(6));
+                if(rs.getInt(7)==1){
                     ps = con.prepareStatement("SELECT nome, percentuale FROM sconto WHERE prodotto=?");
                     ps.setInt(1, id);
                     rs = ps.executeQuery();
                     p.getSconto().setNome(rs.getString(1));
                     p.getSconto().setPercentuale(rs.getFloat(2));
                 }
-
-
 
                 return p;
             }
