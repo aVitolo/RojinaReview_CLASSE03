@@ -20,6 +20,7 @@ create table Giornalista(
     cognome 		varchar(30) not null,
     email			varchar(30),
     pass			varchar(2500),
+    immagine        mediumblob,
     check (nome regexp '[a-zA-Z ]{1,30}'),
     check (cognome regexp '[a-zA-Z\' ]{1,30}'),
     primary key(id)

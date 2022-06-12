@@ -6,7 +6,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
-public class Utente {
+public class Utente extends Persona{
 
     private ArrayList<Indirizzo> indirizzi;
     private ArrayList<Telefono> telefoni;
@@ -14,15 +14,13 @@ public class Utente {
     private ArrayList<Ordine> ordini;
     private Carrello carrello;
     private int eta;
-    private String email;
     private String nickname;
-    private String nome;
-    private String cognome;
-    private String password;
+
 
     /* Costructor */
 
     public Utente() {
+        super();
     }
 
     /* Contructor for insert in DB */
@@ -39,12 +37,9 @@ public class Utente {
                   ArrayList<Ordine> ordini,
                   Carrello carello)
             throws UnsupportedEncodingException {
+        super(nome, cognome, email, password);
         this.eta = eta;
-        this.email = email;
         this.nickname = nickname;
-        this.nome = nome;
-        this.cognome = cognome;
-        this.password = Utente.calcolaHash(password);
         this.indirizzi = indirizzi;
         this.telefoni = telefoni;
         this.pagamenti = pagamenti;
@@ -63,44 +58,12 @@ public class Utente {
         this.eta = eta;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getNickname() {
         return nickname;
     }
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCognome() {
-        return cognome;
-    }
-
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public ArrayList<Indirizzo> getIndirizzi() {
@@ -143,18 +106,5 @@ public class Utente {
         this.carrello = carrello;
     }
 
-    /* Password Hashing */
 
-    public static String calcolaHash(String password) throws UnsupportedEncodingException {
-        String passwordAfterHash;
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            digest.reset();
-            digest.update(password.getBytes("utf8"));
-            passwordAfterHash = String.format("%040x", new BigInteger(1, digest.digest()));
-            return passwordAfterHash;
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

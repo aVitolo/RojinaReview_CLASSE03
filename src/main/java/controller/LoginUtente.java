@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.beans.Persona;
 import model.beans.Utente;
 import model.dao.UtenteDAO;
 
@@ -23,7 +24,7 @@ public class LoginUtente extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         //Calcola Hash della password utente
-        password= Utente.calcolaHash(password);
+        password= Persona.calcolaHash(password);
 
         try {
             //Inizializza la connessione al DB tramite DAO
