@@ -11,18 +11,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class OrdineDAO {
+    private Connection con;
 
-    public ArrayList<Ordine> doRetrieveByUser(String user) {
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps =
+    public OrdineDAO() throws SQLException {
+        con = ConPool.getConnection();
+    }
+
+    public OrdineDAO(Connection con) {
+        this.con = con;
+    }
+
+    public ArrayList<Ordine> doRetrieveByUser(String user) throws SQLException {
+        PreparedStatement ps =
                     con.prepareStatement(
                             "SELECT o.id, stato, o.tracking, o.dataOrdine, o.totale, o.pagamento, o.via, o.numeroCivico, o.città, o.cap, p.nome, p.cognome, p.numeroCarta, p.dataScadenza " +
                             "FROM ordine o join pagamento p on  o.pagamento = p.numeroCarta and o.utente and o.utente = p.utente WHERE utente=?");
-            ps.setString(1, user);
-            ResultSet rs = ps.executeQuery();
-            ArrayList<Ordine> ordini = new ArrayList<>();
-            while(rs.next()) {
-                Ordine o = new Ordine(
+        ps.setString(1, user);
+        ResultSet rs = ps.executeQuery();
+        ArrayList<Ordine> ordini = new ArrayList<>();
+        while(rs.next()) {
+            Ordine o = new Ordine(
                 null,
                 rs.getDate(4),
                 rs.getFloat(5),
@@ -38,21 +46,21 @@ public class OrdineDAO {
                 rs.getString(rs.getString(2)),
                 rs.getString(rs.getString(3)));
 
-                ps = con.prepareStatement("SELECT po.prodotto, po.prezzo, po.quantità FROM prodotto_ordine po join ordine o on po.ordine = o.id WHERE utente=?");
-                ps.setString(1, user);
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    Ordine.ProdottoOrdine p = o.new ProdottoOrdine();
-                    p.setProdotto(new ProdottoDAO().doRetriveById(rs.getInt(1)));
-                    p.setPrezzoAcquisto(rs.getFloat(2));
-                    p.setQuantita(rs.getInt(3));
-                    o.getProdotti().add(p);
-                }
-                ordini.add(o);
+            ps = con.prepareStatement("SELECT po.prodotto, po.prezzo, po.quantità FROM prodotto_ordine po join ordine o on po.ordine = o.id WHERE utente=?");
+            ps.setString(1, user);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Ordine.ProdottoOrdine p = o.new ProdottoOrdine();
+                p.setProdotto(new ProdottoDAO(con).doRetriveById(rs.getInt(1)));
+                p.setPrezzoAcquisto(rs.getFloat(2));
+                p.setQuantita(rs.getInt(3));
+                o.getProdotti().add(p);
             }
-            return ordini;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            ordini.add(o);
+
         }
+
+        return ordini;
     }
+
 }

@@ -10,33 +10,39 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class GiocoDAO {
+    private Connection con;
 
-    public Gioco doRetrieveByTitle(String titolo) {
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps =
+    public GiocoDAO() throws SQLException {
+        con = ConPool.getConnection();
+    }
+
+    public GiocoDAO(Connection con) {
+        this.con = con;
+    }
+
+    public Gioco doRetrieveByTitle(String titolo) throws SQLException {
+        PreparedStatement ps =
                     con.prepareStatement("SELECT * FROM gioco WHERE titolo=?");
-            ps.setString(1, titolo);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                return new Gioco(
+        ps.setString(1, titolo);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return new Gioco(
                     rs.getString(1),
                     rs.getString(3),
                     rs.getInt(5),
                     rs.getInt(4),
                     rs.getDate(2),
                     rs.getBytes(6),
-                    new PiattaformaDAO().doRetriveByGame(titolo),
-                    new TipologiaDAO().doRetriveByGame(titolo));
+                    new PiattaformaDAO(con).doRetriveByGame(titolo),
+                    new TipologiaDAO(con).doRetriveByGame(titolo));
             }
-            return null;
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return null;
+
+
     }
 
-    public ArrayList<Gioco> getGiocoByIdNotizia(int id) {
-        try (Connection con = ConPool.getConnection()) {
+    public ArrayList<Gioco> getGiocoByIdNotizia(int id) throws SQLException {
             PreparedStatement ps =
                     con.prepareStatement("SELECT g.* FROM gioco g join gioco_notizia gn on  g.titolo=gn.gioco WHERE notizia=?");
             ps.setInt(1, id);
@@ -50,13 +56,10 @@ public class GiocoDAO {
                     rs.getInt(4),
                     rs.getDate(2),
                     rs.getBytes(6),
-                    new PiattaformaDAO().doRetriveByGame(rs.getString(1)),
-                    new TipologiaDAO().doRetriveByGame(rs.getString(1))));
+                    new PiattaformaDAO(con).doRetriveByGame(rs.getString(1)),
+                    new TipologiaDAO(con).doRetriveByGame(rs.getString(1))));
             return g;
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }

@@ -6,21 +6,21 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class IndirizzoDAO {
-    Connection con;
+    private Connection con;
 
     //Così da creare una sola connessione per ogni dao
     public IndirizzoDAO() throws SQLException {
-        this.con = ConPool.getConnection();
+        con = ConPool.getConnection();
     }
 
     //In alternativa si potrebbe passare la connessione al costruttore del dao per diminuirle ancora
-    public IndirizzoDAO(Connection con) throws SQLException {
+    public IndirizzoDAO(Connection con) {
         this.con = con;
     }
 
     public ArrayList<Indirizzo> doRetriveByUser(String user) throws SQLException {
-        Connection con = ConPool.getConnection();
-        PreparedStatement ps = con.prepareStatement("SELECT via, numeroCivico, città, cap FROM Indirizzo WHERE utente=?");
+        PreparedStatement ps =
+                con.prepareStatement("SELECT via, numeroCivico, città, cap FROM Indirizzo WHERE utente=?");
         ps.setString(1, user);
         ResultSet rs = ps.executeQuery();
         ArrayList<Indirizzo> indirizzi = new ArrayList<>();

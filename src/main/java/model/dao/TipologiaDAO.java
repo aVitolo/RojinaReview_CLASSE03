@@ -12,17 +12,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class TipologiaDAO {
-    public ArrayList<Tipologia> doRetriveByGame(String titolo) {
-        try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps =
-                    con.prepareStatement("SELECT tipologia FROM gioco_tipologia WHERE gioco=?");
-            ResultSet rs =  ps.executeQuery();
-            ArrayList<Tipologia> tipologie = new ArrayList<>();
-            while (rs.next())
-                tipologie.add(new Tipologia(rs.getString(1)));
-            return tipologie;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    private Connection con;
+
+    public TipologiaDAO() throws SQLException {
+        con = ConPool.getConnection();
     }
+
+    public TipologiaDAO(Connection con) {
+        this.con = con;
+    }
+
+    public ArrayList<Tipologia> doRetriveByGame(String titolo) throws SQLException {
+        PreparedStatement ps =
+                    con.prepareStatement("SELECT tipologia FROM gioco_tipologia WHERE gioco=?");
+        ResultSet rs =  ps.executeQuery();
+        ArrayList<Tipologia> tipologie = new ArrayList<>();
+        while (rs.next())
+                tipologie.add(new Tipologia(rs.getString(1)));
+
+        return tipologie;
+
+    }
+
 }

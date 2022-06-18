@@ -10,22 +10,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UtenteDAO {
-    Connection con;
-
-    public UtenteDAO(Connection con){
-        this.con=con;
-    }
+    private Connection con;
 
     public UtenteDAO() throws SQLException {
-        this.con = ConPool.getConnection();
+        con = ConPool.getConnection();
+    }
+
+    public UtenteDAO(Connection con) {
+        this.con = con;
     }
 
     public Utente doRetriveByEmail(String email) throws SQLException, UnsupportedEncodingException {
-            PreparedStatement ps =
+        PreparedStatement ps =
                     con.prepareStatement("SELECT * FROM Utente WHERE email=?");
-            ps.setString(1, email);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
+        ps.setString(1, email);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
                 return new Utente(
                 rs.getInt(6),
                 rs.getString(1),
@@ -39,9 +39,11 @@ public class UtenteDAO {
                 new OrdineDAO().doRetrieveByUser(email),
                 new CarrelloDAO().doRetrieveByUser(email)
                 );
-            }
-            return null;
+        }
+
+        return null;
     }
+
 }
 
 
