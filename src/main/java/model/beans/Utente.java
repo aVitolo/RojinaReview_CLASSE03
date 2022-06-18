@@ -1,12 +1,11 @@
 package model.beans;
 
+import model.utilities.Persona;
+
 import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
-public class Utente extends Persona{
+public class Utente extends Persona {
 
     private ArrayList<Indirizzo> indirizzi;
     private ArrayList<Telefono> telefoni;

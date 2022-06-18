@@ -5,7 +5,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.beans.Persona;
+import model.utilities.Persona;
 import model.beans.Utente;
 import model.dao.UtenteDAO;
 

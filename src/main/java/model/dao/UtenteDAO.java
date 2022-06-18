@@ -7,7 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class UtenteDAO {
     private Connection con;
@@ -27,12 +26,12 @@ public class UtenteDAO {
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
                 return new Utente(
-                rs.getInt(6),
-                rs.getString(1),
-                rs.getString(2),
-                rs.getString(3),
-                rs.getString(4),
-                rs.getString(5),
+                rs.getInt("eta"),
+                rs.getString("email"),
+                rs.getString("nickname"),
+                rs.getString("pass"),
+                rs.getString("nome"),
+                rs.getString("cognome"),
                 new IndirizzoDAO().doRetriveByUser(email),
                 new TelefonoDAO().doRetriveByUser(email),
                 new PagamentoDAO().doRetrieveByUser(email),

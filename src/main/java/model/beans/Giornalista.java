@@ -1,8 +1,10 @@
 package model.beans;
 
+import model.utilities.Persona;
+
 import java.io.UnsupportedEncodingException;
 
-public class Giornalista extends Persona{
+public class Giornalista extends Persona {
 
     private byte[] immagine;
     private int id;

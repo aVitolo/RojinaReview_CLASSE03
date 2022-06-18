@@ -1,4 +1,4 @@
-package model.beans;
+package model.utilities;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;

@@ -1,8 +1,10 @@
 package model.beans;
 
+import model.utilities.Persona;
+
 import java.io.UnsupportedEncodingException;
 
-public class Amministratore extends Persona{
+public class Amministratore extends Persona {
 
     private int id;
 

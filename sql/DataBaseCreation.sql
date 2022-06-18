@@ -132,7 +132,7 @@ create table Utente(
    pass 			varchar(256) not null,
    nome			    varchar(30),
    cognome			varchar(30),
-   età				tinyint,
+   eta				tinyint,
    primary key(email)
 );
 
