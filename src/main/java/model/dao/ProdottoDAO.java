@@ -36,6 +36,8 @@ public class ProdottoDAO {
             p.setPrezzo(rs.getFloat(5));
             p.setImmagine(rs.getBytes(6));
             p.setCategorie(new CategoriaDAO(con).doRetrieveByProductId(id));
+            p.setMediaVoto(rs.getFloat(8));
+            p.setNumeroVoti(rs.getInt(9));
 
             if(rs.getInt(7)==1){
                 ps = con.prepareStatement("SELECT nome, percentuale FROM sconto WHERE prodotto=?");

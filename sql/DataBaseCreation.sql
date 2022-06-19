@@ -216,7 +216,26 @@ create table Prodotto(
      prezzo			float,
      immagine		mediumblob,
      sconto			boolean,
+     mediaVoto		float(4,2) not null,
+     numeroVoti		int not null,
      primary key(id)
+);
+
+create table Gradimento(
+    prodotto        int,
+    utente  		varchar(30),
+    voto 			float not null,
+    dataVotazione	date,
+    foreign key(prodotto)
+        references Prodotto(id)
+        on delete cascade
+        on update cascade,
+    foreign key(utente)
+        references Utente(email)
+        on delete cascade
+        on update cascade,
+    primary key(prodotto,utente,dataVotazione),
+    check (voto<=10 and voto>=1)
 );
 
 create table Sconto(
@@ -322,6 +341,26 @@ begin
         update Gioco
         set  MediaVoto = ( MediaVoto*NumeroVoti - (select Voto from Voto where (Gioco,Utente,DataVotazione) in (select Gioco,Utente,max(DataVotazione) from Voto where new.Utente=Utente and new.Gioco=Gioco group by Gioco,Utente)) + new.Voto) / NumeroVoti
         where new.Gioco=Titolo;
+    end if;
+end//
+DELIMITER ;
+
+DELIMITER //
+create trigger AggiornaGradimento
+    before insert on Gradimento
+    for each row
+begin
+    if (select count(*) from Gradimento where new.Utente=Utente and new.prodotto=prodotto) = 0 then
+
+        update Prodotto
+        set  MediaVoto = (MediaVoto*NumeroVoti + new.Voto) / (NumeroVoti+1), NumeroVoti = NumeroVoti+1
+        where new.prodotto=Prodotto.id;
+
+    else
+
+        update Prodotto
+        set  MediaVoto = ( MediaVoto*NumeroVoti - (select voto from Gradimento where (prodotto,Utente,DataVotazione) in (select prodotto,utente,max(DataVotazione) from Gradimento where new.Utente=Utente and new.prodotto=prodotto group by prodotto,Utente)) + new.Voto) / NumeroVoti
+        where new.prodotto=Prodotto.id;
     end if;
 end//
 DELIMITER ;
@@ -558,7 +597,7 @@ insert into Voto values
 ("FIFA 21","venebroguppeu@yopmail.com",6,"2020-11-05"),
 ("FIFA 22","venebroguppeu@yopmail.com",6,"2021-10-26"),
 ("Mario Kart 8","venebroguppeu@yopmail.com",8,"2014-06-29"),
-("The Legend of Zelda: Breath of the Wild","venebroguppeu@yopmail.com",9.5,"2017-03-03"),
+("The Legend of Zelda: Breath of the Wild","venebroguppeu@yopmail.com",9,"2017-03-03"),
 ("Halo 2","venebroguppeu@yopmail.com",7,"2004-12-09"),
 ("Halo 3","venebroguppeu@yopmail.com",8,"2007-10-25"),
 ("Halo 4","venebroguppeu@yopmail.com",8,"2012-12-06"),
@@ -573,7 +612,7 @@ insert into Voto values
 ("FIFA 21","frefimeitromo@yopmail.com",7,"2020-11-05"),
 ("FIFA 22","frefimeitromo@yopmail.com",7,"2021-10-26"),
 
-("Sekiro: Shadows Die Twice","ceuprofraucoudi@yopmail.com",8.5,"2019-03-22"),
+("Sekiro: Shadows Die Twice","ceuprofraucoudi@yopmail.com",8,"2019-03-22"),
 
 ("Halo 2","ceubujotawo@yopmail.com",8,"2004-11-09"),
 ("Halo 3","ceubujotawo@yopmail.com",8,"2007-09-25"),
@@ -581,7 +620,7 @@ insert into Voto values
 ("Halo 5","ceubujotawo@yopmail.com",7,"2015-10.27"),
 ("Halo Infinite","ceubujotawo@yopmail.com",9,"2021-12-08"),
 
-("Mario Kart 8","gralameiddauquau@yopmail.com",8.5,"2014-05-29"),
+("Mario Kart 8","gralameiddauquau@yopmail.com",8,"2014-05-29"),
 ("The Legend of Zelda: Breath of the Wild","gralameiddauquau@yopmail.com",9,"2017-03-03"),
 
 ("Halo 4","ceubujotawo@yopmail.com",7,"2022-01-28"),
@@ -609,12 +648,21 @@ insert into Telefono values
 ("oefo@yopmail.com","4212674357"),
 ("zindre@yopmail.com","3115644357");
 
-insert into Prodotto (nome, descrizione, disponibilità, prezzo, immagine, sconto) values
-("Tazza Dark Souls", "Simpatica tazza ispirata a...", 30, 15.00, null, true),
-("Pupazzo Super Mario", "Dolce pupazzo coccoloso di...", 10, 25.00, null, false),
-("T-shirt Zelda", "Splendida t-shirt di...", 20, 30.00, null, false),
-("Bracciale Bloodborne", "Stiloso bracciale...", 50, 13.00, null, true),
-("Pendente Elden Ring", "Realistico pendente...", 70, 18.00, null, false);
+insert into Prodotto (nome, descrizione, disponibilità, prezzo, immagine, sconto, mediaVoto, numeroVoti) values
+("Tazza Dark Souls", "Simpatica tazza ispirata a...", 30, 15.00, null, true, 0, 0),
+("Pupazzo Super Mario", "Dolce pupazzo coccoloso di...", 10, 25.00, null, false, 0, 0),
+("T-shirt Zelda", "Splendida t-shirt di...", 20, 30.00, null, false, 0, 0),
+("Bracciale Bloodborne", "Stiloso bracciale...", 50, 13.00, null, true, 0, 0),
+("Pendente Elden Ring", "Realistico pendente...", 70, 18.00, null, false, 0, 0);
+
+insert into Gradimento values
+(1, "cazzare@yopmail.com", 8, "2022-05-12"),
+(1, "oefo@yopmail.com", 6, "2022-06-12"),
+(2, "cazzare@yopmail.com", 5, "2022-05-17"),
+(3, "zindre@yopmail.com", 9, "2022-05-02"),
+(4, "cazzare@yopmail.com", 10, "2022-03-12"),
+(4, "oefo@yopmail.com", 8, "2022-02-12");
+
 
 insert into Sconto values
 ("30%", 0.7, 1),

@@ -8,6 +8,8 @@ public class Prodotto {
     private byte[] immagine;
     private int disponibilità;
     private int id;
+    private int numeroVoti;
+    private float mediaVoto;
     private float prezzo;
     private String nome;
     private String descrizione;;
@@ -17,6 +19,19 @@ public class Prodotto {
 
     public Prodotto() {
         this.sconto = new Sconto();
+    }
+
+    public Prodotto(ArrayList<Categoria> categorie, byte[] immagine, int disponibilità, int id, int numeroVoti, float mediaVoto, float prezzo, String nome, String descrizione, Sconto sconto) {
+        this.categorie = categorie;
+        this.immagine = immagine;
+        this.disponibilità = disponibilità;
+        this.id = id;
+        this.numeroVoti = numeroVoti;
+        this.mediaVoto = mediaVoto;
+        this.prezzo = prezzo;
+        this.nome = nome;
+        this.descrizione = descrizione;
+        this.sconto = sconto;
     }
 
     /* Getter & Setter*/
@@ -83,6 +98,22 @@ public class Prodotto {
 
     public void setCategorie(ArrayList<Categoria> categorie) {
         this.categorie = categorie;
+    }
+
+    public int getNumeroVoti() {
+        return numeroVoti;
+    }
+
+    public void setNumeroVoti(int numeroVoti) {
+        this.numeroVoti = numeroVoti;
+    }
+
+    public float getMediaVoto() {
+        return mediaVoto;
+    }
+
+    public void setMediaVoto(float mediaVoto) {
+        this.mediaVoto = mediaVoto;
     }
 
     /* Inner Class */
