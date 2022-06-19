@@ -681,7 +681,7 @@ insert into Gradimento values
 insert into CommentoProdotto values
 ("zindre@yopmail.com", "T-shirt quasi perfetta...", "2022-04-15 22:58:20", 3),
 ("cazzare@yopmail.com", "Tazza di Dark Souls molto carina...", "2021-04-15 12:58:20", 1),
-("oefo@yopmail.com", "Tazza discreta poteva...", "2022-05-15 13:58:20", 1)
+("oefo@yopmail.com", "Tazza discreta poteva...", "2022-05-15 13:58:20", 1),
 ("oefo@yopmail.com", "Bracciale di bloodborne stupendo...", "2022-05-15 13:58:20", 4);
 
 
