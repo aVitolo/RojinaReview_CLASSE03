@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Prodotto {
 
+    private ArrayList<Commento> commenti;
     private ArrayList<Categoria> categorie;
     private byte[] immagine;
     private int disponibilità;
@@ -21,7 +22,8 @@ public class Prodotto {
         this.sconto = new Sconto();
     }
 
-    public Prodotto(ArrayList<Categoria> categorie, byte[] immagine, int disponibilità, int id, int numeroVoti, float mediaVoto, float prezzo, String nome, String descrizione, Sconto sconto) {
+    public Prodotto(ArrayList<Commento> commenti,ArrayList<Categoria> categorie, byte[] immagine, int disponibilità, int id, int numeroVoti, float mediaVoto, float prezzo, String nome, String descrizione, Sconto sconto) {
+        this.commenti = commenti;
         this.categorie = categorie;
         this.immagine = immagine;
         this.disponibilità = disponibilità;
@@ -114,6 +116,14 @@ public class Prodotto {
 
     public void setMediaVoto(float mediaVoto) {
         this.mediaVoto = mediaVoto;
+    }
+
+    public ArrayList<Commento> getCommenti() {
+        return commenti;
+    }
+
+    public void setCommenti(ArrayList<Commento> commenti) {
+        this.commenti = commenti;
     }
 
     /* Inner Class */

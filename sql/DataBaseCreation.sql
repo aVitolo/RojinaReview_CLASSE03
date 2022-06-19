@@ -172,7 +172,7 @@ create table CommentoNotizia(
                 references Notizia(id)
                 on delete cascade
                 on update cascade,
-    primary key(utente, dataScrittura)
+    primary key(notizia, utente, dataScrittura)
 );
 
 create table CommentoRecensione(
@@ -188,7 +188,7 @@ create table CommentoRecensione(
                    references Recensione(id)
                    on delete cascade
                    on update cascade,
-    primary key(utente, dataScrittura)
+    primary key(recensione, utente, dataScrittura)
 );
 
 create table Voto(
@@ -238,6 +238,21 @@ create table Gradimento(
     check (voto<=10 and voto>=1)
 );
 
+create table CommentoProdotto(
+   utente 			varchar(30),
+   testo			tinytext,
+   dataScrittura	datetime,
+   prodotto		    int,
+   foreign key(utente)
+       references Utente(email)
+       on delete cascade
+       on update cascade,
+   foreign key(prodotto)
+       references Prodotto(id)
+       on delete cascade
+       on update cascade,
+   primary key(prodotto, utente, dataScrittura)
+);
 create table Sconto(
    nome			    varchar(5), -- nome e percentuale vanno in coppia, esempio nome = 30%, percentuale = 0,70 per fare una semplice moltiplicazione
    percentuale      decimal(3, 2),
@@ -662,6 +677,12 @@ insert into Gradimento values
 (3, "zindre@yopmail.com", 9, "2022-05-02"),
 (4, "cazzare@yopmail.com", 10, "2022-03-12"),
 (4, "oefo@yopmail.com", 8, "2022-02-12");
+
+insert into CommentoProdotto values
+("zindre@yopmail.com", "T-shirt quasi perfetta...", "2022-04-15 22:58:20", 3),
+("cazzare@yopmail.com", "Tazza di Dark Souls molto carina...", "2021-04-15 12:58:20", 1),
+("oefo@yopmail.com", "Tazza discreta poteva...", "2022-05-15 13:58:20", 1)
+("oefo@yopmail.com", "Bracciale di bloodborne stupendo...", "2022-05-15 13:58:20", 4);
 
 
 insert into Sconto values
