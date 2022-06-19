@@ -32,11 +32,11 @@ public class UtenteDAO {
                 rs.getString("pass"),
                 rs.getString("nome"),
                 rs.getString("cognome"),
-                new IndirizzoDAO().doRetriveByUser(email),
-                new TelefonoDAO().doRetriveByUser(email),
-                new PagamentoDAO().doRetrieveByUser(email),
-                new OrdineDAO().doRetrieveByUser(email),
-                new CarrelloDAO().doRetrieveByUser(email)
+                new IndirizzoDAO(con).doRetriveByUser(email),
+                new TelefonoDAO(con).doRetriveByUser(email),
+                new PagamentoDAO(con).doRetrieveByUser(email),
+                new OrdineDAO(con).doRetrieveByUser(email),
+                new CarrelloDAO(con).doRetrieveByUser(email)
                 );
         }
 

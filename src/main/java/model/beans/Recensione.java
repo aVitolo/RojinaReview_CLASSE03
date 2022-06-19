@@ -9,6 +9,7 @@ public class Recensione {
 
     private ArrayList<Commento> commenti;
     private byte[] immagine;
+    private byte[] imgGiornalista;
     private Date dataCaricamento;
     private float voto;
     private Gioco gioco;
@@ -24,6 +25,7 @@ public class Recensione {
 
     public Recensione(ArrayList<Commento> commenti,
                       byte[] immagine,
+                      byte[] imgGiornalista,
                       Date dataCaricamento,
                       float voto,
                       Gioco gioco,
@@ -33,6 +35,7 @@ public class Recensione {
                       String titolo) {
         this.commenti = commenti;
         this.immagine = immagine;
+        this.imgGiornalista = imgGiornalista;
         this.dataCaricamento = dataCaricamento;
         this.voto = voto;
         this.gioco = gioco;
@@ -97,4 +100,12 @@ public class Recensione {
     public byte[] getImmagine() { return immagine; }
 
     public void setImmagine(byte[] immagine) { this.immagine = immagine; }
+
+    public byte[] getImgGiornalista() {
+        return imgGiornalista;
+    }
+
+    public void setImgGiornalista(byte[] imgGiornalista) {
+        this.imgGiornalista = imgGiornalista;
+    }
 }

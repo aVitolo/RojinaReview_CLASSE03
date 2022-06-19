@@ -1,0 +1,11 @@
+
+-Homepage
+-Notizie/Recensioni
+-Notizia/Recensione
+-Pagina principale prodotti
+-prodotto da aggiungere voto e commenti
+
+
+-pagina informazioni sito
+-area utente/giornalista/amministratore
+-responsive
