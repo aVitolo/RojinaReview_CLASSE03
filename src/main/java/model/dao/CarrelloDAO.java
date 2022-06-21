@@ -15,7 +15,6 @@ public class CarrelloDAO {
     public CarrelloDAO() throws SQLException {
         con = ConPool.getConnection();
     }
-
     public CarrelloDAO(Connection con){
         this.con = con;
     }
