@@ -23,19 +23,11 @@ footer ul{
 	margin-bottom: 35px;
 	font-weight: 500;
 	position: relative;
+	text-decoration: underline #e91e63;
+	text-underline-offset: 5px;
+	text-decoration-thickness: 3px;
 }
 
-.footer-col h4::before{
-	content: '';
-	position: absolute;
-	left:0;
-	bottom: -10px;
-	background-color: #e91e63;
-	height: 2px;
-	box-sizing: border-box;
-	width: 50px;
-
-}
 .footer-col ul li:not(:last-child){
 	margin-bottom: 10px;
 }
@@ -50,8 +42,7 @@ footer ul{
 }
 
 .footer-col ul li a:hover{
-	color: #ffffff;
-	padding-left: 8px;
+	color: #e91e63;
 }
 
 .footer-col .social-links a{
@@ -72,10 +63,23 @@ footer ul{
 	background-color: #ffffff;
 }
 
+.footer-col .logo{
+	align-self: center;
+}
+
 /*responsive*/
 @media(max-width: 768px){
 	footer{
 		flex-direction: column;
+		text-align: center;
+	}
+
+	.footer-col{
+		padding: 15px;
+	}
+
+	.footer-col h4::before{
+		left: inherit;
 	}
 }
 

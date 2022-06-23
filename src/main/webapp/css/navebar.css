@@ -41,7 +41,15 @@ header button:hover {
 }
 
 header .bar .expand{
-    visibility: hidden;
+    display: none;
+    font-size: xxx-large;
+    background: transparent;
+    color: #e91e63;
+}
+
+header .bar .logo{
+    max-height: 50px;
+    align-self: center;
 }
 
 
@@ -58,15 +66,14 @@ header .bar .expand{
     }
 
     header .bar{
-        align-self: flex-end;
+        align-self: stretch;
+        flex-direction: row;
+        display: flex;
+        justify-content: space-between;
     }
 
     header .bar .expand{
-        visibility: visible;
-    }
-
-    header .bar .logo{
-        visibility: hidden;
+        display: block;
     }
 
     header .navigazione.responsive, .user.responsive {
