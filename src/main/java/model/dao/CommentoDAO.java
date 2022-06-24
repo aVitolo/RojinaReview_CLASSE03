@@ -25,8 +25,8 @@ public class CommentoDAO {
 
         PreparedStatement ps =
                     con.prepareStatement("SELECT testo, dataScrittura, utente FROM ? WHERE ?=?");
-        ps.setString(1,"Commento".concat(table));
-        ps.setString(2, table.toLowerCase(Locale.ROOT));
+        ps.setString(1,"commento".concat(table));
+        ps.setString(2, table);
         ps.setInt(3, id);
         ResultSet rs = ps.executeQuery();
         ArrayList<Commento> commenti = new ArrayList();
@@ -36,9 +36,7 @@ public class CommentoDAO {
                                     rs.getString(3),
                                     rs.getDate(2)));
             }
-
         return commenti;
-
     }
 
 }
