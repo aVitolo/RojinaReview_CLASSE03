@@ -22,12 +22,10 @@ public class CommentoDAO {
 
     //table: Prodotto-Recensione-Notizia
     public ArrayList<Commento> getCommentById(int id, String table) throws SQLException {
-
-        PreparedStatement ps =
-                    con.prepareStatement("SELECT testo, dataScrittura, utente FROM ? WHERE ?=?");
-        ps.setString(1,"Commento".concat(table));
-        ps.setString(2, table.toLowerCase(Locale.ROOT));
-        ps.setInt(3, id);
+        String commentTable = "Commento".concat(table);
+        String query = "SELECT testo, dataScrittura, utente FROM "+commentTable+" "+"WHERE "+table.toLowerCase(Locale.ROOT)+"=?";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         ArrayList<Commento> commenti = new ArrayList();
         while (rs.next()) {

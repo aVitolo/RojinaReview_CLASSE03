@@ -10,8 +10,9 @@ public class Notizia {
 
     private byte[] immagine;
     private ArrayList<Commento> commenti;
-    private ArrayList<Gioco> giochi;
+    private ArrayList<String> giochi;
     private Date dataCaricamento;
+    private Gioco gioco;
     private int id;
     private String testo;
     private String titolo;
@@ -24,9 +25,10 @@ public class Notizia {
     }
 
     public Notizia(ArrayList<Commento> commenti,
-                   ArrayList<Gioco> giochi,
+                   ArrayList<String> giochi,
                    byte[] immagine,
                    Date dataCaricamento,
+                   Gioco gioco,
                    int id,
                    String testo,
                    String titolo,
@@ -35,6 +37,7 @@ public class Notizia {
         this.commenti = commenti;
         this.giochi = giochi;
         this.dataCaricamento = dataCaricamento;
+        this.gioco = gioco;
         this.id = id;
         this.testo = testo;
         this.titolo = titolo;
@@ -67,6 +70,14 @@ public class Notizia {
         this.dataCaricamento = dataCaricamento;
     }
 
+    public Gioco getGioco() {
+        return gioco;
+    }
+
+    public void setGioco(Gioco gioco) {
+        this.gioco = gioco;
+    }
+
     public int getId() {
         return id;
     }
@@ -91,11 +102,11 @@ public class Notizia {
         return commenti;
     }
 
-    public ArrayList<Gioco> getGiochi() {
+    public ArrayList<String> getGiochi() {
         return giochi;
     }
 
-    public void setGiochi(ArrayList<Gioco> giochi) {
+    public void setGiochi(ArrayList<String> giochi) {
         this.giochi = giochi;
     }
 

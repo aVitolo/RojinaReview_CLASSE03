@@ -21,9 +21,21 @@ public class PiattaformaDAO {
         this.con = con;
     }
 
+    public ArrayList<Piattaforma> doRetrieveAll() throws SQLException {
+        PreparedStatement ps =
+                    con.prepareStatement("Select nome FROM piattaforma");
+        ResultSet rs = ps.executeQuery();
+        ArrayList <Piattaforma> piattaforme = new ArrayList<>();
+        while (rs.next())
+            piattaforme.add(new Piattaforma(rs.getString(1)));
+
+        return piattaforme;
+    }
+
     public ArrayList<Piattaforma> doRetriveByGame(String titolo) throws SQLException {
         PreparedStatement ps =
                     con.prepareStatement("SELECT tipologia FROM gioco_tipologia WHERE gioco=?");
+        ps.setString(1, titolo);
         ResultSet rs =  ps.executeQuery();
         ArrayList<Piattaforma> piattaforme = new ArrayList<>();
         while (rs.next())

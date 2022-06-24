@@ -60,11 +60,16 @@ create table Notizia(
     id				tinyint auto_increment,
     testo   		text,
     giornalista  	tinyint,
+    gioco           varchar(50),
     titolo			varchar(100) unique,
     dataCaricamento	date not null,
     immagine		mediumblob,
     foreign key(giornalista)
                 references Giornalista(id)
+                on update cascade,
+    foreign key(gioco)
+                references Gioco(titolo)
+                on delete set null
                 on update cascade,
     primary key(id)
 );
@@ -583,24 +588,18 @@ insert into Recensione (testo, giornalista, gioco, titolo, voto, dataCaricamento
 ("Halo 5 non lo so...", 6, "Halo 5","Recensione Halo 5: Guardians",8.8,"2022-01-3", null),
 ("Halo infinite figurati...", 4, "Halo Infinite","Un ritorno epico",9,current_date(), null);
 
-insert into Notizia (testo, giornalista, titolo, dataCaricamento, immagine) values
-("Halo Infinite è un gioco...", 2, "Halo Infinite e la community tossica","2022-01-24", null),
-("Doppiaggio in italiano in...", 3, "La Mod italiana per Dark Souls Remastered arriva domani","2021-10-13", null),
-("La nintendo...", 1, "I tesori di casa Nintendo","2020-03-03", null),
-("Bloodborne 2 è molto atteso...", 6, "Bloodborne 2, rumor o verità?","2019-09-12", null),
-("Fifa 21 fa sempre cagare...", 5, "FIFA 21: Cosa ci aspettiamo","2022-01-10", null),
-("Fifa 22 fa ancor più cagare...", 5, "FIFA 22: Cosa ci aspettiamo", "2022-01-29", null);
+insert into Notizia (testo, giornalista, gioco, titolo, dataCaricamento, immagine) values
+("Halo Infinite è un gioco...", 2, "Halo Infinite", "Halo Infinite e la community tossica","2022-01-24", null),
+("Doppiaggio in italiano in...", 3, "Dark Souls",  "La Mod italiana per Dark Souls Remastered arriva domani","2021-10-13", null),
+("La nintendo...", 1, "Mario Kart 8", "I tesori di casa Nintendo","2020-03-03", null),
+("Bloodborne 2 è molto atteso...", 6, "Bloodborne 2", "Bloodborne 2, rumor o verità?","2019-09-12", null),
+("Fifa 21 fa sempre cagare...", 5, "FIFA 21", "FIFA 21: Cosa ci aspettiamo","2022-01-10", null),
+("Fifa 22 fa ancor più cagare...", 5, "FIFA 22", "FIFA 22: Cosa ci aspettiamo", "2022-01-29", null);
 
 insert into Gioco_Notizia values
-(2, 1,"Halo Infinite"),
-(3, 2,"Dark Souls"),
-(1, 3,"Mario Kart 8"),
 (1, 3,"The Legend of Zelda: Breath of the Wild"),
-(6, 4,"Bloodborne 2"),
 (5, 5,"FIFA 20"),
-(5, 5,"FIFA 21"),
-(5, 6,"FIFA 21"),
-(5, 6,"FIFA 22");
+(5, 6,"FIFA 21");
 
 
 insert into Voto values

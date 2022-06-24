@@ -22,9 +22,21 @@ public class TipologiaDAO {
         this.con = con;
     }
 
+    public ArrayList<Tipologia> doRetrieveAll() throws SQLException {
+        PreparedStatement ps =
+                    con.prepareStatement("Select nome FROM tipologia");
+        ResultSet rs = ps.executeQuery();
+        ArrayList<Tipologia> tipologie = new ArrayList<>();
+        while(rs.next())
+            tipologie.add(new Tipologia(rs.getString(1)));
+
+        return tipologie;
+    }
+
     public ArrayList<Tipologia> doRetriveByGame(String titolo) throws SQLException {
         PreparedStatement ps =
                     con.prepareStatement("SELECT tipologia FROM gioco_tipologia WHERE gioco=?");
+        ps.setString(1, titolo);
         ResultSet rs =  ps.executeQuery();
         ArrayList<Tipologia> tipologie = new ArrayList<>();
         while (rs.next())

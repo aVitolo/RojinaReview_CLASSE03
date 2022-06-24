@@ -42,22 +42,15 @@ public class GiocoDAO {
 
     }
 
-    public ArrayList<Gioco> getGiocoByIdNotizia(int id) throws SQLException {
+    public ArrayList<String> getGiocoByIdNotizia(int id) throws SQLException {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT g.* FROM gioco g join gioco_notizia gn on  g.titolo=gn.gioco WHERE notizia=?");
+                    con.prepareStatement("SELECT g.titolo FROM gioco g join gioco_notizia gn on  g.titolo=gn.gioco WHERE notizia=?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            ArrayList<Gioco> g = new ArrayList<>();
+            ArrayList<String> g = new ArrayList<>();
             while (rs.next())
-                g.add(new Gioco(
-                    rs.getString(1),
-                    rs.getString(3),
-                    rs.getInt(5),
-                    rs.getInt(4),
-                    rs.getDate(2),
-                    rs.getBytes(6),
-                    new PiattaformaDAO(con).doRetriveByGame(rs.getString(1)),
-                    new TipologiaDAO(con).doRetriveByGame(rs.getString(1))));
+                g.add(rs.getString(1));
+
             return g;
 
     }
