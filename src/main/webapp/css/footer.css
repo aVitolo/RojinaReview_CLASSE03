@@ -12,7 +12,7 @@ footer ul{
 }
 
 .footer-col{
-   padding: 0 15px;
+   	padding: 0 15px;
 	align-content: center;
 }
 
@@ -63,7 +63,7 @@ footer ul{
 	background-color: #ffffff;
 }
 
-.footer-col .logo{
+footer .logo{
 	align-self: center;
 }
 

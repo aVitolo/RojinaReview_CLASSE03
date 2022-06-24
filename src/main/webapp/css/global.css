@@ -4,6 +4,5 @@
     font-family: "Agency FB";
 }
 body{
-    background-image: url("./images/back.jpg");
-    background-repeat: no-repeat;
+    background: url("./images/back.jpg") no-repeat;
 }
