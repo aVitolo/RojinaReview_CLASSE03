@@ -13,13 +13,15 @@
     <%@ include file="/html/navebar.html" %>
     <section class="home">
         <section class="hot">
+            <img class="logo" src="./images/logof.png" alt="Logo"/>
             <section class="articolo">
                 <img src = "./images/back.jpg" alt = "copertina" decoding="async">
                 <div class = "articolo-content">
                     <h2><c:out value='${copertina.titolo}'/></h2>
-                    <p><c:out value='${fn:substring(copertina.testo, 0, 50)}'/>"...</p>
+                    <p><c:out value='${fn:substring(copertina.testo, 0, 50)}'/></p>
                 </div>
             </section>
+            <img class="logo" src="./images/logof.png" alt="Logo"/>
         </section>
         <section class="arcitoli">
             <h1>News</h1>
@@ -43,6 +45,7 @@
                         <div class = "articolo-content">
                             <h2>${recensione.titolo}</h2>
                             <p>${fn:substring(recensione.testo, 0, 50)}</p>
+                            <p class="voto">${recensione.voto}</p>
                         </div>
                     </div>
                 </c:forEach>
