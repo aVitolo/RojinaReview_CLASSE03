@@ -1,6 +1,6 @@
 footer{
 	background-color: #24262b;
-	padding: 70px 0;
+	padding: 50px;
 	margin:auto;
 	display: flex;
 	flex-direction: row;
@@ -67,7 +67,10 @@ footer .logo{
 	align-self: center;
 }
 
-/*responsive*/
+.logo{
+	align-self: center;
+}
+
 @media(max-width: 768px){
 	footer{
 		flex-direction: column;
@@ -80,6 +83,15 @@ footer .logo{
 
 	.footer-col h4::before{
 		left: inherit;
+	}
+
+	.footer-col{
+		text-align: center;
+		padding: 10px;
+	}
+
+	.logo{
+		display: none;
 	}
 }
 

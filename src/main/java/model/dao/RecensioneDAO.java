@@ -21,7 +21,7 @@ public class RecensioneDAO {
 
     public Recensione doRetrieveById(int id) throws SQLException {
         PreparedStatement ps =
-                    con.prepareStatement("SELECT g.nome, g.cognome, g.immagine, r.id, r.titolo, r.testo, r.voto, r.DataCaricamento, r.gioco, r.immagine FROM recensione r JOIN giornalista g on g.id = r.giornalista WHERE r.id=?");
+                    con.prepareStatement("SELECT g.nome, g.cognome, g.nome, r.id, r.titolo, r.testo, r.voto, r.DataCaricamento, r.gioco, r.immagine FROM recensione r JOIN giornalista g on g.id = r.giornalista WHERE r.id=?");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
@@ -48,7 +48,7 @@ public class RecensioneDAO {
         ArrayList<Recensione> recensioni = new ArrayList<>();
 
         PreparedStatement ps =
-                con.prepareStatement("SELECT g.nome, g.cognome, g.immagine, r.id, r.titolo, r.testo, r.voto, r.DataCaricamento, r.gioco, r.immagine " +
+                con.prepareStatement("SELECT g.nome, g.cognome, g.nome ,r.id, r.titolo, r.testo, r.voto, r.DataCaricamento, r.gioco, r.immagine " +
                                          "FROM recensione r JOIN giornalista g on g.id = r.giornalista " +
                                          "ORDER BY r.DataCaricamento DESC LIMIT 10");
 
@@ -58,7 +58,7 @@ public class RecensioneDAO {
         while (rs.next()) {
             Recensione r = new Recensione();
             r.setGiornalista(rs.getString(1)+" "+rs.getString(2));
-            r.setImgGiornalista(rs.getBytes(3));
+            //r.setImgGiornalista(rs.getBytes(3));
             r.setId(rs.getInt(4));
             r.setTitolo(rs.getString(5));
             r.setTesto(rs.getString(6));

@@ -22,7 +22,7 @@ public class NotiziaDAO {
 
     public Notizia doRetrieveById(int id ) throws SQLException {
         PreparedStatement ps =
-                    con.prepareStatement("SELECT g.Nome,g.Cognome, n.id, n.titolo, n.testo, n.dataCaricamento, n.immagine, n.gioco FROM notizia n JOIN giornalista g on g.id = n.giornalista WHERE n.id=?");
+                    con.prepareStatement("SELECT g.Nome,g.Cognome, n.id, n.titolo, n.testo, n.dataCaricamento, n.immagine FROM notizia n JOIN giornalista g on g.id = n.giornalista WHERE n.id=?");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
