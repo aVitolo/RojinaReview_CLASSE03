@@ -411,7 +411,8 @@ insert into Utente values
 ("febremoulaqui@yopmail.com","PredatorBeta",SHA2('fnkebouewf',256), "Christian", "Rosati", 26),
 ("zindre@yopmail.com","BlackDeath",SHA2('jofhouefwpoj',256), null, null, null),
 ("cazzare@yopmail.com","AbyssWalker",SHA2('pmiwefhoufpewj',256), "Carmine", "Franca", 22),
-("oefo@yopmail.com","Papiciacra",SHA2('piefwhouefoj',256), "Fonz", "Cretoso", 20);
+("oefo@yopmail.com","Papiciacra",SHA2('piefwhouefoj',256), "Fonz", "Cretoso", 20),
+("utente@gmail.com","User",SHA2('password',256), "Persona", "Normale", 20);
 
 
 insert into Indirizzo values

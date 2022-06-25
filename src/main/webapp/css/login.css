@@ -1,0 +1,116 @@
+body{
+    color: white;
+    margin: 0;
+    padding: 0;
+    font-family: montserrat;
+    background: linear-gradient(120deg,#d64161,#6b5b95);
+    /*  background è una shorthand (scorciatoia) per i settaggi di background,
+        linear-gradient() è una propietà css che permette di ottenere un colore con una transizione
+        progressiva, in questo caso: da 120deg a #2980b9 fino a #8e44ad */
+    height: 100vh;
+    overflow: hidden;
+    /*  overflow permette di indicare il comportamento degli item che superano la Box della classe
+        hidden nasconde gli elementi che superano la box*/
+}
+
+.center{
+    position: absolute;
+    /*position indica il tipo di posizionamento dell' elemento*/
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Propietà che permette di spostare gli elementi della classe */
+    width: 400px;
+    background: black;
+    border-radius: 10px;
+}
+
+.center h1{
+    text-align: center; /*Allineo il testo al centro*/
+    padding: 0 0 20px 0; /*Aggiungo 20px di padding nel bottom dell' elemento*/
+    border-bottom: 1px solid silver;
+}
+
+.center form{
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+form .form_input{
+    position: relative;
+    border-bottom: 2px solid;
+    margin: 30px 0;
+}
+
+.form_input input{
+    width: 100%;
+    padding: 0 5px;
+    height:  40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+    color: white;
+}
+
+.form_input label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%); /* Propietà che permette di spostare gli elementi della classe  sull' asse Y*/
+    font-size: 16px;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.form_input span::before{
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #e91e63;
+}
+
+.form_input input:focus ~ label,
+.form_input input:valid ~ label{
+    top: -5px;
+    color: #e91e63;
+}
+
+input[type="submit"]{
+    width: 100%;
+    height: 50px;
+    border: 1px solid;
+    background: #e91e63;
+    border-radius: 25px;
+    font-size: 18px;
+    color: black;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+input[type="submit"]:hover{
+    border-color: #e91e63;
+    transition: .5s;
+}
+
+.register_link{
+    margin: 30px 0;
+    text-align: center;
+    font-size: 16px;
+    color: #666666;
+}
+
+.register_link a{
+    color: #e91e63;
+    text-decoration: none;
+}
+
+.register_link a:hover{
+    text-decoration: underline;
+}
+
