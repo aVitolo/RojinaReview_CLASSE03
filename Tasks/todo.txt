@@ -1,4 +1,19 @@
-- JSP notizie, recensioni, prodotti, header, footer, login/registrazione
-- Testare recupero immagine da beans
-- Modificare costrutttori DAO
-- Polimorfismo utenti UTENTE/CLIENTE/GIORNALIST/AMMINISTRATORE
+Carlo:
+    + Aggiornare Login, unificando l' oggetto user settato nella sessione, per tutti i tipi di utente
+    + Creazione Login Staff
+    + Creazione Registrazione Utenti
+
+
+Andrea:
+    + Rimuovere Bottone "Accedi" se presente la sessione nel client
+    + Se il client ha una sessione, visualizza nella navbar un icona Utente, e il suo nickname
+    + Aggiornamento Home Page
+
+Carmine:
+    + Implementazione Css di Reviews, News
+    + Pannello Admin Giornalista
+
+
+
+
++ Il carrello va gestito con un Merge
