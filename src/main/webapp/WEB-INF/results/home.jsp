@@ -4,16 +4,15 @@
 <html>
 <head>
     <title>Rojina Review</title>
-    <style><%@include file="/css/navebar.css"%></style>
-    <style><%@include file="/css/footer.css"%></style>
-    <style><%@include file="/css/home.css"%></style>
-    <style><%@include file="/css/global.css"%></style>
+    <link rel="stylesheet" href="/Rojina_Review_war/css/navebar.css">
+    <link rel="stylesheet" href="/Rojina_Review_war/css/foot.css">
+    <link rel="stylesheet" href="/Rojina_Review_war/css/home.css">
+    <link rel="stylesheet" href="/Rojina_Review_war/css/master.css">
 </head>
 <body>
     <%@ include file="/html/navebar.html" %>
     <section class="home">
         <section class="hot">
-            <img class="logo" src="./images/logof.png" alt="Logo"/>
             <section class="articolo">
                 <img src = "./images/back.jpg" alt = "copertina" decoding="async">
                 <div class = "articolo-content">
@@ -21,13 +20,11 @@
                     <p><c:out value='${fn:substring(copertina.testo, 0, 50)}'/></p>
                 </div>
             </section>
-            <img class="logo" src="./images/logof.png" alt="Logo"/>
         </section>
         <section class="arcitoli">
             <h1>News</h1>
             <h1>Review</h1>
             <section class = "notizie">
-
                     <c:forEach items="${notizie}" var="notizia">
                         <div class = "articolo">
                             <img src = "./images/back.jpg" alt = "copertina" decoding="async">
@@ -55,5 +52,5 @@
     <%@ include file="/html/footer.html" %>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/navebar.js"></script>
+<script type="text/javascript" src="/Rojina_Review_war/js/navebar.js"></script>
 </html>

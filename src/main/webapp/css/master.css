@@ -1,0 +1,9 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "Agency FB";
+}
+
+body{
+    background: linear-gradient( 120deg,#d64161 0%, #6B354D 51%, #6b5b95 75%);
+}

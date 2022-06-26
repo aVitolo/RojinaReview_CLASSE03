@@ -65,10 +65,8 @@ footer ul{
 
 footer .logo{
 	align-self: center;
-}
-
-.logo{
-	align-self: center;
+	max-width: 120px;
+	max-height: 120px;
 }
 
 @media(max-width: 768px){
@@ -90,9 +88,6 @@ footer .logo{
 		padding: 10px;
 	}
 
-	.logo{
-		display: none;
-	}
 }
 
 
