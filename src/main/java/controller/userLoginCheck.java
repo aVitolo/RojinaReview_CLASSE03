@@ -1,5 +1,6 @@
 package controller;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,10 +13,10 @@ import model.dao.UtenteDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class LoginUtente extends HttpServlet {
+public class userLoginCheck extends HttpServlet {
     private Utente tmp;
-    private String loginErrato = "Da aggiungere";
-    private String homePage =  "/Rojina_Review_war/home";
+    private String loginErrato = "/WEB-INF/results/userLoginErrato.jsp";
+    private String homePage =  "./home";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,7 +40,9 @@ public class LoginUtente extends HttpServlet {
                     //Il flag a false indica che non è necessario continuare i controlli, l' utente non c' è nel db
                     flag = false;
                     System.out.println("Utente non presente");
-                    response.sendRedirect(loginErrato);
+
+                    RequestDispatcher dispatcher = request.getRequestDispatcher(loginErrato);
+                    dispatcher.forward(request, response);
                 }
 
                 //Il flag a true indica l' effettiva presenza dell' utente nell' db
@@ -56,7 +59,9 @@ public class LoginUtente extends HttpServlet {
                         response.sendRedirect(homePage);
                     } else {
                         System.out.println("password errata");
-                        response.sendRedirect(loginErrato);
+
+                        RequestDispatcher dispatcher = request.getRequestDispatcher(loginErrato);
+                        dispatcher.forward(request, response);
                     }
                 }
             }

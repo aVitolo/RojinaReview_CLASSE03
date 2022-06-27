@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./css/home.css">
 </head>
 <body>
-    <%@ include file="/jsp/navebar.jsp" %>
+    <%@ include file="/WEB-INF/results/navebar.jsp" %>
     <section class="home">
         <section class="hot">
             <section class="articolo">

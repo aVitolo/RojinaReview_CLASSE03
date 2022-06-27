@@ -23,6 +23,7 @@ body{
 .center h1{
     text-align: center; /*Allineo il testo al centro*/
     padding: 10px; /*Aggiungo 10px di padding*/
+    margin-top: 10px;
 }
 
 .center form{
@@ -106,5 +107,10 @@ input[type="submit"]:hover{
 
 .register_link a:hover{
     text-decoration: underline;
+}
+
+#loginError{
+    text-align: center;
+    color: white;
 }
 

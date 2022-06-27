@@ -16,6 +16,8 @@ import java.util.Comparator;
 
 @WebServlet(name = "HomeServlet", value = "/HomeServlet")
 public class HomeServlet extends HttpServlet {
+    private String jspPath ="/WEB-INF/results/home.jsp";
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doPost(request, response);
@@ -23,7 +25,6 @@ public class HomeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         ArrayList<Notizia> notizie;
         ArrayList<Recensione> recensioni;
 
@@ -56,11 +57,8 @@ public class HomeServlet extends HttpServlet {
         request.setAttribute("copertina",copertina);
         request.setAttribute("articoli",articoli);
 
-        String jspPath ="/WEB-INF/results/home.jsp";
-
         RequestDispatcher dispatcher =
                 request.getRequestDispatcher(jspPath);
         dispatcher.forward(request, response);
-
     }
 }

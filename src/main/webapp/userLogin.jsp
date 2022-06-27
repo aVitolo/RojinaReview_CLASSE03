@@ -1,15 +1,24 @@
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: carlo
+  Date: 27/06/2022
+  Time: 14:56
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<% if(request.getSession().getAttribute("utente") != null)
+    response.sendRedirect("./home");%>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="/Rojina_Review_war/css/master.css">
-    <link rel="stylesheet" href="/Rojina_Review_war/css/login.css">
+    <link rel="stylesheet" href="./css/master.css">
+    <link rel="stylesheet" href="./css/login.css">
 </head>
 <body>
 <div class="center">
     <h1>Login</h1>
-    <form method="post" action="/Rojina_Review_war/login">
+    <form method="post" action="./userLoginCheck">
         <div class="form_input">
             <input type="email" name="email" required>
             <span></span>
@@ -25,10 +34,6 @@
             <p>Non sei Registrato? <a href="#">Registrati</a> </p>
         </div>
     </form>
-
-
-
 </div>
-
 </body>
 </html>
