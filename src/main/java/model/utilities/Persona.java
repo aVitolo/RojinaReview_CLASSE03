@@ -58,13 +58,16 @@ public abstract class Persona {
     /* Password Hashing */
 
     public static String calcolaHash(String password) throws UnsupportedEncodingException {
-        String passwordAfterHash;
+        StringBuilder  passwordAfterHash;
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            digest.reset();
-            digest.update(password.getBytes("utf8"));
-            passwordAfterHash = String.format("%040x", new BigInteger(1, digest.digest()));
-            return passwordAfterHash;
+            byte[] hash = digest.digest("A".getBytes("UTF-8"));
+
+            passwordAfterHash = new StringBuilder();
+            for (int i: hash) {
+                passwordAfterHash.append(Integer.toHexString(0XFF & i));
+            }
+            return passwordAfterHash.toString();
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }

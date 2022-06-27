@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,8 +22,8 @@
 
     <section class="user" id="us">
         <c:choose>
-            <c:when test = "${sessionScope.utente != null}">
-                <h2><c:out value='${utente.nome}'/></h2>
+            <c:when test = "${sessionScope.get('utente') != null}">
+                <a href=""><c:out value='${utente.nome}'/></a>
             </c:when>
             <c:otherwise>
                 <button onclick="document.location.href='./html/login.html'">Login</button>

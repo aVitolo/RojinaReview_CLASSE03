@@ -7,7 +7,7 @@ public class Carrello {
     /* Attributes */
 
     private ArrayList<Prodotto> prodotti;
-    private Float totale;
+    private double totale;
 
     /* Constructors */
 
@@ -15,7 +15,7 @@ public class Carrello {
     }
 
     public Carrello(ArrayList<Prodotto> prodotti,
-                    Float totale) {
+                    double totale) {
         this.prodotti = prodotti;
         this.totale = totale;
     }
@@ -30,7 +30,7 @@ public class Carrello {
         this.prodotti = prodotti;
     }
 
-    public Float getTotale() {
+    public double getTotale() {
         return totale;
     }
 

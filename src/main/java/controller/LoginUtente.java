@@ -20,7 +20,7 @@ public class LoginUtente extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            if(!(request.getSession(false) == null))
+            if(request.getSession().getAttribute("utente") != null)
                 response.sendRedirect(homePage);
             else {
                 boolean flag = true;
@@ -38,21 +38,24 @@ public class LoginUtente extends HttpServlet {
                 if (this.tmp == null) {
                     //Il flag a false indica che non è necessario continuare i controlli, l' utente non c' è nel db
                     flag = false;
+                    System.out.println("Utente non presente");
                     response.sendRedirect(loginErrato);
                 }
 
                 //Il flag a true indica l' effettiva presenza dell' utente nell' db
                 //Se non avessi il flag, e l' user TMP avesse valore null (non trovato), la successiva seconda istruzione darebbe errore
                 if (flag == true) {
+
                     //ottengo la password dell' user nel db
                     String dbPass = this.tmp.getPassword();
-
+                    System.out.println(dbPass + "\n" + password);
                     //confronta le password
                     if (password.equals(dbPass)) {
                         HttpSession session = request.getSession();
                         session.setAttribute("utente", this.tmp);
                         response.sendRedirect(homePage);
                     } else {
+                        System.out.println("password errata");
                         response.sendRedirect(loginErrato);
                     }
                 }

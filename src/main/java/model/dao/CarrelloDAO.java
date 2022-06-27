@@ -31,11 +31,13 @@ public class CarrelloDAO {
         ArrayList<Prodotto> prodotti = new ArrayList<>();
         while (rs.next())
             prodotti.add(new ProdottoDAO(con).doRetriveById(rs.getInt(1)));
+        float totale = 0;
         con.prepareStatement("SELECT totale FROM carrello WHERE utente=?");
         ps.setString(1, user);
         rs = ps.executeQuery();
-        return new Carrello(prodotti,
-                rs.getFloat(1));
+        if(rs.next())
+            totale =rs.getFloat(1);
+        return new Carrello(prodotti, totale);
 
     }
 

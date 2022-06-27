@@ -35,17 +35,22 @@ public class ProdottoDAO {
             p.setDisponibilità(rs.getInt(4));
             p.setPrezzo(rs.getFloat(5));
             p.setImmagine(rs.getBytes(6));
-            p.setCategorie(new CategoriaDAO(con).doRetrieveByProductId(id));
-            p.setMediaVoto(rs.getFloat(8));
-            p.setNumeroVoti(rs.getInt(9));
 
             if(rs.getInt(7)==1){
                 ps = con.prepareStatement("SELECT nome, percentuale FROM sconto WHERE prodotto=?");
                 ps.setInt(1, id);
-                rs = ps.executeQuery();
-                p.getSconto().setNome(rs.getString(1));
-                p.getSconto().setPercentuale(rs.getFloat(2));
+                ResultSet r = ps.executeQuery();
+                if (r.next()) {
+                    p.getSconto().setNome(r.getString(1));
+                    p.getSconto().setPercentuale(r.getFloat(2));
+                }
             }
+
+            p.setCategorie(new CategoriaDAO(con).doRetrieveByProductId(id));
+            p.setMediaVoto(rs.getFloat(8));
+            p.setNumeroVoti(rs.getInt(9));
+
+
 
             return p;
         }

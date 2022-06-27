@@ -25,7 +25,7 @@ public class OrdineDAO {
         PreparedStatement ps =
                     con.prepareStatement(
                             "SELECT o.id, stato, o.tracking, o.dataOrdine, o.totale, o.pagamento, o.via, o.numeroCivico, o.città, o.cap, p.nome, p.cognome, p.numeroCarta, p.dataScadenza " +
-                            "FROM ordine o join pagamento p on  o.pagamento = p.numeroCarta and o.utente and o.utente = p.utente WHERE utente=?");
+                            "FROM ordine o join pagamento p on  o.pagamento = p.numeroCarta and o.utente and o.utente = p.utente WHERE o.utente=?");
         ps.setString(1, user);
         ResultSet rs = ps.executeQuery();
         ArrayList<Ordine> ordini = new ArrayList<>();

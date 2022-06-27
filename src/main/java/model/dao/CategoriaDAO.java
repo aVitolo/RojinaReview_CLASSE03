@@ -24,6 +24,7 @@ public class CategoriaDAO {
     public ArrayList<Categoria> doRetrieveByProductId(int id) throws SQLException {
         PreparedStatement ps =
                     con.prepareStatement("SELECT categoria FROM prodotto_categoria WHERE prodotto=?");
+        ps.setInt(1,id);
         ResultSet rs =  ps.executeQuery();
         ArrayList<Categoria> categorie = new ArrayList<>();
         while (rs.next())
