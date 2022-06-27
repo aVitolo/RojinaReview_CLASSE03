@@ -8,7 +8,7 @@
 <header id="head">
 
     <section class="bar">
-        <img class="logo" src="/Rojina_Review_war/images/utility/rojinah.png" alt="Logo" />
+        <img class="logo" src="./images/utility/rojinah.png" alt="Logo" />
         <button class="expand" onclick="expandMenu()"> = </button>
     </section>
 
@@ -27,7 +27,7 @@
                 <a href=""><c:out value='${utente.nickname}'/></a>
             </c:when>
             <c:otherwise>
-                <button onclick="document.location.href='/Rojina_Review_war/userLogin.jsp'">Login</button>
+                <button onclick="document.location.href='./userLogin.jsp'">Login</button>
             </c:otherwise>
         </c:choose>
     </section>

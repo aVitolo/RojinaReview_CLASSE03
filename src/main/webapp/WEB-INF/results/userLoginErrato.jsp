@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% if(request.getSession().getAttribute("utente") != null)
-    response.sendRedirect("/Rojina_Review_war/home");%>
+    response.sendRedirect("./home");%>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
