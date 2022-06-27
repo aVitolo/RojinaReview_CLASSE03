@@ -1,7 +1,7 @@
 package model.dao;
 
 import model.beans.Notizia;
-import model.beans.Recensione;
+import model.utilities.GiocoDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

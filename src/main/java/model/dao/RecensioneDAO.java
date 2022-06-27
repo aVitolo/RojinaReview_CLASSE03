@@ -1,6 +1,7 @@
 package model.dao;
 
 import model.beans.Recensione;
+import model.utilities.GiocoDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,7 +28,7 @@ public class RecensioneDAO {
         if (rs.next()) {
             Recensione r = new Recensione();
             r.setGiornalista(rs.getString(1)+" "+rs.getString(2));
-            r.setImgGiornalista(rs.getBytes(3));
+            //r.setImgGiornalista(rs.getBytes(3));
             r.setId(rs.getInt(4));
             r.setTitolo(rs.getString(5));
             r.setTesto(rs.getString(6));

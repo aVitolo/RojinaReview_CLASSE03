@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class LoginUtente extends HttpServlet {
     private Utente tmp;
     private String loginErrato = "Da aggiungere";
-    private String homePage = "/Rojina_Review_war/home";
+    private String homePage =  "/Rojina_Review_war/home";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,7 +50,7 @@ public class LoginUtente extends HttpServlet {
                     //confronta le password
                     if (password.equals(dbPass)) {
                         HttpSession session = request.getSession();
-                        session.setAttribute("Utente", this.tmp);
+                        session.setAttribute("utente", this.tmp);
                         response.sendRedirect(homePage);
                     } else {
                         response.sendRedirect(loginErrato);

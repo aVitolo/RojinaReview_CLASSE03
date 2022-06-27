@@ -18,8 +18,8 @@ import java.sql.SQLException;
 
 public class LoginStaff extends HttpServlet {
     private Utente tmp;
-    private String loginErrato = "Da aggiungere" ;
-    private String homePage = "Da aggiungere";
+    private String loginErrato = "Da Aggiungere" ;
+    private String homePage = "/Rojina_Review_war/home";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -55,9 +55,9 @@ public class LoginStaff extends HttpServlet {
                     if (password.equals(dbPass)) {
                         HttpSession session = request.getSession();
                         if (type == 0)
-                            session.setAttribute("Giornalista",(Giornalista)tmp);
+                            session.setAttribute("utente",(Giornalista)tmp);
                         else if(type == 1)
-                            session.setAttribute("Amministatore",(Amministratore)tmp);
+                            session.setAttribute("utente",(Amministratore)tmp);
 
                         response.sendRedirect(homePage);
                     } else {

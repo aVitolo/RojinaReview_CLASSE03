@@ -3,6 +3,7 @@ package controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import model.utilities.Articolo;
 import model.beans.Notizia;
 import model.beans.Recensione;
 import model.dao.NotiziaDAO;
@@ -10,8 +11,8 @@ import model.dao.RecensioneDAO;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.Clock;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 @WebServlet(name = "HomeServlet", value = "/HomeServlet")
 public class HomeServlet extends HttpServlet {
@@ -47,13 +48,18 @@ public class HomeServlet extends HttpServlet {
         }
 
         Notizia copertina = notizie.remove(0);
+        ArrayList<Articolo> articoli = new ArrayList<>();
+        articoli.addAll(notizie);
+        articoli.addAll(recensioni);
+        articoli.sort(Comparator.comparing(a -> a.getDataCaricamento()));
 
         request.setAttribute("copertina",copertina);
-        request.setAttribute("notizie", notizie);
-        request.setAttribute("recensioni", recensioni);
+        request.setAttribute("articoli",articoli);
+
+        String jspPath ="/WEB-INF/results/home.jsp";
 
         RequestDispatcher dispatcher =
-                request.getRequestDispatcher("/WEB-INF/results/home.jsp");
+                request.getRequestDispatcher(jspPath);
         dispatcher.forward(request, response);
 
     }

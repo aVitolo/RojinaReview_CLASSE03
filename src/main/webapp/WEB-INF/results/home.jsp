@@ -4,49 +4,39 @@
 <html>
 <head>
     <title>Rojina Review</title>
-    <link rel="stylesheet" href="/Rojina_Review_war/css/navebar.css">
-    <link rel="stylesheet" href="/Rojina_Review_war/css/foot.css">
-    <link rel="stylesheet" href="/Rojina_Review_war/css/home.css">
-    <link rel="stylesheet" href="/Rojina_Review_war/css/master.css">
+    <link rel="stylesheet" href="./css/master.css">
+    <link rel="stylesheet" href="./css/navebar.css">
+    <link rel="stylesheet" href="./css/foot.css">
+    <link rel="stylesheet" href="./css/home.css">
 </head>
 <body>
-    <%@ include file="/html/navebar.html" %>
+    <%@ include file="/jsp/navebar.jsp" %>
     <section class="home">
         <section class="hot">
             <section class="articolo">
-                <img src = "./images/back.jpg" alt = "copertina" decoding="async">
+                <img src = "./images/utility/back.jpg" alt = "copertina" decoding="async">
                 <div class = "articolo-content">
                     <h2><c:out value='${copertina.titolo}'/></h2>
                     <p><c:out value='${fn:substring(copertina.testo, 0, 50)}'/></p>
                 </div>
             </section>
         </section>
-        <section class="arcitoli">
-            <h1>News</h1>
-            <h1>Review</h1>
-            <section class = "notizie">
-                    <c:forEach items="${notizie}" var="notizia">
-                        <div class = "articolo">
-                            <img src = "./images/back.jpg" alt = "copertina" decoding="async">
-                            <div class = "articolo-content">
-                                    <h2>${notizia.titolo}</h2>
-                                    <p>${fn:substring(notizia.testo, 0, 50)}</p>
-                            </div>
-                        </div>
-                    </c:forEach>
-            </section>
-            <section class = "recensioni">
-                <c:forEach items="${recensioni}" var="recensione">
+
+        <h1>Latest News</h1>
+
+        <section class="articoli">
+                <c:forEach items="${articoli}" var="articolo">
                     <div class = "articolo">
-                        <img src = "./images/back.jpg" alt = "copertina" decoding="async">
+                        <img src = "./images/utility/back.jpg" alt = "copertina" decoding="async">
                         <div class = "articolo-content">
-                            <h2>${recensione.titolo}</h2>
-                            <p>${fn:substring(recensione.testo, 0, 50)}</p>
-                            <p class="voto">${recensione.voto}</p>
+                            <h2>${articolo.titolo}</h2>
+                            <p>${fn:substring(articolo.testo, 0, 50)}</p>
+                            <c:if test = "${articolo.getClass().simpleName =='Recensione'}">
+                                <p class="voto">${articolo.voto}</p>
+                            </c:if>
                         </div>
                     </div>
                 </c:forEach>
-            </section>
         </section>
     </section>
     <%@ include file="/html/footer.html" %>

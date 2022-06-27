@@ -6,7 +6,7 @@
 <header id="head">
 
     <section class="bar">
-        <img class="logo" src="./images/rojinah.png" alt="Logo" />
+        <img class="logo" src="./images/utility/rojinah.png" alt="Logo" />
         <button class="expand" onclick="expandMenu()"> = </button>
     </section>
 
@@ -17,8 +17,16 @@
         <a href="">Shop</a>
     </section>
 
+
     <section class="user" id="us">
-        <button onclick="document.location.href='/Rojina_Review_war/html/login.html'">Login</button>
+        <c:choose>
+            <c:when test = "${sessionScope.utente != null}">
+                <h2><c:out value='${utente.nome}'/></h2>
+            </c:when>
+            <c:otherwise>
+                <button onclick="document.location.href='./html/login.html'">Login</button>
+            </c:otherwise>
+        </c:choose>
     </section>
 </header>
 </html>

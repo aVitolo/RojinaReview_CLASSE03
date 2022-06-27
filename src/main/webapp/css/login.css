@@ -21,14 +21,13 @@ body{
     transform: translate(-50%, -50%);
     /* Propietà che permette di spostare gli elementi della classe */
     width: 400px;
-    background: black;
+    background: #24262b;
     border-radius: 10px;
 }
 
 .center h1{
     text-align: center; /*Allineo il testo al centro*/
-    padding: 0 0 20px 0; /*Aggiungo 20px di padding nel bottom dell' elemento*/
-    border-bottom: 1px solid silver;
+    padding: 10px; /*Aggiungo 10px di padding*/
 }
 
 .center form{
