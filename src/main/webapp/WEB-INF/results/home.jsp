@@ -13,17 +13,19 @@
     <%@ include file="/WEB-INF/results/navebar.jsp" %>
     <section class="home">
         <section class="hot">
+            <img src = "./images/utility/logoNT.png" alt = "logo" class="logo" decoding="async">
             <section class="articolo">
                 <img src = "./images/utility/back.jpg" alt = "copertina" decoding="async">
                 <div class = "articolo-content">
                     <h3><c:out value="${copertina.getClass().simpleName}"/></h3>
                     <h2><c:out value='${copertina.titolo}'/></h2>
                     <p><c:out value='${fn:substring(copertina.testo, 0, 50)}'/></p>
-                    <c:if test = "${articolo.getClass().simpleName =='Recensione'}">
-                        <p class="voto">${articolo.voto}</p>
+                    <c:if test = "${copertina.getClass().simpleName =='Recensione'}">
+                        <p class="voto">${copertina.voto}</p>
                     </c:if>
                 </div>
             </section>
+            <img src = "./images/utility/logoNT.png" alt = "logo" class="logo" decoding="async">
         </section>
 
         <h1>Latest News</h1>

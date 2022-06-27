@@ -13,12 +13,13 @@ header{
 
 header
 a,
-button{
+button
+{
     font-weight: bold;
     font-size: 18px;
     color: #ffffff;
     text-decoration: none;
-    padding: 10px 25px;
+    padding: 10px 20px;
 }
 
 header a{

@@ -26,7 +26,7 @@ public class UtenteDAO {
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
                 return new Utente(
-                rs.getInt("eta"),
+                rs.getInt("età"),
                 rs.getString("email"),
                 rs.getString("nickname"),
                 rs.getString("nome"),

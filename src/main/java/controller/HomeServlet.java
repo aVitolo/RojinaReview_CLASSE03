@@ -12,25 +12,19 @@ import model.dao.RecensioneDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 
 @WebServlet(name = "HomeServlet", value = "/HomeServlet")
 public class HomeServlet extends HttpServlet {
+
     private String jspPath ="/WEB-INF/results/home.jsp";
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.doPost(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void init(ServletConfig config) throws ServletException {
         ArrayList<Notizia> notizie;
         ArrayList<Recensione> recensioni;
-
         NotiziaDAO nDAO;
         RecensioneDAO rDAO;
-
         try {
             nDAO = new NotiziaDAO();
             notizie = nDAO.doRetrieveLast();
@@ -39,7 +33,6 @@ public class HomeServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-
         try {
             rDAO = new RecensioneDAO();
             recensioni = rDAO.doRetrieveLast();
@@ -47,12 +40,24 @@ public class HomeServlet extends HttpServlet {
             System.out.println("Reviews ERROR");
             throw new RuntimeException(e);
         }
+        config.getServletContext().setAttribute("notizie",notizie);
+        config.getServletContext().setAttribute("recensioni",recensioni);
+    }
 
-        Notizia copertina = notizie.remove(0);
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        this.doPost(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ServletContext servCon = request.getServletContext();
         ArrayList<Articolo> articoli = new ArrayList<>();
-        articoli.addAll(notizie);
-        articoli.addAll(recensioni);
+        articoli.addAll((ArrayList<Articolo>) servCon.getAttribute("notizie"));
+        articoli.addAll((ArrayList<Articolo>) servCon.getAttribute("recensioni"));
         articoli.sort(Comparator.comparing(a -> a.getDataCaricamento()));
+        Articolo copertina = articoli.remove(0);
 
         request.setAttribute("copertina",copertina);
         request.setAttribute("articoli",articoli);
