@@ -2,11 +2,6 @@ body{
     color: white;
     margin: 0;
     padding: 0;
-    font-family: montserrat;
-    background: linear-gradient(120deg,#d64161,#6b5b95);
-    /*  background è una shorthand (scorciatoia) per i settaggi di background,
-        linear-gradient() è una propietà css che permette di ottenere un colore con una transizione
-        progressiva, in questo caso: da 120deg a #2980b9 fino a #8e44ad */
     height: 100vh;
     overflow: hidden;
     /*  overflow permette di indicare il comportamento degli item che superano la Box della classe
