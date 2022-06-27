@@ -16,8 +16,12 @@
             <section class="articolo">
                 <img src = "./images/utility/back.jpg" alt = "copertina" decoding="async">
                 <div class = "articolo-content">
+                    <h3><c:out value="${copertina.getClass().simpleName}"/></h3>
                     <h2><c:out value='${copertina.titolo}'/></h2>
                     <p><c:out value='${fn:substring(copertina.testo, 0, 50)}'/></p>
+                    <c:if test = "${articolo.getClass().simpleName =='Recensione'}">
+                        <p class="voto">${articolo.voto}</p>
+                    </c:if>
                 </div>
             </section>
         </section>
@@ -29,6 +33,7 @@
                     <div class = "articolo">
                         <img src = "./images/utility/back.jpg" alt = "copertina" decoding="async">
                         <div class = "articolo-content">
+                            <h3>${articolo.getClass().simpleName}</h3>
                             <h2>${articolo.titolo}</h2>
                             <p>${fn:substring(articolo.testo, 0, 50)}</p>
                             <c:if test = "${articolo.getClass().simpleName =='Recensione'}">

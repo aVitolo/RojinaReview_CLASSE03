@@ -14,7 +14,7 @@
      text-align: center;
  }
 
-.articolI{
+.articoli{
     display: grid;
     grid-template-columns: repeat(3,1fr);
     grid-column-gap: 20px;
@@ -49,6 +49,11 @@
 .articolo h2{
     padding: 10px 0;
     font-size: 18px;
+    text-shadow: 0 0 2px #000;
+}
+
+.articolo h3{
+    color: #e91e63;
     text-shadow: 0 0 2px #000;
 }
 

@@ -23,7 +23,8 @@
     <section class="user" id="us">
         <c:choose>
             <c:when test = "${sessionScope.get('utente') != null}">
-                <a href=""><c:out value='${utente.nome}'/></a>
+                <p> Bentornato,</p>
+                <a href=""><c:out value='${utente.nickname}'/></a>
             </c:when>
             <c:otherwise>
                 <button onclick="document.location.href='./html/login.html'">Login</button>
