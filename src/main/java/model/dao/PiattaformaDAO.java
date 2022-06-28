@@ -28,7 +28,6 @@ public class PiattaformaDAO {
         ArrayList <Piattaforma> piattaforme = new ArrayList<>();
         while (rs.next())
             piattaforme.add(new Piattaforma(rs.getString(1)));
-
         return piattaforme;
     }
 

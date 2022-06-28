@@ -1,7 +1,6 @@
 package model.utilities;
 
 import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -20,7 +19,7 @@ public abstract class Persona {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
-        this.password = Persona.calcolaHash(password);
+        this.password = password;
     }
 
     public String getNome() {
@@ -58,16 +57,15 @@ public abstract class Persona {
     /* Password Hashing */
 
     public static String calcolaHash(String password) throws UnsupportedEncodingException {
-        StringBuilder  passwordAfterHash;
+        StringBuilder  passwordAfterHash= new StringBuilder();
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest("A".getBytes("UTF-8"));
+            byte[] hash = digest.digest(password.getBytes("UTF-8"));
 
-            passwordAfterHash = new StringBuilder();
             for (int i: hash) {
-                passwordAfterHash.append(Integer.toHexString(0XFF & i));
+                passwordAfterHash.append(String.format("%02x", 0XFF & i));
             }
-            return passwordAfterHash.toString();
+            return new String(passwordAfterHash);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }

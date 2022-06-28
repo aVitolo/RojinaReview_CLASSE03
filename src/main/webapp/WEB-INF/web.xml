@@ -5,6 +5,12 @@
          version="5.0">
 
     <servlet>
+        <servlet-name>ContextSetUpingServlet</servlet-name>
+        <servlet-class>controller.ContextSetUpingServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+
+    <servlet>
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>controller.HomeServlet</servlet-class>
     </servlet>
@@ -15,22 +21,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>userLoginCheck</servlet-name>
-        <servlet-class>controller.userLoginCheck</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>userLoginCheck</servlet-name>
-        <url-pattern>/userLoginCheck</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>RecensioniServlet</servlet-name>
+        <servlet-name>RecensioneServlet</servlet-name>
         <servlet-class>controller.RecensioniServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>RecensioniServlet</servlet-name>
+        <servlet-name>RecensioneServlet</servlet-name>
         <url-pattern>/reviews</url-pattern>
     </servlet-mapping>
 
@@ -42,6 +38,16 @@
     <servlet-mapping>
         <servlet-name>NotizieServlet</servlet-name>
         <url-pattern>/news</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>userLoginCheck</servlet-name>
+        <servlet-class>controller.userLoginCheck</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>userLoginCheck</servlet-name>
+        <url-pattern>/userLoginCheck</url-pattern>
     </servlet-mapping>
 
 </web-app>

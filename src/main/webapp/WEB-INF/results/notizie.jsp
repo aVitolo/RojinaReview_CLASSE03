@@ -1,85 +1,37 @@
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="model.beans.Notizia" %>
-<%@ page import="model.beans.Tipologia" %>
-<%@ page import="model.beans.Piattaforma" %><%--
-  Created by IntelliJ IDEA.
-  User: zindre
-  Date: 04/05/2022
-  Time: 22:05
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<% ArrayList<Notizia> notizie = (ArrayList<Notizia>) session.getAttribute("notizie");
-    ArrayList<Tipologia> tipologie = (ArrayList<Tipologia>) session.getAttribute("tipologie");
-    ArrayList<Piattaforma> piattaforme = (ArrayList<Piattaforma>) session.getAttribute("piattaforme"); %>
-
 <head>
     <title>Notizie - Rojina</title>
+    <link rel="stylesheet" href="./css/notizie.css">
+    <link rel="stylesheet" href="./css/foot.css">
+    <link rel="stylesheet" href="./css/navebar.css">
+    <link rel="stylesheet" href="./css/master.css">
 </head>
 <body>
-    <%@ include file="../../navebar.html" %>
+<%@ include file="/WEB-INF/results/navebar.jsp" %>
 
-    <article id="mainNew">
-        <img id="mainImage" src="data:image/jpg;base64, <%=new String(notizie.get(0).getImmagine())%>">
-        <div id="mainNewTitle">
-            <h1><%=notizie.get(0).getTitolo()%></h1>
-            by <%=notizie.get(0).getGiornalista()%> on <%=notizie.get(0).getDataCaricamento()%>
-        </div>
-    </article>
+    <section class="notizie">
 
-    <section id="newsAndFiltersOrders">
-        <section id="news">
-            <% for(int i = 1; i < notizie.size(); i++){%> <! -- far partire da 0 o 1 considerando la main review in alto? -- >
-            <article class="new">
-                <img class="newImage" src="data:image/jpg;base64, <%=notizie.get(i).getImmagine()%>">
-                <h2 class="newTitle"><%=notizie.get(i).getTitolo()%></h2>
-                by <%=notizie.get(i).getGiornalista()%> on <%=notizie.get(i).getDataCaricamento()%>
-            </article>
-            <%}%>
+        <h1>Latest News</h1>
+
+        <%@ include file="/WEB-INF/results/filter.jsp" %>
+
+        <section class="articoli">
+            <c:forEach items="${applicationScope['notizie']}" var="articolo">
+                <div class = "articolo">
+                    <img src = "./images/utility/back.jpg" alt = "copertina" decoding="async">
+                    <div class = "articolo-content">
+                        <h2>${articolo.titolo}</h2>
+                        <p>${fn:substring(articolo.testo, 0, 50)}</p>
+                    </div>
+                </div>
+            </c:forEach>
         </section>
 
-        <section id="filtersAndOrders">
-            <div id="filters"> Filtra per
-                <div id="tipologie"> Tipologie
-                    <% for(Tipologia t : tipologie){%>
-                    <div class="tipologia">
-                        <label for=<%=t.getNome()%>><%=t.getNome()%></label>
-                        <input type="radio" id=<%=t.getNome()%> name="tipologia">
-                    </div>
-                    <%}%>
-                </div>
-
-                <div id="piattaforme"> Piattaforme
-                    <% for(Piattaforma p : piattaforme){%>
-                    <div class="piattaforma">
-                        <label for=<%=p.getNome()%>><%=p.getNome()%></label>
-                        <input type="radio" id=<%=p.getNome()%> name="piattaforma">
-                    </div>
-                    <%}%>
-                </div>
-            </div>
-
-            <div id="orders"> Ordina per
-                <div class="order">
-                    <label for="mostRecent">Date (most recent)</label>
-                    <input type="radio" id="mostRecent" name="order">
-                </div>
-                <div class="order">
-                    <label for="leastRecent">Date (least recent)</label>
-                    <input type="radio" id="leastRecent" name="order">
-                </div>
-                <div class="order">
-                    <label for="gameTitle">Game title</label>
-                    <input type="radio" id="gameTitle" name="order">
-                </div>
-            </div>
-
-
-        </section>
     </section>
 
-
-    <%@ include file="../../footer.html" %>
+<%@ include file="/html/footer.html" %>
 </body>
 </html>

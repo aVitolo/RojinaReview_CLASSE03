@@ -1,9 +1,9 @@
-.home{
+.recensioni{
     margin: 2% 10%;
     padding: 2%;
     background-color: #24262b;
 }
-.home h1{
+.recensioni h1{
     font-size: 21px;
     text-shadow: 0 0 2px #000;
     color: #f3f3f3;
@@ -75,47 +75,15 @@
     right: 5%;
 }
 
-.hot{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    margin: 10px 25px;
-}
-
-.hot img{
-    opacity: 1;
-}
-
-.hot .articolo{
-    height: 500px;
-}
-
 @media(max-width: 1400px){
     .articoli{
         grid-template-columns: repeat(2,1fr);
     }
-    .hot {
-        margin: 1%;
-    }
-
-    .hot .logo{
-        display: none;
-    }
-
 }
 
 @media(max-width: 780px) {
 
     .articoli{
         grid-template-columns: repeat(1,1fr);
-    }
-
-    .hot .articolo{
-        height: inherit;
-    }
-
-    .hot {
-        margin: 1%;
     }
 }

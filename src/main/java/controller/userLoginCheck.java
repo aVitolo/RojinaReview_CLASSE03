@@ -25,11 +25,8 @@ public class userLoginCheck extends HttpServlet {
                 response.sendRedirect(homePage);
             else {
                 boolean flag = true;
-                //Preleva dalla request i parametri -email -password
+                //Preleva dalla request l'email
                 String email = request.getParameter("email");
-                String password = request.getParameter("password");
-                //Calcola Hash della password utente
-                password = Persona.calcolaHash(password);
 
                 //Inizializza la connessione al DB tramite DAO
                 UtenteDAO uDAO = new UtenteDAO();
@@ -49,9 +46,14 @@ public class userLoginCheck extends HttpServlet {
                 //Se non avessi il flag, e l' user TMP avesse valore null (non trovato), la successiva seconda istruzione darebbe errore
                 if (flag == true) {
 
+                    //Preleva dalla request la password
+                    String password = request.getParameter("password");
+
+                    //Calcola Hash della password utente
+                    password = Persona.calcolaHash(password);
+
                     //ottengo la password dell' user nel db
                     String dbPass = this.tmp.getPassword();
-                    System.out.println(dbPass + "\n" + password);
                     //confronta le password
                     if (password.equals(dbPass)) {
                         HttpSession session = request.getSession();
@@ -59,7 +61,6 @@ public class userLoginCheck extends HttpServlet {
                         response.sendRedirect(homePage);
                     } else {
                         System.out.println("password errata");
-
                         RequestDispatcher dispatcher = request.getRequestDispatcher(loginErrato);
                         dispatcher.forward(request, response);
                     }

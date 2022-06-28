@@ -6,20 +6,18 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "RecensioniServlet", value = "/RecensioniServlet")
+@WebServlet(name = "RecensioneServlet", value = "/RecensioneServlet")
 public class RecensioniServlet extends HttpServlet {
-
-    String jspPath="/WEB-INF/results/recensioni.jsp";
+    private String path ="/WEB-INF/results/recensioni.jsp";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.doPost(request,response);
+        RequestDispatcher dispatcher =
+                request.getRequestDispatcher(path);
+        dispatcher.forward(request, response);
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher =
-                request.getRequestDispatcher(jspPath);
-        dispatcher.forward(request, response);
+
     }
 }
