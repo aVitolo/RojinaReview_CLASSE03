@@ -37,6 +37,17 @@ public class ContextSetUpingServlet extends HttpServlet {
         }
         config.getServletContext().setAttribute("recensioni",recensioni);
 
+        ArrayList<Prodotto> prodotti;
+        ProdottoDAO pDAO;
+        try {
+            pDAO = new ProdottoDAO();
+            prodotti = pDAO.doRetrieveLast();
+        } catch (SQLException e) {
+            System.out.println("Reviews ERROR");
+            throw new RuntimeException(e);
+        }
+        config.getServletContext().setAttribute("prodotti",prodotti);
+
         ArrayList<Tipologia> tipologie;
         TipologiaDAO tDAO;
         try {
@@ -60,10 +71,10 @@ public class ContextSetUpingServlet extends HttpServlet {
         config.getServletContext().setAttribute("categorie",categorie);
 
         ArrayList<Piattaforma> piattaforme;
-        PiattaformaDAO pDAO;
+        PiattaformaDAO ptDAO;
         try {
-            pDAO = new PiattaformaDAO();
-            piattaforme = pDAO.doRetrieveAll();
+            ptDAO = new PiattaformaDAO();
+            piattaforme = ptDAO.doRetrieveAll();
         } catch (SQLException e) {
             System.out.println("Piattaforma ERROR");
             throw new RuntimeException(e);

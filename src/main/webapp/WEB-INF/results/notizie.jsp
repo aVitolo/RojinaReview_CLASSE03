@@ -16,7 +16,7 @@
 
         <h1>Latest News</h1>
 
-        <%@ include file="/WEB-INF/results/filter.jsp" %>
+        <%@ include file="/WEB-INF/results/filterArticol.jsp" %>
 
         <section class="articoli">
             <c:forEach items="${applicationScope['notizie']}" var="articolo">

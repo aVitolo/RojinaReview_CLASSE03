@@ -3,26 +3,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         .filter{
             display: flex;
             justify-content: space-evenly;
-            margin: 1%
+            margin: 1%;
         }
 
         .dropbtn {
-            background-color: #04AA6D;
-            color: white;
+            margin-bottom: 1%;
+            background-color: #e91e63;
             padding: 16px;
             font-size: 16px;
             border: none;
             cursor: pointer;
-            border
+            width: 222px;
+            border-radius: 2px;
         }
 
-        .dropbtn:hover, .dropbtn:focus {
-            background-color: #3e8e41;
+        .dropbtn:hover{
+            background-color: #6B354D;
         }
 
         #sInput, #tInput, #pInput {
@@ -32,10 +32,10 @@
             font-size: 16px;
             padding: 14px 20px 12px 45px;
             border: none;
-            border-bottom: 1px solid #ddd;
+            background: #24262b;
+            color: #ffffff;
+            outline: none;
         }
-
-        #sInput, #tInput, #pInput:focus {outline: 3px solid #ddd;}
 
         .dropdown {
             position: relative;
@@ -45,21 +45,25 @@
         .dropdown-content {
             display: none;
             position: absolute;
-            background-color: #f6f6f6;
-            min-width: 230px;
-            overflow: auto;
-            border: 1px solid #ddd;
+            background-color: #24262b;
+            width: 222px;
+            max-height: 222px;
+            min-height: fit-content;
+            overflow-y: scroll;
+            border: 1px solid #24262b;
             z-index: 1;
         }
 
+        .dropdown-content::webkit-scrollbar{
+            display: none;
+        }
+
         .dropdown-content a {
-            color: black;
             padding: 12px 16px;
             text-decoration: none;
             display: block;
+            color: #f3f3f3;
         }
-
-        .dropdown a:hover {background-color: #ddd;}
 
         .show {display: block;}
     </style>

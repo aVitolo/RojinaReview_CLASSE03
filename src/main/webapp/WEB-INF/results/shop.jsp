@@ -2,32 +2,33 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Recensioni - Rojina</title>
-    <link rel="stylesheet" href="./css/recensioni.css">
+    <title>Notizie - Rojina</title>
+    <link rel="stylesheet" href="./css/notizie.css">
     <link rel="stylesheet" href="./css/foot.css">
     <link rel="stylesheet" href="./css/navebar.css">
     <link rel="stylesheet" href="./css/master.css">
 </head>
 <body>
 <%@ include file="/WEB-INF/results/navebar.jsp" %>
-<section class="recensioni">
 
-    <h1>Latest Reviews</h1>
+<section class="notizie">
 
-    <%@ include file="/WEB-INF/results/filterArticol.jsp" %>
+    <h1>Latest News</h1>
+
+    <%@ include file="/WEB-INF/results/filterShop.jsp" %>
 
     <section class="articoli">
-        <c:forEach items="${applicationScope['recensioni']}" var="articolo">
+        <c:forEach items="${applicationScope['prodotti']}" var="prodotto">
             <div class = "articolo">
                 <img src = "./images/utility/back.jpg" alt = "copertina" decoding="async">
                 <div class = "articolo-content">
-                    <h2>${articolo.titolo}</h2>
-                    <p>${fn:substring(articolo.testo, 0, 50)}</p>
-                    <p class="voto">${articolo.voto}</p>
+                    <h2>${prodotto.nome}</h2>
+                    <p>${prodotto.prezzo} $</p>
                 </div>
             </div>
         </c:forEach>
     </section>
+
 </section>
 
 <%@ include file="/html/footer.html" %>

@@ -17,7 +17,7 @@
         <a href="/Rojina_Review_war/home">Home</a>
         <a href="/Rojina_Review_war/news">News</a>
         <a href="/Rojina_Review_war/reviews">Reviews</a>
-        <a href="">Shop</a>
+        <a href="/Rojina_Review_war/shop">Shop</a>
     </section>
 
 
