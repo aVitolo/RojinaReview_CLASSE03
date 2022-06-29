@@ -25,7 +25,7 @@
             background-color: #6B354D;
         }
 
-        #sInput, #tInput, #pInput {
+        #sInput, #cInput {
             box-sizing: border-box;
             background-position: 14px 12px;
             background-repeat: no-repeat;
@@ -54,10 +54,6 @@
             z-index: 1;
         }
 
-        .dropdown-content::webkit-scrollbar{
-            display: none;
-        }
-
         .dropdown-content a {
             padding: 12px 16px;
             text-decoration: none;
@@ -71,11 +67,11 @@
 <body>
 <section class="filter">
     <div class="dropdown">
-        <button onclick="myFunction('cDrop')" class="dropbtn">Tipologia</button>
-        <div id="tDrop" class="dropdown-content">
+        <button onclick="myFunction('cDrop')" class="dropbtn">Categoria</button>
+        <div id="cDrop" class="dropdown-content">
             <input type="text" placeholder="Search.." id="cInput" onkeyup="filterFunction('cInput','cDrop')">
             <c:forEach items="${applicationScope['categorie']}" var="caterogia">
-                <a href="">${categoria.nome}</a>
+                <a href="">${caterogia.nome}</a>
             </c:forEach>
         </div>
     </div>

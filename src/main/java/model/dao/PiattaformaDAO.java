@@ -23,7 +23,7 @@ public class PiattaformaDAO {
 
     public ArrayList<Piattaforma> doRetrieveAll() throws SQLException {
         PreparedStatement ps =
-                    con.prepareStatement("Select nome FROM piattaforma");
+                    con.prepareStatement("SELECT DISTINCT piattaforma FROM gioco_piattaforma");
         ResultSet rs = ps.executeQuery();
         ArrayList <Piattaforma> piattaforme = new ArrayList<>();
         while (rs.next())
@@ -33,7 +33,7 @@ public class PiattaformaDAO {
 
     public ArrayList<Piattaforma> doRetriveByGame(String titolo) throws SQLException {
         PreparedStatement ps =
-                    con.prepareStatement("SELECT tipologia FROM gioco_tipologia WHERE gioco=?");
+                    con.prepareStatement("SELECT piattaforma FROM gioco_piattaforma WHERE gioco=?");
         ps.setString(1, titolo);
         ResultSet rs =  ps.executeQuery();
         ArrayList<Piattaforma> piattaforme = new ArrayList<>();

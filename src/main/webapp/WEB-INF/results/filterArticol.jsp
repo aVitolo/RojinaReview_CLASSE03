@@ -54,10 +54,6 @@
             z-index: 1;
         }
 
-        .dropdown-content::webkit-scrollbar{
-            display: none;
-        }
-
         .dropdown-content a {
             padding: 12px 16px;
             text-decoration: none;
@@ -70,6 +66,7 @@
 </head>
 <body>
 <section class="filter">
+
     <div class="dropdown">
         <button onclick="myFunction('pDrop')" class="dropbtn">Piattaforma</button>
         <div id="pDrop" class="dropdown-content">

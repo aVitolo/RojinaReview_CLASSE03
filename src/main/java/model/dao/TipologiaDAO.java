@@ -24,12 +24,11 @@ public class TipologiaDAO {
 
     public ArrayList<Tipologia> doRetrieveAll() throws SQLException {
         PreparedStatement ps =
-                    con.prepareStatement("Select nome FROM tipologia");
+                    con.prepareStatement("SELECT DISTINCT tipologia FROM gioco_tipologia");
         ResultSet rs = ps.executeQuery();
         ArrayList<Tipologia> tipologie = new ArrayList<>();
         while(rs.next())
             tipologie.add(new Tipologia(rs.getString(1)));
-
         return tipologie;
     }
 

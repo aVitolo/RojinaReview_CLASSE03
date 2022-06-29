@@ -35,7 +35,7 @@ public class CategoriaDAO {
 
     public ArrayList<Categoria> doRetrieveAll() throws SQLException {
         PreparedStatement ps =
-                con.prepareStatement("Select nome FROM tipologia");
+                con.prepareStatement("SELECT DISTINCT categoria FROM prodotto_categoria");
         ResultSet rs = ps.executeQuery();
         ArrayList<Categoria> categorie = new ArrayList<>();
         while(rs.next())

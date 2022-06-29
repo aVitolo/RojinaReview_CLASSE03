@@ -13,7 +13,7 @@
 
 <section class="notizie">
 
-    <h1>Latest News</h1>
+    <h1>Our Merch</h1>
 
     <%@ include file="/WEB-INF/results/filterShop.jsp" %>
 
