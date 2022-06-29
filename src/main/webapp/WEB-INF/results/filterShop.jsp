@@ -3,71 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        .filter{
-            display: flex;
-            justify-content: space-evenly;
-            margin: 1%;
-        }
-
-        .dropbtn {
-            margin-bottom: 1%;
-            background-color: #e91e63;
-            padding: 16px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            width: 222px;
-            border-radius: 2px;
-        }
-
-        .dropbtn:hover{
-            background-color: #6B354D;
-        }
-
-        #sInput, #cInput {
-            box-sizing: border-box;
-            background-position: 14px 12px;
-            background-repeat: no-repeat;
-            font-size: 16px;
-            padding: 14px 20px 12px 45px;
-            border: none;
-            background: #24262b;
-            color: #ffffff;
-            outline: none;
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #24262b;
-            width: 222px;
-            max-height: 222px;
-            min-height: fit-content;
-            overflow-y: scroll;
-            border: 1px solid #24262b;
-            z-index: 1;
-        }
-
-        .dropdown-content a {
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            color: #f3f3f3;
-        }
-
-        .show {display: block;}
-    </style>
+    <link rel="stylesheet" href="./css/filter.css">
 </head>
 <body>
 <section class="filter">
     <div class="dropdown">
-        <button onclick="myFunction('cDrop')" class="dropbtn">Categoria</button>
+        <button onclick="expandFilter('cDrop')" class="dropbtn">Categoria</button>
         <div id="cDrop" class="dropdown-content">
             <input type="text" placeholder="Search.." id="cInput" onkeyup="filterFunction('cInput','cDrop')">
             <c:forEach items="${applicationScope['categorie']}" var="caterogia">
@@ -77,7 +18,7 @@
     </div>
 
     <div class="dropdown">
-        <button onclick="myFunction('sDrop')" class="dropbtn">Ordina per</button>
+        <button onclick="expandFilter('sDrop')" class="dropbtn">Ordina per</button>
         <div id="sDrop" class="dropdown-content">
             <input type="text" placeholder="Search.." id="sInput" onkeyup="filterFunction('sInput','sDrop')">
             <a href="">Most Recent</a>
