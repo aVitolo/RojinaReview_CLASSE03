@@ -1,8 +1,7 @@
 package model.dao;
 
-import model.beans.Categoria;
 import model.beans.Piattaforma;
-import model.beans.Tipologia;
+import model.utilities.ConPool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

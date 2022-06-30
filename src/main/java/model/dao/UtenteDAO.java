@@ -1,6 +1,7 @@
 package model.dao;
 
 import model.beans.Utente;
+import model.utilities.ConPool;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;

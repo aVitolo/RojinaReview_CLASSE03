@@ -2,6 +2,7 @@ package model.dao;
 
 import model.beans.Carrello;
 import model.beans.Prodotto;
+import model.utilities.ConPool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

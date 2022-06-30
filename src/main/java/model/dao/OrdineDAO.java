@@ -3,6 +3,7 @@ package model.dao;
 import model.beans.Indirizzo;
 import model.beans.Ordine;
 import model.beans.Pagamento;
+import model.utilities.ConPool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

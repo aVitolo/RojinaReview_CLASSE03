@@ -1,6 +1,7 @@
 package model.dao;
 
 import model.beans.Indirizzo;
+import model.utilities.ConPool;
 
 import java.sql.*;
 import java.util.ArrayList;

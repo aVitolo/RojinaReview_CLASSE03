@@ -1,7 +1,7 @@
 package model.dao;
 
-import model.beans.Amministratore;
 import model.beans.Giornalista;
+import model.utilities.ConPool;
 import model.utilities.GenericStaffDAO;
 
 import java.io.UnsupportedEncodingException;

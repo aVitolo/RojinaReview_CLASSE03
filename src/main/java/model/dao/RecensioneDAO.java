@@ -1,6 +1,7 @@
 package model.dao;
 
 import model.beans.Recensione;
+import model.utilities.ConPool;
 import model.utilities.GiocoDAO;
 
 import java.sql.Connection;

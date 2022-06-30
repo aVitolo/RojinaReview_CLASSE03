@@ -1,7 +1,7 @@
 package model.dao;
 
 import model.beans.Telefono;
-import model.beans.Tipologia;
+import model.utilities.ConPool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

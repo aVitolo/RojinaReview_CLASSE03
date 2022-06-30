@@ -1,8 +1,6 @@
 package model.utilities;
 
 import model.beans.Gioco;
-import model.beans.Piattaforma;
-import model.dao.ConPool;
 import model.dao.PiattaformaDAO;
 import model.dao.TipologiaDAO;
 
