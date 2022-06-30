@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: carlo
-  Date: 27/06/2022
-  Time: 14:56
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% if(request.getSession().getAttribute("utente") != null)
     response.sendRedirect("./home");%>
@@ -18,7 +12,7 @@
 <body>
 <div class="center">
     <h1>Create Account</h1>
-    <form method="post" onsubmit="login()">
+    <form method="post" action="./userCreationCheck">
         <div class="form_input">
             <input type="text" name="nickname" required>
             <span></span>
@@ -37,8 +31,18 @@
         <input type="submit" value="Create Account">
     </form>
 </div>
-<script>
-
-</script>
+<c:if test = "${message != null}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#close").click(function(){
+                $("#error").slideToggle();
+            });
+        });
+    </script>
+    <div class="center" id="error">
+        <button id="close"><c:out value="${message}"/></button>
+    </div>
+</c:if>
 </body>
 </html>

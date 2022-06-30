@@ -60,4 +60,14 @@
         <url-pattern>/userLoginCheck</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>userCreationCheckServlet</servlet-name>
+        <servlet-class>controller.userCreationCheckServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>userCreationCheckServlet</servlet-name>
+        <url-pattern>/userCreationCheck</url-pattern>
+    </servlet-mapping>
+
 </web-app>

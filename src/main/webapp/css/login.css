@@ -54,7 +54,8 @@ form .form_input{
     position: absolute;
     top: 50%;
     left: 5px;
-    color: #adadad;
+    color: #e91e63;;
+    top: -5px;
     transform: translateY(-50%); /* Propietà che permette di spostare gli elementi della classe  sull' asse Y*/
     font-size: 16px;
     pointer-events: none;
@@ -71,10 +72,8 @@ form .form_input{
     background: #e91e63;
 }
 
-.form_input input:focus ~ label,
 .form_input input:valid ~ label{
-    top: -5px;
-    color: #e91e63;
+    color: transparent;
 }
 
 button,

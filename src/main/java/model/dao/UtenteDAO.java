@@ -43,6 +43,30 @@ public class UtenteDAO {
         return null;
     }
 
+    public Utente doRetriveByNickname(String nickname) throws SQLException, UnsupportedEncodingException {
+        PreparedStatement ps =
+                con.prepareStatement("SELECT * FROM Utente WHERE nickname=?");
+        ps.setString(1, nickname);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            String email=rs.getString("email");
+            return new Utente(
+                    rs.getInt("età"),
+                    email,
+                    rs.getString("nickname"),
+                    rs.getString("nome"),
+                    rs.getString("cognome"),
+                    rs.getString("pass"),
+                    new IndirizzoDAO(con).doRetriveByUser(email),
+                    new TelefonoDAO(con).doRetriveByUser(email),
+                    new PagamentoDAO(con).doRetrieveByUser(email),
+                    new OrdineDAO(con).doRetrieveByUser(email),
+                    new CarrelloDAO(con).doRetrieveByUser(email)
+            );
+        }
+
+        return null;
+    }
 }
 
 
