@@ -15,7 +15,7 @@ import java.sql.SQLException;
 
 public class userLoginCheck extends HttpServlet {
     private Utente tmp;
-    private String loginErrato = "/WEB-INF/results/userLoginErrato.jsp";
+    private String loginErrato = "./userLogin.jsp";
     private String homePage =  "./home";
 
     @Override
@@ -36,11 +36,12 @@ public class userLoginCheck extends HttpServlet {
                 if (this.tmp == null) {
                     //Il flag a false indica che non è necessario continuare i controlli, l' utente non c' è nel db
                     flag = false;
-                    System.out.println("Utente non presente");
-
+                    String message = "Invalid email";
+                    request.setAttribute("message", message);
                     RequestDispatcher dispatcher = request.getRequestDispatcher(loginErrato);
                     dispatcher.forward(request, response);
                 }
+
 
                 //Il flag a true indica l' effettiva presenza dell' utente nell' db
                 //Se non avessi il flag, e l' user TMP avesse valore null (non trovato), la successiva seconda istruzione darebbe errore
@@ -60,7 +61,8 @@ public class userLoginCheck extends HttpServlet {
                         session.setAttribute("utente", this.tmp);
                         response.sendRedirect(homePage);
                     } else {
-                        System.out.println("password errata");
+                        String message = "Invalid password";
+                        request.setAttribute("message", message);
                         RequestDispatcher dispatcher = request.getRequestDispatcher(loginErrato);
                         dispatcher.forward(request, response);
                     }
