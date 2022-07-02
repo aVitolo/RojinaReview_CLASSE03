@@ -17,14 +17,15 @@ public class Recensione extends Articolo {
     }
 
     public Recensione(ArrayList<Commento> commenti,
-                      byte[] immagine,
-                      Date dataCaricamento,
+                      String  immagine,
+                      java.sql.Date dataCaricamento,
                       float voto,
                       Gioco gioco,
                       int id,
                       String testo,
                       String giornalista,
                       String titolo) {
+
         super(  commenti,
                 immagine,
                 dataCaricamento,

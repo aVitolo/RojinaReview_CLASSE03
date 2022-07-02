@@ -27,6 +27,14 @@
                 <a href="">Bentornato, <c:out value='${utente.nickname}'/></a>
                 <a href="">Carello <c:out value='${fn:length(utente.carrello.prodotti)}'/></a>
             </c:when>
+            <c:when test="${sessionScope.get('giornalista') != null}">
+                <a href="">Bentornato, <c:out value='${giornalista.nome}'/></a>
+                <a href=""><img class="icon" src="images/utility/journalistIcon.png"></a>
+            </c:when>
+            <c:when test="${sessionScope.get('admin') != null}">
+                <a href="">Bentornato, <c:out value='${admin.nome}'/></a>
+                <a href=""><img class="icon" src="images/utility/adminIcon.png"></a>
+            </c:when>
             <c:otherwise>
                 <button onclick="document.location.href='./userLogin.jsp'">Login</button>
             </c:otherwise>

@@ -14,7 +14,13 @@
 
 <div class="center">
     <h1>Login</h1>
-    <form method="post" action="./LoginUser">
+    <form method="post" action="LoginStaff">
+        <div class="form_input">
+            <input type="radio" class="radioLogin" id="giornalistaRadio" name="userType" value="0" checked="checked">
+            <label id="giornalistaLabel" for="giornalistaRadio">Giornalista</label>
+            <input type="radio" class="radioLogin" id="amministratoreRadio" name="userType" value="1">
+            <label id="amministratoreLabel" for="amministratoreRadio">Amministratore</label>
+        </div>
         <div class="form_input">
             <input type="email" name="email" required>
             <span></span>
@@ -26,9 +32,6 @@
             <label>Password</label>
         </div>
         <input type="submit" value="Login">
-        <div class="register_link">
-            <p>Non sei Registrato? <a href="./userCreation.jsp">Registrati</a> </p>
-        </div>
     </form>
 </div>
 <c:if test = "${message != null}">
@@ -46,3 +49,4 @@
 </c:if>
 </body>
 </html>
+

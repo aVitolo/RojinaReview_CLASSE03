@@ -5,13 +5,12 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import model.beans.Utente;
 import model.dao.UtenteDAO;
-import model.utilities.Persona;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet(name = "userCreationCheckServlet", value = "/userCreationCheckServlet")
-public class userCreationCheckServlet extends HttpServlet {
+public class CreationUser extends HttpServlet {
 
     private Utente tmp;
     private String loginErrato = "./userCreation.jsp";

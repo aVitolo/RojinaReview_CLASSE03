@@ -10,14 +10,15 @@ public abstract class Articolo {
 
     /* Attributes */
 
-    private byte[] immagine;
+
     private ArrayList<Commento> commenti;
-    private Date dataCaricamento;
+    private java.sql.Date dataCaricamento;
     private Gioco gioco;
     private int id;
     private String testo;
     private String titolo;
     private String giornalista;
+    private String immagine;
 
 
     /* Constructor */
@@ -26,8 +27,8 @@ public abstract class Articolo {
     }
 
     public Articolo(ArrayList<Commento> commenti,
-                    byte[] immagine,
-                    Date dataCaricamento,
+                    String immagine,
+                    java.sql.Date dataCaricamento,
                     Gioco gioco,
                     int id,
                     String testo,
@@ -61,11 +62,11 @@ public abstract class Articolo {
         this.titolo = titolo;
     }
 
-    public Date getDataCaricamento() {
+    public java.sql.Date getDataCaricamento() {
         return dataCaricamento;
     }
 
-    public void setDataCaricamento(Date dataCaricamento) {
+    public void setDataCaricamento(java.sql.Date dataCaricamento) {
         this.dataCaricamento = dataCaricamento;
     }
 
@@ -101,11 +102,11 @@ public abstract class Articolo {
         return commenti;
     }
 
-    public byte[] getImmagine() {
+    public String getImmagine() {
         return immagine;
     }
 
-    public void setImmagine(byte[] immagine) {
+    public void setImmagine(String immagine) {
         this.immagine = immagine;
     }
 }

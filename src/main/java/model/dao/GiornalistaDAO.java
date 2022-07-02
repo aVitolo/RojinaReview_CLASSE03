@@ -33,11 +33,12 @@ public class GiornalistaDAO implements GenericStaffDAO {
                     rs.getString("cognome"),
                     rs.getString("email"),
                     rs.getString("pass"),
-                    rs.getBytes("immagine"),
+                    rs.getString("immagine"),
                     rs.getInt("id"));
         }
 
         return null;
     }
+
 
 }

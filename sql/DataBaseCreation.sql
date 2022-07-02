@@ -8,7 +8,7 @@ create table Amministratore(
     nome 			varchar(30) not null,
     cognome 		varchar(30) not null,
     email			varchar(30),
-    pass			varchar(2500),
+    pass			varchar(256),
     check (nome regexp '[a-zA-Z ]{1,30}'),
     check (cognome regexp '[a-zA-Z\' ]{1,30}'),
     primary key(id)
@@ -19,8 +19,8 @@ create table Giornalista(
     nome 			varchar(30) not null,
     cognome 		varchar(30) not null,
     email			varchar(30),
-    pass			varchar(2500),
-    immagine        mediumblob,
+    pass			varchar(256),
+    immagine        varchar(100),
     check (nome regexp '[a-zA-Z ]{1,30}'),
     check (cognome regexp '[a-zA-Z\' ]{1,30}'),
     primary key(id)
@@ -32,7 +32,7 @@ create table Gioco(
     casaDiSviluppo	varchar(30) not null,
     mediaVoto		float(4,2) not null,
     numeroVoti		int not null,
-    copertina		mediumblob,
+    copertina		varchar(100),
     primary key(titolo)
 );
 
@@ -44,7 +44,7 @@ create table Recensione(
     titolo 			varchar(100) unique,
     voto 			float not null,
     dataCaricamento	date not null,
-    immagine 		mediumblob,
+    immagine 		varchar(100),
     foreign key(giornalista)
                 references Giornalista(id)
                 on update cascade,
@@ -63,7 +63,7 @@ create table Notizia(
     gioco           varchar(50),
     titolo			varchar(100) unique,
     dataCaricamento	date not null,
-    immagine		mediumblob,
+    immagine		varchar(100),
     foreign key(giornalista)
                 references Giornalista(id)
                 on update cascade,
@@ -137,7 +137,8 @@ create table Utente(
    pass 			varchar(256) not null,
    nome			    varchar(30),
    cognome			varchar(30),
-   età			tinyint,
+   età			    tinyint,
+   immagine         varchar(100),
    primary key(email)
 );
 
@@ -219,7 +220,7 @@ create table Prodotto(
      descrizione	tinytext,
      disponibilità  int,
      prezzo			float,
-     immagine		mediumblob,
+     immagine		varchar(100),
      sconto			boolean,
      mediaVoto		float(4,2) not null,
      numeroVoti		int not null,
@@ -386,33 +387,31 @@ end//
 DELIMITER ;
 
 insert into Amministratore (nome, cognome, email, pass) values
-("Andrea", "Vitolo", "zindrè@gmail.com", "papapa"),
-("Carmine", "Iemmino", "carmineiemmino@gmail.com", "lalala"),
-("Carlo", "Colizzi", "carletto@gmail.com", "bobobobo");
+("Andrea", "Vitolo", "zindrè@gmail.com", SHA2('papapa',256)),
+("Carmine", "Iemmino", "carmineiemmino@gmail.com", SHA2('lalala',256)),
+("Carlo", "Colizzi", "carletto@gmail.com", SHA2('bobbaba',256));
 
-insert into Giornalista (nome, cognome) values
-("Mario", "Dell'Orca"),
-("Carla", "Bianchi"),
-("Giovanni", "Verdi"),
-("Franco", "Neri"),
-("Carlo", "Rossi"),
-("Lorenza", "Gialli"),
-("Paolo", "Rosati"),
-("Marco", "Franca"),
-("Paolo", "Franca");
+insert into Giornalista (nome, cognome, email, pass, immagine) values
+("Mario", "Dell'Orca", "mario@gmail.com", SHA2('marietto',256), "./images/journalists/dellorca.jpg"),
+("Carla", "Bianchi", "carletta@gmail.com", SHA2('xarla',256), "./images/journalists/bianchi.jpg"),
+("Giovanni", "Verdi", "giuann@gmail.com", SHA2('johnny',256), "./images/journalists/verdi.jpg"),
+("Franco", "Neri", "franco@gmail.com", SHA2('francuccio',256), "./images/journalists/neri.jpg"),
+("Carlo", "Rossi", "carlrossi@gmail.com", SHA2('redcarl',256), "./images/journalists/rossi.jpg"),
+("Lorenza", "Gialli", "lorenza@gmail.com", SHA2('lorenzina',256), "./images/journalists/gialli.jpg");
+
 
 insert into Utente values
-("venebroguppeu@yopmail.com","GamaOnix",SHA2('oemfshif',256), "Paolo", "Dell'Orca", 20),
-("jaunnureudeilla@yopmail.com","AimZero",SHA2('efkmfeug',256), "Giovanna", "Bianchi", 25),
-("frefimeitromo@yopmail.com","ZeroVirus",SHA2('vwnjviecwo',256), "Pio", "Verdi", null),
-("ceuprofraucoudi@yopmail.com","ShadowWait",SHA2('nfhuofewoj',256), "Franco", "Neri", 19),
-("ceubujotawo@yopmail.com","PhantomEagle",SHA2('obufewgou',256), null, null, null),
-("gralameiddauquau@yopmail.com","GhostSteel",SHA2('nefihouefwpoj',256), "Lorenza", "Gialli", 18),
-("febremoulaqui@yopmail.com","PredatorBeta",SHA2('fnkebouewf',256), "Christian", "Rosati", 26),
-("zindre@yopmail.com","BlackDeath",SHA2('jofhouefwpoj',256), null, null, null),
-("cazzare@yopmail.com","AbyssWalker",SHA2('pmiwefhoufpewj',256), "Carmine", "Franca", 22),
-("oefo@yopmail.com","Papiciacra",SHA2('piefwhouefoj',256), "Fonz", "Cretoso", 20),
-("utente@gmail.com","User",SHA2('password',256), "Persona", "Normale", 20);
+("venebroguppeu@yopmail.com","GamaOnix",SHA2('oemfshif',256), "Paolo", "Dell'Orca", 20, "./images/users/gamaonix.jpg"),
+("jaunnureudeilla@yopmail.com","AimZero",SHA2('efkmfeug',256), "Giovanna", "Bianchi", 25, "./images/users/aimzero.jpg"),
+("frefimeitromo@yopmail.com","ZeroVirus",SHA2('vwnjviecwo',256), "Pio", "Verdi", null, "./images/users/zerovirus.jpg"),
+("ceuprofraucoudi@yopmail.com","ShadowWait",SHA2('nfhuofewoj',256), "Franco", "Neri", 19, "./images/users/shadowwait.jpg"),
+("ceubujotawo@yopmail.com","PhantomEagle",SHA2('obufewgou',256), null, null, null, "./images/users/phantomeagle.jpg"),
+("gralameiddauquau@yopmail.com","GhostSteel",SHA2('nefihouefwpoj',256), "Lorenza", "Gialli", 18, "./images/users/ghoststeel.jpg"),
+("febremoulaqui@yopmail.com","PredatorBeta",SHA2('fnkebouewf',256), "Christian", "Rosati", 26, "./images/users/predatorbeta.jpg"),
+("zindre@yopmail.com","BlackDeath",SHA2('jofhouefwpoj',256), null, null, null, "./images/users/blackdeath.jpg"),
+("cazzare@yopmail.com","AbyssWalker",SHA2('pmiwefhoufpewj',256), "Carmine", "Franca", 22, "./images/users/abysswalker.jpg"),
+("oefo@yopmail.com","Papiciacra",SHA2('piefwhouefoj',256), "Fonz", "Cretoso", 20, "./images/users/papiciacra.jpg"),
+("utente@gmail.com","User",SHA2('password',256), "Persona", "Normale", 20, "./images/users/default.jpg");
 
 
 insert into Indirizzo values
@@ -474,21 +473,21 @@ insert into Tipologia values
 ("Wargame");
 
 insert into Gioco values
-("Dark Souls","2011-09-22","FromSoftware", 0, 0, load_file('C:\ProgramData\MySQL\MySQL Server 8.0\Uploads\darksouls.jpg')),
-("Dark Souls II","2014-03-11","FromSoftware", 0, 0, null),
-("Dark Souls III","2016-04-12","FromSoftware", 0, 0, null),
-("Sekiro: Shadows Die Twice","2019-03-22","FromSoftware", 0, 0, null),
-("FIFA 20","2019-09-27","EA", 0, 0, null),
-("FIFA 21","2020-10-05","EA", 0, 0, null),
-("FIFA 22","2021-09-26","EA", 0, 0, null),
-("Mario Kart 8","2014-05-29","Nintendo EPD", 0, 0, null),
-("The Legend of Zelda: Breath of the Wild","2017-03-03","Nintendo EPD", 0, 0, null),
-("Bloodborne 2", null,"FromSoftware", 0, 0, null),
-("Halo 2","2004-11-09","Bungie Studios", 0, 0, null),
-("Halo 3","2007-09-25","Bungie Studios", 0, 0, null),
-("Halo 4","2012-11-06","343 Industries", 0, 0, null),
-("Halo 5","2015-10.27","343 Industries", 0, 0, null),
-("Halo Infinite","2021-12-08","343 Industries", 0, 0, null);
+("Dark Souls","2011-09-22","FromSoftware", 0, 0, "./images/games/darksouls.jpg"),
+("Dark Souls II","2014-03-11","FromSoftware", 0, 0, "./images/games/darksoulsii.jpg"),
+("Dark Souls III","2016-04-12","FromSoftware", 0, 0, "./images/games/darksoulsiii.jpg"),
+("Sekiro: Shadows Die Twice","2019-03-22","FromSoftware", 0, 0, "./images/games/sekiro.jpg"),
+("FIFA 20","2019-09-27","EA", 0, 0, "./images/games/fifa20.jpg"),
+("FIFA 21","2020-10-05","EA", 0, 0, "./images/games/fifa21.jpg"),
+("FIFA 22","2021-09-26","EA", 0, 0, "./images/games/fifa22.jpg"),
+("Mario Kart 8","2014-05-29","Nintendo EPD", 0, 0, "./images/games/mariokart8.jpg"),
+("The Legend of Zelda: Breath of the Wild","2017-03-03","Nintendo EPD", 0, 0, "./images/games/zelda.jpg"),
+("Bloodborne 2", null,"FromSoftware", 0, 0, "./images/games/bloodborne2.jpg"),
+("Halo 2","2004-11-09","Bungie Studios", 0, 0, "./images/games/halo2.jpg"),
+("Halo 3","2007-09-25","Bungie Studios", 0, 0, "./images/games/halo3.jpg"),
+("Halo 4","2012-11-06","343 Industries", 0, 0, "./images/games/halo4.jpg"),
+("Halo 5","2015-10.27","343 Industries", 0, 0, "./images/games/halo5.jpg"),
+("Halo Infinite","2021-12-08","343 Industries", 0, 0, "./images/games/haloinfinite.jpg");
 
 insert into Gioco_Piattaforma values
 ("Dark Souls","Xbox 360"),
@@ -579,23 +578,23 @@ insert into Gioco_Tipologia values
 ("Halo Infinite","Multiplayer Online");
 
 insert into Recensione (testo, giornalista, gioco, titolo, voto, dataCaricamento, immagine) values
-("Dark souls è un gioco rpg...", 1,"Dark Souls","Recensione Dark Souls",8.7,"2011-10-22", null),
-("Il seguito di Dark Souls I...", 1, "Dark Souls II","Dark Souls torna a colpire",9,"2014-04-11", null),
-("Dark Souls 3 richiama i...", 3, "Dark Souls III","Recensione Dark Souls III",9,"2016-05-12", null),
-("Sekiro nuova avventura diversa...", 5, "Sekiro: Shadows Die Twice","Il gioco From Software più difficile di sempre",9,"2019-04-22", null),
-("Halo 2 fps...", 7, "Halo 2","Master Chief è tornato più in forma che mai",9.5,"2004-11-16", null),
-("Halo 3 è indubbiamente...", 1, "Halo 3","Il ritorno di Master Chief",8.5 ,"2007-10-01", null),
-("Halo 4 si avvicina a cod...", 2,"Halo 4","Recensione Halo 4",9,"2022-01-13", null),
-("Halo 5 non lo so...", 6, "Halo 5","Recensione Halo 5: Guardians",8.8,"2022-01-3", null),
-("Halo infinite figurati...", 4, "Halo Infinite","Un ritorno epico",9,current_date(), null);
+("Dark souls è un gioco rpg...", 1,"Dark Souls","Recensione Dark Souls",8.7,"2011-10-22", "./images/reviews/review-darksouls.jpg"),
+("Il seguito di Dark Souls I...", 1, "Dark Souls II","Dark Souls torna a colpire",9,"2014-04-11", "./images/reviews/review-darksoulsii.jpg"),
+("Dark Souls 3 richiama i...", 3, "Dark Souls III","Recensione Dark Souls III",9,"2016-05-12", "./images/reviews/review-darksoulsiii.jpg"),
+("Sekiro nuova avventura diversa...", 5, "Sekiro: Shadows Die Twice","Il gioco From Software più difficile di sempre",9,"2019-04-22", "./images/reviews/review-sekiro.jpg"),
+("Halo 2 fps...", 6, "Halo 2","Master Chief è tornato più in forma che mai",9.5,"2004-11-16", "./images/reviews/review-halo2.jpg"),
+("Halo 3 è indubbiamente...", 1, "Halo 3","Il ritorno di Master Chief",8.5 ,"2007-10-01", "./images/reviews/review-halo3.jpg"),
+("Halo 4 si avvicina a cod...", 2,"Halo 4","Recensione Halo 4",9,"2022-01-13", "./images/reviews/review-halo4.jpg"),
+("Halo 5 non lo so...", 6, "Halo 5","Recensione Halo 5: Guardians",8.8,"2022-01-3", "./images/reviews/review-halo5.jpg"),
+("Halo infinite figurati...", 4, "Halo Infinite","Un ritorno epico",9,current_date(), "./images/reviews/review-haloinfinite.jpg");
 
 insert into Notizia (testo, giornalista, gioco, titolo, dataCaricamento, immagine) values
-("Halo Infinite è un gioco...", 2, "Halo Infinite", "Halo Infinite e la community tossica","2022-01-24", null),
-("Doppiaggio in italiano in...", 3, "Dark Souls",  "La Mod italiana per Dark Souls Remastered arriva domani","2021-10-13", null),
-("La nintendo...", 1, "Mario Kart 8", "I tesori di casa Nintendo","2020-03-03", null),
-("Bloodborne 2 è molto atteso...", 6, "Bloodborne 2", "Bloodborne 2, rumor o verità?","2019-09-12", null),
-("Fifa 21 fa sempre cagare...", 5, "FIFA 21", "FIFA 21: Cosa ci aspettiamo","2022-01-10", null),
-("Fifa 22 fa ancor più cagare...", 5, "FIFA 22", "FIFA 22: Cosa ci aspettiamo", "2022-01-29", null);
+("Halo Infinite è un gioco...", 2, "Halo Infinite", "Halo Infinite e la community tossica","2022-01-24", "./images/news/new-haloinfinite.jpg"),
+("Doppiaggio in italiano in...", 3, "Dark Souls",  "La Mod italiana per Dark Souls Remastered arriva domani","2021-10-13", "./images/news/new-darksouls.jpg"),
+("La nintendo...", 1, "Mario Kart 8", "I tesori di casa Nintendo","2020-03-03", "./images/news/new-mariokart8.jpg"),
+("Bloodborne 2 è molto atteso...", 6, "Bloodborne 2", "Bloodborne 2, rumor o verità?","2019-09-12", "./images/news/new-bloodborne2.jpg"),
+("Fifa 21 fa sempre cagare...", 5, "FIFA 21", "FIFA 21: Cosa ci aspettiamo","2022-01-10", "./images/news/new-fifa21.jpg"),
+("Fifa 22 fa ancor più cagare...", 5, "FIFA 22", "FIFA 22: Cosa ci aspettiamo", "2022-01-29", "./images/news/new-fifa22.jpg");
 
 insert into Gioco_Notizia values
 (1, 3,"The Legend of Zelda: Breath of the Wild"),
@@ -664,11 +663,11 @@ insert into Telefono values
 ("zindre@yopmail.com","3115644357");
 
 insert into Prodotto (nome, descrizione, disponibilità, prezzo, immagine, sconto, mediaVoto, numeroVoti) values
-("Tazza Dark Souls", "Simpatica tazza ispirata a...", 30, 15.00, null, true, 0, 0),
-("Pupazzo Super Mario", "Dolce pupazzo coccoloso di...", 10, 25.00, null, false, 0, 0),
-("T-shirt Zelda", "Splendida t-shirt di...", 20, 30.00, null, false, 0, 0),
-("Bracciale Bloodborne", "Stiloso bracciale...", 50, 13.00, null, true, 0, 0),
-("Pendente Elden Ring", "Realistico pendente...", 70, 18.00, null, false, 0, 0);
+("Tazza Dark Souls", "Simpatica tazza ispirata a...", 30, 15.00, "./images/products/tazzadarksouls.jpg", true, 0, 0),
+("Pupazzo Super Mario", "Dolce pupazzo coccoloso di...", 10, 25.00, "./images/products/pupazzomario.jpg", false, 0, 0),
+("T-shirt Zelda", "Splendida t-shirt di...", 20, 30.00, "./images/products/tshirtzelda.jpg", false, 0, 0),
+("Bracciale Bloodborne", "Stiloso bracciale...", 50, 13.00, "./images/products/braccialebloodborne.jpg", true, 0, 0),
+("Pendente Elden Ring", "Realistico pendente...", 70, 18.00, "./images/products/pendenteeldenring.jpg", false, 0, 0);
 
 insert into Gradimento values
 (1, "cazzare@yopmail.com", 8, "2022-05-12"),

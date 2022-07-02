@@ -35,7 +35,7 @@ public class ProdottoDAO {
             p.setDescrizione(rs.getString(3));
             p.setDisponibilità(rs.getInt(4));
             p.setPrezzo(rs.getFloat(5));
-            p.setImmagine(rs.getBytes(6));
+            p.setImmagine(rs.getString(6));
 
             if(rs.getInt(7)==1){
                 ps = con.prepareStatement("SELECT nome, percentuale FROM sconto WHERE prodotto=?");
@@ -73,7 +73,7 @@ public class ProdottoDAO {
             p.setDescrizione(rs.getString(3));
             p.setDisponibilità(rs.getInt(4));
             p.setPrezzo(rs.getFloat(5));
-            p.setImmagine(rs.getBytes(6));
+            p.setImmagine(rs.getString(6));
 
             if (rs.getInt(7) == 1) {
                 ps = con.prepareStatement("SELECT nome, percentuale FROM sconto WHERE prodotto=?");

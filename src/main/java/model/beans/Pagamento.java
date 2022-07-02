@@ -9,7 +9,7 @@ public class Pagamento {
     private String nome;
     private String cognome;
     private String numeroCarta;
-    private Date dataScadenza;
+    private java.sql.Date dataScadenza;
 
     /* Constructors */
 
@@ -18,7 +18,7 @@ public class Pagamento {
     public Pagamento(String nome,
                      String cognome,
                      String numeroCarta,
-                     Date dataScadenza) {
+                     java.sql.Date dataScadenza) {
         this.nome = nome;
         this.cognome = cognome;
         this.numeroCarta = numeroCarta;
@@ -42,11 +42,11 @@ public class Pagamento {
         this.cognome = cognome;
     }
 
-    public Date getDataScadenza() {
+    public java.sql.Date getDataScadenza() {
         return dataScadenza;
     }
 
-    public void setDataScadenza(Date dataScadenza) {
+    public void setDataScadenza(java.sql.Date dataScadenza) {
         this.dataScadenza = dataScadenza;
     }
 

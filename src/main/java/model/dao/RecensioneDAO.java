@@ -4,11 +4,9 @@ import model.beans.Recensione;
 import model.utilities.ConPool;
 import model.utilities.GiocoDAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class RecensioneDAO {
     private Connection con;
@@ -36,7 +34,7 @@ public class RecensioneDAO {
             r.setVoto(rs.getFloat(7));
             r.setDataCaricamento(rs.getDate(8));
             r.setGioco(new GiocoDAO(con).doRetrieveByTitle(rs.getString(9)));
-            r.setImmagine(rs.getBytes(10));
+            r.setImmagine(rs.getString(10));
             r.setCommenti(new CommentoDAO(con).getCommentById(r.getId(),"recensione"));
             return r;
         }
@@ -67,7 +65,7 @@ public class RecensioneDAO {
             r.setVoto(rs.getFloat(7));
             r.setDataCaricamento(rs.getDate(8));
             //r.setGioco(new GiocoDAO(con).doRetrieveByTitle(rs.getString(9)));
-            r.setImmagine(rs.getBytes(10));
+            r.setImmagine(rs.getString(10));
             //r.setCommenti(new CommentoDAO(con).getCommentById(r.getId(),"commentorecensione"));
             recensioni.add(r);
         }
@@ -75,5 +73,23 @@ public class RecensioneDAO {
         return recensioni;
 
     }
+
+    public void doSave(Recensione r, int idGiornalista) throws SQLException {
+        PreparedStatement ps = con.prepareStatement("INSERT INTO recensione " +
+                "(testo, giornalista, gioco, titolo, voto, dataCaricamento, immagine) VALUES(?, ?, ?, ?, ?, ?, ?)");
+        ps.setString(1, r.getTesto());
+        ps.setInt(2, idGiornalista);
+        ps.setString(3, r.getGioco().getTitolo());
+        ps.setString(4, r.getTitolo());
+        ps.setFloat(5, r.getVoto());
+        ps.setDate(6, r.getDataCaricamento());
+        ps.setString(7, r.getImmagine());
+
+        if(ps.executeUpdate() != 1)
+            throw new RuntimeException("Insert error");
+
+
+    }
+
 
 }

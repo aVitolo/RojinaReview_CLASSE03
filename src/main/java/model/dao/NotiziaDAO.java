@@ -33,7 +33,7 @@ public class NotiziaDAO {
             n.setTitolo(rs.getString(4));
             n.setTesto(rs.getString(5));
             n.setDataCaricamento(rs.getDate(6));
-            n.setImmagine(rs.getBytes(7));
+            n.setImmagine(rs.getString(7));
             n.setGioco(new GiocoDAO(con).doRetrieveByTitle(rs.getString(8)));
             n.setCommenti(new CommentoDAO(con).getCommentById(id,"commentonotizia"));
             n.setGiochi(new GiocoDAO(con).getGiocoByIdNotizia(id));
@@ -61,7 +61,7 @@ public class NotiziaDAO {
             n.setTitolo(rs.getString(4));
             n.setTesto(rs.getString(5));
             n.setDataCaricamento(rs.getDate(6));
-            n.setImmagine(rs.getBytes(7));
+            n.setImmagine(rs.getString(7));
             //n.setCommenti(new CommentoDAO(con).getCommentById(n.getId(),"notizia"));
             //n.setGiochi(new GiocoDAO(con).getGiocoByIdNotizia(n.getId()));
             notizie.add(n);

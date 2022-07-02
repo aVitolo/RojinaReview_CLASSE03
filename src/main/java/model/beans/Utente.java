@@ -14,6 +14,7 @@ public class Utente extends Persona {
     private Carrello carrello;
     private int eta;
     private String nickname;
+    private String immagine;
 
 
     /* Costructor */
@@ -34,7 +35,8 @@ public class Utente extends Persona {
                   ArrayList<Telefono> telefoni,
                   ArrayList<Pagamento> pagamenti,
                   ArrayList<Ordine> ordini,
-                  Carrello carello)
+                  Carrello carello,
+                  String immagine)
             throws UnsupportedEncodingException {
         super(nome, cognome, email, password);
         this.eta = eta;
@@ -44,6 +46,7 @@ public class Utente extends Persona {
         this.pagamenti = pagamenti;
         this.ordini = ordini;
         this.carrello = carrello;
+        this.immagine = immagine;
 
     }
 
@@ -105,5 +108,11 @@ public class Utente extends Persona {
         this.carrello = carrello;
     }
 
+    public String getImmagine() {
+        return immagine;
+    }
 
+    public void setImmagine(String immagine) {
+        this.immagine = immagine;
+    }
 }

@@ -37,7 +37,8 @@ public class UtenteDAO {
                 new TelefonoDAO(con).doRetriveByUser(email),
                 new PagamentoDAO(con).doRetrieveByUser(email),
                 new OrdineDAO(con).doRetrieveByUser(email),
-                new CarrelloDAO(con).doRetrieveByUser(email)
+                new CarrelloDAO(con).doRetrieveByUser(email),
+                        rs.getString("immagine")
                 );
         }
 
@@ -62,7 +63,8 @@ public class UtenteDAO {
                     new TelefonoDAO(con).doRetriveByUser(email),
                     new PagamentoDAO(con).doRetrieveByUser(email),
                     new OrdineDAO(con).doRetrieveByUser(email),
-                    new CarrelloDAO(con).doRetrieveByUser(email)
+                    new CarrelloDAO(con).doRetrieveByUser(email),
+                    rs.getString("immagine")
             );
         }
 

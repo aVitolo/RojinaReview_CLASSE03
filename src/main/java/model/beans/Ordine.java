@@ -8,7 +8,7 @@ public class Ordine {
     /* Attributes */
 
     private ArrayList<ProdottoOrdine> prodotti;
-    private Date dataOrdine;
+    private java.sql.Date dataOrdine;
     private Float totale;
     private int id;
     private Indirizzo indirizzo;
@@ -22,7 +22,7 @@ public class Ordine {
     }
 
     public Ordine(ArrayList<ProdottoOrdine> prodotti,
-                  Date dataOrdine,
+                  java.sql.Date dataOrdine,
                   Float totale,
                   int id,
                   Indirizzo indirizzo,
@@ -64,11 +64,11 @@ public class Ordine {
         this.tracking = tracking;
     }
 
-    public Date getDataOrdine() {
+    public java.sql.Date getDataOrdine() {
         return dataOrdine;
     }
 
-    public void setDataOrdine(Date dataOrdine) {
+    public void setDataOrdine(java.sql.Date dataOrdine) {
         this.dataOrdine = dataOrdine;
     }
 

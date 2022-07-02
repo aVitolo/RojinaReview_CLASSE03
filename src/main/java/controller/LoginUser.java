@@ -13,7 +13,7 @@ import model.dao.UtenteDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class userLoginCheck extends HttpServlet {
+public class LoginUser extends HttpServlet {
     private Utente tmp;
     private String loginErrato = "./userLogin.jsp";
     private String homePage =  "./home";
@@ -21,7 +21,8 @@ public class userLoginCheck extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            if(request.getSession().getAttribute("utente") != null)
+            HttpSession session = request.getSession();
+            if(session.getAttribute("utente") != null)
                 response.sendRedirect(homePage);
             else {
                 //Preleva dalla request l'email
@@ -50,7 +51,6 @@ public class userLoginCheck extends HttpServlet {
                 String dbPass = this.tmp.getPassword();
                 //confronta le password
                 if (password.equals(dbPass)) {
-                    HttpSession session = request.getSession();
                     session.setAttribute("utente", this.tmp);
                     response.sendRedirect(homePage);
                 } else {

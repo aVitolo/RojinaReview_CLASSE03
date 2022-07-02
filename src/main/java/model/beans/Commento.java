@@ -6,7 +6,7 @@ public class Commento {
 
     /* Attributes */
 
-    private Date data;
+    private java.sql.Date data;
     private String testo;
     private String utente;
 
@@ -17,7 +17,7 @@ public class Commento {
 
     };
 
-    public Commento(String testo, String utente, Date data) {
+    public Commento(String testo, String utente, java.sql.Date data) {
         this.testo = testo;
         this.utente = utente;
         this.data = data;
@@ -41,11 +41,11 @@ public class Commento {
         this.utente = utente;
     }
 
-    public Date getData() {
+    public java.sql.Date getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(java.sql.Date data) {
         this.data = data;
     }
 }

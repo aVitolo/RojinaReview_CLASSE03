@@ -51,23 +51,23 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>userLoginCheck</servlet-name>
-        <servlet-class>controller.userLoginCheck</servlet-class>
+        <servlet-name>LoginUser</servlet-name>
+        <servlet-class>controller.LoginUser</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>userLoginCheck</servlet-name>
-        <url-pattern>/userLoginCheck</url-pattern>
+        <servlet-name>LoginUser</servlet-name>
+        <url-pattern>/LoginUser</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>userCreationCheckServlet</servlet-name>
-        <servlet-class>controller.userCreationCheckServlet</servlet-class>
+        <servlet-name>CreationUser</servlet-name>
+        <servlet-class>controller.CreationUser</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>userCreationCheckServlet</servlet-name>
-        <url-pattern>/userCreationCheck</url-pattern>
+        <servlet-name>CreationUser</servlet-name>
+        <url-pattern>/CreationUser</url-pattern>
     </servlet-mapping>
 
 </web-app>

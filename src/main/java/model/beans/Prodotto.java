@@ -6,7 +6,7 @@ public class Prodotto {
 
     private ArrayList<Commento> commenti;
     private ArrayList<Categoria> categorie;
-    private byte[] immagine;
+
     private int disponibilità;
     private int id;
     private int numeroVoti;
@@ -15,6 +15,7 @@ public class Prodotto {
     private String nome;
     private String descrizione;;
     private Sconto sconto;
+    private String immagine;
 
     /* Construct */
 
@@ -22,7 +23,7 @@ public class Prodotto {
         this.sconto = new Sconto();
     }
 
-    public Prodotto(ArrayList<Commento> commenti,ArrayList<Categoria> categorie, byte[] immagine, int disponibilità, int id, int numeroVoti, float mediaVoto, float prezzo, String nome, String descrizione, Sconto sconto) {
+    public Prodotto(ArrayList<Commento> commenti,ArrayList<Categoria> categorie, String immagine, int disponibilità, int id, int numeroVoti, float mediaVoto, float prezzo, String nome, String descrizione, Sconto sconto) {
         this.commenti = commenti;
         this.categorie = categorie;
         this.immagine = immagine;
@@ -86,11 +87,11 @@ public class Prodotto {
         this.disponibilità = disponibilità;
     }
 
-    public byte[] getImmagine() {
+    public String getImmagine() {
         return immagine;
     }
 
-    public void setImmagine(byte[] immagine) {
+    public void setImmagine(String immagine) {
         this.immagine = immagine;
     }
 

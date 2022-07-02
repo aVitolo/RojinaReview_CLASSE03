@@ -19,8 +19,8 @@ public class Notizia extends Articolo {
 
     public Notizia(ArrayList<Commento> commenti,
                    ArrayList<String> giochi,
-                   byte[] immagine,
-                   Date dataCaricamento,
+                   String immagine,
+                   java.sql.Date dataCaricamento,
                    Gioco gioco,
                    int id,
                    String testo,

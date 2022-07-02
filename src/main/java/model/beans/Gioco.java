@@ -7,14 +7,14 @@ public class Gioco {
 
     /* Attributes */
 
-    private byte[] copertina;
     private ArrayList<Piattaforma> piattaforme;
     private ArrayList<Tipologia> tipologie;
-    private Date dataDiRilascio;
+    private java.sql.Date dataDiRilascio;
     private float mediaVoto;
     private int numeroVoti;
     private String titolo;
     private String casaDiSviluppo;
+    private String copertina;
 
     /* Constructor */
 
@@ -25,8 +25,8 @@ public class Gioco {
                  String casaDiSviluppo,
                  int numeroVoti,
                  float mediaVoto,
-                 Date dataDiRilascio,
-                 byte[] copertina,
+                 java.sql.Date dataDiRilascio,
+                 String copertina,
                  ArrayList<Piattaforma> piattaforme,
                  ArrayList<Tipologia> tipologie) {
         this.titolo = titolo;
@@ -49,11 +49,11 @@ public class Gioco {
         this.titolo = titolo;
     }
 
-    public Date getDataDiRilascio() {
+    public java.sql.Date getDataDiRilascio() {
         return dataDiRilascio;
     }
 
-    public void setDataDiRilascio(Date dataDiRilascio) {
+    public void setDataDiRilascio(java.sql.Date dataDiRilascio) {
         dataDiRilascio = dataDiRilascio;
     }
 
@@ -81,11 +81,11 @@ public class Gioco {
         this.numeroVoti = numeroVoti;
     }
 
-    public byte[] getCopertina() {
+    public String getCopertina() {
         return copertina;
     }
 
-    public void setCopertina(byte[] copertina) {
+    public void setCopertina(String copertina) {
         this.copertina = copertina;
     }
 

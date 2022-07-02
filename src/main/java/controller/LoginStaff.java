@@ -1,6 +1,8 @@
 package controller;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,9 +18,10 @@ import model.utilities.GenericStaffDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 
+@WebServlet(name = "LoginStaff", value = "/LoginStaff")
 public class LoginStaff extends HttpServlet {
     private Utente tmp;
-    private String loginErrato = "Da Aggiungere" ;
+    private String loginErrato = "./staffLogin.jsp" ;
     private String homePage = "/Rojina_Review_war/home";
 
     @Override
@@ -46,7 +49,10 @@ public class LoginStaff extends HttpServlet {
             }
 
             if( staffDAO == null || (( tmp = staffDAO.doRetriveByEmail(email) ) == null)) {
-                response.sendRedirect(loginErrato);
+                String message = "Invalid email";
+                request.setAttribute("message", message);
+                RequestDispatcher dispatcher = request.getRequestDispatcher(loginErrato);
+                dispatcher.forward(request, response);
             }
             else {
                     String dbPass = ((Persona) tmp).getPassword();
@@ -55,13 +61,16 @@ public class LoginStaff extends HttpServlet {
                     if (password.equals(dbPass)) {
                         HttpSession session = request.getSession();
                         if (type == 0)
-                            session.setAttribute("utente",(Giornalista)tmp);
+                            session.setAttribute("giornalista",(Giornalista)tmp);
                         else if(type == 1)
-                            session.setAttribute("utente",(Amministratore)tmp);
+                            session.setAttribute("admin",(Amministratore)tmp);
 
                         response.sendRedirect(homePage);
                     } else {
-                        response.sendRedirect(loginErrato);
+                        String message = "Invalid password";
+                        request.setAttribute("message", message);
+                        RequestDispatcher dispatcher = request.getRequestDispatcher(loginErrato);
+                        dispatcher.forward(request, response);
                     }
                 }
         } catch (SQLException e) {
