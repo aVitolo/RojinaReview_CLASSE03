@@ -22,7 +22,7 @@ public class TipologiaDAO {
 
     public ArrayList<Tipologia> doRetrieveAll() throws SQLException {
         PreparedStatement ps =
-                    con.prepareStatement("SELECT DISTINCT tipologia FROM gioco_tipologia");
+                    con.prepareStatement("SELECT nome FROM tipologia");
         ResultSet rs = ps.executeQuery();
         ArrayList<Tipologia> tipologie = new ArrayList<>();
         while(rs.next())
@@ -41,6 +41,19 @@ public class TipologiaDAO {
 
         return tipologie;
 
+    }
+
+    public void doSave(String gioco, ArrayList<Tipologia> tipologie) throws SQLException {
+        PreparedStatement ps;
+        for(Tipologia t : tipologie){
+            ps = con.prepareStatement("INSERT INTO gioco_tipologia VALUES (?,?)");
+
+            ps.setString(1, gioco);
+            ps.setString(2, t.getNome());
+
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("Insert error");
+        }
     }
 
 }

@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.beans.Amministratore;
 import model.beans.Giornalista;
+import model.dao.RecensioneDAO;
 import model.utilities.Persona;
 import model.beans.Utente;
 import model.dao.AmministratoreDAO;
@@ -35,7 +36,7 @@ public class LoginStaff extends HttpServlet {
         password= Persona.calcolaHash(password);
 
         int type = -1;
-        Object tmp = null;
+        Persona tmp = null;
         GenericStaffDAO staffDAO = null;
         try {
             //Verifica se è stato richiesto un giornalista
@@ -48,22 +49,30 @@ public class LoginStaff extends HttpServlet {
                 type = 1;
             }
 
-            if( staffDAO == null || (( tmp = staffDAO.doRetriveByEmail(email) ) == null)) {
+            if( staffDAO == null || (( tmp = (Persona) staffDAO.doRetriveByEmail(email)) == null)) {
                 String message = "Invalid email";
                 request.setAttribute("message", message);
                 RequestDispatcher dispatcher = request.getRequestDispatcher(loginErrato);
                 dispatcher.forward(request, response);
             }
             else {
-                    String dbPass = ((Persona) tmp).getPassword();
+                    String dbPass =  tmp.getPassword();
 
                     //confronta le password
                     if (password.equals(dbPass)) {
                         HttpSession session = request.getSession();
                         if (type == 0)
-                            session.setAttribute("giornalista",(Giornalista)tmp);
+                        {
+                            Giornalista g = (Giornalista) tmp;
+                            session.setAttribute("giornalista", g);
+                        }
+
                         else if(type == 1)
+                        {
+                            Amministratore a = (Amministratore) tmp;
                             session.setAttribute("admin",(Amministratore)tmp);
+                        }
+
 
                         response.sendRedirect(homePage);
                     } else {

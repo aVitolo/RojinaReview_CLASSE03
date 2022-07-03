@@ -10,11 +10,11 @@
         <load-on-startup>0</load-on-startup>
     </servlet>
 
+
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>controller.HomeServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -24,7 +24,6 @@
         <servlet-name>RecensioneServlet</servlet-name>
         <servlet-class>controller.RecensioniServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>RecensioneServlet</servlet-name>
         <url-pattern>/reviews</url-pattern>
@@ -34,7 +33,6 @@
         <servlet-name>NotizieServlet</servlet-name>
         <servlet-class>controller.NotizieServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>NotizieServlet</servlet-name>
         <url-pattern>/news</url-pattern>
@@ -44,7 +42,6 @@
         <servlet-name>ShopServlet</servlet-name>
         <servlet-class>controller.ShopServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>ShopServlet</servlet-name>
         <url-pattern>/shop</url-pattern>
@@ -54,7 +51,6 @@
         <servlet-name>LoginUser</servlet-name>
         <servlet-class>controller.LoginUser</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>LoginUser</servlet-name>
         <url-pattern>/LoginUser</url-pattern>
@@ -64,10 +60,53 @@
         <servlet-name>CreationUser</servlet-name>
         <servlet-class>controller.CreationUser</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>CreationUser</servlet-name>
         <url-pattern>/CreationUser</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>journalistAreaServlet</servlet-name>
+        <servlet-class>controller.journalistAreaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>journalistAreaServlet</servlet-name>
+        <url-pattern>/journalistArea</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>journalistReviewsServlet</servlet-name>
+        <servlet-class>controller.journalistReviewsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>journalistReviewsServlet</servlet-name>
+        <url-pattern>/journalistReviews</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>journalistNewsServlet</servlet-name>
+        <servlet-class>controller.journalistNewsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>journalistNewsServlet</servlet-name>
+        <url-pattern>/journalistNews</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>journalistGamesServlet</servlet-name>
+        <servlet-class>controller.journalistGamesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>journalistGamesServlet</servlet-name>
+        <url-pattern>/journalistGames</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>insertReviewServlet</servlet-name>
+        <servlet-class>controller.insertReviewServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>insertReviewServlet</servlet-name>
+        <url-pattern>/insertReview</url-pattern>
+    </servlet-mapping>
 </web-app>

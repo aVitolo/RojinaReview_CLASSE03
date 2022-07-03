@@ -578,12 +578,11 @@ insert into Gioco_Tipologia values
 ("Halo Infinite","Multiplayer Online");
 
 insert into Recensione (testo, giornalista, gioco, titolo, voto, dataCaricamento, immagine) values
-("Dark souls è un gioco rpg...", 1,"Dark Souls","Recensione Dark Souls",8.7,"2011-10-22", "./images/reviews/review-darksouls.jpg"),
 ("Il seguito di Dark Souls I...", 1, "Dark Souls II","Dark Souls torna a colpire",9,"2014-04-11", "./images/reviews/review-darksoulsii.jpg"),
 ("Dark Souls 3 richiama i...", 3, "Dark Souls III","Recensione Dark Souls III",9,"2016-05-12", "./images/reviews/review-darksoulsiii.jpg"),
-("Sekiro nuova avventura diversa...", 5, "Sekiro: Shadows Die Twice","Il gioco From Software più difficile di sempre",9,"2019-04-22", "./images/reviews/review-sekiro.jpg"),
+("Sekiro nuova avventura diversa...", 1, "Sekiro: Shadows Die Twice","Il gioco From Software più difficile di sempre",9,"2019-04-22", "./images/reviews/review-sekiro.jpg"),
 ("Halo 2 fps...", 6, "Halo 2","Master Chief è tornato più in forma che mai",9.5,"2004-11-16", "./images/reviews/review-halo2.jpg"),
-("Halo 3 è indubbiamente...", 1, "Halo 3","Il ritorno di Master Chief",8.5 ,"2007-10-01", "./images/reviews/review-halo3.jpg"),
+("Halo 3 è indubbiamente...", 5, "Halo 3","Il ritorno di Master Chief",8.5 ,"2007-10-01", "./images/reviews/review-halo3.jpg"),
 ("Halo 4 si avvicina a cod...", 2,"Halo 4","Recensione Halo 4",9,"2022-01-13", "./images/reviews/review-halo4.jpg"),
 ("Halo 5 non lo so...", 6, "Halo 5","Recensione Halo 5: Guardians",8.8,"2022-01-3", "./images/reviews/review-halo5.jpg"),
 ("Halo infinite figurati...", 4, "Halo Infinite","Un ritorno epico",9,current_date(), "./images/reviews/review-haloinfinite.jpg");

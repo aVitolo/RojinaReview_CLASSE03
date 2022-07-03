@@ -1,6 +1,7 @@
 package model.dao;
 
 import model.beans.Piattaforma;
+import model.beans.Tipologia;
 import model.utilities.ConPool;
 
 import java.sql.Connection;
@@ -22,7 +23,7 @@ public class PiattaformaDAO {
 
     public ArrayList<Piattaforma> doRetrieveAll() throws SQLException {
         PreparedStatement ps =
-                    con.prepareStatement("SELECT DISTINCT piattaforma FROM gioco_piattaforma");
+                    con.prepareStatement("SELECT nome FROM piattaforma");
         ResultSet rs = ps.executeQuery();
         ArrayList <Piattaforma> piattaforme = new ArrayList<>();
         while (rs.next())
@@ -42,4 +43,16 @@ public class PiattaformaDAO {
         return piattaforme;
     }
 
+    public void doSave(String gioco, ArrayList<Piattaforma> piattaforme) throws SQLException {
+        PreparedStatement ps;
+        for(Piattaforma p : piattaforme){
+            ps = con.prepareStatement("INSERT INTO gioco_piattaforma VALUES (?,?)");
+
+            ps.setString(1, gioco);
+            ps.setString(2, p.getNome());
+
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("Insert error");
+        }
+    }
 }

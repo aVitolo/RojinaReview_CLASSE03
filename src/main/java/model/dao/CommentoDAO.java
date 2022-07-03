@@ -21,7 +21,7 @@ public class CommentoDAO {
         this.con = con;
     }
 
-    //table: Prodotto-Recensione-Notizia
+    /*table: Prodotto-Recensione-Notizia*/
     public ArrayList<Commento> getCommentById(int id, String table) throws SQLException {
         String commentTable = "Commento".concat(table);
         String query = "SELECT testo, dataScrittura, utente FROM "+commentTable+" "+"WHERE "+table.toLowerCase(Locale.ROOT)+"=?";

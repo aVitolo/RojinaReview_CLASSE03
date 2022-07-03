@@ -29,7 +29,7 @@
             </c:when>
             <c:when test="${sessionScope.get('giornalista') != null}">
                 <a href="">Bentornato, <c:out value='${giornalista.nome}'/></a>
-                <a href=""><img class="icon" src="images/utility/journalistIcon.png"></a>
+                <a href="/Rojina_Review_war/journalistArea"><img class="icon" src="images/utility/journalistIcon.png"></a>
             </c:when>
             <c:when test="${sessionScope.get('admin') != null}">
                 <a href="">Bentornato, <c:out value='${admin.nome}'/></a>

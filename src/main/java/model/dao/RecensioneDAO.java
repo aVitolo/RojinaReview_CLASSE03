@@ -2,11 +2,9 @@ package model.dao;
 
 import model.beans.Recensione;
 import model.utilities.ConPool;
-import model.utilities.GiocoDAO;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class RecensioneDAO {
     private Connection con;
@@ -35,7 +33,7 @@ public class RecensioneDAO {
             r.setDataCaricamento(rs.getDate(8));
             r.setGioco(new GiocoDAO(con).doRetrieveByTitle(rs.getString(9)));
             r.setImmagine(rs.getString(10));
-            r.setCommenti(new CommentoDAO(con).getCommentById(r.getId(),"recensione"));
+            r.setCommenti(new CommentoDAO(con).getCommentById(r.getId(),"Recensione"));
             return r;
         }
 
@@ -66,12 +64,39 @@ public class RecensioneDAO {
             r.setDataCaricamento(rs.getDate(8));
             //r.setGioco(new GiocoDAO(con).doRetrieveByTitle(rs.getString(9)));
             r.setImmagine(rs.getString(10));
-            //r.setCommenti(new CommentoDAO(con).getCommentById(r.getId(),"commentorecensione"));
+            r.setCommenti(new CommentoDAO(con).getCommentById(r.getId(),"Recensione"));
             recensioni.add(r);
         }
 
         return recensioni;
 
+    }
+
+    public ArrayList<Recensione> doRetrieveByIdJournalist(int id) throws SQLException {
+        ArrayList<Recensione> recensioni = new ArrayList<>();
+        PreparedStatement ps = con.prepareStatement("SELECT g.nome, g.cognome, r.id, r.titolo, r.testo, r.voto, r.dataCaricamento," +
+                "r.gioco, r.immagine FROM recensione r JOIN giornalista g on r.giornalista = g.id " +
+                "WHERE r.giornalista=? " +
+                "ORDER BY r.dataCaricamento");
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next())
+        {
+            Recensione r = new Recensione();
+            r.setGiornalista(rs.getString(1)+" "+rs.getString(2));
+            r.setId(rs.getInt(3));
+            r.setTitolo(rs.getString(4));
+            r.setTesto(rs.getString(5));
+            r.setVoto(rs.getFloat(6));
+            r.setDataCaricamento(rs.getDate(7));
+            r.setGioco(new GiocoDAO(con).doRetrieveByTitle(rs.getString(8)));
+            r.setImmagine(rs.getString(9));
+            r.setCommenti(new CommentoDAO(con).getCommentById(r.getId(),"Recensione"));
+            recensioni.add(r);
+        }
+
+        return recensioni;
     }
 
     public void doSave(Recensione r, int idGiornalista) throws SQLException {
