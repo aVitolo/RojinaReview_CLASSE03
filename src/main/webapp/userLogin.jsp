@@ -27,7 +27,7 @@
         </div>
         <input type="submit" value="Login">
         <div class="register_link">
-            <p>Non sei Registrato? <a href="./userCreation.jsp">Registrati</a> </p>
+            <p>Non sei Registrato? <a href="registerUser.jsp">Registrati</a> </p>
         </div>
     </form>
 </div>

@@ -12,7 +12,11 @@ public abstract class Persona {
     private String password;
 
     public Persona(){
+    }
 
+    public Persona(String email, String password){
+        this.email = email;
+        this.password = password;
     }
 
     public Persona(String nome, String cognome, String email, String password) throws UnsupportedEncodingException {

@@ -70,6 +70,19 @@ public class UtenteDAO {
 
         return null;
     }
+
+    public boolean doInsertUser(Utente user) throws SQLException {
+        PreparedStatement ps =
+                con.prepareStatement("INSERT INTO Utente VALUES(?,?,?,null,null,null,null)");
+        ps.setString(1,user.getEmail());
+        ps.setString(2,user.getNickname());
+        ps.setString(3,user.getPassword());
+        int i = ps.executeUpdate();
+        if( i == 1)
+            return true;
+        else
+            return false;
+    }
 }
 
 

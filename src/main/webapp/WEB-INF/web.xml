@@ -49,7 +49,7 @@
 
     <servlet>
         <servlet-name>LoginUser</servlet-name>
-        <servlet-class>controller.LoginUser</servlet-class>
+        <servlet-class>controller.logins.LoginUser</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginUser</servlet-name>
@@ -57,12 +57,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>CreationUser</servlet-name>
-        <servlet-class>controller.CreationUser</servlet-class>
+        <servlet-name>RegisterUser</servlet-name>
+        <servlet-class>controller.registrations.RegistrationUser</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>CreationUser</servlet-name>
-        <url-pattern>/CreationUser</url-pattern>
+        <servlet-name>RegisterUser</servlet-name>
+        <url-pattern>/RegisterUser</url-pattern>
     </servlet-mapping>
 
     <servlet>
