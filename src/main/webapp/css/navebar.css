@@ -56,6 +56,12 @@ header .bar .logo{
     padding:  0px 10px;
 }
 
+.icon{
+    max-height: 50px;
+    align-self: center;
+    padding: 0px 10px;
+}
+
 @media screen and (max-width: 768px){
     header{
         display: flex;
