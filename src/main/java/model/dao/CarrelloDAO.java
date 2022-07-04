@@ -31,7 +31,7 @@ public class CarrelloDAO {
         ResultSet rs = ps.executeQuery();
         ArrayList<Prodotto> prodotti = new ArrayList<>();
         while (rs.next())
-            prodotti.add(new ProdottoDAO(con).doRetriveById(rs.getInt(1)));
+            prodotti.add(new ProdottoDAO(con).doRetrieveById(rs.getInt(1)));
         float totale = 0;
         con.prepareStatement("SELECT totale FROM carrello WHERE utente=?");
         ps.setString(1, user);

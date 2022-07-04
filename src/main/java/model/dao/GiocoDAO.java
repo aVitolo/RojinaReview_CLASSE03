@@ -82,6 +82,17 @@ public class GiocoDAO {
 
     }
 
+    public ArrayList<String> getGamesNames() throws SQLException {
+        ArrayList<String> games = new ArrayList<>();
+        PreparedStatement ps = con.prepareStatement("SELECT titolo FROM Gioco");
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next())
+            games.add(rs.getString("titolo"));
+
+        return games;
+    }
+
     public void doSave(Gioco g) throws SQLException {
         PreparedStatement ps = con.prepareStatement("INSERT INTO gioco VALUES" +
                 "(?, ?, ?, ?, ?, ?)");
@@ -92,8 +103,7 @@ public class GiocoDAO {
         ps.setFloat(4, g.getMediaVoto());
         ps.setInt(5, g.getNumeroVoti());
         ps.setString(6, g.getCopertina());
-        new TipologiaDAO(con).doSave(g.getTitolo(), g.getTipologie());
-        new PiattaformaDAO(con).doSave(g.getTitolo(), g.getPiattaforme());
+
 
 
         if(ps.executeUpdate() != 1)

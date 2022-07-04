@@ -54,7 +54,7 @@ public class Gioco {
     }
 
     public void setDataDiRilascio(java.sql.Date dataDiRilascio) {
-        dataDiRilascio = dataDiRilascio;
+        this.dataDiRilascio = dataDiRilascio;
     }
 
     public String getCasaDiSviluppo() {

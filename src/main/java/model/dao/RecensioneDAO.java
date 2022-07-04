@@ -62,7 +62,7 @@ public class RecensioneDAO {
             r.setTesto(rs.getString(6));
             r.setVoto(rs.getFloat(7));
             r.setDataCaricamento(rs.getDate(8));
-            //r.setGioco(new GiocoDAO(con).doRetrieveByTitle(rs.getString(9)));
+            r.setGioco(new GiocoDAO(con).doRetrieveByTitle(rs.getString(9)));
             r.setImmagine(rs.getString(10));
             r.setCommenti(new CommentoDAO(con).getCommentById(r.getId(),"Recensione"));
             recensioni.add(r);
@@ -77,7 +77,7 @@ public class RecensioneDAO {
         PreparedStatement ps = con.prepareStatement("SELECT g.nome, g.cognome, r.id, r.titolo, r.testo, r.voto, r.dataCaricamento," +
                 "r.gioco, r.immagine FROM recensione r JOIN giornalista g on r.giornalista = g.id " +
                 "WHERE r.giornalista=? " +
-                "ORDER BY r.dataCaricamento");
+                "ORDER BY r.dataCaricamento DESC ");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
 

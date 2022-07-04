@@ -26,6 +26,9 @@
             <div class="journalistImage">
                 <img src="${sessionScope.get('giornalista').immagine}", alt="image">
             </div>
+            <div class="Logout">
+                <a href="/Rojina_Review_war/journalistLogout">Logout</a>
+            </div>
         </div>
     </div>
 

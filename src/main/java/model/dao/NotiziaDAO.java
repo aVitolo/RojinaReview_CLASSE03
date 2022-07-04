@@ -62,7 +62,7 @@ public class NotiziaDAO {
             n.setDataCaricamento(rs.getDate(6));
             n.setImmagine(rs.getString(7));
             n.setCommenti(new CommentoDAO(con).getCommentById(n.getId(),"Notizia"));
-            //n.setGiochi(new GiocoDAO(con).getGiocoByIdNotizia(n.getId()));
+            n.setGiochi(new GiocoDAO(con).getGiocoByIdNotizia(n.getId()));
             notizie.add(n);
         }
 
@@ -72,7 +72,7 @@ public class NotiziaDAO {
     public ArrayList<Notizia> doRetrieveByIdJournalist(int id) throws SQLException {
         ArrayList<Notizia> notizie = new ArrayList<>();
         PreparedStatement ps = con.prepareStatement("SELECT g.Nome,g.Cognome, n.id, n.titolo, n.testo, n.dataCaricamento, n.immagine " +
-                "FROM notizia n JOIN giornalista g on g.id = n.giornalista WHERE n.giornalista=?");
+                "FROM notizia n JOIN giornalista g on g.id = n.giornalista WHERE n.giornalista=? ORDER BY n.dataCaricamento DESC");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
 
@@ -105,6 +105,27 @@ public class NotiziaDAO {
 
         if(ps.executeUpdate() != 1)
             throw new RuntimeException("Insert error");
+    }
+
+    //fa l'insert nella table gioco_notizia per i giochi menzionati
+    public void doSaveMentioned(ArrayList<String> mentioned, int idGiornalista) throws SQLException {
+        int idNotizia;
+        PreparedStatement ps = con.prepareStatement("SELECT id FROM Notizia ORDER BY id DESC LIMIT 1"); //prende l'id della notizia appena inserita in insertNewServlet
+        ResultSet rs = ps.executeQuery();
+        if(rs.next())
+            idNotizia = rs.getInt("id");
+        else return;
+
+        for(String s : mentioned){
+            ps = con.prepareStatement("INSERT INTO gioco_notizia (giornalista, notizia, gioco) VALUES (?, ?, ?)");
+
+            ps.setInt(1, idGiornalista);
+            ps.setInt(2, idNotizia);
+            ps.setString(3, s);
+
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("Insert error");
+        }
     }
 
 }

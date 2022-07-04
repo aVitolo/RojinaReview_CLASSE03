@@ -11,7 +11,7 @@
 <%@ include file="/WEB-INF/results/journalistArea.jsp" %>
     <div class="menu">
         <div class="insertRecensione">
-            <form name="insertRecensione" action="insertReviewServlet" method="post" enctype="multipart/form-data">
+            <form name="insertRecensione" action="/Rojina_Review_war/insertReview" method="post" enctype="multipart/form-data">
                 <label for="titolo">Titolo: </label>
                 <input type="text" id="titolo" name="titolo">
                 <label for="gioco">Gioco: </label>
@@ -29,14 +29,16 @@
 
         <section class="articoli">
             <c:forEach items="${requestScope['recensioniGiornalista']}" var="articolo">
-                <div class = "articolo">
-                    <img src = "./images/utility/back.jpg", alt = "copertina" decoding="async">
-                    <div class = "articolo-content">
-                        <h2>${articolo.titolo}</h2>
-                        <p>${fn:substring(articolo.testo, 0, 50)}</p>
-                        <p class="voto">${articolo.voto}</p>
+                <a href="/Rojina_Review_war/getResource?type=recensione&id=${articolo.id}">
+                    <div class = "articolo">
+                        <img src = "./images/utility/back.jpg", alt = "copertina" decoding="async">
+                        <div class = "articolo-content">
+                            <h2>${articolo.titolo}</h2>
+                            <p>${fn:substring(articolo.testo, 0, 50)}</p>
+                            <p class="voto">${articolo.voto}</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </c:forEach>
         </section>
     </div>

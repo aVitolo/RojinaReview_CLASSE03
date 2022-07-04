@@ -9,14 +9,17 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<% Notizia n = (Notizia) request.getAttribute("recensione");
+<% Notizia n = (Notizia) request.getAttribute("notizia");
     ArrayList<Commento> commenti = (ArrayList<Commento>) request.getAttribute("commenti"); %>
 <head>
     <title><%=n.getTitolo()%></title>
+    <link rel="stylesheet" href="css/navebar.css">
+    <link rel="stylesheet" href="css/foot.css">
+    <link rel="stylesheet" href="css/master.css">
 </head>
 
 <body>
-    <%@ include file="../../navebar.html" %>
+    <%@ include file="navebar.jsp" %>
     <section id="main">
         <div id="titleSection">
             <h1 id="newTitle"><%=n.getTitolo()%></h1>
@@ -65,6 +68,6 @@
         <%}%>
     </section>
 
-    <%@ include file="../../footer.html" %>
+    <%@ include file="../../html/footer.html" %>
 </body>
 </html>

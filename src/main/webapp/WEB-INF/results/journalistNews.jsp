@@ -11,7 +11,7 @@
 <%@ include file="/WEB-INF/results/journalistArea.jsp" %>
 <div class="menu">
     <div class="insertNotizia">
-        <form name="insertNotizia" action="insertNewServlet" method="post" enctype="multipart/form-data">
+        <form name="insertNotizia" action="/Rojina_Review_war/insertNew" method="post" enctype="multipart/form-data">
             <label for="titolo">Titolo: </label>
             <input type="text" id="titolo" name="titolo">
             <label for="testo">Testo: </label>
@@ -27,13 +27,15 @@
 
     <section class="articoli">
         <c:forEach items="${requestScope['notizieGiornalista']}" var="articolo">
-            <div class = "articolo">
-                <img src = "./images/utility/back.jpg", alt = "copertina" decoding="async">
-                <div class = "articolo-content">
-                    <h2>${articolo.titolo}</h2>
-                    <p>${fn:substring(articolo.testo, 0, 50)}</p>
+            <a href="/Rojina_Review_war/getResource?type=notizia&id=${articolo.id}">
+                <div class = "articolo">
+                    <img src = "./images/utility/back.jpg", alt = "copertina" decoding="async">
+                    <div class = "articolo-content">
+                        <h2>${articolo.titolo}</h2>
+                        <p>${fn:substring(articolo.testo, 0, 50)}</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </c:forEach>
     </section>
 </div>

@@ -52,7 +52,7 @@ public class OrdineDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Ordine.ProdottoOrdine p = o.new ProdottoOrdine();
-                p.setProdotto(new ProdottoDAO(con).doRetriveById(rs.getInt(1)));
+                p.setProdotto(new ProdottoDAO(con).doRetrieveById(rs.getInt(1)));
                 p.setPrezzoAcquisto(rs.getFloat(2));
                 p.setQuantita(rs.getInt(3));
                 o.getProdotti().add(p);

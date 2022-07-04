@@ -80,6 +80,17 @@ public class ContextSetUpingServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
         config.getServletContext().setAttribute("piattaforme",piattaforme);
+
+        ArrayList<String> giochi;
+        GiocoDAO gcDAO;
+        try {
+            gcDAO = new GiocoDAO();
+            giochi = gcDAO.getGamesNames();
+        } catch (SQLException e) {
+            System.out.println("Gioco ERROR");
+            throw new RuntimeException(e);
+        }
+        config.getServletContext().setAttribute("nomiGiochi", giochi);
     }
 
     @Override

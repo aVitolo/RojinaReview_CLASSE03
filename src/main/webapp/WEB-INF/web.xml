@@ -109,4 +109,41 @@
         <servlet-name>insertReviewServlet</servlet-name>
         <url-pattern>/insertReview</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>insertNewServlet</servlet-name>
+        <servlet-class>controller.insertNewServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>insertNewServlet</servlet-name>
+        <url-pattern>/insertNew</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>insertGameServlet</servlet-name>
+        <servlet-class>controller.insertGameServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>insertGameServlet</servlet-name>
+        <url-pattern>/insertGame</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>journalistLogoutServlet</servlet-name>
+        <servlet-class>controller.journalistLogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>journalistLogoutServlet</servlet-name>
+        <url-pattern>/journalistLogout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>getSingleResourceServlet</servlet-name>
+        <servlet-class>controller.getSingleResourceServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getSingleResourceServlet</servlet-name>
+        <url-pattern>/getResource</url-pattern>
+    </servlet-mapping>
+
 </web-app>

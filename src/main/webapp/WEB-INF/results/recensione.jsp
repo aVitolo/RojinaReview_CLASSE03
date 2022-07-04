@@ -13,10 +13,13 @@
    ArrayList<Commento> commenti = (ArrayList<Commento>) request.getAttribute("commenti"); %>
 <head>
     <title><%=r.getGioco().getTitolo()%> - <%=r.getTitolo()%></title>
+    <link rel="stylesheet" href="css/navebar.css">
+    <link rel="stylesheet" href="css/foot.css">
+    <link rel="stylesheet" href="css/master.css">
 </head>
 
 <body>
-    <%@ include file="../../navebar.html" %>
+    <%@ include file="navebar.jsp" %>
     <section id="main">
         <div id="titleSection">
             <h1 id="gameTitle"><%=r.getGioco().getTitolo()%></h1>
@@ -72,6 +75,6 @@
             <%}%>
     </section>
 
-    <%@ include file="../../footer.html" %>
+    <%@ include file="../../html/footer.html" %>
 </body>
 </html>

@@ -71,7 +71,7 @@ public class insertReviewServlet extends HttpServlet {
         if(filecontent != null)
             filecontent.close();
 
-        request.getRequestDispatcher(result).include(request, response);
+        response.sendRedirect(result);
 
     }
 
