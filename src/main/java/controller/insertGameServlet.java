@@ -8,6 +8,7 @@ import model.dao.GiocoDAO;
 import model.dao.PiattaformaDAO;
 import model.dao.RecensioneDAO;
 import model.dao.TipologiaDAO;
+import model.utilities.Utils;
 
 import java.io.*;
 import java.sql.Date;
@@ -29,7 +30,6 @@ public class insertGameServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String result = "/Rojina_Review_war/journalistGames";
-        String pathStore = "../../webapp/images/games"; //path in cui salvare l'immagine
         ServletContext context = request.getServletContext();
         ArrayList<Tipologia> tipologie = (ArrayList<Tipologia>) context.getAttribute("tipologie");
         ArrayList<Piattaforma> piattaforme = (ArrayList<Piattaforma>) context.getAttribute("piattaforme");
@@ -48,7 +48,6 @@ public class insertGameServlet extends HttpServlet {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        g.setCopertina(pathStore);
 
         g.setTipologie(new ArrayList<>());
         for(Tipologia t : tipologie)
@@ -61,6 +60,12 @@ public class insertGameServlet extends HttpServlet {
             if(p.getNome().equalsIgnoreCase(request.getParameter(p.getNome())))
                 g.getPiattaforme().add(p);
 
+        Part filePart = request.getPart("copertina");
+        String imageType = "games";
+        String fileName = g.getTitolo()+".jpg";
+        g.setCopertina(Utils.saveImageWar(imageType, fileName, filePart));
+        Utils.saveImageFileSystem(imageType, fileName, filePart);
+
         try {
             new GiocoDAO().doSave(g);
             new TipologiaDAO().doSave(g.getTitolo(), g.getTipologie());
@@ -68,29 +73,6 @@ public class insertGameServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        Part filePart = request.getPart("copertina");
-        String fileName = g.getTitolo().replaceAll("\\s+", "").toLowerCase(Locale.ROOT);
-
-        OutputStream out = null;
-        InputStream filecontent = null;
-
-
-
-        out = new FileOutputStream(new File(fileName));
-        filecontent = filePart.getInputStream();
-
-        int read = 0;
-        byte[] bytes = new byte[1024];
-
-        while((read = filecontent.read(bytes)) != -1)
-            out.write(bytes, 0, read);
-
-        if(out != null)
-            out.close();
-
-        if(filecontent != null)
-            filecontent.close();
 
         //aggiornamento lista giochi nel context
         ArrayList<String> allGames = (ArrayList<String>) request.getServletContext().getAttribute("nomiGiochi");

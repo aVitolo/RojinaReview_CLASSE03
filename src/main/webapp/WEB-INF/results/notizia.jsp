@@ -1,12 +1,8 @@
 <%@ page import="model.beans.Notizia" %>
 <%@ page import="model.beans.Commento" %>
-<%@ page import="java.util.ArrayList" %><%--
-  Created by IntelliJ IDEA.
-  User: felin
-  Date: 23/06/2022
-  Time: 17:15
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.ArrayList" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <% Notizia n = (Notizia) request.getAttribute("notizia");
@@ -26,7 +22,7 @@
         </div>
 
         <div id="imageSection">
-            <img id="imageNew" src="data:image/jpg;base64, <%=n.getImmagine()%>">
+            <img id="imageNew" src=<%=n.getImmagine()%>>
         </div>
     </section>
 

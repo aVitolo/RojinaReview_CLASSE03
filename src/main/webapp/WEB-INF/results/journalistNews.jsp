@@ -29,7 +29,7 @@
         <c:forEach items="${requestScope['notizieGiornalista']}" var="articolo">
             <a href="/Rojina_Review_war/getResource?type=notizia&id=${articolo.id}">
                 <div class = "articolo">
-                    <img src = "./images/utility/back.jpg", alt = "copertina" decoding="async">
+                    <img src = "${articolo.immagine}", alt = "copertina" decoding="async">
                     <div class = "articolo-content">
                         <h2>${articolo.titolo}</h2>
                         <p>${fn:substring(articolo.testo, 0, 50)}</p>

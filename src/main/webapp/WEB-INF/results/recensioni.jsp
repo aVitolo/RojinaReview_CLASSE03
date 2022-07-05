@@ -18,14 +18,16 @@
 
     <section class="articoli">
         <c:forEach items="${applicationScope['recensioni']}" var="articolo">
-            <div class = "articolo">
-                <img src = "./images/utility/back.jpg" alt = "copertina" decoding="async">
-                <div class = "articolo-content">
-                    <h2>${articolo.titolo}</h2>
-                    <p>${fn:substring(articolo.testo, 0, 50)}</p>
-                    <p class="voto">${articolo.voto}</p>
+            <a href="/Rojina_Review_war/getResource?type=recensione&id=${articolo.id}">
+                <div class = "articolo">
+                    <img src = "${articolo.immagine}" alt = "copertina" decoding="async">
+                    <div class = "articolo-content">
+                        <h2>${articolo.titolo}</h2>
+                        <p>${fn:substring(articolo.testo, 0, 50)}</p>
+                        <p class="voto">${articolo.voto}</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </c:forEach>
     </section>
 </section>

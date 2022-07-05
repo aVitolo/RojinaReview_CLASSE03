@@ -8,6 +8,7 @@ import model.beans.Giornalista;
 import model.beans.Recensione;
 import model.dao.RecensioneDAO;
 import model.dao.GiocoDAO;
+import model.utilities.Utils;
 
 import java.io.*;
 import java.sql.SQLException;
@@ -25,7 +26,6 @@ public class insertReviewServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String result = "/Rojina_Review_war/journalistReviews";
-        String pathStore = "../../webapp/images/reviews"; //path in cui salvare l'immagine
         Giornalista g = (Giornalista) request.getSession().getAttribute("giornalista");
         String nomeG = g.getNome()+" "+g.getCognome();
 
@@ -40,7 +40,12 @@ public class insertReviewServlet extends HttpServlet {
         r.setTitolo(request.getParameter("titolo"));
         r.setVoto(Float.parseFloat(request.getParameter("voto")));
         r.setDataCaricamento(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
-        r.setImmagine(pathStore);
+
+        Part filePart = request.getPart("immagine");
+        String imageType = "reviews";
+        String fileName = "review-"+r.getGioco().getTitolo()+".jpg";
+        r.setImmagine(Utils.saveImageWar(imageType, fileName, filePart));
+        Utils.saveImageFileSystem(imageType, fileName, filePart);
 
         try {
             new RecensioneDAO().doSave(r, g.getId());
@@ -48,28 +53,8 @@ public class insertReviewServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        Part filePart = request.getPart("immagine");
-        String fileName = "review-"+r.getGioco().getTitolo().toLowerCase(Locale.ROOT)+".jpg";
-
-        OutputStream out = null;
-        InputStream filecontent = null;
 
 
-
-        out = new FileOutputStream(new File(fileName));
-        filecontent = filePart.getInputStream();
-
-        int read = 0;
-        byte[] bytes = new byte[1024];
-
-        while((read = filecontent.read(bytes)) != -1)
-            out.write(bytes, 0, read);
-
-        if(out != null)
-            out.close();
-
-        if(filecontent != null)
-            filecontent.close();
 
         response.sendRedirect(result);
 

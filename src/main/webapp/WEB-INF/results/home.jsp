@@ -15,7 +15,7 @@
         <section class="hot">
             <img src = "./images/utility/logoNT.png" alt = "logo" class="logo" decoding="async">
             <section class="articolo">
-                <img src = "./images/utility/back.jpg" alt = "copertina" decoding="async">
+                <img src = "${copertina.immagine}" alt = "copertina" decoding="async">
                 <div class = "articolo-content">
                     <h3><c:out value="${copertina.getClass().simpleName}"/></h3>
                     <h2><c:out value='${copertina.titolo}'/></h2>
@@ -33,7 +33,7 @@
         <section class="articoli">
                 <c:forEach items="${articoli}" var="articolo">
                     <div class = "articolo">
-                        <img src = "./images/utility/back.jpg" alt = "copertina" decoding="async">
+                        <img src = "${articolo.immagine}" alt = "copertina" decoding="async">
                         <div class = "articolo-content">
                             <h3>${articolo.getClass().simpleName}</h3>
                             <h2>${articolo.titolo}</h2>

@@ -1,12 +1,8 @@
 <%@ page import="model.beans.Recensione" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="model.beans.Commento" %><%--
-  Created by IntelliJ IDEA.
-  User: felin
-  Date: 21/06/2022
-  Time: 15:38
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="model.beans.Commento" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <% Recensione r = (Recensione) request.getAttribute("recensione");
@@ -27,7 +23,7 @@
         </div>
 
         <div id="imageSection">
-            <img id="imageReview" src="data:image/jpg;base64, <%=r.getImmagine()%>">
+            <img id="imageReview" src=<%=r.getImmagine()%>>
         </div>
     </section>
 

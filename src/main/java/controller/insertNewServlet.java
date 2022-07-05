@@ -9,6 +9,7 @@ import model.beans.Recensione;
 import model.dao.GiocoDAO;
 import model.dao.NotiziaDAO;
 import model.dao.RecensioneDAO;
+import model.utilities.Utils;
 
 import java.io.*;
 import java.sql.SQLException;
@@ -27,7 +28,6 @@ public class insertNewServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String result = "/Rojina_Review_war/journalistNews";
-        String pathStore = "../../webapp/images/news"; //path in cui salvare l'immagine
         ArrayList<String> allGames = (ArrayList<String>) request.getServletContext().getAttribute("nomiGiochi");
         Giornalista g = (Giornalista) request.getSession().getAttribute("giornalista");
         String nomeG = g.getNome()+" "+g.getCognome();
@@ -37,37 +37,20 @@ public class insertNewServlet extends HttpServlet {
         n.setTitolo(request.getParameter("titolo"));
         n.setTesto(request.getParameter("testo"));
         n.setDataCaricamento(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
-        n.setImmagine(pathStore);
         n.setGiochi(parseGames(request.getParameter("giochi"), allGames));
+
+        Part filePart = request.getPart("immagine");
+        String imageType = "news";
+        String fileName = "new-" + n.getTitolo() + ".jpg";
+        n.setImmagine(Utils.saveImageWar(imageType, fileName, filePart));
+        Utils.saveImageFileSystem(imageType, fileName, filePart);
+        
         try {
             new NotiziaDAO().doSave(n, g.getId());
             new NotiziaDAO().doSaveMentioned(n.getGiochi(), g.getId());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        Part filePart = request.getPart("immagine");
-        String fileName = "new-"+n.getTitolo().toLowerCase(Locale.ROOT)+".jpg";
-
-        OutputStream out = null;
-        InputStream filecontent = null;
-
-
-
-        out = new FileOutputStream(new File(fileName));
-        filecontent = filePart.getInputStream();
-
-        int read = 0;
-        byte[] bytes = new byte[1024];
-
-        while((read = filecontent.read(bytes)) != -1)
-            out.write(bytes, 0, read);
-
-        if(out != null)
-            out.close();
-
-        if(filecontent != null)
-            filecontent.close();
 
         response.sendRedirect(result);
 

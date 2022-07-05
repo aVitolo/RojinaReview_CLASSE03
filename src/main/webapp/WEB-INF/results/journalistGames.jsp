@@ -40,7 +40,7 @@
     <section class="articoli">
         <c:forEach items="${requestScope['giochiGiornalista']}" var="articolo">
             <div class = "articolo">
-                <img src = "./images/utility/back.jpg", alt = "copertina" decoding="async">
+                <img src = "${articolo.copertina}", alt = "copertina" decoding="async">
                 <div class = "articolo-content">
                     <h2>${articolo.titolo}</h2>
                     <p>${articolo.casaDiSviluppo}</p>
