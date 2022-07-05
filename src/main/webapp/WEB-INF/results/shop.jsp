@@ -19,15 +19,13 @@
 
     <section class="articoli">
         <c:forEach items="${applicationScope['prodotti']}" var="prodotto">
-            <a href="/Rojina_Review_war/getResource?type=prodotto&id=${prodotto.id}">
-                <div class = "articolo">
-                    <img src = "${prodotto.immagine}" alt = "copertina" decoding="async">
-                    <div class = "articolo-content">
-                        <h2>${prodotto.nome}</h2>
-                        <p>${prodotto.prezzo} $</p>
-                    </div>
+            <div class = "articolo">
+                <img src = "${prodotto.immagine}" alt = "copertina" decoding="async">
+                <div class = "articolo-content">
+                    <h2>${prodotto.nome}</h2>
+                    <p>${prodotto.prezzo} $</p>
                 </div>
-            </a>
+            </div>
         </c:forEach>
     </section>
 

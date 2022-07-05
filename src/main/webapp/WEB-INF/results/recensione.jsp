@@ -12,8 +12,10 @@
     <link rel="stylesheet" href="css/navebar.css">
     <link rel="stylesheet" href="css/foot.css">
     <link rel="stylesheet" href="css/master.css">
-</head>
 
+
+
+</head>
 <body>
     <%@ include file="navebar.jsp" %>
     <section id="main">
@@ -68,7 +70,7 @@
                     <%=c.getData()%>
                 </div>
             </div>
-            <%}%>
+0.            <%}%>
     </section>
 
     <%@ include file="../../html/footer.html" %>

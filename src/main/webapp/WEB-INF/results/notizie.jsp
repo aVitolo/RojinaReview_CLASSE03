@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="./css/foot.css">
     <link rel="stylesheet" href="./css/navebar.css">
     <link rel="stylesheet" href="./css/master.css">
+
 </head>
 <body>
 <%@ include file="/WEB-INF/results/navebar.jsp" %>
 
-    <section class="notizie">
+    <section class="notizie" id="wrap">
 
         <h1>Latest News</h1>
 
@@ -38,5 +39,53 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="/Rojina_Review_war/js/navebar.js"></script>
 <script type="text/javascript" src="/Rojina_Review_war/js/filter.js"></script>
+<script type="text/javascript">
+    function yHandler(){
+        var wrap = document.getElementById('wrap');
+        var contentHeight = wrap.offsetHeight;
+        var yOffset = window.pageYOffset;
+        var y = yOffset + window.innerHeight;
+        if(y >= contentHeight) {
+            $(document).ready(function () {
+                $.getJSON({
+                    url: "/Rojina_Review_war/news",
+                    type: "post",
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: {"lastID": this.lastID},
+                    error: function (xhr, status, error) {
+                        alert("error");
+                    },
+                    success: function (data) {
+                        var articoli = document.getElementsByClassName('articoli')[0];
+                        var newA ="";
+                        for (d in data) {
+                            var articolo = data[d];
+                            var titolo = articolo.titolo;
+                            var id = articolo["id"];
+                            var immagine= articolo.immagine;
+                            var testo = articolo.testo;
+                            var a =
+                                "<a href='/Rojina_Review_war/getResource?type=notizia&id='"+ id +"'>"+
+                                "<div class = \"articolo\">" +
+                                "<img src = '" +immagine +"' alt =\"copertina\" decoding=\"async\">" +
+                                "<div class = \"articolo-content\">" +
+                                "<h2>" + titolo + "</h2>" +
+                                "<p>" + testo + "</p>" +
+                                "</div>" +
+                                "</div>" +
+                                "</a>";
+                            newA += a;
+                        }
+                        articoli.innerHTML = articoli.innerHTML + newA;
+                    }
+                });
+            });
+        }
+    }
+
+    window.onscroll = yHandler;
+
+</script>
 </body>
 </html>

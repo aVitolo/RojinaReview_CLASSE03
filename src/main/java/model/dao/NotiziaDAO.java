@@ -128,4 +128,31 @@ public class NotiziaDAO {
         }
     }
 
+    public ArrayList<Notizia> doRetrieveOnScroll(int lastID) throws SQLException {
+        ArrayList<Notizia> notizie = new ArrayList<>();
+
+        PreparedStatement ps =
+                con.prepareStatement("SELECT g.Nome,g.Cognome, n.id, n.titolo, n.testo, n.dataCaricamento, n.immagine " +
+                        "FROM notizia n JOIN giornalista g on g.id = n.giornalista " +
+                      //  "WHERE n.id < ?"+
+                        "ORDER BY n.DataCaricamento DESC LIMIT 10");
+
+        //ps.setInt(1, lastID);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Notizia n = new Notizia();
+            n.setGiornalista(rs.getString(1)+" "+rs.getString(2));
+            n.setId(rs.getInt(3));
+            n.setTitolo(rs.getString(4));
+            n.setTesto(rs.getString(5));
+            n.setDataCaricamento(rs.getDate(6));
+            n.setImmagine(rs.getString(7));
+            n.setCommenti(new CommentoDAO(con).getCommentById(n.getId(),"Notizia"));
+            n.setGiochi(new GiocoDAO(con).getGiocoByIdNotizia(n.getId()));
+            notizie.add(n);
+        }
+
+        return notizie;
+    }
 }

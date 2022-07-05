@@ -21,8 +21,6 @@ public class ProdottoDAO {
         this.con = con;
     }
 
-    // Valutare se gestire lo sconto con left join
-
     public Prodotto doRetrieveById(int id) throws SQLException {
         PreparedStatement ps =
                     con.prepareStatement("SELECT * FROM prodotto WHERE id=?");
