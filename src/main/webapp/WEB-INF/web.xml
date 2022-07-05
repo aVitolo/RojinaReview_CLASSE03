@@ -146,4 +146,22 @@
         <url-pattern>/getResource</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>logOut</servlet-name>
+        <servlet-class>controller.logins.logout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logOut</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>loginStaff</servlet-name>
+        <servlet-class>controller.logins.LoginStaff</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>loginStaff</servlet-name>
+        <url-pattern>/LoginStaff</url-pattern>
+    </servlet-mapping>
+
 </web-app>

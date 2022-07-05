@@ -19,7 +19,6 @@ import model.utilities.GenericStaffDAO;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "LoginStaff", value = "/LoginStaff")
 public class LoginStaff extends HttpServlet {
     private Utente tmp;
     private String loginErrato = "./staffLogin.jsp" ;
