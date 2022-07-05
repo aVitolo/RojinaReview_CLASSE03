@@ -7,12 +7,14 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 
 public class logout extends HttpServlet {
+    private String redirect = "./home";
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getSession(false).getAttribute("utente") != null) {
             request.getSession().invalidate();
         }
-        response.sendRedirect("./home");
+        response.sendRedirect(redirect);
     }
 
     @Override
