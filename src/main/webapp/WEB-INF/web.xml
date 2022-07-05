@@ -156,11 +156,11 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>loginStaff</servlet-name>
+        <servlet-name>LoginStaff</servlet-name>
         <servlet-class>controller.logins.LoginStaff</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>loginStaff</servlet-name>
+        <servlet-name>LoginStaff</servlet-name>
         <url-pattern>/LoginStaff</url-pattern>
     </servlet-mapping>
 </web-app>

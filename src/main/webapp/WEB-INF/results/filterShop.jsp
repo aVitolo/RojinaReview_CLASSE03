@@ -8,49 +8,30 @@
 <body>
 <section class="filter">
     <div class="dropdown">
-        <button onclick="expandFilter('cDrop')" class="dropbtn">Categoria</button>
+        <button onclick="expandFilter('cDrop')" class="dropbtn" id="cButton">Categoria</button>
+        <button onclick="resetFilter('Categoria','cButton','cClose')" class="closebtn" id="cClose">X</button>
         <div id="cDrop" class="dropdown-content">
             <input type="text" placeholder="Search.." id="cInput" onkeyup="filterFunction('cInput','cDrop')">
             <c:forEach items="${applicationScope['categorie']}" var="caterogia">
-                <a href="">${caterogia.nome}</a>
+                <p onclick="setFilter('${caterogia.nome}','cButton','cDrop','cClose')" id="${caterogia.nome}">${caterogia.nome}</p>
             </c:forEach>
         </div>
     </div>
 
     <div class="dropdown">
-        <button onclick="expandFilter('sDrop')" class="dropbtn">Ordina per</button>
+        <button onclick="expandFilter('sDrop')" class="dropbtn" id="sButton">Ordina per</button>
+        <button onclick="resetFilter('Ordina per','sButton','sClose')" class="closebtn" id="sClose">X</button>
         <div id="sDrop" class="dropdown-content">
             <input type="text" placeholder="Search.." id="sInput" onkeyup="filterFunction('sInput','sDrop')">
-            <a href="">Most Recent</a>
-            <a href="">Least Recent</a>
-            <a href="">Lowest price</a>
-            <a href="">Highest price</a>
+            <p onclick="setFilter('mostRecent','sButton','sDrop','sClose')" id="mostRecent">Most Recent</p>
+            <p onclick="setFilter('leastRecent','sButton','sDrop','sClose')" id="leastRecent">Least Recent</p>
+            <p onclick="setFilter('lowestPrice','sButton','sDrop','sClose')" id="lowestPrice">Lowest price</p>
+            <p onclick="setFilter('highestPrice','sButton','sDrop','sClose')" id="highestPrice">Highest price</p>
         </div>
     </div>
+
+    <button class="dropbtn"  onclick=filter()> Filtra </button>
+
 </section>
-
-<script>
-    /* When the user clicks on the button,
-    toggle between hiding and showing the dropdown content */
-    function myFunction(drop) {
-        document.getElementById(drop).classList.toggle("show");
-    }
-
-    function filterFunction(input, drop) {
-        var inp, filter, a, i, div, txtValue;
-        inp = document.getElementById(input);
-        filter = inp.value.toUpperCase();
-        div = document.getElementById(drop);
-        a = div.getElementsByTagName("a");
-        for (i = 0; i < a.length; i++) {
-            txtValue = a[i].textContent || a[i].innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                a[i].style.display = "";
-            } else {
-                a[i].style.display = "none";
-            }
-        }
-    }
-</script>
 </body>
 </html>

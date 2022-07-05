@@ -128,28 +128,33 @@ public class NotiziaDAO {
         }
     }
 
-    public ArrayList<Notizia> doRetrieveOnScroll(int lastID) throws SQLException {
+    public ArrayList<Notizia> updateContent(int lastID, String reset, String piattaforma, String tipologia, String ordina) throws SQLException {
         ArrayList<Notizia> notizie = new ArrayList<>();
 
-        PreparedStatement ps =
-                con.prepareStatement("SELECT g.Nome,g.Cognome, n.id, n.titolo, n.testo, n.dataCaricamento, n.immagine " +
-                        "FROM notizia n JOIN giornalista g on g.id = n.giornalista " +
-                      //  "WHERE n.id < ?"+
-                        "ORDER BY n.DataCaricamento DESC LIMIT 10");
+        String select = " SELECT n.id, n.titolo, n.testo, n.immagine ";
+        String from =   " FROM notizia n"+
+                        (!piattaforma.equals("Piattaforma") ? " JOIN gioco_notizia gn1 on n.id=gn1.notizia JOIN gioco_piattaforma gp on gn1.gioco=gp.gioco " : " " )+
+                        (!tipologia.equals("Tipologia") ? " JOIN gioco_notizia gn2 on n.id=gn2.notizia JOIN gioco_tipologia gt on gn2.gioco=gt.gioco " : " ");
+        String where = " WHERE ";
+         where +=       (!piattaforma.equals("Piattaforma") ? " gp.piattaforma='"+piattaforma+"'" : "" );
+         where +=       (!tipologia.equals("Tipologia") ? (where.equals(" WHERE ") ? "gt.tipologia='"+tipologia+"'" : " AND gt.tipologia='"+tipologia+"'") : "");
+         where +=       (!reset.equals("yes") ? (lastID != -1 ? (where.equals(" WHERE ") ? " n.id > "+String.valueOf(lastID) :" AND n.id > "+String.valueOf(lastID)) : (where.equals(" WHERE ") ? " n.id <"+String.valueOf(lastID) :" AND n.id < "+String.valueOf(lastID))) : "");
+        if (where.equals(" WHERE ")) where = " ";
+        String order =  " ORDER BY n.id " +
+                        (ordina.equals("Least Recent")? " ASC " : " DESC ") +
+                        " LIMIT 12 ";
 
-        //ps.setInt(1, lastID);
+        System.out.println(select + from + where + order);
+        PreparedStatement ps =
+                con.prepareStatement(select + from + where + order);
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
             Notizia n = new Notizia();
-            n.setGiornalista(rs.getString(1)+" "+rs.getString(2));
-            n.setId(rs.getInt(3));
-            n.setTitolo(rs.getString(4));
-            n.setTesto(rs.getString(5));
-            n.setDataCaricamento(rs.getDate(6));
-            n.setImmagine(rs.getString(7));
-            n.setCommenti(new CommentoDAO(con).getCommentById(n.getId(),"Notizia"));
-            n.setGiochi(new GiocoDAO(con).getGiocoByIdNotizia(n.getId()));
+            n.setId(rs.getInt(1));
+            n.setTitolo(rs.getString(2));
+            n.setTesto(rs.getString(3));;
+            n.setImmagine(rs.getString(4));
             notizie.add(n);
         }
 

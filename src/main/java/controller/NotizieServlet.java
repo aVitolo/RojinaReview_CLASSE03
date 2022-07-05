@@ -31,14 +31,20 @@ public class NotizieServlet extends HttpServlet {
 
         try {
             nDAO = new NotiziaDAO();
-           // int lastID=Integer.parseInt(request.getParameter("lastID"));
-            notizie = nDAO.doRetrieveOnScroll(1);
+            int lastID = -1;
+            if(request.getParameter("lastID")!=null)
+                lastID=Integer.parseInt(request.getParameter("lastID"));
+            String reset = request.getParameter("reset");
+            String piattafomra = request.getParameter("piattaforma");
+            String tipologia = request.getParameter("tipologia");
+            String ordine =request.getParameter("ordine");
+            System.out.println(lastID + " " + reset + " " +piattafomra + " " + tipologia + " " + ordine);
+            notizie = nDAO.updateContent(lastID,reset, piattafomra, tipologia, ordine);
         } catch (SQLException e) {
             System.out.println(e);
             throw new RuntimeException(e);
         }
         JSONArray json = new JSONArray(notizie);
-        System.out.println(json);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json.toString());

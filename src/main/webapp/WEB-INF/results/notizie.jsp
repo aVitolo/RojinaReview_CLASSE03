@@ -43,13 +43,16 @@
         var yOffset = window.pageYOffset;
         var y = yOffset + window.innerHeight;
         if(y >= contentHeight) {
+            var l=document.getElementsByClassName('.articoli')[document.getElementsByClassName('.articoli').length].id;
+            var p = document.getElementById('pButton').innerHTML;
+            var t = document.getElementById('tButton').innerHTML;
+            var o = document.getElementById('sButton').innerHTML;
+            var r = "no";
             $(document).ready(function () {
                 $.getJSON({
                     url: "/Rojina_Review_war/news",
                     type: "post",
-                    dataType: "json",
-                    contentType: "application/json",
-                    data: {"lastID": this.lastID},
+                    data: {"lastID":l,"reset":r,"piattaforma" : p,"tipologia": t,"ordine" : o},
                     error: function (xhr, status, error) {
                         alert("error");
                     },
