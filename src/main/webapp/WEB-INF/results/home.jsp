@@ -15,6 +15,7 @@
     <section class="hot">
         <img src = "./images/utility/logoNT.png" alt = "logo" class="logo" decoding="async">
         <section class="articolo">
+            <a href="/Rojina_Review_war/getResource?type=${copertina.getClass().simpleName}&id=${copertina.id}">
             <img src = "<c:out value='${copertina.immagine}'/>" alt = "copertina" decoding="async">
             <div class = "articolo-content">
                 <h3><c:out value="${copertina.getClass().simpleName}"/></h3>
@@ -24,6 +25,7 @@
                     <p class="voto">${copertina.voto}</p>
                 </c:if>
             </div>
+            </a>
         </section>
         <img src = "./images/utility/logoNT.png" alt = "logo" class="logo" decoding="async">
     </section>
@@ -33,6 +35,7 @@
     <section class="articoli">
         <c:forEach items="${articoli}" var="articolo">
             <div class = "articolo">
+                <a href="/Rojina_Review_war/getResource?type=${articolo.getClass().simpleName}&id=${articolo.id}">
                 <img src = "${articolo.immagine}" alt = "copertina" decoding="async">
                 <div class = "articolo-content">
                     <h3>${articolo.getClass().simpleName}</h3>
@@ -42,6 +45,7 @@
                         <p class="voto">${articolo.voto}</p>
                     </c:if>
                 </div>
+                </a>
             </div>
         </c:forEach>
     </section>

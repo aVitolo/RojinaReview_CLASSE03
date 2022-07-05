@@ -4,7 +4,6 @@
 <head>
     <title>Recensioni - Rojina</title>
     <link rel="stylesheet" href="./css/recensioni.css">
-    <link rel="stylesheet" href="./css/foot.css">
     <link rel="stylesheet" href="./css/navebar.css">
     <link rel="stylesheet" href="./css/master.css">
 </head>
@@ -19,18 +18,19 @@
     <section class="articoli">
         <c:forEach items="${applicationScope['recensioni']}" var="articolo">
             <div class = "articolo">
+                <a href="/Rojina_Review_war/getResource?type=recensione&id=${articolo.id}">
                 <img src = "${articolo.immagine}" alt = "copertina" decoding="async">
                 <div class = "articolo-content">
                     <h2>${articolo.titolo}</h2>
                     <p>${fn:substring(articolo.testo, 0, 50)}</p>
                     <p class="voto">${articolo.voto}</p>
                 </div>
+                </a>
             </div>
         </c:forEach>
     </section>
 </section>
 
-<%@ include file="/html/footer.html" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript" src="/Rojina_Review_war/js/navebar.js"></script>
 <script type="text/javascript" src="/Rojina_Review_war/js/filter.js"></script>

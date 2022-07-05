@@ -3,6 +3,7 @@
     padding: 2%;
     background-color: #24262b;
 }
+
 .recensioni h1{
     font-size: 21px;
     text-shadow: 0 0 2px #000;
@@ -26,14 +27,19 @@
     overflow: hidden;
     position: relative;
     width: 100%;
-
     color: #f3f3f3;
+}
+
+.articolo a{
+    color: #f3f3f3;
+    text-decoration: none;
+    width: inherit;
+    height: inherit;
 }
 
 .articolo img{
     width: inherit;
     height: inherit;
-    cursor: pointer;
     opacity: 0.7;
 }
 
