@@ -148,7 +148,7 @@
 
     <servlet>
         <servlet-name>logOut</servlet-name>
-        <servlet-class>controller.logout</servlet-class>
+        <servlet-class>controller.logins.logout</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>logOut</servlet-name>
@@ -163,5 +163,4 @@
         <servlet-name>loginStaff</servlet-name>
         <url-pattern>/LoginStaff</url-pattern>
     </servlet-mapping>
-
 </web-app>
