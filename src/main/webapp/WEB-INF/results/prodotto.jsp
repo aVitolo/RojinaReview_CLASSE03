@@ -23,12 +23,12 @@
     </div>
 
     <div id="imageSection">
-        <img id="imageProduct" src=<%=p.getImmagine()%>>
+        <img id="imageProduct" src="<%=p.getImmagine()%>">
     </div>
 </section>
 
-<h3 id="disponibilità">Disponibilità: ${p.disponibilità}</h3>
-<h3 id="prezzo">Prezzo: ${p.prezzo}</h3>
+<h3 id="disponibilità">Disponibilità: <%=p.getDisponibilità()%></h3>
+<h3 id="prezzo">Prezzo: <%=p.getPrezzo()%></h3>
 
 <p id="bodyText">
     <%=p.getDescrizione()%>
@@ -36,7 +36,7 @@
 
 
 <section id="voto">
-    <h3 id="mediaVoto">Media gradimento: ${p.mediaVoto}</h3>
+    <h3 id="mediaVoto">Media gradimento: <%=p.getMediaVoto()%></h3>
     <div id="votazione">
 
     </div>

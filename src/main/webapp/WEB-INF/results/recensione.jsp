@@ -23,7 +23,7 @@
         </div>
 
         <div id="imageSection">
-            <img id="imageReview" src=<%=r.getImmagine()%>>
+            <img id="imageReview" src="<%=r.getImmagine()%>">
         </div>
     </section>
 

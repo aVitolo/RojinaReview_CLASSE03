@@ -14,17 +14,19 @@
         <section class="home">
         <section class="hot">
             <img src = "./images/utility/logoNT.png" alt = "logo" class="logo" decoding="async">
-            <section class="articolo">
-                <img src = "${copertina.immagine}" alt = "copertina" decoding="async">
-                <div class = "articolo-content">
-                    <h3><c:out value="${copertina.getClass().simpleName}"/></h3>
-                    <h2><c:out value='${copertina.titolo}'/></h2>
-                    <p><c:out value='${fn:substring(copertina.testo, 0, 50)}'/></p>
-                    <c:if test = "${copertina.getClass().simpleName =='Recensione'}">
-                        <p class="voto">${copertina.voto}</p>
-                    </c:if>
-                </div>
-            </section>
+            <a href="/Rojina_Review_war/getResource?type=${copertina.getClass().simpleName}&id=${copertina.id}">
+                <section class="articolo">
+                    <img src = "${copertina.immagine}" alt = "copertina" decoding="async">
+                    <div class = "articolo-content">
+                        <h3><c:out value="${copertina.getClass().simpleName}"/></h3>
+                        <h2><c:out value='${copertina.titolo}'/></h2>
+                        <p><c:out value='${fn:substring(copertina.testo, 0, 50)}'/></p>
+                        <c:if test = "${copertina.getClass().simpleName =='Recensione'}">
+                            <p class="voto">${copertina.voto}</p>
+                        </c:if>
+                    </div>
+                </section>
+            </a>
             <img src = "./images/utility/logoNT.png" alt = "logo" class="logo" decoding="async">
         </section>
 
@@ -32,17 +34,19 @@
 
         <section class="articoli">
                 <c:forEach items="${articoli}" var="articolo">
-                    <div class = "articolo">
-                        <img src = "${articolo.immagine}" alt = "copertina" decoding="async">
-                        <div class = "articolo-content">
-                            <h3>${articolo.getClass().simpleName}</h3>
-                            <h2>${articolo.titolo}</h2>
-                            <p>${fn:substring(articolo.testo, 0, 50)}</p>
-                            <c:if test = "${articolo.getClass().simpleName =='Recensione'}">
-                                <p class="voto">${articolo.voto}</p>
-                            </c:if>
+                    <a href="/Rojina_Review_war/getResource?type=${articolo.getClass().simpleName}&id=${articolo.id}">
+                        <div class = "articolo">
+                            <img src = "${articolo.immagine}" alt = "copertina" decoding="async">
+                            <div class = "articolo-content">
+                                <h3>${articolo.getClass().simpleName}</h3>
+                                <h2>${articolo.titolo}</h2>
+                                <p>${fn:substring(articolo.testo, 0, 50)}</p>
+                                <c:if test = "${articolo.getClass().simpleName =='Recensione'}">
+                                    <p class="voto">${articolo.voto}</p>
+                                </c:if>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </c:forEach>
         </section>
     </section>
