@@ -99,8 +99,7 @@ public class getSingleResourceServlet extends HttpServlet {
             }
             result = "/WEB-INF/results/prodotto.jsp";
         }
-
-        request.getRequestDispatcher(result).forward(request, response);
+       request.getRequestDispatcher(result).forward(request, response);
     }
 
     @Override

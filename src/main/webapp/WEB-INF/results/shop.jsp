@@ -70,7 +70,7 @@
                             var nome = articolo.nome;
                             var voto = articolo.mediaVoto;
                             var a =
-                                "<div class = \"articolo\" id="+id+">" +
+                                "<div class = \"articolo\" id=\""+id+"\">" +
                                 "<a href='/Rojina_Review_war/getResource?type=prodotto&id="+ id +"'>"+
                                 "<img src = '" +immagine +"' alt =\"copertina\" decoding=\"async\">" +
                                 "<div class = \"articolo-content\">" +
@@ -83,27 +83,25 @@
                             newA += a;
                         }
                         articoli.innerHTML = articoli.innerHTML + newA;
-                        triggered = false;
+
                     }
                 });
             });
         }
-
+        triggered = false;
     }
 
     window.onscroll = yHandler;
 
     function filter(){
-        var a = document.getElementsByClassName('articolo');
-        var l = a[a.length-1].getAttribute("id");
         var c = document.getElementById('cButton').innerHTML;
         var o = document.getElementById('sButton').innerHTML;
-        var r = "no";
+        var r = "yes";
         $(document).ready(function () {
             $.getJSON({
                 url: "/Rojina_Review_war/shop",
                 type: "post",
-                data: {"lastID":l,"reset":r,"categoria" : c,"ordine" : o},
+                data: {"reset":r,"categoria" : c,"ordine" : o},
                 error: function (xhr, status, error) {
                     //alert("error");
                 },
@@ -118,7 +116,7 @@
                         var nome = articolo.nome;
                         var voto = articolo.mediaVoto;
                         var a =
-                            "<div class = \"articolo\" id="+id+">" +
+                            "<div class = \"articolo\" id=\""+id+"\">" +
                             "<a href='/Rojina_Review_war/getResource?type=prodotto&id="+ id +"'>"+
                             "<img src = '" +immagine +"' alt =\"copertina\" decoding=\"async\">" +
                             "<div class = \"articolo-content\">" +
@@ -130,7 +128,7 @@
                             "</a>";
                         newA += a;
                     }
-                    articoli.innerHTML = articoli.innerHTML + newA;
+                    articoli.innerHTML = newA;
                 }
             });
         });

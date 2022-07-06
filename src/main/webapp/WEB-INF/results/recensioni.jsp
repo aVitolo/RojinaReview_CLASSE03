@@ -68,10 +68,10 @@
                             var id = articolo["id"];
                             var immagine= articolo.immagine;
                             var testo = articolo.testo;
-                            var voto = articolo.voto
+                            var voto = articolo.voto;
                             var a =
-                                "<div class = \"articolo\" id="+id+">" +
-                                "<a href='/Rojina_Review_war/getResource?type=recesione&id="+ id +"'>"+
+                                "<div class = \"articolo\" id=\""+id+"\">" +
+                                "<a href='/Rojina_Review_war/getResource?type=recensione&id="+ id +"'>"+
                                 "<img src = '" +immagine +"' alt =\"copertina\" decoding=\"async\">" +
                                 "<div class = \"articolo-content\">" +
                                 "<h2>" + titolo + "</h2>" +
@@ -83,28 +83,25 @@
                             newA += a;
                         }
                         articoli.innerHTML = articoli.innerHTML + newA;
-                        triggered = false;
                     }
                 });
             });
         }
-
+        triggered = false;
     }
 
     window.onscroll = yHandler;
 
     function filter(){
-        var a = document.getElementsByClassName('articolo');
-        var l = a[a.length-1].getAttribute("id");
-        var p = document.getElementById('pButton').innerHTML;
-        var t = document.getElementById('tButton').innerHTML;
-        var o = document.getElementById('sButton').innerHTML;
+        var p = document.getElementById('pButton').innerHTML.toString();
+        var t = document.getElementById('tButton').innerHTML.toString();
+        var o = document.getElementById('sButton').innerHTML.toString();
         var r = "yes";
         $(document).ready(function () {
             $.getJSON({
                 url: "/Rojina_Review_war/reviews",
                 type: "post",
-                data: {"lastID":l,"reset":r,"piattaforma" : p,"tipologia": t,"ordine" : o},
+                data: {"reset": r, "piattaforma": p, "tipologia": t, "ordine": o},
                 error: function (xhr, status, error) {
                     //alert("error");
                 },
@@ -117,10 +114,10 @@
                         var id = articolo["id"];
                         var immagine= articolo.immagine;
                         var testo = articolo.testo;
-                        var voto = articolo.voto
+                        var voto = articolo.voto;
                         var a =
-                            "<div class = \"articolo\" id="+id+">" +
-                            "<a href='/Rojina_Review_war/getResource?type=recesione&id="+ id +"'>"+
+                            "<div class = \"articolo\" id=\""+id+"\">" +
+                            "<a href='/Rojina_Review_war/getResource?type=recensione&id="+ id +"'>"+
                             "<img src = '" +immagine +"' alt =\"copertina\" decoding=\"async\">" +
                             "<div class = \"articolo-content\">" +
                             "<h2>" + titolo + "</h2>" +

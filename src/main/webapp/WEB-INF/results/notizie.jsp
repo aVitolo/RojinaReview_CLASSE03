@@ -11,7 +11,6 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/results/navebar.jsp" %>
-
     <section class="notizie" id="wrap">
 
         <h1>Latest News</h1>
@@ -37,16 +36,17 @@
 <script type="text/javascript" src="/Rojina_Review_war/js/navebar.js"></script>
 <script type="text/javascript" src="/Rojina_Review_war/js/filter.js"></script>
 <script type="text/javascript">
-    var triggered = false;
+    var triggered=false
     function yHandler(){
-        if(triggered == true)
-            return null;
-        triggered = true;
         var wrap = document.getElementById('wrap');
         var contentHeight = wrap.offsetHeight;
         var yOffset = window.pageYOffset;
         var y = yOffset + window.innerHeight;
-        if(y >= contentHeight) {
+        document.getElementById('size').innerHTML = y +"|"+ contentHeight;
+        if(y > contentHeight) {
+            if(triggered)
+                return;
+            triggered=true;
             var a = document.getElementsByClassName('articolo');
             var l = a[a.length-1].getAttribute("id");
             var p = document.getElementById('pButton').innerHTML;
@@ -71,7 +71,7 @@
                             var immagine= articolo.immagine;
                             var testo = articolo.testo;
                             var a =
-                                "<div class = \"articolo\" id="+id+">" +
+                                "<div class = \"articolo\" id=\""+id+"\">" +
                                 "<a href='/Rojina_Review_war/getResource?type=notizia&id="+ id +"'>"+
                                 "<img src = '" +immagine +"' alt =\"copertina\" decoding=\"async\">" +
                                 "<div class = \"articolo-content\">" +
@@ -83,13 +83,13 @@
                             newA += a;
                         }
                         articoli.innerHTML = articoli.innerHTML + newA;
-                        triggered = false;
                     }
                 });
             });
+            triggered=false;
         }
-
     }
+
     window.onscroll = yHandler;
 
     function filter() {
@@ -116,8 +116,8 @@
                         var immagine = articolo.immagine;
                         var testo = articolo.testo;
                         var a =
-                            "<div class = \"articolo\" id=" + id + ">" +
-                            "<a href='/Rojina_Review_war/getResource?type=notizia&id='" + id + "'>" +
+                            "<div class = \"articolo\" id=\""+id+"\">" +
+                            "<a href='/Rojina_Review_war/getResource?type=notizia&id=" + id + "'>" +
                             "<img src = '" + immagine + "' alt =\"copertina\" decoding=\"async\">" +
                             "<div class = \"articolo-content\">" +
                             "<h2>" + titolo + "</h2>" +
