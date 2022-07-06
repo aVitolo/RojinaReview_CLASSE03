@@ -10,7 +10,7 @@
 
     <div class="dropdown">
         <button onclick="expandFilter('pDrop')" class="dropbtn" id="pButton">Piattaforma</button>
-        <button onclick="resetFilter('Piattaforma','pButton','pClose')" class="closebtn" id="pClose">X</button>
+        <button onclick="resetFilter('Piattaforma','pButton','pClose')" class="closebtn" id="pClose"><span>X</span></button>
         <div id="pDrop" class="dropdown-content">
             <input type="text" placeholder="Search.." id="pInput" onkeyup="filterFunction('pInput','pDrop')">
             <c:forEach items="${applicationScope['piattaforme']}" var="piattaforma">
@@ -21,7 +21,7 @@
 
     <div class="dropdown">
         <button onclick="expandFilter('tDrop')" class="dropbtn" id="tButton">Tipologia</button>
-        <button onclick="resetFilter('Tipologia','tButton','tClose')" class="closebtn" id="tClose">X</button>
+        <button onclick="resetFilter('Tipologia','tButton','tClose')" class="closebtn" id="tClose"><span>X</span></button>
         <div id="tDrop" class="dropdown-content">
             <input type="text" placeholder="Search.." id="tInput" onkeyup="filterFunction('tInput','tDrop')">
             <c:forEach items="${applicationScope['tipologie']}" var="tipologia">
@@ -31,7 +31,7 @@
     </div>
     <div class="dropdown">
         <button onclick="expandFilter('sDrop')" class="dropbtn" id="sButton">Ordina per</button>
-        <button onclick="resetFilter('Ordina Per','sButton','sClose')" class="closebtn" id="sClose">X</button>
+        <button onclick="resetFilter('Ordina Per','sButton','sClose')" class="closebtn" id="sClose"><span>X</span></button>
         <div id="sDrop" class="dropdown-content">
             <input type="text" placeholder="Search.." id="sInput" onkeyup="filterFunction('sInput','sDrop')">
             <p onclick="setFilter('mostRecent', 'sButton','sDrop','sClose')" id="mostRecent">Most Recent</p>

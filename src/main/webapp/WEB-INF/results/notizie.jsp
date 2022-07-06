@@ -20,7 +20,7 @@
 
         <section class="articoli">
             <c:forEach items="${applicationScope['notizie']}" var="articolo">
-                    <div class = "articolo">
+                    <div class = "articolo" id="${articolo.id}">
                         <a href="/Rojina_Review_war/getResource?type=notizia&id=${articolo.id}">
                         <img src = "${articolo.immagine}" alt = "copertina" decoding="async">
                         <div class = "articolo-content">
@@ -37,13 +37,17 @@
 <script type="text/javascript" src="/Rojina_Review_war/js/navebar.js"></script>
 <script type="text/javascript" src="/Rojina_Review_war/js/filter.js"></script>
 <script type="text/javascript">
+    var triggered = false;
     function yHandler(){
+        if(triggered == true)
+            return null;
         var wrap = document.getElementById('wrap');
         var contentHeight = wrap.offsetHeight;
         var yOffset = window.pageYOffset;
         var y = yOffset + window.innerHeight;
         if(y >= contentHeight) {
-            var l=document.getElementsByClassName('.articoli')[document.getElementsByClassName('.articoli').length].id;
+            var a = document.getElementsByClassName('articolo');
+            var l = a[a.length-1].getAttribute("id");
             var p = document.getElementById('pButton').innerHTML;
             var t = document.getElementById('tButton').innerHTML;
             var o = document.getElementById('sButton').innerHTML;
@@ -54,7 +58,7 @@
                     type: "post",
                     data: {"lastID":l,"reset":r,"piattaforma" : p,"tipologia": t,"ordine" : o},
                     error: function (xhr, status, error) {
-                        alert("error");
+                        //alert("error");
                     },
                     success: function (data) {
                         var articoli = document.getElementsByClassName('articoli')[0];
@@ -66,8 +70,8 @@
                             var immagine= articolo.immagine;
                             var testo = articolo.testo;
                             var a =
+                                "<div class = \"articolo\" id="+id+">" +
                                 "<a href='/Rojina_Review_war/getResource?type=notizia&id='"+ id +"'>"+
-                                "<div class = \"articolo\">" +
                                 "<img src = '" +immagine +"' alt =\"copertina\" decoding=\"async\">" +
                                 "<div class = \"articolo-content\">" +
                                 "<h2>" + titolo + "</h2>" +
@@ -78,10 +82,12 @@
                             newA += a;
                         }
                         articoli.innerHTML = articoli.innerHTML + newA;
+                        triggered=true;
                     }
                 });
             });
         }
+
     }
 
     window.onscroll = yHandler;

@@ -61,7 +61,7 @@ public class ProdottoDAO {
 
     public ArrayList<Prodotto> doRetrieveLast() throws SQLException {
         PreparedStatement ps =
-                con.prepareStatement("SELECT * FROM prodotto LIMIT 10");
+                con.prepareStatement("SELECT * FROM prodotto LIMIT 12");
         ResultSet rs = ps.executeQuery();
         ArrayList<Prodotto> prodotti = new ArrayList<>();
         while (rs.next()) {

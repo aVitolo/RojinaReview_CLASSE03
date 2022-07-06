@@ -100,4 +100,7 @@
     cursor: pointer;
 }
 
-.show {display: block;}
+.show {
+    display: flex;
+    flex-direction:column;
+}

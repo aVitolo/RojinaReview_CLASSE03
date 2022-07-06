@@ -46,9 +46,10 @@ function filter(){
             type: "post",
             data: {"reset":r,"piattaforma" : p,"tipologia": t,"ordine" : o},
             error: function (xhr, status, error) {
-                alert("error");
+                //alert("error");
             },
             success: function (data) {
+
                 var articoli = document.getElementsByClassName('articoli')[0];
                 var newA ="";
                 for (d in data) {
@@ -58,8 +59,8 @@ function filter(){
                     var immagine= articolo.immagine;
                     var testo = articolo.testo;
                     var a =
+                        "<div class = \"articolo\" id="+id+">" +
                         "<a href='/Rojina_Review_war/getResource?type=notizia&id='"+ id +"'>"+
-                        "<div class = \"articolo\">" +
                         "<img src = '" +immagine +"' alt =\"copertina\" decoding=\"async\">" +
                         "<div class = \"articolo-content\">" +
                         "<h2>" + titolo + "</h2>" +
@@ -70,6 +71,7 @@ function filter(){
                     newA += a;
                 }
                 articoli.innerHTML = newA;
+                triggered = false; // reset onscroll triggere after filtered
             }
         });
     });

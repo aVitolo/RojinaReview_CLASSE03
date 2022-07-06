@@ -49,7 +49,7 @@ public class NotiziaDAO {
         PreparedStatement ps =
                 con.prepareStatement("SELECT g.Nome,g.Cognome, n.id, n.titolo, n.testo, n.dataCaricamento, n.immagine " +
                                          "FROM notizia n JOIN giornalista g on g.id = n.giornalista " +
-                                         "ORDER BY n.DataCaricamento DESC LIMIT 10");
+                                         "ORDER BY n.id DESC LIMIT 12");
 
         ResultSet rs = ps.executeQuery();
 
@@ -138,13 +138,12 @@ public class NotiziaDAO {
         String where = " WHERE ";
          where +=       (!piattaforma.equals("Piattaforma") ? " gp.piattaforma='"+piattaforma+"'" : "" );
          where +=       (!tipologia.equals("Tipologia") ? (where.equals(" WHERE ") ? "gt.tipologia='"+tipologia+"'" : " AND gt.tipologia='"+tipologia+"'") : "");
-         where +=       (!reset.equals("yes") ? (lastID != -1 ? (where.equals(" WHERE ") ? " n.id > "+String.valueOf(lastID) :" AND n.id > "+String.valueOf(lastID)) : (where.equals(" WHERE ") ? " n.id <"+String.valueOf(lastID) :" AND n.id < "+String.valueOf(lastID))) : "");
+         where +=       (!reset.equals("yes") ? (lastID != -1 ? (where.equals(" WHERE ") ? " n.id < "+String.valueOf(lastID) :" AND n.id < "+String.valueOf(lastID)) : (where.equals(" WHERE ") ? " n.id >"+String.valueOf(lastID) :" AND n.id > "+String.valueOf(lastID))) : "");
         if (where.equals(" WHERE ")) where = " ";
         String order =  " ORDER BY n.id " +
                         (ordina.equals("Least Recent")? " ASC " : " DESC ") +
                         " LIMIT 12 ";
 
-        System.out.println(select + from + where + order);
         PreparedStatement ps =
                 con.prepareStatement(select + from + where + order);
         ResultSet rs = ps.executeQuery();

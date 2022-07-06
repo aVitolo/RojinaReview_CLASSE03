@@ -9,7 +9,7 @@
 <section class="filter">
     <div class="dropdown">
         <button onclick="expandFilter('cDrop')" class="dropbtn" id="cButton">Categoria</button>
-        <button onclick="resetFilter('Categoria','cButton','cClose')" class="closebtn" id="cClose">X</button>
+        <button onclick="resetFilter('Categoria','cButton','cClose')" class="closebtn" id="cClose"><span>X</span></button>
         <div id="cDrop" class="dropdown-content">
             <input type="text" placeholder="Search.." id="cInput" onkeyup="filterFunction('cInput','cDrop')">
             <c:forEach items="${applicationScope['categorie']}" var="caterogia">
@@ -20,7 +20,7 @@
 
     <div class="dropdown">
         <button onclick="expandFilter('sDrop')" class="dropbtn" id="sButton">Ordina per</button>
-        <button onclick="resetFilter('Ordina per','sButton','sClose')" class="closebtn" id="sClose">X</button>
+        <button onclick="resetFilter('Ordina per','sButton','sClose')" class="closebtn" id="sClose"><span>X</span></button>
         <div id="sDrop" class="dropdown-content">
             <input type="text" placeholder="Search.." id="sInput" onkeyup="filterFunction('sInput','sDrop')">
             <p onclick="setFilter('mostRecent','sButton','sDrop','sClose')" id="mostRecent">Most Recent</p>

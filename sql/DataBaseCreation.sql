@@ -40,8 +40,8 @@ create table Recensione(
                            id				tinyint auto_increment,
                            testo			text,
                            giornalista		tinyint,
-                           gioco   		varchar(50),
-                           titolo 			varchar(100) unique,
+                           gioco   		    varchar(50),
+                           titolo 			varchar(100) ,
                            voto 			float not null,
                            dataCaricamento	date not null,
                            immagine 		varchar(250),
@@ -60,16 +60,11 @@ create table Notizia(
                         id				tinyint auto_increment,
                         testo   		text,
                         giornalista  	tinyint,
-                        gioco           varchar(50),
-                        titolo			varchar(100) unique,
+                        titolo			varchar(100),
                         dataCaricamento	date not null,
                         immagine		varchar(250),
                         foreign key(giornalista)
                             references Giornalista(id)
-                            on update cascade,
-                        foreign key(gioco)
-                            references Gioco(titolo)
-                            on delete set null
                             on update cascade,
                         primary key(id)
 );
@@ -578,22 +573,69 @@ insert into Gioco_Tipologia values
                                 ("Halo Infinite","Multiplayer Online");
 
 insert into Recensione (testo, giornalista, gioco, titolo, voto, dataCaricamento, immagine) values
-                                                                                                ("Il seguito di Dark Souls I...", 1, "Dark Souls II","Dark Souls torna a colpire",9,"2014-04-11", "./images/reviews/review-Dark Souls II.jpg"),
-                                                                                                ("Dark Souls 3 richiama i...", 3, "Dark Souls III","Recensione Dark Souls III",9,"2016-05-12", "./images/reviews/review-Dark Souls III.jpg"),
-                                                                                                ("Sekiro nuova avventura diversa...", 1, "Sekiro Shadows Die Twice","Il gioco From Software più difficile di sempre",9,"2019-04-22", "./images/reviews/review-Sekiro Shadows Die Twice.jpg"),
-                                                                                                ("Halo 2 fps...", 6, "Halo 2","Master Chief è tornato più in forma che mai",9.5,"2004-11-16", "./images/reviews/review-Halo 2.jpg"),
-                                                                                                ("Halo 3 è indubbiamente...", 5, "Halo 3","Il ritorno di Master Chief",8.5 ,"2007-10-01", "./images/reviews/review-Halo 3.jpg"),
-                                                                                                ("Halo 4 si avvicina a cod...", 2,"Halo 4","Recensione Halo 4",9,"2022-01-13", "./images/reviews/review-Halo 4.jpg"),
-                                                                                                ("Halo 5 non lo so...", 6, "Halo 5","Recensione Halo 5: Guardians",8.8,"2022-01-3", "./images/reviews/review-Halo 5.jpg"),
-                                                                                                ("Halo infinite figurati...", 4, "Halo Infinite","Un ritorno epico",9,current_date(), "./images/reviews/review-Halo Infinite.jpg");
+("Il seguito di Dark Souls I...", 1, "Dark Souls II","Dark Souls torna a colpire",9,"2014-04-11", "./images/reviews/review-Dark Souls II.jpg"),
+("Dark Souls 3 richiama i...", 3, "Dark Souls III","Recensione Dark Souls III",9,"2016-05-12", "./images/reviews/review-Dark Souls III.jpg"),
+("Sekiro nuova avventura diversa...", 1, "Sekiro Shadows Die Twice","Il gioco From Software più difficile di sempre",9,"2019-04-22", "./images/reviews/review-Sekiro Shadows Die Twice.jpg"),
+("Halo 2 fps...", 6, "Halo 2","Master Chief è tornato più in forma che mai",9.5,"2004-11-16", "./images/reviews/review-Halo 2.jpg"),
+("Halo 3 è indubbiamente...", 5, "Halo 3","Il ritorno di Master Chief",8.5 ,"2007-10-01", "./images/reviews/review-Halo 3.jpg"),
+("Halo 4 si avvicina a cod...", 2,"Halo 4","Recensione Halo 4",9,"2022-01-13", "./images/reviews/review-Halo 4.jpg"),
+("Halo 5 non lo so...", 6, "Halo 5","Recensione Halo 5: Guardians",8.8,"2022-01-3", "./images/reviews/review-Halo 5.jpg"),
+("Halo infinite figurati...", 4, "Halo Infinite","Un ritorno epico",9,current_date(), "./images/reviews/review-Halo Infinite.jpg"),
+("Il seguito di Dark Souls I...", 1, "Dark Souls II","Dark Souls torna a colpire",9,"2014-04-11", "./images/reviews/review-Dark Souls II.jpg"),
+("Dark Souls 3 richiama i...", 3, "Dark Souls III","Recensione Dark Souls III",9,"2016-05-12", "./images/reviews/review-Dark Souls III.jpg"),
+("Sekiro nuova avventura diversa...", 1, "Sekiro Shadows Die Twice","Il gioco From Software più difficile di sempre",9,"2019-04-22", "./images/reviews/review-Sekiro Shadows Die Twice.jpg"),
+("Halo 2 fps...", 6, "Halo 2","Master Chief è tornato più in forma che mai",9.5,"2004-11-16", "./images/reviews/review-Halo 2.jpg"),
+("Halo 3 è indubbiamente...", 5, "Halo 3","Il ritorno di Master Chief",8.5 ,"2007-10-01", "./images/reviews/review-Halo 3.jpg"),
+("Halo 4 si avvicina a cod...", 2,"Halo 4","Recensione Halo 4",9,"2022-01-13", "./images/reviews/review-Halo 4.jpg"),
+("Halo 5 non lo so...", 6, "Halo 5","Recensione Halo 5: Guardians",8.8,"2022-01-3", "./images/reviews/review-Halo 5.jpg"),
+("Halo infinite figurati...", 4, "Halo Infinite","Un ritorno epico",9,current_date(), "./images/reviews/review-Halo Infinite.jpg"),
+("Il seguito di Dark Souls I...", 1, "Dark Souls II","Dark Souls torna a colpire",9,"2014-04-11", "./images/reviews/review-Dark Souls II.jpg"),
+("Dark Souls 3 richiama i...", 3, "Dark Souls III","Recensione Dark Souls III",9,"2016-05-12", "./images/reviews/review-Dark Souls III.jpg"),
+("Sekiro nuova avventura diversa...", 1, "Sekiro Shadows Die Twice","Il gioco From Software più difficile di sempre",9,"2019-04-22", "./images/reviews/review-Sekiro Shadows Die Twice.jpg"),
+("Halo 2 fps...", 6, "Halo 2","Master Chief è tornato più in forma che mai",9.5,"2004-11-16", "./images/reviews/review-Halo 2.jpg"),
+("Halo 3 è indubbiamente...", 5, "Halo 3","Il ritorno di Master Chief",8.5 ,"2007-10-01", "./images/reviews/review-Halo 3.jpg"),
+("Halo 4 si avvicina a cod...", 2,"Halo 4","Recensione Halo 4",9,"2022-01-13", "./images/reviews/review-Halo 4.jpg"),
+("Halo 5 non lo so...", 6, "Halo 5","Recensione Halo 5: Guardians",8.8,"2022-01-3", "./images/reviews/review-Halo 5.jpg"),
+("Halo infinite figurati...", 4, "Halo Infinite","Un ritorno epico",9,current_date(), "./images/reviews/review-Halo Infinite.jpg"),
+("Il seguito di Dark Souls I...", 1, "Dark Souls II","Dark Souls torna a colpire",9,"2014-04-11", "./images/reviews/review-Dark Souls II.jpg"),
+("Dark Souls 3 richiama i...", 3, "Dark Souls III","Recensione Dark Souls III",9,"2016-05-12", "./images/reviews/review-Dark Souls III.jpg"),
+("Sekiro nuova avventura diversa...", 1, "Sekiro Shadows Die Twice","Il gioco From Software più difficile di sempre",9,"2019-04-22", "./images/reviews/review-Sekiro Shadows Die Twice.jpg"),
+("Halo 2 fps...", 6, "Halo 2","Master Chief è tornato più in forma che mai",9.5,"2004-11-16", "./images/reviews/review-Halo 2.jpg"),
+("Halo 3 è indubbiamente...", 5, "Halo 3","Il ritorno di Master Chief",8.5 ,"2007-10-01", "./images/reviews/review-Halo 3.jpg"),
+("Halo 4 si avvicina a cod...", 2,"Halo 4","Recensione Halo 4",9,"2022-01-13", "./images/reviews/review-Halo 4.jpg"),
+("Halo 5 non lo so...", 6, "Halo 5","Recensione Halo 5: Guardians",8.8,"2022-01-3", "./images/reviews/review-Halo 5.jpg"),
+("Halo infinite figurati...", 4, "Halo Infinite","Un ritorno epico",9,current_date(), "./images/reviews/review-Halo Infinite.jpg"),
+("Halo 5 non lo so...", 6, "Halo 5","Recensione Halo 5: Guardians",8.8,"2022-01-3", "./images/reviews/review-Halo 5.jpg"),
+("Halo infinite figurati...", 4, "Halo Infinite","Un ritorno epico",9,current_date(), "./images/reviews/review-Halo Infinite.jpg"),
+("Halo 5 non lo so...", 6, "Halo 5","Recensione Halo 5: Guardians",8.8,"2022-01-3", "./images/reviews/review-Halo 5.jpg"),
+("Halo infinite figurati...", 4, "Halo Infinite","Un ritorno epico",9,current_date(), "./images/reviews/review-Halo Infinite.jpg");
 
-insert into Notizia (testo, giornalista, gioco, titolo, dataCaricamento, immagine) values
-                                                                                       ("Halo Infinite è un gioco...", 2, "Halo Infinite", "Halo Infinite e la community tossica","2022-01-24", "./images/news/new-Halo Infinite e la community tossica.jpg"),
-                                                                                       ("Doppiaggio in italiano in...", 3, "Dark Souls",  "La Mod italiana per Dark Souls Remastered arriva domani","2021-10-13", "./images/news/new-La Mod italiana per Dark Souls Remastered arriva domani.jpg"),
-                                                                                       ("La nintendo...", 1, "Mario Kart 8", "I tesori di casa Nintendo","2020-03-03", "./images/news/new-I tesori di casa Nintendo.jpg"),
-                                                                                       ("Bloodborne 2 è molto atteso...", 6, "Bloodborne 2", "Bloodborne 2, rumor o verità","2019-09-12", "./images/news/new-Bloodborne 2, rumor o verità.jpg"),
-                                                                                       ("Fifa 21 fa sempre cagare...", 5, "FIFA 21", "FIFA 21 Cosa ci aspettiamo","2022-01-10", "./images/news/new-FIFA 21 Cosa ci aspettiamo.jpg"),
-                                                                                       ("Fifa 22 fa ancor più cagare...", 5, "FIFA 22", "FIFA 22 Cosa ci aspettiamo", "2022-01-29", "./images/news/new-FIFA 22 Cosa ci aspettiamo.jpg");
+insert into Notizia (testo, giornalista, titolo, dataCaricamento, immagine) values
+("Halo Infinite è un gioco...", 2,  "Halo Infinite e la community tossica","2022-01-24", "./images/news/new-Halo Infinite e la community tossica.jpg"),
+("Doppiaggio in italiano in...", 3,   "La Mod italiana per Dark Souls Remastered arriva domani","2021-10-13", "./images/news/new-La Mod italiana per Dark Souls Remastered arriva domani.jpg"),
+("La nintendo...", 1, "I tesori di casa Nintendo","2020-03-03", "./images/news/new-I tesori di casa Nintendo.jpg"),
+("Bloodborne 2 è molto atteso...", 6, "Bloodborne 2, rumor o verità","2019-09-12", "./images/news/new-Bloodborne 2, rumor o verità.jpg"),
+("Fifa 21 fa sempre cagare...", 5, "FIFA 21 Cosa ci aspettiamo","2022-01-10", "./images/news/new-FIFA 21 Cosa ci aspettiamo.jpg"),
+("Fifa 22 fa ancor più cagare...", 5,  "FIFA 22 Cosa ci aspettiamo", "2022-01-29", "./images/news/new-FIFA 22 Cosa ci aspettiamo.jpg"),
+("Halo Infinite è un gioco...", 2,  "Halo Infinite e la community tossica","2022-01-24", "./images/news/new-Halo Infinite e la community tossica.jpg"),
+("Doppiaggio in italiano in...", 3,   "La Mod italiana per Dark Souls Remastered arriva domani","2021-10-13", "./images/news/new-La Mod italiana per Dark Souls Remastered arriva domani.jpg"),
+("La nintendo...", 1, "I tesori di casa Nintendo","2020-03-03", "./images/news/new-I tesori di casa Nintendo.jpg"),
+("Bloodborne 2 è molto atteso...", 6, "Bloodborne 2, rumor o verità","2019-09-12", "./images/news/new-Bloodborne 2, rumor o verità.jpg"),
+("Fifa 21 fa sempre cagare...", 5, "FIFA 21 Cosa ci aspettiamo","2022-01-10", "./images/news/new-FIFA 21 Cosa ci aspettiamo.jpg"),
+("Fifa 22 fa ancor più cagare...", 5,  "FIFA 22 Cosa ci aspettiamo", "2022-01-29", "./images/news/new-FIFA 22 Cosa ci aspettiamo.jpg"),
+("Halo Infinite è un gioco...", 2,  "Halo Infinite e la community tossica","2022-01-24", "./images/news/new-Halo Infinite e la community tossica.jpg"),
+("Doppiaggio in italiano in...", 3,   "La Mod italiana per Dark Souls Remastered arriva domani","2021-10-13", "./images/news/new-La Mod italiana per Dark Souls Remastered arriva domani.jpg"),
+("La nintendo...", 1, "I tesori di casa Nintendo","2020-03-03", "./images/news/new-I tesori di casa Nintendo.jpg"),
+("Bloodborne 2 è molto atteso...", 6, "Bloodborne 2, rumor o verità","2019-09-12", "./images/news/new-Bloodborne 2, rumor o verità.jpg"),
+("Fifa 21 fa sempre cagare...", 5, "FIFA 21 Cosa ci aspettiamo","2022-01-10", "./images/news/new-FIFA 21 Cosa ci aspettiamo.jpg"),
+("Fifa 22 fa ancor più cagare...", 5,  "FIFA 22 Cosa ci aspettiamo", "2022-01-29", "./images/news/new-FIFA 22 Cosa ci aspettiamo.jpg"),
+("Halo Infinite è un gioco...", 2,  "Halo Infinite e la community tossica","2022-01-24", "./images/news/new-Halo Infinite e la community tossica.jpg"),
+("Doppiaggio in italiano in...", 3,   "La Mod italiana per Dark Souls Remastered arriva domani","2021-10-13", "./images/news/new-La Mod italiana per Dark Souls Remastered arriva domani.jpg"),
+("La nintendo...", 1, "I tesori di casa Nintendo","2020-03-03", "./images/news/new-I tesori di casa Nintendo.jpg"),
+("Bloodborne 2 è molto atteso...", 6, "Bloodborne 2, rumor o verità","2019-09-12", "./images/news/new-Bloodborne 2, rumor o verità.jpg"),
+("Fifa 21 fa sempre cagare...", 5, "FIFA 21 Cosa ci aspettiamo","2022-01-10", "./images/news/new-FIFA 21 Cosa ci aspettiamo.jpg"),
+("Fifa 22 fa ancor più cagare...", 5,  "FIFA 22 Cosa ci aspettiamo", "2022-01-29", "./images/news/new-FIFA 22 Cosa ci aspettiamo.jpg");
+
 
 insert into Gioco_Notizia values
                               (1, 3,"The Legend of Zelda Breath of the Wild"),
@@ -662,11 +704,32 @@ insert into Telefono values
                          ("zindre@yopmail.com","3115644357");
 
 insert into Prodotto (nome, descrizione, disponibilità, prezzo, immagine, sconto, mediaVoto, numeroVoti) values
-                                                                                                             ("Tazza Dark Souls", "Simpatica tazza ispirata a...", 30, 15.00, "./images/products/Tazza Dark Souls.jpg", true, 0, 0),
-                                                                                                             ("Pupazzo Super Mario", "Dolce pupazzo coccoloso di...", 10, 25.00, "./images/products/Pupazzo Super Mario.jpg", false, 0, 0),
-                                                                                                             ("T-shirt Zelda", "Splendida t-shirt di...", 20, 30.00, "./images/products/T-shirt Zelda.jpg", false, 0, 0),
-                                                                                                             ("Bracciale Bloodborne", "Stiloso bracciale...", 50, 13.00, "./images/products/Bracciale Bloodborne.jpg", true, 0, 0),
-                                                                                                             ("Pendente Elden Ring", "Realistico pendente...", 70, 18.00, "./images/products/Pendente Elden Ring.jpg", false, 0, 0);
+("Tazza Dark Souls", "Simpatica tazza ispirata a...", 30, 15.00, "./images/products/Tazza Dark Souls.jpg", true, 0, 0),
+("Pupazzo Super Mario", "Dolce pupazzo coccoloso di...", 10, 25.00, "./images/products/Pupazzo Super Mario.jpg", false, 0, 0),
+("T-shirt Zelda", "Splendida t-shirt di...", 20, 30.00, "./images/products/T-shirt Zelda.jpg", false, 0, 0),
+("Bracciale Bloodborne", "Stiloso bracciale...", 50, 13.00, "./images/products/Bracciale Bloodborne.jpg", true, 0, 0),
+("Pendente Elden Ring", "Realistico pendente...", 70, 18.00, "./images/products/Pendente Elden Ring.jpg", false, 0, 0),
+("Tazza Dark Souls", "Simpatica tazza ispirata a...", 30, 15.00, "./images/products/Tazza Dark Souls.jpg", true, 0, 0),
+("Pupazzo Super Mario", "Dolce pupazzo coccoloso di...", 10, 25.00, "./images/products/Pupazzo Super Mario.jpg", false, 0, 0),
+("T-shirt Zelda", "Splendida t-shirt di...", 20, 30.00, "./images/products/T-shirt Zelda.jpg", false, 0, 0),
+("Bracciale Bloodborne", "Stiloso bracciale...", 50, 13.00, "./images/products/Bracciale Bloodborne.jpg", true, 0, 0),
+("Pendente Elden Ring", "Realistico pendente...", 70, 18.00, "./images/products/Pendente Elden Ring.jpg", false, 0, 0),
+("Tazza Dark Souls", "Simpatica tazza ispirata a...", 30, 15.00, "./images/products/Tazza Dark Souls.jpg", true, 0, 0),
+("Pupazzo Super Mario", "Dolce pupazzo coccoloso di...", 10, 25.00, "./images/products/Pupazzo Super Mario.jpg", false, 0, 0),
+("T-shirt Zelda", "Splendida t-shirt di...", 20, 30.00, "./images/products/T-shirt Zelda.jpg", false, 0, 0),
+("Bracciale Bloodborne", "Stiloso bracciale...", 50, 13.00, "./images/products/Bracciale Bloodborne.jpg", true, 0, 0),
+("Pendente Elden Ring", "Realistico pendente...", 70, 18.00, "./images/products/Pendente Elden Ring.jpg", false, 0, 0),
+("Tazza Dark Souls", "Simpatica tazza ispirata a...", 30, 15.00, "./images/products/Tazza Dark Souls.jpg", true, 0, 0),
+("Pupazzo Super Mario", "Dolce pupazzo coccoloso di...", 10, 25.00, "./images/products/Pupazzo Super Mario.jpg", false, 0, 0),
+("T-shirt Zelda", "Splendida t-shirt di...", 20, 30.00, "./images/products/T-shirt Zelda.jpg", false, 0, 0),
+("Bracciale Bloodborne", "Stiloso bracciale...", 50, 13.00, "./images/products/Bracciale Bloodborne.jpg", true, 0, 0),
+("Pendente Elden Ring", "Realistico pendente...", 70, 18.00, "./images/products/Pendente Elden Ring.jpg", false, 0, 0),
+("Tazza Dark Souls", "Simpatica tazza ispirata a...", 30, 15.00, "./images/products/Tazza Dark Souls.jpg", true, 0, 0),
+("Pupazzo Super Mario", "Dolce pupazzo coccoloso di...", 10, 25.00, "./images/products/Pupazzo Super Mario.jpg", false, 0, 0),
+("T-shirt Zelda", "Splendida t-shirt di...", 20, 30.00, "./images/products/T-shirt Zelda.jpg", false, 0, 0),
+("Bracciale Bloodborne", "Stiloso bracciale...", 50, 13.00, "./images/products/Bracciale Bloodborne.jpg", true, 0, 0),
+("Pendente Elden Ring", "Realistico pendente...", 70, 18.00, "./images/products/Pendente Elden Ring.jpg", false, 0, 0);
+
 
 insert into Gradimento values
                            (1, "cazzare@yopmail.com", 8, "2022-05-12"),

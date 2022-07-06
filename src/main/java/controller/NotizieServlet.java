@@ -38,16 +38,17 @@ public class NotizieServlet extends HttpServlet {
             String piattafomra = request.getParameter("piattaforma");
             String tipologia = request.getParameter("tipologia");
             String ordine =request.getParameter("ordine");
-            System.out.println(lastID + " " + reset + " " +piattafomra + " " + tipologia + " " + ordine);
             notizie = nDAO.updateContent(lastID,reset, piattafomra, tipologia, ordine);
         } catch (SQLException e) {
             System.out.println(e);
             throw new RuntimeException(e);
         }
-        JSONArray json = new JSONArray(notizie);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json.toString());
+        if(notizie != null){
+            JSONArray json = new JSONArray(notizie);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json.toString());
+        }
         response.getWriter().flush(); //Calling flush() on the PrintWriter commits the response.
     }
 }

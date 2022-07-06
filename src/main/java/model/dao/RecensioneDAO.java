@@ -48,7 +48,7 @@ public class RecensioneDAO {
         PreparedStatement ps =
                 con.prepareStatement("SELECT g.nome, g.cognome, g.nome ,r.id, r.titolo, r.testo, r.voto, r.DataCaricamento, r.gioco, r.immagine " +
                                          "FROM recensione r JOIN giornalista g on g.id = r.giornalista " +
-                                         "ORDER BY r.DataCaricamento DESC LIMIT 10");
+                                         "ORDER BY r.DataCaricamento DESC LIMIT 12");
 
 
         ResultSet rs = ps.executeQuery();
