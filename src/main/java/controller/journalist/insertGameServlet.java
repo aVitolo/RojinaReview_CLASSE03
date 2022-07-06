@@ -1,4 +1,4 @@
-package controller;
+package controller.journalist;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -50,19 +50,19 @@ public class insertGameServlet extends HttpServlet {
         }
 
         g.setTipologie(new ArrayList<>());
-        for(Tipologia t : tipologie)
-            if(t.getNome().equalsIgnoreCase(request.getParameter(t.getNome())))
+        for (Tipologia t : tipologie)
+            if (t.getNome().equalsIgnoreCase(request.getParameter(t.getNome())))
                 g.getTipologie().add(t);
 
 
         g.setPiattaforme(new ArrayList<>());
-        for(Piattaforma p : piattaforme)
-            if(p.getNome().equalsIgnoreCase(request.getParameter(p.getNome())))
+        for (Piattaforma p : piattaforme)
+            if (p.getNome().equalsIgnoreCase(request.getParameter(p.getNome())))
                 g.getPiattaforme().add(p);
 
         Part filePart = request.getPart("copertina");
         String imageType = "games";
-        String fileName = g.getTitolo()+".jpg";
+        String fileName = g.getTitolo() + ".jpg";
         g.setCopertina(Utils.saveImageWar(imageType, fileName, filePart));
         Utils.saveImageFileSystem(imageType, fileName, filePart);
 

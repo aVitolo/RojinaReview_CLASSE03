@@ -13,7 +13,8 @@ public class Pagamento {
 
     /* Constructors */
 
-    public Pagamento() {}
+    public Pagamento() {
+    }
 
     public Pagamento(String nome,
                      String cognome,

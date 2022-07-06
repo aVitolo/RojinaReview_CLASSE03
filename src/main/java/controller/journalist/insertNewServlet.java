@@ -1,4 +1,4 @@
-package controller;
+package controller.journalist;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -30,7 +30,7 @@ public class insertNewServlet extends HttpServlet {
         String result = "/Rojina_Review_war/journalistNews";
         ArrayList<String> allGames = (ArrayList<String>) request.getServletContext().getAttribute("nomiGiochi");
         Giornalista g = (Giornalista) request.getSession().getAttribute("giornalista");
-        String nomeG = g.getNome()+" "+g.getCognome();
+        String nomeG = g.getNome() + " " + g.getCognome();
 
         //recensione da inserire presa dal form
         Notizia n = new Notizia();
@@ -44,7 +44,7 @@ public class insertNewServlet extends HttpServlet {
         String fileName = "new-" + n.getTitolo() + ".jpg";
         n.setImmagine(Utils.saveImageWar(imageType, fileName, filePart));
         Utils.saveImageFileSystem(imageType, fileName, filePart);
-        
+
         try {
             new NotiziaDAO().doSave(n, g.getId());
             new NotiziaDAO().doSaveMentioned(n.getGiochi(), g.getId());
@@ -56,14 +56,12 @@ public class insertNewServlet extends HttpServlet {
 
     }
 
-    public ArrayList<String> parseGames(String toParse, ArrayList<String> allGames)
-    {
+    public ArrayList<String> parseGames(String toParse, ArrayList<String> allGames) {
         ArrayList<String> parsedGames = new ArrayList<>();
 
-        for(String s : allGames)
-            if(toParse.contains(s))
+        for (String s : allGames)
+            if (toParse.contains(s))
                 parsedGames.add(s);
-
 
 
         return parsedGames;

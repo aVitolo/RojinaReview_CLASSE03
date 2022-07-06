@@ -1,4 +1,4 @@
-package controller;
+package controller.startConfigurations;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -24,7 +24,7 @@ public class ContextSetUpingServlet extends HttpServlet {
             System.out.println("News Error");
             throw new RuntimeException(e);
         }
-        config.getServletContext().setAttribute("notizie",notizie);
+        config.getServletContext().setAttribute("notizie", notizie);
 
         ArrayList<Recensione> recensioni;
         RecensioneDAO rDAO;
@@ -35,7 +35,7 @@ public class ContextSetUpingServlet extends HttpServlet {
             System.out.println("Reviews ERROR");
             throw new RuntimeException(e);
         }
-        config.getServletContext().setAttribute("recensioni",recensioni);
+        config.getServletContext().setAttribute("recensioni", recensioni);
 
         ArrayList<Prodotto> prodotti;
         ProdottoDAO pDAO;
@@ -46,7 +46,7 @@ public class ContextSetUpingServlet extends HttpServlet {
             System.out.println("Reviews ERROR");
             throw new RuntimeException(e);
         }
-        config.getServletContext().setAttribute("prodotti",prodotti);
+        config.getServletContext().setAttribute("prodotti", prodotti);
 
         ArrayList<Tipologia> tipologie;
         TipologiaDAO tDAO;
@@ -57,7 +57,7 @@ public class ContextSetUpingServlet extends HttpServlet {
             System.out.println("Tipologie ERROR");
             throw new RuntimeException(e);
         }
-        config.getServletContext().setAttribute("tipologie",tipologie);
+        config.getServletContext().setAttribute("tipologie", tipologie);
 
         ArrayList<Categoria> categorie;
         CategoriaDAO cDAO;
@@ -68,7 +68,7 @@ public class ContextSetUpingServlet extends HttpServlet {
             System.out.println("Categorie ERROR");
             throw new RuntimeException(e);
         }
-        config.getServletContext().setAttribute("categorie",categorie);
+        config.getServletContext().setAttribute("categorie", categorie);
 
         ArrayList<Piattaforma> piattaforme;
         PiattaformaDAO ptDAO;
@@ -79,7 +79,7 @@ public class ContextSetUpingServlet extends HttpServlet {
             System.out.println("Piattaforma ERROR");
             throw new RuntimeException(e);
         }
-        config.getServletContext().setAttribute("piattaforme",piattaforme);
+        config.getServletContext().setAttribute("piattaforme", piattaforme);
 
         ArrayList<String> giochi;
         GiocoDAO gcDAO;

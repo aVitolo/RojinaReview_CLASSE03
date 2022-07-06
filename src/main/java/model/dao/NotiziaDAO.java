@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class NotiziaDAO {
-    private Connection con;
+    private final Connection con;
 
     public NotiziaDAO() throws SQLException {
         con = ConPool.getConnection();
@@ -20,21 +20,21 @@ public class NotiziaDAO {
         this.con = con;
     }
 
-    public Notizia doRetrieveById(int id ) throws SQLException {
+    public Notizia doRetrieveById(int id) throws SQLException {
         PreparedStatement ps =
-                    con.prepareStatement("SELECT g.Nome,g.Cognome, n.id, n.titolo, n.testo, n.dataCaricamento, n.immagine FROM notizia n JOIN giornalista g on g.id = n.giornalista WHERE n.id=?");
+                con.prepareStatement("SELECT g.Nome,g.Cognome, n.id, n.titolo, n.testo, n.dataCaricamento, n.immagine FROM notizia n JOIN giornalista g on g.id = n.giornalista WHERE n.id=?");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             Notizia n = new Notizia();
-            n.setGiornalista(rs.getString(1)+" "+rs.getString(2));
+            n.setGiornalista(rs.getString(1) + " " + rs.getString(2));
             n.setId(rs.getInt(3));
             n.setTitolo(rs.getString(4));
             n.setTesto(rs.getString(5));
             n.setDataCaricamento(rs.getDate(6));
             n.setImmagine(rs.getString(7));
             //n.setGioco(new GiocoDAO(con).doRetrieveByTitle(rs.getString(8)));
-            n.setCommenti(new CommentoDAO(con).getCommentById(id,"Notizia"));
+            n.setCommenti(new CommentoDAO(con).getCommentById(id, "Notizia"));
             n.setGiochi(new GiocoDAO(con).getGiocoByIdNotizia(id));
             return n;
         }
@@ -42,26 +42,26 @@ public class NotiziaDAO {
         return null;
     }
 
-    public ArrayList<Notizia> doRetrieveLast()  throws SQLException {
+    public ArrayList<Notizia> doRetrieveLast() throws SQLException {
 
         ArrayList<Notizia> notizie = new ArrayList<>();
 
         PreparedStatement ps =
                 con.prepareStatement("SELECT g.Nome,g.Cognome, n.id, n.titolo, n.testo, n.dataCaricamento, n.immagine " +
-                                         "FROM notizia n JOIN giornalista g on g.id = n.giornalista " +
-                                         "ORDER BY n.id DESC LIMIT 12");
+                        "FROM notizia n JOIN giornalista g on g.id = n.giornalista " +
+                        "ORDER BY n.id DESC LIMIT 12");
 
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
             Notizia n = new Notizia();
-            n.setGiornalista(rs.getString(1)+" "+rs.getString(2));
+            n.setGiornalista(rs.getString(1) + " " + rs.getString(2));
             n.setId(rs.getInt(3));
             n.setTitolo(rs.getString(4));
             n.setTesto(rs.getString(5));
             n.setDataCaricamento(rs.getDate(6));
             n.setImmagine(rs.getString(7));
-            n.setCommenti(new CommentoDAO(con).getCommentById(n.getId(),"Notizia"));
+            n.setCommenti(new CommentoDAO(con).getCommentById(n.getId(), "Notizia"));
             n.setGiochi(new GiocoDAO(con).getGiocoByIdNotizia(n.getId()));
             notizie.add(n);
         }
@@ -76,17 +76,16 @@ public class NotiziaDAO {
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
 
-        while (rs.next())
-        {
+        while (rs.next()) {
             Notizia n = new Notizia();
-            n.setGiornalista(rs.getString(1)+" "+rs.getString(2));
+            n.setGiornalista(rs.getString(1) + " " + rs.getString(2));
             n.setId(rs.getInt(3));
             n.setTitolo(rs.getString(4));
             n.setTesto(rs.getString(5));
             n.setDataCaricamento(rs.getDate(6));
             n.setImmagine(rs.getString(7));
             //n.setGioco(new GiocoDAO(con).doRetrieveByTitle(rs.getString(8)));
-            n.setCommenti(new CommentoDAO(con).getCommentById(id,"Notizia"));
+            n.setCommenti(new CommentoDAO(con).getCommentById(id, "Notizia"));
             n.setGiochi(new GiocoDAO(con).getGiocoByIdNotizia(id));
             notizie.add(n);
         }
@@ -103,7 +102,7 @@ public class NotiziaDAO {
         ps.setDate(4, n.getDataCaricamento());
         ps.setString(5, n.getImmagine());
 
-        if(ps.executeUpdate() != 1)
+        if (ps.executeUpdate() != 1)
             throw new RuntimeException("Insert error");
     }
 
@@ -112,18 +111,18 @@ public class NotiziaDAO {
         int idNotizia;
         PreparedStatement ps = con.prepareStatement("SELECT id FROM Notizia ORDER BY id DESC LIMIT 1"); //prende l'id della notizia appena inserita in insertNewServlet
         ResultSet rs = ps.executeQuery();
-        if(rs.next())
+        if (rs.next())
             idNotizia = rs.getInt("id");
         else return;
 
-        for(String s : mentioned){
+        for (String s : mentioned) {
             ps = con.prepareStatement("INSERT INTO gioco_notizia (giornalista, notizia, gioco) VALUES (?, ?, ?)");
 
             ps.setInt(1, idGiornalista);
             ps.setInt(2, idNotizia);
             ps.setString(3, s);
 
-            if(ps.executeUpdate() != 1)
+            if (ps.executeUpdate() != 1)
                 throw new RuntimeException("Insert error");
         }
     }
@@ -132,17 +131,17 @@ public class NotiziaDAO {
         ArrayList<Notizia> notizie = new ArrayList<>();
 
         String select = " SELECT n.id, n.titolo, n.testo, n.immagine ";
-        String from =   " FROM notizia n"+
-                        (!piattaforma.equals("Piattaforma") ? " JOIN gioco_notizia gn1 on n.id=gn1.notizia JOIN gioco_piattaforma gp on gn1.gioco=gp.gioco " : " " )+
-                        (!tipologia.equals("Tipologia") ? " JOIN gioco_notizia gn2 on n.id=gn2.notizia JOIN gioco_tipologia gt on gn2.gioco=gt.gioco " : " ");
+        String from = " FROM notizia n" +
+                (!piattaforma.equals("Piattaforma") ? " JOIN gioco_notizia gn1 on n.id=gn1.notizia JOIN gioco_piattaforma gp on gn1.gioco=gp.gioco " : " ") +
+                (!tipologia.equals("Tipologia") ? " JOIN gioco_notizia gn2 on n.id=gn2.notizia JOIN gioco_tipologia gt on gn2.gioco=gt.gioco " : " ");
         String where = " WHERE ";
-         where +=       (!piattaforma.equals("Piattaforma") ? " gp.piattaforma='"+piattaforma+"'" : "" );
-         where +=       (!tipologia.equals("Tipologia") ? (where.equals(" WHERE ") ? "gt.tipologia='"+tipologia+"'" : " AND gt.tipologia='"+tipologia+"'") : "");
-         where +=       (!reset.equals("yes") ? (lastID != -1 ? (where.equals(" WHERE ") ? " n.id < "+String.valueOf(lastID) :" AND n.id < "+String.valueOf(lastID)) : (where.equals(" WHERE ") ? " n.id >"+String.valueOf(lastID) :" AND n.id > "+String.valueOf(lastID))) : "");
+        where += (!piattaforma.equals("Piattaforma") ? " gp.piattaforma='" + piattaforma + "'" : "");
+        where += (!tipologia.equals("Tipologia") ? (where.equals(" WHERE ") ? "gt.tipologia='" + tipologia + "'" : " AND gt.tipologia='" + tipologia + "'") : "");
+        where += (!reset.equals("yes") ? (lastID != -1 ? (where.equals(" WHERE ") ? " n.id < " + lastID : " AND n.id < " + lastID) : (where.equals(" WHERE ") ? " n.id >" + lastID : " AND n.id > " + lastID)) : "");
         if (where.equals(" WHERE ")) where = " ";
-        String order =  " ORDER BY n.id " +
-                        (ordina.equals("Least Recent")? " ASC " : " DESC ") +
-                        " LIMIT 12 ";
+        String order = " ORDER BY n.id " +
+                (ordina.equals("Least Recent") ? " ASC " : " DESC ") +
+                " LIMIT 12 ";
 
         PreparedStatement ps =
                 con.prepareStatement(select + from + where + order);
@@ -152,7 +151,7 @@ public class NotiziaDAO {
             Notizia n = new Notizia();
             n.setId(rs.getInt(1));
             n.setTitolo(rs.getString(2));
-            n.setTesto(rs.getString(3));;
+            n.setTesto(rs.getString(3));
             n.setImmagine(rs.getString(4));
             notizie.add(n);
         }

@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class GiornalistaDAO implements GenericStaffDAO {
-    private Connection con;
+    private final Connection con;
 
 
     public GiornalistaDAO() throws SQLException {

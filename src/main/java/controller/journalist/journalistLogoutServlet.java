@@ -1,4 +1,4 @@
-package controller;
+package controller.journalist;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;

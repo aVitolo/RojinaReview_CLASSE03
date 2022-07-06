@@ -1,4 +1,4 @@
-package controller;
+package controller.journalist;
 
 
 import jakarta.servlet.*;
@@ -27,7 +27,7 @@ public class insertReviewServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String result = "/Rojina_Review_war/journalistReviews";
         Giornalista g = (Giornalista) request.getSession().getAttribute("giornalista");
-        String nomeG = g.getNome()+" "+g.getCognome();
+        String nomeG = g.getNome() + " " + g.getCognome();
 
         //recensione da inserire presa dal form
         Recensione r = new Recensione();
@@ -43,7 +43,7 @@ public class insertReviewServlet extends HttpServlet {
 
         Part filePart = request.getPart("immagine");
         String imageType = "reviews";
-        String fileName = "review-"+r.getGioco().getTitolo()+".jpg";
+        String fileName = "review-" + r.getGioco().getTitolo() + ".jpg";
         r.setImmagine(Utils.saveImageWar(imageType, fileName, filePart));
         Utils.saveImageFileSystem(imageType, fileName, filePart);
 
@@ -52,8 +52,6 @@ public class insertReviewServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
 
 
         response.sendRedirect(result);

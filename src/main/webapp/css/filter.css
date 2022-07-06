@@ -1,11 +1,11 @@
-.filter{
+.filter {
     display: flex;
     justify-content: space-evenly;
     margin: 1%;
 }
 
-@media screen and (max-width: 768px){
-    .filter{
+@media screen and (max-width: 768px) {
+    .filter {
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -13,7 +13,7 @@
         margin: 1%;
     }
 
-    .dropbtn{
+    .dropbtn {
         margin: 2% 0;
     }
 }
@@ -29,7 +29,7 @@
     border-radius: 2px;
 }
 
-.closebtn{
+.closebtn {
     position: absolute;
     top: -5px;
     right: -15px;
@@ -45,7 +45,7 @@
     align-items: center;
 }
 
-.dropbtn:hover, .closebtn:hover{
+.dropbtn:hover, .closebtn:hover {
     background-color: #6B354D;
 }
 
@@ -79,17 +79,17 @@
 }
 
 .dropdown-content::-webkit-scrollbar {
-    width: 12px;               /* width of the entire scrollbar */
+    width: 12px; /* width of the entire scrollbar */
 }
 
 .dropdown-content::-webkit-scrollbar-track {
-    background: #24262b;        /* color of the tracking area */
+    background: #24262b; /* color of the tracking area */
 }
 
 .dropdown-content::-webkit-scrollbar-thumb {
-    background-color: #6B354D;    /* color of the scroll thumb */
-    border-radius: 20px;       /* roundness of the scroll thumb */
-    border: 3px solid #24262b;  /* creates padding around scroll thumb */
+    background-color: #6B354D; /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+    border: 3px solid #24262b; /* creates padding around scroll thumb */
 }
 
 .dropdown-content p {
@@ -102,5 +102,5 @@
 
 .show {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
 }

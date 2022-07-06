@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class GiocoDAO {
-    private Connection con;
+    private final Connection con;
 
     public GiocoDAO() throws SQLException {
         con = ConPool.getConnection();
@@ -26,7 +26,7 @@ public class GiocoDAO {
 
     public Gioco doRetrieveByTitle(String titolo) throws SQLException {
         PreparedStatement ps =
-                    con.prepareStatement("SELECT * FROM gioco WHERE titolo=?");
+                con.prepareStatement("SELECT * FROM gioco WHERE titolo=?");
         ps.setString(1, titolo);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
@@ -39,7 +39,7 @@ public class GiocoDAO {
                     rs.getString(6),
                     new PiattaformaDAO(con).doRetriveByGame(titolo),
                     new TipologiaDAO(con).doRetriveByGame(titolo));
-            }
+        }
 
         return null;
 
@@ -51,8 +51,7 @@ public class GiocoDAO {
         PreparedStatement ps = con.prepareStatement("SELECT * FROM gioco");
         ResultSet rs = ps.executeQuery();
 
-        while(rs.next())
-        {
+        while (rs.next()) {
             Gioco g = new Gioco();
 
             g.setTitolo(rs.getString("titolo"));
@@ -70,15 +69,15 @@ public class GiocoDAO {
     }
 
     public ArrayList<String> getGiocoByIdNotizia(int id) throws SQLException {
-            PreparedStatement ps =
-                    con.prepareStatement("SELECT g.titolo FROM gioco g join gioco_notizia gn on  g.titolo=gn.gioco WHERE notizia=?");
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            ArrayList<String> g = new ArrayList<>();
-            while (rs.next())
-                g.add(rs.getString(1));
+        PreparedStatement ps =
+                con.prepareStatement("SELECT g.titolo FROM gioco g join gioco_notizia gn on  g.titolo=gn.gioco WHERE notizia=?");
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        ArrayList<String> g = new ArrayList<>();
+        while (rs.next())
+            g.add(rs.getString(1));
 
-            return g;
+        return g;
 
     }
 
@@ -87,7 +86,7 @@ public class GiocoDAO {
         PreparedStatement ps = con.prepareStatement("SELECT titolo FROM Gioco");
         ResultSet rs = ps.executeQuery();
 
-        while(rs.next())
+        while (rs.next())
             games.add(rs.getString("titolo"));
 
         return games;
@@ -105,8 +104,7 @@ public class GiocoDAO {
         ps.setString(6, g.getCopertina());
 
 
-
-        if(ps.executeUpdate() != 1)
+        if (ps.executeUpdate() != 1)
             throw new RuntimeException("Insert error");
     }
 

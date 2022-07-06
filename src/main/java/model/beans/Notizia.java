@@ -26,14 +26,14 @@ public class Notizia extends Articolo {
                    String testo,
                    String titolo,
                    String giornalista) {
-        super(  commenti,
+        super(commenti,
                 immagine,
                 dataCaricamento,
                 gioco,
                 id,
                 testo,
                 titolo,
-                giornalista );
+                giornalista);
         this.giochi = giochi;
     }
 

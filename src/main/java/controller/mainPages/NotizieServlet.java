@@ -1,4 +1,4 @@
-package controller;
+package controller.mainPages;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 @WebServlet(name = "NotizieServlet", value = "/NotizieServlet")
 public class NotizieServlet extends HttpServlet {
-    private String path ="/WEB-INF/results/notizie.jsp";
+    private String path = "/WEB-INF/results/notizie.jsp";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,18 +32,18 @@ public class NotizieServlet extends HttpServlet {
         try {
             nDAO = new NotiziaDAO();
             int lastID = -1;
-            if(request.getParameter("lastID")!=null)
-                lastID=Integer.parseInt(request.getParameter("lastID"));
+            if (request.getParameter("lastID") != null)
+                lastID = Integer.parseInt(request.getParameter("lastID"));
             String reset = request.getParameter("reset");
             String piattafomra = request.getParameter("piattaforma");
             String tipologia = request.getParameter("tipologia");
-            String ordine =request.getParameter("ordine");
-            notizie = nDAO.updateContent(lastID,reset, piattafomra, tipologia, ordine);
+            String ordine = request.getParameter("ordine");
+            notizie = nDAO.updateContent(lastID, reset, piattafomra, tipologia, ordine);
         } catch (SQLException e) {
             System.out.println(e);
             throw new RuntimeException(e);
         }
-        if(notizie != null){
+        if (notizie != null) {
             JSONArray json = new JSONArray(notizie);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");

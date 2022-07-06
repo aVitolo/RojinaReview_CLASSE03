@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AmministratoreDAO implements GenericStaffDAO {
-    private Connection con;
+    private final Connection con;
 
 
     public AmministratoreDAO() throws SQLException {

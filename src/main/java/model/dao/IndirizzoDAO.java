@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class IndirizzoDAO {
-    private Connection con;
+    private final Connection con;
 
     //Così da creare una sola connessione per ogni dao
     public IndirizzoDAO() throws SQLException {

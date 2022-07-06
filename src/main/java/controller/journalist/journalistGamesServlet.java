@@ -1,4 +1,4 @@
-package controller;
+package controller.journalist;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -13,6 +13,7 @@ import java.sql.SQLException;
 @WebServlet(name = "journalistGamesServlet", value = "/journalistGamesServlet")
 public class journalistGamesServlet extends HttpServlet {
     private String path = "/WEB-INF/results/journalistGames.jsp";
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {

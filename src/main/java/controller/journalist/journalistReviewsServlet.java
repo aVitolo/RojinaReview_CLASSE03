@@ -1,4 +1,4 @@
-package controller;
+package controller.journalist;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -12,6 +12,7 @@ import java.sql.SQLException;
 @WebServlet(name = "journalistReviewsServlet", value = "/journalistReviewsServlet")
 public class journalistReviewsServlet extends HttpServlet {
     private String path = "/WEB-INF/results/journalistReviews.jsp";
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
