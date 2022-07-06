@@ -6,14 +6,14 @@
 
     <servlet>
         <servlet-name>ContextSetUpingServlet</servlet-name>
-        <servlet-class>controller.ContextSetUpingServlet</servlet-class>
+        <servlet-class>controller.startConfigurations.ContextSetUpingServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
 
 
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
-        <servlet-class>controller.HomeServlet</servlet-class>
+        <servlet-class>controller.mainPages.HomeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
@@ -22,7 +22,7 @@
 
     <servlet>
         <servlet-name>RecensioneServlet</servlet-name>
-        <servlet-class>controller.RecensioniServlet</servlet-class>
+        <servlet-class>controller.mainPages.RecensioniServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RecensioneServlet</servlet-name>
@@ -31,7 +31,7 @@
 
     <servlet>
         <servlet-name>NotizieServlet</servlet-name>
-        <servlet-class>controller.NotizieServlet</servlet-class>
+        <servlet-class>controller.mainPages.NotizieServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>NotizieServlet</servlet-name>
@@ -40,7 +40,7 @@
 
     <servlet>
         <servlet-name>ShopServlet</servlet-name>
-        <servlet-class>controller.ShopServlet</servlet-class>
+        <servlet-class>controller.mainPages.ShopServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ShopServlet</servlet-name>
@@ -67,7 +67,7 @@
 
     <servlet>
         <servlet-name>journalistAreaServlet</servlet-name>
-        <servlet-class>controller.journalistAreaServlet</servlet-class>
+        <servlet-class>controller.journalist.journalistAreaServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>journalistAreaServlet</servlet-name>
@@ -76,7 +76,7 @@
 
     <servlet>
         <servlet-name>journalistReviewsServlet</servlet-name>
-        <servlet-class>controller.journalistReviewsServlet</servlet-class>
+        <servlet-class>controller.journalist.journalistReviewsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>journalistReviewsServlet</servlet-name>
@@ -85,7 +85,7 @@
 
     <servlet>
         <servlet-name>journalistNewsServlet</servlet-name>
-        <servlet-class>controller.journalistNewsServlet</servlet-class>
+        <servlet-class>controller.journalist.journalistNewsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>journalistNewsServlet</servlet-name>
@@ -94,7 +94,7 @@
 
     <servlet>
         <servlet-name>journalistGamesServlet</servlet-name>
-        <servlet-class>controller.journalistGamesServlet</servlet-class>
+        <servlet-class>controller.journalist.journalistGamesServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>journalistGamesServlet</servlet-name>
@@ -103,7 +103,7 @@
 
     <servlet>
         <servlet-name>insertReviewServlet</servlet-name>
-        <servlet-class>controller.insertReviewServlet</servlet-class>
+        <servlet-class>controller.journalist.insertReviewServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>insertReviewServlet</servlet-name>
@@ -112,7 +112,7 @@
 
     <servlet>
         <servlet-name>insertNewServlet</servlet-name>
-        <servlet-class>controller.insertNewServlet</servlet-class>
+        <servlet-class>controller.journalist.insertNewServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>insertNewServlet</servlet-name>
@@ -121,7 +121,7 @@
 
     <servlet>
         <servlet-name>insertGameServlet</servlet-name>
-        <servlet-class>controller.insertGameServlet</servlet-class>
+        <servlet-class>controller.journalist.insertGameServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>insertGameServlet</servlet-name>
@@ -130,7 +130,7 @@
 
     <servlet>
         <servlet-name>journalistLogoutServlet</servlet-name>
-        <servlet-class>controller.journalistLogoutServlet</servlet-class>
+        <servlet-class>controller.journalist.journalistLogoutServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>journalistLogoutServlet</servlet-name>
@@ -139,7 +139,7 @@
 
     <servlet>
         <servlet-name>getSingleResourceServlet</servlet-name>
-        <servlet-class>controller.getSingleResourceServlet</servlet-class>
+        <servlet-class>controller.utilities.getSingleResourceServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>getSingleResourceServlet</servlet-name>

@@ -23,10 +23,10 @@ public class Utente extends Persona {
         super();
     }
 
-    public Utente(String email, String password, String nickname){
-      super(email,password);
-      this.nickname = nickname;
-    };
+    public Utente(String email, String password, String nickname) {
+        super(email, password);
+        this.nickname = nickname;
+    }
 
     /* Contructor for insert in DB */
 

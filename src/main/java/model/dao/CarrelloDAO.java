@@ -11,12 +11,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CarrelloDAO {
-    private Connection con;
+    private final Connection con;
 
     public CarrelloDAO() throws SQLException {
         con = ConPool.getConnection();
     }
-    public CarrelloDAO(Connection con){
+
+    public CarrelloDAO(Connection con) {
         this.con = con;
     }
 
@@ -36,8 +37,8 @@ public class CarrelloDAO {
         con.prepareStatement("SELECT totale FROM carrello WHERE utente=?");
         ps.setString(1, user);
         rs = ps.executeQuery();
-        if(rs.next())
-            totale =rs.getFloat(1);
+        if (rs.next())
+            totale = rs.getFloat(1);
         return new Carrello(prodotti, totale);
 
     }

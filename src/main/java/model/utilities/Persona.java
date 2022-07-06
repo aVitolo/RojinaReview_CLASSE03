@@ -1,6 +1,7 @@
 package model.utilities;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -11,10 +12,10 @@ public abstract class Persona {
     private String email;
     private String password;
 
-    public Persona(){
+    public Persona() {
     }
 
-    public Persona(String email, String password){
+    public Persona(String email, String password) {
         this.email = email;
         this.password = password;
     }
@@ -61,12 +62,12 @@ public abstract class Persona {
     /* Password Hashing */
 
     public static String calcolaHash(String password) throws UnsupportedEncodingException {
-        StringBuilder  passwordAfterHash= new StringBuilder();
+        StringBuilder passwordAfterHash = new StringBuilder();
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(password.getBytes("UTF-8"));
+            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 
-            for (int i: hash) {
+            for (int i : hash) {
                 passwordAfterHash.append(String.format("%02x", 0XFF & i));
             }
             return new String(passwordAfterHash);

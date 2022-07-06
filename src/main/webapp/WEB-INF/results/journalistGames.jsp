@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -17,7 +17,7 @@
             <label for="casaDiSviluppo">Casa di sviluppo: </label>
             <input type="text" id="casaDiSviluppo" name="casaDiSviluppo">
             <label for="dataDiRilascio">Data di rilascio: </label>
-            <input type="date" id="dataDiRilascio" name="dataDiRilascio" placeholder="yyyy-mm-dd" >
+            <input type="date" id="dataDiRilascio" name="dataDiRilascio" placeholder="yyyy-mm-dd">
             <label for="copertina">Copertina: </label>
             <input type="file" id="copertina" name="copertina">
             <span id="tipologia">Tipologia: </span>
@@ -39,9 +39,9 @@
 
     <section class="articoli">
         <c:forEach items="${requestScope['giochiGiornalista']}" var="articolo">
-            <div class = "articolo">
-                <img src = "${articolo.copertina}", alt = "copertina" decoding="async">
-                <div class = "articolo-content">
+            <div class="articolo">
+                <img src="${articolo.copertina}" , alt="copertina" decoding="async">
+                <div class="articolo-content">
                     <h2>${articolo.titolo}</h2>
                     <p>${articolo.casaDiSviluppo}</p>
                     <p class="voto">${articolo.mediaVoto}</p>

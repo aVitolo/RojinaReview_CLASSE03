@@ -1,10 +1,10 @@
 package model.beans;
 
-public class Telefono{
+public class Telefono {
 
     /* Attributes */
 
-     private String numero;
+    private String numero;
 
     /* Constructors */
 
@@ -12,8 +12,8 @@ public class Telefono{
     }
 
     public Telefono(String numero) {
-            this.numero = numero;
-        }
+        this.numero = numero;
+    }
 
     /* Getter & Setter */
 

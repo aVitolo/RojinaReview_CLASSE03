@@ -1,4 +1,4 @@
-package controller;
+package controller.mainPages;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -13,7 +13,7 @@ import java.util.Comparator;
 @WebServlet(name = "HomeServlet", value = "/HomeServlet")
 public class HomeServlet extends HttpServlet {
 
-    private String path ="/WEB-INF/results/home.jsp";
+    private String path = "/WEB-INF/results/home.jsp";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -24,8 +24,8 @@ public class HomeServlet extends HttpServlet {
         articoli.sort(Comparator.comparing(a -> a.getDataCaricamento()));
         Articolo copertina = articoli.remove(0);
 
-        request.setAttribute("copertina",copertina);
-        request.setAttribute("articoli",articoli);
+        request.setAttribute("copertina", copertina);
+        request.setAttribute("articoli", articoli);
 
         RequestDispatcher dispatcher =
                 request.getRequestDispatcher(path);

@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% if(request.getSession().getAttribute("utente") != null)
+<% if (request.getSession().getAttribute("utente") != null)
     response.sendRedirect("./home");%>
 <html lang="en">
 <head>
@@ -32,7 +32,7 @@
         </div>
         <input type="submit" value="Login">
         <div class="register_link">
-            <p>Non sei Registrato? <a href="#">Registrati</a> </p>
+            <p>Non sei Registrato? <a href="#">Registrati</a></p>
         </div>
     </form>
 </div>

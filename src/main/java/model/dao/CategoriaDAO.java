@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CategoriaDAO {
-    private Connection con;
+    private final Connection con;
 
     public CategoriaDAO() throws SQLException {
         con = ConPool.getConnection();
@@ -22,9 +22,9 @@ public class CategoriaDAO {
 
     public ArrayList<Categoria> doRetrieveByProductId(int id) throws SQLException {
         PreparedStatement ps =
-                    con.prepareStatement("SELECT categoria FROM prodotto_categoria WHERE prodotto=?");
-        ps.setInt(1,id);
-        ResultSet rs =  ps.executeQuery();
+                con.prepareStatement("SELECT categoria FROM prodotto_categoria WHERE prodotto=?");
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
         ArrayList<Categoria> categorie = new ArrayList<>();
         while (rs.next())
             categorie.add(new Categoria(rs.getString(1)));
@@ -36,7 +36,7 @@ public class CategoriaDAO {
                 con.prepareStatement("SELECT DISTINCT categoria FROM prodotto_categoria");
         ResultSet rs = ps.executeQuery();
         ArrayList<Categoria> categorie = new ArrayList<>();
-        while(rs.next())
+        while (rs.next())
             categorie.add(new Categoria(rs.getString(1)));
         return categorie;
     }

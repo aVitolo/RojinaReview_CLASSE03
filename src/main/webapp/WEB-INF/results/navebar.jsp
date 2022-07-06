@@ -1,5 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,8 +9,8 @@
 <header id="head">
 
     <section class="bar">
-        <img class="logo" src="./images/utility/rojinah.png" alt="Logo" />
-        <button class="expand" onclick="expandMenu()"> ≡ </button>
+        <img class="logo" src="./images/utility/rojinah.png" alt="Logo"/>
+        <button class="expand" onclick="expandMenu()"> ≡</button>
     </section>
 
     <section class="navigazione" id="nav">
@@ -23,14 +23,15 @@
 
     <section class="user" id="us">
         <c:choose>
-            <c:when test = "${sessionScope.get('utente') != null}">
+            <c:when test="${sessionScope.get('utente') != null}">
                 <a href="">Bentornato, <c:out value='${utente.nickname}'/></a>
                 <a href="">Carello <c:out value='${fn:length(utente.carrello.prodotti)}'/></a>
                 <button alt="logout" onclick="document.location.href='./logout'">Logout</button>
             </c:when>
             <c:when test="${sessionScope.get('giornalista') != null}">
                 <a href="">Bentornato, <c:out value='${giornalista.nome}'/></a>
-                <a href="/Rojina_Review_war/journalistArea"><img class="icon" src="images/utility/journalistIcon.png"></a>
+                <a href="/Rojina_Review_war/journalistArea"><img class="icon"
+                                                                 src="images/utility/journalistIcon.png"></a>
                 <button alt="logout" onclick="document.location.href='./logout'">Logout</button>
             </c:when>
             <c:when test="${sessionScope.get('admin') != null}">

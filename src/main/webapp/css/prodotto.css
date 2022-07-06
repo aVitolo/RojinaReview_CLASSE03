@@ -2,9 +2,11 @@
     margin: 0;
     padding: 0;
 }
+
 body {
 
 }
+
 .wrapper {
     position: relative;
     top: 50%;
@@ -12,14 +14,17 @@ body {
     transform: translate(-50%, -50%) rotateY(180deg);
     display: flex;
 }
+
 .wrapper input {
     display: none;
 }
+
 .wrapper label {
     display: block;
     cursor: pointer;
     width: 150px;
 }
+
 .wrapper label:before {
     content: '★';
     position: relative;
@@ -27,6 +32,7 @@ body {
     font-size: 150px;
     color: black;
 }
+
 .wrapper label:after {
     content: '★';
     position: absolute;
@@ -37,6 +43,7 @@ body {
     opacity: 0;
     transition: .6s;
 }
-.wrapper label:hover:after, .wrapper label:hover~label:after, .wrapper input:checked~label:after {
+
+.wrapper label:hover:after, .wrapper label:hover ~ label:after, .wrapper input:checked ~ label:after {
     opacity: 1;
 }

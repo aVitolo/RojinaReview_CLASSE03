@@ -16,13 +16,13 @@ import java.sql.SQLException;
 public class LoginUser extends HttpServlet {
     private Utente tmp;
     private String loginErrato = "./userLogin.jsp";
-    private String homePage =  "./home";
+    private String homePage = "./home";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             HttpSession session = request.getSession();
-            if(session.getAttribute("utente") != null)
+            if (session.getAttribute("utente") != null)
                 response.sendRedirect(homePage);
             else {
                 //Preleva dalla request l'email

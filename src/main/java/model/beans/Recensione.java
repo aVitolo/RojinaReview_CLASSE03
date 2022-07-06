@@ -17,7 +17,7 @@ public class Recensione extends Articolo {
     }
 
     public Recensione(ArrayList<Commento> commenti,
-                      String  immagine,
+                      String immagine,
                       java.sql.Date dataCaricamento,
                       float voto,
                       Gioco gioco,
@@ -26,14 +26,14 @@ public class Recensione extends Articolo {
                       String giornalista,
                       String titolo) {
 
-        super(  commenti,
+        super(commenti,
                 immagine,
                 dataCaricamento,
                 gioco,
                 id,
                 testo,
                 titolo,
-                giornalista );
+                giornalista);
         this.voto = voto;
     }
 

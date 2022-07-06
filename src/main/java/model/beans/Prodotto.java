@@ -13,7 +13,7 @@ public class Prodotto {
     private float mediaVoto;
     private float prezzo;
     private String nome;
-    private String descrizione;;
+    private String descrizione;
     private Sconto sconto;
     private String immagine;
 
@@ -23,7 +23,7 @@ public class Prodotto {
         this.sconto = new Sconto();
     }
 
-    public Prodotto(ArrayList<Commento> commenti,ArrayList<Categoria> categorie, String immagine, int disponibilità, int id, int numeroVoti, float mediaVoto, float prezzo, String nome, String descrizione, Sconto sconto) {
+    public Prodotto(ArrayList<Commento> commenti, ArrayList<Categoria> categorie, String immagine, int disponibilità, int id, int numeroVoti, float mediaVoto, float prezzo, String nome, String descrizione, Sconto sconto) {
         this.commenti = commenti;
         this.categorie = categorie;
         this.immagine = immagine;
@@ -129,19 +129,28 @@ public class Prodotto {
 
     /* Inner Class */
 
-    public class Sconto{
+    public class Sconto {
 
         private String nome;
         private float percentuale;
 
-        public Sconto(){};
+        public Sconto() {
+        }
 
-        public String getNome() { return this.nome; }
+        public String getNome() {
+            return this.nome;
+        }
 
-        public void setNome(String string) {this.nome=nome;}
+        public void setNome(String string) {
+            this.nome = nome;
+        }
 
-        public float getPercentuale() {return this.percentuale;}
+        public float getPercentuale() {
+            return this.percentuale;
+        }
 
-        public void setPercentuale(float aFloat) {this.percentuale=percentuale;}
+        public void setPercentuale(float aFloat) {
+            this.percentuale = percentuale;
+        }
     }
 }

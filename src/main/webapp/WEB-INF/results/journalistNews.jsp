@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -15,9 +15,9 @@
             <label for="titolo">Titolo: </label>
             <input type="text" id="titolo" name="titolo">
             <label for="testo">Testo: </label>
-            <input type="text" id="testo" name="testo" >
+            <input type="text" id="testo" name="testo">
             <label for="immagine">Immagine: </label>
-            <input type="file" id="immagine" name="immagine" >
+            <input type="file" id="immagine" name="immagine">
             <label for="giochi">Giochi menzionati: </label>
             <input type="text" id="giochi" name="giochi">
 
@@ -28,9 +28,9 @@
     <section class="articoli">
         <c:forEach items="${requestScope['notizieGiornalista']}" var="articolo">
             <a href="/Rojina_Review_war/getResource?type=notizia&id=${articolo.id}">
-                <div class = "articolo">
-                    <img src = "${articolo.immagine}", alt = "copertina" decoding="async">
-                    <div class = "articolo-content">
+                <div class="articolo">
+                    <img src="${articolo.immagine}" , alt="copertina" decoding="async">
+                    <div class="articolo-content">
                         <h2>${articolo.titolo}</h2>
                         <p>${fn:substring(articolo.testo, 0, 50)}</p>
                     </div>

@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class RecensioneDAO {
-    private Connection con;
+    private final Connection con;
 
     public RecensioneDAO() throws SQLException {
         con = ConPool.getConnection();
@@ -19,12 +19,12 @@ public class RecensioneDAO {
 
     public Recensione doRetrieveById(int id) throws SQLException {
         PreparedStatement ps =
-                    con.prepareStatement("SELECT g.nome, g.cognome, g.nome, r.id, r.titolo, r.testo, r.voto, r.DataCaricamento, r.gioco, r.immagine FROM recensione r JOIN giornalista g on g.id = r.giornalista WHERE r.id=?");
+                con.prepareStatement("SELECT g.nome, g.cognome, g.nome, r.id, r.titolo, r.testo, r.voto, r.DataCaricamento, r.gioco, r.immagine FROM recensione r JOIN giornalista g on g.id = r.giornalista WHERE r.id=?");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             Recensione r = new Recensione();
-            r.setGiornalista(rs.getString(1)+" "+rs.getString(2));
+            r.setGiornalista(rs.getString(1) + " " + rs.getString(2));
             //r.setImgGiornalista(rs.getBytes(3));
             r.setId(rs.getInt(4));
             r.setTitolo(rs.getString(5));
@@ -33,7 +33,7 @@ public class RecensioneDAO {
             r.setDataCaricamento(rs.getDate(8));
             r.setGioco(new GiocoDAO(con).doRetrieveByTitle(rs.getString(9)));
             r.setImmagine(rs.getString(10));
-            r.setCommenti(new CommentoDAO(con).getCommentById(r.getId(),"Recensione"));
+            r.setCommenti(new CommentoDAO(con).getCommentById(r.getId(), "Recensione"));
             return r;
         }
 
@@ -41,21 +41,21 @@ public class RecensioneDAO {
 
     }
 
-    public ArrayList<Recensione> doRetrieveLast() throws SQLException{
+    public ArrayList<Recensione> doRetrieveLast() throws SQLException {
 
         ArrayList<Recensione> recensioni = new ArrayList<>();
 
         PreparedStatement ps =
                 con.prepareStatement("SELECT g.nome, g.cognome, g.nome ,r.id, r.titolo, r.testo, r.voto, r.DataCaricamento, r.gioco, r.immagine " +
-                                         "FROM recensione r JOIN giornalista g on g.id = r.giornalista " +
-                                         "ORDER BY r.DataCaricamento DESC LIMIT 12");
+                        "FROM recensione r JOIN giornalista g on g.id = r.giornalista " +
+                        "ORDER BY r.DataCaricamento DESC LIMIT 12");
 
 
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
             Recensione r = new Recensione();
-            r.setGiornalista(rs.getString(1)+" "+rs.getString(2));
+            r.setGiornalista(rs.getString(1) + " " + rs.getString(2));
             //r.setImgGiornalista(rs.getBytes(3));
             r.setId(rs.getInt(4));
             r.setTitolo(rs.getString(5));
@@ -64,7 +64,7 @@ public class RecensioneDAO {
             r.setDataCaricamento(rs.getDate(8));
             r.setGioco(new GiocoDAO(con).doRetrieveByTitle(rs.getString(9)));
             r.setImmagine(rs.getString(10));
-            r.setCommenti(new CommentoDAO(con).getCommentById(r.getId(),"Recensione"));
+            r.setCommenti(new CommentoDAO(con).getCommentById(r.getId(), "Recensione"));
             recensioni.add(r);
         }
 
@@ -81,10 +81,9 @@ public class RecensioneDAO {
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
 
-        while(rs.next())
-        {
+        while (rs.next()) {
             Recensione r = new Recensione();
-            r.setGiornalista(rs.getString(1)+" "+rs.getString(2));
+            r.setGiornalista(rs.getString(1) + " " + rs.getString(2));
             r.setId(rs.getInt(3));
             r.setTitolo(rs.getString(4));
             r.setTesto(rs.getString(5));
@@ -92,7 +91,7 @@ public class RecensioneDAO {
             r.setDataCaricamento(rs.getDate(7));
             r.setGioco(new GiocoDAO(con).doRetrieveByTitle(rs.getString(8)));
             r.setImmagine(rs.getString(9));
-            r.setCommenti(new CommentoDAO(con).getCommentById(r.getId(),"Recensione"));
+            r.setCommenti(new CommentoDAO(con).getCommentById(r.getId(), "Recensione"));
             recensioni.add(r);
         }
 
@@ -110,7 +109,7 @@ public class RecensioneDAO {
         ps.setDate(6, r.getDataCaricamento());
         ps.setString(7, r.getImmagine());
 
-        if(ps.executeUpdate() != 1)
+        if (ps.executeUpdate() != 1)
             throw new RuntimeException("Insert error");
 
 

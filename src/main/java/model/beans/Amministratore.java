@@ -8,7 +8,7 @@ public class Amministratore extends Persona {
 
     private int id;
 
-    public Amministratore(){
+    public Amministratore() {
         super();
     }
 
@@ -17,7 +17,10 @@ public class Amministratore extends Persona {
         this.id = id;
     }
 
-    public int getId() { return id; }
-
-    public void setId(int id) { this.id = id; }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
 }

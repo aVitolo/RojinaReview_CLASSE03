@@ -21,7 +21,7 @@ import java.sql.SQLException;
 
 public class LoginStaff extends HttpServlet {
     private Utente tmp;
-    private String loginErrato = "./staffLogin.jsp" ;
+    private String loginErrato = "./staffLogin.jsp";
     private String homePage = "/Rojina_Review_war/home";
 
 
@@ -33,55 +33,49 @@ public class LoginStaff extends HttpServlet {
         //userType = 0 Per i Giornalisti, userType = 1 Per gli Admin
         String userType = request.getParameter("userType");
         //Calcola Hash della password utente
-        password= Persona.calcolaHash(password);
+        password = Persona.calcolaHash(password);
 
         int type = -1;
         Persona tmp = null;
         GenericStaffDAO staffDAO = null;
         try {
             //Verifica se è stato richiesto un giornalista
-            if(userType.equals("0")){
+            if (userType.equals("0")) {
                 staffDAO = new GiornalistaDAO();
                 type = 0;
-            }
-            else if (userType.equals("1")){
+            } else if (userType.equals("1")) {
                 staffDAO = new AmministratoreDAO();
                 type = 1;
             }
 
-            if( staffDAO == null || (( tmp = (Persona) staffDAO.doRetriveByEmail(email)) == null)) {
+            if (staffDAO == null || ((tmp = (Persona) staffDAO.doRetriveByEmail(email)) == null)) {
                 String message = "Invalid email";
                 request.setAttribute("message", message);
                 RequestDispatcher dispatcher = request.getRequestDispatcher(loginErrato);
                 dispatcher.forward(request, response);
-            }
-            else {
-                    String dbPass =  tmp.getPassword();
+            } else {
+                String dbPass = tmp.getPassword();
 
-                    //confronta le password
-                    if (password.equals(dbPass)) {
-                        HttpSession session = request.getSession();
-                        if (type == 0)
-                        {
-                            Giornalista g = (Giornalista) tmp;
-                            session.setAttribute("giornalista", g);
-                        }
-
-                        else if(type == 1)
-                        {
-                            Amministratore a = (Amministratore) tmp;
-                            session.setAttribute("admin",(Amministratore)tmp);
-                        }
-
-
-                        response.sendRedirect(homePage);
-                    } else {
-                        String message = "Invalid password";
-                        request.setAttribute("message", message);
-                        RequestDispatcher dispatcher = request.getRequestDispatcher(loginErrato);
-                        dispatcher.forward(request, response);
+                //confronta le password
+                if (password.equals(dbPass)) {
+                    HttpSession session = request.getSession();
+                    if (type == 0) {
+                        Giornalista g = (Giornalista) tmp;
+                        session.setAttribute("giornalista", g);
+                    } else if (type == 1) {
+                        Amministratore a = (Amministratore) tmp;
+                        session.setAttribute("admin", (Amministratore) tmp);
                     }
+
+
+                    response.sendRedirect(homePage);
+                } else {
+                    String message = "Invalid password";
+                    request.setAttribute("message", message);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher(loginErrato);
+                    dispatcher.forward(request, response);
                 }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

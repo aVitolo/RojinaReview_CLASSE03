@@ -13,9 +13,9 @@ public class Commento {
 
     /* Constructor */
 
-    public Commento(){
+    public Commento() {
 
-    };
+    }
 
     public Commento(String testo, String utente, java.sql.Date data) {
         this.testo = testo;

@@ -1,4 +1,4 @@
-body{
+body {
     color: white;
     margin: 0;
     padding: 0;
@@ -8,7 +8,7 @@ body{
         hidden nasconde gli elementi che superano la box*/
 }
 
-.center{
+.center {
     position: absolute;
     /*position indica il tipo di posizionamento dell' elemento*/
     top: 50%;
@@ -22,27 +22,27 @@ body{
 }
 
 
-.center h1{
+.center h1 {
     text-align: center; /*Allineo il testo al centro*/
     padding: 10px; /*Aggiungo 10px di padding*/
     margin-top: 10px;
 }
 
-.center form{
+.center form {
     padding: 0 40px;
     box-sizing: border-box;
 }
 
-form .form_input{
+form .form_input {
     position: relative;
     border-bottom: 2px solid;
     margin: 30px 0;
 }
 
-.form_input input{
+.form_input input {
     width: 100%;
     padding: 0 5px;
-    height:  40px;
+    height: 40px;
     font-size: 16px;
     border: none;
     background: none;
@@ -50,7 +50,7 @@ form .form_input{
     color: #ffffff;
 }
 
-.form_input label{
+.form_input label {
     position: absolute;
     top: 50%;
     left: 5px;
@@ -62,7 +62,7 @@ form .form_input{
     transition: .5s;
 }
 
-.form_input span::before{
+.form_input span::before {
     content: '';
     position: absolute;
     top: 40px;
@@ -72,13 +72,12 @@ form .form_input{
     background: #e91e63;
 }
 
-.form_input input:valid ~ label{
+.form_input input:valid ~ label {
     color: transparent;
 }
 
 button,
-input[type="submit"]
-{
+input[type="submit"] {
     width: 100%;
     height: 50px;
     background: #e91e63;
@@ -91,32 +90,32 @@ input[type="submit"]
     border: transparent;
 }
 
-button{
+button {
     margin: 25%
 }
 
 button:hover,
-input[type="submit"]:hover{
+input[type="submit"]:hover {
     background: #6B354D;
 }
 
-.register_link{
+.register_link {
     margin: 30px 0;
     text-align: center;
     font-size: 16px;
     color: #666666;
 }
 
-.register_link a{
+.register_link a {
     color: #e91e63;
     text-decoration: none;
 }
 
-.register_link a:hover{
+.register_link a:hover {
     text-decoration: underline;
 }
 
-#error{
+#error {
     display: flex;
     align-items: center;
 }

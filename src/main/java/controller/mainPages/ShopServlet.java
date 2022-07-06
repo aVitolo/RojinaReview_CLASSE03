@@ -1,4 +1,4 @@
-package controller;
+package controller.mainPages;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -8,7 +8,7 @@ import java.io.IOException;
 
 @WebServlet(name = "ShopServlet", value = "/ShopServlet")
 public class ShopServlet extends HttpServlet {
-    private String path ="/WEB-INF/results/shop.jsp";
+    private String path = "/WEB-INF/results/shop.jsp";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -16,6 +16,7 @@ public class ShopServlet extends HttpServlet {
                 request.getRequestDispatcher(path);
         dispatcher.forward(request, response);
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

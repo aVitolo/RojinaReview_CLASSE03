@@ -8,13 +8,13 @@ public class Utils {
 
     //funzione che salva un file nella directory del project e restituisce la path
     public static String saveImageWar(String imageType, String fileName, Part filePart) throws IOException {
-        String partialPath = ".."+File.separator+"webapps"+File.separator+"Rojina_Review_war"+File.separator+"images";
+        String partialPath = ".." + File.separator + "webapps" + File.separator + "Rojina_Review_war" + File.separator + "images";
         String path = partialPath + File.separator + imageType;
 
         OutputStream out = null;
         InputStream filecontent = null;
 
-        try{
+        try {
             out = new FileOutputStream(new File(path + File.separator + fileName));
             filecontent = filePart.getInputStream();
 
@@ -25,30 +25,28 @@ public class Utils {
                 out.write(bytes, 0, read);
             }
 
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-        }
-        finally {
-            if(out != null)
+        } finally {
+            if (out != null)
                 out.close();
-            if(filecontent != null)
+            if (filecontent != null)
                 filecontent.close();
 
         }
 
-        return "."+File.separator+"images"+ File.separator + imageType + File.separator + fileName;
+        return "." + File.separator + "images" + File.separator + imageType + File.separator + fileName;
     }
 
     public static void saveImageFileSystem(String imageType, String fileName, Part filePart) throws IOException {
         String home = System.getProperty("user.home");
-        String project = File.separator+"IdeaProjects"+File.separator+"RojinaReview"+File.separator+"src"+File.separator+"main"+File.separator+"webapp"+File.separator+"images";
+        String project = File.separator + "IdeaProjects" + File.separator + "RojinaReview" + File.separator + "src" + File.separator + "main" + File.separator + "webapp" + File.separator + "images";
         String path = home + project + File.separator + imageType;
 
         OutputStream out = null;
         InputStream filecontent = null;
 
-        try{
+        try {
             out = new FileOutputStream(new File(path + File.separator + fileName));
             filecontent = filePart.getInputStream();
 
@@ -59,14 +57,12 @@ public class Utils {
                 out.write(bytes, 0, read);
             }
 
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
-        }
-        finally {
-            if(out != null)
+        } finally {
+            if (out != null)
                 out.close();
-            if(filecontent != null)
+            if (filecontent != null)
                 filecontent.close();
 
         }

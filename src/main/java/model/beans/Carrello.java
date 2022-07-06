@@ -35,6 +35,6 @@ public class Carrello {
     }
 
     public void setTotale(float aFloat) {
-        this.totale=totale;
+        this.totale = totale;
     }
 }

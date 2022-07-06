@@ -1,4 +1,4 @@
-package controller;
+package controller.journalist;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -9,6 +9,7 @@ import java.io.IOException;
 @WebServlet(name = "journalistAreaServlet", value = "/journalistAreaServlet")
 public class journalistAreaServlet extends HttpServlet {
     private String path = "/WEB-INF/results/journalistProfile.jsp";
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(path).forward(request, response);

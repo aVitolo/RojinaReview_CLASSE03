@@ -1,6 +1,6 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% if(session.getAttribute("utente") != null || session.getAttribute("giornalista") != null || session.getAttribute("admin") != null)
+<% if (session.getAttribute("utente") != null || session.getAttribute("giornalista") != null || session.getAttribute("admin") != null)
     response.sendRedirect("./home");%>
 <html lang="en">
 <head>
@@ -34,11 +34,11 @@
         <input type="submit" value="Login">
     </form>
 </div>
-<c:if test = "${message != null}">
+<c:if test="${message != null}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $("#close").click(function(){
+        $(document).ready(function () {
+            $("#close").click(function () {
                 $("#error").slideToggle();
             });
         });
