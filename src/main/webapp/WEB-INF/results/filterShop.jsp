@@ -27,6 +27,8 @@
             <p onclick="setFilter('leastRecent','sButton','sDrop','sClose')" id="leastRecent">Least Recent</p>
             <p onclick="setFilter('lowestPrice','sButton','sDrop','sClose')" id="lowestPrice">Lowest price</p>
             <p onclick="setFilter('highestPrice','sButton','sDrop','sClose')" id="highestPrice">Highest price</p>
+            <p onclick="setFilter('higherVote', 'sButton','sDrop','sClose')" id="higherVote">Higher Vote</p>
+            <p onclick="setFilter('lowerVote', 'sButton','sDrop','sClose')" id="lowerVote">Lower Vote</p>
         </div>
     </div>
 

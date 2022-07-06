@@ -1,6 +1,7 @@
 package model.dao;
 
 import model.beans.Prodotto;
+import model.beans.Recensione;
 import model.utilities.ConPool;
 
 import java.sql.Connection;
@@ -61,7 +62,7 @@ public class ProdottoDAO {
 
     public ArrayList<Prodotto> doRetrieveLast() throws SQLException {
         PreparedStatement ps =
-                con.prepareStatement("SELECT * FROM prodotto LIMIT 12");
+                con.prepareStatement("SELECT * FROM prodotto ORDER BY id LIMIT 12");
         ResultSet rs = ps.executeQuery();
         ArrayList<Prodotto> prodotti = new ArrayList<>();
         while (rs.next()) {
@@ -89,6 +90,36 @@ public class ProdottoDAO {
 
             prodotti.add(p);
         }
+        return prodotti;
+    }
+
+    public ArrayList<Prodotto> updateContent(int lastID, String reset, String categoria, String ordine) throws SQLException {
+        ArrayList<Prodotto> prodotti = new ArrayList<>();
+
+        String select = " SELECT p.id, p.nome, p.prezzo, p.immagine, p.mediaVoto ";
+        String from =   " FROM prodotto p"+
+                (!categoria.equals("Categoria") ? " JOIN prodotto_categoria pc on p.id=pc.prodotto " : " ");
+        String where = " WHERE ";
+        where +=       (!categoria.equals("Categoria") ? " gp.cateoria='"+categoria+"'" : "" );
+        where +=       (!reset.equals("yes") ? (lastID != -1 ? (where.equals(" WHERE ") ? " p.id < "+String.valueOf(lastID) :" AND p.id < "+String.valueOf(lastID)) : (where.equals(" WHERE ") ? " p.id >"+String.valueOf(lastID) :" AND p.id > "+String.valueOf(lastID))) : "");
+        if (where.equals(" WHERE ")) where = " ";
+        String order =  " ORDER BY ";
+        order+=  (ordine.equals("Higher Vote") ? " p.mediaVoto DESC" : (ordine.equals("Lower Vote") ? "p.mediaVoto ASC" : (ordine.equals("Least Recent")? " p.id ASC " : " p.id DESC "))) +
+                " LIMIT 12 ";
+        PreparedStatement ps =
+                con.prepareStatement(select + from + where + order);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Prodotto p = new Prodotto();
+            p.setId(rs.getInt(1));
+            p.setNome(rs.getString(2));
+            p.setPrezzo(rs.getFloat(3));;
+            p.setImmagine(rs.getString(4));
+            p.setMediaVoto(rs.getFloat(5));
+            prodotti.add(p);
+        }
+
         return prodotti;
     }
 }

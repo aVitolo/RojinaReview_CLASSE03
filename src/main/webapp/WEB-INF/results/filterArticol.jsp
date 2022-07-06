@@ -36,6 +36,10 @@
             <input type="text" placeholder="Search.." id="sInput" onkeyup="filterFunction('sInput','sDrop')">
             <p onclick="setFilter('mostRecent', 'sButton','sDrop','sClose')" id="mostRecent">Most Recent</p>
             <p onclick="setFilter('leastRecent', 'sButton','sDrop','sClose')" id="leastRecent">Least Recent</p>
+            <c:if test = "${articoli == 'recensione'}">
+                <p onclick="setFilter('higherVote', 'sButton','sDrop','sClose')" id="higherVote">Higher Vote</p>
+                <p onclick="setFilter('lowerVote', 'sButton','sDrop','sClose')" id="lowerVote">Lower Vote</p>
+            </c:if>
         </div>
     </div>
 

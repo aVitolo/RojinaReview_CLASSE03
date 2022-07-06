@@ -1,5 +1,6 @@
 package model.dao;
 
+import model.beans.Notizia;
 import model.beans.Recensione;
 import model.utilities.ConPool;
 
@@ -48,7 +49,7 @@ public class RecensioneDAO {
         PreparedStatement ps =
                 con.prepareStatement("SELECT g.nome, g.cognome, g.nome ,r.id, r.titolo, r.testo, r.voto, r.DataCaricamento, r.gioco, r.immagine " +
                                          "FROM recensione r JOIN giornalista g on g.id = r.giornalista " +
-                                         "ORDER BY r.DataCaricamento DESC LIMIT 12");
+                                         "ORDER BY r.id DESC LIMIT 12");
 
 
         ResultSet rs = ps.executeQuery();
@@ -117,4 +118,35 @@ public class RecensioneDAO {
     }
 
 
+    public ArrayList<Recensione> updateContent(int lastID, String reset, String piattaforma, String tipologia, String ordine) throws SQLException {
+        ArrayList<Recensione> recensioni = new ArrayList<>();
+
+        String select = " SELECT r.id, r.titolo, r.testo, r.immagine, r.voto ";
+        String from =   " FROM recensione r"+
+                (!piattaforma.equals("Piattaforma") ? " JOIN gioco_piattaforma gp on r.gioco=gp.gioco " : " " )+
+                (!tipologia.equals("Tipologia") ? " JOIN gioco_tipologia gt on r.gioco=gt.gioco " : " ");
+        String where = " WHERE ";
+        where +=       (!piattaforma.equals("Piattaforma") ? " gp.piattaforma='"+piattaforma+"'" : "" );
+        where +=       (!tipologia.equals("Tipologia") ? (where.equals(" WHERE ") ? "gt.tipologia='"+tipologia+"'" : " AND gt.tipologia='"+tipologia+"'") : "");
+        where +=       (!reset.equals("yes") ? (lastID != -1 ? (where.equals(" WHERE ") ? " r.id < "+String.valueOf(lastID) :" AND r.id < "+String.valueOf(lastID)) : (where.equals(" WHERE ") ? " r.id >"+String.valueOf(lastID) :" AND r.id > "+String.valueOf(lastID))) : "");
+        if (where.equals(" WHERE ")) where = " ";
+        String order =  " ORDER BY ";
+        order+=  (ordine.equals("Higher Vote") ? " r.voto DESC" : (ordine.equals("Lower Vote") ? "r.voto ASC" : (ordine.equals("Least Recent")? " r.id ASC " : " r.id DESC "))) +
+                " LIMIT 12 ";
+        PreparedStatement ps =
+                con.prepareStatement(select + from + where + order);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Recensione r = new Recensione();
+            r.setId(rs.getInt(1));
+            r.setTitolo(rs.getString(2));
+            r.setTesto(rs.getString(3));;
+            r.setImmagine(rs.getString(4));
+            r.setVoto(rs.getFloat(5));
+            recensioni.add(r);
+        }
+
+        return recensioni;
+    }
 }
