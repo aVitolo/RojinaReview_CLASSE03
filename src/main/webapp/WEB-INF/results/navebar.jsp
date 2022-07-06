@@ -9,7 +9,7 @@
 <header id="head">
 
     <section class="bar">
-        <img class="logo" src="./images/utility/rojinah.png" alt="Logo"/>
+        <img class="logo" style="cursor:pointer" src="./images/utility/rojinah.png" onclick="location.href='./home'" alt="Logo"/>
         <button class="expand" onclick="expandMenu()"> ≡</button>
     </section>
 
