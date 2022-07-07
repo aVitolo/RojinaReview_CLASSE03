@@ -103,28 +103,36 @@ function filterOrUpdate(reset,table) {
                 var articoli = document.getElementsByClassName('articoli')[0];
                 var newA = "";
                 for (d in data) {
-                    var voto;
-                    var articolo = data[d];
-                    var titolo = articolo.titolo;
-                    var id = articolo["id"];
-                    var immagine = articolo.immagine;
-                    var testo = articolo.testo;
-                    if (table == "reviews")  //recensione e prodotto hanno un voto
-                        voto = articolo.voto;
-                    else if (table == "shop")
-                        voto = articolo.mediaVoto;
-                    var a =
+                    var a,immagine,voto,nome,prezzo,articolo,id,titolo,testo;
+                    articolo = data[d];
+                    id = articolo["id"];
+                    immagine = articolo.immagine;
+                    if(table != "shop") {
+                        titolo = articolo.titolo;
+                        testo = articolo.testo;
+                        if (table == "reviews")  //recensione e prodotto hanno un voto
+                            voto = articolo.voto;
+                    }
+                    else {
+                            voto = articolo.mediaVoto;
+                            nome = articolo.nome;
+                            prezzo = articolo.prezzo;
+                    }
+                    a =
                         "<div class = \"articolo\" id=\"" + id + "\">" +
                         "<a href=\"/Rojina_Review_war/getResource?type=" + table + "&id=" + id + "\">" +
                         "<img src = '" + immagine + "' alt =\"copertina\" decoding=\"async\">" +
                         "<div class = \"articolo-content\">" +
-                        "<h2>" + titolo + "</h2>" +
-                        (table == "news" ?
-                            "<p>" + testo + "</p>" :
-                            "<p>" + testo + "</p>" + "<p class=\"voto\">" + voto + "</p>")
-                        + "</div>" +
+                        (table != "shop" ?
+                            "<h2>" + titolo + "</h2>" + "<p>" + testo + "</p>" :
+                            "<h2>" + nome + "</h2>" + "<p>" + prezzo + " $</p>" ) +
+                        (table != "news" ?
+                            "<p class=\"voto\">" + voto + "</p>" :
+                            "") +
                         "</div>" +
-                        "</a>";
+                        "</a>" +
+                        "</div>" ;
+
                     newA += a;
                 }
                 if (reset === "yes"){

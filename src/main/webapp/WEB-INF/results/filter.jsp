@@ -11,6 +11,7 @@
 <body>
 <section class="filter">
 
+    <c:if test = "${articoli != 'shop'}">
     <div class="dropdown">
         <button onclick="expandFilter('pDrop')" class="dropbtn" id="pButton">Piattaforma</button>
         <button onclick="resetFilter('Piattaforma','pButton','pClose')" class="closebtn" id="pClose"><span>X</span>
@@ -36,6 +37,23 @@
             </c:forEach>
         </div>
     </div>
+    </c:if>
+
+    <c:if test = "${articoli == 'shop'}">
+    <div class="dropdown">
+        <button onclick="expandFilter('cDrop')" class="dropbtn" id="cButton">Categoria</button>
+        <button onclick="resetFilter('Categoria','cButton','cClose')" class="closebtn" id="cClose"><span>X</span>
+        </button>
+        <div id="cDrop" class="dropdown-content">
+            <input type="text" placeholder="Search.." id="cInput" onkeyup="filterFunction('cInput','cDrop')">
+            <c:forEach items="${applicationScope['categorie']}" var="caterogia">
+                <p onclick="setFilter('${caterogia.nome}','cButton','cDrop','cClose')"
+                   id="${caterogia.nome}">${caterogia.nome}</p>
+            </c:forEach>
+        </div>
+    </div>
+    </c:if>
+
     <div class="dropdown">
         <button onclick="expandFilter('sDrop')" class="dropbtn" id="sButton">Ordina per</button>
         <button onclick="resetFilter('Ordina Per','sButton','sClose')" class="closebtn" id="sClose"><span>X</span>
@@ -44,9 +62,13 @@
             <input type="text" placeholder="Search.." id="sInput" onkeyup="filterFunction('sInput','sDrop')">
             <p onclick="setFilter('mostRecent', 'sButton','sDrop','sClose')" id="mostRecent">Most Recent</p>
             <p onclick="setFilter('leastRecent', 'sButton','sDrop','sClose')" id="leastRecent">Least Recent</p>
-            <c:if test = "${articoli == 'reviews'}">
-                <p onclick="setFilter('higherVote', 'sButton','sDrop','sClose')" id="higherVote">Higher Vote</p>
-                <p onclick="setFilter('lowerVote', 'sButton','sDrop','sClose')" id="lowerVote">Lower Vote</p>
+            <c:if test = "${articoli != 'news'}">
+                <p onclick="setFilter('higherVote', 'sButton','sDrop','sClose')" id="higherVote">Highest Vote</p>
+                <p onclick="setFilter('lowerVote', 'sButton','sDrop','sClose')" id="lowerVote">Lowest Vote</p>
+            </c:if>
+            <c:if test = "${articoli == 'shop'}">
+                <p onclick="setFilter('lowestPrice','sButton','sDrop','sClose')" id="lowestPrice">Lowest Price</p>
+                <p onclick="setFilter('highestPrice','sButton','sDrop','sClose')" id="highestPrice">Highest Price</p>
             </c:if>
         </div>
     </div>

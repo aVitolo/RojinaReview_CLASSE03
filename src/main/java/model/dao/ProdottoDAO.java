@@ -91,35 +91,35 @@ public class ProdottoDAO {
         return prodotti;
     }
 
-    public ArrayList<Prodotto> updateContent(int lastID, String reset, String categoria, String ordine) throws SQLException {
+    public ArrayList<Prodotto> updateContent(String offset, String categoria, String ordine) throws SQLException {
         ArrayList<Prodotto> prodotti = new ArrayList<>();
+        int limit = 12;
 
         // scelgo gli attributi da prelevare
         String select = " SELECT p.id, p.nome, p.prezzo, p.immagine, p.mediaVoto ";
 
         // eseguo eventualmente dei join per gestire il filtraggio
         String from =   " FROM prodotto p"+
-                (!categoria.equals("Categoria") ? " JOIN prodotto_categoria pc on p.id=pc.prodotto " : " ");
+                (!categoria.equals("Categoria") ?
+                        " JOIN prodotto_categoria pc on p.id=pc.prodotto " :
+                        " ");
 
         String where = " WHERE ";
-        /*
-            eseguo eventualmente il confrono con gli attributi passati tramite request
-            request = yes -> devo filtrare quindi prendo i primi 12 secondo il filtraggio impostato
-            request = no ->  devo caricare onScroll quindi secondo i parametri di filtraggio quindi devo prelevare da dove mi ero fermato
-            ! where.equals(" WHERE ") eseguito per verificare se il controllo precedente e' avvenuto o meno impendo una scorretta formattazione della query
-         */
-        where +=       (!categoria.equals("Categoria") ? " pc.categoria='"+categoria+"'" : "" );
-        where +=       (!reset.equals("yes") ? (lastID != -1 ? (where.equals(" WHERE ") ? " p.id < "+String.valueOf(lastID) :" AND p.id < "+String.valueOf(lastID)) : (where.equals(" WHERE ") ? " p.id >"+String.valueOf(lastID) :" AND p.id > "+String.valueOf(lastID))) : "");
-
+        // aggiungo eventualemente i confronti per il filtraggio
+        where +=  (!categoria.equals("Categoria") ?
+                " pc.categoria='"+categoria+"'"
+                : "" );
         // se non ho apportato nessuna modifica rimouvo WHERE per evitare una scorretta formatazzione
-
         if (where.equals(" WHERE ")) where = " ";
 
-        // imposto il parametro secondo il quale ordinare l'output
-
+        // imposto il parametro secondo il quale ordinare l'output + limite e offset
         String order =  " ORDER BY ";
-        order+=  (ordine.equals("Higher Vote") ? " p.mediaVoto DESC" : (ordine.equals("Lower Vote") ? "p.mediaVoto ASC" : (ordine.equals("Least Recent")? " p.id ASC " : " p.id DESC "))) +
-                " LIMIT 12 ";
+        order+=  (ordine.equals("Highest Vote") ? " p.mediaVoto DESC" :
+                    (ordine.equals("Lowest Vote") ? "p.mediaVoto ASC" :
+                        (ordine.equals("Least Recent")? " p.id ASC " :
+                            (ordine.equals("Lowest Price")? " p.prezzo ASC " :
+                              " p.prezzo DESC " )))) +
+             " LIMIT "+limit+" OFFSET "+offset;
 
         PreparedStatement ps =
                 con.prepareStatement(select + from + where + order);

@@ -19,6 +19,7 @@ public class ShopServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("articoli","shop");
         RequestDispatcher dispatcher =
                 request.getRequestDispatcher(path);
         dispatcher.forward(request, response);
@@ -31,17 +32,15 @@ public class ShopServlet extends HttpServlet {
 
         try {
             pDAO = new ProdottoDAO();
-            int lastID = -1;
-            if(request.getParameter("lastID")!=null)
-                lastID=Integer.parseInt(request.getParameter("lastID"));
-            String reset = request.getParameter("reset");
+            String offset = request.getParameter("offset");
             String categoria = request.getParameter("categoria");
-            String ordine =request.getParameter("ordine");
-            prodotti = pDAO.updateContent(lastID,reset, categoria, ordine);
+            String ordine = request.getParameter("ordine");
+            prodotti = pDAO.updateContent(offset, categoria, ordine);
         } catch (SQLException e) {
             System.out.println(e);
             throw new RuntimeException(e);
         }
+
         if(prodotti != null){
             JSONArray json = new JSONArray(prodotti);
             response.setContentType("application/json");

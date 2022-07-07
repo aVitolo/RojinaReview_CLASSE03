@@ -152,7 +152,6 @@ public class NotiziaDAO {
                 (ordina.equals("Least Recent") ? " ASC " : " DESC ") +
                 " LIMIT "+ limit +" OFFSET "+ offset;
 
-        System.out.println(select + from + where + order);
         PreparedStatement ps =
                 con.prepareStatement(select + from + where + order);
         ResultSet rs = ps.executeQuery();

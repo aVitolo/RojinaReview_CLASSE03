@@ -141,8 +141,8 @@ public class RecensioneDAO {
                     : "");
         if (where.equals(" WHERE ")) where = " ";
         String order =  " ORDER BY ";
-        order+= (ordine.equals("Higher Vote") ? " r.voto DESC" :
-                    (ordine.equals("Lower Vote") ? "r.voto ASC" :
+        order+= (ordine.equals("Highest Vote") ? " r.voto DESC" :
+                    (ordine.equals("Lowest Vote") ? "r.voto ASC" :
                         (ordine.equals("Least Recent")? " r.id ASC " :
                                 " r.id DESC "))) +
 

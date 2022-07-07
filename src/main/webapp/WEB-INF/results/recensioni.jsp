@@ -13,7 +13,7 @@
 
     <h1>Latest Reviews</h1>
 
-    <%@ include file="/WEB-INF/results/filterArticol.jsp" %>
+    <%@ include file="/WEB-INF/results/filter.jsp" %>
 
     <section class="articoli">
         <c:forEach items="${applicationScope['recensioni']}" var="articolo">
