@@ -40,7 +40,7 @@ public class getSingleResourceServlet extends HttpServlet {
                     }
                 }
             }
-            if (trovato = false) {
+            if (trovato == false) {
                 try {
                     Notizia n = new NotiziaDAO().doRetrieveById(id);
                     request.setAttribute("notizia", n);
@@ -64,7 +64,7 @@ public class getSingleResourceServlet extends HttpServlet {
                     }
                 }
             }
-            if (trovato = false) {
+            if (trovato == false) {
                 try {
                     Recensione r = new RecensioneDAO().doRetrieveById(id);
                     request.setAttribute("recensione", r);
@@ -88,7 +88,7 @@ public class getSingleResourceServlet extends HttpServlet {
                     }
                 }
             }
-            if (trovato = false) {
+            if (trovato == false) {
                 try {
                     Prodotto p = new ProdottoDAO().doRetrieveById(id);
                     request.setAttribute("prodotto", p);

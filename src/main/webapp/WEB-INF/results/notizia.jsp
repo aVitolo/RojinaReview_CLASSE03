@@ -12,62 +12,60 @@
     </title>
     <link rel="stylesheet" href="css/navebar.css">
     <link rel="stylesheet" href="css/foot.css">
+    <link rel="stylesheet" href="css/notizia.css">
     <link rel="stylesheet" href="css/master.css">
 </head>
 
 <body>
 <%@ include file="navebar.jsp" %>
-<section id="main">
-    <div id="titleSection">
-        <h1 id="newTitle"><%=n.getTitolo()%>
-        </h1>
-    </div>
 
-    <div id="imageSection">
-        <img id="imageNew" src="<%=n.getImmagine()%>">
-    </div>
-</section>
+<section id="wrap">
 
-<p id="bodyText">
-    <%=n.getTesto()%>
-</p>
-
-<section id="mentionedGames">
-    <% for (String gioco : n.getGiochi()) {%>
-    <h3><%=gioco%>
-    </h3>
-    <%}%>
-</section>
-
-<section id="writer">
-    Notizia scritta da <%=n.getGiornalista()%> il <%=n.getDataCaricamento()%>
-</section>
-
-<section id="comments">
-    <div id="numberComments">
-        <%=commenti.size()%> commenti
-    </div>
-
-    <form action="" method="post">
-        <input type="text" id="toComment">
-        <input type="submit">
-    </form>
-
-    <% for (Commento c : commenti) {%>
-    <div class="comment">
-        <h4 class="nickname"><%=c.getUtente()%>
-        </h4>
-        <p class="text">
-            <%=c.getTesto()%>
-        </p>
-
-        <div class="date">
-            <%=c.getData()%>
+    <section id="articolo">
+        <img src = "${notizia.immagine}" alt = "copertina" decoding="async">
+        <div id = "articolo-content">
+            <h2>${notizia.titolo}</h2>
+            <h3>Notizia scritta da ${notizia.giornalista} il ${notizia.dataCaricamento}</h3>
+            <p>${notizia.testo}</p>
         </div>
-    </div>
-    <%}%>
+    </section>
+
+    <section id="mentionedGames">
+        <% for (String gioco : n.getGiochi()) {%>
+        <h3><%=gioco%>
+        </h3>
+        <%}%>
+    </section>
+
+    <section id="comments">
+        <div id="numberComments">
+            <%=commenti.size()%> commenti
+        </div>
+
+        <form action="" method="post">
+            <input type="text" id="toComment" placeholder="Lascia un commento">
+            <input type="submit">
+        </form>
+
+        <% for (Commento c : commenti) {%>
+        <div class="comment">
+            <h4 class="nickname"><%=c.getUtente()%>
+            </h4>
+            <p class="text">
+                <%=c.getTesto()%>
+            </p>
+
+            <div class="date">
+                <%=c.getData()%>
+            </div>
+        </div>
+        <%}%>
+    </section>
 </section>
 
 <%@ include file="../../html/footer.html" %>
 </body>
+<scrpit>
+
+</scrpit>
 </html>
