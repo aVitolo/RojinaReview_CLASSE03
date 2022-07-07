@@ -34,3 +34,117 @@ function resetFilter(text,buttonID,closeID){
     b.innerHTML = text;
     document.getElementById(closeID).classList.toggle("show");
 }
+var semaforo = 2;
+var articolAtLastRequest;
+var articolAtRequest;
+var articolAfterRequest;
+var moreArticol = true;
+//!table in inglese
+function yHandler(){
+    var wrap = document.getElementById('wrap');
+    var contentHeight = wrap.offsetHeight;
+    var yOffset = window.pageYOffset;
+    var y = yOffset + window.innerHeight;
+    var reset = "no";
+    //se ci sono ancora altri contenuti e y > contentHeight lancio la richiesta
+    if(moreArticol && y > contentHeight) {
+        //faccio presente che voglio fare una richiesta
+        semaforo += -1;
+        //farò la richiesta solo se semaforo è pari ad 1
+        if (semaforo === 1) {
+            //verifico gli articoli al momento della richiesta
+            articolAtRequest = document.getElementsByClassName('articolo').length;
+            //se al momento della richiesta il numero di articoli è pari a quello dell'ultima richiesta
+            //allora la mia richiesta è un duplicato quinid non la eseguo
+            if(articolAtLastRequest != articolAtRequest) {
+                //conto il numero di articoli esattamente prima della richiesta
+                articolAtLastRequest = document.getElementsByClassName('articolo').length;
+                //eseguo la rihciesta
+                filterOrUpdate(reset, table);
+                }
+            }
+    }
+}
+window.onscroll = yHandler;
+
+
+function filterOrUpdate(reset,table) {
+
+    var offset,categoria,piattaforma,tipologia,ordine, servlet;
+
+    //se sto filatrato reset === yes quindi il limit è 0 altrimenti il numero di articoli
+    if (reset === "yes")
+        offset = 0;
+    else
+        offset = document.getElementsByClassName('articolo').length;
+    //se sono in shop devo passare la categoria altrimenti categoria e piattaforma
+    if(table === "shop")
+        categoria = document.getElementById('cButton').innerHTML.toString();
+    else
+    {
+        piattaforma = document.getElementById('pButton').innerHTML.toString();
+        tipologia = document.getElementById('tButton').innerHTML.toString();
+    }
+    //sicuramente passerò un criterio di ordinamento
+    ordine = document.getElementById('sButton').innerHTML.toString();
+
+    servlet = "/Rojina_Review_war/"+table;
+    console.log(servlet);
+        $(document).ready(function () {
+        $.getJSON({
+            url: servlet,//la path dipende dalla table passata
+            type: "post",
+            data: {"offset":offset,"piattaforma": piattaforma, "tipologia": tipologia, "ordine": ordine, "categoria":categoria},
+            error: function (xhr, status, error) {
+                //alert("error");
+            },
+            success: function (data) {
+
+                var articoli = document.getElementsByClassName('articoli')[0];
+                var newA = "";
+                for (d in data) {
+                    var voto;
+                    var articolo = data[d];
+                    var titolo = articolo.titolo;
+                    var id = articolo["id"];
+                    var immagine = articolo.immagine;
+                    var testo = articolo.testo;
+                    if (table == "reviews")  //recensione e prodotto hanno un voto
+                        voto = articolo.voto;
+                    else if (table == "shop")
+                        voto = articolo.mediaVoto;
+                    var a =
+                        "<div class = \"articolo\" id=\"" + id + "\">" +
+                        "<a href=\"/Rojina_Review_war/getResource?type=" + table + "&id=" + id + "\">" +
+                        "<img src = '" + immagine + "' alt =\"copertina\" decoding=\"async\">" +
+                        "<div class = \"articolo-content\">" +
+                        "<h2>" + titolo + "</h2>" +
+                        (table == "news" ?
+                            "<p>" + testo + "</p>" :
+                            "<p>" + testo + "</p>" + "<p class=\"voto\">" + voto + "</p>")
+                        + "</div>" +
+                        "</div>" +
+                        "</a>";
+                    newA += a;
+                }
+                if (reset === "yes"){
+                    articoli.innerHTML = newA;
+                    semaforo = 2;
+                    articolAtLastRequest = articolAtRequest = articolAfterRequest = 0;
+                    moreArticol = true;
+                }
+                else
+                    articoli.innerHTML += newA;
+
+                //conto il numero di articoli esattamente dopo la richiesta
+                articolAfterRequest = document.getElementsByClassName('articolo').length;
+                console.log(articolAtLastRequest +" "+ articolAfterRequest +" "+moreArticol);
+                //se dopo la richiesta il numero di articoli non è cambiato allora non ci sono contenuti
+                if(articolAtLastRequest === articolAfterRequest)
+                    moreArticol = false;
+                //permetto agli altri di fare richieste
+                semaforo = 2;
+            }
+        });
+    });
+}

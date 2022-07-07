@@ -26,7 +26,7 @@ public class getSingleResourceServlet extends HttpServlet {
         boolean trovato = false;
         ServletContext context = request.getServletContext();
 
-        if (type.equalsIgnoreCase("notizia")) {
+        if (type.equalsIgnoreCase("news")) {
             //cerco prima nel context la notizia
             ArrayList<Notizia> notizieContext = (ArrayList<Notizia>) context.getAttribute("notizie");
             for (i = 0; i < notizieContext.size() && !trovato; i++) {
@@ -50,7 +50,7 @@ public class getSingleResourceServlet extends HttpServlet {
                 }
             }
             result = "/WEB-INF/results/notizia.jsp";
-        } else if (type.equalsIgnoreCase("recensione")) {
+        } else if (type.equalsIgnoreCase("reviews")) {
             //cerco prima nel context la recensione
             ArrayList<Recensione> recensioniContext = (ArrayList<Recensione>) context.getAttribute("recensioni");
             for (i = 0; i < recensioniContext.size() && !trovato; i++) {
@@ -74,7 +74,7 @@ public class getSingleResourceServlet extends HttpServlet {
                 }
             }
             result = "/WEB-INF/results/recensione.jsp";
-        } else if (type.equalsIgnoreCase("prodotto")) {
+        } else if (type.equalsIgnoreCase("shop")) {
             //cerco prima nel context il prodotto
             ArrayList<Prodotto> prodottiContext = (ArrayList<Prodotto>) context.getAttribute("prodotti");
             for (i = 0; i < prodottiContext.size() && !trovato; i++) {

@@ -127,22 +127,32 @@ public class NotiziaDAO {
         }
     }
 
-    public ArrayList<Notizia> updateContent(int lastID, String reset, String piattaforma, String tipologia, String ordina) throws SQLException {
+    public ArrayList<Notizia> updateContent(String offset, String piattaforma, String tipologia, String ordina) throws SQLException {
         ArrayList<Notizia> notizie = new ArrayList<>();
-
+        int limit = 12;
         String select = " SELECT n.id, n.titolo, n.testo, n.immagine ";
-        String from = " FROM notizia n" +
-                (!piattaforma.equals("Piattaforma") ? " JOIN gioco_notizia gn1 on n.id=gn1.notizia JOIN gioco_piattaforma gp on gn1.gioco=gp.gioco " : " ") +
-                (!tipologia.equals("Tipologia") ? " JOIN gioco_notizia gn2 on n.id=gn2.notizia JOIN gioco_tipologia gt on gn2.gioco=gt.gioco " : " ");
+        String from = " FROM notizia n";
+        from += (!piattaforma.equals("Piattaforma") ?
+                    " JOIN gioco_notizia gn1 on n.id=gn1.notizia JOIN gioco_piattaforma gp on gn1.gioco=gp.gioco "
+                    : " ");
+        from += (!tipologia.equals("Tipologia") ?
+                    " JOIN gioco_notizia gn2 on n.id=gn2.notizia JOIN gioco_tipologia gt on gn2.gioco=gt.gioco "
+                    : " ");
         String where = " WHERE ";
-        where += (!piattaforma.equals("Piattaforma") ? " gp.piattaforma='" + piattaforma + "'" : "");
-        where += (!tipologia.equals("Tipologia") ? (where.equals(" WHERE ") ? "gt.tipologia='" + tipologia + "'" : " AND gt.tipologia='" + tipologia + "'") : "");
-        where += (!reset.equals("yes") ? (lastID != -1 ? (where.equals(" WHERE ") ? " n.id < " + lastID : " AND n.id < " + lastID) : (where.equals(" WHERE ") ? " n.id >" + lastID : " AND n.id > " + lastID)) : "");
+        where += (!piattaforma.equals("Piattaforma") ?
+                 " gp.piattaforma='" + piattaforma + "'" :
+                 "");
+        where += (!tipologia.equals("Tipologia") ?
+                    (where.equals(" WHERE ") ?
+                            " gt.tipologia='" + tipologia + "'" :
+                            " AND gt.tipologia='" + tipologia + "'")
+                  : "");
         if (where.equals(" WHERE ")) where = " ";
-        String order = " ORDER BY n.id " +
+        String order = " ORDER BY n.dataCaricamento " +
                 (ordina.equals("Least Recent") ? " ASC " : " DESC ") +
-                " LIMIT 12 ";
+                " LIMIT "+ limit +" OFFSET "+ offset;
 
+        System.out.println(select + from + where + order);
         PreparedStatement ps =
                 con.prepareStatement(select + from + where + order);
         ResultSet rs = ps.executeQuery();

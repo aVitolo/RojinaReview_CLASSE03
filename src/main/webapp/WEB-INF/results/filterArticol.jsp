@@ -4,6 +4,9 @@
 <html>
 <head>
     <link rel="stylesheet" href="./css/filter.css">
+    <script>
+        var table = "${articoli}";
+    </script>
 </head>
 <body>
 <section class="filter">
@@ -41,14 +44,14 @@
             <input type="text" placeholder="Search.." id="sInput" onkeyup="filterFunction('sInput','sDrop')">
             <p onclick="setFilter('mostRecent', 'sButton','sDrop','sClose')" id="mostRecent">Most Recent</p>
             <p onclick="setFilter('leastRecent', 'sButton','sDrop','sClose')" id="leastRecent">Least Recent</p>
-            <c:if test = "${articoli == 'recensione'}">
+            <c:if test = "${articoli == 'reviews'}">
                 <p onclick="setFilter('higherVote', 'sButton','sDrop','sClose')" id="higherVote">Higher Vote</p>
                 <p onclick="setFilter('lowerVote', 'sButton','sDrop','sClose')" id="lowerVote">Lower Vote</p>
             </c:if>
         </div>
     </div>
 
-    <button class="dropbtn" onclick="filter()"> Filtra</button>
+    <button class="dropbtn" onclick="filterOrUpdate('yes','${articoli}')"> Filtra </button>
 
 </section>
 </body>

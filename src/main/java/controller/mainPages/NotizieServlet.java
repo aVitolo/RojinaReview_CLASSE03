@@ -18,6 +18,7 @@ public class NotizieServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("articoli","news");
         RequestDispatcher dispatcher =
                 request.getRequestDispatcher(path);
         dispatcher.forward(request, response);
@@ -31,14 +32,11 @@ public class NotizieServlet extends HttpServlet {
 
         try {
             nDAO = new NotiziaDAO();
-            int lastID = -1;
-            if (request.getParameter("lastID") != null)
-                lastID = Integer.parseInt(request.getParameter("lastID"));
-            String reset = request.getParameter("reset");
+            String offset = request.getParameter("offset");
             String piattafomra = request.getParameter("piattaforma");
             String tipologia = request.getParameter("tipologia");
             String ordine = request.getParameter("ordine");
-            notizie = nDAO.updateContent(lastID, reset, piattafomra, tipologia, ordine);
+            notizie = nDAO.updateContent(offset, piattafomra, tipologia, ordine);
         } catch (SQLException e) {
             System.out.println(e);
             throw new RuntimeException(e);
