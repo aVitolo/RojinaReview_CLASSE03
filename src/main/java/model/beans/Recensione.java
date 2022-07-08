@@ -24,16 +24,18 @@ public class Recensione extends Articolo {
                       int id,
                       String testo,
                       String giornalista,
-                      String titolo) {
+                      String titolo,
+                      String immagineGiornalista) {
 
-        super(commenti,
+        super(  commenti,
                 immagine,
                 dataCaricamento,
                 gioco,
                 id,
                 testo,
                 titolo,
-                giornalista);
+                giornalista,
+                immagineGiornalista);
         this.voto = voto;
     }
 

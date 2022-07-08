@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="css/navebar.css">
     <link rel="stylesheet" href="css/foot.css">
     <link rel="stylesheet" href="css/master.css">
-    <link rel="stylesheet" href="css/prodotto.css">
+    <link rel="stylesheet" href="../../css/notizia.css">
 </head>
 
 <body>

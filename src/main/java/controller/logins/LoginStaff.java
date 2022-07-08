@@ -67,7 +67,7 @@ public class LoginStaff extends HttpServlet {
                         session.setAttribute("admin", (Amministratore) tmp);
                     }
 
-
+                    session.removeAttribute("ospite");
                     response.sendRedirect(homePage);
                 } else {
                     String message = "Invalid password";

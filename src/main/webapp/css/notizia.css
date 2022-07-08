@@ -1,0 +1,103 @@
+#wrap{
+    margin: 2%;
+    background: #24262b;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+#articolo{
+    position: relative;
+    margin: 2%;
+}
+
+#articolo img{
+    opacity: 0.7;
+    width: 100%;
+}
+
+#articolo-content{
+    width: 100%;
+    color: white;
+}
+
+#articolo-content h2,h3,p{
+    margin: 2%;
+}
+
+#articolo-content h2{
+    text-align: center;
+}
+#comments{
+    margin: 2%;
+}
+#numberComments{
+    position: relative;
+    left: 5px;
+    color: white;
+}
+
+#comments form{
+    position: relative;
+    left: 5px;
+    margin: 2% 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#comments input[type=text]{
+    width: 80%;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+    color: #ffffff;
+    border-bottom: solid 2px #e91e63;
+    resize: none;
+}
+
+#comments input[type=submit]{
+    margin: 5px 5px;
+    background: #e91e63;
+    border: none;
+    cursor: pointer;
+    transtion: all .3s ease;
+    height: 40px;
+    width: 70px;
+    border-radius: 2px;
+    color: white;
+}
+
+#copertina{
+    position: relative;
+    text-align: center;
+}
+
+#type{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, 0%);
+    margin: 0;
+    font-size: 30px;
+    background: #e91e63;
+    border: solid 2px #e91e63;
+    width: 100px;
+}
+
+#giornalista{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#giornalista img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: solid 1px transparent;
+}

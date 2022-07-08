@@ -4,8 +4,9 @@
 <html>
 <head>
     <title>Area giornalista</title>
-    <link rel="stylesheet" href="./css/master.css">
+
     <link rel="stylesheet" href="./css/recensioni.css">
+    <link rel="stylesheet" href="./css/master.css">
 </head>
 <body>
 <%@ include file="/WEB-INF/results/journalistArea.jsp" %>

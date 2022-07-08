@@ -30,7 +30,7 @@
 
     <section class="articoli">
         <c:forEach items="${requestScope['recensioniGiornalista']}" var="articolo">
-            <a href="/Rojina_Review_war/getResource?type=recensione&id=${articolo.id}">
+            <a href="/Rojina_Review_war/getResource?type=reviews&id=${articolo.id}">
                 <div class="articolo">
                     <img src="${articolo.immagine}" , alt="copertina" decoding="async">
                     <div class="articolo-content">

@@ -64,7 +64,10 @@ public class Prodotto {
     }
 
     public float getPrezzo() {
-        return prezzo;
+        if(this.sconto.nome != null)
+            return prezzo*this.sconto.percentuale;
+        else
+            return prezzo;
     }
 
     public void setPrezzo(float prezzo) {

@@ -26,35 +26,36 @@ public class OrdineDAO {
         PreparedStatement ps =
                 con.prepareStatement(
                         "SELECT o.id, stato, o.tracking, o.dataOrdine, o.totale, o.pagamento, o.via, o.numeroCivico, o.città, o.cap, p.nome, p.cognome, p.numeroCarta, p.dataScadenza " +
-                                "FROM ordine o join pagamento p on  o.pagamento = p.numeroCarta and o.utente and o.utente = p.utente WHERE o.utente=?");
+                                "FROM ordine o join pagamento p on  o.pagamento = p.numeroCarta  and o.utente = p.utente WHERE o.utente=?");
         ps.setString(1, user);
         ResultSet rs = ps.executeQuery();
+        ResultSet rsInt;
         ArrayList<Ordine> ordini = new ArrayList<>();
         while (rs.next()) {
             Ordine o = new Ordine(
-                    null,
+                    new ArrayList<Ordine.ProdottoOrdine>(),
                     rs.getDate(4),
                     rs.getFloat(5),
                     rs.getInt(1),
-                    new Indirizzo(rs.getString(8),
+                    new Indirizzo(rs.getString(7),
+                            rs.getString(9),
                             rs.getString(10),
-                            rs.getString(11),
-                            rs.getInt(9)),
-                    new Pagamento(rs.getString(12),
+                            rs.getInt(8)),
+                    new Pagamento(rs.getString(11),
+                            rs.getString(12),
                             rs.getString(13),
-                            rs.getString(14),
-                            rs.getDate(15)),
-                    rs.getString(rs.getString(2)),
-                    rs.getString(rs.getString(3)));
+                            rs.getDate(14)),
+                    rs.getString(2),
+                    rs.getString(3));
 
             ps = con.prepareStatement("SELECT po.prodotto, po.prezzo, po.quantità FROM prodotto_ordine po join ordine o on po.ordine = o.id WHERE utente=?");
             ps.setString(1, user);
-            rs = ps.executeQuery();
-            while (rs.next()) {
+            rsInt = ps.executeQuery();
+            while (rsInt.next()) {
                 Ordine.ProdottoOrdine p = o.new ProdottoOrdine();
-                p.setProdotto(new ProdottoDAO(con).doRetrieveById(rs.getInt(1)));
-                p.setPrezzoAcquisto(rs.getFloat(2));
-                p.setQuantita(rs.getInt(3));
+                p.setProdotto(new ProdottoDAO(con).doRetrieveById(rsInt.getInt(1)));
+                p.setPrezzoAcquisto(rsInt.getFloat(2));
+                p.setQuantita(rsInt.getInt(3));
                 o.getProdotti().add(p);
             }
             ordini.add(o);

@@ -11,7 +11,6 @@ public class Notizia extends Articolo {
     /* Attributes */
 
     private ArrayList<String> giochi;
-
     /* Constructor */
 
     public Notizia() {
@@ -25,7 +24,9 @@ public class Notizia extends Articolo {
                    int id,
                    String testo,
                    String titolo,
-                   String giornalista) {
+                   String giornalista,
+                   String immagineGiornalista
+                   ) {
         super(commenti,
                 immagine,
                 dataCaricamento,
@@ -33,7 +34,8 @@ public class Notizia extends Articolo {
                 id,
                 testo,
                 titolo,
-                giornalista);
+                giornalista,
+                immagineGiornalista);
         this.giochi = giochi;
     }
 

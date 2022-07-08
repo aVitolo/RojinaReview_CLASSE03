@@ -19,7 +19,7 @@
     <section class="articoli" id="wrap">
         <c:forEach items="${applicationScope['prodotti']}" var="prodotto">
             <div class = "articolo" id="${prodotto.id}">
-                <a href="/Rojina_Review_war/getResource?type=prodotto&id=${prodotto.id}">
+                <a href="/Rojina_Review_war/getResource?type=shop&id=${prodotto.id}">
                 <img src = "${prodotto.immagine}" alt = "copertina" decoding="async">
                 <div class = "articolo-content">
                     <h2>${prodotto.nome}</h2>

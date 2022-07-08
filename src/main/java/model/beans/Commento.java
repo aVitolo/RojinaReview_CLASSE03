@@ -6,9 +6,12 @@ public class Commento {
 
     /* Attributes */
 
+    private int id;
     private java.sql.Date data;
     private String testo;
     private String utente;
+    private String resource; //oggetto a cui fa riferimento: notizia, recensione, prodotto
+
 
 
     /* Constructor */
@@ -17,10 +20,12 @@ public class Commento {
 
     }
 
-    public Commento(String testo, String utente, java.sql.Date data) {
+    public Commento(String testo, String utente, java.sql.Date data, int id, String resource) {
         this.testo = testo;
         this.utente = utente;
         this.data = data;
+        this.id = id;
+        this.resource = resource;
     }
 
     /* Getter & Setter */
@@ -47,5 +52,21 @@ public class Commento {
 
     public void setData(java.sql.Date data) {
         this.data = data;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getResource() {
+        return resource;
+    }
+
+    public void setResource(String resource) {
+        this.resource = resource;
     }
 }

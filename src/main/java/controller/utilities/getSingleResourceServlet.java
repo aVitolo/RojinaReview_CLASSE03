@@ -26,7 +26,8 @@ public class getSingleResourceServlet extends HttpServlet {
         boolean trovato = false;
         ServletContext context = request.getServletContext();
 
-        if (type.equalsIgnoreCase("news")) {
+
+        if (type.equalsIgnoreCase("news") || type.equalsIgnoreCase("notizia")) {
             //cerco prima nel context la notizia
             ArrayList<Notizia> notizieContext = (ArrayList<Notizia>) context.getAttribute("notizie");
             for (i = 0; i < notizieContext.size() && !trovato; i++) {
@@ -40,7 +41,7 @@ public class getSingleResourceServlet extends HttpServlet {
                     }
                 }
             }
-            if (trovato = false) {
+            if (trovato == false) {
                 try {
                     Notizia n = new NotiziaDAO().doRetrieveById(id);
                     request.setAttribute("notizia", n);
@@ -50,7 +51,7 @@ public class getSingleResourceServlet extends HttpServlet {
                 }
             }
             result = "/WEB-INF/results/notizia.jsp";
-        } else if (type.equalsIgnoreCase("reviews")) {
+        } else if (type.equalsIgnoreCase("reviews") || type.equalsIgnoreCase("recensione")) {
             //cerco prima nel context la recensione
             ArrayList<Recensione> recensioniContext = (ArrayList<Recensione>) context.getAttribute("recensioni");
             for (i = 0; i < recensioniContext.size() && !trovato; i++) {
@@ -64,7 +65,7 @@ public class getSingleResourceServlet extends HttpServlet {
                     }
                 }
             }
-            if (trovato = false) {
+            if (trovato == false) {
                 try {
                     Recensione r = new RecensioneDAO().doRetrieveById(id);
                     request.setAttribute("recensione", r);
@@ -74,7 +75,7 @@ public class getSingleResourceServlet extends HttpServlet {
                 }
             }
             result = "/WEB-INF/results/recensione.jsp";
-        } else if (type.equalsIgnoreCase("shop")) {
+        } else if (type.equalsIgnoreCase("shop") || type.equalsIgnoreCase("prodotto")) {
             //cerco prima nel context il prodotto
             ArrayList<Prodotto> prodottiContext = (ArrayList<Prodotto>) context.getAttribute("prodotti");
             for (i = 0; i < prodottiContext.size() && !trovato; i++) {
@@ -88,7 +89,7 @@ public class getSingleResourceServlet extends HttpServlet {
                     }
                 }
             }
-            if (trovato = false) {
+            if (trovato == false) {
                 try {
                     Prodotto p = new ProdottoDAO().doRetrieveById(id);
                     request.setAttribute("prodotto", p);

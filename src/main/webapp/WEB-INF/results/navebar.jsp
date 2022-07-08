@@ -6,6 +6,10 @@
 <head>
     <meta charset="UTF-8">
 </head>
+<c:if test="${sessionScope['ospite'] != null}">
+    <c:set var="ospite" scope="page" value="${sessionScope['ospite']}"/>
+</c:if>
+
 <header id="head">
 
     <section class="bar">
@@ -25,7 +29,8 @@
         <c:choose>
             <c:when test="${sessionScope.get('utente') != null}">
                 <a href="">Bentornato, <c:out value='${utente.nickname}'/></a>
-                <a href="">Carello <c:out value='${fn:length(utente.carrello.prodotti)}'/></a>
+                <a href="/Rojina_Review_war/userArea"><img  class="icon" src="${utente.immagine}"></a>
+                <a href="">Carrello <c:out value='${fn:length(utente.carrello.prodotti)}'/></a>
                 <button alt="logout" onclick="document.location.href='./logout'">Logout</button>
             </c:when>
             <c:when test="${sessionScope.get('giornalista') != null}">
@@ -40,6 +45,7 @@
                 <button alt="logout" onclick="document.location.href='./logout'">Logout</button>
             </c:when>
             <c:otherwise>
+                <a href="">Carrello <c:out value='${fn:length(ospite.prodotti)}'/></a>
                 <button onclick="document.location.href='./userLogin.jsp'">Login</button>
             </c:otherwise>
         </c:choose>

@@ -15,7 +15,14 @@
     <section class="hot">
         <img src="./images/utility/logoNT.png" alt="logo" class="logo" decoding="async">
         <section class="articolo">
-            <a href="/Rojina_Review_war/getResource?type=${copertina.getClass().simpleName}&id=${copertina.id}">
+            <c:choose>
+                <c:when test="${copertina.getClass().simpleName =='Recensione'}">
+                    <a href="/Rojina_Review_war/getResource?type=reviews&id=${copertina.id}">
+                </c:when>
+                <c:when test="${copertina.getClass().simpleName =='Notizia'}">
+                    <a href="/Rojina_Review_war/getResource?type=news&id=${copertina.id}">
+                </c:when>
+            </c:choose>
                 <img src="<c:out value='${copertina.immagine}'/>" alt="copertina" decoding="async">
                 <div class="articolo-content">
                     <h3><c:out value="${copertina.getClass().simpleName}"/></h3>
@@ -35,7 +42,14 @@
     <section class="articoli">
         <c:forEach items="${articoli}" var="articolo">
             <div class="articolo">
-                <a href="/Rojina_Review_war/getResource?type=${articolo.getClass().simpleName}&id=${articolo.id}">
+                <c:choose>
+                    <c:when test="${articolo.getClass().simpleName =='Recensione'}">
+                        <a href="/Rojina_Review_war/getResource?type=reviews&id=${articolo.id}">
+                    </c:when>
+                    <c:when test="${articolo.getClass().simpleName =='Notizia'}">
+                        <a href="/Rojina_Review_war/getResource?type=news&id=${articolo.id}">
+                    </c:when>
+                </c:choose>
                     <img src="${articolo.immagine}" alt="copertina" decoding="async">
                     <div class="articolo-content">
                         <h3>${articolo.getClass().simpleName}</h3>
