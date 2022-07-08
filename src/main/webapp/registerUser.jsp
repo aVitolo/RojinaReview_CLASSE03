@@ -32,7 +32,7 @@
             <span></span>
             <label>Password</label>
         </div>
-        <input id="registerSubmit" type="submit" onclick="formValidation()" value="Create Account">
+        <input id="registerSubmit" type="submit" onclick="validateInputs()" value="Create Account">
     </form>
 </div>
 <c:if test="${message != null}">
@@ -47,32 +47,6 @@
         <button id="close"><c:out value="${message}"/></button>
     </div>
 </c:if>
-
-<script defer>
-    function formValidation() {
-        //va aggiunto il check sui caratteri per ogni input
-        let nickname = $("#nickname").val();
-        let email = $("#email").val();
-        let password = $("#password").val();
-
-        //Check nickname
-        if (nickname.length < 5 || nickname.length > 30) {
-            alert("Wrong format for NICKNAME!\n+ Minimum: 5 letters\n+ Maximum: 30 letters\n+ Don't accepted: {# - ' \\ \" }");
-            $("#nickname").val("");
-        }
-
-        //Check email
-        if (email.length < 5 || email.length > 30) {
-            alert("Wrong format for EMAIL!\n+ Minimum: 5 letters\n+ Maximum: 30 letters\n+ Don't accepted: {# - ' \\ \"}");
-            $("#email").val("");
-        }
-
-        //Check password
-        if (password.length < 6 || password.length > 20) {
-            alert("Wrong format for PASSWORD!\n+ Minimum: 6 letters\n+ Maximum: 20 letters\n+ Don't accepted: {# - ' \\ \" }");
-            $("#password").val("");
-        }
-    }
-</script>
+<script defer src="./js/formValidation.js"></script>
 </body>
 </html>

@@ -29,11 +29,14 @@ public class RegistrationUser extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+
             if (request.getSession().getAttribute("utente") != null)
                 response.sendRedirect(homePage);
             else {
                 //Preleva dalla request l'email
                 String email = request.getParameter("email");
+                if(email != null)
+                    email = email.trim();
 
                 //Inizializza la connessione al DB tramite DAO
                 UtenteDAO uDAO = new UtenteDAO();
@@ -50,6 +53,8 @@ public class RegistrationUser extends HttpServlet {
 
                 String nickname = request.getParameter("nickname");
                 this.tmp = uDAO.doRetriveByNickname(nickname);
+                if(nickname != null)
+                    nickname = nickname.trim();
 
                 //Verifica se la ricerca dell' utente è andata male e controlla il nickname
                 if (this.tmp != null || RegistrationUser.textCheck(nickname, this.nickNameMinLenght, this.nickNameMaxLenght, this.badCharacters) == false) {
@@ -62,6 +67,8 @@ public class RegistrationUser extends HttpServlet {
 
                 //Prelevo dalla request la password
                 String password = request.getParameter("password");
+                if(password != null)
+                    password = password.trim();
 
                 //Verifico se la password è valida con la funzione passwordCheck
                 if (RegistrationUser.textCheck(password, this.passwordMinLenght, this.passwordMaxLenght, this.badCharacters) == false) {
