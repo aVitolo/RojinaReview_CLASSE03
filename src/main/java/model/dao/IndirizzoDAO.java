@@ -36,4 +36,17 @@ public class IndirizzoDAO {
         return indirizzi;
     }
 
+    public void doSave(String user, Indirizzo i) throws SQLException {
+        PreparedStatement ps = con.prepareStatement("INSERT INTO indirizzo VALUES (?, ?, ?, ?, ?)");
+        ps.setString(1, user);
+        ps.setString(2, i.getVia());
+        ps.setInt(3, i.getNumeroCivico());
+        ps.setString(4, i.getCittà());
+        ps.setString(5, i.getCap());
+
+        if(ps.executeUpdate() != 1)
+            throw new RuntimeException("Insert error");
+
+    }
+
 }
