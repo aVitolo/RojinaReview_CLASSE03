@@ -17,8 +17,8 @@
 </head>
 
 <body>
-<%@ include file="navebar.jsp" %>
 
+<%@ include file="navebar.jsp" %>
 <section id="wrap">
 
     <section id="articolo">
@@ -27,17 +27,20 @@
             <p id="type">News</p>
         </div>
         <div id = "articolo-content">
-            <h2>${notizia.titolo}</h2>
+            <h1>${notizia.titolo}</h1>
             <p>${notizia.testo}</p>
+            <p>Caricata il ${notizia.dataCaricamento}</p>
+        </div>
+        <div id="card">
             <div id="giornalista">
-                <h3>Notizia scritta da ${notizia.giornalista} il ${notizia.dataCaricamento}</h3>
                 <img src = "${notizia.immagineGiornalista}" alt = "copertina" decoding="async">
+                <h2>${notizia.giornalista} </h2>
             </div>
         </div>
     </section>
 
     <section id="mentionedGames">
-        <c:if test="${n.giochi()!=null}">
+        <c:if test="${n.giochi!=null}">
             <% for (String gioco : n.getGiochi()) {%>
             <h3>
                 <%=gioco%>
@@ -74,7 +77,5 @@
 
 <%@ include file="../../html/footer.html" %>
 </body>
-<scrpit>
-
-</scrpit>
+<script type="text/javascript" src="/Rojina_Review_war/js/navebar.js"></script>
 </html>

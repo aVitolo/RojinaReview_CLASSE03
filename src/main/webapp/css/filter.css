@@ -1,25 +1,13 @@
 .filter {
-    display: flex;
-    justify-content: space-evenly;
-    margin: 1%;
-}
-
-@media screen and (max-width: 768px) {
-    .filter {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        margin: 1%;
-    }
-
-    .dropbtn {
-        margin: 2% 0;
-    }
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    justify-items: center;
 }
 
 .dropbtn {
-    margin-bottom: 1%;
+    margin: 2% 0;
     background-color: #e91e63;
     padding: 16px;
     font-size: 16px;
@@ -103,4 +91,16 @@
 .show {
     display: flex;
     flex-direction: column;
+}
+@media (max-width: 1400px) {
+    .filter {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 780px) {
+
+    .filter {
+        grid-template-columns: repeat(1, 1fr);
+    }
 }
