@@ -22,19 +22,28 @@
 <section id="wrap">
 
     <section id="articolo">
-        <img src = "${notizia.immagine}" alt = "copertina" decoding="async">
+        <div id="copertina">
+            <img src = "${notizia.immagine}" alt = "copertina" decoding="async">
+            <p id="type">News</p>
+        </div>
         <div id = "articolo-content">
             <h2>${notizia.titolo}</h2>
-            <h3>Notizia scritta da ${notizia.giornalista} il ${notizia.dataCaricamento}</h3>
             <p>${notizia.testo}</p>
+            <div id="giornalista">
+                <h3>Notizia scritta da ${notizia.giornalista} il ${notizia.dataCaricamento}</h3>
+                <img src = "${notizia.immagineGiornalista}" alt = "copertina" decoding="async">
+            </div>
         </div>
     </section>
 
     <section id="mentionedGames">
-        <% for (String gioco : n.getGiochi()) {%>
-        <h3><%=gioco%>
-        </h3>
-        <%}%>
+        <c:if test="${n.giochi()!=null}">
+            <% for (String gioco : n.getGiochi()) {%>
+            <h3>
+                <%=gioco%>
+            </h3>
+            <%}%>
+        </c:if>
     </section>
 
     <section id="comments">

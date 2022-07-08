@@ -19,7 +19,7 @@ public abstract class Articolo {
     private String titolo;
     private String giornalista;
     private String immagine;
-
+    private String immagineGiornalista;
 
     /* Constructor */
 
@@ -33,7 +33,8 @@ public abstract class Articolo {
                     int id,
                     String testo,
                     String titolo,
-                    String giornalista) {
+                    String giornalista,
+                    String immagineGiornalista) {
         this.immagine = immagine;
         this.commenti = commenti;
         this.dataCaricamento = dataCaricamento;
@@ -42,6 +43,7 @@ public abstract class Articolo {
         this.testo = testo;
         this.titolo = titolo;
         this.giornalista = giornalista;
+        this.immagineGiornalista = immagineGiornalista;
     }
 
     /* Getter and Setter */
@@ -108,6 +110,14 @@ public abstract class Articolo {
 
     public void setImmagine(String immagine) {
         this.immagine = immagine;
+    }
+
+    public String  getImmagineGiornalista() {
+        return immagineGiornalista;
+    }
+
+    public void setImmagineGiornalista(String immagineGiornalista) {
+        this.immagineGiornalista = immagineGiornalista;
     }
 }
 
