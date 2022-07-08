@@ -20,14 +20,17 @@
 <section id="wrap">
 
     <section id="articolo">
-        <img src = "${recensione.immagine}" alt = "copertina" decoding="async">
+        <div id="copertina">
+            <img src = "${recensione.immagine}" alt = "copertina" decoding="async">
+            <p id="type">News</p>
+        </div>
         <div id = "articolo-content">
             <h2>${recensione.titolo}</h2>
-            <div class="voto">
-            <p>${recensione.voto}</p>
-            </div>
-            <h3>Notizia scritta da ${recensione.giornalista} il ${recensione.dataCaricamento}</h3>
             <p>${recensione.testo}</p>
+            <div id="giornalista">
+                <h3>Notizia scritta da ${recensione.giornalista} il ${recensione.dataCaricamento}</h3>
+                <img src = "${recensione.immagineGiornalista}" alt = "copertina" decoding="async">
+            </div>
         </div>
     </section>
 
