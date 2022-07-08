@@ -147,11 +147,11 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>logOut</servlet-name>
+        <servlet-name>logout</servlet-name>
         <servlet-class>controller.logins.logout</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>logOut</servlet-name>
+        <servlet-name>logout</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
@@ -163,4 +163,68 @@
         <servlet-name>LoginStaff</servlet-name>
         <url-pattern>/LoginStaff</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>userAreaServlet</servlet-name>
+        <servlet-class>controller.user.userAreaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userAreaServlet</servlet-name>
+        <url-pattern>/userArea</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>userInformationsServlet</servlet-name>
+        <servlet-class>controller.user.userInformationsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userInformationsServlet</servlet-name>
+        <url-pattern>/userInformations</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>userOrdersServlet</servlet-name>
+        <servlet-class>controller.user.userOrdersServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userOrdersServlet</servlet-name>
+        <url-pattern>/userOrders</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>userVotesServlet</servlet-name>
+        <servlet-class>controller.user.userVotesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userVotesServlet</servlet-name>
+        <url-pattern>/userVotes</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>insertAddressServlet</servlet-name>
+        <servlet-class>controller.user.insertAddressServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>insertAddressServlet</servlet-name>
+        <url-pattern>/insertAddress</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>insertNumberServlet</servlet-name>
+        <servlet-class>controller.user.insertNumberServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>insertNumberServlet</servlet-name>
+        <url-pattern>/insertNumber</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>insertPaymentServlet</servlet-name>
+        <servlet-class>controller.user.insertPaymentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>insertPaymentServlet</servlet-name>
+        <url-pattern>/insertPayment</url-pattern>
+    </servlet-mapping>
+
 </web-app>

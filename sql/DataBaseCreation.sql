@@ -404,9 +404,9 @@ insert into Utente values
                        ("gralameiddauquau@yopmail.com","GhostSteel",SHA2('nefihouefwpoj',256), "Lorenza", "Gialli", 18, "./images/users/GhostSteel.jpg"),
                        ("febremoulaqui@yopmail.com","PredatorBeta",SHA2('fnkebouewf',256), "Christian", "Rosati", 26, "./images/users/PredatorBeta.jpg"),
                        ("zindre@yopmail.com","BlackDeath",SHA2('jofhouefwpoj',256), null, null, null, "./images/users/BlackDeath.jpg"),
-                       ("cazzare@yopmail.com","AbyssWalker",SHA2('pmiwefhoufpewj',256), "Carmine", "Franca", 22, "./images/users/AbyssWalker.jpg"),
+                       ("cazzare@yopmail.com","AbyssWalker",SHA2('cazzare',256), "Carmine", "Franca", 22, "./images/users/AbyssWalker.jpg"),
                        ("oefo@yopmail.com","Papiciacra",SHA2('piefwhouefoj',256), "Fonz", "Cretoso", 20, "./images/users/Papiciacra.jpg"),
-                       ("utente@gmail.com","User",SHA2('password',256), "Persona", "Normale", 20, "./images/users/User.jpg");
+                       ("utente@gmail.com","User",SHA2('password',256), "Persona", "Normale", 20, null);
 
 
 insert into Indirizzo values
@@ -482,7 +482,12 @@ insert into Gioco values
                       ("Halo 3","2007-09-25","Bungie Studios", 0, 0, "./images/games/Halo 3.jpg"),
                       ("Halo 4","2012-11-06","343 Industries", 0, 0, "./images/games/Halo 4.jpg"),
                       ("Halo 5","2015-10.27","343 Industries", 0, 0, "./images/games/Halo 5.jpg"),
-                      ("Halo Infinite","2021-12-08","343 Industries", 0, 0, "./images/games/Halo Infinite.jpg");
+                      ("Halo Infinite","2021-12-08","343 Industries", 0, 0, "./images/games/Halo Infinite.jpg"),
+                      ("God of War", "2020-11-07", "Santa Monica Studio", 0, 0, "./images/games/God of War.jpg"),
+                      ("COD Black Ops 3", "2018-10-10", "Treyarch", 0, 0, "./images/games/COD Black Ops 3.jpg"),
+                      ("Rainbow Six Siege", "2017-05-11", "Ubisoft", 0, 0, "./images/games/Rainbow Six Siege.jpg"),
+                      ("Red Dead Redemption 2", "2019-03-02", "Rockstar Games", 0, 0, "./images/games/Red Dead Redemption 2.jpg"),
+                      ("GTA 5", "2015-09-15", "Rockstar Games", 0, 0, "./images/games/GTA 5.jpg");
 
 insert into Gioco_Piattaforma values
                                   ("Dark Souls","Xbox 360"),
@@ -520,7 +525,20 @@ insert into Gioco_Piattaforma values
                                   ("Halo 4","Xbox 360"),
                                   ("Halo 5","Xbox One"),
                                   ("Halo Infinite","Xbox One"),
-                                  ("Halo Infinite","Xbox Series X/S");
+                                  ("Halo Infinite","Xbox Series X/S"),
+                                  ("God of War", "Xbox One"),
+                                  ("God of War", "Playstation 4"),
+                                  ("COD Black Ops 3", "Xbox One"),
+                                  ("COD Black Ops 3", "Playstation 4"),
+                                  ("Rainbow Six Siege", "Xbox One"),
+                                  ("Rainbow Six Siege", "Playstation 4"),
+                                  ("Red Dead Redemption 2", "Xbox One"),
+                                  ("Red Dead Redemption 2", "Playstation 4"),
+                                  ("Red Dead Redemption 2", "Nintendo Switch"),
+                                  ("GTA 5", "Playstation 4"),
+                                  ("GTA 5", "Xbox One"),
+                                  ("GTA 5", "Playstation 5"),
+                                  ("GTA 5", "Xbox Series X/S");
 
 insert into Gioco_Tipologia values
                                 ("Dark Souls","Azione"),
@@ -570,7 +588,20 @@ insert into Gioco_Tipologia values
                                 ("Halo Infinite","FPS"),
                                 ("Halo Infinite","Giocatore Singolo"),
                                 ("Halo Infinite","Multiplayer"),
-                                ("Halo Infinite","Multiplayer Online");
+                                ("Halo Infinite","Multiplayer Online"),
+                                ("God of War", "Giocatore Singolo"),
+                                ("God of War", "Avventura"),
+                                ("COD Black Ops 3", "FPS"),
+                                ("COD Black Ops 3", "Multiplayer Online"),
+                                ("Rainbow Six Siege", "FPS"),
+                                ("Rainbow Six Siege", "Multiplayer Online"),
+                                ("Red Dead Redemption 2", "Avventura"),
+                                ("Red Dead Redemption 2", "Giocatore Singolo"),
+                                ("Red Dead Redemption 2", "Azione"),
+                                ("GTA 5", "Azione"),
+                                ("GTA 5", "Multiplayer Online"),
+                                ("GTA 5", "Giocatore Singolo"),
+                                ("GTA 5", "VR");
 
 insert into Recensione (testo, giornalista, gioco, titolo, voto, dataCaricamento, immagine) values
 ("Il seguito di Dark Souls I...", 1, "Dark Souls II","Dark Souls torna a colpire",9,"2014-04-11", "./images/reviews/review-Dark Souls II.jpg"),
@@ -581,34 +612,15 @@ insert into Recensione (testo, giornalista, gioco, titolo, voto, dataCaricamento
 ("Halo 4 si avvicina a cod...", 2,"Halo 4","Recensione Halo 4",9,"2022-01-13", "./images/reviews/review-Halo 4.jpg"),
 ("Halo 5 non lo so...", 6, "Halo 5","Recensione Halo 5: Guardians",8.8,"2022-01-3", "./images/reviews/review-Halo 5.jpg"),
 ("Halo infinite figurati...", 4, "Halo Infinite","Un ritorno epico",9,current_date(), "./images/reviews/review-Halo Infinite.jpg"),
-("Il seguito di Dark Souls I...", 1, "Dark Souls II","Dark Souls torna a colpire",9,"2014-04-11", "./images/reviews/review-Dark Souls II.jpg"),
-("Dark Souls 3 richiama i...", 3, "Dark Souls III","Recensione Dark Souls III",9,"2016-05-12", "./images/reviews/review-Dark Souls III.jpg"),
-("Sekiro nuova avventura diversa...", 1, "Sekiro Shadows Die Twice","Il gioco From Software più difficile di sempre",9,"2019-04-22", "./images/reviews/review-Sekiro Shadows Die Twice.jpg"),
-("Halo 2 fps...", 6, "Halo 2","Master Chief è tornato più in forma che mai",9.5,"2004-11-16", "./images/reviews/review-Halo 2.jpg"),
-("Halo 3 è indubbiamente...", 5, "Halo 3","Il ritorno di Master Chief",8.5 ,"2007-10-01", "./images/reviews/review-Halo 3.jpg"),
-("Halo 4 si avvicina a cod...", 2,"Halo 4","Recensione Halo 4",9,"2022-01-13", "./images/reviews/review-Halo 4.jpg"),
-("Halo 5 non lo so...", 6, "Halo 5","Recensione Halo 5: Guardians",8.8,"2022-01-3", "./images/reviews/review-Halo 5.jpg"),
-("Halo infinite figurati...", 4, "Halo Infinite","Un ritorno epico",9,current_date(), "./images/reviews/review-Halo Infinite.jpg"),
-("Il seguito di Dark Souls I...", 1, "Dark Souls II","Dark Souls torna a colpire",9,"2014-04-11", "./images/reviews/review-Dark Souls II.jpg"),
-("Dark Souls 3 richiama i...", 3, "Dark Souls III","Recensione Dark Souls III",9,"2016-05-12", "./images/reviews/review-Dark Souls III.jpg"),
-("Sekiro nuova avventura diversa...", 1, "Sekiro Shadows Die Twice","Il gioco From Software più difficile di sempre",9,"2019-04-22", "./images/reviews/review-Sekiro Shadows Die Twice.jpg"),
-("Halo 2 fps...", 6, "Halo 2","Master Chief è tornato più in forma che mai",9.5,"2004-11-16", "./images/reviews/review-Halo 2.jpg"),
-("Halo 3 è indubbiamente...", 5, "Halo 3","Il ritorno di Master Chief",8.5 ,"2007-10-01", "./images/reviews/review-Halo 3.jpg"),
-("Halo 4 si avvicina a cod...", 2,"Halo 4","Recensione Halo 4",9,"2022-01-13", "./images/reviews/review-Halo 4.jpg"),
-("Halo 5 non lo so...", 6, "Halo 5","Recensione Halo 5: Guardians",8.8,"2022-01-3", "./images/reviews/review-Halo 5.jpg"),
-("Halo infinite figurati...", 4, "Halo Infinite","Un ritorno epico",9,current_date(), "./images/reviews/review-Halo Infinite.jpg"),
-("Il seguito di Dark Souls I...", 1, "Dark Souls II","Dark Souls torna a colpire",9,"2014-04-11", "./images/reviews/review-Dark Souls II.jpg"),
-("Dark Souls 3 richiama i...", 3, "Dark Souls III","Recensione Dark Souls III",9,"2016-05-12", "./images/reviews/review-Dark Souls III.jpg"),
-("Sekiro nuova avventura diversa...", 1, "Sekiro Shadows Die Twice","Il gioco From Software più difficile di sempre",9,"2019-04-22", "./images/reviews/review-Sekiro Shadows Die Twice.jpg"),
-("Halo 2 fps...", 6, "Halo 2","Master Chief è tornato più in forma che mai",9.5,"2004-11-16", "./images/reviews/review-Halo 2.jpg"),
-("Halo 3 è indubbiamente...", 5, "Halo 3","Il ritorno di Master Chief",8.5 ,"2007-10-01", "./images/reviews/review-Halo 3.jpg"),
-("Halo 4 si avvicina a cod...", 2,"Halo 4","Recensione Halo 4",9,"2022-01-13", "./images/reviews/review-Halo 4.jpg"),
-("Halo 5 non lo so...", 6, "Halo 5","Recensione Halo 5: Guardians",8.8,"2022-01-3", "./images/reviews/review-Halo 5.jpg"),
-("Halo infinite figurati...", 4, "Halo Infinite","Un ritorno epico",9,current_date(), "./images/reviews/review-Halo Infinite.jpg"),
-("Halo 5 non lo so...", 6, "Halo 5","Recensione Halo 5: Guardians",8.8,"2022-01-3", "./images/reviews/review-Halo 5.jpg"),
-("Halo infinite figurati...", 4, "Halo Infinite","Un ritorno epico",9,current_date(), "./images/reviews/review-Halo Infinite.jpg"),
-("Halo 5 non lo so...", 6, "Halo 5","Recensione Halo 5: Guardians",8.8,"2022-01-3", "./images/reviews/review-Halo 5.jpg"),
-("Halo infinite figurati...", 4, "Halo Infinite","Un ritorno epico",9,current_date(), "./images/reviews/review-Halo Infinite.jpg");
+("GTA 5 è un gioco molto violento...", 3, "GTA 5", "La saga che non delude mai", 8, "2020-11-09", "./images/reviews/review-GTA 5.jpg"),
+("In Rainbow è importante la tattica...", 1, "Rainbow Six Siege", "Il miglior FPS tattico", 9, "2018-05-23", "./images/reviews/review-Rainbow Six Siege.jpg"),
+("God of War è sempre una certezza...", 2, "God of War", "Il grande ritorno di Kratos", 9.5, "2021-03-11", "./images/reviews/review-God of War.jpg"),
+("Black Ops 3 si prospetta come...", 1, "COD Black Ops 3", "La Treyarch ci lascia senza parole", 10, "2018-04-04", "./images/reviews/review-COD Black Ops 3.jpg"),
+("RDR 2 è mastodontico...", 5, "Red Dead Redemption 2", "Il GTA ambientato nell'old west", 9.3, "2021-06-11", "./images/reviews/review-Red Dead Redemption 2.jpg"),
+("Zelda è ormai la nostra infanzia...", 2, "The Legend of Zelda Breath of the Wild", "Il capolavoro Nintendo", 9.5, "2022-03-11", "./images/reviews/review-The Legend of Zelda Breath of the Wild.jpg"),
+("Mario e corse connubio perfetto...", 5, "Mario Kart 8", "Mario&Furious", 7.5, "2021-01-15", "./images/reviews/review-Mario Kart 8.jpg"),
+("FIFA 21 si mostra come...", 3, "FIFA 21", "Il solito gioco di calcio", 6, "2021-02-22", "./images/reviews/review-FIFA 21.jpg");
+
 
 insert into Notizia (testo, giornalista, titolo, dataCaricamento, immagine) values
 ("Halo Infinite è un gioco...", 2,  "Halo Infinite e la community tossica","2022-01-24", "./images/news/new-Halo Infinite e la community tossica.jpg"),
@@ -639,8 +651,11 @@ insert into Notizia (testo, giornalista, titolo, dataCaricamento, immagine) valu
 
 insert into Gioco_Notizia values
                               (1, 3,"The Legend of Zelda Breath of the Wild"),
+                                (1, 3, "Mario Kart 8"),
                               (5, 5,"FIFA 20"),
-                              (5, 6,"FIFA 21");
+                              (5, 6,"FIFA 21"),
+                                (5, 6, "FIFA 20");
+
 
 
 insert into Voto values

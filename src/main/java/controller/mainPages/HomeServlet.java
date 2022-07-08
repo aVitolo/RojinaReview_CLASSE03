@@ -3,6 +3,7 @@ package controller.mainPages;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import model.beans.Carrello;
 import model.utilities.Articolo;
 
 
@@ -18,6 +19,7 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletContext servCon = request.getServletContext();
+        HttpSession session = request.getSession();
         ArrayList<Articolo> articoli = new ArrayList<>();
         articoli.addAll((ArrayList<Articolo>) servCon.getAttribute("notizie"));
         articoli.addAll((ArrayList<Articolo>) servCon.getAttribute("recensioni"));
@@ -26,6 +28,8 @@ public class HomeServlet extends HttpServlet {
 
         request.setAttribute("copertina", copertina);
         request.setAttribute("articoli", articoli);
+        if(session.getAttribute("ospite") == null)
+            session.setAttribute("ospite", new Carrello());
 
         RequestDispatcher dispatcher =
                 request.getRequestDispatcher(path);

@@ -33,4 +33,13 @@ public class TelefonoDAO {
 
     }
 
+    public void doSave(String user, Telefono t) throws SQLException {
+        PreparedStatement ps = con.prepareStatement("INSERT INTO telefono VALUES (?,?)");
+        ps.setString(1, user);
+        ps.setString(2, t.getNumero());
+
+        if(ps.executeUpdate() != 1)
+            throw new RuntimeException("Insert error");
+    }
+
 }

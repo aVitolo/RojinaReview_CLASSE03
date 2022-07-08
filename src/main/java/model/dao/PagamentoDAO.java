@@ -38,4 +38,17 @@ public class PagamentoDAO {
         return pagamenti;
     }
 
+    public void doSave(Pagamento p, String user) throws SQLException {
+        PreparedStatement ps = con.prepareStatement("INSERT INTO pagamento VALUES (?, ?, ?, ?, ?)");
+        ps.setString(1, p.getNome());
+        ps.setString(2, p.getCognome());
+        ps.setString(3, user);
+        ps.setString(4, p.getNumeroCarta());
+        ps.setDate(5, p.getDataScadenza());
+
+        if(ps.executeUpdate() != 1)
+            throw new RuntimeException("Insert error");
+
+    }
+
 }
