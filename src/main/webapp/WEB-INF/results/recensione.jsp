@@ -39,7 +39,7 @@
         <h1>(<%=r.getGioco().getNumeroVoti()%>)</h1>
         <form  method="post">
             <input type="number" id="toVoto" min="1" max="10">
-            <input type="submit">
+            <input type="submit" value="Vota">
         </form>
     </section>
 
@@ -57,7 +57,7 @@
 
         <form action="" method="post">
             <input type="text" id="toComment" placeholder="Lascia un commento">
-            <input type="submit">
+            <input type="submit" value="Commenta">
         </form>
 
         <% for (Commento c : commenti) {%>

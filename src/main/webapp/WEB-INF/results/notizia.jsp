@@ -56,7 +56,7 @@
 
         <form action="" method="post">
             <input type="text" id="toComment" placeholder="Lascia un commento">
-            <input type="submit">
+            <input type="submit" value="Commenta">
         </form>
 
         <% for (Commento c : commenti) {%>

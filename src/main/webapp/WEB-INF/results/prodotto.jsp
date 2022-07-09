@@ -12,66 +12,75 @@
     </title>
     <link rel="stylesheet" href="css/navebar.css">
     <link rel="stylesheet" href="css/foot.css">
+    <link rel="stylesheet" href="css/prodotto.css">
     <link rel="stylesheet" href="css/master.css">
-    <link rel="stylesheet" href="../../css/notizia.css">
 </head>
 
 <body>
 <%@ include file="navebar.jsp" %>
-<section id="main">
-    <div id="titleSection">
-        <h1 id="productTitle"><%=p.getNome()%>
-        </h1>
-    </div>
-
-    <div id="imageSection">
-        <img id="imageProduct" src="<%=p.getImmagine()%>">
-    </div>
-</section>
-
-<h3 id="disponibilità">Disponibilità: <%=p.getDisponibilità()%>
-</h3>
-<h3 id="prezzo">Prezzo: <%=p.getPrezzo()%>
-</h3>
-
-<p id="bodyText">
-    <%=p.getDescrizione()%>
-</p>
-
-
-<section id="voto">
-    <h3 id="mediaVoto">Media gradimento: <%=p.getMediaVoto()%>
-    </h3>
-    <div id="votazione">
-
-    </div>
-</section>
-
-<section id="comments">
-    <div id="numberComments">
-        <%=commenti.size()%> commenti
-    </div>
-
-    <form action="" method="post">
-        <input type="text" id="toComment">
-        <input type="submit">
-    </form>
-
-    <% for (Commento c : commenti) {%>
-    <div class="comment">
-        <h4 class="nickname"><%=c.getUtente()%>
-        </h4>
-        <p class="text">
-            <%=c.getTesto()%>
-        </p>
-
-        <div class="date">
-            <%=c.getData()%>
+<section id="wrap">
+    <section id="articolo">
+        <div id="imageSection">
+            <img id="imageProduct" src="<%=p.getImmagine()%>">
         </div>
-    </div>
-    <%}%>
-</section>
+        <div id="articolo-content">
+        <h1 id="productTitle">
+                    <%=p.getNome()%>
+         </h1>
+        <h3 id="disponibilità">
+            Disponibilità: <%=p.getDisponibilità()%>
+        </h3>
+        <h3 id="prezzo">
+            Prezzo: <%=p.getPrezzo()%>
+        </h3>
+        <p id="bodyText">
+            <%=p.getDescrizione()%>
+        </p>
+        <section id="toCarret">
+            <form  method="post">
+                <input type="number" min="1" max="10">
+                <input type="submit" style="width:auto" value="Aggiungo al Carello">
+            </form>
+        </section>
+        </div>
+    </section>
 
+    <section id="votiUtenti">
+            <h1> Il vostro parere </h1>
+            <h1 id="mediaVoto"><%=p.getMediaVoto()%></h1>
+            <h1>(<%=p.getNumeroVoti()%>)</h1>
+            <form  method="post">
+                <input type="number" min="1" max="10">
+                <input type="submit" value="Vota">
+            </form>
+    </section>
+
+    <section id="comments">
+        <div id="numberComments">
+            <%=commenti.size()%> commenti
+        </div>
+
+        <form action="" method="post">
+            <input type="text" id="toComment" placeholder="Lascia un commento">
+            <input type="submit" value="Commenta">
+        </form>
+
+        <% for (Commento c : commenti) {%>
+        <div class="comment">
+            <h4 class="nickname"><%=c.getUtente()%>
+            </h4>
+            <p class="text">
+                <%=c.getTesto()%>
+            </p>
+
+            <div class="date">
+                <%=c.getData()%>
+            </div>
+        </div>
+        <%}%>
+    </section>
+</section>
 <%@ include file="../../html/footer.html" %>
 </body>
+<script type="text/javascript" src="/Rojina_Review_war/js/navebar.js"></script>
 </html>
