@@ -7,18 +7,20 @@
 }
 
 #articolo{
-    position: relative;
+    display: flex;
     margin: 2%;
 }
 
 #articolo img{
     opacity: 0.7;
     width: 100%;
+    height: 100%;
 }
 
 #articolo-content{
     width: 100%;
     color: white;
+    text-align: center;
 }
 
 #articolo-content h1,p{
@@ -37,6 +39,7 @@
 #comments{
     margin: 2%;
 }
+
 #numberComments{
     position: relative;
     left: 5px;
@@ -65,21 +68,71 @@
     resize: none;
 }
 
-#comments input[type=submit]{
+input[type=submit]{
     margin: 5px 5px;
     background: #e91e63;
     border: none;
     cursor: pointer;
     transition-duration: 0.3s;
-    border-radius: 2px;
-    font-size: 16px;
-    color: #ffffff;
     height: 40px;
     width: 70px;
+    border-radius: 2px;
+    color: white;
 }
 
-#comments input[type=submit]:hover{
+input[type=submit]:hover{
     background: #6B354D;
+}
+
+#votoRecensione{
+    position: relative;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, 0%);
+    font-size: 30px !important;
+    background: #e91e63;
+    border: solid 2px #e91e63;
+    width: 50px;
+    border-radius: 50%;
+    margin: 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+#votiUtenti{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2% 0;
+}
+
+input[type=number] {
+    height: 40px;
+    width: 40px;
+    background: none;
+    color: white;
+    outline: none;
+    font-size: 17px;
+    border: none;
+    border-bottom: solid 2px #e91e63;
+    text-align: center;
+}
+#mediaVoto{
+    font-size: 30px;
+    background: #e91e63;
+    border: solid 2px #e91e63;
+    width: 50px;
+    border-radius: 50%;
+    text-align: center;
+    font-weight: bold;
+}
+
+#votiUtenti form{
+    width: 125px;
+}
+
+#votiUtenti *{
+    margin-right: 1%;
 }
 
 #copertina{
@@ -99,7 +152,6 @@
     border: solid 2px #e91e63;
     width: 100px;
 }
-
 #card{
     display: flex;
     justify-content: center;
@@ -128,9 +180,9 @@
 }
 
 @media (max-width: 1400px) {
-     #wrap{
-         margin: 10%;
-     }
+    #wrap{
+        margin: 10%;
+    }
 }
 
 @media (max-width: 780px) {

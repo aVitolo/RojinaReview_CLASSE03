@@ -3,8 +3,6 @@ footer {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    position: absolute;
-    border: 0px;
     width: 100%;
 }
 

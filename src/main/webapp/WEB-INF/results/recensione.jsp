@@ -16,35 +16,39 @@
     <link rel="stylesheet" href="css/master.css">
 </head>
 <body>
+
 <%@ include file="navebar.jsp" %>
 <section id="wrap">
 
     <section id="articolo">
         <div id="copertina">
             <img src = "${recensione.immagine}" alt = "copertina" decoding="async">
-            <p id="type">News</p>
+            <p id="type">Review</p>
         </div>
         <div id = "articolo-content">
-            <h2>${recensione.titolo}</h2>
+            <h1>${recensione.titolo}</h1>
+            <p id="votoRecensione">${recensione.voto}</p>
             <p>${recensione.testo}</p>
-            <div id="giornalista">
-                <h3>Notizia scritta da ${recensione.giornalista} il ${recensione.dataCaricamento}</h3>
-                <img src = "${recensione.immagineGiornalista}" alt = "copertina" decoding="async">
-            </div>
+            <p>Caricata il ${recensione.dataCaricamento}</p>
         </div>
     </section>
 
     <section id="votiUtenti">
-        <h3>Il vostro parere</h3>
-        <div id="resume">
-            <p id="numberUsers">Utenti (<%=r.getGioco().getNumeroVoti()%>)</p>
-            <p id="usersVote"> <%=r.getGioco().getMediaVoto()%>   </p>
-        </div>
+        <h1> Il vostro parere </h1>
+        <h1 id="mediaVoto"><%=r.getGioco().getMediaVoto()%></h1>
+        <h1>(<%=r.getGioco().getNumeroVoti()%>)</h1>
         <form  method="post">
             <input type="number" id="toVoto" min="1" max="10">
-            <input type="submit">
+            <input type="submit" value="Vota">
         </form>
     </section>
+
+    <div id="card">
+        <div id="giornalista">
+            <img src = "${recensione.immagineGiornalista}" alt = "copertina" decoding="async">
+            <h1>${recensione.giornalista} </h1>
+        </div>
+    </div>
 
     <section id="comments">
         <div id="numberComments">
@@ -53,7 +57,7 @@
 
         <form action="" method="post">
             <input type="text" id="toComment" placeholder="Lascia un commento">
-            <input type="submit">
+            <input type="submit" value="Commenta">
         </form>
 
         <% for (Commento c : commenti) {%>

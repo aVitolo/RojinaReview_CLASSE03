@@ -30,13 +30,11 @@
             <c:when test="${sessionScope.get('utente') != null}">
                 <a href="">Bentornato, <c:out value='${utente.nickname}'/></a>
                 <a href="/Rojina_Review_war/userArea"><img  class="icon" src="${utente.immagine}"></a>
-                <a href="">Carrello <c:out value='${fn:length(utente.carrello.prodotti)}'/></a>
                 <button alt="logout" onclick="document.location.href='./logout'">Logout</button>
             </c:when>
             <c:when test="${sessionScope.get('giornalista') != null}">
                 <a href="">Bentornato, <c:out value='${giornalista.nome}'/></a>
-                <a href="/Rojina_Review_war/journalistArea"><img class="icon"
-                                                                 src="images/utility/journalistIcon.png"></a>
+                <a href="/Rojina_Review_war/journalistArea"><img class="icon"src="images/utility/journalistIcon.png"></a>
                 <button alt="logout" onclick="document.location.href='./logout'">Logout</button>
             </c:when>
             <c:when test="${sessionScope.get('admin') != null}">
