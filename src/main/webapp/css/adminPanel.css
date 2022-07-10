@@ -68,3 +68,15 @@ ul li:hover a{
 .sidebar ul li a #signOut{
     color: red;
 }
+
+div.manage{
+    font-size: 22px;
+    margin-left: 260px;
+    margin-top: 5px;
+}
+
+td, th {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+}

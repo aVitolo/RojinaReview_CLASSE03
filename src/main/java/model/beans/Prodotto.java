@@ -3,6 +3,7 @@ package model.beans;
 import java.util.ArrayList;
 
 public class Prodotto {
+    static public String[] fieldNames = {"Id","Nome","Descrizione","Disponibilità","Prezzo","Immagine","Sconto","Media Voto","Numero Voti"};
 
     private ArrayList<Commento> commenti;
     private ArrayList<Categoria> categorie;

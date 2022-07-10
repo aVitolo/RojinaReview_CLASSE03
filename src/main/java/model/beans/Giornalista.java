@@ -5,7 +5,7 @@ import model.utilities.Persona;
 import java.io.UnsupportedEncodingException;
 
 public class Giornalista extends Persona {
-
+    static public String[] fieldsName = {"Id","Nome","Cognome","Email","Password Hash"};
 
     private int id;
     private String immagine;

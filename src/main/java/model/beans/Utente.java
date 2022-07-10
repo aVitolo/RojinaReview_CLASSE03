@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class Utente extends Persona {
+    static public String[] fieldsName = {"Email","Nickname","Password Hash","Nome","Cognome","Età"};
 
     private ArrayList<Indirizzo> indirizzi;
     private ArrayList<Telefono> telefoni;

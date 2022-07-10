@@ -74,6 +74,36 @@
 <div class="navbar">
     <p>👨🏻‍💼Benvenuto Admin Carlo Colizzi</p>
 </div>
+<div class="manage">
+    <table>
+        <tr>
+            <th>
+                <p>ID</p>
+            </th>
+            <th>
+                <p>Nome</p>
+            </th>
+            <th>
+                <p>Cognome</p>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                1
+            </td>
+            <td>
+                Carlo
+            </td>
+            <td>
+                Colizzi
+            </td>
+            <td>
+            <button>Modifica </button>
+            <button>Elimina </button>
+            </td>
+        </tr>
+    </table>
+</div>
 
 </body>
 </html>

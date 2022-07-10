@@ -3,8 +3,10 @@ package model.beans;
 import model.utilities.Persona;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 public class Amministratore extends Persona {
+    static public String[] fieldsName = {"Id","Nome","Cognome","Email","Password Hash"};
 
     private int id;
 
