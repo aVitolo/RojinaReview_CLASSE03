@@ -29,6 +29,12 @@ public class Utente extends Persona {
         this.nickname = nickname;
     }
 
+    public Utente(String nome, String cognome, String email, String password, int eta, String nickname) throws UnsupportedEncodingException {
+        super(nome, cognome, email, password);
+        this.eta = eta;
+        this.nickname = nickname;
+    }
+
     /* Contructor for insert in DB */
 
     public Utente(int eta,

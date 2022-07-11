@@ -6,7 +6,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 public class Recensione extends Articolo {
-    static public String[] fieldsName = {"Id","Testo","ID Giornalista","Gioco","Titolo","Voto","Data Caricamento"};
+    static public String[] fieldsName = {"Id","Testo","Titolo","Voto","Data Caricamento"};
 
     /* Attributes */
 

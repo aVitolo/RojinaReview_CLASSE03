@@ -10,15 +10,22 @@
 <head>
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="./css/adminPanel.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/adminPanel.js"></script>
 </head>
 <body>
+<script>
+    function search(){
+        prompt("Cerca Ora", "")
+    }
+</script>
 <div class="sidebar">
-    <header>Admin Panel</header>
+    <header>🟢Carlo Colizzi</header>
         <ul>
             <li>
-                <a href="#">
+                <a href="home">
                     <span class="icon"></span>
-                    <span class="title">🎮Dashboard</span>
+                    <span class="title" >🎮Dashboard</span>
                 </a>
             </li>
             <li>
@@ -72,7 +79,7 @@
         </ul>
 </div>
 <div class="navbar">
-    <p>👨🏻‍💼Benvenuto Admin Carlo Colizzi</p>
+    <p>Gestione Admins</p>
 </div>
 <div class="manage">
     <table>
@@ -86,6 +93,8 @@
             <th>
                 <p>Cognome</p>
             </th>
+            <th onclick="search()" style="cursor: pointer">🔍</th>
+            <th style="cursor: pointer">✖️</th>
         </tr>
         <tr>
             <td>
@@ -98,12 +107,11 @@
                 Colizzi
             </td>
             <td>
-            <button>Modifica </button>
-            <button>Elimina </button>
+            <button>✏️ </button>
+            <button>🗑️ </button>
             </td>
         </tr>
     </table>
 </div>
-
 </body>
 </html>

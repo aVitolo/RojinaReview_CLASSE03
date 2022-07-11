@@ -164,4 +164,30 @@ public class RecensioneDAO {
 
         return recensioni;
     }
+
+    public ArrayList<Recensione> doRetriveAll() throws SQLException {
+        ArrayList<Recensione> list = new ArrayList<>();
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM Recensione");
+
+        while(rs.next()){
+            Recensione r = new Recensione();
+            r.setId(rs.getInt(4));
+            r.setTitolo(rs.getString(5));
+            r.setTesto(rs.getString(6));
+            r.setVoto(rs.getFloat(7));
+            r.setDataCaricamento(rs.getDate(8));
+            list.add(r);
+        }
+        return list;
+    }
+
+    public boolean doRemoveById(int Id) throws SQLException {
+        PreparedStatement ps =
+                con.prepareStatement("DELETE FROM Recensione WHERE id=?");
+        ps.setInt(1,Id);
+        int i = ps.executeUpdate();
+        return i == 1;
+    }
 }
+

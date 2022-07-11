@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 
 public class Notizia extends Articolo {
-    static public String[] fieldsName = {"Id","Testo","ID Giornalista","Titolo","Data Caricamento"};
+    static public String[] fieldsName = {"Id","Testo","Titolo","Data Caricamento"};
 
     /* Attributes */
 

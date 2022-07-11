@@ -30,16 +30,16 @@ body{
     width: 100%;
     height: 71px;
     z-index: 1;
-    color: white;
-    font-size: 22px;
+    color: #e91e63;
+    font-size: 35px;
 }
 
 .sidebar header{
-    font-size: 22px;
+    font-size: 25px;
     color: white;
     text-align: center;
     line-height: 70px;
-    background: #063146;
+    background: #042331;
     user-select: none;
 }
 
@@ -62,11 +62,12 @@ body{
 }
 
 ul li:hover a{
-    padding-left: 50px;
+    padding-left: 60px;
+    color: #e91e63;
 }
 
 .sidebar ul li a #signOut{
-    color: red;
+    color: #e91e63;
 }
 
 div.manage{
@@ -76,7 +77,15 @@ div.manage{
 }
 
 td, th {
-    border: 1px solid black;
+    border-bottom: 1px solid black;
     text-align: left;
     padding: 8px;
+}
+
+table th{
+    font-size: 25px;
+}
+
+div td button{
+    cursor: pointer;
 }

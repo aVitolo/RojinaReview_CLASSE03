@@ -4,10 +4,8 @@ import model.beans.Utente;
 import model.utilities.ConPool;
 
 import java.io.UnsupportedEncodingException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class UtenteDAO {
     private final Connection con;
@@ -54,7 +52,7 @@ public class UtenteDAO {
             String email = rs.getString("email");
             return new Utente(
                     rs.getInt("età"),
-                    email,
+                    rs.getString("email"),
                     rs.getString("nickname"),
                     rs.getString("nome"),
                     rs.getString("cognome"),
@@ -77,6 +75,30 @@ public class UtenteDAO {
         ps.setString(1, user.getEmail());
         ps.setString(2, user.getNickname());
         ps.setString(3, user.getPassword());
+        int i = ps.executeUpdate();
+        return i == 1;
+    }
+
+    public ArrayList<Utente> doRetriveAll() throws SQLException, UnsupportedEncodingException {
+        ArrayList<Utente> list = new ArrayList<>();
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM Utente");
+
+        while(rs.next()){
+            list.add(new Utente(rs.getString("nome"),
+                    rs.getString("cognome"),
+                    rs.getString("email"),
+                    rs.getString("pass"),
+                    rs.getInt("età"),
+                    rs.getString("nickname")));
+        }
+        return list;
+    }
+
+    public boolean doRemoveByEmail(String email) throws SQLException {
+        PreparedStatement ps =
+                con.prepareStatement("DELETE FROM Utente WHERE email=?");
+        ps.setString(1,email);
         int i = ps.executeUpdate();
         return i == 1;
     }

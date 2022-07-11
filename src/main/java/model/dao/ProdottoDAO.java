@@ -1,13 +1,11 @@
 package model.dao;
 
+import model.beans.Notizia;
 import model.beans.Prodotto;
 import model.beans.Recensione;
 import model.utilities.ConPool;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class ProdottoDAO {
@@ -136,5 +134,32 @@ public class ProdottoDAO {
         }
 
         return prodotti;
+    }
+
+    public ArrayList<Prodotto> doRetriveAll() throws SQLException {
+        ArrayList<Prodotto> list = new ArrayList<>();
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM Prodotto");
+
+        while (rs.next()) {
+            Prodotto p = new Prodotto();
+            p.setId(rs.getInt(1));
+            p.setNome(rs.getString(2));
+            p.setDescrizione(rs.getString(3));
+            p.setDisponibilità(rs.getInt(4));
+            p.setPrezzo(rs.getFloat(5));
+            p.setMediaVoto(rs.getFloat(8));
+            p.setNumeroVoti(rs.getInt(9));
+            list.add(p);
+        }
+        return list;
+    }
+
+    public boolean doRemoveById(int Id) throws SQLException {
+        PreparedStatement ps =
+                con.prepareStatement("DELETE FROM Prodotto WHERE id=?");
+        ps.setInt(1,Id);
+        int i = ps.executeUpdate();
+        return i == 1;
     }
 }
