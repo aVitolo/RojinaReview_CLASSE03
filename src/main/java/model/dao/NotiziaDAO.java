@@ -173,9 +173,9 @@ public class NotiziaDAO {
         while (rs.next()) {
             Notizia n = new Notizia();
             n.setId(rs.getInt(1));
-            n.setTitolo(rs.getString(2));
-            n.setTesto(rs.getString(3));
-            n.setDataCaricamento(rs.getDate(4));
+            n.setTitolo(rs.getString(4));
+            n.setTesto(rs.getString(2));
+            n.setDataCaricamento(rs.getDate(5));
             list.add(n);
         }
         return list;

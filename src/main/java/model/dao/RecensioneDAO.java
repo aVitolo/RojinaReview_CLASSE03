@@ -172,11 +172,11 @@ public class RecensioneDAO {
 
         while(rs.next()){
             Recensione r = new Recensione();
-            r.setId(rs.getInt(4));
+            r.setId(rs.getInt(1));
             r.setTitolo(rs.getString(5));
-            r.setTesto(rs.getString(6));
-            r.setVoto(rs.getFloat(7));
-            r.setDataCaricamento(rs.getDate(8));
+            r.setTesto(rs.getString(2));
+            r.setVoto(rs.getFloat(6));
+            r.setDataCaricamento(rs.getDate(7));
             list.add(r);
         }
         return list;

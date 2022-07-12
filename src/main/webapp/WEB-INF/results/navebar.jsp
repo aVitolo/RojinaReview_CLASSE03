@@ -18,10 +18,13 @@
     </section>
 
     <section class="navigazione" id="nav">
-        <a href="/Rojina_Review_war/home">Home</a>
-        <a href="/Rojina_Review_war/news">News</a>
-        <a href="/Rojina_Review_war/reviews">Reviews</a>
-        <a href="/Rojina_Review_war/shop">Shop</a>
+        <a href="./home">Home</a>
+        <a href="./news">News</a>
+        <a href="./reviews">Reviews</a>
+        <a href="./shop">Shop</a>
+        <c:if test="${sessionScope.get('admin') != null}">
+            <b><a href="./AdminPanel?className=Amministratore">AdminPanel</a></b>
+        </c:if>
     </section>
 
 
@@ -38,7 +41,7 @@
                 <button alt="logout" onclick="document.location.href='./logout'">Logout</button>
             </c:when>
             <c:when test="${sessionScope.get('admin') != null}">
-                <a href="">Bentornato, <c:out value='${admin.nome}'/></a>
+                <a href="./AdminPanel?className=Amministratore">Bentornato, <c:out value='${admin.nome}'/></a>
                 <a href=""><img class="icon" src="images/utility/adminIcon.png"></a>
                 <button alt="logout" onclick="document.location.href='./logout'">Logout</button>
             </c:when>
