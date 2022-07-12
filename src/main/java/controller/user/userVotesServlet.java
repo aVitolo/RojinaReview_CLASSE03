@@ -5,6 +5,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import model.beans.Utente;
 import model.dao.CommentoDAO;
+import model.dao.VotoDAO;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -18,6 +19,7 @@ public class userVotesServlet extends HttpServlet {
         Utente u = (Utente) session.getAttribute("utente");
         try {
             request.setAttribute("commenti", new CommentoDAO().getCommentByUser(u.getEmail()));
+            request.setAttribute("voti", new VotoDAO().doRetrieveByUser(u.getEmail()));
         } catch (SQLException e) {
             e.printStackTrace();
         }

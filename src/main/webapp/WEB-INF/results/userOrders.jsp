@@ -14,12 +14,14 @@
     <h1 class="currentMenuName">Ordini</h1>
     <div class="orders">
         <c:forEach items="${utente.ordini}" var="ordine">
-            <div class="order">
-                <h3 class="orderId">${ordine.id}</h3>
-                <h3 class="orderState">${ordine.stato}</h3>
-                <h3 class="orderDate">${ordine.dataOrdine}</h3>
-                <h3 class="orderTotal">${ordine.totale}</h3>
-            </div>
+            <a href="/Rojina_Review_war/getOrder?id=${ordine.id}">
+                <div class="order">
+                    <h3 class="orderId">${ordine.id}</h3>
+                    <h3 class="orderState">${ordine.stato}</h3>
+                    <h3 class="orderDate">${ordine.dataOrdine}</h3>
+                    <h3 class="orderTotal">${ordine.totale}€</h3>
+                </div>
+            </a>
         </c:forEach>
     </div>
 </div>

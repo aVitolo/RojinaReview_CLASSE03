@@ -31,7 +31,6 @@ public class LoginUser extends HttpServlet {
                 //Inizializza la connessione al DB tramite DAO
                 UtenteDAO uDAO = new UtenteDAO();
                 this.tmp = uDAO.doRetriveByEmail(email);
-                System.out.println(this.tmp.getOrdini());
 
                 //Verifica se la ricerca dell' utente è andata male, e assegna a tmp il risultato
                 if (this.tmp == null) {

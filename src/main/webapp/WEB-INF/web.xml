@@ -4,6 +4,7 @@
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
 
+
     <servlet>
         <servlet-name>ContextSetUpingServlet</servlet-name>
         <servlet-class>controller.startConfigurations.ContextSetUpingServlet</servlet-class>
@@ -227,4 +228,21 @@
         <url-pattern>/insertPayment</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>getGameServlet</servlet-name>
+        <servlet-class>controller.utilities.getGameServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getGameServlet</servlet-name>
+        <url-pattern>/getGame</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>getOrderServlet</servlet-name>
+        <servlet-class>controller.user.getOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getOrderServlet</servlet-name>
+        <url-pattern>/getOrder</url-pattern>
+    </servlet-mapping>
 </web-app>
