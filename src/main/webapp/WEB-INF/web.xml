@@ -245,4 +245,13 @@
         <servlet-name>getOrderServlet</servlet-name>
         <url-pattern>/getOrder</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>addProductCartServlet</servlet-name>
+        <servlet-class>controller.utilities.addProductCartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addProductCartServlet</servlet-name>
+        <url-pattern>/addProductCart</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -4,6 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import model.beans.Carrello;
+import model.beans.Prodotto;
 import model.utilities.Articolo;
 
 
@@ -30,6 +31,8 @@ public class HomeServlet extends HttpServlet {
         request.setAttribute("articoli", articoli);
         if(session.getAttribute("ospite") == null)
             session.setAttribute("ospite", new Carrello());
+        if(session.getAttribute("prodottiSession") == null)
+            session.setAttribute("prodottiSession", new ArrayList<Prodotto>());
 
         RequestDispatcher dispatcher =
                 request.getRequestDispatcher(path);

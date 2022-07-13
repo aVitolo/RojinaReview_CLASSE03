@@ -6,7 +6,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 <% Prodotto p = (Prodotto) request.getAttribute("prodotto");
-    ArrayList<Commento> commenti = (ArrayList<Commento>) request.getAttribute("commenti"); %>
+    ArrayList<Commento> commenti = (ArrayList<Commento>) request.getAttribute("commenti");
+    Integer quantitàCarrello = (Integer) request.getAttribute("quantitàCarrello");%>
 <head>
     <title><%=p.getNome()%>
     </title>
@@ -28,7 +29,7 @@
                     <%=p.getNome()%>
          </h1>
         <h3 id="disponibilità">
-            Disponibilità: <%=p.getDisponibilità()%>
+            Disponibilità: <%=p.getDisponibilità()-quantitàCarrello%>
         </h3>
         <h3 id="prezzo">
             Prezzo: <%=p.getPrezzo()%>
@@ -37,9 +38,10 @@
             <%=p.getDescrizione()%>
         </p>
         <section id="toCarret">
-            <form  method="post">
-                <input type="number" min="1" max="10">
-                <input type="submit" style="width:auto" value="Aggiungo al Carello">
+            <form  action="/Rojina_Review_war/addProductCart" method="post">
+                <input type="hidden" value="<%=p.getId()%>" name="prodottoID" id="prodottoID">
+                <input type="number" min="1" max="10" name="quantità" id="quantità" value="1">
+                <input type="submit" style="width:auto" value="Aggiungi al Carrello">
             </form>
         </section>
         </div>

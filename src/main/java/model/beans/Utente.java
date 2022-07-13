@@ -41,7 +41,7 @@ public class Utente extends Persona {
                   ArrayList<Telefono> telefoni,
                   ArrayList<Pagamento> pagamenti,
                   ArrayList<Ordine> ordini,
-                  Carrello carello,
+                  Carrello carrello,
                   String immagine)
             throws UnsupportedEncodingException {
         super(nome, cognome, email, password);

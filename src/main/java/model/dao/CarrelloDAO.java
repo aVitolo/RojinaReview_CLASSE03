@@ -25,6 +25,7 @@ public class CarrelloDAO {
 
         //Valutare se effettuare accorpare tramite join le query o lasciare tutto come ora
 
+        Carrello carrello = new Carrello();
 
         PreparedStatement ps =
                 con.prepareStatement("SELECT pc.quantità, pc.prodotto FROM prodotto_carrello pc WHERE utente=?");
@@ -35,13 +36,14 @@ public class CarrelloDAO {
         {
             Carrello.ProdottoCarrello prodottoCarrello = new Carrello.ProdottoCarrello();
             prodottoCarrello.setQuantità(rs.getInt(1));
-            Prodotto p = new ProdottoDAO().doRetrieveById(rs.getInt(2));
+            Prodotto p = new ProdottoDAO(con).doRetrieveById(rs.getInt(2));
             prodottoCarrello.setProdotto(p);
             prodottoCarrello.setPrezzoAttuale(p.getPrezzo());
 
             prodotti.add(prodottoCarrello);
 
         }
+
         float totale = 0;
         con.prepareStatement("SELECT totale FROM carrello WHERE utente=?");
         ps.setString(1, user);
@@ -49,7 +51,11 @@ public class CarrelloDAO {
         if (rs.next())
             totale = rs.getFloat(1);
 
-        return new Carrello(prodotti, totale);
+        carrello.setProdotti(prodotti);
+        carrello.setTotale(totale);
+
+
+        return carrello;
 
     }
 
