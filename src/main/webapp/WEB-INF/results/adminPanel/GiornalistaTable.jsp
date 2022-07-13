@@ -11,7 +11,7 @@
         <th id="add" onclick="add()">✖️</th>
     </tr>
         <%for(Giornalista a : list){%>
-    <tr>
+    <tr id="<%=a.getId()%>">
         <td>
             <%= a.getId()%>
         </td>
@@ -28,8 +28,8 @@
             <%= a.getPassword()%>
         </td>
         <td>
-            <button>✏️ </button>
-            <button>🗑️ </button>
+            <button name="<%=a.getId()%>" onclick="modifyEntry(this)">✏️ </button>
+            <button name="<%=a.getId()%>" onclick="deleteEntry(this)">🗑️ </button>
         </td>
     </tr>
 

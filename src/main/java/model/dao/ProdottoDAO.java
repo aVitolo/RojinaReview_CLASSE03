@@ -11,6 +11,10 @@ import java.util.ArrayList;
 public class ProdottoDAO {
     private final Connection con;
 
+    public Connection getCon() {
+        return con;
+    }
+
     public ProdottoDAO() throws SQLException {
         con = ConPool.getConnection();
     }

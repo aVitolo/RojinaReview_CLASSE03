@@ -11,6 +11,10 @@ import java.util.ArrayList;
 public class NotiziaDAO {
     private final Connection con;
 
+    public Connection getCon() {
+        return con;
+    }
+
     public NotiziaDAO() throws SQLException {
         con = ConPool.getConnection();
     }

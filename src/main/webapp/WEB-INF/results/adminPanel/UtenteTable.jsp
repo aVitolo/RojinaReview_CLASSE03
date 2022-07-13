@@ -11,7 +11,7 @@
         <th id="add" onclick="add()">✖️</th>
     </tr>
         <%for(Utente a : list){%>
-    <tr>
+    <tr id="<%=a.getEmail()%>">
         <td>
             <%= a.getEmail()%>
         </td>
@@ -31,8 +31,8 @@
             <%= a.getEta()%>
         </td>
         <td>
-            <button>✏️ </button>
-            <button>🗑️ </button>
+            <button name="<%=a.getEmail()%>" onclick="modifyEntry(this)">✏️ </button>
+            <button name="<%=a.getEmail()%>" onclick="deleteEntry(this)">🗑️ </button>
         </td>
     </tr>
 

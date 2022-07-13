@@ -11,7 +11,7 @@
         <th id="add" onclick="add()">✖️</th>
     </tr>
         <%for(Prodotto a : list){%>
-    <tr>
+    <tr id="<%=a.getId()%>">
         <td>
             <%= a.getId()%>
         </td>
@@ -34,8 +34,8 @@
             <%= a.getNumeroVoti()%>
         </td>
         <td>
-            <button>✏️ </button>
-            <button>🗑️ </button>
+            <button name="<%=a.getId()%>" onclick="modifyEntry(this)">✏️ </button>
+            <button name="<%=a.getId()%>" onclick="deleteEntry(this)">🗑️ </button>
         </td>
     </tr>
 

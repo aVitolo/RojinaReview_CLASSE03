@@ -11,6 +11,9 @@ import java.util.ArrayList;
 public class AmministratoreDAO implements GenericStaffDAO {
     private final Connection con;
 
+    public Connection getCon() {
+        return con;
+    }
 
     public AmministratoreDAO() throws SQLException {
         con = ConPool.getConnection();

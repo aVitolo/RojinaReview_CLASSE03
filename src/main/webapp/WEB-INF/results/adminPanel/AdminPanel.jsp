@@ -88,5 +88,8 @@
     <jsp:include page="<%=path%>"/>
     <%}%>
 </div>
+<script>
+    var className = "<%=request.getAttribute("className")%>";
+</script>
 </body>
 </html>

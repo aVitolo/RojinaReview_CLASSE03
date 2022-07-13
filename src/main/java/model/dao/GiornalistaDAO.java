@@ -12,6 +12,9 @@ import java.util.ArrayList;
 public class GiornalistaDAO implements GenericStaffDAO {
     private final Connection con;
 
+    public Connection getCon() {
+        return con;
+    }
 
     public GiornalistaDAO() throws SQLException {
         con = ConPool.getConnection();
