@@ -1,17 +1,22 @@
+navebar da aggiustare --ANDREA
+icone footer --ANDREA
+shop gestire css filtri articolo --ANDREA
+shop gestire css articoli dimensione --ANDREA
+notizia padding giochi menzionati --ANDREA
+commenti e voto ajax --CARMINE
+aggiunta al carrello da servlet ad ajax --CARMINE
+commento e voto non possibile da ospite --CARMINE
+far comparire voto in recensione e prodotto se l'utente ha votato --CARMINE
+gestire trigger voto recensione-prodotto con update e quindi mantenere un solo voto utente --CARMINE
+area utente css --CARMINE
+utente profilo modifica anagrafica --CARLO
+utente informazioni di fatturazione modifica-cancellazione (inserimento già fatto) --CARLO
+area giornalista css --CARMINE
+giornalista profilo modifica anagrafica --CARLO
+pagina jsp carrello per l'acquisto da creare in base ad ordine.jsp gestire autocompilazione per indirizzi-pagamento-telefono ordine -- FRONT END ANDREA-CARLO, BACK END CARMINE
+gestire css pagina storico ordine.jsp --ANDREA
+gestire amminstratore/giornalista non possono votare, commentare e acquistare --CARMINE
+admin panel --CARLO
 
 
-
-
-
-+ Il carrello va gestito con un Merge
-
-
-
-navebar: aggiungere icone utenti
-footer: aggiungere icone social
-filtri: bottone filtra e reset richiesta ajax
-notizia/recensione/prodotto: da fare prodotto e css e gestire i commmenti
-aggiungere check javascript lato client
-carrello
-pagina admin e utente
-pagina giornalista css e alcuni problemi back end
+gestire cambiamento prezzo quando si clicca su carrello --CARMINE
