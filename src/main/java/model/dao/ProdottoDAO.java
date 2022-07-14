@@ -59,6 +59,16 @@ public class ProdottoDAO {
 
     }
 
+    public String doRetrieveNameById(int id) throws SQLException {
+        PreparedStatement ps = con.prepareStatement("SELECT nome FROM prodotto WHERE id=?");
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next())
+            return rs.getString(1);
+
+        return null;
+    }
+
 
     public ArrayList<Prodotto> doRetrieveLast() throws SQLException {
         PreparedStatement ps =

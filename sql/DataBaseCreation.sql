@@ -396,13 +396,13 @@ insert into Giornalista (nome, cognome, email, pass, immagine) values
 
 
 insert into Utente values
-                       ("venebroguppeu@yopmail.com","GamaOnix",SHA2('oemfshif',256), "Paolo", "Dell'Orca", 20, "./images/users/GamaOnix.jpg"),
-                       ("jaunnureudeilla@yopmail.com","AimZero",SHA2('efkmfeug',256), "Giovanna", "Bianchi", 25, "./images/users/AimZero.jpg"),
-                       ("frefimeitromo@yopmail.com","ZeroVirus",SHA2('vwnjviecwo',256), "Pio", "Verdi", null, "./images/users/ZeroVirus.jpg"),
-                       ("ceuprofraucoudi@yopmail.com","ShadowWait",SHA2('nfhuofewoj',256), "Franco", "Neri", 19, "./images/users/ShadowWait.jpg"),
-                       ("ceubujotawo@yopmail.com","PhantomEagle",SHA2('obufewgou',256), null, null, null, "./images/users/PhantomEagle.jpg"),
-                       ("gralameiddauquau@yopmail.com","GhostSteel",SHA2('nefihouefwpoj',256), "Lorenza", "Gialli", 18, "./images/users/GhostSteel.jpg"),
-                       ("febremoulaqui@yopmail.com","PredatorBeta",SHA2('fnkebouewf',256), "Christian", "Rosati", 26, "./images/users/PredatorBeta.jpg"),
+                       ("venebroguppeu@yopmail.com","GamaOnix",SHA2('oemfshif',256), "Paolo", "Dell'Orca", 20, "./images/users/GamaOnix.png"),
+                       ("jaunnureudeilla@yopmail.com","AimZero",SHA2('efkmfeug',256), "Giovanna", "Bianchi", 25, "./images/users/AimZero.png"),
+                       ("frefimeitromo@yopmail.com","ZeroVirus",SHA2('vwnjviecwo',256), "Pio", "Verdi", null, "./images/users/ZeroVirus.png"),
+                       ("ceuprofraucoudi@yopmail.com","FratmOMisterios",SHA2('nfhuofewoj',256), "Franco", "Neri", 19, "./images/users/FratmOMisterios.png"),
+                       ("ceubujotawo@yopmail.com","PhantomEagle",SHA2('obufewgou',256), null, null, null, "./images/users/PhantomEagle.png"),
+                       ("gralameiddauquau@yopmail.com","GhostSteel",SHA2('nefihouefwpoj',256), "Lorenza", "Gialli", 18, "./images/users/GhostSteel.png"),
+                       ("febremoulaqui@yopmail.com","PredatorBeta",SHA2('fnkebouewf',256), "Christian", "Rosati", 26, "./images/users/PredatorBeta.png"),
                        ("zindre@yopmail.com","BlackDeath",SHA2('jofhouefwpoj',256), null, null, null, "./images/users/BlackDeath.jpg"),
                        ("cazzare@yopmail.com","AbyssWalker",SHA2('cazzare',256), "Carmine", "Franca", 22, "./images/users/AbyssWalker.jpg"),
                        ("oefo@yopmail.com","Papiciacra",SHA2('piefwhouefoj',256), "Fonz", "Cretoso", 20, "./images/users/Papiciacra.jpg"),
@@ -695,7 +695,9 @@ insert into Voto values
 
                      ("Halo 4","ceubujotawo@yopmail.com",7,"2022-01-28"),
                      ("Halo 5","ceubujotawo@yopmail.com",7,"2022-01-25"),
-                     ("Halo Infinite","ceubujotawo@yopmail.com",9,"2022-01-29");
+                     ("Halo Infinite","ceubujotawo@yopmail.com",9,"2022-01-29"),
+
+                     ("Mario Kart 8", "cazzare@yopmail.com", 6, "2021-02-11");
 
 insert into CommentoNotizia values
                                 ("zindre@yopmail.com", "Halo a me non piace...", "2022-04-15 22:58:20", 1),

@@ -46,6 +46,30 @@ public class NotiziaDAO {
         return null;
     }
 
+    public ArrayList<Notizia> doRetrieveByGameMentioned(String game) throws SQLException {
+        ArrayList<Notizia> notizie = new ArrayList<>();
+        PreparedStatement ps = con.prepareStatement("SELECT n.id, n.testo, n.dataCaricamento, n.titolo, n.giornalista, n.immagine FROM notizia n JOIN gioco_notizia gn ON n.id = gn.notizia WHERE gn.gioco=?");
+        ps.setString(1, game);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next())
+        {
+            Notizia n = new Notizia();
+            n.setId(rs.getInt(1));
+            n.setTesto(rs.getString(2));
+            n.setDataCaricamento(rs.getDate(3));
+            n.setTitolo(rs.getString(4));
+            n.setGiornalista(rs.getString(5));
+            n.setImmagine(rs.getString(6));
+            n.setGiochi(new GiocoDAO(con).getGiocoByIdNotizia(n.getId()));
+            n.setCommenti(new CommentoDAO().getCommentById(n.getId(), "notizia"));
+
+            notizie.add(n);
+        }
+
+        return notizie;
+    }
+
     public ArrayList<Notizia> doRetrieveLast() throws SQLException {
 
         ArrayList<Notizia> notizie = new ArrayList<>();

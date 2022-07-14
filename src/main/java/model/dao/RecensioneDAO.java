@@ -77,6 +77,17 @@ public class RecensioneDAO {
 
     }
 
+    public int doRetrieveIDByGameTitle(String title) throws SQLException {
+        PreparedStatement ps = con.prepareStatement("SELECT id FROM recensione WHERE gioco=?");
+        ps.setString(1, title);
+        ResultSet rs = ps.executeQuery();
+
+        if(rs.next())
+            return rs.getInt(1);
+
+        return 0;
+    }
+
     public ArrayList<Recensione> doRetrieveByIdJournalist(int id) throws SQLException {
         ArrayList<Recensione> recensioni = new ArrayList<>();
         PreparedStatement ps = con.prepareStatement("SELECT g.nome, g.cognome, r.id, r.titolo, r.testo, r.voto, r.dataCaricamento," +

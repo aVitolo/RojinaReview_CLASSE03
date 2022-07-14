@@ -3,9 +3,7 @@ package controller.utilities;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import model.beans.Notizia;
-import model.beans.Prodotto;
-import model.beans.Recensione;
+import model.beans.*;
 import model.dao.CommentoDAO;
 import model.dao.NotiziaDAO;
 import model.dao.ProdottoDAO;
@@ -22,8 +20,9 @@ public class getSingleResourceServlet extends HttpServlet {
         String type = request.getParameter("type");
         String result = null;
         int id = Integer.parseInt(request.getParameter("id"));
-        int i;
+        int i, j;
         boolean trovato = false;
+        HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
 
 
@@ -76,6 +75,17 @@ public class getSingleResourceServlet extends HttpServlet {
             }
             result = "/WEB-INF/results/recensione.jsp";
         } else if (type.equalsIgnoreCase("shop") || type.equalsIgnoreCase("prodotto")) {
+
+            Carrello carrello = null;
+            Integer quantitàCarrello = new Integer(0);
+            if(session.getAttribute("utente") != null){
+                Utente u = (Utente) session.getAttribute("utente");
+                carrello = u.getCarrello();
+            }
+            else if(session.getAttribute("ospite") != null)
+                carrello = (Carrello) session.getAttribute("ospite");
+
+
             //cerco prima nel context il prodotto
             ArrayList<Prodotto> prodottiContext = (ArrayList<Prodotto>) context.getAttribute("prodotti");
             for (i = 0; i < prodottiContext.size() && !trovato; i++) {
@@ -89,6 +99,7 @@ public class getSingleResourceServlet extends HttpServlet {
                     }
                 }
             }
+            //cerco nel database
             if (trovato == false) {
                 try {
                     Prodotto p = new ProdottoDAO().doRetrieveById(id);
@@ -97,7 +108,17 @@ public class getSingleResourceServlet extends HttpServlet {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+
             }
+
+            //per aggiornare in real-time la quantità disponibile
+            if(carrello != null){
+                for(j = 0; j < carrello.getProdotti().size(); j++)
+                    if(carrello.getProdotti().get(j).getProdotto().getId() == id)
+                        quantitàCarrello = carrello.getProdotti().get(j).getQuantità();
+            }
+            request.setAttribute("quantitàCarrello", quantitàCarrello);
+
             result = "/WEB-INF/results/prodotto.jsp";
         }
        request.getRequestDispatcher(result).forward(request, response);

@@ -6,12 +6,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.beans.Carrello;
 import model.utilities.Persona;
 import model.beans.Utente;
 import model.dao.UtenteDAO;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class LoginUser extends HttpServlet {
     private Utente tmp;
@@ -31,7 +33,6 @@ public class LoginUser extends HttpServlet {
                 //Inizializza la connessione al DB tramite DAO
                 UtenteDAO uDAO = new UtenteDAO();
                 this.tmp = uDAO.doRetriveByEmail(email);
-                System.out.println(this.tmp.getOrdini());
 
                 //Verifica se la ricerca dell' utente è andata male, e assegna a tmp il risultato
                 if (this.tmp == null) {
@@ -54,9 +55,11 @@ public class LoginUser extends HttpServlet {
                 if (password.equals(dbPass)) {
                     if(this.tmp.getImmagine() == null)
                         this.tmp.setImmagine("./images/utility/defaultImageUser.png"); //immagine di default utente
-
+                    //merge dei carrelli
+                    Carrello ospite = (Carrello) session.getAttribute("ospite");
+                    this.tmp.setCarrello(LoginUser.mergeCarts(this.tmp.getCarrello(), ospite));
                     session.setAttribute("utente", this.tmp);
-                    //rimozione del carrello ospite, da gestire il contenuto del carrello ospite prima di questa rimozione
+                    //rimozione del carrello ospite
                     session.removeAttribute("ospite");
                     response.sendRedirect(homePage);
                 } else {
@@ -69,5 +72,32 @@ public class LoginUser extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    private static Carrello mergeCarts(Carrello carrello, Carrello ospite) {
+        int i, j;
+        boolean trovato;
+        ArrayList<Carrello.ProdottoCarrello> prodottiDB = carrello.getProdotti();
+        ArrayList<Carrello.ProdottoCarrello> prodottiOspite = ospite.getProdotti();
+
+        for(i = 0; i < prodottiOspite.size(); i++){
+            for(j = 0, trovato = false; j < prodottiDB.size() && !trovato; j++){
+                if(prodottiOspite.get(i).getProdotto().getId() == prodottiDB.get(j).getProdotto().getId())
+                {
+                    prodottiDB.get(j).setQuantità(prodottiDB.get(j).getQuantità() + prodottiOspite.get(i).getQuantità());
+                    trovato = true;
+                }
+            }
+            //prodotto del carrello ospite non trovato nel DB
+            if(!trovato)
+                prodottiDB.add(prodottiOspite.get(i));
+        }
+
+        carrello.setProdotti(prodottiDB); //istruzione penso inutile
+        carrello.setTotale(carrello.getTotale() + ospite.getTotale());
+
+        return carrello;
+
+
     }
 }

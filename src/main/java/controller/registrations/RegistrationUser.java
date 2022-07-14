@@ -3,6 +3,7 @@ package controller.registrations;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import model.beans.Carrello;
 import model.beans.Utente;
 import model.dao.UtenteDAO;
 
@@ -83,6 +84,8 @@ public class RegistrationUser extends HttpServlet {
 
                     UtenteDAO uDao = new UtenteDAO();
                     if (uDao.doInsertUser(tmpUser) == true) {
+                        if(request.getSession().getAttribute("ospite") != null)
+                            tmpUser.setCarrello((Carrello) request.getSession().getAttribute("ospite"));
                         request.getSession().setAttribute("utente", tmpUser);
                         response.sendRedirect(homePage);
                     } else {
