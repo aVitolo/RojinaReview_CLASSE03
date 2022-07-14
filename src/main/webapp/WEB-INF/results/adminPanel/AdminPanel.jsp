@@ -22,11 +22,6 @@
     <header>🟢<%=nome%> <%=cognome%> </header>
         <ul>
             <li>
-                <a href="home">
-                    <span class="title" >🎮Dashboard</span>
-                </a>
-            </li>
-            <li>
                 <a href="./AdminPanel?className=Utente">
                     <span class="title">👨🏽Utenti</span>
                 </a>
@@ -89,7 +84,7 @@
     <%}%>
 </div>
 <script>
-    var className = "<%=request.getAttribute("className")%>";
+    const className = "<%=request.getAttribute("className")%>";
 </script>
 </body>
 </html>

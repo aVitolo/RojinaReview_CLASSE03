@@ -255,12 +255,13 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>AdminPanel</servlet-name>
+        <servlet-name>adminPanel</servlet-name>
         <servlet-class>controller.admin.AdminPanel</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AdminPanel</servlet-name>
+        <servlet-name>adminPanel</servlet-name>
         <url-pattern>/AdminPanel</url-pattern>
     </servlet-mapping>
+
 
 </web-app>

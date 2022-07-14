@@ -10,8 +10,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-@WebServlet(name = "UpdateDb", value = "/UpdateDb")
-public class UpdateDb extends HttpServlet {
+@WebServlet(name = "InsertDbEntry", value = "/InsertDbEntry")
+public class InsertDbEntry extends HttpServlet {
     private String homePage = "./home";
 
     @Override
@@ -25,7 +25,7 @@ public class UpdateDb extends HttpServlet {
                 Connection con = ConPool.getConnection();
                 Statement stmt = con.createStatement();
 
-                query = "UPDATE " + query;
+                query = "INSERT INTO " + query;
                 if (stmt.executeUpdate(query) >= 1)
                     response.getWriter().print("true");
                 else

@@ -26,7 +26,7 @@ function modifyEntry(element){
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             if(this.responseText !== "true"){
-                alert("An error occurrent in your request")
+                alert("Si è verificato un errore con la tua richiesta")
             }
             else{
                 location.reload();
@@ -40,7 +40,23 @@ function modifyEntry(element){
 }
 
 function add(){
-    let element = prompt("Aggiungi Ora");
+    let query = prompt("Aggiungi Ora (Segui l'ordine delle colonne)","Es: 5,'Nome','cognome',85;");
+    query = "query=" + className + " VALUES " + "(" + query + ");"
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            if (this.responseText !== "true") {
+                alert("E' stato riscontrato un errore durante l' inserimento")
+            } else {
+                alert("L'entry in "+className+" è stata aggiunta con successo");
+                location.reload();
+            }
+        }
+    };
+    xhttp.open("POST", "./InsertDbEntry", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(query);
 }
 
 function deleteEntry(element){
@@ -54,7 +70,7 @@ function deleteEntry(element){
         xhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 if (this.responseText !== "true") {
-                    alert("This table have a protection, the system don't allow this action")
+                    alert("Questa entry ha un vincolo relazionale, non è possibile rimuoverla!!")
                 } else {
                     deleteTD(name);
                 }

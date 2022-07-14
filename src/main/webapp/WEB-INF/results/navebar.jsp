@@ -23,7 +23,7 @@
         <a href="./reviews">Reviews</a>
         <a href="./shop">Shop</a>
         <c:if test="${sessionScope.get('admin') != null}">
-            <b><a href="./AdminPanel?className=Amministratore">AdminPanel</a></b>
+            <b><a href="./AdminPanel?className=Utente">AdminPanel</a></b>
         </c:if>
     </section>
 
