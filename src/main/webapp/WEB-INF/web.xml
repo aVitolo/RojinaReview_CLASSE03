@@ -227,4 +227,40 @@
         <url-pattern>/insertPayment</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>getGameServlet</servlet-name>
+        <servlet-class>controller.utilities.getGameServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getGameServlet</servlet-name>
+        <url-pattern>/getGame</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>getOrderServlet</servlet-name>
+        <servlet-class>controller.user.getOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getOrderServlet</servlet-name>
+        <url-pattern>/getOrder</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>addProductCartServlet</servlet-name>
+        <servlet-class>controller.utilities.addProductCartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addProductCartServlet</servlet-name>
+        <url-pattern>/addProductCart</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AdminPanel</servlet-name>
+        <servlet-class>controller.admin.AdminPanel</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminPanel</servlet-name>
+        <url-pattern>/AdminPanel</url-pattern>
+    </servlet-mapping>
+
 </web-app>
