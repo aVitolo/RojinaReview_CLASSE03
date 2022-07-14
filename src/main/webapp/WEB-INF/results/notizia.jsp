@@ -40,11 +40,11 @@
     </section>
 
     <section id="mentionedGames">
-        <c:if test="${n.giochi!=null}">
+
+        <c:if test="${notizia.giochi != null}">
+            <h2>Giochi menzionati:</h2>
             <% for (String gioco : n.getGiochi()) {%>
-            <h3>
-                <%=gioco%>
-            </h3>
+            <a href="/Rojina_Review_war/getGame?name=<%=gioco%>"><h3><%=gioco%></h3></a>
             <%}%>
         </c:if>
     </section>

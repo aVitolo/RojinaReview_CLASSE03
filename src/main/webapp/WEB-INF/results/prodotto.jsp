@@ -32,7 +32,7 @@
             Disponibilità: <%=p.getDisponibilità()-quantitàCarrello%>
         </h3>
         <h3 id="prezzo">
-            Prezzo: <%=p.getPrezzo()%>
+            Prezzo: <%=p.getPrezzo()%>€
         </h3>
         <p id="bodyText">
             <%=p.getDescrizione()%>

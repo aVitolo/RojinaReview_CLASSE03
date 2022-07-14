@@ -59,4 +59,36 @@ public class CarrelloDAO {
 
     }
 
+    public void doSave(Carrello c, String user) throws SQLException {
+        PreparedStatement ps;
+        //cancello i prodotti-carrello
+        ps = con.prepareStatement("DELETE FROM prodotto_carrello WHERE utente=?");
+        ps.setString(1, user);
+        ps.executeUpdate();
+        //cancello il carrello già presente nel database
+        ps = con.prepareStatement("DELETE FROM carrello WHERE utente=?");
+        ps.setString(1, user);
+        ps.executeUpdate();
+
+        //effettuo l'insert in carrello
+        ps = con.prepareStatement("INSERT INTO  carrello VALUES (?, ?)");
+        ps.setFloat(1, c.getTotale());
+        ps.setString(2, user);
+
+        if(ps.executeUpdate() != 1)
+            throw new RuntimeException("Insert error");
+        //effettuo l'insert in prodotto-carrello
+        for(Carrello.ProdottoCarrello p : c.getProdotti()){
+            ps = con.prepareStatement("INSERT INTO prodotto_carrello VALUES (?, ?, ?)");
+            ps.setInt(1, p.getProdotto().getId());
+            ps.setString(2, user);
+            ps.setInt(3, p.getQuantità());
+
+            if(ps.executeUpdate() != 1)
+                throw new RuntimeException("Insert error");
+
+        }
+
+    }
+
 }

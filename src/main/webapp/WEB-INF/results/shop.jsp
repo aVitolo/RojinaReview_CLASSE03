@@ -23,7 +23,7 @@
                 <img src = "${prodotto.immagine}" alt = "copertina" decoding="async">
                 <div class = "articolo-content">
                     <h2>${prodotto.nome}</h2>
-                    <p>${prodotto.prezzo} $</p>
+                    <p>${prodotto.prezzo} €</p>
                     <p class="voto">${prodotto.mediaVoto}</p>
                 </div>
                 </a>

@@ -29,7 +29,7 @@ public class HomeServlet extends HttpServlet {
 
         request.setAttribute("copertina", copertina);
         request.setAttribute("articoli", articoli);
-        if(session.getAttribute("ospite") == null)
+        if(session.getAttribute("ospite") == null && session.getAttribute("utente") == null)
             session.setAttribute("ospite", new Carrello());
         if(session.getAttribute("prodottiSession") == null)
             session.setAttribute("prodottiSession", new ArrayList<Prodotto>());

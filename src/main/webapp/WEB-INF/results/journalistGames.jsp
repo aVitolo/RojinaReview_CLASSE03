@@ -4,9 +4,9 @@
 <html>
 <head>
     <title>Area giornalista</title>
-
-    <link rel="stylesheet" href="./css/recensioni.css">
     <link rel="stylesheet" href="./css/master.css">
+    <link rel="stylesheet" href="./css/notizie.css">
+
 </head>
 <body>
 <%@ include file="/WEB-INF/results/journalistArea.jsp" %>
@@ -46,7 +46,6 @@
                     <h2>${articolo.titolo}</h2>
                     <p>${articolo.casaDiSviluppo}</p>
                     <p class="voto">${articolo.mediaVoto}</p>
-                    <p class="voto"></p>
                 </div>
             </div>
         </c:forEach>
