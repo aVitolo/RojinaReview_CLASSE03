@@ -127,6 +127,17 @@ input[type=number] {
     font-weight: bold;
 }
 
+#votoUtente{
+    font-size: 30px;
+    background: #e91e63;
+    border: solid 2px #e91e63;
+    width: 50px;
+    border-radius: 20%;
+    text-align: center;
+    font-weight: bold;
+
+}
+
 #votiUtenti form{
     width: 125px;
 }

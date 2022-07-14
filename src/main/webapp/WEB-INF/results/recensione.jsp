@@ -1,12 +1,14 @@
 <%@ page import="model.beans.Recensione" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.beans.Commento" %>
+<%@ page import="model.beans.VotoGioco" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <% Recensione r = (Recensione) request.getAttribute("recensione");
-    ArrayList<Commento> commenti = (ArrayList<Commento>) request.getAttribute("commenti"); %>
+    ArrayList<Commento> commenti = (ArrayList<Commento>) request.getAttribute("commenti");
+    VotoGioco vg = (VotoGioco) request.getAttribute("votoUtente");%>
 <head>
     <title><%=r.getGioco().getTitolo()%> - <%=r.getTitolo()%>
     </title>
@@ -41,6 +43,10 @@
             <input type="number" id="toVoto" min="1" max="10">
             <input type="submit" value="Vota">
         </form>
+        <%if(vg != null){%>
+            <h1>Il tuo voto </h1>
+            <h1 id="votoUtente"><%=vg.getVoto()%></h1>
+        <%}%>
     </section>
 
     <div id="card">

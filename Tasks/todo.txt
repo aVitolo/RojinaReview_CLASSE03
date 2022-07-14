@@ -6,14 +6,14 @@ notizia padding giochi menzionati --ANDREA
 commenti e voto ajax --CARMINE
 aggiunta al carrello da servlet ad ajax --CARMINE
 commento e voto non possibile da ospite --CARMINE
-far comparire voto in recensione e prodotto se l'utente ha votato --CARMINE
-gestire trigger voto recensione-prodotto con update e quindi mantenere un solo voto utente --CARMINE
+far comparire voto in recensione e prodotto se l'utente ha votato --CARMINE (FATTO)
+gestire trigger voto recensione-prodotto con update e quindi mantenere un solo voto utente --CARMINE (FATTO lato Java)
 area utente css --CARMINE
 utente profilo modifica anagrafica --CARLO
 utente informazioni di fatturazione modifica-cancellazione (inserimento già fatto) --CARLO
 area giornalista css --CARMINE
 giornalista profilo modifica anagrafica --CARLO
-pagina jsp carrello per l'acquisto da creare in base ad ordine.jsp gestire autocompilazione per indirizzi-pagamento-telefono ordine -- FRONT END ANDREA-CARLO, BACK END CARMINE
+pagina jsp carrello per l'acquisto da creare in base ad ordine.jsp gestire autocompilazione per indirizzi-pagamento-telefono ordine -- FRONT END ANDREA-CARLO, BACK END CARMINE (FATTO)
 gestire css pagina storico ordine.jsp --ANDREA
 gestire amminstratore/giornalista non possono votare, commentare e acquistare --CARMINE
 admin panel --CARLO

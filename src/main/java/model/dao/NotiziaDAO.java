@@ -78,7 +78,7 @@ public class NotiziaDAO {
                 con.prepareStatement("" +
                         "SELECT g.Nome,g.Cognome, g.immagine as gi, n.id, n.titolo, n.testo, n.dataCaricamento, n.immagine " +
                         "FROM notizia n JOIN giornalista g on g.id = n.giornalista " +
-                        "ORDER BY n.id DESC LIMIT 12");
+                        "ORDER BY n.id DESC LIMIT 13");
 
         ResultSet rs = ps.executeQuery();
 

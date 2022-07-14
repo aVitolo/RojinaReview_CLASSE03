@@ -4,10 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import model.beans.*;
-import model.dao.CommentoDAO;
-import model.dao.NotiziaDAO;
-import model.dao.ProdottoDAO;
-import model.dao.RecensioneDAO;
+import model.dao.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -24,6 +21,7 @@ public class getSingleResourceServlet extends HttpServlet {
         boolean trovato = false;
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
+        request.setAttribute("votoUtente", null);
 
 
         if (type.equalsIgnoreCase("news") || type.equalsIgnoreCase("notizia")) {
@@ -59,6 +57,12 @@ public class getSingleResourceServlet extends HttpServlet {
                     request.setAttribute("recensione", recensioniContext.get(i));
                     try {
                         request.setAttribute("commenti", new CommentoDAO().getCommentById(id, "Recensione"));
+                        if(session.getAttribute("utente") != null)
+                        {
+                            Utente u = (Utente) session.getAttribute("utente");
+                            request.setAttribute("votoUtente", new VotoDAO().doRetrieveByUserAndIDTable(u.getEmail(),
+                                    recensioniContext.get(i).getGioco().getTitolo(), "gioco"));
+                        }
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -69,17 +73,23 @@ public class getSingleResourceServlet extends HttpServlet {
                     Recensione r = new RecensioneDAO().doRetrieveById(id);
                     request.setAttribute("recensione", r);
                     request.setAttribute("commenti", new CommentoDAO().getCommentById(id, "Recensione"));
+                    if(session.getAttribute("utente") != null)
+                    {
+                        Utente u = (Utente) session.getAttribute("utente");
+                        request.setAttribute("votoUtente", new VotoDAO().doRetrieveByUserAndIDTable(u.getEmail(),
+                                r.getGioco().getTitolo(), "gioco"));
+                    }
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
             result = "/WEB-INF/results/recensione.jsp";
         } else if (type.equalsIgnoreCase("shop") || type.equalsIgnoreCase("prodotto")) {
-
+            Utente u = null;
             Carrello carrello = null;
             Integer quantitàCarrello = new Integer(0);
             if(session.getAttribute("utente") != null){
-                Utente u = (Utente) session.getAttribute("utente");
+                u = (Utente) session.getAttribute("utente");
                 carrello = u.getCarrello();
             }
             else if(session.getAttribute("ospite") != null)
@@ -94,6 +104,9 @@ public class getSingleResourceServlet extends HttpServlet {
                     request.setAttribute("prodotto", prodottiContext.get(i));
                     try {
                         request.setAttribute("commenti", new CommentoDAO().getCommentById(id, "Prodotto"));
+                        if(u != null)
+                            request.setAttribute("votoUtente", new VotoDAO().doRetrieveByUserAndIDTable(u.getEmail(),
+                                    Integer.toString(prodottiContext.get(i).getId()), "prodotto"));
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -105,6 +118,9 @@ public class getSingleResourceServlet extends HttpServlet {
                     Prodotto p = new ProdottoDAO().doRetrieveById(id);
                     request.setAttribute("prodotto", p);
                     request.setAttribute("commenti", new CommentoDAO().getCommentById(id, "Prodotto"));
+                    if(u != null)
+                        request.setAttribute("votoUtente", new VotoDAO().doRetrieveByUserAndIDTable(u.getEmail(),
+                                Integer.toString(p.getId()), "prodotto"));
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

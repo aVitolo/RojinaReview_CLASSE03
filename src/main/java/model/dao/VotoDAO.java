@@ -60,11 +60,61 @@ public class VotoDAO {
         return voti;
     }
 
+    //table Gioco, Prodotto
+    public Voto doRetrieveByUserAndIDTable(String user, String id, String table) throws SQLException {
+        Voto v = null;
+        PreparedStatement ps;
+        ResultSet rs;
+        if(table.equalsIgnoreCase("gioco"))
+        {
+            ps = con.prepareStatement("SELECT gioco, utente, voto, dataVotazione FROM voto WHERE gioco=? && utente=?");
+            ps.setString(1, id);
+            ps.setString(2, user);
+            rs = ps.executeQuery();
+
+            if(rs.next()){
+                v = new VotoGioco();
+                VotoGioco vg = (VotoGioco) v;
+                vg.setGioco(rs.getString(1));
+                vg.setUtente(rs.getString(2));
+                vg.setVoto(rs.getFloat(3));
+                vg.setDataVotazione(rs.getDate(4));
+
+            }
+        }
+        else if(table.equalsIgnoreCase("prodotto"))
+        {
+            ps = con.prepareStatement("SELECT prodotto, utente, voto, dataVotazione FROM gradimento WHERE prodotto=? && utente=?");
+            ps.setInt(1, Integer.parseInt(id));
+            ps.setString(2, user);
+            rs = ps.executeQuery();
+
+            if(rs.next()){
+                v = new VotoProdotto();
+                VotoProdotto vp = (VotoProdotto) v;
+                vp.setId(rs.getInt(1));
+                vp.setUtente(rs.getString(2));
+                vp.setVoto(rs.getFloat(3));
+                vp.setDataVotazione(rs.getDate(4));
+
+            }
+        }
+
+        return v;
+    }
+
     public void doSave(Voto v, String table) throws SQLException {
+        PreparedStatement ps;
         if(table.equalsIgnoreCase("gioco"))
         {
             VotoGioco votogioco = (VotoGioco) v;
-            PreparedStatement ps = con.prepareStatement("INSERT INTO voto VALUES(?, ?, ?, ?) ");
+            //cancellazione voto precedente
+            ps = con.prepareStatement("DELETE FROM voto WHERE utente=? && gioco=?");
+            ps.setString(1, votogioco.getUtente());
+            ps.setString(2, votogioco.getGioco());
+            ps.executeUpdate();
+
+            ps = con.prepareStatement("INSERT INTO voto VALUES(?, ?, ?, ?) ");
             ps.setString(1, votogioco.getGioco());
             ps.setString(2, votogioco.getUtente());
             ps.setFloat(3, votogioco.getVoto());
@@ -76,7 +126,13 @@ public class VotoDAO {
         else if(table.equalsIgnoreCase("prodotto"))
         {
             VotoProdotto votoprodotto = (VotoProdotto) v;
-            PreparedStatement ps = con.prepareStatement("INSERT INTO gradimento VALUES (?, ?, ?, ?)");
+            //cancellazione voto precedente
+            ps = con.prepareStatement("DELETE FROM gradimento WHERE utente=? && gradimento.prodotto=?");
+            ps.setString(1, votoprodotto.getUtente());
+            ps.setInt(2, votoprodotto.getId());
+            ps.executeUpdate();
+
+            ps = con.prepareStatement("INSERT INTO gradimento VALUES (?, ?, ?, ?)");
             ps.setInt(1, votoprodotto.getId());
             ps.setString(2, votoprodotto.getUtente());
             ps.setFloat(3, votoprodotto.getVoto());
