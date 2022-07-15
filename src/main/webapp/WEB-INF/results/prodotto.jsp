@@ -73,6 +73,7 @@
             <input type="submit" value="Commenta">
         </form>
 
+        <%if(commenti != null){%>
         <% for (Commento c : commenti) {%>
         <div class="comment">
             <h4 class="nickname"><%=c.getUtente()%>
@@ -86,6 +87,8 @@
             </div>
         </div>
         <%}%>
+        <%}%>
+
     </section>
 </section>
 <%@ include file="../../html/footer.html" %>

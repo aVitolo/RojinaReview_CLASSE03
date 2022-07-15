@@ -11,6 +11,11 @@ header {
     z-index: 1;
 }
 
+header section{
+    width: 33%;
+    text-align: center;
+}
+
 header
 a,
 button {
@@ -61,12 +66,16 @@ header .bar .logo {
     padding: 0px 10px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1000px) {
     header {
         display: flex;
         flex-direction: column;
         height: auto;
         align-items: center;
+    }
+
+    header section{
+        width: auto;
     }
 
     header .navigazione, .user {

@@ -11,8 +11,6 @@
 <%@ include file="/WEB-INF/results/navebar.jsp" %>
 <section class="recensioni" id="wrap">
 
-    <h1>Latest Reviews</h1>
-
     <%@ include file="/WEB-INF/results/filter.jsp" %>
 
     <section class="articoli">

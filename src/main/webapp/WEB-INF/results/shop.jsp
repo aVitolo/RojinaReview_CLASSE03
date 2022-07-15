@@ -12,8 +12,6 @@
 
 <section class="notizie">
 
-    <h1>Our Merch</h1>
-
     <%@ include file="/WEB-INF/results/filter.jsp" %>
 
     <section class="articoli" id="wrap">

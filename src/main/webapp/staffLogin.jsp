@@ -15,11 +15,11 @@
 <div class="center">
     <h1>Login</h1>
     <form method="post" action="LoginStaff">
-        <div class="form_input">
+        <div class="form_input" id="radioLogin">
             <input type="radio" class="radioLogin" id="giornalistaRadio" name="userType" value="0" checked="checked">
-            <label id="giornalistaLabel" for="giornalistaRadio">Giornalista</label>
+            <label>Giornalista</label>
             <input type="radio" class="radioLogin" id="amministratoreRadio" name="userType" value="1">
-            <label id="amministratoreLabel" for="amministratoreRadio">Amministratore</label>
+            <label>Amministratore</label>
         </div>
         <div class="form_input">
             <input type="email" name="email" required>

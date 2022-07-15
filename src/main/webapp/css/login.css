@@ -35,7 +35,6 @@ body {
 
 form .form_input {
     position: relative;
-    border-bottom: 2px solid;
     margin: 30px 0;
 }
 
@@ -48,6 +47,22 @@ form .form_input {
     background: none;
     outline: none;
     color: #ffffff;
+}
+
+#radioLogin label{
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin: 1%;
+}
+#radioLogin {
+    display: flex;
+    position: relative;
+}
+
+.form_input input[type="radio"] {
+    height: 20px;
 }
 
 .form_input label {
@@ -72,7 +87,7 @@ form .form_input {
     background: #e91e63;
 }
 
-.form_input input:valid ~ label {
+.form_input input:not([type="radio"]):valid ~ label {
     color: transparent;
 }
 

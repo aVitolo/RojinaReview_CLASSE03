@@ -127,6 +127,11 @@
     margin: 25% 0;
 }
 
+#mentionedGames{
+    margin: 2%;
+}
+
+
 @media (max-width: 1400px) {
      #wrap{
          margin: 10%;

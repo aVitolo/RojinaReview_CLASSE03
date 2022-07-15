@@ -58,9 +58,9 @@ footer ul {
     transition: all 0.5s ease;
 }
 
-.footer-col .social-links a:hover {
-    color: #24262b;
-    background-color: #ffffff;
+.footer-col .social-links a img {
+    width: inherit;
+    height: inherit;
 }
 
 footer .logo {
@@ -69,7 +69,7 @@ footer .logo {
     max-height: 120px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
     footer {
         flex-direction: column;
         text-align: center;

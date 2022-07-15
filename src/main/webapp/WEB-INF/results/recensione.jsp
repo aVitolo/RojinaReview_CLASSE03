@@ -66,18 +66,20 @@
             <input type="submit" value="Commenta">
         </form>
 
-        <% for (Commento c : commenti) {%>
-        <div class="comment">
-            <h4 class="nickname"><%=c.getUtente()%>
-            </h4>
-            <p class="text">
-                <%=c.getTesto()%>
-            </p>
+        <%if(commenti != null){%>
+            <% for (Commento c : commenti) {%>
+            <div class="comment">
+                <h4 class="nickname"><%=c.getUtente()%>
+                </h4>
+                <p class="text">
+                    <%=c.getTesto()%>
+                </p>
 
-            <div class="date">
-                <%=c.getData()%>
+                <div class="date">
+                    <%=c.getData()%>
+                </div>
             </div>
-        </div>
+            <%}%>
         <%}%>
     </section>
 </section>

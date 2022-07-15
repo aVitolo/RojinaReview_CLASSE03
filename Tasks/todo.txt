@@ -1,8 +1,3 @@
-navebar da aggiustare --ANDREA
-icone footer --ANDREA
-shop gestire css filtri articolo --ANDREA
-shop gestire css articoli dimensione --ANDREA
-notizia padding giochi menzionati --ANDREA
 commenti e voto ajax --CARMINE
 aggiunta al carrello da servlet ad ajax --CARMINE
 commento e voto non possibile da ospite --CARMINE

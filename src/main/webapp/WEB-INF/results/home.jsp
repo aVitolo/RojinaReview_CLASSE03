@@ -37,9 +37,7 @@
         <img src="./images/utility/logoNT.png" alt="logo" class="logo" decoding="async">
     </section>
 
-    <h1>Latest News</h1>
-
-    <section class="articoli">
+        <section class="articoli">
         <c:forEach items="${articoli}" var="articolo">
             <div class="articolo">
                 <c:choose>

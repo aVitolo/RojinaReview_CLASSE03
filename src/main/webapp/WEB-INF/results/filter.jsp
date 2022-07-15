@@ -4,6 +4,34 @@
 <html>
 <head>
     <link rel="stylesheet" href="./css/filter.css">
+    <c:if test = "${articoli == 'shop'}">
+        <style>
+            .filter {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            @media (max-width: 1400px) {
+                .filter {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+
+                /* Make #f start on row 2 column 1, and span 1 rows and 2 columns */
+                #f{
+                   grid-area:  2 / 1 / span 1 / span 2;
+                }
+            }
+
+            @media (max-width: 800px) {
+                .filter {
+                    grid-template-columns: repeat(1, 1fr);
+                }
+
+                #f{
+                    grid-area: auto;
+                }
+            }
+        </style>
+    </c:if>
     <script>
         var table = "${articoli}";
     </script>
@@ -40,7 +68,7 @@
     </c:if>
 
     <c:if test = "${articoli == 'shop'}">
-    <div class="dropdown">
+    <div class="dropdown" id="c">
         <button onclick="expandFilter('cDrop')" class="dropbtn" id="cButton">Categoria</button>
         <button onclick="resetFilter('Categoria','cButton','cClose')" class="closebtn" id="cClose"><span>X</span>
         </button>
@@ -54,7 +82,7 @@
     </div>
     </c:if>
 
-    <div class="dropdown">
+    <div class="dropdown" id="s">
         <button onclick="expandFilter('sDrop')" class="dropbtn" id="sButton">Ordina per</button>
         <button onclick="resetFilter('Ordina Per','sButton','sClose')" class="closebtn" id="sClose"><span>X</span>
         </button>
@@ -73,7 +101,7 @@
         </div>
     </div>
 
-    <button class="dropbtn" onclick="filterOrUpdate('yes','${articoli}')"> Filtra </button>
+    <button class="dropbtn" id="f" onclick="filterOrUpdate('yes','${articoli}')"> Filtra </button>
 
 </section>
 </body>

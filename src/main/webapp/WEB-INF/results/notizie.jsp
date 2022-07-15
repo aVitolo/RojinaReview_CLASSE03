@@ -13,8 +13,6 @@
 <%@ include file="/WEB-INF/results/navebar.jsp" %>
     <section class="notizie" id="wrap">
 
-        <h1>Latest News</h1>
-
         <%@ include file="/WEB-INF/results/filter.jsp" %>
 
         <section class="articoli">

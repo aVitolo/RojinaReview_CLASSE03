@@ -31,22 +31,20 @@
             <p>${notizia.testo}</p>
             <p>Caricata il ${notizia.dataCaricamento}</p>
         </div>
+        <section id="mentionedGames">
+            <c:if test="${notizia.giochi != null}">
+                <h2>Giochi menzionati:</h2>
+                <% for (String gioco : n.getGiochi()) {%>
+                <a href="/Rojina_Review_war/getGame?name=<%=gioco%>"><h3><%=gioco%></h3></a>
+                <%}%>
+            </c:if>
+        </section>
         <div id="card">
             <div id="giornalista">
                 <img src = "${notizia.immagineGiornalista}" alt = "copertina" decoding="async">
                 <h2>${notizia.giornalista} </h2>
             </div>
         </div>
-    </section>
-
-    <section id="mentionedGames">
-
-        <c:if test="${notizia.giochi != null}">
-            <h2>Giochi menzionati:</h2>
-            <% for (String gioco : n.getGiochi()) {%>
-            <a href="/Rojina_Review_war/getGame?name=<%=gioco%>"><h3><%=gioco%></h3></a>
-            <%}%>
-        </c:if>
     </section>
 
     <section id="comments">
@@ -58,7 +56,7 @@
             <input type="text" id="toComment" placeholder="Lascia un commento">
             <input type="submit" value="Commenta">
         </form>
-
+        <%if(commenti != null){%>
         <% for (Commento c : commenti) {%>
         <div class="comment">
             <h4 class="nickname"><%=c.getUtente()%>
@@ -71,6 +69,7 @@
                 <%=c.getData()%>
             </div>
         </div>
+        <%}%>
         <%}%>
     </section>
 </section>
