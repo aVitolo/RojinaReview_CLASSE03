@@ -34,7 +34,7 @@ public class GiocoDAO {
                     rs.getString(1),
                     rs.getString(3),
                     rs.getInt(5),
-                    rs.getInt(4),
+                    rs.getFloat(4),
                     rs.getDate(2),
                     rs.getString(6),
                     new PiattaformaDAO(con).doRetriveByGame(titolo),

@@ -21,10 +21,10 @@ public class addCommentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String result = "/Rojina_Review_war/getResource?type="+request.getParameter("type")+"&"+"id="+request.getParameter("id");
-        Commento c = new Commento();
         HttpSession session = request.getSession();
         Utente u = (Utente) session.getAttribute("utente");
 
+        Commento c = new Commento();
         c.setUtente(u.getEmail());
         c.setTesto(request.getParameter("commentText"));
         c.setData(new java.sql.Timestamp(Calendar.getInstance().getTime().getTime()));

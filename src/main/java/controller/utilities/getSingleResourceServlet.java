@@ -19,6 +19,7 @@ public class getSingleResourceServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         int i, j;
         boolean trovato = false;
+        boolean searchDB = Boolean.parseBoolean(request.getParameter("searchDB"));
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
         request.setAttribute("votoUtente", null);
@@ -48,10 +49,11 @@ public class getSingleResourceServlet extends HttpServlet {
                 }
             }
             result = "/WEB-INF/results/notizia.jsp";
+
         } else if (type.equalsIgnoreCase("reviews") || type.equalsIgnoreCase("recensione")) {
             //cerco prima nel context la recensione
             ArrayList<Recensione> recensioniContext = (ArrayList<Recensione>) context.getAttribute("recensioni");
-            for (i = 0; i < recensioniContext.size() && !trovato; i++) {
+            for (i = 0; i < recensioniContext.size() && !trovato && !searchDB; i++) {
                 if (recensioniContext.get(i).getId() == id) {
                     trovato = true;
                     request.setAttribute("recensione", recensioniContext.get(i));
@@ -68,7 +70,7 @@ public class getSingleResourceServlet extends HttpServlet {
                     }
                 }
             }
-            if (trovato == false) {
+            if (trovato == false || searchDB) {
                 try {
                     Recensione r = new RecensioneDAO().doRetrieveById(id);
                     request.setAttribute("recensione", r);
@@ -84,6 +86,7 @@ public class getSingleResourceServlet extends HttpServlet {
                 }
             }
             result = "/WEB-INF/results/recensione.jsp";
+
         } else if (type.equalsIgnoreCase("shop") || type.equalsIgnoreCase("prodotto")) {
             Utente u = null;
             Carrello carrello = null;
@@ -98,7 +101,7 @@ public class getSingleResourceServlet extends HttpServlet {
 
             //cerco prima nel context il prodotto
             ArrayList<Prodotto> prodottiContext = (ArrayList<Prodotto>) context.getAttribute("prodotti");
-            for (i = 0; i < prodottiContext.size() && !trovato; i++) {
+            for (i = 0; i < prodottiContext.size() && !trovato && !searchDB; i++) {
                 if (prodottiContext.get(i).getId() == id) {
                     trovato = true;
                     request.setAttribute("prodotto", prodottiContext.get(i));
@@ -113,7 +116,7 @@ public class getSingleResourceServlet extends HttpServlet {
                 }
             }
             //cerco nel database
-            if (trovato == false) {
+            if (trovato == false || searchDB) {
                 try {
                     Prodotto p = new ProdottoDAO().doRetrieveById(id);
                     request.setAttribute("prodotto", p);

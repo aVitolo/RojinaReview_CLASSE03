@@ -341,45 +341,7 @@ create table Prodotto_Carrello(
                                   primary key(utente, prodotto)
 );
 
-DELIMITER //
-create trigger AggiornaVoto
-    before insert on Voto
-    for each row
-begin
-    if (select count(*) from Voto where new.Utente=Utente and new.Gioco=Gioco) = 0 then
 
-        update Gioco
-        set  MediaVoto = (MediaVoto*NumeroVoti + new.Voto) / (NumeroVoti+1), NumeroVoti = NumeroVoti+1
-        where new.Gioco=Titolo;
-
-    else
-
-        update Gioco
-        set  MediaVoto = ( MediaVoto*NumeroVoti - (select Voto from Voto where (Gioco,Utente,DataVotazione) in (select Gioco,Utente,max(DataVotazione) from Voto where new.Utente=Utente and new.Gioco=Gioco group by Gioco,Utente)) + new.Voto) / NumeroVoti
-        where new.Gioco=Titolo;
-    end if;
-end//
-DELIMITER ;
-
-DELIMITER //
-create trigger AggiornaGradimento
-    before insert on Gradimento
-    for each row
-begin
-    if (select count(*) from Gradimento where new.Utente=Utente and new.prodotto=prodotto) = 0 then
-
-        update Prodotto
-        set  MediaVoto = (MediaVoto*NumeroVoti + new.Voto) / (NumeroVoti+1), NumeroVoti = NumeroVoti+1
-        where new.prodotto=Prodotto.id;
-
-    else
-
-        update Prodotto
-        set  MediaVoto = ( MediaVoto*NumeroVoti - (select voto from Gradimento where (prodotto,Utente,DataVotazione) in (select prodotto,utente,max(DataVotazione) from Gradimento where new.Utente=Utente and new.prodotto=prodotto group by prodotto,Utente)) + new.Voto) / NumeroVoti
-        where new.prodotto=Prodotto.id;
-    end if;
-end//
-DELIMITER ;
 
 insert into Amministratore (nome, cognome, email, pass) values
                                                             ("Andrea", "Vitolo", "zindrè@gmail.com", SHA2('papapa',256)),
@@ -660,46 +622,7 @@ insert into Gioco_Notizia values
 
 
 
-insert into Voto values
-                     ("Dark Souls","venebroguppeu@yopmail.com",9,"2011-10-22"),
-                     ("Dark Souls II","venebroguppeu@yopmail.com",7,"2014-04-11"),
-                     ("Dark Souls III","venebroguppeu@yopmail.com",8,"2016-05-12"),
-                     ("Sekiro Shadows Die Twice","venebroguppeu@yopmail.com",9,"2019-04-22"),
-                     ("FIFA 20","venebroguppeu@yopmail.com",6,"2019-10-27"),
-                     ("FIFA 21","venebroguppeu@yopmail.com",6,"2020-11-05"),
-                     ("FIFA 22","venebroguppeu@yopmail.com",6,"2021-10-26"),
-                     ("Mario Kart 8","venebroguppeu@yopmail.com",8,"2014-06-29"),
-                     ("The Legend of Zelda Breath of the Wild","venebroguppeu@yopmail.com",9,"2017-03-03"),
-                     ("Halo 2","venebroguppeu@yopmail.com",7,"2004-12-09"),
-                     ("Halo 3","venebroguppeu@yopmail.com",8,"2007-10-25"),
-                     ("Halo 4","venebroguppeu@yopmail.com",8,"2012-12-06"),
-                     ("Halo 5","venebroguppeu@yopmail.com",7,"2015-11.27"),
-                     ("Halo Infinite","venebroguppeu@yopmail.com",9,"2021-01-08"),
 
-                     ("Dark Souls","jaunnureudeilla@yopmail.com",8,"2011-10-22"),
-                     ("Dark Souls II","jaunnureudeilla@yopmail.com",6,"2014-04-11"),
-                     ("Dark Souls III","jaunnureudeilla@yopmail.com",9,"2016-05-12"),
-
-                     ("FIFA 20","frefimeitromo@yopmail.com",7,"2019-10-27"),
-                     ("FIFA 21","frefimeitromo@yopmail.com",7,"2020-11-05"),
-                     ("FIFA 22","frefimeitromo@yopmail.com",7,"2021-10-26"),
-
-                     ("Sekiro Shadows Die Twice","ceuprofraucoudi@yopmail.com",8,"2019-03-22"),
-
-                     ("Halo 2","ceubujotawo@yopmail.com",8,"2004-11-09"),
-                     ("Halo 3","ceubujotawo@yopmail.com",8,"2007-09-25"),
-                     ("Halo 4","ceubujotawo@yopmail.com",7,"2012-11-06"),
-                     ("Halo 5","ceubujotawo@yopmail.com",7,"2015-10.27"),
-                     ("Halo Infinite","ceubujotawo@yopmail.com",9,"2021-12-08"),
-
-                     ("Mario Kart 8","gralameiddauquau@yopmail.com",8,"2014-05-29"),
-                     ("The Legend of Zelda Breath of the Wild","gralameiddauquau@yopmail.com",9,"2017-03-03"),
-
-                     ("Halo 4","ceubujotawo@yopmail.com",7,"2022-01-28"),
-                     ("Halo 5","ceubujotawo@yopmail.com",7,"2022-01-25"),
-                     ("Halo Infinite","ceubujotawo@yopmail.com",9,"2022-01-29"),
-
-                     ("Mario Kart 8", "cazzare@yopmail.com", 6, "2021-02-11");
 
 insert into CommentoNotizia values
                                 ("zindre@yopmail.com", "Halo a me non piace...", "2022-04-15 22:58:20", 1),
@@ -750,13 +673,6 @@ insert into Prodotto (nome, descrizione, disponibilità, prezzo, immagine, scont
 ("Pendente Elden Ring", "Realistico pendente...", 70, 18.00, "./images/products/Pendente Elden Ring.jpg", false, 0, 0);
 
 
-insert into Gradimento values
-                           (1, "cazzare@yopmail.com", 8, "2022-05-12"),
-                           (1, "oefo@yopmail.com", 6, "2022-06-12"),
-                           (2, "cazzare@yopmail.com", 5, "2022-05-17"),
-                           (3, "zindre@yopmail.com", 9, "2022-05-02"),
-                           (4, "cazzare@yopmail.com", 10, "2022-03-12"),
-                           (4, "oefo@yopmail.com", 8, "2022-02-12");
 
 insert into CommentoProdotto values
                                  ("zindre@yopmail.com", "T-shirt quasi perfetta...", "2022-04-15 22:58:20", 3),

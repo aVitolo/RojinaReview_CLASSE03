@@ -6,7 +6,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <% Notizia n = (Notizia) request.getAttribute("notizia");
-    ArrayList<Commento> commenti = (ArrayList<Commento>) request.getAttribute("commenti"); %>
+    ArrayList<Commento> commenti = (ArrayList<Commento>) request.getAttribute("commenti");
+    int canDo = 0; //ospite
+    if(session.getAttribute("giornalista") != null || session.getAttribute("admin") != null)
+        canDo = 2;
+    else if(session.getAttribute("utente") != null)
+        canDo = 1;%>
 <head>
     <title><%=n.getTitolo()%>
     </title>
@@ -14,6 +19,8 @@
     <link rel="stylesheet" href="css/foot.css">
     <link rel="stylesheet" href="css/notizia.css">
     <link rel="stylesheet" href="css/master.css">
+    <script src="js/userFunctions.js" type="text/javascript"></script>
+
 </head>
 
 <body>
@@ -52,7 +59,7 @@
             <%=commenti.size()%> commenti
         </div>
 
-        <form action="/Rojina_Review_war/addComment" method="post">
+        <form  id="commentAction" action="/Rojina_Review_war/addComment" method="post" name="commentAction" onsubmit="return canComment('<%=canDo%>');">
             <input type="hidden" name="type" value="notizia">
             <input type="hidden" name="id" value="<%=n.getId()%>">
             <input type="text" name="commentText" id="toComment" placeholder="Lascia un commento">
