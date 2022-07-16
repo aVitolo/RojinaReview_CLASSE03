@@ -1,4 +1,35 @@
 .order{
-    margin: 50px;
-    border: 2px solid #e91e63
+    width: 50%;
+    margin: 2% 25%;
+    background: #24262b;
+    border-radius: 5px;
+    color: #f3f3f3;
+}
+
+.resume{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 40px;
+    margin: 1%;
+}
+
+.top, .products{
+    border-bottom: 2px white solid;
+}
+
+.products{
+    margin: 1%;
+}
+
+.product{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    text-align: center;
+    margin: 2%;
+}
+
+.productImg{
+    width: 150px;
+    height: 150px;
 }
