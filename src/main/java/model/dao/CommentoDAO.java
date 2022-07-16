@@ -26,7 +26,7 @@ public class CommentoDAO {
     /*table: Prodotto-Recensione-Notizia*/
     public ArrayList<Commento> getCommentById(int id, String table) throws SQLException {
         String commentTable = "Commento".concat(table);
-        String query = "SELECT testo, dataScrittura, utente, " + table.toLowerCase(Locale.ROOT) + " " + "FROM "+commentTable+" "+"WHERE "+table.toLowerCase(Locale.ROOT)+"=?";
+        String query = "SELECT testo, dataScrittura, utente, " + table.toLowerCase(Locale.ROOT) + " " + "FROM "+commentTable+" "+"WHERE "+table.toLowerCase(Locale.ROOT)+"=? "+"ORDER BY dataScrittura DESC";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
@@ -35,10 +35,12 @@ public class CommentoDAO {
             commenti.add(
                     new Commento(   rs.getString(1),
                                     rs.getString(3),
-                                    rs.getDate(2),
+                                    rs.getTimestamp(2),
                                     rs.getInt(4),
                                     table));
             }
+
+
 
         return commenti;
 
@@ -54,7 +56,7 @@ public class CommentoDAO {
         {
             Commento c = new Commento();
             c.setTesto(rs.getString(1));
-            c.setData(rs.getDate(2));
+            c.setData(rs.getTimestamp(2));
             c.setUtente(rs.getString(3));
             c.setId(rs.getInt(4));
             c.setResource("recensione");
@@ -69,7 +71,7 @@ public class CommentoDAO {
         {
             Commento c = new Commento();
             c.setTesto(rs.getString(1));
-            c.setData(rs.getDate(2));
+            c.setData(rs.getTimestamp(2));
             c.setUtente(rs.getString(3));
             c.setId(rs.getInt(4));
             c.setResource("notizia");
@@ -84,7 +86,7 @@ public class CommentoDAO {
         {
             Commento c = new Commento();
             c.setTesto(rs.getString(1));
-            c.setData(rs.getDate(2));
+            c.setData(rs.getTimestamp(2));
             c.setUtente(rs.getString(3));
             c.setId(rs.getInt(4));
             c.setResource("prodotto");
@@ -95,6 +97,17 @@ public class CommentoDAO {
 
         return commenti;
 
+    }
+
+    public void doSave(Commento c) throws SQLException {
+        PreparedStatement ps = con.prepareStatement("INSERT INTO commento"+c.getResource()+" VALUES (?, ?, ?, ?)");
+        ps.setString(1, c.getUtente());
+        ps.setString(2, c.getTesto());
+        ps.setTimestamp(3, c.getData());
+        ps.setInt(4, c.getId());
+
+        if(ps.executeUpdate() != 1)
+            throw new RuntimeException("Insert error");
     }
 
 }

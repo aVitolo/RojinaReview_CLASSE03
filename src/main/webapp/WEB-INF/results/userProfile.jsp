@@ -47,10 +47,6 @@
         </c:if>
 
 
-
-        <div class="Logout">
-            <a href="/Rojina_Review_war/logout">Logout</a>
-        </div>
     </div>
 </div>
 

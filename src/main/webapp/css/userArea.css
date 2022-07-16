@@ -1,0 +1,157 @@
+body{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    user-select: text !important;
+    background: linear-gradient(120deg, #d64161 0%, #6B354D 51%, #6b5b95 75%);
+    min-width: 300px;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+}
+
+
+
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+.sidebar{
+    font-family: "Agency FB";
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    user-select: text !important;
+    position: fixed;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background: #24262b;
+    max-width: 15%;
+}
+
+
+
+.navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background: #24262b;
+    position: sticky;
+    top: 0;
+    margin-left: 250px;
+    margin-right: 0px;
+    width: 100%;
+    height: 71px;
+    z-index: 1;
+    color: #e91e63;
+    font-size: 35px;
+}
+
+.sidebar header{
+    font-size: 25px;
+    color: white;
+    text-align: center;
+    line-height: 70px;
+    background: #24262b;
+    user-select: none;
+}
+
+.sidebar ul li{
+    height: 53px;
+}
+
+.sidebar ul a{
+    display: block;
+    height: 100%;
+    width: 100%;
+    line-height: 65px;
+    font-size: 20px;
+    color: white;
+    padding-left: 40px;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(255,255,255,.1);
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    transition: .4s;
+}
+
+ul li:hover a{
+    padding-left: 60px;
+    color: #e91e63;
+}
+
+.sidebar ul li a #pink1, .sidebar ul li a #pink2{
+    color: #e91e63;
+}
+.menu{
+    width: 85%;
+    margin-left: 15%;
+    background-color:  #24262b;
+    margin-left: 40%;
+    margin-bottom: 20%;
+    margin-top: 5%;
+    margin-right: 18%;
+    color: white;
+}
+
+.menu > h3, div{
+    margin: 3%
+}
+.currentMenuName{
+    text-align: center;
+}
+
+.information{
+    text-align: center;
+}
+
+
+#homeButton{
+
+    margin-bottom: 95;
+    height: 150;
+    border-top: 1px solid rgba(255,255,255,.1);
+
+
+
+
+}
+
+#logo{
+    display: block;
+    width: 100%;
+    margin-left: -2;
+    margin-top: 60;
+
+}
+#logout{
+    margin-top: 357;
+}
+
+div.manage{
+    font-size: 22px;
+    margin-left: 260px;
+    margin-top: 5px;
+}
+
+td, th {
+    border-bottom: 1px solid black;
+    text-align: left;
+    padding: 8px;
+}
+
+table th{
+    font-size: 25px;
+}
+
+div td button{
+    cursor: pointer;
+}
+
+.manage table th#add, .manage table th#search{
+    cursor: pointer;

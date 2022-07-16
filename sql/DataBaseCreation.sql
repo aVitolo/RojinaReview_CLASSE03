@@ -364,9 +364,9 @@ insert into Utente values
                        ("ceubujotawo@yopmail.com","PhantomEagle",SHA2('obufewgou',256), null, null, null, "./images/users/PhantomEagle.png"),
                        ("gralameiddauquau@yopmail.com","GhostSteel",SHA2('nefihouefwpoj',256), "Lorenza", "Gialli", 18, "./images/users/GhostSteel.png"),
                        ("febremoulaqui@yopmail.com","PredatorBeta",SHA2('fnkebouewf',256), "Christian", "Rosati", 26, "./images/users/PredatorBeta.png"),
-                       ("zindre@yopmail.com","BlackDeath",SHA2('jofhouefwpoj',256), null, null, null, "./images/users/BlackDeath.jpg"),
-                       ("cazzare@yopmail.com","AbyssWalker",SHA2('cazzare',256), "Carmine", "Franca", 22, "./images/users/AbyssWalker.jpg"),
-                       ("oefo@yopmail.com","Papiciacra",SHA2('piefwhouefoj',256), "Fonz", "Cretoso", 20, "./images/users/Papiciacra.jpg"),
+                       ("zindre@yopmail.com","BlackDeath",SHA2('jofhouefwpoj',256), null, null, null, "./images/users/BlackDeath.png"),
+                       ("cazzare@yopmail.com","AbyssWalker",SHA2('cazzare',256), "Carmine", "Franca", 22, "./images/users/AbyssWalker.png"),
+                       ("oefo@yopmail.com","Papiciacra",SHA2('piefwhouefoj',256), "Fonz", "Cretoso", 20, "./images/users/Papiciacra.png"),
                        ("utente@gmail.com","User",SHA2('password',256), "Persona", "Normale", 20, null);
 
 

@@ -1,8 +1,6 @@
-commenti e voto ajax --CARMINE
+voto ajax --CARMINE
 aggiunta al carrello da servlet ad ajax --CARMINE
 commento e voto non possibile da ospite --CARMINE
-far comparire voto in recensione e prodotto se l'utente ha votato --CARMINE (FATTO)
-gestire trigger voto recensione-prodotto con update e quindi mantenere un solo voto utente --CARMINE (FATTO lato Java)
 area utente css --CARMINE
 utente profilo modifica anagrafica --CARLO
 utente informazioni di fatturazione modifica-cancellazione (inserimento già fatto) --CARLO

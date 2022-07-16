@@ -2,6 +2,8 @@
 <%@ page import="model.beans.Commento" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.beans.VotoProdotto" %>
+<%@ page import="org.json.JSONObject" %>
+<%@ page import="java.io.StringWriter" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -17,6 +19,9 @@
     <link rel="stylesheet" href="css/foot.css">
     <link rel="stylesheet" href="css/prodotto.css">
     <link rel="stylesheet" href="css/master.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/Rojina_Review_war/js/navebar.js"></script>
+    <script type="text/javascript" src="/Rojina_Review_war/js/addToCart.js"></script>
 </head>
 
 <body>
@@ -40,10 +45,10 @@
             <%=p.getDescrizione()%>
         </p>
         <section id="toCarret">
-            <form  action="/Rojina_Review_war/addProductCart" method="post">
+            <form  id="addProduct" action="/Rojina_Review_war/addProductCart" method="post">
                 <input type="hidden" value="<%=p.getId()%>" name="prodottoID" id="prodottoID">
-                <input type="number" min="1" max="10" name="quantità" id="quantità" value="1">
-                <input type="submit" style="width:auto" value="Aggiungi al Carrello">
+                <input type="number" min="1" max="<%=p.getDisponibilità()-quantitàCarrello%>" name="quantità" id="quantità" value="1">
+                <input type="submit" style="width:auto" value="Aggiungi al Carrello" onclick="addToUserCart()">
             </form>
         </section>
         </div>
@@ -68,8 +73,10 @@
             <%=commenti.size()%> commenti
         </div>
 
-        <form action="" method="post">
-            <input type="text" id="toComment" placeholder="Lascia un commento">
+        <form action="/Rojina_Review_war/addComment" method="post">
+            <input type="hidden" name="type" value="prodotto">
+            <input type="hidden" name="id" value="<%=p.getId()%>">
+            <input type="text" name="commentText" id="toComment" placeholder="Lascia un commento">
             <input type="submit" value="Commenta">
         </form>
 
@@ -93,5 +100,5 @@
 </section>
 <%@ include file="../../html/footer.html" %>
 </body>
-<script type="text/javascript" src="/Rojina_Review_war/js/navebar.js"></script>
+
 </html>

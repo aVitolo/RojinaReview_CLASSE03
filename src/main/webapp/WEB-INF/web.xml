@@ -263,5 +263,12 @@
         <url-pattern>/AdminPanel</url-pattern>
     </servlet-mapping>
 
-
+    <servlet>
+        <servlet-name>addCommentServlet</servlet-name>
+        <servlet-class>controller.user.addCommentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addCommentServlet</servlet-name>
+        <url-pattern>/addComment</url-pattern>
+    </servlet-mapping>
 </web-app>

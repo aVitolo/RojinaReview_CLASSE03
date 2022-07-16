@@ -7,7 +7,7 @@ public class Commento {
     /* Attributes */
 
     private int id;
-    private java.sql.Date data;
+    private java.sql.Timestamp data;
     private String testo;
     private String utente;
     private String resource; //oggetto a cui fa riferimento: notizia, recensione, prodotto
@@ -20,7 +20,7 @@ public class Commento {
 
     }
 
-    public Commento(String testo, String utente, java.sql.Date data, int id, String resource) {
+    public Commento(String testo, String utente, java.sql.Timestamp data, int id, String resource) {
         this.testo = testo;
         this.utente = utente;
         this.data = data;
@@ -46,11 +46,11 @@ public class Commento {
         this.utente = utente;
     }
 
-    public java.sql.Date getData() {
+    public java.sql.Timestamp getData() {
         return data;
     }
 
-    public void setData(java.sql.Date data) {
+    public void setData(java.sql.Timestamp data) {
         this.data = data;
     }
 

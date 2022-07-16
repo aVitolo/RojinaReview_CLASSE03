@@ -52,8 +52,10 @@
             <%=commenti.size()%> commenti
         </div>
 
-        <form action="" method="post">
-            <input type="text" id="toComment" placeholder="Lascia un commento">
+        <form action="/Rojina_Review_war/addComment" method="post">
+            <input type="hidden" name="type" value="notizia">
+            <input type="hidden" name="id" value="<%=n.getId()%>">
+            <input type="text" name="commentText" id="toComment" placeholder="Lascia un commento">
             <input type="submit" value="Commenta">
         </form>
         <%if(commenti != null){%>
