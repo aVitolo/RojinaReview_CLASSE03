@@ -7,7 +7,6 @@
     <title>Rojina Review</title>
     <link rel="stylesheet" href="css/acquista.css">
     <link rel="stylesheet" href="css/navebar.css">
-    <link rel="stylesheet" href="css/orders.css">
     <link rel="stylesheet" href="css/master.css">
 </head>
 <body>
@@ -40,6 +39,37 @@
                 </div>
             </c:forEach>
         </div>
+        <div class="address">
+            <c:if test="${sessionScope.get('utente') != null}">
+                <c:forEach items="${sessionScope['utente'].indirizzi}" var="indirizzo" varStatus="loop">
+                    <input class="boxed" type="radio" id="${loop.index}" name="address" checked="checked">
+                    <label for="${loop.index}">
+                            ${indirizzo.via} ${indirizzo.numeroCivico} ${indirizzo.città} ${indirizzo.cap}
+                    </label>
+                </c:forEach>
+                <input type="radio" id="newA" name="address">
+                <label for="newA">
+                       Nuovo
+                </label>
+            </c:if>
+        </div>
+        <div class="payment">
+            <c:if test="${sessionScope.get('utente') != null}">
+                <c:forEach items="${sessionScope['utente'].pagamenti}" var="pagamento" varStatus="loop">
+                    <input class="boxed" type="radio" id="${loop.index}" name="payment">
+                    <label for="${loop.index}">
+                        ${pagamento.nome} ${pagamento.cognome} ${pagamento.numeroCarta} ${pagamento.dataScadenza}
+                    </label>
+                </c:forEach>
+                <input class="boxed" id="newP" type="radio" name="payment">
+                <label for="newP">
+                    Nuovo
+                </label>
+            </c:if>
+        </div>
+        <button>
+            Acquista
+        </button>
     </section>
     </c:when>
     <c:otherwise>

@@ -30,3 +30,15 @@
     border-radius: 10px;
     background: #24262b;
 }
+input[type="radio"] {
+     display: none;
+ }
+
+label{
+    background: #e91e63;
+    transtion-duration: .3s;
+}
+
+input[type="radio"]:checked + label {
+    background: #6B354D;
+}
