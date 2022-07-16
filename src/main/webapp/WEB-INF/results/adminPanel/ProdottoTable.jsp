@@ -40,3 +40,7 @@
     </tr>
 
         <%}%>
+    <script>
+        var details = "'nome', 'descrizione', disponibilità, (float)prezzo, 'immagine' or null, (boolean)sconto, mediaVoto, numeroVoti";
+        var necessary = "(nome, descrizione, disponibilità, prezzo, immagine, sconto, mediaVoto, numeroVoti)";
+    </script>

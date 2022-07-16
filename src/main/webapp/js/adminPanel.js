@@ -40,8 +40,8 @@ function modifyEntry(element){
 }
 
 function add(){
-    let query = prompt("Aggiungi Ora (Segui l'ordine delle colonne)","Es: 5,'Nome','cognome',85;");
-    query = "query=" + className + " VALUES " + "(" + query + ");"
+    let query = prompt("Aggiungi Ora (Riempi i valori)",details);
+    query = "query=" + className +" "+ necessary + " VALUES " + "(" + query + ");"
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {

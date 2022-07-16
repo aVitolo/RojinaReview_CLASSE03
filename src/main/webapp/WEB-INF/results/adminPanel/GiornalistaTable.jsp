@@ -34,4 +34,7 @@
     </tr>
 
         <%}%>
-
+    <script>
+        var details = "'nome', 'cognome', 'email', 'pass', 'immagine' or null)";
+        var necessary = "(nome, cognome, email, pass, immagine)";
+    </script>
