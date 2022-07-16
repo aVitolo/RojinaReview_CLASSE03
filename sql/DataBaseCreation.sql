@@ -619,7 +619,9 @@ insert into Recensione (testo, giornalista, gioco, titolo, voto, dataCaricamento
 ("RDR 2 è mastodontico...", 5, "Red Dead Redemption 2", "Il GTA ambientato nell'old west", 9.3, "2021-06-11", "./images/reviews/review-Red Dead Redemption 2.jpg"),
 ("Zelda è ormai la nostra infanzia...", 2, "The Legend of Zelda Breath of the Wild", "Il capolavoro Nintendo", 9.5, "2022-03-11", "./images/reviews/review-The Legend of Zelda Breath of the Wild.jpg"),
 ("Mario e corse connubio perfetto...", 5, "Mario Kart 8", "Mario&Furious", 7.5, "2021-01-15", "./images/reviews/review-Mario Kart 8.jpg"),
-("FIFA 21 si mostra come...", 3, "FIFA 21", "Il solito gioco di calcio", 6, "2021-02-22", "./images/reviews/review-FIFA 21.jpg");
+("FIFA 21 si mostra come...", 3, "FIFA 21", "Il solito gioco di calcio", 6, "2021-02-22", "./images/reviews/review-FIFA 21.jpg"),
+("FIFA 20 non è il top...", 2, "FIFA 20", "FIFA delude", 5, "2020-03-11", "./images/reviews/review-FIFA 20.jpg"),
+("Dark Souls è un rpg di tutto...", 1, "Dark Souls", "Il miglior RPG", 9.5, "2018-01-10", "./images/reviews/review-Dark Souls.jpg");
 
 
 insert into Notizia (testo, giornalista, titolo, dataCaricamento, immagine) values
