@@ -263,5 +263,13 @@
         <url-pattern>/AdminPanel</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>proceedToOrderServlet</servlet-name>
+        <servlet-class>controller.utilities.proceedToOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>proceedToOrderServlet</servlet-name>
+        <url-pattern>/acquista</url-pattern>
+    </servlet-mapping>
 
 </web-app>
