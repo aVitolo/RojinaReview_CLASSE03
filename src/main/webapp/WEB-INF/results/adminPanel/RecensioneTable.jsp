@@ -34,3 +34,7 @@
     </tr>
 
         <%}%>
+    <script>
+        var details = "'testo', giornalista, 'gioco', 'titolo', voto, dataCaricamento, 'immagine' or null";
+        var necessary = "(testo, giornalista, gioco, titolo, voto, dataCaricamento, immagine)";
+    </script>

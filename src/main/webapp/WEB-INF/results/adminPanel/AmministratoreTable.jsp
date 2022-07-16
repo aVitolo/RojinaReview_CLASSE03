@@ -34,5 +34,8 @@
             <button name="<%=a.getId()%>" onclick="deleteEntry(this)">🗑️ </button>
         </td>
     </tr>
-
         <%}%>
+    <script>
+        var details = "'nome', 'cognome', 'email', 'pass'";
+        var necessary = "(nome, cognome, email, pass)";
+    </script>

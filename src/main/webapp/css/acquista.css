@@ -1,0 +1,32 @@
+.order{
+    width: 50%;
+    margin: 2% 25%;
+    background: #24262b;
+    border-radius: 5px;
+    color: #f3f3f3;
+}
+
+.products{
+    margin: 1%;
+}
+
+.product{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    text-align: center;
+    margin: 2%;
+}
+
+.productImg{
+    width: 150px;
+    height: 150px;
+}
+
+#empty{
+    color: white;
+    text-align: center;
+    margin: 20%;
+    padding: 2%;
+    border-radius: 10px;
+    background: #24262b;
+}

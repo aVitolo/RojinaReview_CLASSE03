@@ -34,7 +34,7 @@
                                 <h3 class="productName">${prodotto.prodotto.nome}</h3>
                                 <h3 class="price">${prodotto.prezzoAcquisto}€</h3>
                                 <h3 class="quantity">${prodotto.quantita}</h3>
-                                <h3 class="subtotal"><fmt:formatNumber value="${prodotto.prezzoAcquisto * prodotto.quantita}" maxFractionDigits="2"/>€</h3>
+                                <h3 class="subtotal"><fmt:formatNumber value="${prodotto.prezzoAcquisto * prodotto.quantita}" maxFractionDigits="3"/>€</h3>
                             </section>
                         </div>
                     </c:forEach>

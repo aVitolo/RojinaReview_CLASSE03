@@ -264,11 +264,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>addCommentServlet</servlet-name>
-        <servlet-class>controller.user.addCommentServlet</servlet-class>
+        <servlet-name>proceedToOrderServlet</servlet-name>
+        <servlet-class>controller.utilities.proceedToOrderServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>addCommentServlet</servlet-name>
-        <url-pattern>/addComment</url-pattern>
+        <servlet-name>proceedToOrderServlet</servlet-name>
+        <url-pattern>/acquista</url-pattern>
     </servlet-mapping>
+
 </web-app>

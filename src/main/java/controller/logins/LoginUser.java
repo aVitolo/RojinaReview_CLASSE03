@@ -75,29 +75,26 @@ public class LoginUser extends HttpServlet {
     }
 
     private static Carrello mergeCarts(Carrello carrello, Carrello ospite) {
-        int i, j;
-        boolean trovato;
-        ArrayList<Carrello.ProdottoCarrello> prodottiDB = carrello.getProdotti();
-        ArrayList<Carrello.ProdottoCarrello> prodottiOspite = ospite.getProdotti();
-
-        for(i = 0; i < prodottiOspite.size(); i++){
-            for(j = 0, trovato = false; j < prodottiDB.size() && !trovato; j++){
-                if(prodottiOspite.get(i).getProdotto().getId() == prodottiDB.get(j).getProdotto().getId())
-                {
-                    prodottiDB.get(j).setQuantità(prodottiDB.get(j).getQuantità() + prodottiOspite.get(i).getQuantità());
-                    trovato = true;
+        if(ospite!=null) {
+            int i, j;
+            boolean trovato;
+            ArrayList<Carrello.ProdottoCarrello> prodottiDB = carrello.getProdotti();
+            ArrayList<Carrello.ProdottoCarrello> prodottiOspite = ospite.getProdotti();
+            for (i = 0; i < prodottiOspite.size(); i++) {
+                for (j = 0, trovato = false; j < prodottiDB.size() && !trovato; j++) {
+                    if (prodottiOspite.get(i).getProdotto().getId() == prodottiDB.get(j).getProdotto().getId()) {
+                        prodottiDB.get(j).setQuantità(prodottiDB.get(j).getQuantità() + prodottiOspite.get(i).getQuantità());
+                        trovato = true;
+                    }
                 }
+                //prodotto del carrello ospite non trovato nel DB
+                if (!trovato)
+                    prodottiDB.add(prodottiOspite.get(i));
             }
-            //prodotto del carrello ospite non trovato nel DB
-            if(!trovato)
-                prodottiDB.add(prodottiOspite.get(i));
+
+            carrello.setProdotti(prodottiDB); //istruzione penso inutile
+            carrello.setTotale(carrello.getTotale() + ospite.getTotale());
         }
-
-        carrello.setProdotti(prodottiDB); //istruzione penso inutile
-        carrello.setTotale(carrello.getTotale() + ospite.getTotale());
-
         return carrello;
-
-
     }
 }

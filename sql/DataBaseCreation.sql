@@ -341,6 +341,45 @@ create table Prodotto_Carrello(
                                   primary key(utente, prodotto)
 );
 
+DELIMITER //
+create trigger AggiornaVoto
+    before insert on Voto
+    for each row
+begin
+    if (select count(*) from Voto where new.Utente=Utente and new.Gioco=Gioco) = 0 then
+
+        update Gioco
+        set  MediaVoto = (MediaVoto*NumeroVoti + new.Voto) / (NumeroVoti+1), NumeroVoti = NumeroVoti+1
+        where new.Gioco=Titolo;
+
+    else
+
+        update Gioco
+        set  MediaVoto = ( MediaVoto*NumeroVoti - (select Voto from Voto where (Gioco,Utente,DataVotazione) in (select Gioco,Utente,max(DataVotazione) from Voto where new.Utente=Utente and new.Gioco=Gioco group by Gioco,Utente)) + new.Voto) / NumeroVoti
+        where new.Gioco=Titolo;
+    end if;
+end//
+DELIMITER ;
+
+DELIMITER //
+create trigger AggiornaGradimento
+    before insert on Gradimento
+    for each row
+begin
+    if (select count(*) from Gradimento where new.Utente=Utente and new.prodotto=prodotto) = 0 then
+
+        update Prodotto
+        set  MediaVoto = (MediaVoto*NumeroVoti + new.Voto) / (NumeroVoti+1), NumeroVoti = NumeroVoti+1
+        where new.prodotto=Prodotto.id;
+
+    else
+
+        update Prodotto
+        set  MediaVoto = ( MediaVoto*NumeroVoti - (select voto from Gradimento where (prodotto,Utente,DataVotazione) in (select prodotto,utente,max(DataVotazione) from Gradimento where new.Utente=Utente and new.prodotto=prodotto group by prodotto,Utente)) + new.Voto) / NumeroVoti
+        where new.prodotto=Prodotto.id;
+    end if;
+end//
+DELIMITER ;
 
 insert into Amministratore (nome, cognome, email, pass) values
                                                             ("Andrea", "Vitolo", "zindrè@gmail.com", SHA2('papapa',256)),
@@ -583,6 +622,7 @@ insert into Recensione (testo, giornalista, gioco, titolo, voto, dataCaricamento
 ("FIFA 21 si mostra come...", 3, "FIFA 21", "Il solito gioco di calcio", 6, "2021-02-22", "./images/reviews/review-FIFA 21.jpg"),
 ("FIFA 20 non è il top...", 2, "FIFA 20", "FIFA delude", 5, "2020-03-11", "./images/reviews/review-FIFA 20.jpg"),
 ("Dark Souls è un rpg di tutto...", 1, "Dark Souls", "Il miglior RPG", 9.5, "2018-01-10", "./images/reviews/review-Dark Souls.jpg");
+
 
 insert into Notizia (testo, giornalista, titolo, dataCaricamento, immagine) values
 ("Halo Infinite è un gioco...", 2,  "Halo Infinite e la community tossica","2022-01-24", "./images/news/new-Halo Infinite e la community tossica.jpg"),
