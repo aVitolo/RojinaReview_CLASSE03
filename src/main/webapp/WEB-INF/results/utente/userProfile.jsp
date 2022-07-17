@@ -12,7 +12,7 @@
 <div class="menu">
     <h1 class="currentMenuName">Profilo</h1>
     <div class="information">
-        <div class="userName">
+        <div>
             <h3 class="userAttribute">Nickname:</h3>
             ${utente.nickname}
         </div>
@@ -34,7 +34,7 @@
 
 
         <c:if test="${utente.nome != null}">
-            <div class="userName">
+            <div>
                 <h3 class="userAttribute">Nome:</h3>
                 ${utente.nome} ${utente.cognome}
             </div>
