@@ -66,7 +66,7 @@ header .bar .logo {
     padding: 0px 10px;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1250px) {
     header {
         display: flex;
         flex-direction: column;

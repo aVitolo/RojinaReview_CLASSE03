@@ -111,6 +111,27 @@ input[type='submit']:hover{
     color: white;
 }
 
+.deleteArticol{
+    background: #e91e63;
+    border: none;
+    border-radius: 5px;
+}
+
+.deleteArticol:hover{
+    background: #6B354D;
+}
+
+.updateArticol{
+    background: none;
+}
+.updateArticol input {
+    background: none;
+    color: white;
+    outline: none;
+    border: none;
+    border-bottom: 1px white solid;
+    text-align: center;
+}
 @media screen and (max-width: 1000px) {
     .order{
         width: 70%;

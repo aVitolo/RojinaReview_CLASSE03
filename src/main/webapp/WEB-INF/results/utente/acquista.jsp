@@ -36,9 +36,21 @@
                     </section>
                     <section>
                         <h3 class="productName">${prodotto.prodotto.nome}</h3>
-                        <h3 class="price">${prodotto.prezzoAttuale}€</h3>
-                        <label style="backfground:none"><input type="number" min="1" max="${prodotto.quantità}" value="${prodotto.quantità}">Quantita</label>
-                        <h3 class="subtotal"><fmt:formatNumber value="${prodotto.prezzoAttuale * prodotto.quantità}" maxFractionDigits="3"/>€</h3>
+                        <div style="
+                             display: flex;
+                             justify-content: center;
+                             ">
+                            <h3 class="price">${prodotto.prezzoAttuale}</h3>
+                            <h3>€</h3>
+                        </div>
+                        <label class="updateArticol"><input type="number" min="1" max="${prodotto.prodotto.disponibilità}" value="${prodotto.quantità}">Quantita</label>
+                        <div style="
+                             display: flex;
+                             justify-content: center;
+                             ">
+                            <h3 class="subtotal"><fmt:formatNumber value="${prodotto.prezzoAttuale * prodotto.quantità}" maxFractionDigits="3"/></h3>
+                            <h3>€</h3>
+                        </div>
                         <button class="deleteArticol" onclick='removeFromCart("${prodotto.prodotto.id}")'>Rimuovi</button>
                     </section>
                 </div>
@@ -168,5 +180,29 @@
         xhttp.send(requestText);
     }
 
+
+    for (let p of document.getElementsByClassName("product")){
+        let idProdotto = p.getAttribute("id");
+        let input = p.getElementsByTagName("input")[0];
+        input.addEventListener('change', function () {
+            let newQuantity = input.value;
+            requestText = "id=" + idProdotto + "&quantita=" + newQuantity;
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    if (this.responseText === "-1") {
+                        //error
+                    } else{
+                        let subtotal = p.getElementsByClassName("subtotal")[0];
+                        subtotal.innerHTML = newQuantity * p.getElementsByClassName("price")[0].innerHTML;
+                        document.getElementById("tot").innerHTML = "Totale "+this.responseText;
+                    }
+                }
+            };
+            xhttp.open("POST", "./updateProductDisponibility", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send(requestText);
+        });
+    }
 </script>
 </html>
