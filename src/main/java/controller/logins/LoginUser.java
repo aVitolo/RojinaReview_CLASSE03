@@ -42,31 +42,32 @@ public class LoginUser extends HttpServlet {
                     RequestDispatcher dispatcher = request.getRequestDispatcher(loginErrato);
                     dispatcher.forward(request, response);
                 }
+                else {
+                    //Preleva dalla request la password
+                    String password = request.getParameter("password");
 
-                //Preleva dalla request la password
-                String password = request.getParameter("password");
+                    //Calcola Hash della password utente
+                    password = Persona.calcolaHash(password);
 
-                //Calcola Hash della password utente
-                password = Persona.calcolaHash(password);
-
-                //ottengo la password dell' user nel db
-                String dbPass = this.tmp.getPassword();
-                //confronta le password
-                if (password.equals(dbPass)) {
-                    if(this.tmp.getImmagine() == null)
-                        this.tmp.setImmagine("./images/utility/defaultImageUser.png"); //immagine di default utente
-                    //merge dei carrelli
-                    Carrello ospite = (Carrello) session.getAttribute("ospite");
-                    this.tmp.setCarrello(LoginUser.mergeCarts(this.tmp.getCarrello(), ospite));
-                    session.setAttribute("utente", this.tmp);
-                    //rimozione del carrello ospite
-                    session.removeAttribute("ospite");
-                    response.sendRedirect(homePage);
-                } else {
-                    String message = "Invalid password";
-                    request.setAttribute("message", message);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher(loginErrato);
-                    dispatcher.forward(request, response);
+                    //ottengo la password dell' user nel db
+                    String dbPass = this.tmp.getPassword();
+                    //confronta le password
+                    if (password.equals(dbPass)) {
+                        if (this.tmp.getImmagine() == null)
+                            this.tmp.setImmagine("./images/utility/defaultImageUser.png"); //immagine di default utente
+                        //merge dei carrelli
+                        Carrello ospite = (Carrello) session.getAttribute("ospite");
+                        this.tmp.setCarrello(LoginUser.mergeCarts(this.tmp.getCarrello(), ospite));
+                        session.setAttribute("utente", this.tmp);
+                        //rimozione del carrello ospite
+                        session.removeAttribute("ospite");
+                        response.sendRedirect(homePage);
+                    } else {
+                        String message = "Invalid password";
+                        request.setAttribute("message", message);
+                        RequestDispatcher dispatcher = request.getRequestDispatcher(loginErrato);
+                        dispatcher.forward(request, response);
+                    }
                 }
             }
         } catch (SQLException e) {

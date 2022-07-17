@@ -52,12 +52,6 @@
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <span class="icon"></span>
-                    <span class="title">⚙️Settings</span>
-                </a>
-            </li>
-            <li>
                 <a href="./home">
                     <span class="title" id="pink1" >🏠Home </span>
                 </a>

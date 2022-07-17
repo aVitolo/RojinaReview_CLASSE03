@@ -8,7 +8,7 @@
         <th><%=s%></th>
         <%}%>
         <th id="search" onclick="search()">🔍</th>
-        <th id="add" onclick="add()">✖️</th>
+        <th id="add" onclick="add()">➕️</th>
     </tr>
         <%for(Prodotto a : list){%>
     <tr id="<%=a.getId()%>">
