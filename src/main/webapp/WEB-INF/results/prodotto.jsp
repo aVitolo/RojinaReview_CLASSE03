@@ -55,7 +55,7 @@
         <section id="toCarret">
                 <input type="hidden" value="<%=p.getId()%>" name="prodottoID" id="prodottoID">
                 <input type="number" min="1" max="<%=p.getDisponibilità()-quantitàCarrello%>" name="quantita" id="quantita" value="1">
-                <input type="submit" style="width:auto" value="Aggiungi al Carrello" onclick="addToUserCart("<%=canDo%>")">
+                <input type="submit" style="width:auto" value="Aggiungi al Carrello" onclick="addToUserCart('<%=canDo%>')">
         </section>
         </div>
     </section>

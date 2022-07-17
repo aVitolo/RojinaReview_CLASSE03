@@ -35,7 +35,7 @@ public class Carrello {
         return totale;
     }
 
-    public void setTotale(float aFloat) {
+    public void setTotale(float totale) {
         this.totale = totale;
     }
 

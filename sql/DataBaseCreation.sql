@@ -421,7 +421,7 @@ insert into Tipologia values
                           ("MMO"),
                           ("Multiplayer"),
                           ("Multiplayer Online"),
-                          ("Piacchiduro"),
+                          ("Picchiaduro"),
                           ("RPG"),
                           ("Simulazione"),
                           ("Sport"),
@@ -697,19 +697,7 @@ insert into Prodotto_Categoria values
                                    (4, "Abbigliamento"),
                                    (5, "Abbigliamento");
 
-insert into Carrello values
-                         (34.00, "cazzare@yopmail.com"),
-                         (17.50, "oefo@yopmail.com"),
-                         (12.30, "venebroguppeu@yopmail.com");
 
-insert into Prodotto_Carrello values
-                                  (2, "venebroguppeu@yopmail.com", 1),
-                                  (4, "venebroguppeu@yopmail.com", 1),
-                                  (1, "venebroguppeu@yopmail.com", 5),
-                                  (2, "oefo@yopmail.com", 3),
-                                  (5, "oefo@yopmail.com", 6),
-                                  (3, "venebroguppeu@yopmail.com", 1),
-                                  (4, "cazzare@yopmail.com", 2);
 
 insert into Ordine (stato, tracking, dataOrdine, totale, pagamento, utente, via, numeroCivico, città, cap) values
                                                                                                                ("in consegna", "tracking1", "2022-05-12", 31.00, "523521", "oefo@yopmail.com", "mattarella", "232", "Striano", "80040"),

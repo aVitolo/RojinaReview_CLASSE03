@@ -13,28 +13,30 @@
 <div class="menu">
     <div class="insertGioco">
         <form name="insertGioco" action="/Rojina_Review_war/insertGame" method="post" enctype="multipart/form-data">
-            <label for="titolo">Titolo: </label>
+            <span class="attribute">Titolo: </span>
             <input type="text" id="titolo" name="titolo">
-            <label for="casaDiSviluppo">Casa di sviluppo: </label>
+            <span class="attribute">&nbsp;&nbsp;Casa di sviluppo: </span>
             <input type="text" id="casaDiSviluppo" name="casaDiSviluppo">
-            <label for="dataDiRilascio">Data di rilascio: </label>
+            <span class="attribute">&nbsp;&nbsp;Data di rilascio: </span>
             <input type="date" id="dataDiRilascio" name="dataDiRilascio" placeholder="yyyy-mm-dd">
-            <label for="copertina">Copertina: </label>
+            <br>
+            <span class="attribute">Copertina: </span>
             <input type="file" id="copertina" name="copertina">
-            <span id="tipologia">Tipologia: </span>
+            <br>
+            <span id="tipologia" class="attribute">Tipologia: </span>
             <c:forEach items="${applicationScope['tipologie']}" var="tipologia">
                 <input type="checkbox" id="${tipologia.nome}" name="${tipologia.nome}" value="${tipologia.nome}">
-                <label for="${tipologia.nome}">${tipologia.nome}</label>
+                <label for="${tipologia.nome}">${tipologia.nome}&nbsp;&nbsp;</label>
             </c:forEach>
             <br>
-            <span id="piattaforma">Piattaforma: </span>
+            <span id="piattaforma" class="attribute">Piattaforma: </span>
             <c:forEach items="${applicationScope['piattaforme']}" var="piattaforma">
                 <input type="checkbox" id="${piattaforma.nome}" name="${piattaforma.nome}" value="${piattaforma.nome}">
-                <label for="${piattaforma.nome}">${piattaforma.nome}</label>
+                <label for="${piattaforma.nome}">${piattaforma.nome}&nbsp;&nbsp;</label>
             </c:forEach>
 
-
-            <input type="submit" value="Submit">
+            <br>
+            <input type="submit" value="Inserisci gioco">
         </form>
     </div>
 
