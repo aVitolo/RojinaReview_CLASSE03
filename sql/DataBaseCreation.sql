@@ -631,7 +631,7 @@ insert into CommentoNotizia values
 
 insert into CommentoRecensione values
                                    ("zindre@yopmail.com", "Recensione fatta molto bene Dark Souls...", "2022-04-15 22:58:20", 1),
-                                   ("cazzare@yopmail.com", "Sekiro è facile secondo me...", "2021-04-15 12:58:20", 3),
+                                   ("cazzare@yopmail.com", "Sekiro è facile secondo me...", "2020-03-05 12:58:20", 3),
                                    ("oefo@yopmail.com", "Qualcuno mi da un mano su Sekiro?...", "2022-05-15 13:58:20", 3);
 
 insert into Pagamento values
@@ -676,7 +676,7 @@ insert into Prodotto (nome, descrizione, disponibilità, prezzo, immagine, scont
 
 insert into CommentoProdotto values
                                  ("zindre@yopmail.com", "T-shirt quasi perfetta...", "2022-04-15 22:58:20", 3),
-                                 ("cazzare@yopmail.com", "Tazza di Dark Souls molto carina...", "2021-04-15 12:58:20", 1),
+                                 ("cazzare@yopmail.com", "Tazza di Dark Souls molto carina...", "2018-01-22 12:58:20", 1),
                                  ("oefo@yopmail.com", "Tazza discreta poteva...", "2022-05-15 13:58:20", 1),
                                  ("oefo@yopmail.com", "Bracciale di bloodborne stupendo...", "2022-05-15 13:58:20", 4);
 

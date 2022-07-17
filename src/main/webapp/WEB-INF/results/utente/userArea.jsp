@@ -35,7 +35,7 @@
         </li>
         <li>
             <a href="/Rojina_Review_war/userInformations">
-                <span class="title">Informazioni di fatturazione</span>
+                <span class="title">Fatturazione</span>
             </a>
         </li>
         <li>

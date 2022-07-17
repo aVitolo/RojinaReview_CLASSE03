@@ -133,7 +133,7 @@ ul li:hover a{
 
 .userImage{
     max-width: 100px;
-    text-align: center;
+    margin-left: -42;
 
 }
 .userimage > img{
@@ -143,9 +143,20 @@ ul li:hover a{
     margin-left: 261;
 }
 #logout{
-    margin-top: 357;
+    margin-top: 132;
 }
 
 .currentmenuname{
     color: #e91e63
+}
+
+.username{
+    color: #e91e63;
+}
+
+.commentotext{
+    color: white;
+}
+.datacommento{
+    color: white;
 }

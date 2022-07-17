@@ -1,9 +1,10 @@
 .order{
-    width: 50%;
+    width: 80%;
     margin: 2% 25%;
     background: #24262b;
     border-radius: 5px;
     color: #f3f3f3;
+    margin-left: 400;
 }
 
 .resume{

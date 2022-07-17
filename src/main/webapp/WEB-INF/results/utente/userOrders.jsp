@@ -11,7 +11,7 @@
 <body>
 <%@ include file="/WEB-INF/results/utente/userArea.jsp" %>
 <c:set var="utente" scope="page" value="${sessionScope['utente']}" />
-<div class="menu">
+
     <h1 class="currentMenuName">Ordini</h1>
     <div class="orders">
         <c:forEach items="${utente.ordini}" var="ordine">
@@ -46,7 +46,7 @@
             </div>
         </c:forEach>
     </div>
-</div>
+
 
 </body>
 </html>

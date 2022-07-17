@@ -19,6 +19,9 @@
     <h1 class="currentMenuName">Voti e commenti</h1>
     <div class="votes">
         <h2 id="voti">Voti</h2>
+        <%if (voti.size() == 0){%>
+        <h3>Non hai votato nessun gioco o prodotto</h3>
+        <%}%>
         <%for(Voto v : voti){
             if(v.getClass().getSimpleName().equalsIgnoreCase("VotoProdotto")){
                 VotoProdotto vp = (VotoProdotto) v;%>
