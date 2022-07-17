@@ -72,7 +72,6 @@ public class addProductCartServlet extends HttpServlet {
 
 
             carrello.setTotale(carrello.getTotale() + p.getPrezzo() * quantità);
-            System.out.println(p.getPrezzo()+" "+quantità);
             out = String.valueOf(carrello.getProdotti().size());
         }
         response.getWriter().print(out);
