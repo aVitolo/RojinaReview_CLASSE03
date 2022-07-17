@@ -28,7 +28,6 @@
     <link rel="stylesheet" href="css/master.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="/Rojina_Review_war/js/navebar.js"></script>
-    <script type="text/javascript" src="/Rojina_Review_war/js/addToCart.js"></script>
     <script src="js/userFunctions.js" type="text/javascript"></script>
 
 </head>
@@ -54,11 +53,9 @@
             <%=p.getDescrizione()%>
         </p>
         <section id="toCarret">
-            <form  id="addProduct" action="/Rojina_Review_war/addProductCart" method="post">
                 <input type="hidden" value="<%=p.getId()%>" name="prodottoID" id="prodottoID">
-                <input type="number" min="1" max="<%=p.getDisponibilità()-quantitàCarrello%>" name="quantità" id="quantità" value="1">
-                <input type="submit" style="width:auto" value="Aggiungi al Carrello" onclick="addToUserCart()">
-            </form>
+                <input type="number" min="1" max="<%=p.getDisponibilità()-quantitàCarrello%>" name="quantita" id="quantita" value="1">
+                <input type="submit" style="width:auto" value="Aggiungi al Carrello" onclick="addToUserCart("<%=canDo%>")">
         </section>
         </div>
     </section>
