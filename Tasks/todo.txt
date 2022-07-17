@@ -1,15 +1,13 @@
-voto ajax --CARMINE
+
 aggiunta al carrello da servlet ad ajax --CARMINE
-commento e voto non possibile da ospite --CARMINE
 area utente css --CARMINE
-utente profilo modifica anagrafica --CARLO
-utente informazioni di fatturazione modifica-cancellazione (inserimento già fatto) --CARLO
 area giornalista css --CARMINE
-giornalista profilo modifica anagrafica --CARLO
+
+utente informazioni di fatturazione modifica-cancellazione (inserimento già fatto) --CARLO
 pagina jsp carrello per l'acquisto da creare in base ad ordine.jsp gestire autocompilazione per indirizzi-pagamento-telefono ordine -- FRONT END ANDREA-CARLO, BACK END CARMINE (FATTO)
 gestire css pagina storico ordine.jsp --ANDREA
-gestire amminstratore/giornalista non possono votare, commentare e acquistare --CARMINE
 admin panel --CARLO
+
 
 
 gestire cambiamento prezzo quando si clicca su carrello --CARMINE

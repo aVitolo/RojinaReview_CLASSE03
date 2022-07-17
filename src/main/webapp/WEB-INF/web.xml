@@ -281,4 +281,13 @@
         <url-pattern>/addComment</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>addVoteServlet</servlet-name>
+        <servlet-class>controller.user.addVoteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addVoteServlet</servlet-name>
+        <url-pattern>/addVote</url-pattern>
+    </servlet-mapping>
+
 </web-app>

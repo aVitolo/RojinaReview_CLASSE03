@@ -27,13 +27,12 @@
         </c:if>
     </section>
 
-
     <section class="user" id="us">
         <c:choose>
             <c:when test="${sessionScope.get('utente') != null}">
                 <a href="">Bentornato, <c:out value='${utente.nickname}'/></a>
                 <a href="/Rojina_Review_war/userArea"><img  class="icon" src="${utente.immagine}"></a>
-                <a href="/Rojina_Review_war/acquista">Carrello <c:out value='${fn:length(utente.carrello.prodotti)}'/></a>
+                <a href="/Rojina_Review_war/acquista">Carrello <span id="countCarrello"><c:out value='${fn:length(utente.carrello.prodotti)}'/></span></a>
                 <button alt="logout" onclick="document.location.href='./logout'">Logout</button>
             </c:when>
             <c:when test="${sessionScope.get('giornalista') != null}">
@@ -47,7 +46,7 @@
                 <button alt="logout" onclick="document.location.href='./logout'">Logout</button>
             </c:when>
             <c:otherwise>
-                <a href="/Rojina_Review_war/acquista">Carrello <c:out value='${fn:length(ospite.prodotti)}'/></a>
+                <a href="/Rojina_Review_war/acquista">Carrello <span id="countCarrello"><c:out value='${fn:length(ospite.prodotti)}'/></span></a>
                 <button onclick="document.location.href='./userLogin.jsp'">Login</button>
             </c:otherwise>
         </c:choose>

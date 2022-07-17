@@ -105,10 +105,21 @@ public class VotoDAO {
 
     public void doSave(Voto v, String table) throws SQLException {
         PreparedStatement ps;
+        float votoPrecedente = 0;
+        int increment = 1;
         if(table.equalsIgnoreCase("gioco"))
         {
             VotoGioco votogioco = (VotoGioco) v;
             //cancellazione voto precedente
+            ps = con.prepareStatement("SELECT voto FROM voto WHERE utente=? && gioco=?");
+            ps.setString(1, votogioco.getUtente());
+            ps.setString(2, votogioco.getGioco());
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                increment = 0;
+                votoPrecedente = rs.getFloat(1);
+            }
+
             ps = con.prepareStatement("DELETE FROM voto WHERE utente=? && gioco=?");
             ps.setString(1, votogioco.getUtente());
             ps.setString(2, votogioco.getGioco());
@@ -122,11 +133,28 @@ public class VotoDAO {
 
             if(ps.executeUpdate() != 1)
                 throw new RuntimeException("Insert error");
+
+            ps = con.prepareStatement("UPDATE gioco SET mediaVoto = (mediaVoto*numeroVoti - ? + ?)/(numeroVoti+?), numeroVoti = numeroVoti + ? WHERE titolo=?");
+            ps.setFloat(1, votoPrecedente);
+            ps.setFloat(2, votogioco.getVoto());
+            ps.setInt(3, increment);
+            ps.setInt(4, increment);
+            ps.setString(5, votogioco.getGioco());
+            ps.executeUpdate();
         }
         else if(table.equalsIgnoreCase("prodotto"))
         {
             VotoProdotto votoprodotto = (VotoProdotto) v;
             //cancellazione voto precedente
+            ps = con.prepareStatement("SELECT voto FROM gradimento WHERE utente=? && prodotto=?");
+            ps.setString(1, votoprodotto.getUtente());
+            ps.setInt(2, votoprodotto.getId());
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                increment = 0;
+                votoPrecedente = rs.getFloat(1);
+            }
+
             ps = con.prepareStatement("DELETE FROM gradimento WHERE utente=? && gradimento.prodotto=?");
             ps.setString(1, votoprodotto.getUtente());
             ps.setInt(2, votoprodotto.getId());
@@ -140,6 +168,14 @@ public class VotoDAO {
 
             if(ps.executeUpdate() != 1)
                 throw new RuntimeException("Insert error");
+
+            ps = con.prepareStatement("UPDATE prodotto SET mediaVoto = (mediaVoto*numeroVoti - ? + ?)/(numeroVoti+?), numeroVoti = numeroVoti + ? WHERE id=?");
+            ps.setFloat(1, votoPrecedente);
+            ps.setFloat(2, votoprodotto.getVoto());
+            ps.setInt(3, increment);
+            ps.setInt(4, increment);
+            ps.setInt(5, votoprodotto.getId());
+            ps.executeUpdate();
         }
     }
 }

@@ -2,13 +2,21 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.beans.Commento" %>
 <%@ page import="model.beans.VotoGioco" %>
+<%@ page import="model.beans.Utente" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <% Recensione r = (Recensione) request.getAttribute("recensione");
     ArrayList<Commento> commenti = (ArrayList<Commento>) request.getAttribute("commenti");
-    VotoGioco vg = (VotoGioco) request.getAttribute("votoUtente");%>
+    VotoGioco vg = (VotoGioco) request.getAttribute("votoUtente");
+    int canDo = 0; //ospite
+    if(session.getAttribute("giornalista") != null || session.getAttribute("admin") != null)
+         canDo = 2;
+    else if(session.getAttribute("utente") != null)
+        canDo = 1;%>
+<c:set var="voto" value="${requestScope['recensione'].gioco.mediaVoto}"/>
 <head>
     <title><%=r.getGioco().getTitolo()%> - <%=r.getTitolo()%>
     </title>
@@ -16,6 +24,7 @@
     <link rel="stylesheet" href="css/foot.css">
     <link rel="stylesheet" href="css/recensione.css">
     <link rel="stylesheet" href="css/master.css">
+    <script src="js/userFunctions.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -37,15 +46,19 @@
 
     <section id="votiUtenti">
         <h1> Il vostro parere </h1>
-        <h1 id="mediaVoto"><%=r.getGioco().getMediaVoto()%></h1>
+        <h1 id="mediaVoto"><fmt:formatNumber value="${voto}" maxFractionDigits="1"/></h1>
         <h1>(<%=r.getGioco().getNumeroVoti()%>)</h1>
-        <form  method="post">
-            <input type="number" id="toVoto" min="1" max="10">
+        <form  id="voteAction" name="voteAction" method="post" action="/Rojina_Review_war/addVote" onsubmit="return canVote('<%=canDo%>');">
+            <input type="hidden" name="type" value="recensione">
+            <input type="hidden" name="id" value="<%=r.getId()%>">
+            <input type="hidden" name="table" value="gioco">
+            <input type="hidden" name="nomeGioco" value="<%=r.getGioco().getTitolo()%>">
+            <input type="number" name="toVoto" id="toVoto" min="1" max="10" value="1">
             <input type="submit" value="Vota">
         </form>
         <%if(vg != null){%>
             <h1>Il tuo voto </h1>
-            <h1 id="votoUtente"><%=vg.getVoto()%></h1>
+            <h1 id="votoUtente"><fmt:formatNumber value="<%=vg.getVoto()%>" maxFractionDigits="0"/> </h1>
         <%}%>
     </section>
 
@@ -61,11 +74,11 @@
             <%=commenti.size()%> commenti
         </div>
 
-        <form action="/Rojina_Review_war/addComment" method="post">
+        <form  id="commentAction" action="/Rojina_Review_war/addComment" method="post" name="commentAction" onsubmit="return canComment('<%=canDo%>');">
             <input type="hidden" name="type" value="recensione">
             <input type="hidden" name="id" value="<%=r.getId()%>">
             <input type="text" name="commentText" id="toComment" placeholder="Lascia un commento">
-            <input type="submit" value="Commenta">
+            <input type="submit" value="Commenta" >
         </form>
 
         <%if(commenti != null){%>
