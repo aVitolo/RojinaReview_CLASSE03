@@ -20,10 +20,6 @@
             <h3 class="userAttribute">Email:</h3>
             ${utente.email}
         </div>
-        <div class="userPassword">
-            <h3 class="userAttribute">Password:</h3>
-            ******
-        </div>
 
         <div class="userImage">
             <img src="${utente.immagine}", alt="userImage">
