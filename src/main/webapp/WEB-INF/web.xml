@@ -298,15 +298,6 @@
         <servlet-name>addVoteServlet</servlet-name>
         <url-pattern>/addVote</url-pattern>
     </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>removeFromCartServlet</servlet-name>
-        <servlet-class>controller.utilities.removeFromCartServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>removeFromCartServlet</servlet-name>
-        <url-pattern>/RemoveCartEntry</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>confirmOrderServlet</servlet-name>
@@ -319,10 +310,10 @@
     
     <error-page>
         <error-code>404</error-code>
-        <location>/WEB-INF/results/errorPages/errorPage404.html</location>
+        <location>/WEB-INF/results/errorPages/errorPage404.jsp</location>
     </error-page>
     <error-page>
         <error-code>500</error-code>
-        <location>/WEB-INF/results/errorPages/errorPage500.html</location>
+        <location>/WEB-INF/results/errorPages/errorPage500.jsp</location>
     </error-page>
 </web-app>
