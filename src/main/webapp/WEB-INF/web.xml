@@ -273,6 +273,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>removeFromCartServlet</servlet-name>
+        <servlet-class>controller.utilities.removeFromCartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>removeFromCartServlet</servlet-name>
+        <url-pattern>/RemoveFromCart</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>addCommentServlet</servlet-name>
         <servlet-class>controller.user.addCommentServlet</servlet-class>
     </servlet>
@@ -291,14 +300,13 @@
     </servlet-mapping>
     
     <servlet>
-        <servlet-name>confirmOrderServlet</servlet-name>
-        <servlet-class>controller.user.confirmOrderServlet</servlet-class>
+        <servlet-name>removeFromCartServlet</servlet-name>
+        <servlet-class>controller.utilities.removeFromCartServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>confirmOrderServlet</servlet-name>
-        <url-pattern>/confirmOrder</url-pattern>
+        <servlet-name>removeFromCartServlet</servlet-name>
+        <url-pattern>/RemoveCartEntry</url-pattern>
     </servlet-mapping>
-    
 
     <error-page>
         <error-code>404</error-code>

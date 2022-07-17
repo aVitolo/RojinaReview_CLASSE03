@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 @WebServlet(name = "ShopServlet", value = "/ShopServlet")
 public class ShopServlet extends HttpServlet {
-    private String path = "/WEB-INF/results/shop.jsp";
+    private String path = "/WEB-INF/results/mainPage/shop.jsp";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

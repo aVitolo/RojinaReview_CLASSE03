@@ -48,7 +48,7 @@ public class getSingleResourceServlet extends HttpServlet {
                     e.printStackTrace();
                 }
             }
-            result = "/WEB-INF/results/notizia.jsp";
+            result = "/WEB-INF/results/mainPage/notizia.jsp";
 
         } else if (type.equalsIgnoreCase("reviews") || type.equalsIgnoreCase("recensione")) {
             //cerco prima nel context la recensione
@@ -85,7 +85,7 @@ public class getSingleResourceServlet extends HttpServlet {
                     e.printStackTrace();
                 }
             }
-            result = "/WEB-INF/results/recensione.jsp";
+            result = "/WEB-INF/results/mainPage/recensione.jsp";
 
         } else if (type.equalsIgnoreCase("shop") || type.equalsIgnoreCase("prodotto")) {
             Utente u = null;
@@ -138,7 +138,7 @@ public class getSingleResourceServlet extends HttpServlet {
             }
             request.setAttribute("quantitàCarrello", quantitàCarrello);
 
-            result = "/WEB-INF/results/prodotto.jsp";
+            result = "/WEB-INF/results/mainPage/prodotto.jsp";
         }
        request.getRequestDispatcher(result).forward(request, response);
     }

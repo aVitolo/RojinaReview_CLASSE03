@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/master.css">
 </head>
 <body>
-<%@ include file="/WEB-INF/results/navebar.jsp" %>
+<%@ include file="/WEB-INF/results/utilities/navebar.jsp" %>
 <c:choose>
     <c:when test="${sessionScope.get('utente') != null}">
         <c:set var="carello" scope="page" value="${sessionScope['utente'].carrello}" />
@@ -19,16 +19,12 @@
         <c:set var="carello" scope="page" value="${sessionScope['ospite']}" />
     </c:otherwise>
 </c:choose>
-
 <c:choose>
     <c:when test="${carello.prodotti.size() > 0}">
     <section class="order">
-        <c:if test="${sessionScope.get('utente') == null}">
-            <h2 id="notLogged">Devi essere loggato per continuare con l'acquisto</h2>
-        </c:if>
         <div class="products">
             <c:forEach items="${carello.prodotti}" var="prodotto">
-                <div class="product">
+                <div class="product" id="${prodotto.prodotto.id}">
                     <section>
                         <a href="/Rojina_Review_war/getResource?type=shop&id=${prodotto.prodotto.id}">
                             <img class="productImg" src="${prodotto.prodotto.immagine}">
@@ -37,80 +33,93 @@
                     <section>
                         <h3 class="productName">${prodotto.prodotto.nome}</h3>
                         <h3 class="price">${prodotto.prezzoAttuale}€</h3>
-                        <h3 class="quantity">${prodotto.quantità}</h3>
+                        <label style="backfground:none"><input type="number" min="1" max="${prodotto.quantità}" value="${prodotto.quantità}">Quantita</label>
                         <h3 class="subtotal"><fmt:formatNumber value="${prodotto.prezzoAttuale * prodotto.quantità}" maxFractionDigits="3"/>€</h3>
+                        <button class="deleteArticol" onclick='removeFromCart("${prodotto.prodotto.id}")'>Rimuovi</button>
                     </section>
                 </div>
             </c:forEach>
-            <h1 style="text-align: center">Totale ${carello.totale} </h1>
+            <h1 id="tot" style="text-align: center">Totale ${carello.totale} </h1>
         </div>
-        <c:if test="${sessionScope.get('utente') != null}">
-            <form method="post" action="/Rojina_Review_war/confirmOrder">
-                <div class="address">
-                    <h2>Indirizzo di spedizione</h2>
-                    <c:forEach items="${sessionScope['utente'].indirizzi}" var="indirizzo" varStatus="loop">
-                        <input class="boxed" type="radio" id="address${loop.index}" name="address">
-                        <label for="address${loop.index}" onclick='autoFill("${indirizzo.via}","${indirizzo.numeroCivico}","${indirizzo.città}","${indirizzo.cap}","newAddress")'>
-                                ${indirizzo.via} ${indirizzo.numeroCivico} ${indirizzo.città} ${indirizzo.cap}
+        <form method="post" action="./LoginUser">
+            <div class="address">
+                <h2>Indirizzo di spedizione</h2>
+                <c:choose>
+                    <c:when test="${sessionScope.get('utente') != null}">
+                        <c:forEach items="${sessionScope['utente'].indirizzi}" var="indirizzo" varStatus="loop">
+                            <input class="boxed" type="radio" id="address${loop.index}" name="address">
+                            <label for="address${loop.index}" onclick='autoFill("${indirizzo.via}","${indirizzo.numeroCivico}","${indirizzo.città}","${indirizzo.cap}","newAddress")'>
+                                    ${indirizzo.via} ${indirizzo.numeroCivico} ${indirizzo.città} ${indirizzo.cap}
+                            </label>
+                        </c:forEach>
+                        <input type="radio" id="newA" name="address">
+                        <label for="newA" onclick='resetForm("newAddress")'>
+                               Nuovo
                         </label>
-                    </c:forEach>
-                    <input type="radio" id="newA" name="address" value="true">
-                    <label for="newA" onclick='resetForm("newAddress")'>
-                        Nuovo
+                        <div class="hide" id="newAddress">
+                    </c:when>
+                    <c:otherwise>
+                        <div class="form-input" id="newAddress">
+                    </c:otherwise>
+                </c:choose>
+                    <label for="via">
+                        Via
                     </label>
-                    <div class="hide" id="newAddress">
-                        <label for="via">
-                            Via
-                        </label>
-                        <input type="text" id="via" name="via" required="required">
-                        <label for="numeroCivico">
-                            Numero Civico
-                        </label>
-                        <input type="text" id="numeroCivico" name="numeroCivico" required="required">
-                        <label for="citta">
-                            Citta
-                        </label>
-                        <input type="text" id="citta" name="citta" required="required">
-                        <label for="cap">
-                            CAP
-                        </label>
-                        <input type="text" id="cap" name="cap" required="required">
-                    </div>
+                    <input type="text" id="via" name="via" required="required">
+                    <label for="numeroCivico">
+                        Numero Civico
+                    </label>
+                    <input type="text" id="numeroCivico" name="numeroCivico" required="required">
+                    <label for="citta">
+                        Citta
+                    </label>
+                    <input type="text" id="citta" name="citta" required="required">
+                    <label for="cap">
+                        CAP
+                    </label>
+                    <input type="text" id="cap" name="cap" required="required">
                 </div>
-                <div class="payment">
-                    <h2>Metodo di Pagamento</h2>
+            </div>
+            <div class="payment">
+                <h2>Metodo di Pagamento</h2>
+                <c:choose>
+                    <c:when test="${sessionScope.get('utente') != null}">
                         <c:forEach items="${sessionScope['utente'].pagamenti}" var="pagamento" varStatus="loop">
                             <input class="boxed" type="radio" id="payment${loop.index}" name="payment">
                             <label for="payment${loop.index}" onclick='autoFill("${pagamento.nome}", "${pagamento.cognome}", "${pagamento.numeroCarta}"," ${pagamento.dataScadenza}","newPayment")'>
                                     ${pagamento.nome} ${pagamento.cognome} ${pagamento.numeroCarta} ${pagamento.dataScadenza}
                             </label>
                         </c:forEach>
-                    <input class="boxed" id="newP" type="radio" name="payment" value="true">
-                    <label for="newP" onclick=resetForm("newPayment")>
-                        Nuovo
+                        <input class="boxed" id="newP" type="radio" name="payment">
+                        <label for="newP" onclick=resetForm("newPayment")>
+                            Nuovo
+                        </label>
+                        <div class="hide" id="newPayment">
+                    </c:when>
+                    <c:otherwise>
+                        <div class="form-input" id="newPayment">
+                    </c:otherwise>
+                </c:choose>
+                    <label for="nome">
+                        Nome
                     </label>
-                    <div class="hide" id="newPayment">
-                        <label for="nome">
-                            Nome
-                        </label>
-                        <input type="text" id="nome" name="nome" required="required">
-                        <label for="Cognome">
-                            Cognome
-                        </label>
-                        <input type="text" id="cognome" name="cognome" required="required">
-                        <label for="numeroCarta">
-                            Numero Carta
-                        </label>
-                        <input type="text" id="numeroCarta" name="numeroCarta" required="required">
-                        <label for="dataScadenza">
+                    <input type="text" id="nome" name="nome" required="required">
+                    <label for="Cognome">
+                        Cognome
+                    </label>
+                    <input type="text" id="cognome" name="cognome" required="required">
+                    <label for="numeroCarta">
+                        Numero Carta
+                    </label>
+                    <input type="text" id="numeroCarta" name="numeroCarta" required="required">
+                    <label for="dataScadenza">
                         Data Scadenza
-                        </label>
-                        <input type="text" id="dataScadenza" name="dataScadenza" required="required">
-                    </div>
+                    </label>
+                    <input type="text" id="dataScadenza" name="dataScadenza" required="required">
                 </div>
-                <input type="submit" value="Acquista">
-            </form>
-        </c:if>
+            </div>
+            <input type="submit" value="Acquista">
+        </form>
     </section>
     </c:when>
     <c:otherwise>
@@ -141,5 +150,31 @@
         input[2].value = input3;
         input[3].value = input4;
     }
+
+    function  removeFromCart(idProdotto){
+        requestText ="id=" + idProdotto;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.responseText === "-1") {
+                    alert("Error")
+                } else if(this.responseText ==="0.0"){
+                    document.getElementsByClassName("order")[0].innerHTML = "<section id='empty'> <h1>Il tuo carello è vuoto</h1></section>"
+                    document.getElementById("countCarrello").innerHTML = 0;
+                }
+                else{
+                    document.getElementById(idProdotto).remove();
+                    document.getElementById("tot").innerHTML = "Totale "+this.responseText;
+                    let countCarello = document.getElementById("countCarrello").innerHTML;
+                    countCarello = countCarello-1;
+                    document.getElementById("countCarrello").innerHTML = countCarello;
+                }
+            }
+        };
+        xhttp.open("POST", "./RemoveCartEntry", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(requestText);
+    }
+
 </script>
 </html>

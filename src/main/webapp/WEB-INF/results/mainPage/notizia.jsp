@@ -15,17 +15,17 @@
 <head>
     <title><%=n.getTitolo()%>
     </title>
-    <link rel="stylesheet" href="css/navebar.css">
-    <link rel="stylesheet" href="css/foot.css">
-    <link rel="stylesheet" href="css/notizia.css">
-    <link rel="stylesheet" href="css/master.css">
-    <script src="js/userFunctions.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="./css/navebar.css">
+    <link rel="stylesheet" href="./css/foot.css">
+    <link rel="stylesheet" href="./css/notizia.css">
+    <link rel="stylesheet" href="./css/master.css">
+    <script src="./js/userFunctions.js" type="text/javascript"></script>
 
 </head>
 
 <body>
 
-<%@ include file="navebar.jsp" %>
+<%@ include file="/WEB-INF/results/utilities/navebar.jsp" %>
 <section id="wrap">
 
     <section id="articolo">
@@ -38,6 +38,7 @@
             <p>${notizia.testo}</p>
             <p>Caricata il ${notizia.dataCaricamento}</p>
         </div>
+        <!--
         <section id="mentionedGames">
             <c:if test="${notizia.giochi != null}">
                 <h2>Giochi menzionati:</h2>
@@ -46,6 +47,7 @@
                 <%}%>
             </c:if>
         </section>
+        -->
         <div id="card">
             <div id="giornalista">
                 <img src = "${notizia.immagineGiornalista}" alt = "copertina" decoding="async">
@@ -83,7 +85,7 @@
     </section>
 </section>
 
-<%@ include file="../../html/footer.html" %>
+<%@ include file="/html/footer.html" %>
 </body>
 <script type="text/javascript" src="/Rojina_Review_war/js/navebar.js"></script>
 </html>

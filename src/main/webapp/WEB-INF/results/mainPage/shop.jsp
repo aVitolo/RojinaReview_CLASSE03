@@ -8,11 +8,11 @@
     <link rel="stylesheet" href="./css/master.css">
 </head>
 <body>
-<%@ include file="/WEB-INF/results/navebar.jsp" %>
+<%@ include file="/WEB-INF/results/utilities/navebar.jsp" %>
 
 <section class="notizie">
 
-    <%@ include file="/WEB-INF/results/filter.jsp" %>
+    <%@ include file="/WEB-INF/results/utilities/filter.jsp" %>
 
     <section class="articoli" id="wrap">
         <c:forEach items="${applicationScope['prodotti']}" var="prodotto">

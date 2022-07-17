@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="./css/master.css">
 </head>
 <body>
-<%@ include file="/WEB-INF/results/navebar.jsp" %>
+<%@ include file="/WEB-INF/results/utilities/navebar.jsp" %>
 <section class="recensioni" id="wrap">
 
-    <%@ include file="/WEB-INF/results/filter.jsp" %>
+    <%@ include file="/WEB-INF/results/utilities/filter.jsp" %>
 
     <section class="articoli">
         <c:forEach items="${applicationScope['recensioni']}" var="articolo">

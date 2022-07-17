@@ -20,15 +20,15 @@
 <head>
     <title><%=r.getGioco().getTitolo()%> - <%=r.getTitolo()%>
     </title>
-    <link rel="stylesheet" href="css/navebar.css">
-    <link rel="stylesheet" href="css/foot.css">
-    <link rel="stylesheet" href="css/recensione.css">
-    <link rel="stylesheet" href="css/master.css">
-    <script src="js/userFunctions.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="./css/navebar.css">
+    <link rel="stylesheet" href="./css/foot.css">
+    <link rel="stylesheet" href="./css/recensione.css">
+    <link rel="stylesheet" href="./css/master.css">
+    <script src="./js/userFunctions.js" type="text/javascript"></script>
 </head>
 <body>
 
-<%@ include file="navebar.jsp" %>
+<%@ include file="../utilities/navebar.jsp" %>
 <section id="wrap">
 
     <section id="articolo">
@@ -98,6 +98,6 @@
         <%}%>
     </section>
 </section>
-<%@ include file="../../html/footer.html" %>
+<%@ include file="/html/footer.html" %>
 </body>
 </html>

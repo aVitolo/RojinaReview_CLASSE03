@@ -1,6 +1,9 @@
 package model.dao;
 
-import model.beans.*;
+import model.beans.Carrello;
+import model.beans.Indirizzo;
+import model.beans.Ordine;
+import model.beans.Pagamento;
 import model.utilities.ConPool;
 
 import java.sql.Connection;
@@ -64,7 +67,7 @@ public class OrdineDAO {
         return ordini;
     }
 
-    public void confirmOrder(Carrello c, String user, Indirizzo indirizzo, Pagamento pagamento, ArrayList<Prodotto> prodottiContext) throws SQLException {
+    public void confirmOrder(Carrello c, String user, Indirizzo indirizzo, Pagamento pagamento) throws SQLException {
         int idOrdine = 0;
         ArrayList<Carrello.ProdottoCarrello> prodotti = c.getProdotti();
         PreparedStatement ps;
@@ -94,32 +97,15 @@ public class OrdineDAO {
             throw new RuntimeException("Insert error");
         //per prendere l'id dell'ordine appena inserito che servirà in prodotto_ordine
         ps = con.prepareStatement("SELECT id FROM ordine WHERE utente=? ORDER BY id DESC LIMIT 1");
-        ps.setString(1, user);
         ResultSet rs = ps.executeQuery();
         if(rs.next())
             idOrdine = rs.getInt(1);
-        
 
         for(Carrello.ProdottoCarrello p : prodotti){
-            //controllo se il prodotto è effettivamente disponibile
-            ps = con.prepareStatement("SELECT disponibilità FROM prodotto WHERE id=?");
-            ps.setInt(1, p.getProdotto().getId());
-            rs = ps.executeQuery();
-            if(rs.next())
-                if(p.getQuantità() > rs.getInt("disponibilità"))
-                    throw new SQLException("Prodotto non disponibile");
-
-            //aggiorno la disponibilità dei prodotti nel database
+            //aggiorno la disponibilità dei prodotti
             ps = con.prepareStatement("UPDATE prodotto SET disponibilità=disponibilità-? WHERE id=?");
             ps.setInt(1, p.getQuantità());
             ps.setInt(2, p.getProdotto().getId());
-            ps.executeUpdate();
-            //aggiorno la disponibilità nel context
-            if(prodottiContext != null){
-                for(Prodotto pContext : prodottiContext)
-                    if(pContext.getId() == p.getProdotto().getId())
-                        pContext.setDisponibilità(pContext.getDisponibilità() - p.getQuantità());
-            }
 
             ps = con.prepareStatement("INSERT INTO prodotto_ordine VALUES (?, ?, ?, ?)");
             ps.setInt(1, p.getProdotto().getId());

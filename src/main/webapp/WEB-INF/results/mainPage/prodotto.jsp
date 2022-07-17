@@ -22,10 +22,10 @@
 <head>
     <title><%=p.getNome()%>
     </title>
-    <link rel="stylesheet" href="css/navebar.css">
-    <link rel="stylesheet" href="css/foot.css">
-    <link rel="stylesheet" href="css/prodotto.css">
-    <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="./css/navebar.css">
+    <link rel="stylesheet" href="./css/foot.css">
+    <link rel="stylesheet" href="./css/prodotto.css">
+    <link rel="stylesheet" href="./css/master.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="/Rojina_Review_war/js/navebar.js"></script>
     <script src="js/userFunctions.js" type="text/javascript"></script>
@@ -33,7 +33,7 @@
 </head>
 
 <body>
-<%@ include file="navebar.jsp" %>
+<%@ include file="/WEB-INF/results/utilities/navebar.jsp" %>
 <section id="wrap">
     <section id="articolo">
         <div id="imageSection">
@@ -43,11 +43,11 @@
         <h1 id="productTitle">
                     <%=p.getNome()%>
          </h1>
-        <h3>
-            Disponibilità: <span id="disponibilità"><%=p.getDisponibilità()-quantitàCarrello%></span>
+        <h3 id="disponibilità">
+            Disponibilità: <%=p.getDisponibilità()-quantitàCarrello%>
         </h3>
-        <h3>
-            Prezzo: <span id="prezzo"><%=p.getPrezzo()%>€</span>
+        <h3 id="prezzo">
+            Prezzo: <%=p.getPrezzo()%>€
         </h3>
         <p id="bodyText">
             <%=p.getDescrizione()%>
@@ -107,7 +107,7 @@
 
     </section>
 </section>
-<%@ include file="../../html/footer.html" %>
+<%@ include file="/html/footer.html" %>
 </body>
 
 </html>

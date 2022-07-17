@@ -4,9 +4,6 @@ function addToUserCart(canDo) {
         let quantita = $("#quantita").val();
         let query = "prodottoID=" + id + "&quantita=" + quantita;
         let carrelloElement = document.getElementById("countCarrello");
-        let quantitaIniziale = document.getElementById("disponibilità").innerHTML;
-        let nuovaQuantita = quantitaIniziale - quantita;
-
 
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
@@ -15,7 +12,6 @@ function addToUserCart(canDo) {
                     alert("E' stato riscontrato un errore durante l' inserimento")
                 } else {
                     carrelloElement.innerHTML = this.responseText;
-                    document.getElementById("disponibilità").innerHTML = nuovaQuantita;
                 }
             }
         };
