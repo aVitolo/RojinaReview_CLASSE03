@@ -8,6 +8,11 @@
     flex-direction: column;
 }
 
+#notLogged{
+    text-align: center;
+    color: #e91e63;
+}
+
 .products{
     margin: 1%;
     border-bottom: 2px solid white;

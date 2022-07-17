@@ -102,10 +102,19 @@ public class OrdineDAO {
             idOrdine = rs.getInt(1);
 
         for(Carrello.ProdottoCarrello p : prodotti){
+            //controllo se il prodotto è effettivamente disponibile
+            ps = con.prepareStatement("SELECT disponibilità FROM prodotto WHERE id=?");
+            ps.setInt(1, p.getProdotto().getId());
+            rs = ps.executeQuery();
+            if(rs.next())
+                if(p.getQuantità() > rs.getInt("disponibilità"))
+                    throw new SQLException("Prodotto non disponibile");
+
             //aggiorno la disponibilità dei prodotti
             ps = con.prepareStatement("UPDATE prodotto SET disponibilità=disponibilità-? WHERE id=?");
             ps.setInt(1, p.getQuantità());
             ps.setInt(2, p.getProdotto().getId());
+            ps.executeUpdate();
 
             ps = con.prepareStatement("INSERT INTO prodotto_ordine VALUES (?, ?, ?, ?)");
             ps.setInt(1, p.getProdotto().getId());

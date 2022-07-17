@@ -289,5 +289,15 @@
         <servlet-name>addVoteServlet</servlet-name>
         <url-pattern>/addVote</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>confirmOrderServlet</servlet-name>
+        <servlet-class>controller.user.confirmOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>confirmOrderServlet</servlet-name>
+        <url-pattern>/confirmOrder</url-pattern>
+    </servlet-mapping>
+    
 
 </web-app>
