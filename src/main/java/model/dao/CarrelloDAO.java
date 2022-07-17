@@ -45,11 +45,12 @@ public class CarrelloDAO {
         }
 
         float totale = 0;
-        con.prepareStatement("SELECT totale FROM carrello WHERE utente=?");
+        ps = con.prepareStatement("SELECT totale FROM carrello WHERE utente=?");
         ps.setString(1, user);
         rs = ps.executeQuery();
         if (rs.next())
-            totale = rs.getFloat(1);
+            totale = rs.getFloat("totale");
+
 
         carrello.setProdotti(prodotti);
         carrello.setTotale(totale);
@@ -71,7 +72,7 @@ public class CarrelloDAO {
         ps.executeUpdate();
 
         //effettuo l'insert in carrello
-        ps = con.prepareStatement("INSERT INTO  carrello VALUES (?, ?)");
+        ps = con.prepareStatement("INSERT INTO carrello VALUES (?, ?)");
         ps.setFloat(1, c.getTotale());
         ps.setString(2, user);
 

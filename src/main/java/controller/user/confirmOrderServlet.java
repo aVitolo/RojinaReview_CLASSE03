@@ -3,10 +3,7 @@ package controller.user;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import model.beans.Carrello;
-import model.beans.Indirizzo;
-import model.beans.Pagamento;
-import model.beans.Utente;
+import model.beans.*;
 import model.dao.IndirizzoDAO;
 import model.dao.OrdineDAO;
 import model.dao.PagamentoDAO;
@@ -15,6 +12,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 @WebServlet(name = "confirmOrderServlet", value = "/confirmOrderServlet")
 public class confirmOrderServlet extends HttpServlet {
@@ -31,6 +29,7 @@ public class confirmOrderServlet extends HttpServlet {
         Carrello carrello = u.getCarrello();
         boolean newAddress = Boolean.parseBoolean(request.getParameter("address"));
         boolean newPayment = Boolean.parseBoolean(request.getParameter("payment"));
+        ArrayList<Prodotto> prodotti = (ArrayList<Prodotto>) request.getServletContext().getAttribute("prodotti");
 
         Indirizzo indirizzo = new Indirizzo();
         indirizzo.setVia(request.getParameter("via"));
@@ -53,15 +52,10 @@ public class confirmOrderServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        try {
-            new OrdineDAO().confirmOrder(carrello, u.getEmail(), indirizzo, pagamento);
-        } catch (SQLException e) {
-            //prodotto non disponibile
-        }
-
         if(newAddress) {
             try {
                 new IndirizzoDAO().doSave(u.getEmail(), indirizzo);
+                u.getIndirizzi().add(indirizzo);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -69,10 +63,18 @@ public class confirmOrderServlet extends HttpServlet {
         if(newPayment){
             try {
                 new PagamentoDAO().doSave(pagamento, u.getEmail());
+                u.getPagamenti().add(pagamento);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
+
+        try {
+            new OrdineDAO().confirmOrder(carrello, u.getEmail(), indirizzo, pagamento, prodotti);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
 
         response.sendRedirect(home);
     }
