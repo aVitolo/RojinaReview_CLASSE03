@@ -282,6 +282,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>updateProductDisponibilityServlet</servlet-name>
+        <servlet-class>controller.utilities.updateProductDisponibilityServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>updateProductDisponibilityServlet</servlet-name>
+        <url-pattern>/updateProductDisponibility</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>addCommentServlet</servlet-name>
         <servlet-class>controller.user.addCommentServlet</servlet-class>
     </servlet>

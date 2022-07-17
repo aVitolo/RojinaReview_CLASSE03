@@ -175,7 +175,7 @@
                 }
             }
         };
-        xhttp.open("POST", "./RemoveCartEntry", true);
+        xhttp.open("POST", "./RemoveFromCart", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(requestText);
     }
