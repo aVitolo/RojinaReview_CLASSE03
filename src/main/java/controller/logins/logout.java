@@ -2,7 +2,6 @@ package controller.logins;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
 import model.beans.Utente;
 import model.dao.CarrelloDAO;
 
@@ -14,19 +13,18 @@ public class logout extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getSession(false).getAttribute("utente") != null || request.getSession(false).getAttribute("giornalista") != null || request.getSession(false).getAttribute("admin") != null) {
-            if(request.getSession(false).getAttribute("utente") != null){
-                Utente u = (Utente) request.getSession().getAttribute("utente");
-                try {
+        try {
+            if (request.getSession(false).getAttribute("utente") != null || request.getSession(false).getAttribute("giornalista") != null || request.getSession(false).getAttribute("admin") != null) {
+                if(request.getSession(false).getAttribute("utente") != null){
+                    Utente u = (Utente) request.getSession().getAttribute("utente");
                     new CarrelloDAO().doSave(u.getCarrello(), u.getEmail());
-                } catch (SQLException e) {
-                    e.printStackTrace();
                 }
-
+                request.getSession().invalidate();
             }
-            request.getSession().invalidate();
+            response.sendRedirect(redirect);
+        } catch (SQLException e) {
+        e.printStackTrace();
         }
-        response.sendRedirect(redirect);
     }
 
     @Override
