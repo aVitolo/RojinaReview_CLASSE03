@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./css/master.css">
 </head>
 <body>
-<%@ include file="/WEB-INF/results/journalistArea.jsp" %>
+<%@ include file="/WEB-INF/results/giornalista/journalistArea.jsp" %>
 <div class="menu">
     <h1 class="currentMenuName">Profilo</h1>
     <div class="information">

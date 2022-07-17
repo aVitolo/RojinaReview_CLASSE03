@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 @WebServlet(name = "journalistReviewsServlet", value = "/journalistReviewsServlet")
 public class journalistReviewsServlet extends HttpServlet {
-    private String path = "/WEB-INF/results/journalistReviews.jsp";
+    private String path = "/WEB-INF/results/giornalista/journalistReviews.jsp";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

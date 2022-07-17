@@ -5,11 +5,11 @@
 <html>
 <head>
     <title>Area utente</title>
-    <link rel="stylesheet" href="css/master.css">
-    <link rel="stylesheet" href="css/orders.css">
+    <link rel="stylesheet" href="./css/master.css">
+    <link rel="stylesheet" href="./css/orders.css">
 </head>
 <body>
-<%@ include file="/WEB-INF/results/userArea.jsp" %>
+<%@ include file="/WEB-INF/results/utente/userArea.jsp" %>
 <c:set var="utente" scope="page" value="${sessionScope['utente']}" />
 <div class="menu">
     <h1 class="currentMenuName">Ordini</h1>

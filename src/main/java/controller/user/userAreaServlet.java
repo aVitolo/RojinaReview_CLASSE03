@@ -8,7 +8,7 @@ import java.io.IOException;
 
 @WebServlet(name = "userAreaServlet", value = "/userAreaServlet")
 public class userAreaServlet extends HttpServlet {
-    private String path = "/WEB-INF/results/userProfile.jsp";
+    private String path = "/WEB-INF/results/utente/userProfile.jsp";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(path).forward(request, response);

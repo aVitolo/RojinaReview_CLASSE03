@@ -106,7 +106,7 @@ public class Ordine {
 
     /* Inner Class */
 
-    public class ProdottoOrdine {
+    public static class ProdottoOrdine {
         /*
             Valutare se modificare a class  per riutilizzo in Carrello e Ordine
             o estendere prodotto

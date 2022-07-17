@@ -3,11 +3,11 @@
 <html>
 <head>
     <title>Area utente</title>
-    <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href=".css/master.css">
 </head>
 <body>
 <c:set var="utente" scope="page" value="${sessionScope['utente']}" />
-<%@ include file="/WEB-INF/results/userArea.jsp" %>
+<%@ include file="/WEB-INF/results/utente/userArea.jsp" %>
 <div class="menu">
     <h1 class="currentMenuName">Informazioni Utente</h1>
     <div class="informations">

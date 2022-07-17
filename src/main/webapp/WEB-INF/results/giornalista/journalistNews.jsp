@@ -5,38 +5,34 @@
 <head>
     <title>Area giornalista</title>
     <link rel="stylesheet" href="./css/master.css">
-    <link rel="stylesheet" href="./css/recensioni.css">
+    <link rel="stylesheet" href="./css/notizie.css">
 </head>
 <body>
-<%@ include file="/WEB-INF/results/journalistArea.jsp" %>
+<%@ include file="/WEB-INF/results/giornalista/journalistArea.jsp" %>
 <div class="menu">
-    <div class="insertRecensione">
-        <form name="insertRecensione" action="/Rojina_Review_war/insertReview" method="post"
-              enctype="multipart/form-data">
+    <div class="insertNotizia">
+        <form  name="insertNotizia" action="/Rojina_Review_war/insertNew" method="post" enctype="multipart/form-data">
             <label for="titolo">Titolo: </label>
             <input type="text" id="titolo" name="titolo">
-            <label for="gioco">Gioco: </label>
-            <input type="text" id="gioco" name="gioco">
             <label for="testo">Testo: </label>
             <input type="text" id="testo" name="testo">
-            <label for="voto">Voto: </label>
-            <input type="range" id="voto" name="voto" min="0" max="10">
             <label for="immagine">Immagine: </label>
             <input type="file" id="immagine" name="immagine">
+            <label for="giochi">Giochi menzionati: </label>
+            <input type="text" id="giochi" name="giochi">
 
             <input type="submit" value="Submit">
         </form>
     </div>
 
     <section class="articoli">
-        <c:forEach items="${requestScope['recensioniGiornalista']}" var="articolo">
-            <a href="/Rojina_Review_war/getResource?type=reviews&id=${articolo.id}">
+        <c:forEach items="${requestScope['notizieGiornalista']}" var="articolo">
+            <a href="/Rojina_Review_war/getResource?type=news&id=${articolo.id}">
                 <div class="articolo">
                     <img src="${articolo.immagine}" , alt="copertina" decoding="async">
                     <div class="articolo-content">
                         <h2>${articolo.titolo}</h2>
                         <p>${fn:substring(articolo.testo, 0, 50)}</p>
-                        <p class="voto">${articolo.voto}</p>
                     </div>
                 </div>
             </a>

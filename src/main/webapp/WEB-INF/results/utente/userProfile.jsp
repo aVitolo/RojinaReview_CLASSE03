@@ -8,7 +8,7 @@
 </head>
 <body>
 <c:set var="utente" scope="page" value="${sessionScope.get('utente')}" />
-<%@ include file="/WEB-INF/results/userArea.jsp" %>
+<%@ include file="/WEB-INF/results/utente/userArea.jsp" %>
 <div class="menu">
     <h1 class="currentMenuName">Profilo</h1>
     <div class="information">

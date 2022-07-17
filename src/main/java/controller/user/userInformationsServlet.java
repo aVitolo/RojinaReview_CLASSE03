@@ -10,7 +10,7 @@ import java.io.IOException;
 public class userInformationsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String result = "/WEB-INF/results/userInformations.jsp";
+        String result = "/WEB-INF/results/utente/userInformations.jsp";
         request.getRequestDispatcher(result).forward(request, response);
     }
 

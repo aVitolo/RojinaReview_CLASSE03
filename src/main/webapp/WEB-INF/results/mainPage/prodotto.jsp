@@ -43,11 +43,11 @@
         <h1 id="productTitle">
                     <%=p.getNome()%>
          </h1>
-        <h3 id="disponibilità">
-            Disponibilità: <%=p.getDisponibilità()-quantitàCarrello%>
+            <h3>
+                Disponibilità: <span id="disponibilità"><%=p.getDisponibilità()-quantitàCarrello%></span>
         </h3>
-        <h3 id="prezzo">
-            Prezzo: <%=p.getPrezzo()%>€
+            <h3>
+                Prezzo: <span id="prezzo"><%=p.getPrezzo()%>€</span>
         </h3>
         <p id="bodyText">
             <%=p.getDescrizione()%>

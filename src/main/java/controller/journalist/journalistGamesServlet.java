@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 @WebServlet(name = "journalistGamesServlet", value = "/journalistGamesServlet")
 public class journalistGamesServlet extends HttpServlet {
-    private String path = "/WEB-INF/results/journalistGames.jsp";
+    private String path = "/WEB-INF/results/giornalista/journalistGames.jsp";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

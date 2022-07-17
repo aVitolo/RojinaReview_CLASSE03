@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class userVotesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String result = "/WEB-INF/results/userVotes.jsp";
+        String result = "/WEB-INF/results/utente/userVotes.jsp";
         HttpSession session = request.getSession();
         Utente u = (Utente) session.getAttribute("utente");
         try {

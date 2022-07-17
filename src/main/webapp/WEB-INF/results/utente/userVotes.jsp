@@ -9,12 +9,12 @@
 <html>
 <head>
     <title>Aree Utente</title>
-    <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="./css/master.css">
 </head>
 <body>
 <% ArrayList<Commento> commenti = (ArrayList<Commento>) request.getAttribute("commenti");
    ArrayList<Voto> voti = (ArrayList<Voto>) request.getAttribute("voti");%>
-<%@ include file="/WEB-INF/results/userArea.jsp" %>
+<%@ include file="/WEB-INF/results/utente/userArea.jsp" %>
 <div class="menu">
     <h1 class="currentMenuName">Voti e commenti</h1>
     <div class="votes">
