@@ -38,38 +38,87 @@
                     </section>
                 </div>
             </c:forEach>
+            <h1 style="text-align: center">Totale ${carello.totale} </h1>
         </div>
-        <div class="address">
-            <c:if test="${sessionScope.get('utente') != null}">
-                <c:forEach items="${sessionScope['utente'].indirizzi}" var="indirizzo" varStatus="loop">
-                    <input class="boxed" type="radio" id="${loop.index}" name="address" checked="checked">
-                    <label for="${loop.index}">
-                            ${indirizzo.via} ${indirizzo.numeroCivico} ${indirizzo.città} ${indirizzo.cap}
+        <form method="post" action="./LoginUser">
+            <div class="address">
+                <h2>Indirizzo di spedizione</h2>
+                <c:choose>
+                    <c:when test="${sessionScope.get('utente') != null}">
+                        <c:forEach items="${sessionScope['utente'].indirizzi}" var="indirizzo" varStatus="loop">
+                            <input class="boxed" type="radio" id="address${loop.index}" name="address">
+                            <label for="address${loop.index}" onclick='autoFill("${indirizzo.via}","${indirizzo.numeroCivico}","${indirizzo.città}","${indirizzo.cap}","newAddress")'>
+                                    ${indirizzo.via} ${indirizzo.numeroCivico} ${indirizzo.città} ${indirizzo.cap}
+                            </label>
+                        </c:forEach>
+                        <input type="radio" id="newA" name="address">
+                        <label for="newA" onclick='resetForm("newAddress")'>
+                               Nuovo
+                        </label>
+                        <div class="hide" id="newAddress">
+                    </c:when>
+                    <c:otherwise>
+                        <div class="form-input" id="newAddress">
+                    </c:otherwise>
+                </c:choose>
+                    <label for="via">
+                        Via
                     </label>
-                </c:forEach>
-                <input type="radio" id="newA" name="address">
-                <label for="newA">
-                       Nuovo
-                </label>
-            </c:if>
-        </div>
-        <div class="payment">
-            <c:if test="${sessionScope.get('utente') != null}">
-                <c:forEach items="${sessionScope['utente'].pagamenti}" var="pagamento" varStatus="loop">
-                    <input class="boxed" type="radio" id="${loop.index}" name="payment">
-                    <label for="${loop.index}">
-                        ${pagamento.nome} ${pagamento.cognome} ${pagamento.numeroCarta} ${pagamento.dataScadenza}
+                    <input type="text" id="via" name="via">
+                    <label for="numeroCivico">
+                        Numero Civico
                     </label>
-                </c:forEach>
-                <input class="boxed" id="newP" type="radio" name="payment">
-                <label for="newP">
-                    Nuovo
-                </label>
-            </c:if>
-        </div>
-        <button>
-            Acquista
-        </button>
+                    <input type="text" id="numeroCivico" name="numeroCivico">
+                    <label for="citta">
+                        Citta
+                    </label>
+                    <input type="text" id="citta" name="citta">
+                    <label for="cap">
+                        CAP
+                    </label>
+                    <input type="text" id="cap" name="cap">
+                </div>
+            </div>
+            <div class="payment">
+                <h2>Metodo di Pagamento</h2>
+                <c:choose>
+                    <c:when test="${sessionScope.get('utente') != null}">
+                        <c:forEach items="${sessionScope['utente'].pagamenti}" var="pagamento" varStatus="loop">
+                            <input class="boxed" type="radio" id="payment${loop.index}" name="payment">
+                            <label for="payment${loop.index}" onclick='autoFill("${pagamento.nome}", "${pagamento.cognome}", "${pagamento.numeroCarta}"," ${pagamento.dataScadenza}","newPayment")'>
+                                    ${pagamento.nome} ${pagamento.cognome} ${pagamento.numeroCarta} ${pagamento.dataScadenza}
+                            </label>
+                        </c:forEach>
+                        <input class="boxed" id="newP" type="radio" name="payment">
+                        <label for="newP" onclick=resetForm("newPayment")>
+                            Nuovo
+                        </label>
+                        <div class="hide" id="newPayment">
+                    </c:when>
+                    <c:otherwise>
+                        <div class="form-input" id="newPayment">
+                    </c:otherwise>
+                </c:choose>
+                    <label for="nome">
+                        Nome
+                    </label>
+                    <input type="text" id="nome" name="nome">
+                    <label for="Cognome">
+                        Cognome
+                    </label>
+                    <input type="text" id="cognome" name="cognome">
+                    <label for="numeroCarta">
+                        Numero Carta
+                    </label>
+                    <input type="text" id="numeroCarta" name="numeroCarta">
+                    <label for="dataScadenza">
+                        Data Scadenza
+                    </label>
+                    <input type="text" id="dataScadenza" name="dataScadenza">
+                </div>
+            </div>
+            <input type="submit" value="Acquista">
+        </form>
     </section>
     </c:when>
     <c:otherwise>
@@ -79,4 +128,26 @@
     </c:otherwise>
 </c:choose>
 </body>
+<script>
+
+    function resetForm(divId) {
+        let div = document.getElementById(divId);
+        if (div.className === "hide")
+            div.className = "form-input";
+        let input = div.getElementsByTagName('input');
+        for(let i=0;i<input.length;i++)
+            input[i].value="";
+    }
+
+    function autoFill(input1, input2, input3, input4, divId) {
+        let div = document.getElementById(divId);
+        if (div.className === "form-input")
+            div.className = "hide";
+        let input = div.getElementsByTagName('input');
+        input[0].value = input1;
+        input[1].value = input2;
+        input[2].value = input3;
+        input[3].value = input4;
+    }
+</script>
 </html>

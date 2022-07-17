@@ -72,6 +72,7 @@ header .bar .logo {
         flex-direction: column;
         height: auto;
         align-items: center;
+        text-align-last: start;
     }
 
     header section{
@@ -97,5 +98,9 @@ header .bar .logo {
         display: flex;
         flex-direction: column;
         align-self: flex-start;
+    }
+
+    header button{
+        text-align-last: center;
     }
 }
