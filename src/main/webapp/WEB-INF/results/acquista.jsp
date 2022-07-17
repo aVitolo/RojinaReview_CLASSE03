@@ -64,19 +64,19 @@
                     <label for="via">
                         Via
                     </label>
-                    <input type="text" id="via" name="via">
+                    <input type="text" id="via" name="via" required="required">
                     <label for="numeroCivico">
                         Numero Civico
                     </label>
-                    <input type="text" id="numeroCivico" name="numeroCivico">
+                    <input type="text" id="numeroCivico" name="numeroCivico" required="required">
                     <label for="citta">
                         Citta
                     </label>
-                    <input type="text" id="citta" name="citta">
+                    <input type="text" id="citta" name="citta" required="required">
                     <label for="cap">
                         CAP
                     </label>
-                    <input type="text" id="cap" name="cap">
+                    <input type="text" id="cap" name="cap" required="required">
                 </div>
             </div>
             <div class="payment">
@@ -102,19 +102,19 @@
                     <label for="nome">
                         Nome
                     </label>
-                    <input type="text" id="nome" name="nome">
+                    <input type="text" id="nome" name="nome" required="required">
                     <label for="Cognome">
                         Cognome
                     </label>
-                    <input type="text" id="cognome" name="cognome">
+                    <input type="text" id="cognome" name="cognome" required="required">
                     <label for="numeroCarta">
                         Numero Carta
                     </label>
-                    <input type="text" id="numeroCarta" name="numeroCarta">
+                    <input type="text" id="numeroCarta" name="numeroCarta" required="required">
                     <label for="dataScadenza">
                         Data Scadenza
                     </label>
-                    <input type="text" id="dataScadenza" name="dataScadenza">
+                    <input type="text" id="dataScadenza" name="dataScadenza" required="required">
                 </div>
             </div>
             <input type="submit" value="Acquista">
