@@ -3,7 +3,7 @@ body{   margin: 0;
     list-style: none;
     text-decoration: none;
     user-select: text !important;
-    background: linear-gradient(120deg, #d64161 0%, #6B354D 51%, #6b5b95 75%);
+    background: #e91e63;
     min-width: 300px;
     font-family: 'Roboto', sans-serif;
     display: flex;
@@ -88,6 +88,23 @@ ul li:hover a{
     color: #e91e63;
 }
 
+#profilo{
+    width: 170%;
+    margin-left: 15%;
+    height: 390;
+    background-color:  #24262b;
+    margin-left: 35%;
+    margin-bottom: 20%;
+    margin-top: 4%;
+    margin-right: 25%;
+    color: white;
+}
+
+.journalistimage > img{
+    width: 170;
+    height: 150;
+}
+
 input[type=submit]{
     margin: 5px 5px;
     background: #e91e63;
@@ -108,6 +125,20 @@ span.attribute{
 
 label{
     font-size: 18px;
+}
+
+
+
+.journalistAttribute{
+    color: #e91e63;
+}
+
+label.labelNotizie{
+    color: #e91e63;
+}
+
+label.labelRecensioni{
+    color: #e91e63;
 }
 
 
@@ -174,4 +205,28 @@ label{
 
 .currentmenuname{
     color: #e91e63
+}
+
+#addRecensione{
+    width: 170%;
+    margin-left: 15%;
+    height: 130;
+    background-color:  #24262b;
+    margin-left: 35%;
+    margin-bottom: 20%;
+    margin-top: 4%;
+    margin-right: 25%;
+    color: white;
+}
+
+#addNotizia{
+    width: 170%;
+    margin-left: 15%;
+    height: 130;
+    background-color:  #24262b;
+    margin-left: 35%;
+    margin-bottom: 20%;
+    margin-top: 4%;
+    margin-right: 25%;
+    color: white;
 }

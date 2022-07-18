@@ -13,15 +13,16 @@
     <div class="insertRecensione">
         <form name="insertRecensione" action="/Rojina_Review_war/insertReview" method="post"
               enctype="multipart/form-data">
-            <label for="titolo">Titolo: </label>
+            <label for="titolo" class="labelRecensioni">Titolo: </label>
             <input type="text" id="titolo" name="titolo">
-            <label for="gioco">Gioco: </label>
+            <label for="gioco" class="labelRecensioni">Gioco: </label>
             <input type="text" id="gioco" name="gioco">
-            <label for="testo">Testo: </label>
+            <label for="testo" class="labelRecensioni">Testo: </label>
             <input type="text" id="testo" name="testo">
-            <label for="voto">Voto: </label>
+            <br>
+            <label for="voto" class="labelRecensioni">Voto: </label>
             <input type="range" id="voto" name="voto" min="0" max="10">
-            <label for="immagine">Immagine: </label>
+            <label for="immagine" class="labelRecensioni">Immagine: </label>
             <input type="file" id="immagine" name="immagine">
 
             <input type="submit" value="Submit">
