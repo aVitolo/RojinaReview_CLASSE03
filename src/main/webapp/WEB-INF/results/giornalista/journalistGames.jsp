@@ -10,7 +10,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/results/giornalista/journalistArea.jsp" %>
-<div class="menu">
+<div class="menu" id="addGame">
     <div class="insertGioco">
         <form name="insertGioco" action="/Rojina_Review_war/insertGame" method="post" enctype="multipart/form-data">
             <span class="attribute">Titolo: </span>

@@ -97,7 +97,7 @@ public class confirmOrderServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        u.getOrdini().add(ordine);
+        u.getOrdini().add(0, ordine);
 
         response.sendRedirect(home);
     }

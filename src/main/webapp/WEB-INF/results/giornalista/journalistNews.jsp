@@ -9,16 +9,16 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/results/giornalista/journalistArea.jsp" %>
-<div class="menu">
+<div class="menu" id="addNotizia">
     <div class="insertNotizia">
         <form  name="insertNotizia" action="/Rojina_Review_war/insertNew" method="post" enctype="multipart/form-data">
-            <label for="titolo">Titolo: </label>
+            <label for="titolo" class="labelNotizie">Titolo: </label>
             <input type="text" id="titolo" name="titolo">
-            <label for="testo">Testo: </label>
+            <label for="testo" class="labelNotizie">Testo: </label>
             <input type="text" id="testo" name="testo">
-            <label for="immagine">Immagine: </label>
+            <label for="immagine" class="labelNotizie">Immagine: </label>
             <input type="file" id="immagine" name="immagine">
-            <label for="giochi">Giochi menzionati: </label>
+            <label for="giochi" class="labelNotizie">Giochi menzionati: </label>
             <input type="text" id="giochi" name="giochi">
 
             <input type="submit" value="Submit">

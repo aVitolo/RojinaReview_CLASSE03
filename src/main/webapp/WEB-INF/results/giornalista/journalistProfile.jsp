@@ -8,7 +8,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/results/giornalista/journalistArea.jsp" %>
-<div class="menu">
+<div class="menu" id="profilo">
     <h1 class="currentMenuName">Profilo</h1>
     <div class="information">
         <div class="journalistName">
@@ -19,15 +19,8 @@
             <h3 class="journalistAttribute">Email:</h3>
             ${sessionScope.get('giornalista').email}
         </div>
-        <div class="journalistPassword">
-            <h3 class="journalistAttribute">Password:</h3>
-            ******
-        </div>
         <div class="journalistImage">
             <img src="${sessionScope.get('giornalista').immagine}" , alt="image">
-        </div>
-        <div class="Logout">
-            <a href="/Rojina_Review_war/journalistLogout">Logout</a>
         </div>
     </div>
 </div>
