@@ -25,7 +25,7 @@ public class OrdineDAO {
         PreparedStatement ps =
                 con.prepareStatement(
                         "SELECT o.id, stato, o.tracking, o.dataOrdine, o.totale, o.pagamento, o.via, o.numeroCivico, o.città, o.cap, p.nome, p.cognome, p.numeroCarta, p.dataScadenza " +
-                                "FROM ordine o join pagamento p on  o.pagamento = p.numeroCarta  and o.utente = p.utente WHERE o.utente=?");
+                                "FROM ordine o join pagamento p on  o.pagamento = p.numeroCarta  and o.utente = p.utente WHERE o.utente=? ORDER BY o.dataOrdine DESC");
         ps.setString(1, user);
         ResultSet rs = ps.executeQuery();
         ResultSet rsInt;
@@ -47,8 +47,8 @@ public class OrdineDAO {
                     rs.getString(2),
                     rs.getString(3));
 
-            ps = con.prepareStatement("SELECT po.prodotto, po.prezzo, po.quantità FROM prodotto_ordine po join ordine o on po.ordine = o.id WHERE utente=?");
-            ps.setString(1, user);
+            ps = con.prepareStatement("SELECT po.prodotto, po.prezzo, po.quantità FROM prodotto_ordine po WHERE po.ordine=?");
+            ps.setInt(1, o.getId());
             rsInt = ps.executeQuery();
             while (rsInt.next()) {
                 Ordine.ProdottoOrdine p = new Ordine.ProdottoOrdine();

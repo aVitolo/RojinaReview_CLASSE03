@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class LoginUser extends HttpServlet {
     private Utente tmp;
-    private String loginErrato = "/WEB-INF/userLogin.jsp";
+    private String loginErrato = "./userLogin.jsp";
     private String homePage = "./home";
 
     @Override

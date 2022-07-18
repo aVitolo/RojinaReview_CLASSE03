@@ -1,13 +1,23 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Area giornalista</title>
+    <link rel="stylesheet" href="./css/master.css">
+    <link rel="stylesheet" href="./css/notizie.css">
+
+</head>
+<body>
+<%@ include file="/WEB-INF/results/giornalista/journalistArea.jsp" %>
 <%@ page import="model.beans.Giornalista" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% Giornalista g = (Giornalista) session.getAttribute("giornalista");%>
+<section>
 <h1>Aggiorna i tuoi dati:</h1>
 <br>
 <table>
     <tr>
-        <th>
-            <p>Id</p>
-        </th>
         <th>
             <p>Nome</p>
         </th>
@@ -20,9 +30,6 @@
     </tr>
     <tr>
         <form id="journalistUpdate" method="POST" action="./journalistUpdateData">
-            <td>
-                <input type="text" value="<%=g.getId()%>" name="id">
-            </td>
             <td>
                 <input type="text" value="<%=g.getNome()%>" name="nome">
             </td>
@@ -38,6 +45,7 @@
         </form>
     </tr>
 </table>
+</section>
 <script>
     function info() {
         let resoult = confirm("Cambiando i seguenti dati sarai disconnesso, Sei sicuro? \n(Potrai riloggare subito dopo!!)");
@@ -46,3 +54,7 @@
         }
     }
 </script>
+</div>
+</body>
+</html>
+

@@ -29,6 +29,11 @@
             </a>
         </li>
         <li>
+            <a href="/Rojina_Review_war/userChangeData">
+                <span class="title">Modifica Dati</span>
+            </a>
+        </li>
+        <li>
             <a href="/Rojina_Review_war/userOrders">
                 <span class="title">Ordini</span>
             </a>

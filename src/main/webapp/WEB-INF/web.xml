@@ -300,15 +300,6 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>addVoteServlet</servlet-name>
-        <servlet-class>controller.user.addVoteServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>addVoteServlet</servlet-name>
-        <url-pattern>/addVote</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>confirmOrderServlet</servlet-name>
         <servlet-class>controller.user.confirmOrderServlet</servlet-class>
     </servlet>
@@ -316,7 +307,26 @@
         <servlet-name>confirmOrderServlet</servlet-name>
         <url-pattern>/confirmOrder</url-pattern>
     </servlet-mapping>
-    
+
+
+    <servlet>
+        <servlet-name>userChangeDataServlet</servlet-name>
+        <servlet-class>controller.user.userChangeDataServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userChangeDataServlet</servlet-name>
+        <url-pattern>/userChangeData</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>journalistChangeDataServlet</servlet-name>
+        <servlet-class>controller.journalist.journalistChangeDataServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>journalistChangeDataServlet</servlet-name>
+        <url-pattern>/giornalistaModificaDati</url-pattern>
+    </servlet-mapping>
+
     <error-page>
         <error-code>404</error-code>
         <location>/WEB-INF/results/errorPages/errorPage404.jsp</location>
@@ -325,4 +335,5 @@
         <error-code>500</error-code>
         <location>/WEB-INF/results/errorPages/errorPage500.jsp</location>
     </error-page>
+
 </web-app>

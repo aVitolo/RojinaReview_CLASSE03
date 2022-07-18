@@ -30,6 +30,11 @@
             </a>
         </li>
         <li>
+            <a href="/Rojina_Review_war/giornalistaModificaDati">
+                <span class="menuName">Modifica Dati</span>
+            </a>
+        </li>
+        <li>
             <a href="/Rojina_Review_war/journalistGames">
                 <span class="menuName">Giochi</span>
             </a>

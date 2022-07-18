@@ -1,6 +1,29 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Area utente</title>
+    <link rel="stylesheet" href=".css/master.css">
+    <style>
+        section{
+            margin: 25%;
+            color: white;
+            height: fit-content;
+            padding: 2%;
+            background: #24262b;
+        }
+        table{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<c:set var="utente" scope="page" value="${sessionScope['utente']}" />
+<%@ include file="/WEB-INF/results/utente/userArea.jsp" %>
 <%@ page import="model.beans.Utente" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% Utente u = (Utente) session.getAttribute("utente");%>
+<section>
 <h1>Aggiorna i tuoi dati:</h1>
 <br>
 <table>
@@ -44,6 +67,7 @@
         </form>
     </tr>
 </table>
+</section>
 <script>
     function info() {
         let resoult = confirm("Cambiando i seguenti dati sarai disconnesso, Sei sicuro? \n(Potrai riloggare subito dopo!!)");
@@ -52,3 +76,6 @@
         }
     }
 </script>
+</body>
+</html>
+
