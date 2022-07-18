@@ -6,6 +6,18 @@
     <title>Area giornalista</title>
     <link rel="stylesheet" href="./css/master.css">
     <link rel="stylesheet" href="./css/notizie.css">
+    <style>
+        section{
+            margin: 25%;
+            color: white;
+            height: fit-content;
+            padding: 2%;
+            background: #24262b;
+        }
+        table{
+            color: white;
+        }
+    </style>
 
 </head>
 <body>
