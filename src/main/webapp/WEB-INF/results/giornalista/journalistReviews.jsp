@@ -9,7 +9,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/results/giornalista/journalistArea.jsp" %>
-<div class="menu">
+<div class="menu" id="addRecensione">
     <div class="insertRecensione">
         <form name="insertRecensione" action="/Rojina_Review_war/insertReview" method="post"
               enctype="multipart/form-data">

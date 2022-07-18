@@ -8,7 +8,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/results/giornalista/journalistArea.jsp" %>
-<div class="menu">
+<div class="menu" id="profilo">
     <h1 class="currentMenuName">Profilo</h1>
     <div class="information">
         <div class="journalistName">

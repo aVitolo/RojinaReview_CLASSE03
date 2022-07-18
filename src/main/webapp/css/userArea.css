@@ -4,7 +4,7 @@ body{
     list-style: none;
     text-decoration: none;
     user-select: text !important;
-    background: linear-gradient(120deg, #d64161 0%, #6B354D 51%, #6b5b95 75%);
+    background: #e91e63;
     min-width: 300px;
     font-family: 'Roboto', sans-serif;
     display: flex;
