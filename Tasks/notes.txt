@@ -1,3 +1,0 @@
-utente: commentare, votare, acquistare
-giornalista: aggiungere/modificare recensioni/notizie, aggiungere giochi, eventualmente rimuovere commenti
-amministratore: aggiungere giornalisti, aggiungere prodotti, rimuovere utente

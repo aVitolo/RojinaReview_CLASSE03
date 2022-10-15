@@ -6,6 +6,12 @@
     <title>Area giornalista</title>
     <link rel="stylesheet" href="./css/master.css">
     <link rel="stylesheet" href="./css/notizie.css">
+    <style>
+        img{
+            opacity: 1;
+        }
+    </style>
+
 </head>
 <body>
 <%@ include file="/WEB-INF/results/giornalista/journalistArea.jsp" %>

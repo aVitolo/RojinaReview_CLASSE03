@@ -208,7 +208,7 @@
         <servlet-name>insertAddressServlet</servlet-name>
         <url-pattern>/insertAddress</url-pattern>
     </servlet-mapping>
-    
+
     <servlet>
         <servlet-name>insertNumberServlet</servlet-name>
         <servlet-class>controller.user.insertNumberServlet</servlet-class>
@@ -327,6 +327,15 @@
         <url-pattern>/giornalistaModificaDati</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>addVoteServlet</servlet-name>
+        <servlet-class>controller.user.addVoteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addVoteServlet</servlet-name>
+        <url-pattern>/addVote</url-pattern>
+    </servlet-mapping>
+    
     <error-page>
         <error-code>404</error-code>
         <location>/WEB-INF/results/errorPages/errorPage404.jsp</location>
