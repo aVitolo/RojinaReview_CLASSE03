@@ -1,6 +1,6 @@
 package rojinaReview.model.dao;
 
-import rojinaReview.model.beans.Gioco;
+import rojinaReview.model.beans.Videogioco;
 import rojinaReview.model.utilities.ConPool;
 
 import java.sql.Connection;
@@ -20,13 +20,13 @@ public class GiocoDAO {
         this.con = con;
     }
 
-    public Gioco doRetrieveByTitle(String titolo) throws SQLException {
+    public Videogioco doRetrieveByTitle(String titolo) throws SQLException {
         PreparedStatement ps =
                 con.prepareStatement("SELECT * FROM gioco WHERE titolo=?");
         ps.setString(1, titolo);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            return new Gioco(
+            return new Videogioco(
                     rs.getString(1),
                     rs.getString(3),
                     rs.getInt(5),
@@ -42,13 +42,13 @@ public class GiocoDAO {
 
     }
 
-    public ArrayList<Gioco> doRetrieveAll() throws SQLException {
-        ArrayList<Gioco> giochi = new ArrayList<>();
+    public ArrayList<Videogioco> doRetrieveAll() throws SQLException {
+        ArrayList<Videogioco> giochi = new ArrayList<>();
         PreparedStatement ps = con.prepareStatement("SELECT * FROM gioco");
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            Gioco g = new Gioco();
+            Videogioco g = new Videogioco();
 
             g.setTitolo(rs.getString("titolo"));
             g.setDataDiRilascio(rs.getDate("dataDiRilascio"));
@@ -88,7 +88,7 @@ public class GiocoDAO {
         return games;
     }
 
-    public void doSave(Gioco g) throws SQLException {
+    public void doSave(Videogioco g) throws SQLException {
         PreparedStatement ps = con.prepareStatement("INSERT INTO gioco VALUES" +
                 "(?, ?, ?, ?, ?, ?)");
 

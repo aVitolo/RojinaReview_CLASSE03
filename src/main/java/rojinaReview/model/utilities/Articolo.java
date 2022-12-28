@@ -1,7 +1,7 @@
 package rojinaReview.model.utilities;
 
 import rojinaReview.model.beans.Commento;
-import rojinaReview.model.beans.Gioco;
+import rojinaReview.model.beans.Videogioco;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ public abstract class Articolo {
 
     private ArrayList<Commento> commenti;
     private java.sql.Date dataCaricamento;
-    private Gioco gioco;
+    private Videogioco gioco;
     private int id;
     private String testo;
     private String titolo;
@@ -28,7 +28,7 @@ public abstract class Articolo {
     public Articolo(ArrayList<Commento> commenti,
                     String immagine,
                     java.sql.Date dataCaricamento,
-                    Gioco gioco,
+                    Videogioco gioco,
                     int id,
                     String testo,
                     String titolo,
@@ -71,11 +71,11 @@ public abstract class Articolo {
         this.dataCaricamento = dataCaricamento;
     }
 
-    public Gioco getGioco() {
+    public Videogioco getGioco() {
         return gioco;
     }
 
-    public void setGioco(Gioco gioco) {
+    public void setGioco(Videogioco gioco) {
         this.gioco = gioco;
     }
 

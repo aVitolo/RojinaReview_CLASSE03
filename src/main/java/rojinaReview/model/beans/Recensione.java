@@ -20,7 +20,7 @@ public class Recensione extends Articolo {
                       String immagine,
                       java.sql.Date dataCaricamento,
                       float voto,
-                      Gioco gioco,
+                      Videogioco gioco,
                       int id,
                       String testo,
                       String giornalista,

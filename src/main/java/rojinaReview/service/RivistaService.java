@@ -1,6 +1,7 @@
 package rojinaReview.service;
 
 import rojinaReview.model.utilities.Articolo;
+import rojinaReview.model.beans.Videogioco;
 
 import java.util.ArrayList;
 
@@ -8,6 +9,7 @@ import java.util.ArrayList;
  * @author Carmine Iemmino
  * Interfaccia per i metodi del sottosistema Rivista.
  */
+
 public interface RivistaService {
     /**
      * Implementa la funzionalità che permette di

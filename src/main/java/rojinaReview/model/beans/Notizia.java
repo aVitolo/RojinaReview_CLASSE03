@@ -20,7 +20,7 @@ public class Notizia extends Articolo {
                    ArrayList<String> giochi,
                    String immagine,
                    java.sql.Date dataCaricamento,
-                   Gioco gioco,
+                   Videogioco gioco,
                    int id,
                    String testo,
                    String titolo,
