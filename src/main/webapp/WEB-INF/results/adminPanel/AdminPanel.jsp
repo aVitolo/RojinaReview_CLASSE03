@@ -1,4 +1,4 @@
-<%@ page import="model.beans.Amministratore" %><%--
+<%@ page import="rojinaReview.model.beans.Amministratore" %><%--
   Created by IntelliJ IDEA.
   User: carlo
   Date: 09/07/2022

@@ -1,7 +1,7 @@
-<%@ page import="model.beans.Prodotto" %>
-<%@ page import="model.beans.Commento" %>
+<%@ page import="rojinaReview.model.beans.Prodotto" %>
+<%@ page import="rojinaReview.model.beans.Commento" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="model.beans.VotoProdotto" %>
+<%@ page import="rojinaReview.model.beans.VotoProdotto" %>
 <%@ page import="org.json.JSONObject" %>
 <%@ page import="java.io.StringWriter" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

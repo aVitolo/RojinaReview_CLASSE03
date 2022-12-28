@@ -1,5 +1,5 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="model.beans.Prodotto" %>
+<%@ page import="rojinaReview.model.beans.Prodotto" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% ArrayList<Prodotto> list = (ArrayList<Prodotto>)request.getAttribute("list");%>
 <table>

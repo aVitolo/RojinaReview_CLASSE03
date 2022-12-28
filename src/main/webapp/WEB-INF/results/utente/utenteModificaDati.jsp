@@ -20,7 +20,7 @@
 <body>
 <c:set var="utente" scope="page" value="${sessionScope['utente']}" />
 <%@ include file="/WEB-INF/results/utente/userArea.jsp" %>
-<%@ page import="model.beans.Utente" %>
+<%@ page import="rojinaReview.model.beans.Utente" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% Utente u = (Utente) session.getAttribute("utente");%>
 <section>

@@ -1,5 +1,5 @@
-<%@ page import="model.beans.Notizia" %>
-<%@ page import="model.beans.Commento" %>
+<%@ page import="rojinaReview.model.beans.Notizia" %>
+<%@ page import="rojinaReview.model.beans.Commento" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>

@@ -1,8 +1,8 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="model.beans.Commento" %>
-<%@ page import="model.utilities.Voto" %>
-<%@ page import="model.beans.VotoProdotto" %>
-<%@ page import="model.beans.VotoGioco" %>
+<%@ page import="rojinaReview.model.beans.Commento" %>
+<%@ page import="rojinaReview.model.utilities.Voto" %>
+<%@ page import="rojinaReview.model.beans.VotoProdotto" %>
+<%@ page import="rojinaReview.model.beans.VotoGioco" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

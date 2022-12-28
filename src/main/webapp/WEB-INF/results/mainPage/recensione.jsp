@@ -1,8 +1,8 @@
-<%@ page import="model.beans.Recensione" %>
+<%@ page import="rojinaReview.model.beans.Recensione" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="model.beans.Commento" %>
-<%@ page import="model.beans.VotoGioco" %>
-<%@ page import="model.beans.Utente" %>
+<%@ page import="rojinaReview.model.beans.Commento" %>
+<%@ page import="rojinaReview.model.beans.VotoGioco" %>
+<%@ page import="rojinaReview.model.beans.Utente" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>

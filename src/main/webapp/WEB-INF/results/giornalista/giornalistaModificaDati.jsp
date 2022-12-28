@@ -22,7 +22,7 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/results/giornalista/journalistArea.jsp" %>
-<%@ page import="model.beans.Giornalista" %>
+<%@ page import="rojinaReview.model.beans.Giornalista" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% Giornalista g = (Giornalista) session.getAttribute("giornalista");%>
 <section>

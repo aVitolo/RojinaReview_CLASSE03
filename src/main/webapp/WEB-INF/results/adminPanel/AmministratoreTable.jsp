@@ -1,4 +1,4 @@
-<%@ page import="model.beans.Amministratore" %>
+<%@ page import="rojinaReview.model.beans.Amministratore" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% ArrayList<Amministratore> list = (ArrayList<Amministratore>) request.getAttribute("list");%>
