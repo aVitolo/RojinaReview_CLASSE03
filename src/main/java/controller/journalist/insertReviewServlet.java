@@ -52,10 +52,7 @@ public class insertReviewServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
         response.sendRedirect(result);
-
     }
 
 }
