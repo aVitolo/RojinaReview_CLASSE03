@@ -1,4 +1,4 @@
-package rojinaReview;
+package rojinaReview.service;
 
 import rojinaReview.model.utilities.Articolo;
 

@@ -3,345 +3,331 @@ create database rojina;
 
 use rojina;
 
-create table Amministratore(
-                               id 				tinyint auto_increment,
-                               nome 			varchar(30) not null,
-                               cognome 		varchar(30) not null,
-                               email			varchar(30),
-                               pass			varchar(256),
-                               check (nome regexp '[a-zA-Z ]{1,30}'),
-                               check (cognome regexp '[a-zA-Z\' ]{1,30}'),
-                               primary key(id)
+create table Videogiocatore(
+   id               int auto_increment not null,
+   email 			varchar(100) not null unique,
+   pass 			varchar(256) not null,
+   nome			    varchar(100),
+   cognome			varchar(100),
+   immagine         varchar(100),
+   nickname 		varchar(30) not null unique,
+   bannato          int(1),
+   primary key(id)
 );
 
 create table Giornalista(
-                            id 				tinyint auto_increment,
-                            nome 			varchar(30) not null,
-                            cognome 		varchar(30) not null,
-                            email			varchar(30),
-                            pass			varchar(256),
-                            immagine        varchar(250),
-                            check (nome regexp '[a-zA-Z ]{1,30}'),
-                            check (cognome regexp '[a-zA-Z\' ]{1,30}'),
-                            primary key(id)
+    id 				int auto_increment not null,
+    email			varchar(100) not null unique ,
+    pass			varchar(256) not null,
+    nome 			varchar(100) not null,
+    cognome 		varchar(100) not null,
+    immagine        varchar(100),
+    verificato      int(1),
+    check (nome regexp '[a-zA-Z ]{1,30}'),
+    check (cognome regexp '[a-zA-Z\' ]{1,30}'),
+    primary key(id)
 );
 
-create table Gioco(
-                      titolo 			varchar(50),
-                      dataDiRilascio 	date,
-                      casaDiSviluppo	varchar(30) not null,
-                      mediaVoto		float(4,2) not null,
-                      numeroVoti		int not null,
-                      copertina		varchar(250),
-                      primary key(titolo)
-);
-
-create table Recensione(
-                           id				tinyint auto_increment,
-                           testo			text,
-                           giornalista		tinyint,
-                           gioco   		    varchar(50),
-                           titolo 			varchar(100) ,
-                           voto 			float not null,
-                           dataCaricamento	date not null,
-                           immagine 		varchar(250),
-                           foreign key(giornalista)
-                               references Giornalista(id)
-                               on update cascade,
-                           foreign key(gioco)
-                               references Gioco(titolo)
-                               on delete set null
-                               on update cascade,
-                           primary key(id),
-                           check (voto<=10 and voto>=1)
-);
-
-create table Notizia(
-                        id				tinyint auto_increment,
-                        testo   		text,
-                        giornalista  	tinyint,
-                        titolo			varchar(100),
-                        dataCaricamento	date not null,
-                        immagine		varchar(250),
-                        foreign key(giornalista)
-                            references Giornalista(id)
-                            on update cascade,
-                        primary key(id)
-);
-
-create table Gioco_Notizia(
-                              giornalista		tinyint,
-                              notizia 		tinyint,
-                              gioco 			varchar(50),
-                              foreign key(giornalista)
-                                  references Giornalista(id)
-                                  on update cascade,
-                              foreign key(notizia)
-                                  references Notizia(id)
-                                  on delete cascade
-                                  on update cascade,
-                              foreign key(gioco)
-                                  references Gioco(titolo)
-                                  on delete cascade
-                                  on update cascade,
-                              primary key(giornalista, notizia, gioco)
-);
-
-create table Piattaforma(
-                            nome			varchar(30),
-                            brand 			varchar(30),
-                            primary	key(nome)
-);
-
-create table Tipologia(
-                          nome			varchar(30),
-                          primary key(nome)
-);
-
-create table Gioco_Piattaforma(
-                                  gioco			varchar(50),
-                                  piattaforma		varchar(30),
-                                  foreign key(gioco)
-                                      references Gioco(titolo)
-                                      on delete cascade
-                                      on update cascade,
-                                  foreign key(piattaforma)
-                                      references Piattaforma(nome)
-                                      on delete cascade
-                                      on update cascade,
-                                  primary key(gioco, piattaforma)
-);
-
-create table Gioco_Tipologia(
-                                gioco			varchar(50),
-                                tipologia		varchar(30),
-                                foreign	key(gioco)
-                                    references Gioco(titolo)
-                                    on delete cascade
-                                    on update cascade,
-                                foreign key(tipologia)
-                                    references  Tipologia(nome)
-                                    on delete cascade
-                                    on update cascade,
-                                primary key(Gioco, Tipologia)
-);
-
-create table Utente(
-                       email 			varchar(30),
-                       nickname 		varchar(30) not null unique,
-                       pass 			varchar(256) not null,
-                       nome			    varchar(30),
-                       cognome			varchar(30),
-                       età			    tinyint,
-                       immagine         varchar(100),
-                       primary key(email)
-);
-
-create table Indirizzo(
-                          utente 			varchar(30),
-                          via				varchar(30),
-                          numeroCivico	smallint,
-                          città			varchar(30),
-                          cap				varchar(6),
-                          foreign key(utente)
-                              references Utente(email)
-                              on delete cascade
-                              on update cascade,
-                          primary key(utente, via, numeroCivico, città, cap)
-);
-
-create table Telefono(
-                         utente 			varchar(30),
-                         numero 			varchar(10),
-                         foreign key(utente)
-                             references Utente(email)
-                             on delete cascade
-                             on update cascade, -- da aggiungere regexp
-                         primary key(utente,numero)
-);
-
-create table CommentoNotizia(
-                                utente			varchar(30),
-                                testo			tinytext,
-                                dataScrittura   datetime,
-                                notizia			tinyint,
-                                foreign key(utente)
-                                    references Utente(email)
-                                    on delete cascade
-                                    on update cascade,
-                                foreign key(notizia)
-                                    references Notizia(id)
-                                    on delete cascade
-                                    on update cascade,
-                                primary key(notizia, utente, dataScrittura)
-);
-
-create table CommentoRecensione(
-                                   utente 			varchar(30),
-                                   testo			tinytext,
-                                   dataScrittura	datetime,
-                                   recensione		tinyint,
-                                   foreign key(utente)
-                                       references Utente(email)
-                                       on delete cascade
-                                       on update cascade,
-                                   foreign key(recensione)
-                                       references Recensione(id)
-                                       on delete cascade
-                                       on update cascade,
-                                   primary key(recensione, utente, dataScrittura)
-);
-
-create table Voto(
-                     gioco  			varchar(50),
-                     utente  		varchar(30),
-                     voto 			float not null,
-                     dataVotazione	date,
-                     foreign key(gioco)
-                         references Gioco(titolo)
-                         on delete cascade
-                         on update cascade,
-                     foreign key(utente)
-                         references Utente(email)
-                         on delete cascade
-                         on update cascade,
-                     primary key(gioco,utente,dataVotazione),
-                     check (voto<=10 and voto>=1)
-);
-
-create table Prodotto(
-                         id				int auto_increment,
-                         nome			varchar(30),
-                         descrizione	tinytext,
-                         disponibilità  int,
-                         prezzo			float,
-                         immagine		varchar(250),
-                         sconto			boolean,
-                         mediaVoto		float(4,2) not null,
-                         numeroVoti		int not null,
-                         primary key(id)
-);
-
-create table Gradimento(
-                           prodotto        int,
-                           utente  		varchar(30),
-                           voto 			float not null,
-                           dataVotazione	date,
-                           foreign key(prodotto)
-                               references Prodotto(id)
-                               on delete cascade
-                               on update cascade,
-                           foreign key(utente)
-                               references Utente(email)
-                               on delete cascade
-                               on update cascade,
-                           primary key(prodotto,utente,dataVotazione),
-                           check (voto<=10 and voto>=1)
-);
-
-create table CommentoProdotto(
-                                 utente 			varchar(30),
-                                 testo			tinytext,
-                                 dataScrittura	datetime,
-                                 prodotto		    int,
-                                 foreign key(utente)
-                                     references Utente(email)
-                                     on delete cascade
-                                     on update cascade,
-                                 foreign key(prodotto)
-                                     references Prodotto(id)
-                                     on delete cascade
-                                     on update cascade,
-                                 primary key(prodotto, utente, dataScrittura)
-);
-create table Sconto(
-                       nome			    varchar(5), -- nome e percentuale vanno in coppia, esempio nome = 30%, percentuale = 0,70 per fare una semplice moltiplicazione
-                       percentuale      decimal(3, 2),
-                       prodotto		    int,
-                       foreign key(prodotto)
-                           references Prodotto(id),
-                       primary key(nome, prodotto)
-);
-
-create table Categoria(
-                          nome			varchar(30),
-                          primary key(nome)
-);
-
-create table Prodotto_Categoria(
-                                   prodotto		int,
-                                   categoria		varchar(30),
-                                   foreign key(prodotto)
-                                       references Prodotto(id),
-                                   foreign key(categoria)
-                                       references Categoria(nome),
-                                   primary key(prodotto, categoria)
+create table Manager(
+    id 				int auto_increment not null,
+    email			varchar(100) not null unique ,
+    pass			varchar(256) not null,
+    nome 			varchar(100) not null,
+    cognome 		varchar(100) not null,
+    immagine        varchar(100),
+    verificato      int(1),
+    check (nome regexp '[a-zA-Z ]{1,30}'),
+    check (cognome regexp '[a-zA-Z\' ]{1,30}'),
+    primary key(id)
 );
 
 create table Pagamento(
-                          nome			    varchar(30),
-                          cognome			varchar(30),
-                          utente			varchar(30),
-                          numeroCarta		varchar(20),
-                          dataScadenza	    date,
-                          foreign key(utente)
-                              references Utente(email),
-                          primary key(utente, numeroCarta)
+    nome			            varchar(100) not null,
+    cognome			            varchar(100) not null,
+    email_videogiocatore		varchar(100) not null,
+    numeroCarta		            varchar(16) not null,
+    dataScadenza	            date,
+    foreign key(email_videogiocatore)
+      references Videogiocatore(email),
+    primary key(email_videogiocatore, numeroCarta)
 );
 
-create table Ordine(
-                       id				int auto_increment,
-                       stato			varchar(30),
-                       tracking		    varchar(50), -- link che porta al sito tracking
-                       dataOrdine		date,
-                       totale			float,
-                       pagamento    	varchar(20),
-                       utente			varchar(30),
-                       via			    varchar(30),
-                       numeroCivico	    smallint,
-                       città			varchar(30),
-                       cap			    varchar(6),
-                       foreign key(utente, pagamento)
-                           references Pagamento(utente, numeroCarta),
-                       foreign key(utente)
-                           references Utente(email),
-                       foreign key(utente, via, numeroCivico, città, cap)
-                           references Indirizzo(utente, via, numeroCivico, città, cap),
-                       primary key(id)
+create table Indirizzo(
+    via				        varchar(100) not null,
+    numeroCivico	        tinyint not null,
+    cap				        varchar(5) not null,
+    città			        varchar(100) not null,
+    email_videogiocatore    varchar(100) not null,
+    foreign key(email_videogiocatore)
+      references Videogiocatore(email)
+      on delete cascade
+      on update cascade,
+    primary key(email_videogiocatore, via, numeroCivico, città, cap)
 );
 
-create table Prodotto_Ordine(
-                                prodotto		int,
-                                ordine			int,
-                                prezzo			float,
-                                quantità		tinyint,
-                                foreign key(prodotto)
-                                    references Prodotto(id),
-                                foreign key(ordine)
-                                    references Ordine(id),
-                                primary key(prodotto, ordine)
+create table Telefono(
+    numero                 varchar(10) not null,
+    email_videogiocatore   varchar(100) not null,
+    foreign key(email_videogiocatore)
+     references Videogiocatore(email)
+     on delete cascade
+     on update cascade,
+    primary key(email_videogiocatore,numero)
+);
+
+create table Videogioco(
+    id              int auto_increment not null,
+    titolo 			varchar(100) not null unique,
+    dataDiRilascio 	date,
+    casaDiSviluppo	varchar(30) not null,
+    mediaVoto		float(4,2) not null,
+    numeroVoti		int not null,
+    copertina		varchar(100),
+    primary key(titolo)
+);
+
+
+create table Piattaforma(
+    nome    varchar(30) not null,
+    primary	key(nome)
+);
+
+create table Genere(
+    nome    varchar(30) not null,
+    primary key(nome)
+);
+
+create table Videogioco_Piattaforma(
+    id_videogioco	int not null,
+    piattaforma		varchar(30) not null,
+    foreign key(id_videogioco)
+      references Videogioco(id)
+      on delete cascade
+      on update cascade,
+    foreign key(piattaforma)
+      references Piattaforma(nome)
+      on delete cascade
+      on update cascade,
+    primary key(id_videogioco, piattaforma)
+);
+
+create table Videogioco_Genere(
+    id_videogioco	int not null,
+    genere		varchar(30) not null,
+    foreign key(id_videogioco)
+      references Videogioco(id)
+      on delete cascade
+      on update cascade,
+    foreign key(genere)
+      references Genere(nome)
+      on delete cascade
+      on update cascade,
+    primary key(id_videogioco, genere)
+);
+
+
+create table Recensione(
+    id				    int auto_increment,
+    titolo 			    varchar(100) not null unique ,
+    testo			    text not null,
+    immagine 		    varchar(100) not null,
+    dataScrittura	    date not null,
+    votoGiornalista	    float not null,
+    email_giornalista	varchar(100) not null,
+    id_videogioco   	int not null,
+    foreign key(email_giornalista)
+       references Giornalista(email)
+       on update cascade,
+    foreign key(id_videogioco )
+       references Videogioco(id)
+       on delete set null
+       on update cascade,
+    primary key(id),
+    check (votoGiornalista<=10 and votoGiornalista>=1)
+);
+
+create table Notizia(
+    id				    int auto_increment,
+    titolo 			    varchar(100) not null unique ,
+    testo			    text not null,
+    immagine 		    varchar(100) not null,
+    dataScrittura	    date not null,
+    email_giornalista	varchar(100) not null,
+    foreign key(email_giornalista)
+        references Giornalista(email)
+        on update cascade,
+    primary key(id),
+);
+
+create table Videogioco_Notizia(
+    id_notizia 		int not null,
+    id_videogioco 	int not null,
+    foreign key(id_notizia)
+      references Notizia(id)
+      on delete cascade
+      on update cascade,
+    foreign key(id_videogioco)
+      references Videogioco(id)
+      on delete cascade
+      on update cascade,
+    primary key(id_notizia, id_videogioco)
+);
+
+create table Paragrafo(
+  id_paragrafo  int auto_increment not null,
+  titolo 	    varchar(100) not null unique ,
+  testo		    text not null,
+  immagine 	    varchar(100) not null,
+  id_notizia    int,
+  id_recensione int,
+  foreign key(id_notizia)
+      references Notizia(id)
+      on delete cascade
+      on update cascade,
+  foreign key(id_recensione)
+      references Recensione(id)
+      on delete cascade
+      on update cascade,
+  primary key(id_paragrafo)
+);
+
+create table Prodotto(
+    id				int auto_increment not null,
+    nome			varchar(100) not null unique,
+    descrizione	    text not null,
+    immagine		varchar(100) not null,
+    prezzo			float not null,
+    disponibilità   int not null,
+    mediaVoto		float(4,2) not null,
+    numeroVoti		int not null,
+    nome_categoria  varchar(30) not null,
+    foreign key(nome_categoria)
+        references Categoria(nome)
+        on update cascade,
+    primary key(id)
+);
+
+create table Categoria(
+    nome    varchar(30),
+    primary key(nome)
 );
 
 create table Carrello(
-                         totale			float,
-                         utente 		varchar(30),
-                         foreign key(utente)
-                             references Utente(email),
-                         primary key(utente)
+    totale	                float not null,
+    email_videogiocatore 	varchar(30) not null,
+    foreign key(email_videogiocatore)
+     references Videogiocatore(email),
+    primary key(email_videogiocatore)
+);
+
+create table Ordine(
+    id				            int auto_increment not null ,
+    stato			            varchar(20) not null,
+    dataOrdine		            date not null,
+    totale			            float not null,
+    numeroCarta_pagamento       varchar(20) not null,
+    email_videogiocatore        varchar(30) not null,
+    via_videogiocatore			varchar(30) not null,
+    numeroCivico_videogiocatore smallint not null,
+    città_videogiocatore		varchar(30) not null,
+    cap_videogiocatore			varchar(6) not null,
+    foreign key(email_videogiocatore, numeroCarta_pagamento)
+       references Pagamento(email_videogiocatore, numeroCarta),
+    foreign key(email_videogiocatore)
+       references Videogiocatore(email),
+    foreign key(email_videogiocatore,via_videogiocatore,numeroCivico_videogiocatore,città_videogiocatore,cap_videogiocatore)
+       references Indirizzo(email_videogiocatore, via, numeroCivico, città, cap),
+    primary key(id)
 );
 
 create table Prodotto_Carrello(
-                                  prodotto		    int,
-                                  utente			varchar(30),
-                                  quantità 		    tinyint,
-                                  foreign key(utente)
-                                      references Carrello(utente),
-                                  foreign key(prodotto)
-                                      references Prodotto(id),
-                                  primary key(utente, prodotto)
+    id_prodotto		        int not null,
+    email_videogiocatore	varchar(100) not null,
+    quantità 		        int not null,
+    foreign key(email_videogiocatore)
+      references Carrello(email_videogiocatore),
+    foreign key(id_prodotto	)
+      references Prodotto(id),
+    primary key(email_videogiocatore,id_prodotto)
 );
 
+create table Prodotto_Ordine(
+    id_prodotto		int not null,
+    id_ordine		int not null,
+    prezzoAcquisto	float not null,
+    quantità		tinyint not null,
+    foreign key(id_prodotto)
+        references Prodotto(id),
+    foreign key(id_ordine)
+        references Ordine(id),
+    primary key(id_prodotto,id_ordine)
+);
 
+create table Parere(
+    id                      int auto_increment not null,
+    voto                    float not null,
+    dataVotazione           date not null,
+    email_videogiocatore    varchar(30) not null,
+    id_videogioco           int,
+    id_prodotto             int,
+    foreign key(id_videogioco)
+       references Videogioco(id)
+        on delete cascade
+        on update cascade,
+    foreign key(id_prodotto)
+        references Prodotto(id)
+        on delete cascade
+        on update cascade,
+    foreign key(email_videogiocatore)
+       references Videogiocatore(email)
+       on update cascade,
+    primary key(id),
+    check (voto<=10 and voto>=1)
+);
+
+create table Commento(
+    id                      int auto_increment not null,
+    testo			        tinytext not null,
+    dataScrittura	        date not null,
+    email_videogiocatore    varchar(100) not null,
+    id_prodotto		        int,
+    id_recensione           int,
+    id_notizia              int,
+    foreign key(email_videogiocatore)
+     references Videogiocatore(email)
+     on delete cascade
+     on update cascade,
+    foreign key(id_prodotto	)
+     references Prodotto(id)
+     on delete cascade
+     on update cascade,
+    foreign key(id_recensione)
+        references Prodotto(id)
+        on delete cascade
+        on update cascade,
+    foreign key(id_notizia)
+        references Prodotto(id)
+        on delete cascade
+        on update cascade,
+    primary key(id)
+);
+
+create table Segnlazione(
+    id_commento             int not null,
+    email_videogiocatore    varchar(100) not null,
+    motivazione             varchar(50) not null,
+    commentoAggiuntivo		tinytext,
+    dataSegnalazione	    date not null,
+    foreign key(email_videogiocatore)
+        references Videogiocatore(email)
+        on delete cascade
+        on update cascade,
+    foreign key(id_commento)
+        references Commento(id)
+        on delete cascade
+        on update cascade,
+    primary key(id_commento, email_videogiocatore)
+);
 
 insert into Amministratore (nome, cognome, email, pass) values
                                                             ("Andrea", "Vitolo", "zindrè@gmail.com", SHA2('papapa',256)),
