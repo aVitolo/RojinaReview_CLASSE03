@@ -6,7 +6,7 @@ use rojina;
 create table Videogiocatore(
    id               int auto_increment not null,
    email 			varchar(100) not null unique,
-   pass 			varchar(256) not null,
+   password 		varchar(256) not null,
    nome			    varchar(100),
    cognome			varchar(100),
    immagine         varchar(100),
@@ -18,7 +18,7 @@ create table Videogiocatore(
 create table Giornalista(
     id 				int auto_increment not null,
     email			varchar(100) not null unique ,
-    pass			varchar(256) not null,
+    password		varchar(256) not null,
     nome 			varchar(100) not null,
     cognome 		varchar(100) not null,
     immagine        varchar(100),
@@ -31,7 +31,7 @@ create table Giornalista(
 create table Manager(
     id 				int auto_increment not null,
     email			varchar(100) not null unique ,
-    pass			varchar(256) not null,
+    password		varchar(256) not null,
     nome 			varchar(100) not null,
     cognome 		varchar(100) not null,
     immagine        varchar(100),
@@ -44,35 +44,35 @@ create table Manager(
 create table Pagamento(
     nome			            varchar(100) not null,
     cognome			            varchar(100) not null,
-    email_videogiocatore		varchar(100) not null,
+    id_videogiocatore		    int not null,
     numeroCarta		            varchar(16) not null,
     dataScadenza	            date,
-    foreign key(email_videogiocatore)
-      references Videogiocatore(email),
-    primary key(email_videogiocatore, numeroCarta)
+    foreign key(id_videogiocatore)
+      references Videogiocatore(id),
+    primary key(id_videogiocatore, numeroCarta)
 );
 
 create table Indirizzo(
     via				        varchar(100) not null,
-    numeroCivico	        tinyint not null,
+    numeroCivico	        smallint not null,
     cap				        varchar(5) not null,
     città			        varchar(100) not null,
-    email_videogiocatore    varchar(100) not null,
-    foreign key(email_videogiocatore)
-      references Videogiocatore(email)
+    id_videogiocatore       int not null,
+    foreign key(id_videogiocatore)
+      references Videogiocatore(id)
       on delete cascade
       on update cascade,
-    primary key(email_videogiocatore, via, numeroCivico, città, cap)
+    primary key(id_videogiocatore, via, numeroCivico, città, cap)
 );
 
 create table Telefono(
     numero                 varchar(10) not null,
-    email_videogiocatore   varchar(100) not null,
-    foreign key(email_videogiocatore)
-     references Videogiocatore(email)
+    id_videogiocatore      int not null,
+    foreign key(id_videogiocatore)
+     references Videogiocatore(id)
      on delete cascade
      on update cascade,
-    primary key(email_videogiocatore,numero)
+    primary key(id_videogiocatore,numero)
 );
 
 create table Videogioco(
@@ -83,7 +83,7 @@ create table Videogioco(
     mediaVoto		float(4,2) not null,
     numeroVoti		int not null,
     copertina		varchar(100) not null,
-    primary key(titolo)
+    primary key(id)
 );
 
 
@@ -140,7 +140,6 @@ create table Recensione(
        on update cascade,
     foreign key(id_videogioco )
        references Videogioco(id)
-       on delete set null
        on update cascade,
     primary key(id),
     check (votoGiornalista<=10 and votoGiornalista>=1)
@@ -191,6 +190,11 @@ create table Paragrafo(
   primary key(id_paragrafo)
 );
 
+create table Categoria(
+                          nome    varchar(30),
+                          primary key(nome)
+);
+
 create table Prodotto(
     id				int auto_increment not null,
     nome			varchar(100) not null unique,
@@ -207,17 +211,13 @@ create table Prodotto(
     primary key(id)
 );
 
-create table Categoria(
-    nome    varchar(30),
-    primary key(nome)
-);
 
 create table Carrello(
     totale	                float not null,
-    email_videogiocatore 	varchar(30) not null,
-    foreign key(email_videogiocatore)
-     references Videogiocatore(email),
-    primary key(email_videogiocatore)
+    id_videogiocatore 	    int not null,
+    foreign key(id_videogiocatore)
+     references Videogiocatore(id),
+    primary key(id_videogiocatore)
 );
 
 create table Ordine(
@@ -226,29 +226,29 @@ create table Ordine(
     dataOrdine		            date not null,
     totale			            float not null,
     numeroCarta_pagamento       varchar(20) not null,
-    email_videogiocatore        varchar(30) not null,
+    id_videogiocatore           int not null,
     via_videogiocatore			varchar(30) not null,
     numeroCivico_videogiocatore smallint not null,
     città_videogiocatore		varchar(30) not null,
     cap_videogiocatore			varchar(6) not null,
-    foreign key(email_videogiocatore, numeroCarta_pagamento)
-       references Pagamento(email_videogiocatore, numeroCarta),
-    foreign key(email_videogiocatore)
-       references Videogiocatore(email),
-    foreign key(email_videogiocatore,via_videogiocatore,numeroCivico_videogiocatore,città_videogiocatore,cap_videogiocatore)
-       references Indirizzo(email_videogiocatore, via, numeroCivico, città, cap),
+    foreign key(id_videogiocatore, numeroCarta_pagamento)
+       references Pagamento(id_videogiocatore, numeroCarta),
+    foreign key(id_videogiocatore)
+       references Videogiocatore(id),
+    foreign key(id_videogiocatore,via_videogiocatore,numeroCivico_videogiocatore,città_videogiocatore,cap_videogiocatore)
+       references Indirizzo(id_videogiocatore, via, numeroCivico, città, cap),
     primary key(id)
 );
 
 create table Prodotto_Carrello(
     id_prodotto		        int not null,
-    email_videogiocatore	varchar(100) not null,
+    id_videogiocatore	    int not null,
     quantità 		        int not null,
-    foreign key(email_videogiocatore)
-      references Carrello(email_videogiocatore),
+    foreign key(id_videogiocatore)
+      references Carrello(id_videogiocatore),
     foreign key(id_prodotto	)
       references Prodotto(id),
-    primary key(email_videogiocatore,id_prodotto)
+    primary key(id_videogiocatore,id_prodotto)
 );
 
 create table Prodotto_Ordine(
@@ -267,7 +267,7 @@ create table Parere(
     id                      int auto_increment not null,
     voto                    float not null,
     dataVotazione           date not null,
-    email_videogiocatore    varchar(30) not null,
+    id_videogiocatore       int not null,
     id_videogioco           int,
     id_prodotto             int,
     foreign key(id_videogioco)
@@ -278,8 +278,8 @@ create table Parere(
         references Prodotto(id)
         on delete cascade
         on update cascade,
-    foreign key(email_videogiocatore)
-       references Videogiocatore(email)
+    foreign key(id_videogiocatore)
+       references Videogiocatore(id)
        on update cascade,
     primary key(id),
     check (voto<=10 and voto>=1)
@@ -289,15 +289,15 @@ create table Commento(
     id                      int auto_increment not null,
     testo			        tinytext not null,
     dataScrittura	        date not null,
-    email_videogiocatore    varchar(100) not null,
+    id_videogiocatore       int not null,
     id_prodotto		        int,
     id_recensione           int,
     id_notizia              int,
-    foreign key(email_videogiocatore)
-     references Videogiocatore(email)
+    foreign key(id_videogiocatore)
+     references Videogiocatore(id)
      on delete cascade
      on update cascade,
-    foreign key(id_prodotto	)
+    foreign key(id_prodotto)
      references Prodotto(id)
      on delete cascade
      on update cascade,
@@ -314,27 +314,27 @@ create table Commento(
 
 create table Segnlazione(
     id_commento             int not null,
-    email_videogiocatore    varchar(100) not null,
+    id_videogiocatore       int not null,
     motivazione             varchar(50) not null,
     commentoAggiuntivo		tinytext,
     dataSegnalazione	    date not null,
-    foreign key(email_videogiocatore)
-        references Videogiocatore(email)
+    foreign key(id_videogiocatore)
+        references Videogiocatore(id)
         on delete cascade
         on update cascade,
     foreign key(id_commento)
         references Commento(id)
         on delete cascade
         on update cascade,
-    primary key(id_commento, email_videogiocatore)
+    primary key(id_commento, id_videogiocatore)
 );
 
-insert into Manager (nome, cognome, email, pass,verificato) values
+insert into Manager (nome, cognome, email, password,verificato) values
     ("Andrea", "Vitolo", "zindrè@gmail.com", SHA2('papapa',256),1),
     ("Carmine", "Iemmino", "carmineiemmino@gmail.com", SHA2('lalala',256),1),
     ("Carlo", "Colizzi", "carletto@gmail.com", SHA2('bobbaba',256),1);
 
-insert into Giornalista (nome, cognome, email, pass, immagine, verificato) values
+insert into Giornalista (nome, cognome, email, password, immagine, verificato) values
     ("Mario", "Dell'Orca", "mario@gmail.com", SHA2('marietto',256), "./images/journalists/Dell'Orca.jpg",1),
     ("Carla", "Bianchi", "carletta@gmail.com", SHA2('xarla',256), "./images/journalists/Bianchi.jpg",1),
     ("Giovanni", "Verdi", "giuann@gmail.com", SHA2('johnny',256), "./images/journalists/Verdi.jpg",1),
@@ -343,7 +343,7 @@ insert into Giornalista (nome, cognome, email, pass, immagine, verificato) value
     ("Lorenza", "Gialli", "lorenza@gmail.com", SHA2('lorenzina',256), "./images/journalists/Gialli.jpg",1);
 
 
-insert into Videogiocatore(email,nickname,password,nome,cogome,immagine,bannato)  values
+insert into Videogiocatore(email,nickname,password,nome,cognome,immagine,bannato)  values
     ("venebroguppeu@yopmail.com","GamaOnix",SHA2('oemfshif',256), "Paolo", "Dell'Orca", "./images/users/GamaOnix.png",0),
     ("jaunnureudeilla@yopmail.com","AimZero",SHA2('efkmfeug',256), "Giovanna", "Bianchi", "./images/users/AimZero.png",0),
     ("frefimeitromo@yopmail.com","ZeroVirus",SHA2('vwnjviecwo',256), "Pio", "Verdi", "./images/users/ZeroVirus.png",0),
@@ -357,12 +357,12 @@ insert into Videogiocatore(email,nickname,password,nome,cogome,immagine,bannato)
     ("utente@gmail.com","User",SHA2('password',256), "Persona", "Normale", null,0);
 
 
-insert into Indirizzo (email_videogiocatore,via,numeroCivico,città,cap) values
+insert into Indirizzo (id_videogiocatore,via,numeroCivico,città,cap) values
     ("cazzare@yopmail.com", "xxiv maggio", 342, "Poggiomarino", "80040"),
     ("oefo@yopmail.com", "mattarella", 232, "Striano", "80040"),
     ("zindre@yopmail.com", "cavour", 342, "Pontecagnano", "80020");
 
-insert into Telefono (email_videogiocatore,numero)values
+insert into Telefono (id_videogiocatore,numero)values
     ("cazzare@yopmail.com", "3348970852"),
     ("cazzare@yopmail.com", "3344030653"),
     ("zindre@yopmail.com", "3334977623"),
