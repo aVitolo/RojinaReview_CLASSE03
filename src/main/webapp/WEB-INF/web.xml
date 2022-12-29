@@ -10,14 +10,14 @@
     
     <servlet>
         <servlet-name>ContextSetUpingServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.startConfigurations.ContextSetUpingServlet</servlet-class>
+        <servlet-class>rojinaReview.startConfigurations.ContextSetUpingServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
 
 
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.rivista.HomeServlet</servlet-class>
+        <servlet-class>rojinaReview.rivista.controller.HomeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
@@ -26,7 +26,7 @@
 
     <servlet>
         <servlet-name>RecensioneServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.rivista.RecensioniServlet</servlet-class>
+        <servlet-class>rojinaReview.rivista.controller.RecensioniServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RecensioneServlet</servlet-name>
@@ -35,7 +35,7 @@
 
     <servlet>
         <servlet-name>NotizieServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.rivista.NotizieServlet</servlet-class>
+        <servlet-class>rojinaReview.rivista.controller.NotizieServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>NotizieServlet</servlet-name>
@@ -44,7 +44,7 @@
 
     <servlet>
         <servlet-name>ShopServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.shop.ShopServlet</servlet-class>
+        <servlet-class>rojinaReview.shop.controller.ShopServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ShopServlet</servlet-name>
@@ -53,7 +53,7 @@
 
     <servlet>
         <servlet-name>LoginUser</servlet-name>
-        <servlet-class>rojinaReview.controller.autenticazione.LoginUser</servlet-class>
+        <servlet-class>rojinaReview.autenticazione.controller.LoginUser</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginUser</servlet-name>
@@ -62,7 +62,7 @@
 
     <servlet>
         <servlet-name>RegisterUser</servlet-name>
-        <servlet-class>rojinaReview.controller.registrazione.RegistrationUser</servlet-class>
+        <servlet-class>rojinaReview.registrazione.controller.RegistrationUser</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterUser</servlet-name>
@@ -71,7 +71,7 @@
 
     <servlet>
         <servlet-name>journalistAreaServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.autenticazione.journalistAreaServlet</servlet-class>
+        <servlet-class>rojinaReview.autenticazione.controller.journalistAreaServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>journalistAreaServlet</servlet-name>
@@ -80,7 +80,7 @@
 
     <servlet>
         <servlet-name>journalistReviewsServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.rivista.journalistReviewsServlet</servlet-class>
+        <servlet-class>rojinaReview.rivista.controller.journalistReviewsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>journalistReviewsServlet</servlet-name>
@@ -89,7 +89,7 @@
 
     <servlet>
         <servlet-name>journalistNewsServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.rivista.journalistNewsServlet</servlet-class>
+        <servlet-class>rojinaReview.rivista.controller.journalistNewsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>journalistNewsServlet</servlet-name>
@@ -98,7 +98,7 @@
 
     <servlet>
         <servlet-name>journalistGamesServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.rivista.journalistGamesServlet</servlet-class>
+        <servlet-class>rojinaReview.rivista.controller.journalistGamesServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>journalistGamesServlet</servlet-name>
@@ -107,7 +107,7 @@
 
     <servlet>
         <servlet-name>insertReviewServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.rivista.insertReviewServlet</servlet-class>
+        <servlet-class>rojinaReview.rivista.controller.insertReviewServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>insertReviewServlet</servlet-name>
@@ -116,7 +116,7 @@
 
     <servlet>
         <servlet-name>insertNewServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.rivista.insertNewServlet</servlet-class>
+        <servlet-class>rojinaReview.rivista.controller.insertNewServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>insertNewServlet</servlet-name>
@@ -125,7 +125,7 @@
 
     <servlet>
         <servlet-name>insertGameServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.rivista.insertGameServlet</servlet-class>
+        <servlet-class>rojinaReview.rivista.controller.insertGameServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>insertGameServlet</servlet-name>
@@ -134,7 +134,7 @@
 
     <servlet>
         <servlet-name>journalistLogoutServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.autenticazione.journalistLogoutServlet</servlet-class>
+        <servlet-class>rojinaReview.autenticazione.controller.journalistLogoutServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>journalistLogoutServlet</servlet-name>
@@ -143,7 +143,7 @@
 
     <servlet>
         <servlet-name>getSingleResourceServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.utilities.getSingleResourceServlet</servlet-class>
+        <servlet-class>rojinaReview.utilities.getSingleResourceServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>getSingleResourceServlet</servlet-name>
@@ -152,7 +152,7 @@
 
     <servlet>
         <servlet-name>logout</servlet-name>
-        <servlet-class>rojinaReview.controller.autenticazione.logout</servlet-class>
+        <servlet-class>rojinaReview.autenticazione.controller.logout</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>logout</servlet-name>
@@ -161,7 +161,7 @@
 
     <servlet>
         <servlet-name>LoginStaff</servlet-name>
-        <servlet-class>rojinaReview.controller.autenticazione.LoginStaff</servlet-class>
+        <servlet-class>rojinaReview.autenticazione.controller.LoginStaff</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginStaff</servlet-name>
@@ -170,7 +170,7 @@
     
     <servlet>
         <servlet-name>userAreaServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.autenticazione.userAreaServlet</servlet-class>
+        <servlet-class>rojinaReview.autenticazione.controller.userAreaServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>userAreaServlet</servlet-name>
@@ -179,7 +179,7 @@
 
     <servlet>
         <servlet-name>userInformationsServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.autenticazione.userInformationsServlet</servlet-class>
+        <servlet-class>rojinaReview.autenticazione.controller.userInformationsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>userInformationsServlet</servlet-name>
@@ -188,7 +188,7 @@
 
     <servlet>
         <servlet-name>userOrdersServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.autenticazione.userOrdersServlet</servlet-class>
+        <servlet-class>rojinaReview.autenticazione.controller.userOrdersServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>userOrdersServlet</servlet-name>
@@ -197,7 +197,7 @@
 
     <servlet>
         <servlet-name>userVotesServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.opinione.userVotesServlet</servlet-class>
+        <servlet-class>rojinaReview.opinione.controller.userVotesServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>userVotesServlet</servlet-name>
@@ -206,7 +206,7 @@
     
     <servlet>
         <servlet-name>insertAddressServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.autenticazione.insertAddressServlet</servlet-class>
+        <servlet-class>rojinaReview.autenticazione.controller.insertAddressServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>insertAddressServlet</servlet-name>
@@ -215,7 +215,7 @@
 
     <servlet>
         <servlet-name>insertNumberServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.autenticazione.insertNumberServlet</servlet-class>
+        <servlet-class>rojinaReview.autenticazione.controller.insertNumberServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>insertNumberServlet</servlet-name>
@@ -224,7 +224,7 @@
     
     <servlet>
         <servlet-name>insertPaymentServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.autenticazione.insertPaymentServlet</servlet-class>
+        <servlet-class>rojinaReview.autenticazione.controller.insertPaymentServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>insertPaymentServlet</servlet-name>
@@ -233,7 +233,7 @@
 
     <servlet>
         <servlet-name>getGameServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.rivista.getGameServlet</servlet-class>
+        <servlet-class>rojinaReview.rivista.controller.getGameServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>getGameServlet</servlet-name>
@@ -242,7 +242,7 @@
 
     <servlet>
         <servlet-name>getOrderServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.autenticazione.getOrderServlet</servlet-class>
+        <servlet-class>rojinaReview.autenticazione.controller.getOrderServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>getOrderServlet</servlet-name>
@@ -251,7 +251,7 @@
 
     <servlet>
         <servlet-name>addProductCartServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.shop.addProductCartServlet</servlet-class>
+        <servlet-class>rojinaReview.shop.controller.addProductCartServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>addProductCartServlet</servlet-name>
@@ -260,7 +260,7 @@
 
     <servlet>
         <servlet-name>adminPanel</servlet-name>
-        <servlet-class>rojinaReview.controller.autenticazione.AdminPanel</servlet-class>
+        <servlet-class>rojinaReview.autenticazione.controller.AdminPanel</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>adminPanel</servlet-name>
@@ -269,7 +269,7 @@
 
     <servlet>
         <servlet-name>proceedToOrderServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.shop.proceedToOrderServlet</servlet-class>
+        <servlet-class>rojinaReview.shop.controller.proceedToOrderServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>proceedToOrderServlet</servlet-name>
@@ -278,7 +278,7 @@
 
     <servlet>
         <servlet-name>removeFromCartServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.shop.removeFromCartServlet</servlet-class>
+        <servlet-class>rojinaReview.shop.controller.removeFromCartServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>removeFromCartServlet</servlet-name>
@@ -287,7 +287,7 @@
 
     <servlet>
         <servlet-name>updateProductDisponibilityServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.shop.updateProductDisponibilityServlet</servlet-class>
+        <servlet-class>rojinaReview.shop.controller.updateProductDisponibilityServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>updateProductDisponibilityServlet</servlet-name>
@@ -296,7 +296,7 @@
 
     <servlet>
         <servlet-name>addCommentServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.opinione.addCommentServlet</servlet-class>
+        <servlet-class>rojinaReview.opinione.controller.addCommentServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>addCommentServlet</servlet-name>
@@ -305,7 +305,7 @@
 
     <servlet>
         <servlet-name>confirmOrderServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.shop.confirmOrderServlet</servlet-class>
+        <servlet-class>rojinaReview.shop.controller.confirmOrderServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>confirmOrderServlet</servlet-name>
@@ -315,7 +315,7 @@
 
     <servlet>
         <servlet-name>userChangeDataServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.autenticazione.userChangeDataServlet</servlet-class>
+        <servlet-class>rojinaReview.autenticazione.controller.userChangeDataServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>userChangeDataServlet</servlet-name>
@@ -324,7 +324,7 @@
 
     <servlet>
         <servlet-name>journalistChangeDataServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.autenticazione.journalistChangeDataServlet</servlet-class>
+        <servlet-class>rojinaReview.autenticazione.controller.journalistChangeDataServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>journalistChangeDataServlet</servlet-name>
@@ -333,7 +333,7 @@
 
     <servlet>
         <servlet-name>addVoteServlet</servlet-name>
-        <servlet-class>rojinaReview.controller.opinione.addVoteServlet</servlet-class>
+        <servlet-class>rojinaReview.opinione.controller.addVoteServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>addVoteServlet</servlet-name>
