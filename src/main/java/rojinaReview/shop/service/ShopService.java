@@ -14,7 +14,7 @@ import rojinaReview.model.beans.Prodotto;
 public interface ShopService
 {
     /**
-     * Implementa la funzionalità che permette
+     * Firma del metodo che permette
      * ad Giornalista o un Videogiocatore
      * di visualizzare tutti i prodotti.
      * @return la lista dei prodotti
@@ -22,7 +22,7 @@ public interface ShopService
     List<Prodotto> visualizzaShop();
 
     /**
-     * Implementa la funzionalità che permette
+     * Firma del metodo che permette
      * ad un Giornalista o un Videogiocatore
      * di visualizzare i dati di un prodotto.
      * @param id del prodotto
@@ -31,7 +31,7 @@ public interface ShopService
     Prodotto visualizzaProdotto(int id);
 
     /**
-     * Implementa la funzionalità che permette
+     * Firma del metodo che permette
      * ad un Giornalista
      * di aggiungere un prodotto allo shop
      * @param prodotto info
@@ -39,7 +39,7 @@ public interface ShopService
     void inserisciProdotto(Prodotto prodotto);
 
     /**
-     * Implementa la funzionalità che permette
+     * Firma del metodo che permette
      * ad un Giornalista
      * di aggiungere un prodotto allo shop
      * @param prodotto
@@ -47,7 +47,7 @@ public interface ShopService
     void modificaProdotto(Prodotto prodotto);
 
     /**
-     * Implementa la funzionalità che permette
+     * Firma del metodo che permette
      * ad un Giornalista
      * di rimuovere un prodotto dallo shop
      * @param id del prodotto
@@ -55,7 +55,7 @@ public interface ShopService
     void cancellaProdotto(int id);
 
     /**
-     * Implementa la funzionalità che permette
+     * Firma del metodo che permette
      * ad un Videogicoatore
      * di aggiungere un prodotto al carello
      * @param prodotto da aggiungere al carello
@@ -63,7 +63,7 @@ public interface ShopService
     void aggiungiProdottoAlCarrello(Carrello.ProdottoCarrello prodotto);
 
     /**
-     * Implementa la funzionalità che permette
+     * Firma del metodo che permette
      * ad un Videogicoatore
      * di rimuovere un prodotto al carello
      * @param prodotto da rimuovere dal carello
@@ -71,7 +71,7 @@ public interface ShopService
     void rimuoviProdottoDalCarrello(Carrello.ProdottoCarrello prodotto);
 
     /**
-     * Implementa la funzionalità che permette
+     * Firma del metodo che permette
      * ad un Videogicoatore
      * di rimuovere un prodotto al carello
      * @param carrello da svuotare
@@ -79,7 +79,7 @@ public interface ShopService
     void checkout(Carrello carrello);
 
     /**
-     * Implementa la funzionalità che permette
+     * Firma del metodo che permette
      * ad un Videogicoatore
      * di visualziare gli ordini effettuati
      * @param id del videogiocatore
