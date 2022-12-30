@@ -133,10 +133,10 @@ create table Recensione(
     immagine 		    varchar(100) not null,
     dataScrittura	    date not null,
     votoGiornalista	    float not null,
-    email_giornalista	varchar(100) not null,
+    id_giornalista	    int(100) not null,
     id_videogioco   	int not null,
-    foreign key(email_giornalista)
-       references Giornalista(email)
+    foreign key(id_giornalista)
+       references Giornalista(id)
        on update cascade,
     foreign key(id_videogioco )
        references Videogioco(id)
@@ -151,9 +151,9 @@ create table Notizia(
     testo			    text not null,
     immagine 		    varchar(100) not null,
     dataScrittura	    date not null,
-    email_giornalista	varchar(100) not null,
-    foreign key(email_giornalista)
-        references Giornalista(email)
+    id_giornalista	    int not null,
+    foreign key(id_giornalista)
+        references Giornalista(id)
         on update cascade,
     primary key(id)
 );
