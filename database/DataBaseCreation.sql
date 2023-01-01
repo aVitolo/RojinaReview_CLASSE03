@@ -44,9 +44,9 @@ create table Manager(
 create table Pagamento(
     nome			            varchar(100) not null,
     cognome			            varchar(100) not null,
-    id_videogiocatore		    int not null,
     numeroCarta		            varchar(16) not null,
     dataScadenza	            date,
+    id_videogiocatore		    int not null,
     foreign key(id_videogiocatore)
       references Videogiocatore(id),
     primary key(id_videogiocatore, numeroCarta)
@@ -174,9 +174,9 @@ create table Videogioco_Notizia(
 
 create table Paragrafo(
   id_paragrafo  int auto_increment not null,
-  titolo 	    varchar(100) not null unique ,
+  titolo 	    varchar(100) unique,
   testo		    text not null,
-  immagine 	    varchar(100) not null,
+  immagine 	    varchar(100),
   id_notizia    int,
   id_recensione int,
   foreign key(id_notizia)
@@ -191,8 +191,8 @@ create table Paragrafo(
 );
 
 create table Categoria(
-                          nome    varchar(30),
-                          primary key(nome)
+    nome    varchar(30),
+    primary key(nome)
 );
 
 create table Prodotto(
@@ -312,7 +312,7 @@ create table Commento(
     primary key(id)
 );
 
-create table Segnlazione(
+create table Segnalazione(
     id_commento             int not null,
     id_videogiocatore       int not null,
     motivazione             varchar(50) not null,
@@ -358,9 +358,9 @@ insert into Videogiocatore(email,nickname,password,nome,cognome,immagine,bannato
 
 
 insert into Indirizzo (id_videogiocatore,via,numeroCivico,città,cap) values
-    ("cazzare@yopmail.com", "xxiv maggio", 342, "Poggiomarino", "80040"),
-    ("oefo@yopmail.com", "mattarella", 232, "Striano", "80040"),
-    ("zindre@yopmail.com", "cavour", 342, "Pontecagnano", "80020");
+    (1, "xxiv maggio", 342, "Poggiomarino", "80040"),
+    (3, "mattarella", 232, "Striano", "80040"),
+    (2, "cavour", 342, "Pontecagnano", "80020");
 
 insert into Telefono (id_videogiocatore,numero)values
     ("cazzare@yopmail.com", "3348970852"),
@@ -550,7 +550,7 @@ insert into Videogioco_Genere values
     ("GTA 5", "Giocatore Singolo"),
     ("GTA 5", "VR");
 
-insert into Recensione (testo, email_giornalista, id_videogioco, titolo, votoGiornalista, dataScrittura,immagine) values
+insert into Recensione (testo, id_giornalista, id_videogioco, titolo, votoGiornalista, dataScrittura,immagine) values
     ("Il seguito di Dark Souls I...", "carletta@gmail.com", 2,"Dark Souls torna a colpire",9,"2014-04-11", "./images/reviews/review-Dark Souls II.jpg"),
     ("Dark Souls 3 richiama i...", "franco@gmail.com", 3,"Recensione Dark Souls III",9,"2016-05-12", "./images/reviews/review-Dark Souls III.jpg"),
     ("Sekiro nuova avventura diversa...","carletta@gmail.com", 4,"Il gioco From Software più difficile di sempre",9,"2019-04-22", "./images/reviews/review-Sekiro Shadows Die Twice.jpg"),
@@ -571,7 +571,7 @@ insert into Recensione (testo, email_giornalista, id_videogioco, titolo, votoGio
     ("Dark Souls è un rpg di tutto...", "carletta@gmail.com",1, "Il miglior RPG", 9.5, "2018-01-10", "./images/reviews/review-Dark Souls.jpg");
 
 
-insert into Notizia (testo, email_giornalista, titolo, dataScrittura, immagine) values
+insert into Notizia (testo, id_giornalista, titolo, dataScrittura, immagine) values
     ("Halo Infinite è un gioco...", "mario@gmail.com",  "Halo Infinite e la community tossica","2022-01-24", "./images/news/new-Halo Infinite e la community tossica.jpg"),
     ("Doppiaggio in italiano in...", "mario@gmail.com",   "La Mod italiana per Dark Souls Remastered arriva domani","2021-10-13", "./images/news/new-La Mod italiana per Dark Souls Remastered arriva domani.jpg"),
     ("La nintendo...", "mario@gmail.com", "I tesori di casa Nintendo","2020-03-03", "./images/news/new-I tesori di casa Nintendo.jpg"),
@@ -586,13 +586,13 @@ insert into Videogioco_Notizia (id_notizia, id_videogioco) values
     (6,6),
     (6,5);
 
-insert into Pagamento (nome, cognome, email_videogiocatore, numeroCarta, dataScadenza) values
-    ("Carmine", "Franca", "cazzare@yopmail.com", "1234567812345678", "2024-05-11"),
-    ("Andrea", "Vitolo", "zindre@yopmail.com",   "4324421243244212", "2025-05-11"),
-    ("Fonz", "Cretoso", "oefo@yopmail.com",      "5235213452352134", "2027-03-11");
+insert into Pagamento (nome, cognome, id_videogiocatore, numeroCarta, dataScadenza) values
+    ("Carmine", "Franca", 1, "1234567812345678", "2024-05-11"),
+    ("Andrea", "Vitolo", 2,   "4324421243244212", "2025-05-11"),
+    ("Fonz", "Cretoso", 3,      "5235213452352134", "2027-03-11");
 
 
-insert into Telefono(email_videogiocatore,numero)values
+insert into Telefono(id_videogiocatore,numero)values
      ("cazzare@yopmail.com","3215674357"),
      ("oefo@yopmail.com","4212674357"),
      ("zindre@yopmail.com","3115644357");
@@ -609,7 +609,7 @@ insert into Prodotto (nome, descrizione, disponibilità, prezzo, immagine,  medi
     ("Bracciale Bloodborne", "Stiloso bracciale...", 50, 13.00, "./images/products/Bracciale Bloodborne.jpg", 0, 0,"Abbigliamento"),
     ("Pendente Elden Ring", "Realistico pendente...", 70, 18.00, "./images/products/Pendente Elden Ring.jpg", 0, 0,"Abbigliamento");
 
-insert into Commento(email_videogiocatore,testo, dataScrittura,id_prodotto, id_recensione, id_notizia) values
+insert into Commento(id_videogiocatore,testo, dataScrittura,id_prodotto, id_recensione, id_notizia) values
     ("zindre@yopmail.com", "T-shirt quasi perfetta...", "2022-04-15 22:58:20",3,null,null),
     ("cazzare@yopmail.com",  "Seguo questo link per avere sconti sui videogiochi....", "2018-01-22 12:58:20", 1,null,null),
     ("oefo@yopmail.com", "Tazza discreta poteva...", "2022-05-15 13:58:20", 1,null,null),
@@ -621,23 +621,23 @@ insert into Commento(email_videogiocatore,testo, dataScrittura,id_prodotto, id_r
     ("cazzare@yopmail.com", "Seguo questo link per avere sconti sui videogiochi....", "2020-03-05 12:58:20", null,3,null),
     ("oefo@yopmail.com", "Qualcuno mi da un mano su Sekiro?...", "2022-05-15 13:58:20", null,3,null);
 
-insert into Segnlazione(id_commento, email_videogiocatore, motivazione, commentoAggiuntivo, dataSegnalazione) values
+insert into Segnalazione(id_commento, id_videogiocatore, motivazione, commentoAggiuntivo, dataSegnalazione) values
     (2,"zindre@yopmail.com","spam",null,"2018-01-22 13:58:20"),
     (9,"zindre@yopmail.com","spam",null,"2020-03-05 13:58:20");
 
-insert into Ordine (stato, dataOrdine, totale, numeroCarta_pagamento, email_videogiocatore, via_videogiocatore, numeroCivico_videogiocatore, città_videogiocatore, cap_videogiocatore) values
-    ("in consegna", "2022-05-12",81.20 , "5235213452352134", "oefo@yopmail.com", "mattarella", "232", "Striano", "80040"),
-    ("in transito", "2022-04-12",73.80 , "1234567812346578", "cazzare@yopmail.com", "xxiv maggio", "342", "Poggiomarino", "80040"),
-    ("consegnato", "2022-05-03",30.90 ,  "4324421243244212", "zindre@yopmail.com", "cavour", "342", "Pontecagnano", "80020");
+insert into Ordine (stato, dataOrdine, totale, numeroCarta_pagamento, id_videogiocatore, via_videogiocatore, numeroCivico_videogiocatore, città_videogiocatore, cap_videogiocatore) values
+    ("in consegna", "2022-05-12",81.20 , "5235213452352134", 3, "mattarella", "232", "Striano", "80040"),
+    ("in transito", "2022-04-12",73.80 , "1234567812346578", 1, "xxiv maggio", "342", "Poggiomarino", "80040"),
+    ("consegnato", "2022-05-03",30.90 ,  "4324421243244212", 2, "cavour", "342", "Pontecagnano", "80020");
 
 insert into Prodotto_Ordine (id_prodotto, id_ordine, prezzoAcquisto, quantità)values
     (3, 1, 12.00, 2),
     (1, 1, 9.40, 3),
-    (5, 1, 14.50, 2),
+    (3, 1, 14.50, 2),
     (1, 2, 22.10, 1),
-    (4, 2, 11.20, 4),
+    (1, 2, 11.20, 4),
     (3, 2, 6.90, 1),
-    (4, 3, 8.80, 2),
-    (3, 3, 13.30, 1);   
+    (2, 3, 8.80, 2),
+    (3, 3, 13.30, 1);
 
 
