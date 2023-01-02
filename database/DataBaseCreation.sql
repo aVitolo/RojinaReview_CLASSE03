@@ -134,7 +134,7 @@ create table Recensione(
     dataScrittura	    date not null,
     votoGiornalista	    float not null,
     id_giornalista	    int(100) not null,
-    id_videogioco   	int not null,
+    id_videogioco   	int unique not null,
     foreign key(id_giornalista)
        references Giornalista(id)
        on update cascade,
