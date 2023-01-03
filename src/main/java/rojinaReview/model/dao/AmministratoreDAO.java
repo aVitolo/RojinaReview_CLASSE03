@@ -1,6 +1,6 @@
 package rojinaReview.model.dao;
 
-import rojinaReview.model.beans.Amministratore;
+import rojinaReview.model.beans.Manager;
 import rojinaReview.model.utilities.ConPool;
 import rojinaReview.model.utilities.GenericStaffDAO;
 
@@ -29,7 +29,7 @@ public class AmministratoreDAO implements GenericStaffDAO {
         ResultSet rs = ps.executeQuery();
 
         if (rs.next()) {
-            return new Amministratore(
+            return new Manager(
                     rs.getString("nome"),
                     rs.getString("cognome"),
                     rs.getString("email"),
@@ -40,13 +40,13 @@ public class AmministratoreDAO implements GenericStaffDAO {
         return null;
     }
 
-    public ArrayList<Amministratore> doRetriveAll() throws SQLException, UnsupportedEncodingException {
-        ArrayList<Amministratore> list = new ArrayList<>();
+    public ArrayList<Manager> doRetriveAll() throws SQLException, UnsupportedEncodingException {
+        ArrayList<Manager> list = new ArrayList<>();
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM Amministratore");
 
         while(rs.next()){
-            list.add(new Amministratore(
+            list.add(new Manager(
                     rs.getString("nome"),
                     rs.getString("cognome"),
                     rs.getString("email"),

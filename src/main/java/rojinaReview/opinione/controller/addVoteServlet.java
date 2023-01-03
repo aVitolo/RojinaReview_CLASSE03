@@ -3,9 +3,9 @@ package rojinaReview.opinione.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import rojinaReview.model.beans.Utente;
-import rojinaReview.model.beans.VotoGioco;
-import rojinaReview.model.beans.VotoProdotto;
+import rojinaReview.model.beans.ParereGioco;
+import rojinaReview.model.beans.ParereProdotto;
+import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.dao.VotoDAO;
 
 import java.io.IOException;
@@ -24,11 +24,11 @@ public class addVoteServlet extends HttpServlet {
         String result = "/Rojina_Review_war/getResource?type="+request.getParameter("type")+"&"+"id="+
                 request.getParameter("id")+"&"+"searchDB=true";
         HttpSession session = request.getSession();
-        Utente u = (Utente) session.getAttribute("utente");
+        Videogiocatore u = (Videogiocatore) session.getAttribute("utente");
         String table = request.getParameter("table");
 
         if(table.equals("gioco")){
-            VotoGioco vg = new VotoGioco();
+            ParereGioco vg = new ParereGioco();
             vg.setGioco(request.getParameter("nomeGioco"));
             vg.setUtente(u.getEmail());
             vg.setDataVotazione(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
@@ -41,7 +41,7 @@ public class addVoteServlet extends HttpServlet {
             }
         }
         else if(table.equals("prodotto")){
-            VotoProdotto vp = new VotoProdotto();
+            ParereProdotto vp = new ParereProdotto();
             vp.setId(Integer.parseInt(request.getParameter("id")));
             vp.setUtente(u.getEmail());
             vp.setDataVotazione(new java.sql.Date(Calendar.getInstance().getTime().getTime()));

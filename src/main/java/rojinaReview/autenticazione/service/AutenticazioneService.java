@@ -17,31 +17,31 @@ public interface AutenticazioneService {
      * @param password dell'utente da loggare
      * @return utente loggato
      */
-    Utente login(String email, String password);
+    Videogiocatore login(String email, String password);
 
     /**
      * Firma del metodo che permette di
      * identificare un videogiocatore
-     * @param utente registrato salvato nella sessione
+     * @param videogiocatore registrato salvato nella sessione
      * @return true se l'utente è un videogiocatore altrimenti false
      */
-    boolean isVideogiocatore(Utente utente);
+    boolean isVideogiocatore(Videogiocatore videogiocatore);
 
     /**
      * Firma del metodo che permette di
      * identificare un giornalista
-     * @param utente registrato salvato nella sessione
+     * @param videogiocatore registrato salvato nella sessione
      * @return true se l'utente è un giornalista altrimenti false
      */
-    boolean isGiornalista(Utente utente);
+    boolean isGiornalista(Videogiocatore videogiocatore);
 
     /**
      * Firma del metodo che permette di
      * identificare un manager
-     * @param utente registrato salvato nella sessione
+     * @param videogiocatore registrato salvato nella sessione
      * @return true se l'utente è un manager altrimenti false
      */
-    boolean isManager(Utente utente);
+    boolean isManager(Videogiocatore videogiocatore);
 
     /**
      * Firma del metodo che permette di

@@ -265,7 +265,7 @@ create table Prodotto_Ordine(
 
 create table Parere(
     id                      int auto_increment not null,
-    voto                    float not null,
+    parere                    float not null,
     dataVotazione           date not null,
     id_videogiocatore       int not null,
     id_videogioco           int,
@@ -282,7 +282,7 @@ create table Parere(
        references Videogiocatore(id)
        on update cascade,
     primary key(id),
-    check (voto<=10 and voto>=1)
+    check (parere<=10 and parere>=1)
 );
 
 create table Commento(
@@ -354,7 +354,7 @@ insert into Videogiocatore(email,nickname,password,nome,cognome,immagine,bannato
     ("zindre@yopmail.com","BlackDeath",SHA2('jofhouefwpoj',256), null, null, "./images/users/BlackDeath.png",0),
     ("cazzare@yopmail.com","AbyssWalker",SHA2('cazzare',256), "Carmine", "Franca",  "./images/users/AbyssWalker.png",0),
     ("oefo@yopmail.com","Papiciacra",SHA2('piefwhouefoj',256), "Fonz", "Cretoso", "./images/users/Papiciacra.png",0),
-    ("utente@gmail.com","User",SHA2('password',256), "Persona", "Normale", null,0);
+    ("videogiocatore@gmail.com","User",SHA2('password',256), "Persona", "Normale", null,0);
 
 
 insert into Indirizzo (id_videogiocatore,via,numeroCivico,città,cap) values

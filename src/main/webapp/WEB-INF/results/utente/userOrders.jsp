@@ -4,17 +4,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Area utente</title>
+    <title>Area videogiocatore</title>
     <link rel="stylesheet" href="./css/master.css">
     <link rel="stylesheet" href="./css/orders.css">
 </head>
 <body>
-<%@ include file="/WEB-INF/results/utente/userArea.jsp" %>
-<c:set var="utente" scope="page" value="${sessionScope['utente']}" />
+<%@ include file="/WEB-INF/results/videogiocatore/userArea.jsp" %>
+<c:set var="videogiocatore" scope="page" value="${sessionScope['videogiocatore']}" />
 
     <h1 class="currentMenuName">Ordini</h1>
     <div class="orders">
-        <c:forEach items="${utente.ordini}" var="ordine">
+        <c:forEach items="${videogiocatore.ordini}" var="ordine">
             <div class="order">
                 <section class="resume top">
                     <h3 class="orderId">${ordine.id}</h3>

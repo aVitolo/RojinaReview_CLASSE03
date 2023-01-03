@@ -4,7 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.Ordine;
-import rojinaReview.model.beans.Utente;
+import rojinaReview.model.beans.Videogiocatore;
 
 import java.io.IOException;
 
@@ -15,7 +15,7 @@ public class getOrderServlet extends HttpServlet {
         String result = "/WEB-INF/results/ordine.jsp";
         String home = "./home";
         int id = Integer.parseInt(request.getParameter("id"));
-        Utente u = (Utente) request.getSession().getAttribute("utente");
+        Videogiocatore u = (Videogiocatore) request.getSession().getAttribute("utente");
         if(u == null)
             response.sendRedirect(home);
 

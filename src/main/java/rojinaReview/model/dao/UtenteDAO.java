@@ -1,6 +1,6 @@
 package rojinaReview.model.dao;
 
-import rojinaReview.model.beans.Utente;
+import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.utilities.ConPool;
 
 import java.io.UnsupportedEncodingException;
@@ -22,13 +22,13 @@ public class UtenteDAO {
         this.con = con;
     }
 
-    public Utente doRetriveByEmail(String email) throws SQLException, UnsupportedEncodingException {
+    public Videogiocatore doRetriveByEmail(String email) throws SQLException, UnsupportedEncodingException {
         PreparedStatement ps =
                 con.prepareStatement("SELECT * FROM Utente WHERE email=?");
         ps.setString(1, email);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            return new Utente(
+            return new Videogiocatore(
                     rs.getInt("età"),
                     rs.getString("email"),
                     rs.getString("nickname"),
@@ -47,14 +47,14 @@ public class UtenteDAO {
         return null;
     }
 
-    public Utente doRetriveByNickname(String nickname) throws SQLException, UnsupportedEncodingException {
+    public Videogiocatore doRetriveByNickname(String nickname) throws SQLException, UnsupportedEncodingException {
         PreparedStatement ps =
                 con.prepareStatement("SELECT * FROM Utente WHERE nickname=?");
         ps.setString(1, nickname);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             String email = rs.getString("email");
-            return new Utente(
+            return new Videogiocatore(
                     rs.getInt("età"),
                     rs.getString("email"),
                     rs.getString("nickname"),
@@ -73,7 +73,7 @@ public class UtenteDAO {
         return null;
     }
 
-    public boolean doInsertUser(Utente user) throws SQLException {
+    public boolean doInsertUser(Videogiocatore user) throws SQLException {
         PreparedStatement ps =
                 con.prepareStatement("INSERT INTO Utente VALUES(?,?,?,null,null,null,null)");
         ps.setString(1, user.getEmail());
@@ -83,13 +83,13 @@ public class UtenteDAO {
         return i == 1;
     }
 
-    public ArrayList<Utente> doRetriveAll() throws SQLException, UnsupportedEncodingException {
-        ArrayList<Utente> list = new ArrayList<>();
+    public ArrayList<Videogiocatore> doRetriveAll() throws SQLException, UnsupportedEncodingException {
+        ArrayList<Videogiocatore> list = new ArrayList<>();
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM Utente");
 
         while(rs.next()){
-            list.add(new Utente(rs.getString("nome"),
+            list.add(new Videogiocatore(rs.getString("nome"),
                     rs.getString("cognome"),
                     rs.getString("email"),
                     rs.getString("pass"),

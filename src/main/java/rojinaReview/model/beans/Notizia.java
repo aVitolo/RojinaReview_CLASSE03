@@ -3,6 +3,7 @@ package rojinaReview.model.beans;
 import rojinaReview.model.utilities.Articolo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class Notizia extends Articolo {
@@ -10,42 +11,34 @@ public class Notizia extends Articolo {
 
     /* Attributes */
 
-    private ArrayList<String> giochi;
+    private HashMap<Integer,String> giochi;
     /* Constructor */
-
-    public Notizia() {
+    public Notizia(){
+        super();
     }
-
     public Notizia(ArrayList<Commento> commenti,
-                   ArrayList<String> giochi,
+                   HashMap<Integer,String> giochi,
                    String immagine,
                    java.sql.Date dataCaricamento,
-                   Videogioco gioco,
+                   String nomeVideogioco,
+                   int idVideogioco,
                    int id,
                    String testo,
                    String titolo,
                    String giornalista,
-                   String immagineGiornalista
-                   ) {
-        super(commenti,
-                immagine,
-                dataCaricamento,
-                gioco,
-                id,
-                testo,
-                titolo,
-                giornalista,
-                immagineGiornalista);
+                   String immagineGiornalista,
+                    ArrayList<Paragrafo> paragrafi) {
+        super(commenti, immagine, dataCaricamento, nomeVideogioco,idVideogioco, id, testo, titolo, giornalista, immagineGiornalista,paragrafi);
         this.giochi = giochi;
     }
 
     /* Getter and Setter */
 
-    public ArrayList<String> getGiochi() {
+    public HashMap<Integer,String> getGiochi() {
         return giochi;
     }
 
-    public void setGiochi(ArrayList<String> giochi) {
+    public void setGiochi(HashMap<Integer,String> giochi) {
         this.giochi = giochi;
     }
 }

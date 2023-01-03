@@ -38,7 +38,7 @@
                         <h2><c:out value='${copertina.titolo}'/></h2>
                         <p><c:out value='${fn:substring(copertina.testo, 0, 50)}'/></p>
                         <c:if test="${copertina.getClass().simpleName =='Recensione'}">
-                            <p class="voto">${copertina.voto}</p>
+                            <p class="parere">${copertina.parere}</p>
                         </c:if>
                     </div>
                 </a>
@@ -63,7 +63,7 @@
                             <h2>${articolo.titolo}</h2>
                             <p>${fn:substring(articolo.testo, 0, 50)}</p>
                             <c:if test="${articolo.getClass().simpleName =='Recensione'}">
-                                <p class="voto">${articolo.voto}</p>
+                                <p class="parere">${articolo.parere}</p>
                             </c:if>
                         </div>
                     </a>

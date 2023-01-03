@@ -2,9 +2,14 @@ package rojinaReview.opinione.service;
 
 import rojinaReview.model.beans.Commento;
 import rojinaReview.model.beans.Segnalazione;
-import rojinaReview.model.utilities.Voto;
+import rojinaReview.model.beans.Parere;
 
 import java.util.List;
+
+/**
+ * @author Carmine Pio Nardo
+ * Interfaccia per i metodi del sottosistema Opinione.
+ */
 
 public interface OpinioneService {
     /**
@@ -35,11 +40,11 @@ public interface OpinioneService {
     /**
      * Firma del metodo che permette di
      * inserire un parere ad un videogioco o ad un prodotto
-     * @param voto il voto da inserire nel database
+     * @param parere il voto da inserire nel database
      * @param flag flag che serve a capire se il voto si riferisce ad un prodotto o ad un vidogioco
      *
      */
-    void inserisciVoto(Voto voto, int flag);
+    void inserisciVoto(Parere parere, int flag);
 
     /**
      * Firma del metodo che permette di
@@ -47,7 +52,7 @@ public interface OpinioneService {
      * @param id id dell'utente della quale visualizzare i voti
      * @return lista dei voti dell'utente
      */
-    List<Voto> visualizzaVoti(int id);
+    List<Parere> visualizzaVoti(int id);
 
     /**
      * Firma del metodo che permette di

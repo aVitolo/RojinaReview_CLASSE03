@@ -4,7 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.Carrello;
-import rojinaReview.model.beans.Utente;
+import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.dao.UtenteDAO;
 
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 @WebServlet(name = "userCreationCheckServlet", value = "/userCreationCheckServlet")
 public class RegistrationUser extends HttpServlet {
-    private Utente tmp;
+    private Videogiocatore tmp;
     private String registrationErrata = "./registerUser.jsp";
     private String homePage = "./home";
 
@@ -79,8 +79,8 @@ public class RegistrationUser extends HttpServlet {
                     dispatcher.forward(request, response);
                 } else {
                     //Utente ha passato tutti i controlli e può essere registrato nel DB
-                    String passHash = Utente.calcolaHash(password);
-                    Utente tmpUser = new Utente(email, passHash, nickname);
+                    String passHash = Videogiocatore.calcolaHash(password);
+                    Videogiocatore tmpUser = new Videogiocatore(email, passHash, nickname);
 
                     UtenteDAO uDao = new UtenteDAO();
                     if (uDao.doInsertUser(tmpUser) == true) {

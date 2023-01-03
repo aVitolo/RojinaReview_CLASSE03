@@ -1,5 +1,9 @@
 package rojinaReview.model.beans;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Commento {
 
     /* Attributes */
@@ -7,8 +11,11 @@ public class Commento {
     private int id;
     private java.sql.Timestamp data;
     private String testo;
-    private String utente;
-    private String resource; //oggetto a cui fa riferimento: notizia, recensione, prodotto
+    private int idVideogiocatore;
+    private String videogiocatore;
+    private int idContenuto;
+    private String nomeContenuto;
+    private List<Segnalazione> segnalazioni;
 
 
 
@@ -18,38 +25,15 @@ public class Commento {
 
     }
 
-    public Commento(String testo, String utente, java.sql.Timestamp data, int id, String resource) {
-        this.testo = testo;
-        this.utente = utente;
-        this.data = data;
+    public Commento(int id, Timestamp data, String testo, int idVideogiocatore, String videogiocatore, int idContenuto, String nomeContenuto) {
         this.id = id;
-        this.resource = resource;
-    }
-
-    /* Getter & Setter */
-
-    public String getTesto() {
-        return testo;
-    }
-
-    public void setTesto(String testo) {
-        this.testo = testo;
-    }
-
-    public String getUtente() {
-        return utente;
-    }
-
-    public void setUtente(String utente) {
-        this.utente = utente;
-    }
-
-    public java.sql.Timestamp getData() {
-        return data;
-    }
-
-    public void setData(java.sql.Timestamp data) {
         this.data = data;
+        this.testo = testo;
+        this.idVideogiocatore = idVideogiocatore;
+        this.videogiocatore = videogiocatore;
+        this.idContenuto = idContenuto;
+        this.nomeContenuto = nomeContenuto;
+        this.segnalazioni = new ArrayList<>();
     }
 
     public int getId() {
@@ -60,11 +44,59 @@ public class Commento {
         this.id = id;
     }
 
-    public String getResource() {
-        return resource;
+    public Timestamp getData() {
+        return data;
     }
 
-    public void setResource(String resource) {
-        this.resource = resource;
+    public void setData(Timestamp data) {
+        this.data = data;
+    }
+
+    public String getTesto() {
+        return testo;
+    }
+
+    public void setTesto(String testo) {
+        this.testo = testo;
+    }
+
+    public int getIdVideogiocatore() {
+        return idVideogiocatore;
+    }
+
+    public void setIdVideogiocatore(int idVideogiocatore) {
+        this.idVideogiocatore = idVideogiocatore;
+    }
+
+    public String getVideogiocatore() {
+        return videogiocatore;
+    }
+
+    public void setVideogiocatore(String videogiocatore) {
+        this.videogiocatore = videogiocatore;
+    }
+
+    public int getIdContenuto() {
+        return idContenuto;
+    }
+
+    public void setIdContenuto(int idContenuto) {
+        this.idContenuto = idContenuto;
+    }
+
+    public String getNomeContenuto() {
+        return nomeContenuto;
+    }
+
+    public void setNomeContenuto(String nomeContenuto) {
+        this.nomeContenuto = nomeContenuto;
+    }
+
+    public List<Segnalazione> getSegnalazioni() {
+        return segnalazioni;
+    }
+
+    public void setSegnalazioni(List<Segnalazione> segnalazioni) {
+        this.segnalazioni = segnalazioni;
     }
 }

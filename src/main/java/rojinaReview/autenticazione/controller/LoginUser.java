@@ -7,8 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import rojinaReview.model.beans.Carrello;
+import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.utilities.Persona;
-import rojinaReview.model.beans.Utente;
 import rojinaReview.model.dao.UtenteDAO;
 
 import java.io.IOException;
@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class LoginUser extends HttpServlet {
-    private Utente tmp;
+    private Videogiocatore tmp;
     private String loginErrato = "./userLogin.jsp";
     private String homePage = "./home";
 

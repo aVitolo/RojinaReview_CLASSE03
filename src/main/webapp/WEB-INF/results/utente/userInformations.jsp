@@ -2,18 +2,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Area utente</title>
+    <title>Area videogiocatore</title>
     <link rel="stylesheet" href=".css/master.css">
 </head>
 <body>
-<c:set var="utente" scope="page" value="${sessionScope['utente']}" />
-<%@ include file="/WEB-INF/results/utente/userArea.jsp" %>
+<c:set var="videogiocatore" scope="page" value="${sessionScope['videogiocatore']}" />
+<%@ include file="/WEB-INF/results/videogiocatore/userArea.jsp" %>
 <div class="menu">
     <h1 class="currentMenuName">Informazioni Utente</h1>
     <div class="informations">
         <div class="addresses">
             <h3 class="userAttribute">Indirizzi:</h3>
-            <c:forEach items="${utente.indirizzi}" var="indirizzo">
+            <c:forEach items="${videogiocatore.indirizzi}" var="indirizzo">
                 <div class="address">
                     ${indirizzo.via} ${indirizzo.numeroCivico} ${indirizzo.città} ${indirizzo.cap}
                 </div>
@@ -35,7 +35,7 @@
         </div>
         <div class="numbers">
             <h3 class="userAttribute">Telefoni:</h3>
-            <c:forEach items="${utente.telefoni}" var="telefono">
+            <c:forEach items="${videogiocatore.telefoni}" var="telefono">
                 <div class="number">
                     ${telefono.numero}
                 </div>
@@ -51,7 +51,7 @@
         </div>
         <div class="paymentMethods">
             <h3 class="userAttribute">Metodi di pagamento:</h3>
-            <c:forEach items="${utente.pagamenti}" var="pagamento">
+            <c:forEach items="${videogiocatore.pagamenti}" var="pagamento">
                 <div class="paymentMethod">
                     ${pagamento.nome} ${pagamento.cognome} ${pagamento.numeroCarta} ${pagamento.dataScadenza}
                 </div>

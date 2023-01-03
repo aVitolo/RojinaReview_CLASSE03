@@ -12,8 +12,8 @@
 <body>
 <%@ include file="/WEB-INF/results/utilities/navebar.jsp" %>
 <c:choose>
-    <c:when test="${sessionScope.get('utente') != null}">
-        <c:set var="carello" scope="page" value="${sessionScope['utente'].carrello}" />
+    <c:when test="${sessionScope.get('videogiocatore') != null}">
+        <c:set var="carello" scope="page" value="${sessionScope['videogiocatore'].carrello}" />
     </c:when>
     <c:otherwise>
         <c:set var="carello" scope="page" value="${sessionScope['ospite']}" />
@@ -23,7 +23,7 @@
 <c:choose>
     <c:when test="${carello.prodotti.size() > 0}">
     <section class="order">
-        <c:if test="${sessionScope.get('utente') == null}">
+        <c:if test="${sessionScope.get('videogiocatore') == null}">
             <h2 id="notLogged">Devi essere loggato per continuare con l'acquisto</h2>
         </c:if>
         <div class="products">
@@ -57,11 +57,11 @@
             </c:forEach>
             <h1 id="tot" style="text-align: center">Totale ${carello.totale} </h1>
         </div>
-        <c:if test="${sessionScope.get('utente') != null}">
+        <c:if test="${sessionScope.get('videogiocatore') != null}">
             <form method="post" action="/Rojina_Review_war/confirmOrder">
                 <div class="address">
                     <h2>Indirizzo di spedizione</h2>
-                    <c:forEach items="${sessionScope['utente'].indirizzi}" var="indirizzo" varStatus="loop">
+                    <c:forEach items="${sessionScope['videogiocatore'].indirizzi}" var="indirizzo" varStatus="loop">
                         <input class="boxed" type="radio" id="address${loop.index}" name="address">
                         <label for="address${loop.index}" onclick='autoFill("${indirizzo.via}","${indirizzo.numeroCivico}","${indirizzo.città}","${indirizzo.cap}","newAddress")'>
                                 ${indirizzo.via} ${indirizzo.numeroCivico} ${indirizzo.città} ${indirizzo.cap}
@@ -92,7 +92,7 @@
                 </div>
                 <div class="payment">
                     <h2>Metodo di Pagamento</h2>
-                    <c:forEach items="${sessionScope['utente'].pagamenti}" var="pagamento" varStatus="loop">
+                    <c:forEach items="${sessionScope['videogiocatore'].pagamenti}" var="pagamento" varStatus="loop">
                         <input class="boxed" type="radio" id="payment${loop.index}" name="payment">
                         <label for="payment${loop.index}" onclick='autoFill("${pagamento.nome}", "${pagamento.cognome}", "${pagamento.numeroCarta}"," ${pagamento.dataScadenza}","newPayment")'>
                                 ${pagamento.nome} ${pagamento.cognome} ${pagamento.numeroCarta} ${pagamento.dataScadenza}

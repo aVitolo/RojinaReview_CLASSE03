@@ -52,7 +52,7 @@
                 <div class="articolo-content">
                     <h2>${articolo.titolo}</h2>
                     <p>${articolo.casaDiSviluppo}</p>
-                    <p class="voto">${articolo.mediaVoto}</p>
+                    <p class="parere">${articolo.mediaVoto}</p>
                 </div>
             </div>
         </c:forEach>

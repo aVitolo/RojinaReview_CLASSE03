@@ -10,7 +10,7 @@
     int canDo = 0; //ospite
     if(session.getAttribute("giornalista") != null || session.getAttribute("admin") != null)
         canDo = 2;
-    else if(session.getAttribute("utente") != null)
+    else if(session.getAttribute("videogiocatore") != null)
         canDo = 1;%>
 <head>
     <title><%=n.getTitolo()%>

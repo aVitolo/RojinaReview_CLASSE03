@@ -1,9 +1,9 @@
 package rojinaReview.model.dao;
 
-import rojinaReview.model.beans.VotoGioco;
-import rojinaReview.model.beans.VotoProdotto;
+import rojinaReview.model.beans.ParereProdotto;
+import rojinaReview.model.beans.ParereGioco;
 import rojinaReview.model.utilities.ConPool;
-import rojinaReview.model.utilities.Voto;
+import rojinaReview.model.beans.Parere;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,15 +23,15 @@ public class VotoDAO {
         this.con = con;
     }
 
-    public ArrayList<Voto> doRetrieveByUser(String utente) throws SQLException {
-        ArrayList<Voto> voti = new ArrayList<>();
+    public ArrayList<Parere> doRetrieveByUser(String utente) throws SQLException {
+        ArrayList<Parere> voti = new ArrayList<>();
         PreparedStatement ps = con.prepareStatement("SELECT * FROM voto WHERE utente=?");
         ps.setString(1, utente);
         ResultSet rs = ps.executeQuery();
 
         while (rs.next())
         {
-            VotoGioco voto = new VotoGioco();
+            ParereGioco voto = new ParereGioco();
             voto.setGioco(rs.getString(1));
             voto.setUtente(utente);
             voto.setVoto(rs.getFloat(3));
@@ -46,7 +46,7 @@ public class VotoDAO {
 
         while (rs.next())
         {
-            VotoProdotto voto = new VotoProdotto();
+            ParereProdotto voto = new ParereProdotto();
             voto.setId(rs.getInt(1));
             voto.setUtente(utente);
             voto.setVoto(rs.getFloat(3));
@@ -61,8 +61,8 @@ public class VotoDAO {
     }
 
     //table Gioco, Prodotto
-    public Voto doRetrieveByUserAndIDTable(String user, String id, String table) throws SQLException {
-        Voto v = null;
+    public Parere doRetrieveByUserAndIDTable(String user, String id, String table) throws SQLException {
+        Parere v = null;
         PreparedStatement ps;
         ResultSet rs;
         if(table.equalsIgnoreCase("gioco"))
@@ -73,8 +73,8 @@ public class VotoDAO {
             rs = ps.executeQuery();
 
             if(rs.next()){
-                v = new VotoGioco();
-                VotoGioco vg = (VotoGioco) v;
+                v = new ParereGioco();
+                ParereGioco vg = (ParereGioco) v;
                 vg.setGioco(rs.getString(1));
                 vg.setUtente(rs.getString(2));
                 vg.setVoto(rs.getFloat(3));
@@ -90,8 +90,8 @@ public class VotoDAO {
             rs = ps.executeQuery();
 
             if(rs.next()){
-                v = new VotoProdotto();
-                VotoProdotto vp = (VotoProdotto) v;
+                v = new ParereProdotto();
+                ParereProdotto vp = (ParereProdotto) v;
                 vp.setId(rs.getInt(1));
                 vp.setUtente(rs.getString(2));
                 vp.setVoto(rs.getFloat(3));
@@ -103,13 +103,13 @@ public class VotoDAO {
         return v;
     }
 
-    public void doSave(Voto v, String table) throws SQLException {
+    public void doSave(Parere v, String table) throws SQLException {
         PreparedStatement ps;
         float votoPrecedente = 0;
         int increment = 1;
         if(table.equalsIgnoreCase("gioco"))
         {
-            VotoGioco votogioco = (VotoGioco) v;
+            ParereGioco votogioco = (ParereGioco) v;
             //cancellazione voto precedente
             ps = con.prepareStatement("SELECT voto FROM voto WHERE utente=? && gioco=?");
             ps.setString(1, votogioco.getUtente());
@@ -144,7 +144,7 @@ public class VotoDAO {
         }
         else if(table.equalsIgnoreCase("prodotto"))
         {
-            VotoProdotto votoprodotto = (VotoProdotto) v;
+            ParereProdotto votoprodotto = (ParereProdotto) v;
             //cancellazione voto precedente
             ps = con.prepareStatement("SELECT voto FROM gradimento WHERE utente=? && prodotto=?");
             ps.setString(1, votoprodotto.getUtente());

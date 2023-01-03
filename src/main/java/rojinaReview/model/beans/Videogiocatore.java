@@ -5,31 +5,33 @@ import rojinaReview.model.utilities.Persona;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-public class Utente extends Persona {
+public class Videogiocatore extends Persona {
     static public String[] fieldsName = {"Email","Nickname","Password Hash","Nome","Cognome","Età"};
 
     private ArrayList<Indirizzo> indirizzi;
     private ArrayList<Telefono> telefoni;
     private ArrayList<Pagamento> pagamenti;
     private ArrayList<Ordine> ordini;
+    private ArrayList<Commento> commenti;
+    private ArrayList<Parere> voti;
     private Carrello carrello;
     private int eta;
+    private boolean bannato;
     private String nickname;
-    private String immagine;
 
 
     /* Costructor */
 
-    public Utente() {
+    public Videogiocatore() {
         super();
     }
 
-    public Utente(String email, String password, String nickname) {
+    public Videogiocatore(String email, String password, String nickname) {
         super(email, password);
         this.nickname = nickname;
     }
 
-    public Utente(String nome, String cognome, String email, String password, int eta, String nickname) throws UnsupportedEncodingException {
+    public Videogiocatore(String nome, String cognome, String email, String password, int eta, String nickname) throws UnsupportedEncodingException {
         super(nome, cognome, email, password);
         this.eta = eta;
         this.nickname = nickname;
@@ -37,20 +39,20 @@ public class Utente extends Persona {
 
     /* Contructor for insert in DB */
 
-    public Utente(int eta,
-                  String email,
-                  String nickname,
-                  String nome,
-                  String cognome,
-                  String password,
-                  ArrayList<Indirizzo> indirizzi,
-                  ArrayList<Telefono> telefoni,
-                  ArrayList<Pagamento> pagamenti,
-                  ArrayList<Ordine> ordini,
-                  Carrello carrello,
-                  String immagine)
+    public Videogiocatore(int eta,
+                          String email,
+                          String nickname,
+                          String nome,
+                          String cognome,
+                          String password,
+                          ArrayList<Indirizzo> indirizzi,
+                          ArrayList<Telefono> telefoni,
+                          ArrayList<Pagamento> pagamenti,
+                          ArrayList<Ordine> ordini,
+                          Carrello carrello,
+                          String immagine)
             throws UnsupportedEncodingException {
-        super(nome, cognome, email, password);
+        super(nome, cognome, email, password, immagine);
         this.eta = eta;
         this.nickname = nickname;
         this.indirizzi = indirizzi;
@@ -58,7 +60,6 @@ public class Utente extends Persona {
         this.pagamenti = pagamenti;
         this.ordini = ordini;
         this.carrello = carrello;
-        this.immagine = immagine;
 
     }
 
@@ -121,10 +122,10 @@ public class Utente extends Persona {
     }
 
     public String getImmagine() {
-        return immagine;
+        return super.getImmagine();
     }
 
     public void setImmagine(String immagine) {
-        this.immagine = immagine;
+        super.setImmagine(immagine);
     }
 }

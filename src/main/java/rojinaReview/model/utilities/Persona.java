@@ -11,6 +11,7 @@ public abstract class Persona {
     private String cognome;
     private String email;
     private String password;
+    private String immagine;
 
     public Persona() {
     }
@@ -25,6 +26,14 @@ public abstract class Persona {
         this.cognome = cognome;
         this.email = email;
         this.password = password;
+    }
+
+    public Persona(String nome, String cognome, String email, String password, String immagine) throws UnsupportedEncodingException {
+        this.nome = nome;
+        this.cognome = cognome;
+        this.email = email;
+        this.password = password;
+        this.immagine=immagine;
     }
 
     public String getNome() {
@@ -57,6 +66,14 @@ public abstract class Persona {
 
     public void setPassword(String password) throws UnsupportedEncodingException {
         this.password = Persona.calcolaHash(password);
+    }
+
+    public String getImmagine() {
+        return immagine;
+    }
+
+    public void setImmagine(String immagine) {
+        this.immagine = immagine;
     }
 
     /* Password Hashing */

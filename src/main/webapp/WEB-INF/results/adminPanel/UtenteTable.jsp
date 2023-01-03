@@ -1,16 +1,17 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="rojinaReview.model.beans.Utente" %>
+<%@ page import="rojinaReview.model.beans.Videogiocatore" %>
+<%@ page import="rojinaReview.model.beans.Videogiocatore" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% ArrayList< Utente > list = (ArrayList<Utente>)request.getAttribute("list");%>
+<% ArrayList<Videogiocatore> list = (ArrayList<Videogiocatore>)request.getAttribute("list");%>
 <table>
     <tr>
-        <%for(String s : Utente.fieldsName){%>
+        <%for(String s : Videogiocatore.fieldsName){%>
         <th><%=s%></th>
         <%}%>
         <th id="search" onclick="search()">🔍</th>
         <th id="add" onclick="add()">➕️</th>
     </tr>
-        <%for(Utente a : list){%>
+        <%for(Videogiocatore a : list){%>
     <tr id="<%=a.getEmail()%>">
         <td>
             <%= a.getEmail()%>

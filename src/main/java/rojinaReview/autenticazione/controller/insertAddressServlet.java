@@ -4,7 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.Indirizzo;
-import rojinaReview.model.beans.Utente;
+import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.dao.IndirizzoDAO;
 
 import java.io.IOException;
@@ -20,7 +20,7 @@ public class insertAddressServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String result = "/Rojina_Review_war/userInformations";
-        Utente u = (Utente) request.getSession().getAttribute("utente");
+        Videogiocatore u = (Videogiocatore) request.getSession().getAttribute("utente");
         Indirizzo i = new Indirizzo();
 
         i.setVia(request.getParameter("via"));

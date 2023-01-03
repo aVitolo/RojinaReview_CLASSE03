@@ -4,7 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import rojinaReview.model.beans.Carrello;
 import rojinaReview.model.beans.Prodotto;
-import rojinaReview.model.beans.Utente;
+import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.dao.ProdottoDAO;
 
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class addProductCartServlet extends HttpServlet {
             HttpSession session = request.getSession();
             Carrello carrello;
             if (session.getAttribute("utente") != null) {
-                Utente u = (Utente) session.getAttribute("utente");
+                Videogiocatore u = (Videogiocatore) session.getAttribute("utente");
                 carrello = u.getCarrello();
             } else {
                 if (session.getAttribute("ospite") == null) {

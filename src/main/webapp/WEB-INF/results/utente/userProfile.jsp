@@ -3,42 +3,42 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Area utente</title>
+    <title>Area videogiocatore</title>
     <link rel="stylesheet" href="./css/master.css">
 </head>
 <body>
-<c:set var="utente" scope="page" value="${sessionScope.get('utente')}" />
-<%@ include file="/WEB-INF/results/utente/userArea.jsp" %>
+<c:set var="videogiocatore" scope="page" value="${sessionScope.get('videogiocatore')}" />
+<%@ include file="/WEB-INF/results/videogiocatore/userArea.jsp" %>
 <div class="menu">
     <h1 class="currentMenuName">Profilo</h1>
     <div class="information">
         <div>
             <h3 class="userAttribute">Nickname:</h3>
-            ${utente.nickname}
+            ${videogiocatore.nickname}
         </div>
         <div class="userEmail">
             <h3 class="userAttribute">Email:</h3>
-            ${utente.email}
+            ${videogiocatore.email}
         </div>
 
         <div class="userImage">
-            <img src="${utente.immagine}", alt="userImage">
+            <img src="${videogiocatore.immagine}", alt="userImage">
         </div>
 
 
 
 
 
-        <c:if test="${utente.nome != null}">
+        <c:if test="${videogiocatore.nome != null}">
             <div>
                 <h3 class="userAttribute">Nome:</h3>
-                ${utente.nome} ${utente.cognome}
+                ${videogiocatore.nome} ${videogiocatore.cognome}
             </div>
         </c:if>
-        <c:if test="${utente.eta != 0}">
+        <c:if test="${videogiocatore.eta != 0}">
             <div class="userEtà">
                 <h3 class="userAttribute">Età:</h3>
-                    ${utente.eta}
+                    ${videogiocatore.eta}
             </div>
         </c:if>
 

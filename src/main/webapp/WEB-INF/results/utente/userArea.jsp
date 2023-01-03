@@ -1,18 +1,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%if(session.getAttribute("utente") == null) //se non sei utente non puoi entrare nell'area utente
+<%if(session.getAttribute("videogiocatore") == null) //se non sei videogiocatore non puoi entrare nell'area videogiocatore
     response.sendRedirect("./home");%>
-<c:set var="utente" scope="page" value="${sessionScope.get('utente')}" />
+<c:set var="videogiocatore" scope="page" value="${sessionScope.get('videogiocatore')}" />
 <html>
 <head>
-    <title>Area utente</title>
+    <title>Area videogiocatore</title>
     <link rel="stylesheet" href="./css/master.css">
     <link rel="stylesheet" href="./css/userArea.css">
 </head>
 <body>
 <div class="sidebar">
-    <header>${utente.nickname}</header>
+    <header>${videogiocatore.nickname}</header>
 
 
     <div id="homeButton">

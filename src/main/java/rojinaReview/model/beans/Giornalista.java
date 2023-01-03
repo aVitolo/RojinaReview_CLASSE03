@@ -8,20 +8,26 @@ public class Giornalista extends Persona {
     static public String[] fieldsName = {"Id","Nome","Cognome","Email","Password Hash"};
 
     private int id;
-    private String immagine;
+
+    private boolean verificato;
 
     public Giornalista() {
         super();
     }
 
     public Giornalista(String nome, String cognome, String email, String password, String immagine, int id) throws UnsupportedEncodingException {
-        super(nome, cognome, email, password);
-        this.immagine = immagine;
+        super(nome, cognome, email, password, immagine);
         this.id = id;
     }
 
+    public Giornalista(String nome, String cognome, String email, String password, String immagine, int id, boolean verificato) throws UnsupportedEncodingException {
+        super(nome, cognome, email, password, immagine);
+        this.id = id;
+        this.verificato=verificato;
+    }
+
     public String getImmagine() {
-        return immagine;
+        return super.getImmagine();
     }
 
     public int getId() {
@@ -29,10 +35,16 @@ public class Giornalista extends Persona {
     }
 
     public void setImmagine(String immagine) {
-        this.immagine = immagine;
+        super.setImmagine(immagine);
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setVerificato(boolean verificato){this.verificato=verificato;}
+
+    public boolean isVerificato() {
+        return verificato;
     }
 }

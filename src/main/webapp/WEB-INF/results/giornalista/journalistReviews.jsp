@@ -26,8 +26,8 @@
             <label for="testo" class="labelRecensioni">Testo: </label>
             <input type="text" id="testo" name="testo">
             <br>
-            <label for="voto" class="labelRecensioni">Voto: </label>
-            <input type="range" id="voto" name="voto" min="0" max="10">
+            <label for="parere" class="labelRecensioni">Voto: </label>
+            <input type="range" id="parere" name="parere" min="0" max="10">
             <label for="immagine" class="labelRecensioni">Immagine: </label>
             <input type="file" id="immagine" name="immagine">
 
@@ -43,7 +43,7 @@
                     <div class="articolo-content">
                         <h2>${articolo.titolo}</h2>
                         <p>${fn:substring(articolo.testo, 0, 50)}</p>
-                        <p class="voto">${articolo.voto}</p>
+                        <p class="parere">${articolo.parere}</p>
                     </div>
                 </div>
             </a>

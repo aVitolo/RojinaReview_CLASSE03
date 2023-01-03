@@ -61,7 +61,7 @@ public class getSingleResourceServlet extends HttpServlet {
                         request.setAttribute("commenti", new CommentoDAO().getCommentById(id, "Recensione"));
                         if(session.getAttribute("utente") != null)
                         {
-                            Utente u = (Utente) session.getAttribute("utente");
+                            Videogiocatore u = (Videogiocatore) session.getAttribute("utente");
                             request.setAttribute("votoUtente", new VotoDAO().doRetrieveByUserAndIDTable(u.getEmail(),
                                     recensioniContext.get(i).getGioco().getTitolo(), "gioco"));
                         }
@@ -77,7 +77,7 @@ public class getSingleResourceServlet extends HttpServlet {
                     request.setAttribute("commenti", new CommentoDAO().getCommentById(id, "Recensione"));
                     if(session.getAttribute("utente") != null)
                     {
-                        Utente u = (Utente) session.getAttribute("utente");
+                        Videogiocatore u = (Videogiocatore) session.getAttribute("utente");
                         request.setAttribute("votoUtente", new VotoDAO().doRetrieveByUserAndIDTable(u.getEmail(),
                                 r.getGioco().getTitolo(), "gioco"));
                     }
@@ -88,11 +88,11 @@ public class getSingleResourceServlet extends HttpServlet {
             result = "/WEB-INF/results/mainPage/recensione.jsp";
 
         } else if (type.equalsIgnoreCase("shop") || type.equalsIgnoreCase("prodotto")) {
-            Utente u = null;
+            Videogiocatore u = null;
             Carrello carrello = null;
             Integer quantitàCarrello = new Integer(0);
             if(session.getAttribute("utente") != null){
-                u = (Utente) session.getAttribute("utente");
+                u = (Videogiocatore) session.getAttribute("utente");
                 carrello = u.getCarrello();
             }
             else if(session.getAttribute("ospite") != null)

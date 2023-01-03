@@ -1,41 +1,35 @@
 package rojinaReview.model.beans;
 
+import rojinaReview.model.utilities.Contenuto;
+
 import java.util.ArrayList;
 
-public class Prodotto {
+public class Prodotto extends Contenuto {
     static public String[] fieldsName = {"Id","Nome","Descrizione","Disponibilità","Prezzo","Media Voto","Numero Voti"};
 
-    private ArrayList<Commento> commenti;
+
     private ArrayList<Categoria> categorie;
+    private ArrayList<Parere> voti;
 
     private int disponibilità;
     private int id;
     private int numeroVoti;
     private float mediaVoto;
     private float prezzo;
-    private String nome;
-    private String descrizione;
-    private Sconto sconto;
-    private String immagine;
+
 
     /* Construct */
 
-    public Prodotto() {
-        this.sconto = new Sconto();
-    }
 
-    public Prodotto(ArrayList<Commento> commenti, ArrayList<Categoria> categorie, String immagine, int disponibilità, int id, int numeroVoti, float mediaVoto, float prezzo, String nome, String descrizione, Sconto sconto) {
-        this.commenti = commenti;
+    public Prodotto(ArrayList<Commento> commenti, ArrayList<Categoria> categorie,ArrayList<Parere> voti,String immagine, int disponibilità, int id, int numeroVoti, float mediaVoto, float prezzo, String nome, String descrizione) {
+        super(nome,descrizione,immagine,commenti);
         this.categorie = categorie;
-        this.immagine = immagine;
+        this.voti=voti;
         this.disponibilità = disponibilità;
         this.id = id;
         this.numeroVoti = numeroVoti;
         this.mediaVoto = mediaVoto;
         this.prezzo = prezzo;
-        this.nome = nome;
-        this.descrizione = descrizione;
-        this.sconto = sconto;
     }
 
     /* Getter & Setter*/
@@ -49,38 +43,27 @@ public class Prodotto {
     }
 
     public String getNome() {
-        return nome;
+        return super.getNome();
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        super.setNome(nome);
     }
 
     public String getDescrizione() {
-        return descrizione;
+        return super.getTesto();
     }
 
     public void setDescrizione(String descrizione) {
-        this.descrizione = descrizione;
+        super.setTesto(descrizione);
     }
 
     public float getPrezzo() {
-        if(this.sconto.nome != null)
-            return prezzo*this.sconto.percentuale;
-        else
-            return prezzo;
+        return prezzo;
     }
 
     public void setPrezzo(float prezzo) {
         this.prezzo = prezzo;
-    }
-
-    public Sconto getSconto() {
-        return sconto;
-    }
-
-    public void setSconto(Sconto sconto) {
-        this.sconto = sconto;
     }
 
     public int getDisponibilità() {
@@ -92,11 +75,11 @@ public class Prodotto {
     }
 
     public String getImmagine() {
-        return immagine;
+        return super.getImmagine();
     }
 
     public void setImmagine(String immagine) {
-        this.immagine = immagine;
+        super.setImmagine(immagine);
     }
 
     public ArrayList<Categoria> getCategorie() {
@@ -124,37 +107,10 @@ public class Prodotto {
     }
 
     public ArrayList<Commento> getCommenti() {
-        return commenti;
+        return super.getCommenti();
     }
 
     public void setCommenti(ArrayList<Commento> commenti) {
-        this.commenti = commenti;
-    }
-
-    /* Inner Class */
-
-    public class Sconto {
-
-        private String nome;
-        private float percentuale;
-
-        public Sconto() {
-        }
-
-        public String getNome() {
-            return this.nome;
-        }
-
-        public void setNome(String string) {
-            this.nome = nome;
-        }
-
-        public float getPercentuale() {
-            return this.percentuale;
-        }
-
-        public void setPercentuale(float aFloat) {
-            this.percentuale = percentuale;
-        }
+        super.setCommenti(commenti);
     }
 }

@@ -1,6 +1,7 @@
 package rojinaReview.model.beans;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Videogioco {
 
@@ -14,6 +15,8 @@ public class Videogioco {
     private String titolo;
     private String casaDiSviluppo;
     private String copertina;
+    private HashMap<Integer, String> listaNotizie;
+    private ArrayList<Parere> pareri;
 
     /* Constructor */
 
@@ -36,6 +39,28 @@ public class Videogioco {
         this.copertina = copertina;
         this.piattaforme = piattaforme;
         this.tipologie = tipologie;
+    }
+
+    public Videogioco(String titolo,
+                      String casaDiSviluppo,
+                      int numeroVoti,
+                      float mediaVoto,
+                      java.sql.Date dataDiRilascio,
+                      String copertina,
+                      ArrayList<Piattaforma> piattaforme,
+                      ArrayList<Tipologia> tipologie,
+                      HashMap<Integer,String> notizie,
+                      ArrayList<Parere> voti) {
+        this.titolo = titolo;
+        this.dataDiRilascio = dataDiRilascio;
+        this.casaDiSviluppo = casaDiSviluppo;
+        this.mediaVoto = mediaVoto;
+        this.numeroVoti = numeroVoti;
+        this.copertina = copertina;
+        this.piattaforme = piattaforme;
+        this.tipologie = tipologie;
+        this.listaNotizie=notizie;
+        this.pareri=voti;
     }
 
     /* Getter and Setter */
@@ -104,5 +129,19 @@ public class Videogioco {
         this.tipologie = tipologie;
     }
 
+    public HashMap<Integer, String> getListaNotizie() {
+        return listaNotizie;
+    }
 
+    public void setListaNotizie(HashMap<Integer, String> listaNotizie) {
+        this.listaNotizie = listaNotizie;
+    }
+
+    public ArrayList<Parere> getPareri() {
+        return pareri;
+    }
+
+    public void setPareri(ArrayList<Parere> pareri) {
+        this.pareri = pareri;
+    }
 }

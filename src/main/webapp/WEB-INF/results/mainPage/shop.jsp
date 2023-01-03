@@ -22,7 +22,7 @@
                 <div class = "articolo-content">
                     <h2>${prodotto.nome}</h2>
                     <p>${prodotto.prezzo} €</p>
-                    <p class="voto">${prodotto.mediaVoto}</p>
+                    <p class="parere">${prodotto.mediaVoto}</p>
                 </div>
                 </a>
             </div>

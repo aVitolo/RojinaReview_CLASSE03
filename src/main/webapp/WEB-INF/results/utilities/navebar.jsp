@@ -26,9 +26,9 @@
 
     <section class="user" id="us">
         <c:choose>
-            <c:when test="${sessionScope.get('utente') != null}">
-                <a href="/Rojina_Review_war/userArea">Bentornato, <c:out value='${utente.nickname}'/></a>
-                <a href="/Rojina_Review_war/acquista">Carrello <span id="countCarrello"><c:out value='${fn:length(utente.carrello.prodotti)}'/></span></a>
+            <c:when test="${sessionScope.get('videogiocatore') != null}">
+                <a href="/Rojina_Review_war/userArea">Bentornato, <c:out value='${videogiocatore.nickname}'/></a>
+                <a href="/Rojina_Review_war/acquista">Carrello <span id="countCarrello"><c:out value='${fn:length(videogiocatore.carrello.prodotti)}'/></span></a>
                 <button alt="logout" onclick="document.location.href='./logout'">Logout</button>
             </c:when>
             <c:when test="${sessionScope.get('giornalista') != null}">

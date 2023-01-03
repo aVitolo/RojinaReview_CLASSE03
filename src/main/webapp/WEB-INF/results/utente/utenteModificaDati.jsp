@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Area utente</title>
+    <title>Area videogiocatore</title>
     <link rel="stylesheet" href=".css/master.css">
     <style>
         section{
@@ -18,11 +18,11 @@
     </style>
 </head>
 <body>
-<c:set var="utente" scope="page" value="${sessionScope['utente']}" />
-<%@ include file="/WEB-INF/results/utente/userArea.jsp" %>
-<%@ page import="rojinaReview.model.beans.Utente" %>
+<c:set var="videogiocatore" scope="page" value="${sessionScope['videogiocatore']}" />
+<%@ include file="/WEB-INF/results/videogiocatore/userArea.jsp" %>
+<%@ page import="rojinaReview.model.beans.Videogiocatore" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% Utente u = (Utente) session.getAttribute("utente");%>
+<% Videogiocatore u = (Videogiocatore) session.getAttribute("videogiocatore");%>
 <section>
 <h1>Aggiorna i tuoi dati:</h1>
 <br>

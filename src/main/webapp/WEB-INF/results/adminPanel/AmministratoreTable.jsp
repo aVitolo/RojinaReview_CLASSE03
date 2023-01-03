@@ -1,17 +1,17 @@
-<%@ page import="rojinaReview.model.beans.Amministratore" %>
+<%@ page import="rojinaReview.model.beans.Manager" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% ArrayList<Amministratore> list = (ArrayList<Amministratore>) request.getAttribute("list");%>
+<% ArrayList<Manager> list = (ArrayList<Manager>) request.getAttribute("list");%>
 <table>
     <tr>
-        <%for (String s : Amministratore.fieldsName) {%>
+        <%for (String s : Manager.fieldsName) {%>
         <th><%=s%>
         </th>
         <%}%>
         <th id="search" onclick="search()">🔍</th>
         <th id="add" onclick="add()">➕️</th>
     </tr>
-        <%for(Amministratore a : list){%>
+        <%for(Manager a : list){%>
     <tr id="<%=a.getId()%>">
         <td>
             <p>

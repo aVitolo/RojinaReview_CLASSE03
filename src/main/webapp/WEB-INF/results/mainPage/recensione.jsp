@@ -1,8 +1,9 @@
 <%@ page import="rojinaReview.model.beans.Recensione" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="rojinaReview.model.beans.Commento" %>
-<%@ page import="rojinaReview.model.beans.VotoGioco" %>
-<%@ page import="rojinaReview.model.beans.Utente" %>
+<%@ page import="rojinaReview.model.beans.ParereGioco" %>
+<%@ page import="rojinaReview.model.beans.Videogiocatore" %>
+<%@ page import="rojinaReview.model.beans.ParereGioco" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
@@ -10,13 +11,13 @@
 <html>
 <% Recensione r = (Recensione) request.getAttribute("recensione");
     ArrayList<Commento> commenti = (ArrayList<Commento>) request.getAttribute("commenti");
-    VotoGioco vg = (VotoGioco) request.getAttribute("votoUtente");
+    ParereGioco vg = (ParereGioco) request.getAttribute("votoUtente");
     int canDo = 0; //ospite
     if(session.getAttribute("giornalista") != null || session.getAttribute("admin") != null)
          canDo = 2;
-    else if(session.getAttribute("utente") != null)
+    else if(session.getAttribute("videogiocatore") != null)
         canDo = 1;%>
-<c:set var="voto" value="${requestScope['recensione'].gioco.mediaVoto}"/>
+<c:set var="parere" value="${requestScope['recensione'].gioco.mediaVoto}"/>
 <head>
     <title><%=r.getGioco().getTitolo()%> - <%=r.getTitolo()%>
     </title>
@@ -38,7 +39,7 @@
         </div>
         <div id = "articolo-content">
             <h1>${recensione.titolo}</h1>
-            <p id="votoRecensione">${recensione.voto}</p>
+            <p id="votoRecensione">${recensione.parere}</p>
             <p>${recensione.testo}</p>
             <p>Caricata il ${recensione.dataCaricamento}</p>
         </div>
@@ -46,7 +47,7 @@
 
     <section id="votiUtenti">
         <h1> Il vostro parere </h1>
-        <h1 id="mediaVoto"><fmt:formatNumber value="${voto}" maxFractionDigits="1"/></h1>
+        <h1 id="mediaVoto"><fmt:formatNumber value="${parere}" maxFractionDigits="1"/></h1>
         <h1>(<%=r.getGioco().getNumeroVoti()%>)</h1>
         <form  id="voteAction" name="voteAction" method="post" action="/Rojina_Review_war/addVote" onsubmit="return canVote('<%=canDo%>');">
             <input type="hidden" name="type" value="recensione">
@@ -57,7 +58,7 @@
             <input type="submit" value="Vota">
         </form>
         <%if(vg != null){%>
-            <h1>Il tuo voto </h1>
+            <h1>Il tuo parere </h1>
             <h1 id="votoUtente"><fmt:formatNumber value="<%=vg.getVoto()%>" maxFractionDigits="0"/> </h1>
         <%}%>
     </section>

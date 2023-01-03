@@ -21,7 +21,7 @@
                 <div class = "articolo-content">
                     <h2>${articolo.titolo}</h2>
                     <p>${fn:substring(articolo.testo, 0, 50)}</p>
-                    <p class="voto">${articolo.voto}</p>
+                    <p class="parere">${articolo.parere}</p>
                 </div>
                 </a>
             </div>

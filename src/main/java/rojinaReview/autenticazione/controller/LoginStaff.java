@@ -6,10 +6,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import rojinaReview.model.beans.Amministratore;
+import rojinaReview.model.beans.Manager;
 import rojinaReview.model.beans.Giornalista;
+import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.utilities.Persona;
-import rojinaReview.model.beans.Utente;
 import rojinaReview.model.dao.AmministratoreDAO;
 import rojinaReview.model.dao.GiornalistaDAO;
 import rojinaReview.model.utilities.GenericStaffDAO;
@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class LoginStaff extends HttpServlet {
-    private Utente tmp;
+    private Videogiocatore tmp;
     private String loginErrato = "./staffLogin.jsp";
     private String homePage = "/Rojina_Review_war/home";
 
@@ -61,8 +61,8 @@ public class LoginStaff extends HttpServlet {
                         Giornalista g = (Giornalista) tmp;
                         session.setAttribute("giornalista", g);
                     } else if (type == 1) {
-                        Amministratore a = (Amministratore) tmp;
-                        session.setAttribute("admin", (Amministratore) tmp);
+                        Manager a = (Manager) tmp;
+                        session.setAttribute("admin", (Manager) tmp);
                     }
 
                     session.removeAttribute("ospite");

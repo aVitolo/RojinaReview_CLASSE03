@@ -26,7 +26,7 @@ public class confirmOrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String home = "/Rojina_Review_war/home";
-        Utente u = (Utente) session.getAttribute("utente");
+        Videogiocatore u = (Videogiocatore) session.getAttribute("utente");
         Carrello carrello = u.getCarrello();
         boolean newAddress = Boolean.parseBoolean(request.getParameter("address"));
         boolean newPayment = Boolean.parseBoolean(request.getParameter("payment"));

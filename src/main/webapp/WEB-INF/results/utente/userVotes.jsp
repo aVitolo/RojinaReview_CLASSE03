@@ -1,8 +1,10 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="rojinaReview.model.beans.Commento" %>
-<%@ page import="rojinaReview.model.utilities.Voto" %>
-<%@ page import="rojinaReview.model.beans.VotoProdotto" %>
-<%@ page import="rojinaReview.model.beans.VotoGioco" %>
+<%@ page import="rojinaReview.model.beans.Parere" %>
+<%@ page import="rojinaReview.model.beans.ParereProdotto" %>
+<%@ page import="rojinaReview.model.beans.ParereGioco" %>
+<%@ page import="rojinaReview.model.beans.ParereProdotto" %>
+<%@ page import="rojinaReview.model.beans.ParereGioco" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -13,8 +15,8 @@
 </head>
 <body>
 <% ArrayList<Commento> commenti = (ArrayList<Commento>) request.getAttribute("commenti");
-   ArrayList<Voto> voti = (ArrayList<Voto>) request.getAttribute("voti");%>
-<%@ include file="/WEB-INF/results/utente/userArea.jsp" %>
+   ArrayList<Parere> voti = (ArrayList<Parere>) request.getAttribute("voti");%>
+<%@ include file="/WEB-INF/results/videogiocatore/userArea.jsp" %>
 <div class="menu">
     <h1 class="currentMenuName">Voti e commenti</h1>
     <div class="votes">
@@ -22,11 +24,11 @@
         <%if (voti.size() == 0){%>
         <h3>Non hai votato nessun gioco o prodotto</h3>
         <%}%>
-        <%for(Voto v : voti){
+        <%for(Parere v : voti){
             if(v.getClass().getSimpleName().equalsIgnoreCase("VotoProdotto")){
-                VotoProdotto vp = (VotoProdotto) v;%>
+                ParereProdotto vp = (ParereProdotto) v;%>
                 <a href="/Rojina_Review_war/getResource?type=shop&id=<%=vp.getId()%>">
-                    <div class="voto">
+                    <div class="parere">
                         <h3 class="userName"><%=vp.getUtente()%></h3>
                         <div class="voteNumber"><%=vp.getVoto()%></div>
                         <h3 class="dataVoto"><%=vp.getDataVotazione()%></h3>
@@ -35,9 +37,9 @@
                 </a>
             <%}%>
             <%if(v.getClass().getSimpleName().equalsIgnoreCase("VotoGioco")){
-                VotoGioco vg = (VotoGioco) v;%>
+                ParereGioco vg = (ParereGioco) v;%>
                 <a href="/Rojina_Review_war/getGame?name=<%=vg.getGioco()%>">
-                    <div class="voto">
+                    <div class="parere">
                         <h3 class="userName"><%=vg.getUtente()%></h3>
                         <div class="voteNumber"><%=vg.getVoto()%></div>
                         <h3 class="dataVoto"><%=vg.getDataVotazione()%></h3>

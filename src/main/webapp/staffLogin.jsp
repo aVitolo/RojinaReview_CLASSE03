@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% if (session.getAttribute("utente") != null || session.getAttribute("giornalista") != null || session.getAttribute("admin") != null)
+<% if (session.getAttribute("videogiocatore") != null || session.getAttribute("giornalista") != null || session.getAttribute("admin") != null)
     response.sendRedirect("./home");%>
 <html lang="en">
 <head>

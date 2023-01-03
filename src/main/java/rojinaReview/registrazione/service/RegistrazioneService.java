@@ -1,6 +1,7 @@
 package rojinaReview.registrazione.service;
 
 import rojinaReview.model.beans.Giornalista;
+import rojinaReview.model.beans.Manager;
 
 /**
  * @author Carmine Iemmino

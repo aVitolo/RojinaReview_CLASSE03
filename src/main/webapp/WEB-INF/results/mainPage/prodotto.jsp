@@ -1,7 +1,7 @@
 <%@ page import="rojinaReview.model.beans.Prodotto" %>
 <%@ page import="rojinaReview.model.beans.Commento" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="rojinaReview.model.beans.VotoProdotto" %>
+<%@ page import="rojinaReview.model.beans.ParereProdotto" %>
 <%@ page import="org.json.JSONObject" %>
 <%@ page import="java.io.StringWriter" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -13,11 +13,11 @@
 <% Prodotto p = (Prodotto) request.getAttribute("prodotto");
     ArrayList<Commento> commenti = (ArrayList<Commento>) request.getAttribute("commenti");
     Integer quantitàCarrello = (Integer) request.getAttribute("quantitàCarrello");
-    VotoProdotto vp = (VotoProdotto) request.getAttribute("votoUtente");
+    ParereProdotto vp = (ParereProdotto) request.getAttribute("votoUtente");
     int canDo = 0; //ospite
     if(session.getAttribute("giornalista") != null || session.getAttribute("admin") != null)
         canDo = 2;
-    else if(session.getAttribute("utente") != null)
+    else if(session.getAttribute("videogiocatore") != null)
         canDo = 1;%>
 <head>
     <title><%=p.getNome()%>
@@ -72,7 +72,7 @@
             <input type="submit" value="Vota">
         </form>
         <%if(vp != null){%>
-        <h1>Il tuo voto </h1>
+        <h1>Il tuo parere </h1>
         <h1 id="votoUtente"><fmt:formatNumber value="<%=vp.getVoto()%>" maxFractionDigits="0"/> </h1>
         <%}%>
     </section>

@@ -3,7 +3,7 @@ package rojinaReview.shop.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import rojinaReview.model.beans.Carrello;
-import rojinaReview.model.beans.Utente;
+import rojinaReview.model.beans.Videogiocatore;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class removeFromCartServlet extends HttpServlet {
         if(request.getParameter("id") != null) {
             Carrello cart;
             id = Integer.parseInt(request.getParameter("id"));
-            Utente u = (Utente) request.getSession().getAttribute("utente");
+            Videogiocatore u = (Videogiocatore) request.getSession().getAttribute("utente");
             if (u != null)
                 cart = u.getCarrello();
             else

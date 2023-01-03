@@ -10,6 +10,8 @@ public class Recensione extends Articolo {
     /* Attributes */
 
     public float voto;
+    public String nomeVideogioco;
+    public int idVideogioco;
 
     /* Constructor */
 
@@ -20,23 +22,29 @@ public class Recensione extends Articolo {
                       String immagine,
                       java.sql.Date dataCaricamento,
                       float voto,
-                      Videogioco gioco,
+                      String nomeVideogioco,
+                      int idVideogioco,
                       int id,
                       String testo,
                       String giornalista,
                       String titolo,
-                      String immagineGiornalista) {
+                      String immagineGiornalista,
+                      ArrayList<Paragrafo> paragrafi) {
 
         super(  commenti,
                 immagine,
                 dataCaricamento,
-                gioco,
+                nomeVideogioco,
+                idVideogioco,
                 id,
                 testo,
                 titolo,
                 giornalista,
-                immagineGiornalista);
+                immagineGiornalista,
+                paragrafi);
         this.voto = voto;
+        this.nomeVideogioco=nomeVideogioco;
+        this.idVideogioco=idVideogioco;
     }
 
     /* Getter and Setter */
