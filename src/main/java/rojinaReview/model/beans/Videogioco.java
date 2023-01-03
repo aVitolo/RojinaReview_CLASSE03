@@ -1,5 +1,6 @@
 package rojinaReview.model.beans;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -7,8 +8,9 @@ public class Videogioco {
 
     /* Attributes */
 
-    private ArrayList<Piattaforma> piattaforme;
-    private ArrayList<Tipologia> tipologie;
+    private int id;
+    private ArrayList<String> piattaforme;
+    private ArrayList<String> generi;
     private java.sql.Date dataDiRilascio;
     private float mediaVoto;
     private int numeroVoti;
@@ -23,70 +25,50 @@ public class Videogioco {
     public Videogioco() {
     }
 
-    public Videogioco(String titolo,
-                      String casaDiSviluppo,
-                      int numeroVoti,
-                      float mediaVoto,
-                      java.sql.Date dataDiRilascio,
-                      String copertina,
-                      ArrayList<Piattaforma> piattaforme,
-                      ArrayList<Tipologia> tipologie) {
-        this.titolo = titolo;
+    public Videogioco(int id, ArrayList<String> piattaforme, ArrayList<String> generi, Date dataDiRilascio, float mediaVoto, int numeroVoti, String titolo, String casaDiSviluppo, String copertina, HashMap<Integer, String> listaNotizie, ArrayList<Parere> pareri) {
+        this.id = id;
+        this.piattaforme = piattaforme;
+        this.generi = generi;
         this.dataDiRilascio = dataDiRilascio;
-        this.casaDiSviluppo = casaDiSviluppo;
         this.mediaVoto = mediaVoto;
         this.numeroVoti = numeroVoti;
-        this.copertina = copertina;
-        this.piattaforme = piattaforme;
-        this.tipologie = tipologie;
-    }
-
-    public Videogioco(String titolo,
-                      String casaDiSviluppo,
-                      int numeroVoti,
-                      float mediaVoto,
-                      java.sql.Date dataDiRilascio,
-                      String copertina,
-                      ArrayList<Piattaforma> piattaforme,
-                      ArrayList<Tipologia> tipologie,
-                      HashMap<Integer,String> notizie,
-                      ArrayList<Parere> voti) {
         this.titolo = titolo;
-        this.dataDiRilascio = dataDiRilascio;
         this.casaDiSviluppo = casaDiSviluppo;
-        this.mediaVoto = mediaVoto;
-        this.numeroVoti = numeroVoti;
         this.copertina = copertina;
+        this.listaNotizie = listaNotizie;
+        this.pareri = pareri;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public ArrayList<String> getPiattaforme() {
+        return piattaforme;
+    }
+
+    public void setPiattaforme(ArrayList<String> piattaforme) {
         this.piattaforme = piattaforme;
-        this.tipologie = tipologie;
-        this.listaNotizie=notizie;
-        this.pareri=voti;
     }
 
-    /* Getter and Setter */
-
-    public String getTitolo() {
-        return titolo;
+    public ArrayList<String> getGeneri() {
+        return generi;
     }
 
-    public void setTitolo(String titolo) {
-        this.titolo = titolo;
+    public void setGeneri(ArrayList<String> generi) {
+        this.generi = generi;
     }
 
-    public java.sql.Date getDataDiRilascio() {
+    public Date getDataDiRilascio() {
         return dataDiRilascio;
     }
 
-    public void setDataDiRilascio(java.sql.Date dataDiRilascio) {
+    public void setDataDiRilascio(Date dataDiRilascio) {
         this.dataDiRilascio = dataDiRilascio;
-    }
-
-    public String getCasaDiSviluppo() {
-        return casaDiSviluppo;
-    }
-
-    public void setCasaDiSviluppo(String casaDiSviluppo) {
-        this.casaDiSviluppo = casaDiSviluppo;
     }
 
     public float getMediaVoto() {
@@ -105,28 +87,28 @@ public class Videogioco {
         this.numeroVoti = numeroVoti;
     }
 
+    public String getTitolo() {
+        return titolo;
+    }
+
+    public void setTitolo(String titolo) {
+        this.titolo = titolo;
+    }
+
+    public String getCasaDiSviluppo() {
+        return casaDiSviluppo;
+    }
+
+    public void setCasaDiSviluppo(String casaDiSviluppo) {
+        this.casaDiSviluppo = casaDiSviluppo;
+    }
+
     public String getCopertina() {
         return copertina;
     }
 
     public void setCopertina(String copertina) {
         this.copertina = copertina;
-    }
-
-    public ArrayList<Piattaforma> getPiattaforme() {
-        return piattaforme;
-    }
-
-    public void setPiattaforme(ArrayList<Piattaforma> piattaforme) {
-        this.piattaforme = piattaforme;
-    }
-
-    public ArrayList<Tipologia> getTipologie() {
-        return tipologie;
-    }
-
-    public void setTipologie(ArrayList<Tipologia> tipologie) {
-        this.tipologie = tipologie;
     }
 
     public HashMap<Integer, String> getListaNotizie() {

@@ -6,7 +6,7 @@ public class Carrello {
 
     /* Attributes */
 
-    private ArrayList<ProdottoCarrello> prodotti;
+    private ArrayList<Prodotto> prodotti;
     private float totale;
 
     /* Constructors */
@@ -15,7 +15,7 @@ public class Carrello {
         this.prodotti = new ArrayList<>();
     }
 
-    public Carrello(ArrayList<ProdottoCarrello> prodotti,
+    public Carrello(ArrayList<Prodotto> prodotti,
                     float totale) {
         this.prodotti = prodotti;
         this.totale = totale;
@@ -23,11 +23,11 @@ public class Carrello {
 
     /* Getter & Setter */
 
-    public ArrayList<ProdottoCarrello> getProdotti() {
+    public ArrayList<Prodotto> getProdotti() {
         return prodotti;
     }
 
-    public void setProdotti(ArrayList<ProdottoCarrello> prodotti) {
+    public void setProdotti(ArrayList<Prodotto> prodotti) {
         this.prodotti = prodotti;
     }
 
@@ -39,37 +39,4 @@ public class Carrello {
         this.totale = totale;
     }
 
-    public static class ProdottoCarrello{
-        private int quantità;
-        private float prezzoAttuale;
-        private Prodotto prodotto;
-
-        public ProdottoCarrello(){
-
-        }
-
-        public int getQuantità() {
-            return quantità;
-        }
-
-        public void setQuantità(int quantità) {
-            this.quantità = quantità;
-        }
-
-        public float getPrezzoAttuale() {
-            return prezzoAttuale;
-        }
-
-        public void setPrezzoAttuale(float prezzoAttuale) {
-            this.prezzoAttuale = prezzoAttuale;
-        }
-
-        public Prodotto getProdotto() {
-            return prodotto;
-        }
-
-        public void setProdotto(Prodotto prodotto) {
-            this.prodotto = prodotto;
-        }
-    }
 }

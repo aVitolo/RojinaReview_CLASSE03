@@ -21,37 +21,34 @@ public class CarrelloDAO {
         this.con = con;
     }
 
-    public Carrello doRetrieveByUser(String user) throws SQLException {
+    public Carrello doRetrieveByUser(int user) throws SQLException {
 
         //Valutare se effettuare accorpare tramite join le query o lasciare tutto come ora
 
         Carrello carrello = new Carrello();
 
         PreparedStatement ps =
-                con.prepareStatement("SELECT pc.quantità, pc.prodotto FROM prodotto_carrello pc WHERE utente=?");
-        ps.setString(1, user);
+                con.prepareStatement("SELECT pc.quantità, pc.id_prodotto FROM prodotto_carrello pc WHERE id_videogiocatore=?");
+        ps.setInt(1, user);
         ResultSet rs = ps.executeQuery();
-        ArrayList<Carrello.ProdottoCarrello> prodotti = new ArrayList<>();
+        ArrayList<Prodotto> prodotti = new ArrayList<>();
         while (rs.next())
         {
-            Carrello.ProdottoCarrello prodottoCarrello = new Carrello.ProdottoCarrello();
-            prodottoCarrello.setQuantità(rs.getInt(1));
             Prodotto p = new ProdottoDAO(con).doRetrieveById(rs.getInt(2));
-            prodottoCarrello.setProdotto(p);
-            prodottoCarrello.setPrezzoAttuale(p.getPrezzo());
+            p.setQuantità(rs.getInt(1));
 
-            prodotti.add(prodottoCarrello);
+            prodotti.add(p);
 
         }
 
         float totale = 0;
-        ps = con.prepareStatement("SELECT totale FROM carrello WHERE utente=?");
-        ps.setString(1, user);
+        ps = con.prepareStatement("SELECT totale FROM carrello WHERE id_videogiocatore=?"); //sommare direttamente l'arraylist?
+        ps.setInt(1, user);
         rs = ps.executeQuery();
         if (rs.next())
             totale = rs.getFloat("totale");
 
-        carrello.setProdotti(prodotti);
+        carrello.setProdottiCarrello(prodotti);
         carrello.setTotale(totale);
 
 
@@ -59,29 +56,29 @@ public class CarrelloDAO {
 
     }
 
-    public void doSave(Carrello c, String user) throws SQLException {
+    public void doSave(Carrello c, int user) throws SQLException {
         PreparedStatement ps;
         //cancello i prodotti-carrello
-        ps = con.prepareStatement("DELETE FROM prodotto_carrello WHERE utente=?");
-        ps.setString(1, user);
+        ps = con.prepareStatement("DELETE FROM prodotto_carrello WHERE id_videogiocatore=?");
+        ps.setInt(1, user);
         ps.executeUpdate();
         //cancello il carrello già presente nel database
-        ps = con.prepareStatement("DELETE FROM carrello WHERE utente=?");
-        ps.setString(1, user);
+        ps = con.prepareStatement("DELETE FROM carrello WHERE id_videogiocatore=?");
+        ps.setInt(1, user);
         ps.executeUpdate();
 
         //effettuo l'insert in carrello
         ps = con.prepareStatement("INSERT INTO carrello VALUES (?, ?)");
         ps.setFloat(1, c.getTotale());
-        ps.setString(2, user);
+        ps.setInt(2, user);
 
         if(ps.executeUpdate() != 1)
             throw new RuntimeException("Insert error");
         //effettuo l'insert in prodotto-carrello
-        for(Carrello.ProdottoCarrello p : c.getProdotti()){
+        for(Prodotto p : c.getProdottiCarrello()){
             ps = con.prepareStatement("INSERT INTO prodotto_carrello VALUES (?, ?, ?)");
-            ps.setInt(1, p.getProdotto().getId());
-            ps.setString(2, user);
+            ps.setInt(1, p.getId());
+            ps.setInt(2, user);
             ps.setInt(3, p.getQuantità());
 
             if(ps.executeUpdate() != 1)

@@ -20,10 +20,10 @@ public class PagamentoDAO {
         this.con = con;
     }
 
-    public ArrayList<Pagamento> doRetrieveByUser(String user) throws SQLException {
+    public ArrayList<Pagamento> doRetrieveByUser(int user) throws SQLException {
         PreparedStatement ps =
-                con.prepareStatement("SELECT nome, cognome, numeroCarta, dataScadenza FROM pagamento WHERE utente=?");
-        ps.setString(1, user);
+                con.prepareStatement("SELECT nome, cognome, numeroCarta, dataScadenza FROM pagamento WHERE id_videogiocatore=?");
+        ps.setInt(1, user);
         ResultSet rs = ps.executeQuery();
         ArrayList<Pagamento> pagamenti = new ArrayList<>();
         while (rs.next()) {
@@ -38,13 +38,13 @@ public class PagamentoDAO {
         return pagamenti;
     }
 
-    public void doSave(Pagamento p, String user) throws SQLException {
+    public void doSave(Pagamento p, int user) throws SQLException {
         PreparedStatement ps = con.prepareStatement("INSERT INTO pagamento VALUES (?, ?, ?, ?, ?)");
         ps.setString(1, p.getNome());
         ps.setString(2, p.getCognome());
-        ps.setString(3, user);
-        ps.setString(4, p.getNumeroCarta());
-        ps.setDate(5, p.getDataScadenza());
+        ps.setString(3, p.getNumeroCarta());
+        ps.setDate(4, p.getDataScadenza());
+        ps.setInt(5, user);
 
         if(ps.executeUpdate() != 1)
             throw new RuntimeException("Insert error");

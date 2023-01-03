@@ -20,23 +20,23 @@ public class TelefonoDAO {
         this.con = con;
     }
 
-    public ArrayList<Telefono> doRetriveByUser(String user) throws SQLException {
+    public ArrayList<String> doRetriveByUser(int user) throws SQLException {
         PreparedStatement ps =
-                con.prepareStatement("SELECT numero FROM Telefono WHERE utente=?");
-        ps.setString(1, user);
+                con.prepareStatement("SELECT numero FROM Telefono WHERE id_videogiocatore=?");
+        ps.setInt(1, user);
         ResultSet rs = ps.executeQuery();
-        ArrayList<Telefono> telefoni = new ArrayList<>();
+        ArrayList<String> telefoni = new ArrayList<>();
         while (rs.next())
-            telefoni.add(new Telefono(rs.getString(1)));
+            telefoni.add(rs.getString(1));
 
         return telefoni;
 
     }
 
-    public void doSave(String user, Telefono t) throws SQLException {
+    public void doSave(int user, String t) throws SQLException {
         PreparedStatement ps = con.prepareStatement("INSERT INTO telefono VALUES (?,?)");
-        ps.setString(1, user);
-        ps.setString(2, t.getNumero());
+        ps.setString(1, t);
+        ps.setInt(2, user);
 
         if(ps.executeUpdate() != 1)
             throw new RuntimeException("Insert error");

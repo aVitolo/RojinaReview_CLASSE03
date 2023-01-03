@@ -1,10 +1,11 @@
-package rojinaReview.model.utilities;
+package rojinaReview.model.beans;
 
 import rojinaReview.model.beans.Commento;
 
 import java.util.ArrayList;
 
 public abstract class Contenuto {
+    private int id;
     private String nome;
     private String testo;
     private String immagine;
@@ -12,11 +13,20 @@ public abstract class Contenuto {
 
     public Contenuto(){}
 
-    public Contenuto(String nome, String testo, String immagine, ArrayList<Commento> commenti) {
+    public Contenuto(int id, String nome, String testo, String immagine, ArrayList<Commento> commenti) {
+        this.id = id;
         this.nome = nome;
         this.testo = testo;
         this.immagine = immagine;
         this.commenti = commenti;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNome() {

@@ -9,13 +9,13 @@ public class Commento {
     /* Attributes */
 
     private int id;
-    private java.sql.Timestamp data;
+    private java.sql.Timestamp dataScrittura;
     private String testo;
     private int idVideogiocatore;
-    private String videogiocatore;
+    private String nicknameVideogiocatore;
     private int idContenuto;
     private String nomeContenuto;
-    private List<Segnalazione> segnalazioni;
+    private ArrayList<Segnalazione> segnalazioni;
 
 
 
@@ -25,12 +25,12 @@ public class Commento {
 
     }
 
-    public Commento(int id, Timestamp data, String testo, int idVideogiocatore, String videogiocatore, int idContenuto, String nomeContenuto) {
+    public Commento(int id, Timestamp dataScrittura, String testo, int idVideogiocatore, String nicknameVideogiocatore, int idContenuto, String nomeContenuto) {
         this.id = id;
-        this.data = data;
+        this.dataScrittura = dataScrittura;
         this.testo = testo;
         this.idVideogiocatore = idVideogiocatore;
-        this.videogiocatore = videogiocatore;
+        this.nicknameVideogiocatore = nicknameVideogiocatore;
         this.idContenuto = idContenuto;
         this.nomeContenuto = nomeContenuto;
         this.segnalazioni = new ArrayList<>();
@@ -44,12 +44,12 @@ public class Commento {
         this.id = id;
     }
 
-    public Timestamp getData() {
-        return data;
+    public Timestamp getDataScrittura() {
+        return dataScrittura;
     }
 
-    public void setData(Timestamp data) {
-        this.data = data;
+    public void setDataScrittura(Timestamp dataScrittura) {
+        this.dataScrittura = dataScrittura;
     }
 
     public String getTesto() {
@@ -68,12 +68,12 @@ public class Commento {
         this.idVideogiocatore = idVideogiocatore;
     }
 
-    public String getVideogiocatore() {
-        return videogiocatore;
+    public String getNicknameVideogiocatore() {
+        return nicknameVideogiocatore;
     }
 
-    public void setVideogiocatore(String videogiocatore) {
-        this.videogiocatore = videogiocatore;
+    public void setNicknameVideogiocatore(String nicknameVideogiocatore) {
+        this.nicknameVideogiocatore = nicknameVideogiocatore;
     }
 
     public int getIdContenuto() {
@@ -92,11 +92,11 @@ public class Commento {
         this.nomeContenuto = nomeContenuto;
     }
 
-    public List<Segnalazione> getSegnalazioni() {
+    public ArrayList<Segnalazione> getSegnalazioni() {
         return segnalazioni;
     }
 
-    public void setSegnalazioni(List<Segnalazione> segnalazioni) {
+    public void setSegnalazioni(ArrayList<Segnalazione> segnalazioni) {
         this.segnalazioni = segnalazioni;
     }
 }

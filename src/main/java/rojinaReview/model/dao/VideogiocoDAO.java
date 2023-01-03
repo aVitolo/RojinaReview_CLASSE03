@@ -9,32 +9,33 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class GiocoDAO {
+public class VideogiocoDAO {
     private final Connection con;
 
-    public GiocoDAO() throws SQLException {
+    public VideogiocoDAO() throws SQLException {
         con = ConPool.getConnection();
     }
 
-    public GiocoDAO(Connection con) {
+    public VideogiocoDAO(Connection con) {
         this.con = con;
     }
 
-    public Videogioco doRetrieveByTitle(String titolo) throws SQLException {
+    public Videogioco doRetrieveById(int videogioco) throws SQLException {
         PreparedStatement ps =
-                con.prepareStatement("SELECT * FROM gioco WHERE titolo=?");
-        ps.setString(1, titolo);
+                con.prepareStatement("SELECT * FROM videogioco WHERE id=?");
+        ps.setInt(1, videogioco);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            return new Videogioco(
-                    rs.getString(1),
-                    rs.getString(3),
-                    rs.getInt(5),
-                    rs.getFloat(4),
-                    rs.getDate(2),
-                    rs.getString(6),
-                    new PiattaformaDAO(con).doRetriveByGame(titolo),
-                    new TipologiaDAO(con).doRetriveByGame(titolo));
+            return new Videogioco(rs.getInt("id"),
+                    rs.getString("titolo"),
+                    rs.getDate("dataDiRilascio"),
+                    rs.getString("casaDiSviluppo"),
+                    rs.getFloat("mediaVoto"),
+                    rs.getInt("numeroVoti"),
+                    rs.getString("copertina"),
+                    new GenereDAO(con).doRetriveByGame(videogioco),
+                    new PiattaformaDAO(con).doRetriveByGame(videogioco),
+                    new NotiziaDAO(con).doRetrieveByGame(videogioco));
         }
 
         return null;
@@ -42,31 +43,35 @@ public class GiocoDAO {
 
     }
 
+    //utilizzata per costruire la sezione videogiochi del giornalista
     public ArrayList<Videogioco> doRetrieveAll() throws SQLException {
         ArrayList<Videogioco> giochi = new ArrayList<>();
-        PreparedStatement ps = con.prepareStatement("SELECT * FROM gioco");
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM videogioco");
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
             Videogioco g = new Videogioco();
 
+            g.setId(rs.getInt("id"));
             g.setTitolo(rs.getString("titolo"));
             g.setDataDiRilascio(rs.getDate("dataDiRilascio"));
             g.setCasaDiSviluppo(rs.getString("casaDiSviluppo"));
             g.setMediaVoto(rs.getFloat("mediaVoto"));
             g.setNumeroVoti(rs.getInt("numeroVoti"));
             g.setCopertina(rs.getString("copertina"));
-            g.setTipologie(new TipologiaDAO(con).doRetriveByGame(g.getTitolo()));
-            g.setPiattaforme(new PiattaformaDAO(con).doRetriveByGame(g.getTitolo()));
+            g.setListaGeneri(new GenereDAO(con).doRetriveByGame(g.getId()));
+            g.setListaPiattaforme(new PiattaformaDAO(con).doRetriveByGame(g.getId()));
+            g.setListaNotizie(new NotiziaDAO(con).doRetriveByGame(g.getId()));
 
             giochi.add(g);
         }
         return giochi;
     }
 
+    //utilizzata per vedere i giochi menzionati in una notizia
     public ArrayList<String> getGiocoByIdNotizia(int id) throws SQLException {
         PreparedStatement ps =
-                con.prepareStatement("SELECT g.titolo FROM gioco g join gioco_notizia gn on  g.titolo=gn.gioco WHERE notizia=?");
+                con.prepareStatement("SELECT v.titolo FROM videogioco v join videogioco_notizia vn on  v.id=vn.id_videogioco WHERE vn.id_notizia=?");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         ArrayList<String> g = new ArrayList<>();
@@ -88,8 +93,9 @@ public class GiocoDAO {
         return games;
     }
 
+
     public void doSave(Videogioco g) throws SQLException {
-        PreparedStatement ps = con.prepareStatement("INSERT INTO gioco VALUES" +
+        PreparedStatement ps = con.prepareStatement("INSERT INTO videogioco VALUES " +
                 "(?, ?, ?, ?, ?, ?)");
 
         ps.setString(1, g.getTitolo());

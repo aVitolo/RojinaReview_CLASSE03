@@ -20,24 +20,23 @@ public class CategoriaDAO {
         this.con = con;
     }
 
-    public ArrayList<Categoria> doRetrieveByProductId(int id) throws SQLException {
+    public String doRetrieveByProductId(int id) throws SQLException {
         PreparedStatement ps =
-                con.prepareStatement("SELECT categoria FROM prodotto_categoria WHERE prodotto=?");
+                con.prepareStatement("SELECT nome_categoria FROM prodotto WHERE id=?");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
-        ArrayList<Categoria> categorie = new ArrayList<>();
-        while (rs.next())
-            categorie.add(new Categoria(rs.getString(1)));
-        return categorie;
+        if (rs.next())
+            return rs.getString(1);
     }
 
-    public ArrayList<Categoria> doRetrieveAll() throws SQLException {
+    public ArrayList<String> doRetrieveAll() throws SQLException {
         PreparedStatement ps =
-                con.prepareStatement("SELECT DISTINCT categoria FROM prodotto_categoria");
+                con.prepareStatement("SELECT nome FROM categoria");
         ResultSet rs = ps.executeQuery();
-        ArrayList<Categoria> categorie = new ArrayList<>();
+        ArrayList<String> categorie = new ArrayList<>();
         while (rs.next())
-            categorie.add(new Categoria(rs.getString(1)));
+            categorie.add(rs.getString(1));
+
         return categorie;
     }
 

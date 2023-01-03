@@ -23,20 +23,25 @@ public class CommentoDAO {
     }
 
     /*table: Prodotto-Recensione-Notizia*/
-    public ArrayList<Commento> getCommentById(int id, String table) throws SQLException {
-        String commentTable = "Commento".concat(table);
-        String query = "SELECT testo, dataScrittura, utente, " + table.toLowerCase(Locale.ROOT) + " " + "FROM "+commentTable+" "+"WHERE "+table.toLowerCase(Locale.ROOT)+"=? "+"ORDER BY dataScrittura DESC";
+    public ArrayList<Commento> getCommentById(int id, int tipo) throws SQLException {
+        String stringType = null;
+        if(tipo == 0)
+            stringType = "id_prodotto";
+        else if(tipo == 1)
+            stringType = "id_recensione";
+        else if(tipo == 2)
+            stringType = "id_notizia"
+        String query = "SELECT id, testo, dataScrittura, id_videogiocatore FROM commento WHERE " + stringType + "=? " + "ORDER BY dataScrittura DESC";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         ArrayList<Commento> commenti = new ArrayList();
         while (rs.next()) {
             commenti.add(
-                    new Commento(   rs.getString(1),
-                                    rs.getString(3),
-                                    rs.getTimestamp(2),
-                                    rs.getInt(4),
-                                    table));
+                    new Commento(   rs.getInt(1),
+                                    rs.getString(2),
+                                    rs.getTimestamp(3),
+                                    new VideogiocatoreDAO(con).retrieveNickname(rs.getInt(4)));
             }
 
 
@@ -45,52 +50,43 @@ public class CommentoDAO {
 
     }
 
-    public ArrayList<Commento> getCommentByUser(String email) throws SQLException {
+    public ArrayList<Commento> getCommentsByUser(int user) throws SQLException {
         ArrayList<Commento> commenti = new ArrayList<>();
-        PreparedStatement ps = con.prepareStatement("SELECT testo, dataScrittura, utente, recensione FROM commentorecensione WHERE utente=?");
-        ps.setString(1, email);
+        PreparedStatement ps = con.prepareStatement("SELECT id, testo, dataScrittura, id_prodotto, id_recensione, id_notizia FROM commento WHERE id_videogiocatore=?");
+        ps.setInt(1, user);
         ResultSet rs = ps.executeQuery();
 
         while (rs.next())
         {
             Commento c = new Commento();
-            c.setTesto(rs.getString(1));
-            c.setData(rs.getTimestamp(2));
-            c.setUtente(rs.getString(3));
-            c.setId(rs.getInt(4));
-            c.setResource("recensione");
+            c.setId(rs.getInt(1));
+            c.setTesto(rs.getString(2));
+            c.setData(rs.getTimestamp(3));
+            int idContenuto;
+            String contenuto = null;
+            if(rs.getInt("id_prodotto") != null)
+            {
+                idContenuto = rs.getInt("id_prodotto");
+                contenuto = new ProdottoDAO(con).retrieveNome(rs.getInt("id_prodotto"));
+            }
+
+            else if (rs.getInt("id_recensione") != null)
+            {
+                idContenuto = rs.getInt("id_recensione");
+                contenuto = new RecensioneDAO(con).retrieveNome(rs.getInt("id_recensione"));
+            }
+
+            else if (rs.getInt("id_notizia") != null)
+            {
+                idContenuto = rs.getInt("id_notizia");
+                contenuto = new NotiziaDAO(con).retrieveNome(rs.getInt("id_notizia"));
+            }
+
+            c.setIdContenuto(idContenuto);
+            c.setContenuto(contenuto);
             commenti.add(c);
         }
 
-        ps = con.prepareStatement("SELECT testo, dataScrittura, utente, notizia FROM commentonotizia WHERE utente=?");
-        ps.setString(1, email);
-        rs = ps.executeQuery();
-
-        while (rs.next())
-        {
-            Commento c = new Commento();
-            c.setTesto(rs.getString(1));
-            c.setData(rs.getTimestamp(2));
-            c.setUtente(rs.getString(3));
-            c.setId(rs.getInt(4));
-            c.setResource("notizia");
-            commenti.add(c);
-        }
-
-        ps = con.prepareStatement("SELECT testo, dataScrittura, utente, prodotto FROM commentoprodotto WHERE utente=?");
-        ps.setString(1, email);
-        rs = ps.executeQuery();
-
-        while (rs.next())
-        {
-            Commento c = new Commento();
-            c.setTesto(rs.getString(1));
-            c.setData(rs.getTimestamp(2));
-            c.setUtente(rs.getString(3));
-            c.setId(rs.getInt(4));
-            c.setResource("prodotto");
-            commenti.add(c);
-        }
 
         commenti.sort(Comparator.comparing(c -> c.getData()));
 
@@ -98,12 +94,18 @@ public class CommentoDAO {
 
     }
 
-    public void doSave(Commento c) throws SQLException {
-        PreparedStatement ps = con.prepareStatement("INSERT INTO commento"+c.getResource()+" VALUES (?, ?, ?, ?)");
-        ps.setString(1, c.getUtente());
-        ps.setString(2, c.getTesto());
-        ps.setTimestamp(3, c.getData());
-        ps.setInt(4, c.getId());
+    public void doSave(Commento c, int tipo) throws SQLException {
+        PreparedStatement ps = con.prepareStatement("INSERT INTO commento VALUES (?, ?, ?, ?, ?, ?)");
+        ps.setString(1, c.getTesto());
+        ps.setTimestamp(2, c.getData());
+        ps.setInt(3, c.getIdVideogiocatore());
+        //se non setto gli altri parametri viene direttamente messo null o lanciata eccezione?
+        if(tipo == 0)
+            ps.setInt(4, c.getIdContenuto());
+        if(tipo == 1)
+            ps.setInt(5, c.getIdContenuto());
+        if(tipo == 2)
+            ps.setInt(6, c.getIdContenuto());
 
         if(ps.executeUpdate() != 1)
             throw new RuntimeException("Insert error");

@@ -2,84 +2,37 @@ package rojinaReview.model.beans;
 
 import rojinaReview.model.utilities.Persona;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-public class Videogiocatore extends Persona {
+public class Videogiocatore extends Utente {
     static public String[] fieldsName = {"Email","Nickname","Password Hash","Nome","Cognome","Età"};
 
     private ArrayList<Indirizzo> indirizzi;
-    private ArrayList<Telefono> telefoni;
+    private ArrayList<String> telefoni;
     private ArrayList<Pagamento> pagamenti;
     private ArrayList<Ordine> ordini;
     private ArrayList<Commento> commenti;
-    private ArrayList<Parere> voti;
+    private ArrayList<Segnalazione> segnalazioni;
+    private ArrayList<Parere> pareri;
     private Carrello carrello;
-    private int eta;
     private boolean bannato;
     private String nickname;
 
-
-    /* Costructor */
-
-    public Videogiocatore() {
-        super();
-    }
-
-    public Videogiocatore(String email, String password, String nickname) {
-        super(email, password);
-        this.nickname = nickname;
-    }
-
-    public Videogiocatore(String nome, String cognome, String email, String password, int eta, String nickname) throws UnsupportedEncodingException {
-        super(nome, cognome, email, password);
-        this.eta = eta;
-        this.nickname = nickname;
-    }
-
-    /* Contructor for insert in DB */
-
-    public Videogiocatore(int eta,
-                          String email,
-                          String nickname,
-                          String nome,
-                          String cognome,
-                          String password,
-                          ArrayList<Indirizzo> indirizzi,
-                          ArrayList<Telefono> telefoni,
-                          ArrayList<Pagamento> pagamenti,
-                          ArrayList<Ordine> ordini,
-                          Carrello carrello,
-                          String immagine)
-            throws UnsupportedEncodingException {
-        super(nome, cognome, email, password, immagine);
-        this.eta = eta;
-        this.nickname = nickname;
+    public Videogiocatore(int id, String nome, String cognome, String email, String password, String immagine, ArrayList<Indirizzo> indirizzi, ArrayList<String> telefoni, ArrayList<Pagamento> pagamenti, ArrayList<Ordine> ordini, ArrayList<Commento> commenti, ArrayList<Segnalazione> segnalazioni, ArrayList<Parere> pareri, Carrello carrello, boolean bannato, String nickname) {
+        super(id, nome, cognome, email, password, immagine);
         this.indirizzi = indirizzi;
         this.telefoni = telefoni;
         this.pagamenti = pagamenti;
         this.ordini = ordini;
+        this.commenti = commenti;
+        this.segnalazioni = segnalazioni;
+        this.pareri = pareri;
         this.carrello = carrello;
-
-    }
-
-    /* Getter & Setter */
-
-    public int getEta() {
-        return eta;
-    }
-
-    public void setEta(int eta) {
-        this.eta = eta;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
+        this.bannato = bannato;
         this.nickname = nickname;
     }
+
+
 
     public ArrayList<Indirizzo> getIndirizzi() {
         return indirizzi;
@@ -89,11 +42,11 @@ public class Videogiocatore extends Persona {
         this.indirizzi = indirizzi;
     }
 
-    public ArrayList<Telefono> getTelefoni() {
+    public ArrayList<String> getTelefoni() {
         return telefoni;
     }
 
-    public void setTelefoni(ArrayList<Telefono> telefoni) {
+    public void setTelefoni(ArrayList<String> telefoni) {
         this.telefoni = telefoni;
     }
 
@@ -113,6 +66,30 @@ public class Videogiocatore extends Persona {
         this.ordini = ordini;
     }
 
+    public ArrayList<Commento> getCommenti() {
+        return commenti;
+    }
+
+    public void setCommenti(ArrayList<Commento> commenti) {
+        this.commenti = commenti;
+    }
+
+    public ArrayList<Segnalazione> getSegnalazioni() {
+        return segnalazioni;
+    }
+
+    public void setSegnalazioni(ArrayList<Segnalazione> segnalazioni) {
+        this.segnalazioni = segnalazioni;
+    }
+
+    public ArrayList<Parere> getPareri() {
+        return pareri;
+    }
+
+    public void setPareri(ArrayList<Parere> pareri) {
+        this.pareri = pareri;
+    }
+
     public Carrello getCarrello() {
         return carrello;
     }
@@ -121,11 +98,19 @@ public class Videogiocatore extends Persona {
         this.carrello = carrello;
     }
 
-    public String getImmagine() {
-        return super.getImmagine();
+    public boolean isBannato() {
+        return bannato;
     }
 
-    public void setImmagine(String immagine) {
-        super.setImmagine(immagine);
+    public void setBannato(boolean bannato) {
+        this.bannato = bannato;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 }

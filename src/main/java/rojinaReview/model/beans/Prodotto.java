@@ -1,18 +1,17 @@
 package rojinaReview.model.beans;
 
-import rojinaReview.model.utilities.Contenuto;
-
 import java.util.ArrayList;
 
 public class Prodotto extends Contenuto {
-    static public String[] fieldsName = {"Id","Nome","Descrizione","Disponibilità","Prezzo","Media Voto","Numero Voti"};
+    static public String[] fieldsName = {"Id","Nome","DescrizionesetQuantità","Prezzo","Media Voto","Numero Voti"};
 
 
-    private ArrayList<Categoria> categorie;
-    private ArrayList<Parere> voti;
 
-    private int disponibilità;
-    private int id;
+    private String categoria;
+    private ArrayList<Parere> pareri;
+
+    private int quantità;
+
     private int numeroVoti;
     private float mediaVoto;
     private float prezzo;
@@ -20,13 +19,13 @@ public class Prodotto extends Contenuto {
 
     /* Construct */
 
+    public Prodotto(){}
 
-    public Prodotto(ArrayList<Commento> commenti, ArrayList<Categoria> categorie,ArrayList<Parere> voti,String immagine, int disponibilità, int id, int numeroVoti, float mediaVoto, float prezzo, String nome, String descrizione) {
-        super(nome,descrizione,immagine,commenti);
-        this.categorie = categorie;
-        this.voti=voti;
-        this.disponibilità = disponibilità;
-        this.id = id;
+    public Prodotto(int id, String nome, String testo, String immagine, ArrayList<Commento> commenti, String categoria, ArrayList<Parere> pareri, int quantità, int numeroVoti, float mediaVoto, float prezzo) {
+        super(id, nome, testo, immagine, commenti);
+        this.categoria = categoria;
+        this.pareri = pareri;
+        this.quantità = quantità;
         this.numeroVoti = numeroVoti;
         this.mediaVoto = mediaVoto;
         this.prezzo = prezzo;
@@ -34,13 +33,7 @@ public class Prodotto extends Contenuto {
 
     /* Getter & Setter*/
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return super.getNome();
@@ -66,14 +59,6 @@ public class Prodotto extends Contenuto {
         this.prezzo = prezzo;
     }
 
-    public int getDisponibilità() {
-        return disponibilità;
-    }
-
-    public void setDisponibilità(int disponibilità) {
-        this.disponibilità = disponibilità;
-    }
-
     public String getImmagine() {
         return super.getImmagine();
     }
@@ -82,12 +67,12 @@ public class Prodotto extends Contenuto {
         super.setImmagine(immagine);
     }
 
-    public ArrayList<Categoria> getCategorie() {
-        return categorie;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setCategorie(ArrayList<Categoria> categorie) {
-        this.categorie = categorie;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public int getNumeroVoti() {
@@ -112,5 +97,17 @@ public class Prodotto extends Contenuto {
 
     public void setCommenti(ArrayList<Commento> commenti) {
         super.setCommenti(commenti);
+    }
+
+    public ArrayList<Parere> getPareri() {
+        return pareri;
+    }
+
+    public void setPareri(ArrayList<Parere> pareri) {
+        this.pareri = pareri;
+    }
+
+    public int getQuantità() {
+        return quantità;
     }
 }

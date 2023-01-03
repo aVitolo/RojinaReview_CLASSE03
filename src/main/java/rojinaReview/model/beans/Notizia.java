@@ -1,7 +1,6 @@
 package rojinaReview.model.beans;
 
-import rojinaReview.model.utilities.Articolo;
-
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -16,22 +15,11 @@ public class Notizia extends Articolo {
     public Notizia(){
         super();
     }
-    public Notizia(ArrayList<Commento> commenti,
-                   HashMap<Integer,String> giochi,
-                   String immagine,
-                   java.sql.Date dataCaricamento,
-                   String nomeVideogioco,
-                   int idVideogioco,
-                   int id,
-                   String testo,
-                   String titolo,
-                   String giornalista,
-                   String immagineGiornalista,
-                    ArrayList<Paragrafo> paragrafi) {
-        super(commenti, immagine, dataCaricamento, nomeVideogioco,idVideogioco, id, testo, titolo, giornalista, immagineGiornalista,paragrafi);
+
+    public Notizia(int id, String nome, String testo, String immagine, ArrayList<Commento> commenti, ArrayList<Paragrafo> paragrafi, Date dataScrittura, HashMap<Integer, String> giochi) {
+        super(id, nome, testo, immagine, commenti, paragrafi, dataScrittura);
         this.giochi = giochi;
     }
-
     /* Getter and Setter */
 
     public HashMap<Integer,String> getGiochi() {

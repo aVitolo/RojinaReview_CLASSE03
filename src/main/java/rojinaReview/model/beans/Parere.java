@@ -3,51 +3,26 @@ package rojinaReview.model.beans;
 import java.sql.Date;
 
 public class Parere {
-    private String utente;
+    //private String utente; non serve sapere chi ha dato il voto
+    private int id;
     private float voto;
     private java.sql.Date dataVotazione;
-    private Integer idProdotto;
-    private Integer idNotizia;
-    private Integer idRecensione;
+    private Integer idProdottoORVideogioco //id del prodotto o videogioco
+    private boolean type; //false prodotto, true videogioco
 
     public Parere(){
 
     }
 
-    public Parere(String utente, int voto, Date dataVotazione) {
-        this.utente = utente;
+    public Parere(int id, float voto, Date dataVotazione, Integer idProdottoORVideogioco, boolean type) {
+        this.id = id;
         this.voto = voto;
         this.dataVotazione = dataVotazione;
+        this.idProdottoORVideogioco = idProdottoORVideogioco;
+        this.type = type;
     }
 
-    public Parere(String utente, int voto, Date dataVotazione,int idProdotto,int idRecensione, int idNotizia, int flag) {
-        this.utente = utente;
-        this.voto = voto;
-        this.dataVotazione = dataVotazione;
-        if(flag==1) {
-            this.idProdotto = idProdotto;
-            this.idNotizia = null;
-            this.idRecensione = null;
-        }
-        if(flag==2) {
-            this.idProdotto = null;
-            this.idNotizia = idNotizia;
-            this.idRecensione = null;
-        }
-        if(flag==3) {
-            this.idProdotto = null;
-            this.idNotizia = null;
-            this.idRecensione = idRecensione;
-        }
-    }
 
-    public String getUtente() {
-        return utente;
-    }
-
-    public void setUtente(String utente) {
-        this.utente = utente;
-    }
 
     public float getVoto() {
         return voto;
@@ -65,27 +40,27 @@ public class Parere {
         this.dataVotazione = dataVotazione;
     }
 
-    public Integer getIdProdotto() {
-        return idProdotto;
+    public int getId() {
+        return id;
     }
 
-    public void setIdProdotto(Integer idProdotto) {
-        this.idProdotto = idProdotto;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public Integer getIdNotizia() {
-        return idNotizia;
+    public Integer getIdProdottoORVideogioco() {
+        return idProdottoORVideogioco;
     }
 
-    public void setIdNotizia(Integer idNotizia) {
-        this.idNotizia = idNotizia;
+    public void setIdProdottoORVideogioco(Integer idProdottoORVideogioco) {
+        this.idProdottoORVideogioco = idProdottoORVideogioco;
     }
 
-    public Integer getIdRecensione() {
-        return idRecensione;
+    public boolean isType() {
+        return type;
     }
 
-    public void setIdRecensione(Integer idRecensione) {
-        this.idRecensione = idRecensione;
+    public void setType(boolean type) {
+        this.type = type;
     }
 }

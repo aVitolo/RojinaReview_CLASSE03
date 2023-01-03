@@ -31,23 +31,12 @@ public class ProdottoDAO {
             p.setId(rs.getInt(1));
             p.setNome(rs.getString(2));
             p.setDescrizione(rs.getString(3));
-            p.setDisponibilità(rs.getInt(4));
+            p.setImmagine(rs.getString(4));
             p.setPrezzo(rs.getFloat(5));
-            p.setImmagine(rs.getString(6));
-
-            if (rs.getInt(7) == 1) {
-                ps = con.prepareStatement("SELECT nome, percentuale FROM sconto WHERE prodotto=?");
-                ps.setInt(1, id);
-                ResultSet r = ps.executeQuery();
-                if (r.next()) {
-                    p.getSconto().setNome(r.getString(1));
-                    p.getSconto().setPercentuale(r.getFloat(2));
-                }
-            }
-
-            p.setCategorie(new CategoriaDAO(con).doRetrieveByProductId(id));
-            p.setMediaVoto(rs.getFloat(8));
-            p.setNumeroVoti(rs.getInt(9));
+            p.setQuantità(rs.getInt(6));
+            p.setMediaVoto(rs.getFloat(7));
+            p.setNumeroVoti(rs.getInt(8));
+            p.setCategoria(rs.getString(9))
 
 
             return p;
@@ -75,26 +64,16 @@ public class ProdottoDAO {
         ArrayList<Prodotto> prodotti = new ArrayList<>();
         while (rs.next()) {
             Prodotto p = new Prodotto();
+
             p.setId(rs.getInt(1));
             p.setNome(rs.getString(2));
             p.setDescrizione(rs.getString(3));
-            p.setDisponibilità(rs.getInt(4));
+            p.setImmagine(rs.getString(4));
             p.setPrezzo(rs.getFloat(5));
-            p.setImmagine(rs.getString(6));
-
-            if (rs.getInt(7) == 1) {
-                ps = con.prepareStatement("SELECT nome, percentuale FROM sconto WHERE prodotto=?");
-                ps.setInt(1, p.getId());
-                ResultSet r = ps.executeQuery();
-                if (r.next()) {
-                    p.getSconto().setNome(r.getString(1));
-                    p.getSconto().setPercentuale(r.getFloat(2));
-                }
-            }
-
-            p.setCategorie(new CategoriaDAO(con).doRetrieveByProductId(p.getId()));
-            p.setMediaVoto(rs.getFloat(8));
-            p.setNumeroVoti(rs.getInt(9));
+            p.setQuantità(rs.getInt(6));
+            p.setMediaVoto(rs.getFloat(7));
+            p.setNumeroVoti(rs.getInt(8));
+            p.setCategoria(rs.getString(9))
 
             prodotti.add(p);
         }
@@ -155,18 +134,23 @@ public class ProdottoDAO {
 
         while (rs.next()) {
             Prodotto p = new Prodotto();
+
             p.setId(rs.getInt(1));
             p.setNome(rs.getString(2));
             p.setDescrizione(rs.getString(3));
-            p.setDisponibilità(rs.getInt(4));
+            p.setImmagine(rs.getString(4));
             p.setPrezzo(rs.getFloat(5));
-            p.setMediaVoto(rs.getFloat(8));
-            p.setNumeroVoti(rs.getInt(9));
+            p.setQuantità(rs.getInt(6));
+            p.setMediaVoto(rs.getFloat(7));
+            p.setNumeroVoti(rs.getInt(8));
+            p.setCategoria(rs.getString(9))
+
             list.add(p);
         }
         return list;
     }
 
+    //non serve?
     public boolean doRemoveById(int Id) throws SQLException {
         PreparedStatement ps =
                 con.prepareStatement("DELETE FROM Prodotto WHERE id=?");

@@ -23,23 +23,43 @@ public class GiornalistaDAO implements GenericStaffDAO {
         this.con = con;
     }
 
-    public Object doRetriveByEmail(String email) throws SQLException, UnsupportedEncodingException {
+    public Giornalista doRetriveByEmail(String email) throws SQLException, UnsupportedEncodingException {
         PreparedStatement ps = con.prepareStatement("SELECT * FROM Giornalista WHERE email=?");
         ps.setString(1, email);
         ResultSet rs = ps.executeQuery();
 
         if (rs.next()) {
-            return new Giornalista(
+            return new Giornalista(rs.getInt("id"),
+                    rs.getString("email"),
+                    rs.getString("password"),
                     rs.getString("nome"),
                     rs.getString("cognome"),
-                    rs.getString("email"),
-                    rs.getString("pass"),
                     rs.getString("immagine"),
-                    rs.getInt("id"));
+                    rs.getInt("verificato"), articoli);
         }
 
         return null;
     }
+
+    public Giornalista doRetrieveById(int giornalista) throws SQLException {
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM Giornalista WHERE id=?");
+        ps.setInt(1, giornalista);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            return new Giornalista(rs.getInt("id"),
+                    rs.getString("email"),
+                    rs.getString("password"),
+                    rs.getString("nome"),
+                    rs.getString("cognome"),
+                    rs.getString("immagine"),
+                    rs.getInt("verificato"), articoli);
+        }
+
+        return null;
+    }
+
+    //non serve?
     public ArrayList<Giornalista> doRetriveAll() throws SQLException, UnsupportedEncodingException {
         ArrayList<Giornalista> list = new ArrayList<>();
         Statement stmt = con.createStatement();
@@ -57,12 +77,31 @@ public class GiornalistaDAO implements GenericStaffDAO {
         return list;
     }
 
-    public boolean doRemoveById(int Id) throws SQLException {
+    //non serve?
+    public boolean doRemoveById(int id) throws SQLException {
         PreparedStatement ps =
                 con.prepareStatement("DELETE FROM Giornalista WHERE id=?");
-        ps.setInt(1,Id);
+        ps.setInt(1,id);
         int i = ps.executeUpdate();
         return i == 1;
+    }
+
+    public ArrayList<Giornalista> doRetrieveNonVerifiedJournalists() throws SQLException {
+        PreparedStatement ps = con.prepareStatement("SELECT email, nome, cognome FROM giornalista WHERE verificato = 0");
+        ResultSet rs = ps.executeQuery();
+        ArrayList<Giornalista> giornalisti = new ArrayList<>();
+        while(rs.next())
+        {
+            Giornalista g = new Giornalista();
+
+            g.setEmail(rs.getString("email"));
+            g.setNome(rs.getString("nome"));
+            g.setCognome(rs.getString("cognome"));
+
+            giornalisti.add(g);
+        }
+
+        return giornalisti;
     }
 
 }

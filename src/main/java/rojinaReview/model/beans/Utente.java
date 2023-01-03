@@ -1,39 +1,29 @@
-package rojinaReview.model.utilities;
+package rojinaReview.model.beans;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public abstract class Persona {
+public abstract class Utente {
 
+    private int id;
     private String nome;
     private String cognome;
     private String email;
     private String password;
     private String immagine;
 
-    public Persona() {
+    public Utente() {
     }
 
-    public Persona(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-
-    public Persona(String nome, String cognome, String email, String password) throws UnsupportedEncodingException {
+    public Utente(int id, String nome, String cognome, String email, String password, String immagine) {
+        this.id = id;
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
         this.password = password;
-    }
-
-    public Persona(String nome, String cognome, String email, String password, String immagine) throws UnsupportedEncodingException {
-        this.nome = nome;
-        this.cognome = cognome;
-        this.email = email;
-        this.password = password;
-        this.immagine=immagine;
+        this.immagine = immagine;
     }
 
     public String getNome() {
@@ -65,7 +55,7 @@ public abstract class Persona {
     }
 
     public void setPassword(String password) throws UnsupportedEncodingException {
-        this.password = Persona.calcolaHash(password);
+        this.password = Utente.calcolaHash(password);
     }
 
     public String getImmagine() {
@@ -91,5 +81,13 @@ public abstract class Persona {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

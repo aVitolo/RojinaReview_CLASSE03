@@ -19,10 +19,10 @@ public class IndirizzoDAO {
         this.con = con;
     }
 
-    public ArrayList<Indirizzo> doRetriveByUser(String user) throws SQLException {
+    public ArrayList<Indirizzo> doRetriveByUser(int user) throws SQLException {
         PreparedStatement ps =
-                con.prepareStatement("SELECT via, numeroCivico, città, cap FROM Indirizzo WHERE utente=?");
-        ps.setString(1, user);
+                con.prepareStatement("SELECT via, numeroCivico, città, cap FROM Indirizzo WHERE id_videogiocatore=?");
+        ps.setInt(1, user);
         ResultSet rs = ps.executeQuery();
         ArrayList<Indirizzo> indirizzi = new ArrayList<>();
         //da controllare, potrebbe dare null pointer exception se l' email non e' presente nel db
@@ -36,13 +36,14 @@ public class IndirizzoDAO {
         return indirizzi;
     }
 
-    public void doSave(String user, Indirizzo i) throws SQLException {
+    public void doSave(int user, Indirizzo i) throws SQLException {
         PreparedStatement ps = con.prepareStatement("INSERT INTO indirizzo VALUES (?, ?, ?, ?, ?)");
-        ps.setString(1, user);
-        ps.setString(2, i.getVia());
-        ps.setInt(3, i.getNumeroCivico());
+        ps.setString(1, i.getVia());
+        ps.setInt(2, i.getNumeroCivico());
+        ps.setString(3, i.getCap());
         ps.setString(4, i.getCittà());
-        ps.setString(5, i.getCap());
+        ps.setInt(5, user);
+
 
         if(ps.executeUpdate() != 1)
             throw new RuntimeException("Insert error");

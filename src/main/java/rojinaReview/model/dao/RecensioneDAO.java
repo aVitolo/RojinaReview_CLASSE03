@@ -23,21 +23,20 @@ public class RecensioneDAO {
 
     public Recensione doRetrieveById(int id) throws SQLException {
         PreparedStatement ps =
-                    con.prepareStatement("SELECT g.nome, g.cognome, g.immagine, r.id, r.titolo, r.testo, r.voto, r.DataCaricamento, r.gioco, r.immagine FROM recensione r JOIN giornalista g on g.id = r.giornalista WHERE r.id=?");
+                    con.prepareStatement("SELECT * FROM recensione WHERE id=?");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             Recensione r = new Recensione();
-            r.setGiornalista(rs.getString(1)+" "+rs.getString(2));
-            r.setImmagineGiornalista(rs.getString(3));
-            r.setId(rs.getInt(4));
-            r.setTitolo(rs.getString(5));
-            r.setTesto(rs.getString(6));
-            r.setVoto(rs.getFloat(7));
-            r.setDataCaricamento(rs.getDate(8));
-            r.setGioco(new GiocoDAO(con).doRetrieveByTitle(rs.getString(9)));
-            r.setImmagine(rs.getString(10));
-            r.setCommenti(new CommentoDAO(con).getCommentById(r.getId(),"Recensione"));
+
+            r.setId(rs.getInt(1));
+            r.setTitolo(rs.getString(2));
+            r.setTesto(rs.getString(3));
+            r.setImmagine(rs.getString(4));
+            r.setDataScrittura(rs.getDate(5));
+            r.setVotoGiornalista(rs.getFloat(6));
+
+
             return r;
         }
 
@@ -50,25 +49,21 @@ public class RecensioneDAO {
         ArrayList<Recensione> recensioni = new ArrayList<>();
 
         PreparedStatement ps =
-                con.prepareStatement("SELECT g.nome, g.cognome, g.immagine ,r.id, r.titolo, r.testo, r.voto, r.DataCaricamento, r.gioco, r.immagine " +
-                                         "FROM recensione r JOIN giornalista g on g.id = r.giornalista " +
-                                         "ORDER BY r.id DESC LIMIT 12");
+                con.prepareStatement("SELECT * FROM recensione ORDER BY id DESC LIMIT 12");
 
 
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
             Recensione r = new Recensione();
-            r.setGiornalista(rs.getString(1)+" "+rs.getString(2));
-            r.setImmagineGiornalista(rs.getString(3));
-            r.setId(rs.getInt(4));
-            r.setTitolo(rs.getString(5));
-            r.setTesto(rs.getString(6));
-            r.setVoto(rs.getFloat(7));
-            r.setDataCaricamento(rs.getDate(8));
-            r.setGioco(new GiocoDAO(con).doRetrieveByTitle(rs.getString(9)));
-            r.setImmagine(rs.getString(10));
-            r.setCommenti(new CommentoDAO(con).getCommentById(r.getId(),"Recensione"));
+
+            r.setId(rs.getInt(1));
+            r.setTitolo(rs.getString(2));
+            r.setTesto(rs.getString(3));
+            r.setImmagine(rs.getString(4));
+            r.setDataScrittura(rs.getDate(5));
+            r.setVotoGiornalista(rs.getFloat(6));
+
             recensioni.add(r);
         }
 
@@ -76,6 +71,7 @@ public class RecensioneDAO {
 
     }
 
+    //non serve?
     public int doRetrieveIDByGameTitle(String title) throws SQLException {
         PreparedStatement ps = con.prepareStatement("SELECT id FROM recensione WHERE gioco=?");
         ps.setString(1, title);
@@ -87,42 +83,41 @@ public class RecensioneDAO {
         return 0;
     }
 
-    public ArrayList<Recensione> doRetrieveByIdJournalist(int id) throws SQLException {
+    public ArrayList<Recensione> doRetrieveByIdJournalist(int giornalista) throws SQLException {
         ArrayList<Recensione> recensioni = new ArrayList<>();
-        PreparedStatement ps = con.prepareStatement("SELECT g.nome, g.cognome, r.id, r.titolo, r.testo, r.voto, r.dataCaricamento," +
-                "r.gioco, r.immagine FROM recensione r JOIN giornalista g on r.giornalista = g.id " +
-                "WHERE r.giornalista=? " +
-                "ORDER BY r.dataCaricamento DESC ");
-        ps.setInt(1, id);
+        PreparedStatement ps = con.prepareStatement("SELECT r.id, r.titolo, r.testo, r.immagine, r.dataScrittura," +
+                "r.votoGiornalista FROM recensione r JOIN giornalista g on r.id_giornalista = g.id " +
+                "WHERE r.id_giornalista=? " +
+                "ORDER BY r.dataScrittura DESC ");
+        ps.setInt(1, giornalista);
         ResultSet rs = ps.executeQuery();
 
         while(rs.next())
         {
             Recensione r = new Recensione();
-            r.setGiornalista(rs.getString(1)+" "+rs.getString(2));
-            r.setId(rs.getInt(3));
-            r.setTitolo(rs.getString(4));
-            r.setTesto(rs.getString(5));
-            r.setVoto(rs.getFloat(6));
-            r.setDataCaricamento(rs.getDate(7));
-            r.setGioco(new GiocoDAO(con).doRetrieveByTitle(rs.getString(8)));
-            r.setImmagine(rs.getString(9));
-            r.setCommenti(new CommentoDAO(con).getCommentById(r.getId(),"Recensione"));
+
+            r.setId(rs.getInt(1));
+            r.setTitolo(rs.getString(2));
+            r.setTesto(rs.getString(3));
+            r.setImmagine(rs.getString(4));
+            r.setDataScrittura(rs.getDate(5));
+            r.setVotoGiornalista(rs.getFloat(6));
+
             recensioni.add(r);
         }
 
         return recensioni;
     }
 
-    public void doSave(Recensione r, int idGiornalista) throws SQLException {
+    public void doSave(Recensione r, int idGiornalista, int idVideogioco) throws SQLException {
         PreparedStatement ps = con.prepareStatement("INSERT INTO recensione " +
-                "(testo, giornalista, gioco, titolo, voto, dataCaricamento, immagine) VALUES(?, ?, ?, ?, ?, ?, ?)");
+                "(testo, id_giornalista, id_videogioco, titolo, votoGiornalista, dataScrittura, immagine) VALUES(?, ?, ?, ?, ?, ?, ?)");
         ps.setString(1, r.getTesto());
         ps.setInt(2, idGiornalista);
-        ps.setString(3, r.getGioco().getTitolo());
+        ps.setInt(3, idVideogioco);
         ps.setString(4, r.getTitolo());
-        ps.setFloat(5, r.getVoto());
-        ps.setDate(6, r.getDataCaricamento());
+        ps.setFloat(5, r.getVotoGiornalista());
+        ps.setDate(6, r.getDataScrittura());
         ps.setString(7, r.getImmagine());
 
         if(ps.executeUpdate() != 1)
@@ -186,16 +181,20 @@ public class RecensioneDAO {
 
         while(rs.next()){
             Recensione r = new Recensione();
+
             r.setId(rs.getInt(1));
-            r.setTitolo(rs.getString(5));
-            r.setTesto(rs.getString(2));
-            r.setVoto(rs.getFloat(6));
-            r.setDataCaricamento(rs.getDate(7));
+            r.setTitolo(rs.getString(2));
+            r.setTesto(rs.getString(3));
+            r.setImmagine(rs.getString(4));
+            r.setDataScrittura(rs.getDate(5));
+            r.setVotoGiornalista(rs.getFloat(6));
+
             list.add(r);
         }
         return list;
     }
 
+    //non serve?
     public boolean doRemoveById(int Id) throws SQLException {
         PreparedStatement ps =
                 con.prepareStatement("DELETE FROM Recensione WHERE id=?");

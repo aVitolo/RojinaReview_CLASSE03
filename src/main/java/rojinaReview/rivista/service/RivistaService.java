@@ -1,6 +1,6 @@
 package rojinaReview.rivista.service;
 
-import rojinaReview.model.utilities.Articolo;
+import rojinaReview.model.beans.Articolo;
 import rojinaReview.model.beans.Videogioco;
 
 import java.util.ArrayList;

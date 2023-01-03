@@ -6,28 +6,27 @@ public class Ordine {
 
     /* Attributes */
 
-    private ArrayList<ProdottoOrdine> prodotti;
+    private ArrayList<Prodotto> prodotti;
     private java.sql.Date dataOrdine;
-    private Float totale;
+    private float totale;
     private int id;
     private Indirizzo indirizzo;
     private Pagamento pagamento;
     private String stato;
-    private String tracking;
+
 
     /* Costructor */
 
     public Ordine() {
     }
 
-    public Ordine(ArrayList<ProdottoOrdine> prodotti,
+    public Ordine(ArrayList<Prodotto> prodotti,
                   java.sql.Date dataOrdine,
                   Float totale,
                   int id,
                   Indirizzo indirizzo,
                   Pagamento pagamento,
-                  String stato,
-                  String tracking) {
+                  String stato) {
         this.prodotti = prodotti;
         this.dataOrdine = dataOrdine;
         this.totale = totale;
@@ -35,7 +34,6 @@ public class Ordine {
         this.pagamento = pagamento;
         this.indirizzo = indirizzo;
         this.stato = stato;
-        this.tracking = tracking;
     }
     /* Getter & Setter */
 
@@ -55,13 +53,6 @@ public class Ordine {
         this.stato = stato;
     }
 
-    public String getTracking() {
-        return tracking;
-    }
-
-    public void setTracking(String tracking) {
-        this.tracking = tracking;
-    }
 
     public java.sql.Date getDataOrdine() {
         return dataOrdine;
@@ -95,61 +86,15 @@ public class Ordine {
         this.indirizzo = indirizzo;
     }
 
-    public ArrayList<ProdottoOrdine> getProdotti() {
+    public ArrayList<Prodotto> getProdotti() {
         return prodotti;
     }
 
-    public void setProdotti(ArrayList<ProdottoOrdine> prodotti) {
+    public void setProdotti(ArrayList<Prodotto> prodotti) {
         this.prodotti = prodotti;
     }
 
-    /* Inner Class */
-
-    public static class ProdottoOrdine {
-        /*
-            Valutare se modificare a class  per riutilizzo in Carrello e Ordine
-            o estendere prodotto
-        */
-
-        /* Attributes */
-
-        public int quantita;
-        public float prezzoAcquisto;
-        public Prodotto prodotto;
-
-        /* Constructors */
-
-        public ProdottoOrdine() {
-        }
 
 
-
-        /* Getter & Setter */
-
-        public void setProdotto(Prodotto prodotto) {
-            this.prodotto = prodotto;
-        }
-
-        public Prodotto getProdotto() {
-            return this.prodotto;
-        }
-
-        public float getPrezzoAcquisto() {
-            return prezzoAcquisto;
-        }
-
-        public void setPrezzoAcquisto(float prezzoAcquisto) {
-            this.prezzoAcquisto = prezzoAcquisto;
-        }
-
-        public int getQuantita() {
-            return quantita;
-        }
-
-        public void setQuantita(int quantita) {
-            this.quantita = quantita;
-        }
-
-    }
 
 }
