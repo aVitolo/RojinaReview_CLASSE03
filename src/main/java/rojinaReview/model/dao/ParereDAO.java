@@ -1,7 +1,6 @@
 package rojinaReview.model.dao;
 
-import rojinaReview.model.beans.ParereProdotto;
-import rojinaReview.model.beans.ParereGioco;
+
 import rojinaReview.model.utilities.ConPool;
 import rojinaReview.model.beans.Parere;
 
@@ -69,7 +68,7 @@ public class ParereDAO {
         ResultSet rs;
         if(type) //parere su videogioco
         {
-            ps = con.prepareStatement("SELECT id, voto, dataVotazione, id_videogioco FROM parere WHERE id_videogioco=? && id_videogiocatore=?");
+            ps = con.prepareStatement("SELECT id, parere, dataVotazione, id_videogioco FROM parere WHERE id_videogioco=? && id_videogiocatore=?");
             ps.setInt(1, idProdottoORVideogioco);
             ps.setInt(2, user);
             rs = ps.executeQuery();
@@ -85,7 +84,7 @@ public class ParereDAO {
         }
         else if(!type) //parere su prodotto
         {
-            ps = con.prepareStatement("SELECT id, voto, dataVotazione, id_prodotto FROM parere WHERE id_prodotto=? && id_videogiocatore=?");
+            ps = con.prepareStatement("SELECT id, parere, dataVotazione, id_prodotto FROM parere WHERE id_prodotto=? && id_videogiocatore=?");
             ps.setInt(1, idProdottoORVideogioco);
             ps.setInt(2, user);
             rs = ps.executeQuery();
@@ -110,7 +109,7 @@ public class ParereDAO {
         if(p.isType()) //videogioco
         {
             //cancellazione voto precedente
-            ps = con.prepareStatement("SELECT voto FROM parere WHERE id_videogiocatore=? && id_videogioco=?");
+            ps = con.prepareStatement("SELECT parere FROM Parere WHERE id_videogiocatore=? && id_videogioco=?");
             ps.setInt(1, user);
             ps.setInt(2, p.getIdProdottoORVideogioco());
             ResultSet rs = ps.executeQuery();
@@ -119,12 +118,12 @@ public class ParereDAO {
                 votoPrecedente = rs.getFloat(1);
             }
 
-            ps = con.prepareStatement("DELETE FROM parere WHERE id_videogiocatore=? && id_videogioco=?");
+            ps = con.prepareStatement("DELETE FROM Parere WHERE id_videogiocatore=? && id_videogioco=?");
             ps.setInt(1, user);
             ps.setInt(2, p.getIdProdottoORVideogioco());
             ps.executeUpdate();
 
-            ps = con.prepareStatement("INSERT INTO parere VALUES(?, ?, ?, ?, null) ");
+            ps = con.prepareStatement("INSERT INTO Parere VALUES(?, ?, ?, ?, null) ");
             ps.setFloat(1, p.getVoto());
             ps.setDate(2, p.getDataVotazione());
             ps.setInt(3, user);
@@ -145,7 +144,7 @@ public class ParereDAO {
         else if(!p.isType()) //prodotto
         {
             //cancellazione voto precedente
-            ps = con.prepareStatement("SELECT voto FROM parere WHERE id_videogiocatore=? && id_prodotto=?");
+            ps = con.prepareStatement("SELECT parere FROM parere WHERE id_videogiocatore=? && id_prodotto=?");
             ps.setInt(1, user);
             ps.setInt(2, p.getIdProdottoORVideogioco());
             ResultSet rs = ps.executeQuery();
@@ -176,5 +175,10 @@ public class ParereDAO {
             ps.setInt(5, p.getIdProdottoORVideogioco());
             ps.executeUpdate();
         }
+    }
+
+
+    public Object doRetrieveByUserAndIDTable(int id, String toString, boolean b) {
+        return null;
     }
 }

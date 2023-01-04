@@ -7,7 +7,7 @@ public class Parere {
     private int id;
     private float voto;
     private java.sql.Date dataVotazione;
-    private Integer idProdottoORVideogioco //id del prodotto o videogioco
+    private int idProdottoORVideogioco; //id del prodotto o videogioco
     private boolean type; //false prodotto, true videogioco
 
     public Parere(){

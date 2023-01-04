@@ -5,8 +5,6 @@ import java.util.ArrayList;
 public class Prodotto extends Contenuto {
     static public String[] fieldsName = {"Id","Nome","DescrizionesetQuantità","Prezzo","Media Voto","Numero Voti"};
 
-
-
     private String categoria;
     private ArrayList<Parere> pareri;
 
@@ -45,8 +43,6 @@ public class Prodotto extends Contenuto {
     public void setPrezzo(float prezzo) {
         this.prezzo = prezzo;
     }
-
-
 
     public String getCategoria() {
         return categoria;

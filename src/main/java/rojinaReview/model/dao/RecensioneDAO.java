@@ -30,7 +30,7 @@ public class RecensioneDAO {
             Recensione r = new Recensione();
 
             r.setId(rs.getInt(1));
-            r.setTitolo(rs.getString(2));
+            r.setNome(rs.getString(2));
             r.setTesto(rs.getString(3));
             r.setImmagine(rs.getString(4));
             r.setDataScrittura(rs.getDate(5));
@@ -58,7 +58,7 @@ public class RecensioneDAO {
             Recensione r = new Recensione();
 
             r.setId(rs.getInt(1));
-            r.setTitolo(rs.getString(2));
+            r.setNome(rs.getString(2));
             r.setTesto(rs.getString(3));
             r.setImmagine(rs.getString(4));
             r.setDataScrittura(rs.getDate(5));
@@ -73,7 +73,7 @@ public class RecensioneDAO {
 
     //non serve?
     public int doRetrieveIDByGameTitle(String title) throws SQLException {
-        PreparedStatement ps = con.prepareStatement("SELECT id FROM recensione WHERE gioco=?");
+        PreparedStatement ps = con.prepareStatement("SELECT id FROM recensione WHERE id_videogioco=?");
         ps.setString(1, title);
         ResultSet rs = ps.executeQuery();
 
@@ -97,7 +97,7 @@ public class RecensioneDAO {
             Recensione r = new Recensione();
 
             r.setId(rs.getInt(1));
-            r.setTitolo(rs.getString(2));
+            r.setNome(rs.getString(2));
             r.setTesto(rs.getString(3));
             r.setImmagine(rs.getString(4));
             r.setDataScrittura(rs.getDate(5));
@@ -115,7 +115,7 @@ public class RecensioneDAO {
         ps.setString(1, r.getTesto());
         ps.setInt(2, idGiornalista);
         ps.setInt(3, idVideogioco);
-        ps.setString(4, r.getTitolo());
+        ps.setString(4, r.getNome());
         ps.setFloat(5, r.getVotoGiornalista());
         ps.setDate(6, r.getDataScrittura());
         ps.setString(7, r.getImmagine());
@@ -164,10 +164,10 @@ public class RecensioneDAO {
         while (rs.next()) {
             Recensione r = new Recensione();
             r.setId(rs.getInt(1));
-            r.setTitolo(rs.getString(2));
+            r.setNome(rs.getString(2));
             r.setTesto(rs.getString(3));;
             r.setImmagine(rs.getString(4));
-            r.setVoto(rs.getFloat(5));
+            r.setVotoGiornalista(rs.getFloat(5));
             recensioni.add(r);
         }
 
@@ -183,7 +183,7 @@ public class RecensioneDAO {
             Recensione r = new Recensione();
 
             r.setId(rs.getInt(1));
-            r.setTitolo(rs.getString(2));
+            r.setNome(rs.getString(2));
             r.setTesto(rs.getString(3));
             r.setImmagine(rs.getString(4));
             r.setDataScrittura(rs.getDate(5));
@@ -201,6 +201,10 @@ public class RecensioneDAO {
         ps.setInt(1,Id);
         int i = ps.executeUpdate();
         return i == 1;
+    }
+
+    public String retrieveNome(int idRecensione) {
+        return null;
     }
 }
 

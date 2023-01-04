@@ -7,7 +7,7 @@ import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.Giornalista;
 import rojinaReview.model.beans.Recensione;
 import rojinaReview.model.dao.RecensioneDAO;
-import rojinaReview.model.dao.GiocoDAO;
+import rojinaReview.model.dao.VideogiocoDAO;
 import rojinaReview.model.utilities.Utils;
 
 import java.io.*;
@@ -31,23 +31,24 @@ public class insertReviewServlet extends HttpServlet {
         //recensione da inserire presa dal form
         Recensione r = new Recensione();
         r.setTesto(request.getParameter("testo"));
+
         try {
-            r.setGioco(new GiocoDAO().doRetrieveByTitle(request.getParameter("gioco")));
+            r.setIdVideogioco(new VideogiocoDAO().doRetrieveIdByTitle(request.getParameter("gioco")));
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        r.setTitolo(request.getParameter("titolo"));
-        r.setVoto(Float.parseFloat(request.getParameter("voto")));
-        r.setDataCaricamento(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+        r.setNome(request.getParameter("titolo"));
+        r.setVotoGiornalista(Float.parseFloat(request.getParameter("voto")));
+        r.setDataScrittura(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 
         Part filePart = request.getPart("immagine");
         String imageType = "reviews";
-        String fileName = "review-" + r.getGioco().getTitolo() + ".jpg";
+        String fileName = "review-" + "gioco" + ".jpg";
         r.setImmagine(Utils.saveImageWar(imageType, fileName, filePart));
         Utils.saveImageFileSystem(imageType, fileName, filePart);
 
         try {
-            new RecensioneDAO().doSave(r, g.getId());
+            new RecensioneDAO().doSave(r, g.getId(),r.getIdVideogioco());
         } catch (SQLException e) {
             e.printStackTrace();
         }

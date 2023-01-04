@@ -26,16 +26,18 @@ public class VideogiocoDAO {
         ps.setInt(1, videogioco);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            return new Videogioco(rs.getInt("id"),
-                    rs.getString("titolo"),
-                    rs.getDate("dataDiRilascio"),
-                    rs.getString("casaDiSviluppo"),
-                    rs.getFloat("mediaVoto"),
-                    rs.getInt("numeroVoti"),
-                    rs.getString("copertina"),
-                    new GenereDAO(con).doRetriveByGame(videogioco),
-                    new PiattaformaDAO(con).doRetriveByGame(videogioco),
-                    new NotiziaDAO(con).doRetrieveByGame(videogioco));
+            Videogioco g = new Videogioco();
+            g.setId(rs.getInt("id"));
+            g.setTitolo(rs.getString("titolo"));
+            g.setDataDiRilascio(rs.getDate("dataDiRilascio"));
+            g.setCasaDiSviluppo(rs.getString("casaDiSviluppo"));
+            g.setMediaVoto(rs.getFloat("mediaVoto"));
+            g.setNumeroVoti(rs.getInt("numeroVoti"));
+            g.setCopertina(rs.getString("copertina"));
+            g.setGeneri(new GenereDAO(con).doRetriveByGame(g.getId()));
+            g.setPiattaforme(new PiattaformaDAO(con).doRetriveByGame(g.getId()));
+            //g.setListaNotizie(new NotiziaDAO(con).doRetrieveByGameMentioned(g.getId()));
+            return g;
         }
 
         return null;
@@ -59,9 +61,9 @@ public class VideogiocoDAO {
             g.setMediaVoto(rs.getFloat("mediaVoto"));
             g.setNumeroVoti(rs.getInt("numeroVoti"));
             g.setCopertina(rs.getString("copertina"));
-            g.setListaGeneri(new GenereDAO(con).doRetriveByGame(g.getId()));
-            g.setListaPiattaforme(new PiattaformaDAO(con).doRetriveByGame(g.getId()));
-            g.setListaNotizie(new NotiziaDAO(con).doRetriveByGame(g.getId()));
+            g.setGeneri(new GenereDAO(con).doRetriveByGame(g.getId()));
+            g.setPiattaforme(new PiattaformaDAO(con).doRetriveByGame(g.getId()));
+            //g.setListaNotizie(new NotiziaDAO(con).doRetrieveByGameMentioned(g.getId()));
 
             giochi.add(g);
         }
@@ -77,14 +79,13 @@ public class VideogiocoDAO {
         ArrayList<String> g = new ArrayList<>();
         while (rs.next())
             g.add(rs.getString(1));
-
         return g;
 
     }
 
     public ArrayList<String> getGamesNames() throws SQLException {
         ArrayList<String> games = new ArrayList<>();
-        PreparedStatement ps = con.prepareStatement("SELECT titolo FROM Gioco");
+        PreparedStatement ps = con.prepareStatement("SELECT titolo FROM videogioco");
         ResultSet rs = ps.executeQuery();
 
         while (rs.next())
@@ -110,4 +111,14 @@ public class VideogiocoDAO {
             throw new RuntimeException("Insert error");
     }
 
+    public Videogioco doRetrieveByTitle(String gioco) {
+        return null;
+    }
+
+    public int doRetrieveByTitle(String gioco) {
+        return -1;
+    }
+
+    public int retrieveIdByName(String s) {
+    }
 }

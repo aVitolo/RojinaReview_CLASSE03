@@ -8,9 +8,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import rojinaReview.model.beans.Manager;
 import rojinaReview.model.beans.Giornalista;
+import rojinaReview.model.beans.Utente;
 import rojinaReview.model.beans.Videogiocatore;
-import rojinaReview.model.utilities.Persona;
-import rojinaReview.model.dao.AmministratoreDAO;
+import rojinaReview.model.dao.ManagerDAO;
 import rojinaReview.model.dao.GiornalistaDAO;
 import rojinaReview.model.utilities.GenericStaffDAO;
 
@@ -31,10 +31,10 @@ public class LoginStaff extends HttpServlet {
         //userType = 0 Per i Giornalisti, userType = 1 Per gli Admin
         String userType = request.getParameter("userType");
         //Calcola Hash della password utente
-        password = Persona.calcolaHash(password);
+        password = Utente.calcolaHash(password);
 
         int type = -1;
-        Persona tmp = null;
+        Utente tmp = null;
         GenericStaffDAO staffDAO = null;
         try {
             //Verifica se è stato richiesto un giornalista
@@ -42,11 +42,11 @@ public class LoginStaff extends HttpServlet {
                 staffDAO = new GiornalistaDAO();
                 type = 0;
             } else if (userType.equals("1")) {
-                staffDAO = new AmministratoreDAO();
+                staffDAO = new ManagerDAO();
                 type = 1;
             }
 
-            if (staffDAO == null || ((tmp = (Persona) staffDAO.doRetriveByEmail(email)) == null)) {
+            if (staffDAO == null || ((tmp = (Utente) staffDAO.doRetriveByEmail(email)) == null)) {
                 String message = "Invalid email";
                 request.setAttribute("message", message);
                 RequestDispatcher dispatcher = request.getRequestDispatcher(loginErrato);

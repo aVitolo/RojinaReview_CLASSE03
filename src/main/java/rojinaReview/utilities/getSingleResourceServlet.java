@@ -33,7 +33,7 @@ public class getSingleResourceServlet extends HttpServlet {
                     trovato = true;
                     request.setAttribute("notizia", notizieContext.get(i));
                     try {
-                        request.setAttribute("commenti", new CommentoDAO().getCommentById(id, "Notizia"));
+                        request.setAttribute("commenti", new CommentoDAO().getCommentById(id, 1));
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -43,7 +43,8 @@ public class getSingleResourceServlet extends HttpServlet {
                 try {
                     Notizia n = new NotiziaDAO().doRetrieveById(id);
                     request.setAttribute("notizia", n);
-                    request.setAttribute("commenti", new CommentoDAO().getCommentById(id, "Notizia"));
+                    request.setAttribute("commenti", new CommentoDAO().getCommentById(id, 1));
+                    //1 dovrebbe specificare la colonna idRecensione, guardare DB per verificare la correttezza
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -58,12 +59,12 @@ public class getSingleResourceServlet extends HttpServlet {
                     trovato = true;
                     request.setAttribute("recensione", recensioniContext.get(i));
                     try {
-                        request.setAttribute("commenti", new CommentoDAO().getCommentById(id, "Recensione"));
+                        request.setAttribute("commenti", new CommentoDAO().getCommentById(id, 1));
                         if(session.getAttribute("utente") != null)
                         {
                             Videogiocatore u = (Videogiocatore) session.getAttribute("utente");
-                            request.setAttribute("votoUtente", new VotoDAO().doRetrieveByUserAndIDTable(u.getEmail(),
-                                    recensioniContext.get(i).getGioco().getTitolo(), "gioco"));
+                            request.setAttribute("votoUtente", new ParereDAO().
+                                    doRetrieveUserOpinion(u.getId(), recensioniContext.get(i).getIdVideogioco(), true));
                         }
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -74,12 +75,12 @@ public class getSingleResourceServlet extends HttpServlet {
                 try {
                     Recensione r = new RecensioneDAO().doRetrieveById(id);
                     request.setAttribute("recensione", r);
-                    request.setAttribute("commenti", new CommentoDAO().getCommentById(id, "Recensione"));
+                    request.setAttribute("commenti", new CommentoDAO().getCommentById(id, 1));
                     if(session.getAttribute("utente") != null)
                     {
                         Videogiocatore u = (Videogiocatore) session.getAttribute("utente");
-                        request.setAttribute("votoUtente", new VotoDAO().doRetrieveByUserAndIDTable(u.getEmail(),
-                                r.getGioco().getTitolo(), "gioco"));
+                        request.setAttribute("votoUtente", new ParereDAO().
+                                doRetrieveUserOpinion(u.getId(), r.getIdVideogioco(), true));
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
@@ -90,7 +91,7 @@ public class getSingleResourceServlet extends HttpServlet {
         } else if (type.equalsIgnoreCase("shop") || type.equalsIgnoreCase("prodotto")) {
             Videogiocatore u = null;
             Carrello carrello = null;
-            Integer quantitàCarrello = new Integer(0);
+            int quantitàCarrello = 0;
             if(session.getAttribute("utente") != null){
                 u = (Videogiocatore) session.getAttribute("utente");
                 carrello = u.getCarrello();
@@ -106,10 +107,10 @@ public class getSingleResourceServlet extends HttpServlet {
                     trovato = true;
                     request.setAttribute("prodotto", prodottiContext.get(i));
                     try {
-                        request.setAttribute("commenti", new CommentoDAO().getCommentById(id, "Prodotto"));
+                        request.setAttribute("commenti", new CommentoDAO().getCommentById(id, 2));
                         if(u != null)
-                            request.setAttribute("votoUtente", new VotoDAO().doRetrieveByUserAndIDTable(u.getEmail(),
-                                    Integer.toString(prodottiContext.get(i).getId()), "prodotto"));
+                            request.setAttribute("votoUtente", new ParereDAO().
+                                    doRetrieveByUserAndIDTable(u.getId(),Integer.toString(prodottiContext.get(i).getId()), false));
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -120,10 +121,10 @@ public class getSingleResourceServlet extends HttpServlet {
                 try {
                     Prodotto p = new ProdottoDAO().doRetrieveById(id);
                     request.setAttribute("prodotto", p);
-                    request.setAttribute("commenti", new CommentoDAO().getCommentById(id, "Prodotto"));
+                    request.setAttribute("commenti", new CommentoDAO().getCommentById(id, 2));
                     if(u != null)
-                        request.setAttribute("votoUtente", new VotoDAO().doRetrieveByUserAndIDTable(u.getEmail(),
-                                Integer.toString(p.getId()), "prodotto"));
+                        request.setAttribute("votoUtente", new ParereDAO().
+                                doRetrieveByUserAndIDTable(u.getId(),Integer.toString(p.getId()), false));
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -133,7 +134,7 @@ public class getSingleResourceServlet extends HttpServlet {
             //per aggiornare in real-time la quantità disponibile
             if(carrello != null){
                 for(j = 0; j < carrello.getProdotti().size(); j++)
-                    if(carrello.getProdotti().get(j).getProdotto().getId() == id)
+                    if(carrello.getProdotti().get(j).getId() == id)
                         quantitàCarrello = carrello.getProdotti().get(j).getQuantità();
             }
             request.setAttribute("quantitàCarrello", quantitàCarrello);

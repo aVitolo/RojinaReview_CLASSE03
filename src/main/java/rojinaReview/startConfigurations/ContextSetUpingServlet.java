@@ -48,7 +48,7 @@ public class ContextSetUpingServlet extends HttpServlet {
         }
         config.getServletContext().setAttribute("prodotti", prodotti);
 
-        ArrayList<Tipologia> tipologie;
+        ArrayList<String> tipologie;
         TipologiaDAO tDAO;
         try {
             tDAO = new TipologiaDAO();
@@ -59,7 +59,7 @@ public class ContextSetUpingServlet extends HttpServlet {
         }
         config.getServletContext().setAttribute("tipologie", tipologie);
 
-        ArrayList<Categoria> categorie;
+        ArrayList<String> categorie;
         CategoriaDAO cDAO;
         try {
             cDAO = new CategoriaDAO();
@@ -70,7 +70,7 @@ public class ContextSetUpingServlet extends HttpServlet {
         }
         config.getServletContext().setAttribute("categorie", categorie);
 
-        ArrayList<Piattaforma> piattaforme;
+        ArrayList<String> piattaforme;
         PiattaformaDAO ptDAO;
         try {
             ptDAO = new PiattaformaDAO();
@@ -82,10 +82,9 @@ public class ContextSetUpingServlet extends HttpServlet {
         config.getServletContext().setAttribute("piattaforme", piattaforme);
 
         ArrayList<String> giochi;
-        GiocoDAO gcDAO;
+        VideogiocoDAO gcDAO;
         try {
-            gcDAO = new GiocoDAO();
-            giochi = gcDAO.getGamesNames();
+            giochi = new VideogiocoDAO().getGamesNames();
         } catch (SQLException e) {
             System.out.println("Gioco ERROR");
             throw new RuntimeException(e);

@@ -3,10 +3,9 @@ package rojinaReview.opinione.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import rojinaReview.model.beans.ParereGioco;
-import rojinaReview.model.beans.ParereProdotto;
 import rojinaReview.model.beans.Videogiocatore;
-import rojinaReview.model.dao.VotoDAO;
+import rojinaReview.model.beans.Parere;
+import rojinaReview.model.dao.ParereDAO;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -28,27 +27,39 @@ public class addVoteServlet extends HttpServlet {
         String table = request.getParameter("table");
 
         if(table.equals("gioco")){
-            ParereGioco vg = new ParereGioco();
-            vg.setGioco(request.getParameter("nomeGioco"));
-            vg.setUtente(u.getEmail());
-            vg.setDataVotazione(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
-            vg.setVoto(Float.parseFloat(request.getParameter("toVoto")));
+            Parere p = new Parere();
+            p.setIdProdottoORVideogioco(Integer.valueOf(request.getParameter("nomeGioco")));
+            /*
+            aggiungere se ID videogiocatore sara' inserito nella classe
+            p.setUtente(u.getId());
+             */
+            p.setDataVotazione(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+            p.setVoto(Float.parseFloat(request.getParameter("toVoto")));
 
+            /*
+            0 e' valore momentanio, sostituito con ID videogiocatore se sara' inserito nella classe
+            */
             try {
-                new VotoDAO().doSave(vg, table);
+                new ParereDAO().doSave(p, 0);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
         else if(table.equals("prodotto")){
-            ParereProdotto vp = new ParereProdotto();
+            Parere vp = new Parere();
             vp.setId(Integer.parseInt(request.getParameter("id")));
-            vp.setUtente(u.getEmail());
+            /*
+                aggiungere se ID videogiocatore sara' inserito nella classe
+                 vp.setUtente(u.getId());
+             */
             vp.setDataVotazione(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
             vp.setVoto(Float.parseFloat(request.getParameter("toVoto")));
 
+            /*
+                0 e' valore momentanio, sostituito con ID videogiocatore se sara' inserito nella classe
+            */
             try {
-                new VotoDAO().doSave(vp, table);
+                new ParereDAO().doSave(vp, 0);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

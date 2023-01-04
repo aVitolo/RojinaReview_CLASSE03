@@ -1,6 +1,5 @@
 package rojinaReview.model.dao;
 
-import rojinaReview.model.beans.Categoria;
 import rojinaReview.model.utilities.ConPool;
 
 import java.sql.Connection;
@@ -27,6 +26,7 @@ public class CategoriaDAO {
         ResultSet rs = ps.executeQuery();
         if (rs.next())
             return rs.getString(1);
+        return null;
     }
 
     public ArrayList<String> doRetrieveAll() throws SQLException {
@@ -36,7 +36,6 @@ public class CategoriaDAO {
         ArrayList<String> categorie = new ArrayList<>();
         while (rs.next())
             categorie.add(rs.getString(1));
-
         return categorie;
     }
 

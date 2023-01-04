@@ -5,7 +5,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.dao.CommentoDAO;
-import rojinaReview.model.dao.VotoDAO;
+import rojinaReview.model.dao.ParereDAO;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -18,8 +18,8 @@ public class userVotesServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Videogiocatore u = (Videogiocatore) session.getAttribute("utente");
         try {
-            request.setAttribute("commenti", new CommentoDAO().getCommentByUser(u.getEmail()));
-            request.setAttribute("voti", new VotoDAO().doRetrieveByUser(u.getEmail()));
+            request.setAttribute("commenti", new CommentoDAO().getCommentByUser(u.getId()));
+            request.setAttribute("voti", new ParereDAO().doRetrieveByUser(u.getId()));
         } catch (SQLException e) {
             e.printStackTrace();
         }

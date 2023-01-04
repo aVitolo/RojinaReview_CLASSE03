@@ -17,7 +17,7 @@ public class logout extends HttpServlet {
             if (request.getSession(false).getAttribute("utente") != null || request.getSession(false).getAttribute("giornalista") != null || request.getSession(false).getAttribute("admin") != null) {
                 if(request.getSession(false).getAttribute("utente") != null){
                     Videogiocatore u = (Videogiocatore) request.getSession().getAttribute("utente");
-                    new CarrelloDAO().doSave(u.getCarrello(), u.getEmail());
+                    new CarrelloDAO().doSave(u.getCarrello(), u.getId());
                 }
                 request.getSession().invalidate();
             }

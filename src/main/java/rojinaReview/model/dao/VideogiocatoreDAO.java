@@ -1,6 +1,7 @@
 package rojinaReview.model.dao;
 
 import rojinaReview.model.beans.Videogiocatore;
+import rojinaReview.model.beans.Videogioco;
 import rojinaReview.model.utilities.ConPool;
 
 import java.io.UnsupportedEncodingException;
@@ -14,11 +15,11 @@ public class VideogiocatoreDAO {
         return con;
     }
 
-    public VideogiocoDAO() throws SQLException {
+    public VideogiocatoreDAO() throws SQLException {
         con = ConPool.getConnection();
     }
 
-    public VideogiocoDAO(Connection con) {
+    public VideogiocatoreDAO(Connection con) {
         this.con = con;
     }
 
@@ -30,7 +31,6 @@ public class VideogiocatoreDAO {
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             Videogiocatore v = new Videogiocatore();
-
             v.setId(rs.getInt(1));
             v.setEmail(rs.getString(2));
             v.setPassword(rs.getString(3));
@@ -140,6 +140,8 @@ public class VideogiocatoreDAO {
         int i = ps.executeUpdate();
         return i == 1;
     }
+
+
 }
 
 

@@ -30,7 +30,7 @@ public class CommentoDAO {
         else if(tipo == 1)
             stringType = "id_recensione";
         else if(tipo == 2)
-            stringType = "id_notizia"
+            stringType = "id_notizia";
         String query = "SELECT c.id, c.testo, c.dataScrittura, c.id_videogiocatore, v.nickname FROM commento c JOIN videogiocatore v on v.id = c.id_videogiocatore WHERE " + stringType + "=? " + "and v.bannato = 0 ORDER BY dataScrittura DESC";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setInt(1, id);
@@ -66,34 +66,37 @@ public class CommentoDAO {
             Commento c = new Commento();
             c.setId(rs.getInt(1));
             c.setTesto(rs.getString(2));
-            c.setData(rs.getTimestamp(3));
-            int idContenuto;
+            c.setDataScrittura(rs.getTimestamp(3));
+            int idContenuto = 0;
             String contenuto = null;
-            if(rs.getInt("id_prodotto") != null)
+            /*
+                Da testare
+             */
+            if(rs.getObject("id_prodotto") != null)
             {
                 idContenuto = rs.getInt("id_prodotto");
                 contenuto = new ProdottoDAO(con).retrieveNome(rs.getInt("id_prodotto"));
             }
 
-            else if (rs.getInt("id_recensione") != null)
+            else if (rs.getObject("id_recensione") != null)
             {
                 idContenuto = rs.getInt("id_recensione");
                 contenuto = new RecensioneDAO(con).retrieveNome(rs.getInt("id_recensione"));
             }
 
-            else if (rs.getInt("id_notizia") != null)
+            else if (rs.getObject("id_notizia") != null)
             {
                 idContenuto = rs.getInt("id_notizia");
                 contenuto = new NotiziaDAO(con).retrieveNome(rs.getInt("id_notizia"));
             }
 
             c.setIdContenuto(idContenuto);
-            c.setContenuto(contenuto);
+            c.setNomeContenuto(contenuto);
             commenti.add(c);
         }
 
 
-        commenti.sort(Comparator.comparing(c -> c.getData()));
+        commenti.sort(Comparator.comparing(c -> c.getDataScrittura()));
 
         return commenti;
 
@@ -102,16 +105,24 @@ public class CommentoDAO {
     public void doSave(Commento c, int tipo) throws SQLException {
         PreparedStatement ps = con.prepareStatement("INSERT INTO commento VALUES (?, ?, ?, ?, ?, ?)");
         ps.setString(1, c.getTesto());
-        ps.setTimestamp(2, c.getData());
+        ps.setTimestamp(2, c.getDataScrittura());
         ps.setInt(3, c.getIdVideogiocatore());
-        //se non setto gli altri parametri viene direttamente messo null o lanciata eccezione?
-        if(tipo == 0)
+        /*
+            se non setto gli altri parametri viene direttamente messo null o lanciata eccezione?
+            proviamo ad utilizzare setNull.
+        */
+        if(tipo == 0) {
             ps.setInt(4, c.getIdContenuto());
-        if(tipo == 1)
+            ps.setNull(5, 6);
+        }
+        if(tipo == 1) {
             ps.setInt(5, c.getIdContenuto());
-        if(tipo == 2)
+            ps.setNull(4, 6);
+        }
+        if(tipo == 2) {
             ps.setInt(6, c.getIdContenuto());
-
+            ps.setNull(5, 4);
+        }
         if(ps.executeUpdate() != 1)
             throw new RuntimeException("Insert error");
     }
@@ -122,4 +133,10 @@ public class CommentoDAO {
         ps.executeUpdate();
     }
 
+    /*
+        Neccessario implementare?
+     */
+    public ArrayList<Commento> getCommentByUser(int id) {
+        return null;
+    }
 }

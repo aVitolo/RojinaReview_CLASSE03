@@ -21,7 +21,7 @@ public class ParagrafoDAO {
     }
 
     public ArrayList<Paragrafo> doRetrieveAllByArticle(int article, boolean type) throws SQLException {
-        ArrayList<Paragrafo> paragrafi = new ArrayList<>()
+        ArrayList<Paragrafo> paragrafi = new ArrayList<>();
         PreparedStatement ps;
         ResultSet rs;
 

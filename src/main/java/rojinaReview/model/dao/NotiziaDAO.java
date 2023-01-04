@@ -30,7 +30,7 @@ public class NotiziaDAO {
             Notizia n = new Notizia();
 
             n.setId(rs.getInt(1));
-            n.setTitolo(rs.getString(2));
+            n.setNome(rs.getString(2));
             n.setTesto(rs.getString(3));
             n.setImmagine(rs.getString(4));
             n.setDataScrittura(rs.getDate(5));
@@ -52,7 +52,7 @@ public class NotiziaDAO {
             Notizia n = new Notizia();
 
             n.setId(rs.getInt(1));
-            n.setTitolo(rs.getString(2));
+            n.setNome(rs.getString(2));
             n.setTesto(rs.getString(3));
             n.setImmagine(rs.getString(4));
             n.setDataScrittura(rs.getDate(5));
@@ -77,7 +77,7 @@ public class NotiziaDAO {
             Notizia n = new Notizia();
 
             n.setId(rs.getInt(1));
-            n.setTitolo(rs.getString(2));
+            n.setNome(rs.getString(2));
             n.setTesto(rs.getString(3));
             n.setImmagine(rs.getString(4));
             n.setDataScrittura(rs.getDate(5));
@@ -99,7 +99,7 @@ public class NotiziaDAO {
             Notizia n = new Notizia();
 
             n.setId(rs.getInt(1));
-            n.setTitolo(rs.getString(2));
+            n.setNome(rs.getString(2));
             n.setTesto(rs.getString(3));
             n.setImmagine(rs.getString(4));
             n.setDataScrittura(rs.getDate(5));
@@ -116,7 +116,7 @@ public class NotiziaDAO {
 
         ps.setString(1, n.getTesto());
         ps.setInt(2, idGiornalista);
-        ps.setString(3, n.getTitolo());
+        ps.setString(3, n.getNome());
         ps.setDate(4, n.getDataScrittura());
         ps.setString(5, n.getImmagine());
 
@@ -136,7 +136,7 @@ public class NotiziaDAO {
         for (String s : mentioned) {
             ps = con.prepareStatement("INSERT INTO videogioco_notizia (id_notizia, id_videogioco) VALUES (?, ?)");
             ps.setInt(1, idNotizia);
-            ps.setString(2, new VideogiocoDAO().retrieveId(s));
+            ps.setInt(2, new VideogiocoDAO().retrieveIdByName(s));
 
             if (ps.executeUpdate() != 1)
                 throw new RuntimeException("Insert error");
@@ -175,7 +175,7 @@ public class NotiziaDAO {
         while (rs.next()) {
             Notizia n = new Notizia();
             n.setId(rs.getInt(1));
-            n.setTitolo(rs.getString(2));
+            n.setNome(rs.getString(2));
             n.setTesto(rs.getString(3));
             n.setImmagine(rs.getString(4));
             notizie.add(n);
@@ -193,7 +193,7 @@ public class NotiziaDAO {
             Notizia n = new Notizia();
 
             n.setId(rs.getInt(1));
-            n.setTitolo(rs.getString(2));
+            n.setNome(rs.getString(2));
             n.setTesto(rs.getString(3));
             n.setImmagine(rs.getString(4));
             n.setDataScrittura(rs.getDate(5));
@@ -210,5 +210,13 @@ public class NotiziaDAO {
         ps.setInt(1,Id);
         int i = ps.executeUpdate();
         return i == 1;
+    }
+
+    public Object doRetrieveByGame(int idVideogioco) {
+        return null;
+    }
+
+    public String retrieveNome(int idNotizia) {
+        return null;
     }
 }

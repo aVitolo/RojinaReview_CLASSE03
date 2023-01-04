@@ -1,7 +1,5 @@
 package rojinaReview.model.beans;
 
-import rojinaReview.model.utilities.Persona;
-
 public class Manager extends Utente {
     static public String[] fieldsName = {"Id","Nome","Cognome","Email","Password Hash"};
 

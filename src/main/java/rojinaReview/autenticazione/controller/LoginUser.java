@@ -8,9 +8,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import rojinaReview.model.beans.Carrello;
 import rojinaReview.model.beans.Prodotto;
+import rojinaReview.model.beans.Utente;
 import rojinaReview.model.beans.Videogiocatore;
-import rojinaReview.model.utilities.Persona;
-import rojinaReview.model.dao.UtenteDAO;
+import rojinaReview.model.dao.VideogiocatoreDAO;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -32,7 +32,7 @@ public class LoginUser extends HttpServlet {
                 String email = request.getParameter("email");
 
                 //Inizializza la connessione al DB tramite DAO
-                UtenteDAO uDAO = new UtenteDAO();
+                VideogiocatoreDAO uDAO = new VideogiocatoreDAO();
                 this.tmp = uDAO.doRetriveByEmail(email);
 
                 //Verifica se la ricerca dell' utente è andata male, e assegna a tmp il risultato
@@ -48,7 +48,7 @@ public class LoginUser extends HttpServlet {
                     String password = request.getParameter("password");
 
                     //Calcola Hash della password utente
-                    password = Persona.calcolaHash(password);
+                    password = Utente.calcolaHash(password);
 
                     //ottengo la password dell' user nel db
                     String dbPass = this.tmp.getPassword();
@@ -93,7 +93,6 @@ public class LoginUser extends HttpServlet {
                 if (!trovato)
                     prodottiDB.add(prodottiOspite.get(i));
             }
-
             carrello.setProdotti(prodottiDB); //istruzione penso inutile
             carrello.setTotale(carrello.getTotale() + ospite.getTotale());
         }

@@ -20,9 +20,9 @@ public class WrapperDaoAdminPanel {
 
         switch (className) {
             case amministratoreClass:
-                dao = new AmministratoreDAO();
-                lista = ((AmministratoreDAO) dao).doRetriveAll();
-                ((AmministratoreDAO) dao).getCon().close();
+                dao = new ManagerDAO();
+                lista = ((ManagerDAO) dao).doRetriveAll();
+                ((ManagerDAO) dao).getCon().close();
                 break;
             case giornalistaClass:
                 dao = new GiornalistaDAO();
@@ -31,9 +31,9 @@ public class WrapperDaoAdminPanel {
                 break;
 
             case utenteClass:
-                dao = new UtenteDAO();
-                lista = ((UtenteDAO) dao).doRetriveAll();
-                ((UtenteDAO) dao).getCon().close();
+                dao = new VideogiocatoreDAO();
+                lista = ((VideogiocatoreDAO) dao).doRetriveAll();
+                ((VideogiocatoreDAO) dao).getCon().close();
                 break;
 
             case notiziaClass:
@@ -64,9 +64,9 @@ public class WrapperDaoAdminPanel {
 
         switch (className) {
             case amministratoreClass:
-                dao = new AmministratoreDAO();
-                ((AmministratoreDAO) dao).doRemoveById(Integer.parseInt(identifier));
-                ((AmministratoreDAO) dao).getCon().close();
+                dao = new ManagerDAO();
+                ((ManagerDAO) dao).doRemoveById(Integer.parseInt(identifier));
+                ((ManagerDAO) dao).getCon().close();
                 break;
             case giornalistaClass:
                 dao = new GiornalistaDAO();
@@ -75,9 +75,9 @@ public class WrapperDaoAdminPanel {
                 break;
 
             case utenteClass:
-                dao = new UtenteDAO();
-                ((UtenteDAO) dao).doRemoveByEmail(identifier);
-                ((UtenteDAO) dao).getCon().close();
+                dao = new VideogiocatoreDAO();
+                ((VideogiocatoreDAO) dao).doRemoveByEmail(identifier);
+                ((VideogiocatoreDAO) dao).getCon().close();
                 break;
 
             case notiziaClass:

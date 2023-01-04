@@ -4,7 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.Carrello;
-import rojinaReview.model.utilities.Articolo;
+import rojinaReview.model.beans.Articolo;
 
 
 import java.io.IOException;
@@ -38,7 +38,7 @@ public class HomeServlet extends HttpServlet {
         ArrayList<Articolo> articoli = new ArrayList<>();
         articoli.addAll((ArrayList<Articolo>) servCon.getAttribute("notizie"));
         articoli.addAll((ArrayList<Articolo>) servCon.getAttribute("recensioni"));
-        articoli.sort(Comparator.comparing(a -> a.getDataCaricamento()));
+        articoli.sort(Comparator.comparing(a -> a.getDataScrittura()));
 
         //estraggo l'articolo piu recente per la prima pagina
         Articolo copertina = articoli.remove(0);

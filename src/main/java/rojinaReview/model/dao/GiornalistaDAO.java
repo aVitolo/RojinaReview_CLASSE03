@@ -1,5 +1,6 @@
 package rojinaReview.model.dao;
 
+import rojinaReview.model.beans.Articolo;
 import rojinaReview.model.beans.Giornalista;
 import rojinaReview.model.utilities.ConPool;
 import rojinaReview.model.utilities.GenericStaffDAO;
@@ -35,7 +36,8 @@ public class GiornalistaDAO implements GenericStaffDAO {
                     rs.getString("nome"),
                     rs.getString("cognome"),
                     rs.getString("immagine"),
-                    rs.getInt("verificato"), articoli);
+                    rs.getBoolean("verificato"),
+                    null);
         }
 
         return null;
@@ -53,13 +55,17 @@ public class GiornalistaDAO implements GenericStaffDAO {
                     rs.getString("nome"),
                     rs.getString("cognome"),
                     rs.getString("immagine"),
-                    rs.getInt("verificato"), articoli);
+                    rs.getBoolean("verificato"),
+                    null);
         }
 
         return null;
     }
 
-    //non serve?
+    /*
+        Non serve?
+        Permetteva al Manager di visualizzare tutti i giornalisti quindi ora e' superflua
+     */
     public ArrayList<Giornalista> doRetriveAll() throws SQLException, UnsupportedEncodingException {
         ArrayList<Giornalista> list = new ArrayList<>();
         Statement stmt = con.createStatement();
@@ -67,12 +73,14 @@ public class GiornalistaDAO implements GenericStaffDAO {
 
         while(rs.next()){
             list.add(new Giornalista(
+                    rs.getInt("id"),
+                    rs.getString("email"),
+                    rs.getString("password"),
                     rs.getString("nome"),
                     rs.getString("cognome"),
-                    rs.getString("email"),
-                    rs.getString("pass"),
                     rs.getString("immagine"),
-                    rs.getInt("id")));
+                    rs.getBoolean("verificato"),
+                    null));
         }
         return list;
     }

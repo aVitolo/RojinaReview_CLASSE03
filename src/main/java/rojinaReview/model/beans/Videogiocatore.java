@@ -1,7 +1,5 @@
 package rojinaReview.model.beans;
 
-import rojinaReview.model.utilities.Persona;
-
 import java.util.ArrayList;
 
 public class Videogiocatore extends Utente {
@@ -18,6 +16,8 @@ public class Videogiocatore extends Utente {
     private boolean bannato;
     private String nickname;
 
+    public Videogiocatore(){};
+
     public Videogiocatore(int id, String nome, String cognome, String email, String password, String immagine, ArrayList<Indirizzo> indirizzi, ArrayList<String> telefoni, ArrayList<Pagamento> pagamenti, ArrayList<Ordine> ordini, ArrayList<Commento> commenti, ArrayList<Segnalazione> segnalazioni, ArrayList<Parere> pareri, Carrello carrello, boolean bannato, String nickname) {
         super(id, nome, cognome, email, password, immagine);
         this.indirizzi = indirizzi;
@@ -32,6 +32,12 @@ public class Videogiocatore extends Utente {
         this.nickname = nickname;
     }
 
+    /*
+            Costruttore Usato in fase di Registrazione
+     */
+    public Videogiocatore(String email, String password, String nickname) {
+        super(0,null, null, email, password, null);
+    }
 
 
     public ArrayList<Indirizzo> getIndirizzi() {

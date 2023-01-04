@@ -25,14 +25,29 @@ public class addCommentServlet extends HttpServlet {
         Videogiocatore u = (Videogiocatore) session.getAttribute("utente");
 
         Commento c = new Commento();
-        c.setUtente(u.getEmail());
+        c.setIdVideogiocatore(u.getId());
         c.setTesto(request.getParameter("commentText"));
-        c.setData(new java.sql.Timestamp(Calendar.getInstance().getTime().getTime()));
+        c.setDataScrittura(new java.sql.Timestamp(Calendar.getInstance().getTime().getTime()));
         c.setId(Integer.parseInt(request.getParameter("id")));
-        c.setResource(request.getParameter("type"));
+        /*
+            Integer.parseInt(request.getParameter("type") da modificare con idContenuto
+         */
+        c.setIdContenuto(Integer.parseInt(request.getParameter("idContenuto")));
 
+        /*
+             Ordini dei check provvisorio
+         */
+        int type = -1;
+        if(request.getParameter("idContenuto").equals("prodotto"))
+            type = 0;
+        else if(request.getParameter("idContenuto").equals("recensione"))
+            type = 1;
+        else if(request.getParameter("idContenuto").equals("notizia"))
+            type = 2;
+        else
+                throw new RuntimeException();// modificare con Eccezione Personalizzata
         try {
-            new CommentoDAO().doSave(c);
+            new CommentoDAO().doSave(c,type);
         } catch (SQLException e) {
             e.printStackTrace();
         }

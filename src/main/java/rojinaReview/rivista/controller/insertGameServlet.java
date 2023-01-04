@@ -4,7 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.*;
-import rojinaReview.model.dao.GiocoDAO;
+import rojinaReview.model.dao.VideogiocatoreDAO;
 import rojinaReview.model.dao.PiattaformaDAO;
 import rojinaReview.model.dao.TipologiaDAO;
 import rojinaReview.model.utilities.Utils;
@@ -27,8 +27,8 @@ public class insertGameServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String result = "/Rojina_Review_war/journalistGames";
         ServletContext context = request.getServletContext();
-        ArrayList<Tipologia> tipologie = (ArrayList<Tipologia>) context.getAttribute("tipologie");
-        ArrayList<Piattaforma> piattaforme = (ArrayList<Piattaforma>) context.getAttribute("piattaforme");
+        ArrayList<String> tipologie = (ArrayList<String>) context.getAttribute("tipologie");
+        ArrayList<String> piattaforme = (ArrayList<String>) context.getAttribute("piattaforme");
 
         //gioco da inserire preso dal form
         Videogioco g = new Videogioco();
@@ -45,15 +45,15 @@ public class insertGameServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        g.setTipologie(new ArrayList<>());
-        for (Tipologia t : tipologie)
-            if (t.getNome().equalsIgnoreCase(request.getParameter(t.getNome())))
-                g.getTipologie().add(t);
+        g.setGeneri(new ArrayList<String>());
+        for (String t : tipologie)
+            if (t.equalsIgnoreCase(request.getParameter(t)))
+                g.getGeneri().add(t);
 
 
         g.setPiattaforme(new ArrayList<>());
-        for (Piattaforma p : piattaforme)
-            if (p.getNome().equalsIgnoreCase(request.getParameter(p.getNome())))
+        for (String p : piattaforme)
+            if (p.equalsIgnoreCase(request.getParameter(p)))
                 g.getPiattaforme().add(p);
 
         Part filePart = request.getPart("copertina");
@@ -63,9 +63,9 @@ public class insertGameServlet extends HttpServlet {
         Utils.saveImageFileSystem(imageType, fileName, filePart);
 
         try {
-            new GiocoDAO().doSave(g);
-            new TipologiaDAO().doSave(g.getTitolo(), g.getTipologie());
-            new PiattaformaDAO().doSave(g.getTitolo(), g.getPiattaforme());
+            new VideogiocatoreDAO().doSave(g);
+            new TipologiaDAO().doSave(g.getId(), g.getGeneri());
+            new PiattaformaDAO().doSave(g.getId(), g.getPiattaforme());
         } catch (SQLException e) {
             e.printStackTrace();
         }

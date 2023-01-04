@@ -5,7 +5,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.Carrello;
 import rojinaReview.model.beans.Videogiocatore;
-import rojinaReview.model.dao.UtenteDAO;
+import rojinaReview.model.dao.VideogiocatoreDAO;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -40,7 +40,7 @@ public class RegistrationUser extends HttpServlet {
                     email = email.trim();
 
                 //Inizializza la connessione al DB tramite DAO
-                UtenteDAO uDAO = new UtenteDAO();
+                VideogiocatoreDAO uDAO = new VideogiocatoreDAO();
                 this.tmp = uDAO.doRetriveByEmail(email);
 
                 //Verifica se la ricerca dell' utente è andata male e controlla l' email
@@ -82,7 +82,7 @@ public class RegistrationUser extends HttpServlet {
                     String passHash = Videogiocatore.calcolaHash(password);
                     Videogiocatore tmpUser = new Videogiocatore(email, passHash, nickname);
 
-                    UtenteDAO uDao = new UtenteDAO();
+                    VideogiocatoreDAO uDao = new VideogiocatoreDAO();
                     if (uDao.doInsertUser(tmpUser) == true) {
                         if(request.getSession().getAttribute("ospite") != null)
                             tmpUser.setCarrello((Carrello) request.getSession().getAttribute("ospite"));

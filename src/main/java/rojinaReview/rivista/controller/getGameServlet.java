@@ -20,8 +20,8 @@ public class getGameServlet extends HttpServlet {
             int id = new RecensioneDAO().doRetrieveIDByGameTitle(request.getParameter("name"));
             //request.setAttribute("gioco", new GiocoDAO().doRetrieveByTitle(request.getParameter("name")));
             request.setAttribute("recensione", new RecensioneDAO().doRetrieveById(id));
-            request.setAttribute("commenti", new CommentoDAO().getCommentById(id, "recensione"));
-            request.setAttribute("votoUtente", new VotoDAO().doRetrieveByUserAndIDTable(u.getEmail(), String.valueOf(id), "gioco"));
+            request.setAttribute("commenti", new CommentoDAO().getCommentById(id, 0));
+            request.setAttribute("votoUtente", new ParereDAO().doRetrieveUserOpinion(u.getId(), id, true));
             //request.setAttribute("notizieGioco", new NotiziaDAO().doRetrieveByGameMentioned(request.getParameter("name")));
         } catch (SQLException e) {
             e.printStackTrace();

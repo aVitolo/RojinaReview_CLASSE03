@@ -1,7 +1,5 @@
 package rojinaReview.model.beans;
 
-import rojinaReview.model.utilities.Persona;
-
 import java.util.ArrayList;
 
 public class Giornalista extends Utente {

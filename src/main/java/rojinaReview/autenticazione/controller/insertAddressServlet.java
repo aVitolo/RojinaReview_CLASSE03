@@ -29,7 +29,7 @@ public class insertAddressServlet extends HttpServlet {
         i.setCap(request.getParameter("cap"));
 
         try {
-            new IndirizzoDAO().doSave(u.getEmail(), i);
+            new IndirizzoDAO().doSave(u.getId(), i);
         } catch (SQLException e) {
             e.printStackTrace();
         }

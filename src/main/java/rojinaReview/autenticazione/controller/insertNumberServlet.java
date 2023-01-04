@@ -3,7 +3,6 @@ package rojinaReview.autenticazione.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import rojinaReview.model.beans.Telefono;
 import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.dao.TelefonoDAO;
 
@@ -21,9 +20,9 @@ public class insertNumberServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String result = "/Rojina_Review_war/userInformations";
         Videogiocatore u = (Videogiocatore) request.getSession().getAttribute("utente");
-        Telefono t = new Telefono(request.getParameter("telefono"));
+        String t = request.getParameter("telefono");
         try {
-            new TelefonoDAO().doSave(u.getEmail(), t);
+            new TelefonoDAO().doSave(u.getId(), t);
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -136,7 +136,7 @@ public class ShopServiceImpl implements  ShopService{
     public List<Ordine> visualizzaOrdiniEffettuati(int id) throws LoadingOrderException {
         List<Ordine> ordini = null;
         try {
-            ordini = new OrdineDAO().doRetrieveUserById(id);
+            ordini = new OrdineDAO().doRetrieveByUserId(id);
             return ordini;
         } catch (SQLException e) {
             throw new LoadingOrderException("Errore nel caricamento degli ordini");

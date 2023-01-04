@@ -48,7 +48,7 @@ public class CarrelloDAO {
         if (rs.next())
             totale = rs.getFloat("totale");
 
-        carrello.setProdottiCarrello(prodotti);
+        carrello.setProdotti(prodotti);
         carrello.setTotale(totale);
 
 
@@ -75,7 +75,7 @@ public class CarrelloDAO {
         if(ps.executeUpdate() != 1)
             throw new RuntimeException("Insert error");
         //effettuo l'insert in prodotto-carrello
-        for(Prodotto p : c.getProdottiCarrello()){
+        for(Prodotto p : c.getProdotti()){
             ps = con.prepareStatement("INSERT INTO prodotto_carrello VALUES (?, ?, ?)");
             ps.setInt(1, p.getId());
             ps.setInt(2, user);
