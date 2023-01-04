@@ -30,7 +30,7 @@ public class ProdottoDAO {
         if (rs.next()) {
             p.setId(rs.getInt(1));
             p.setNome(rs.getString(2));
-            p.setDescrizione(rs.getString(3));
+            p.setTesto(rs.getString(3));
             p.setImmagine(rs.getString(4));
             p.setPrezzo(rs.getFloat(5));
             p.setQuantità(rs.getInt(6));
@@ -67,7 +67,7 @@ public class ProdottoDAO {
 
             p.setId(rs.getInt(1));
             p.setNome(rs.getString(2));
-            p.setDescrizione(rs.getString(3));
+            p.setTesto(rs.getString(3));
             p.setImmagine(rs.getString(4));
             p.setPrezzo(rs.getFloat(5));
             p.setQuantità(rs.getInt(6));
@@ -137,7 +137,7 @@ public class ProdottoDAO {
 
             p.setId(rs.getInt(1));
             p.setNome(rs.getString(2));
-            p.setDescrizione(rs.getString(3));
+            p.setTesto(rs.getString(3));
             p.setImmagine(rs.getString(4));
             p.setPrezzo(rs.getFloat(5));
             p.setQuantità(rs.getInt(6));

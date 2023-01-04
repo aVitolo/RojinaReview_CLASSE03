@@ -126,6 +126,12 @@ public class VideogiocatoreDAO {
         return list;
     }
 
+    public void banUser(int user) throws SQLException {
+        PreparedStatement ps = con.prepareStatement("UPDATE videogiocatore SET bannato = 1 WHERE id=?");
+        ps.setInt(1, user);
+        ps.executeUpdate();
+    }
+
     //non serve?
     public boolean doRemoveByEmail(String email) throws SQLException {
         PreparedStatement ps =

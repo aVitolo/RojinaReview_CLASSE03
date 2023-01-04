@@ -128,7 +128,7 @@ create table Videogioco_Genere(
 
 create table Recensione(
     id				    int auto_increment,
-    titolo 			    varchar(100) not null unique ,
+    nome 			    varchar(100) not null unique ,
     testo			    text not null,
     immagine 		    varchar(100) not null,
     dataScrittura	    date not null,
@@ -147,7 +147,7 @@ create table Recensione(
 
 create table Notizia(
     id				    int auto_increment,
-    titolo 			    varchar(100) not null unique ,
+    nome 			    varchar(100) not null unique ,
     testo			    text not null,
     immagine 		    varchar(100) not null,
     dataScrittura	    date not null,
@@ -543,7 +543,7 @@ insert into Videogioco_Genere values
     (20, "Giocatore Singolo"),
     (20, "VR");
 
-insert into Recensione (testo, id_giornalista, id_videogioco, titolo, votoGiornalista, dataScrittura,immagine) values
+insert into Recensione (testo, id_giornalista, id_videogioco, nome, votoGiornalista, dataScrittura,immagine) values
     ("Il seguito di Dark Souls I...", 2, 2,"Dark Souls torna a colpire",9,"2014-04-11", "./images/reviews/review-Dark Souls II.jpg"),
     ("Dark Souls 3 richiama i...", 4, 3,"Recensione Dark Souls III",9,"2016-05-12", "./images/reviews/review-Dark Souls III.jpg"),
     ("Sekiro nuova avventura diversa...",2, 4,"Il gioco From Software più difficile di sempre",9,"2019-04-22", "./images/reviews/review-Sekiro Shadows Die Twice.jpg"),
@@ -564,7 +564,7 @@ insert into Recensione (testo, id_giornalista, id_videogioco, titolo, votoGiorna
     ("Dark Souls è un rpg di tutto...", 2,1, "Il miglior RPG", 9.5, "2018-01-10", "./images/reviews/review-Dark Souls.jpg");
 
 
-insert into Notizia (testo, id_giornalista, titolo, dataScrittura, immagine) values
+insert into Notizia (testo, id_giornalista, nome, dataScrittura, immagine) values
     ("Halo Infinite è un gioco...", 1,  "Halo Infinite e la community tossica","2022-01-24", "./images/news/new-Halo Infinite e la community tossica.jpg"),
     ("Doppiaggio in italiano in...", 1,   "La Mod italiana per Dark Souls Remastered arriva domani","2021-10-13", "./images/news/new-La Mod italiana per Dark Souls Remastered arriva domani.jpg"),
     ("La nintendo...", 1, "I tesori di casa Nintendo","2020-03-03", "./images/news/new-I tesori di casa Nintendo.jpg"),

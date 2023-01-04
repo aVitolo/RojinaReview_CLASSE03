@@ -15,6 +15,7 @@ public class Commento {
     private String nicknameVideogiocatore;
     private int idContenuto;
     private String nomeContenuto;
+    private int tipo; //0 prodotto, 1 recensione, 2 notizia
     private ArrayList<Segnalazione> segnalazioni;
 
 
@@ -98,5 +99,13 @@ public class Commento {
 
     public void setSegnalazioni(ArrayList<Segnalazione> segnalazioni) {
         this.segnalazioni = segnalazioni;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
     }
 }

@@ -1,14 +1,27 @@
 package rojinaReview.model.beans;
 
 public class Paragrafo{
+    private int id;
     private String titolo;
     private String testo;
     private String immagine;
 
-    public Paragrafo(String titolo, String testo, String immagine){
+    public Paragrafo() {
+    }
+
+    public Paragrafo(int id, String titolo, String testo, String immagine){
+        this.id = id;
         this.titolo=titolo;
         this.testo=testo;
         this.immagine=immagine;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitolo() {

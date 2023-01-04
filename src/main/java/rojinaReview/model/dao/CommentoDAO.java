@@ -31,17 +31,22 @@ public class CommentoDAO {
             stringType = "id_recensione";
         else if(tipo == 2)
             stringType = "id_notizia"
-        String query = "SELECT id, testo, dataScrittura, id_videogiocatore FROM commento WHERE " + stringType + "=? " + "ORDER BY dataScrittura DESC";
+        String query = "SELECT c.id, c.testo, c.dataScrittura, c.id_videogiocatore, v.nickname FROM commento c JOIN videogiocatore v on v.id = c.id_videogiocatore WHERE " + stringType + "=? " + "and v.bannato = 0 ORDER BY dataScrittura DESC";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         ArrayList<Commento> commenti = new ArrayList();
         while (rs.next()) {
-            commenti.add(
-                    new Commento(   rs.getInt(1),
-                                    rs.getString(2),
-                                    rs.getTimestamp(3),
-                                    new VideogiocatoreDAO(con).retrieveNickname(rs.getInt(4)));
+            Commento c = new Commento();
+
+            c.setId(rs.getInt(1));
+            c.setTesto(rs.getString(2));
+            c.setDataScrittura(rs.getTimestamp(3));
+            c.setIdVideogiocatore(rs.getInt(4));
+            c.setNicknameVideogiocatore(rs.getString(5));
+
+
+            commenti.add(c);
             }
 
 
@@ -109,6 +114,12 @@ public class CommentoDAO {
 
         if(ps.executeUpdate() != 1)
             throw new RuntimeException("Insert error");
+    }
+
+    public void deleteComment(int commento) throws SQLException {
+        PreparedStatement ps = con.prepareStatement("DELETE FROM commento WHERE id=?");
+        ps.setInt(1, commento);
+        ps.executeUpdate();
     }
 
 }

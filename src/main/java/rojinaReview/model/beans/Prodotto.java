@@ -35,21 +35,8 @@ public class Prodotto extends Contenuto {
 
 
 
-    public String getNome() {
-        return super.getNome();
-    }
 
-    public void setNome(String nome) {
-        super.setNome(nome);
-    }
 
-    public String getDescrizione() {
-        return super.getTesto();
-    }
-
-    public void setDescrizione(String descrizione) {
-        super.setTesto(descrizione);
-    }
 
     public float getPrezzo() {
         return prezzo;
@@ -59,13 +46,7 @@ public class Prodotto extends Contenuto {
         this.prezzo = prezzo;
     }
 
-    public String getImmagine() {
-        return super.getImmagine();
-    }
 
-    public void setImmagine(String immagine) {
-        super.setImmagine(immagine);
-    }
 
     public String getCategoria() {
         return categoria;
@@ -91,13 +72,7 @@ public class Prodotto extends Contenuto {
         this.mediaVoto = mediaVoto;
     }
 
-    public ArrayList<Commento> getCommenti() {
-        return super.getCommenti();
-    }
 
-    public void setCommenti(ArrayList<Commento> commenti) {
-        super.setCommenti(commenti);
-    }
 
     public ArrayList<Parere> getPareri() {
         return pareri;
@@ -109,5 +84,9 @@ public class Prodotto extends Contenuto {
 
     public int getQuantità() {
         return quantità;
+    }
+
+    public void setQuantità(int quantità) {
+        this.quantità = quantità;
     }
 }
