@@ -65,67 +65,75 @@ public class OrdineDAO {
 
 
 
-    public void confirmOrder(Ordine o, String user, ArrayList<Prodotto> prodottiContext) throws SQLException {
-        int idOrdine = 0;
-        ArrayList<Ordine.ProdottoOrdine> prodotti = o.getProdotti();
+    public void confirmOrder(Ordine o, int idUser, ArrayList<Prodotto> prodottiContext) throws SQLException {
+        ArrayList<Prodotto> prodotti = o.getProdotti();
         PreparedStatement ps;
         //cancello i prodotti-carrello
-        ps = con.prepareStatement("DELETE FROM prodotto_carrello WHERE utente=?");
-        ps.setString(1, user);
+        ps = con.prepareStatement("DELETE FROM Prodotto_Carrello WHERE id_videogiocatore=?");
+        ps.setInt(1, idUser);
         ps.executeUpdate();
         //cancello il carrello già presente nel database
-        ps = con.prepareStatement("DELETE FROM carrello WHERE utente=?");
-        ps.setString(1, user);
+        ps = con.prepareStatement("DELETE FROM Carrello WHERE id_videogiocatore=?");
+        ps.setInt(1, idUser);
         ps.executeUpdate();
 
-        ps = con.prepareStatement("INSERT INTO ordine (stato, tracking, dataOrdine, totale, pagamento, utente, via, numeroCivico, città, cap) " +
+        ps = con.prepareStatement("INSERT INTO Ordine (" +
+                "stato, " +
+                "dataOrdine, " +
+                "totale, " +
+                "numeroCarta_pagamento," +
+                "id_videogiocatore, " +
+                "via_videogiocatore, " +
+                "numeroCivico_videogiocatore," +
+                " città_videogiocatore, " +
+                "cap_videogiocatore) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ");
         ps.setString(1, o.getStato());
-        ps.setString(2, o.getTracking());
-        ps.setDate(3, o.getDataOrdine());
-        ps.setFloat(4, o.getTotale());
-        ps.setString(5, o.getPagamento().getNumeroCarta());
-        ps.setString(6, user);
-        ps.setString(7, o.getIndirizzo().getVia());
-        ps.setInt(8, o.getIndirizzo().getNumeroCivico());
-        ps.setString(9, o.getIndirizzo().getCittà());
-        ps.setString(10, o.getIndirizzo().getCap());
+        ps.setDate(2, o.getDataOrdine());
+        ps.setFloat(3, o.getTotale());
+        ps.setString(4, o.getPagamento().getNumeroCarta());
+        ps.setInt(5, idUser);
+        ps.setString(6, o.getIndirizzo().getVia());
+        ps.setInt(7, o.getIndirizzo().getNumeroCivico());
+        ps.setString(8, o.getIndirizzo().getCittà());
+        ps.setString(9, o.getIndirizzo().getCap());
 
         if(ps.executeUpdate() != 1)
             throw new RuntimeException("Insert error");
         //per prendere l'id dell'ordine appena inserito che servirà in prodotto_ordine
-        ps = con.prepareStatement("SELECT id FROM ordine WHERE utente=? ORDER BY id DESC LIMIT 1");
-        ps.setString(1, user);
+        ps = con.prepareStatement("SELECT id FROM Ordine WHERE id_videogiocatore=? ORDER BY id DESC LIMIT 1");
+        ps.setInt(1, idUser);
         ResultSet rs = ps.executeQuery();
+        int idOrdine = -1;
         if(rs.next())
             idOrdine = rs.getInt(1);
 
-        for(Ordine.ProdottoOrdine p : prodotti) {
+        for(Prodotto p : prodotti) {
             //controllo se il prodotto è effettivamente disponibile
-            ps = con.prepareStatement("SELECT disponibilità FROM prodotto WHERE id=?");
-            ps.setInt(1, p.getProdotto().getId());
+            ps = con.prepareStatement("SELECT disponibilità FROM Prodotto WHERE id=?");
+            ps.setInt(1, p.getId());
             rs = ps.executeQuery();
             if (rs.next())
-                if (p.getQuantita() > rs.getInt("disponibilità"))
+                if (p.getQuantità() > rs.getInt("disponibilità"))
                     throw new SQLException("Prodotto non disponibile");
 
             //aggiorno la disponibilità dei prodotti nel database
-            ps = con.prepareStatement("UPDATE prodotto SET disponibilità=disponibilità-? WHERE id=?");
-            ps.setInt(1, p.getQuantita());
-            ps.setInt(2, p.getProdotto().getId());
+            ps = con.prepareStatement("UPDATE Prodotto SET disponibilità=disponibilità-? WHERE id=?");
+            ps.setInt(1, p.getQuantità());
+            ps.setInt(2, p.getId());
             ps.executeUpdate();
 
             //aggiorno la disponibilità nel context
             if (prodottiContext != null) {
                 for (Prodotto pContext : prodottiContext)
-                    if (pContext.getId() == p.getProdotto().getId())
-                        pContext.setDisponibilità(pContext.getDisponibilità() - p.getQuantita());
+                    if (pContext.getId() == p.getId())
+                        pContext.setQuantità(pContext.getQuantità() - p.getQuantità());
             }
-            ps = con.prepareStatement("INSERT INTO prodotto_ordine VALUES (?, ?, ?, ?)");
-            ps.setInt(1, p.getProdotto().getId());
+            ps = con.prepareStatement("INSERT INTO Prodotto_Ordine VALUES (?, ?, ?, ?)");
+            ps.setInt(1, p.getId());
             ps.setInt(2, idOrdine);
-            ps.setFloat(3, p.getPrezzoAcquisto());
-            ps.setInt(4, p.getQuantita());
+            ps.setFloat(3, p.getPrezzo());
+            ps.setInt(4, p.getQuantità());
 
             if (ps.executeUpdate() != 1)
                 throw new RuntimeException("Insert error");

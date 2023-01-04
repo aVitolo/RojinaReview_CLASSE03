@@ -4,11 +4,11 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.Prodotto;
-import rojinaReview.model.dao.ProdottoDAO;
 import org.json.JSONArray;
+import rojinaReview.exception.LoadingShopException;
+import rojinaReview.shop.service.ShopServiceImpl;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 @WebServlet(name = "ShopServlet", value = "/ShopServlet")
@@ -25,20 +25,24 @@ public class ShopServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Prodotto> prodotti = new ArrayList<Prodotto>();
-        ProdottoDAO pDAO = null;
 
+
+        /*
+            Carico dal DB un sottogruppo dei prodotti da far visualizzare
+         */
+        ArrayList<Prodotto> prodotti = new ArrayList<Prodotto>();
         try {
-            pDAO = new ProdottoDAO();
             String offset = request.getParameter("offset");
             String categoria = request.getParameter("categoria");
             String ordine = request.getParameter("ordine");
-            prodotti = pDAO.updateContent(offset, categoria, ordine);
-        } catch (SQLException e) {
-            System.out.println(e);
-            throw new RuntimeException(e);
+            prodotti = (ArrayList<Prodotto>) new ShopServiceImpl().visualizzaShop(offset, categoria, ordine);
+        } catch (LoadingShopException e) {
+            e.printStackTrace();
         }
 
+        /*
+             Se ci sono altri prodotti da mostrare li inivio al CLient tramite JSON
+         */
         if(prodotti != null){
             JSONArray json = new JSONArray(prodotti);
             response.setContentType("application/json");
