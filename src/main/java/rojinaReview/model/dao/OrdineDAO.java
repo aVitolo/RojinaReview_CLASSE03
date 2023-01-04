@@ -22,7 +22,7 @@ public class OrdineDAO {
 
     //usata per lo storico ordini
     public ArrayList<Ordine> doRetrieveByUser(int user) throws SQLException {
-        PreparedStatement ps = con.prepareStatement("SELECT o.id, o.stato, o.dataOrdine, o.totale, p.nome, p.cognome, p.numeroCarta, p.dataScadenza, i.via, i.città, i.cap, i.numeroCivico  FROM ordine o JOIN pagamento p on o.id_videogiocatore = p.id_videogiocatore and o.numeroCarta_pagamento = p.numeroCarta JOIN indirizzo i on o.id_videogiocatore = i.id_videogiocatore and o.via_videogiocatore = i.via and o.numeroCivico_videogiocatore = i.numeroCivico and o.città_videogiocatore = i.città and o.cap_videogiocatore = i.cap ORDER BY o.dataOrdine DESC");
+        PreparedStatement ps = con.prepareStatement("SELECT o.id, o.stato, o.dataOrdine, o.totale, p.nome, p.cognome, p.numeroCarta, p.dataScadenza, i.via, i.città, i.cap, i.numeroCivico  FROM ordine o JOIN pagamento p on o.id_videogiocatore = p.id_videogiocatore and o.numeroCarta_pagamento = p.numeroCarta JOIN indirizzo i on o.id_videogiocatore = i.id_videogiocatore and o.via_videogiocatore = i.via and o.numeroCivico_videogiocatore = i.numeroCivico and o.città_videogiocatore = i.città and o.cap_videogiocatore = i.cap WHERE o.id_videogiocatore = ? ORDER BY o.dataOrdine DESC");
         ps.setInt(1, user);
         ResultSet rs = ps.executeQuery();
         ResultSet rsInt;
@@ -38,7 +38,7 @@ public class OrdineDAO {
             o.setIndirizzo(new Indirizzo(rs.getString(9), rs.getString(10), rs.getString(11), rs.getInt(12)));
 
 
-            o.setProdotti();
+            o.setProdotti(); //settare i prodotti non in questo metodo ma bensì nell'implementazione dell'interfaccia quando si va nei dettagli dell'ordine?
 
             ps = con.prepareStatement("SELECT po.id_prodotto, p.nome, p.immagine, po.prezzoAcquisto, p.nome_categoria, po.quantità FROM prodotto_ordine po JOIN prodotto p on po.id_prodotto = p.id WHERE po.id_ordine=?");
             ps.setInt(1, o.getId());
