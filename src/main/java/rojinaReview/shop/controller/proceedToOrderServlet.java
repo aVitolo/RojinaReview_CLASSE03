@@ -13,6 +13,9 @@ public class proceedToOrderServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        /*
+            Reindirizzo alla pagine per il checkout
+         */
         RequestDispatcher dispatcher =
                 request.getRequestDispatcher(path);
         dispatcher.forward(request, response);
@@ -20,6 +23,6 @@ public class proceedToOrderServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        this.doGet(request,response);
     }
 }

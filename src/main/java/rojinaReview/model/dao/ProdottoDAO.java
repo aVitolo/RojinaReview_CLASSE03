@@ -151,11 +151,37 @@ public class ProdottoDAO {
     }
 
     //non serve?
-    public boolean doRemoveById(int Id) throws SQLException {
+    public void doRemoveById(int Id) throws SQLException {
         PreparedStatement ps =
                 con.prepareStatement("DELETE FROM Prodotto WHERE id=?");
         ps.setInt(1,Id);
-        int i = ps.executeUpdate();
-        return i == 1;
+        ps.executeUpdate();
+    }
+
+    public void doUpdate(Prodotto prodotto) throws SQLException {
+        PreparedStatement ps =
+                con.prepareStatement("UPDATE Prodotto SET nome=?,descrizione=?,immagine=?,prezzo=?,disponibilità=?,nome_categoria=? WHERE id=?");
+        ps.setString(1,prodotto.getNome());
+        ps.setString(2,prodotto.getDescrizione());
+        ps.setString(3,prodotto.getImmagine());
+        ps.setFloat(4,prodotto.getPrezzo());
+        ps.setInt(5,prodotto.getQuantità());
+        ps.setString(6,prodotto.getCategoria());
+        ps.setInt(7,prodotto.getId());
+        ps.executeUpdate();
+    }
+    }
+
+    public void doSave(Prodotto prodotto) throws SQLException{
+        PreparedStatement ps =
+                con.prepareStatement("INSERT INTO Prodotto (nome,descrizione,immagine,prezzo,disponibilità,nome_categoria,mediaVoto,numeroVoti)" +
+                        "VALUES (?, ?, ?, ?, ?, ?,0,0);");
+        ps.setString(1,prodotto.getNome());
+        ps.setString(2,prodotto.getDescrizione());
+        ps.setString(3,prodotto.getImmagine());
+        ps.setFloat(4,prodotto.getPrezzo());
+        ps.setInt(5,prodotto.getQuantità());
+        ps.setString(6,prodotto.getCategoria());
+        ps.executeUpdate();
     }
 }

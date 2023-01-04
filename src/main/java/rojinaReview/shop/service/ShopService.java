@@ -1,7 +1,11 @@
 package rojinaReview.shop.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import rojinaReview.exception.CheckoutException;
+import rojinaReview.exception.LoadingOrderException;
+import rojinaReview.exception.ProductIDMissingException;
 import rojinaReview.model.beans.Carrello;
 import rojinaReview.model.beans.Ordine;
 import rojinaReview.model.beans.Prodotto;
@@ -28,7 +32,7 @@ public interface ShopService
      * @param id del prodotto
      * @return dati del prodotto
      */
-    Prodotto visualizzaProdotto(int id);
+    Prodotto visualizzaProdotto(int id) throws ProductIDMissingException;
 
     /**
      * Firma del metodo che permette
@@ -36,7 +40,7 @@ public interface ShopService
      * di aggiungere un prodotto allo shop
      * @param prodotto info
      */
-    void inserisciProdotto(Prodotto prodotto);
+    void inserisciProdotto(Prodotto prodotto) throws ProductIDMissingException;
 
     /**
      * Firma del metodo che permette
@@ -44,7 +48,7 @@ public interface ShopService
      * di aggiungere un prodotto allo shop
      * @param prodotto
      */
-    void modificaProdotto(Prodotto prodotto);
+    void modificaProdotto(Prodotto prodotto) throws ProductIDMissingException;
 
     /**
      * Firma del metodo che permette
@@ -52,7 +56,7 @@ public interface ShopService
      * di rimuovere un prodotto dallo shop
      * @param id del prodotto
      */
-    void cancellaProdotto(int id);
+    void cancellaProdotto(int id) throws ProductIDMissingException;
 
     /**
      * Firma del metodo che permette
@@ -60,7 +64,7 @@ public interface ShopService
      * di aggiungere un prodotto al carello
      * @param prodotto da aggiungere al carello
      */
-    void aggiungiProdottoAlCarrello(Carrello.ProdottoCarrello prodotto);
+    void aggiungiProdottoAlCarrello(Prodotto prodotto);
 
     /**
      * Firma del metodo che permette
@@ -68,15 +72,17 @@ public interface ShopService
      * di rimuovere un prodotto al carello
      * @param prodotto da rimuovere dal carello
      */
-    void rimuoviProdottoDalCarrello(Carrello.ProdottoCarrello prodotto);
+    void rimuoviProdottoDalCarrello(Prodotto prodotto);
 
     /**
      * Firma del metodo che permette
      * ad un Videogicoatore
      * di rimuovere un prodotto al carello
-     * @param carrello da svuotare
+     * @param ordin per la persistenza
+     * @param id del videogiocatore
+     * @param prodottiContext , lista prodotti nella sessione da aggiornare
      */
-    void checkout(Carrello carrello);
+    void checkout(Ordine ordine, int id, ArrayList<Prodotto>prodottiContext) throws CheckoutException;
 
     /**
      * Firma del metodo che permette
@@ -84,6 +90,6 @@ public interface ShopService
      * di visualziare gli ordini effettuati
      * @param id del videogiocatore
      */
-    List<Ordine>visualizzaOrdiniEffettuati(int id);
+    List<Ordine>visualizzaOrdiniEffettuati(int id) throws LoadingOrderException;
 
 }

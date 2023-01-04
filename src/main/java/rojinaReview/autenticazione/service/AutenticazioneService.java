@@ -1,5 +1,6 @@
 package rojinaReview.autenticazione.service;
 
+import rojinaReview.exception.VideogiocatoreIDMissingException;
 import rojinaReview.model.beans.*;
 
 import java.util.ArrayList;
@@ -84,7 +85,13 @@ public interface AutenticazioneService {
      * inserire un metodo di pagamento ad un videogiocatore
      * @param pagamento da inserire
      */
-    void inserisciMetodoDiPagamento(Pagamento pagamento);
+    void inserisciMetodoDiPagamento(Pagamento pagamento) throws VideogiocatoreIDMissingException;
+
+    /*
+        inserisciMetodoDiPagamento(Pagamento pagamento) permette di inserire un nuovo metodo di pagamento nella tabella Pagamento
+        ma senza id non e' possibile salvare il "collegamento" pagamento-videogiocatore quindi modifico momentanemente il metodo
+     */
+    void inserisciMetodoDiPagamento(int id, Pagamento pagamento) throws VideogiocatoreIDMissingException;
 
     /**
      * Firma del metodo che permette di
@@ -100,6 +107,8 @@ public interface AutenticazioneService {
      * @param indirizzo da inserire
      */
     void inserisciIndrizzo(Indirizzo indirizzo);
+
+    void inserisciIndrizzo(int id, Indirizzo indirizzo) throws VideogiocatoreIDMissingException;
 
     /**
      * Firma del metodo che permette di
