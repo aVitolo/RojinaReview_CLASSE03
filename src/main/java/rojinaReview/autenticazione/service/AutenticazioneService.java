@@ -70,7 +70,7 @@ public interface AutenticazioneService {
      * inserire un numero telefonico ad un videogiocatore
      * @param telefono da inserire
      */
-    void inserisciNumeroTelefonico(Telefono telefono);
+    void inserisciNumeroTelefonico(String telefono);
 
     /**
      * Firma del metodo che permette di
@@ -78,7 +78,7 @@ public interface AutenticazioneService {
      * @param id del videogiocatore
      * @return una lista di numeri di telefono
      */
-    ArrayList<Telefono> visualizzaNumeriTelefonici(int id);
+    ArrayList<String> visualizzaNumeriTelefonici(int id);
 
     /**
      * Firma del metodo che permette di

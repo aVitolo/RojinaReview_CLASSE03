@@ -20,51 +20,73 @@ public class OrdineDAO {
         this.con = con;
     }
 
-    public ArrayList<Ordine> doRetrieveByUser(String user) throws SQLException {
+    /*
+        Carica tutti gli ordini di un videogiocatore attraverso il suo id
+     */
+    public ArrayList<Ordine> doRetrieveUserById(int id) throws SQLException {
         PreparedStatement ps =
                 con.prepareStatement(
-                        "SELECT o.id, stato, o.tracking, o.dataOrdine, o.totale, o.pagamento, o.via, o.numeroCivico, o.città, o.cap, p.nome, p.cognome, p.numeroCarta, p.dataScadenza " +
-                                "FROM ordine o join pagamento p on  o.pagamento = p.numeroCarta  and o.utente = p.utente WHERE o.utente=? ORDER BY o.dataOrdine DESC");
-        ps.setString(1, user);
+                        "SELECT " +
+                                "o.id, " +
+                                "o.stato, " +
+                                "o.dataOrdine, " +
+                                "o.totale, " +
+                                "o.numeroCivico_videogiocatore, " +
+                                "o.via_videogiocatore, " +
+                                "o.città_videogiocatore, " +
+                                "o.cap_videogiocatore\t, " +
+                                "p.nome, " +
+                                "p.cognome," +
+                                "p.numeroCarta, " +
+                                "p.dataScadenza " +
+                                "FROM Ordine o join Pagamento p on o.numeroCarta_pagamento = p.numeroCarta and o.id_videogiocatore = p.id_videogiocatore " +
+                                "WHERE o.id_videogiocatore=? " +
+                                "ORDER BY o.dataOrdine DESC ");
+        ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         ResultSet rsInt;
         ArrayList<Ordine> ordini = new ArrayList<>();
         while (rs.next()) {
             Ordine o = new Ordine(
-                    new ArrayList<Ordine.ProdottoOrdine>(),
-                    rs.getDate(4),
-                    rs.getFloat(5),
+                    new ArrayList<Prodotto>(),
+                    rs.getDate(3),
+                    rs.getFloat(4),
                     rs.getInt(1),
-                    new Indirizzo(rs.getString(7),
-                            rs.getString(9),
-                            rs.getString(10),
+                    new Indirizzo(rs.getString(5),
+                            rs.getString(6),
+                            rs.getString(7),
                             rs.getInt(8)),
-                    new Pagamento(rs.getString(11),
-                            rs.getString(12),
-                            rs.getString(13),
-                            rs.getDate(14)),
-                    rs.getString(2),
-                    rs.getString(3));
-
-            ps = con.prepareStatement("SELECT po.prodotto, po.prezzo, po.quantità FROM prodotto_ordine po WHERE po.ordine=?");
-            ps.setInt(1, o.getId());
-            rsInt = ps.executeQuery();
-            while (rsInt.next()) {
-                Ordine.ProdottoOrdine p = new Ordine.ProdottoOrdine();
-                p.setProdotto(new ProdottoDAO(con).doRetrieveById(rsInt.getInt(1)));
-                p.setPrezzoAcquisto(rsInt.getFloat(2));
-                p.setQuantita(rsInt.getInt(3));
-                o.getProdotti().add(p);
-            }
-            ordini.add(o);
-
+                    new Pagamento(rs.getString(9),
+                            rs.getString(10),
+                            rs.getString(11),
+                            rs.getDate(12)),
+                    rs.getString(2));
         }
-
         return ordini;
     }
 
-
-
+    /*
+        Carica tutti i prodotti di un ordine attraverso il suo id
+    */
+    public ArrayList<Prodotto> doRetrieveByOrderId(int id) throws SQLException {
+        ArrayList<Prodotto> prodotti = new ArrayList<>();
+        PreparedStatement ps = con.prepareStatement(
+                "SELECT po.id_prodotto, po.prezzoAcquisto, po.quantità " +
+                    "FROM Prodotto_Ordine po " +
+                    "WHERE po.id_ordine=?");
+        ps.setInt(1, id);
+        ResultSet rsInt = ps.executeQuery();
+        while (rsInt.next()) {
+            Prodotto prodotto = (new ProdottoDAO(con).doRetrieveById(rsInt.getInt(1)));
+            prodotto.setPrezzo(rsInt.getFloat(2));
+            prodotto.setQuantità(rsInt.getInt(3));
+            prodotti.add(prodotto);
+        }
+        return prodotti;
+    }
+    /*
+        Rende Persistente L'ordine
+     */
     public void confirmOrder(Ordine o, int idUser, ArrayList<Prodotto> prodottiContext) throws SQLException {
         ArrayList<Prodotto> prodotti = o.getProdotti();
         PreparedStatement ps;

@@ -41,7 +41,7 @@ public class insertPaymentServlet extends HttpServlet {
         p.setNumeroCarta(request.getParameter("numeroCarta"));
 
         try {
-            new PagamentoDAO().doSave(p, u.getEmail());
+            new PagamentoDAO().doSave(p, u.getId());
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -45,12 +45,12 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
     }
 
     @Override
-    public void inserisciNumeroTelefonico(Telefono telefono) {
+    public void inserisciNumeroTelefonico(String telefono) {
 
     }
 
     @Override
-    public ArrayList<Telefono> visualizzaNumeriTelefonici(int id) {
+    public ArrayList<String> visualizzaNumeriTelefonici(int id) {
         return null;
     }
 

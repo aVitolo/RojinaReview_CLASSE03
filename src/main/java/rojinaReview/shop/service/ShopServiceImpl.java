@@ -15,13 +15,12 @@ import java.util.List;
 
 public class ShopServiceImpl implements  ShopService{
 
-    @Override
     /*
-        Servelet:
-        -shop.ShopServlet
-        -autenticazione.ShopManagment (visualizzazione Shop lato manager, da sviluppare)
-
-     */
+    Servelet:
+    -shop.ShopServlet
+    -autenticazione.ShopManagment (visualizzazione Shop lato manager, da sviluppare)
+ */
+    @Override
     public List<Prodotto> visualizzaShop(String offset, String categoria, String ordine) throws LoadingShopException {
         List<Prodotto> prodotti = null;
         try {
@@ -33,15 +32,15 @@ public class ShopServiceImpl implements  ShopService{
     }
 
     public List<Prodotto> visualizzaShop() {
-        List<Prodotto> prodotti = new;
+        List<Prodotto> prodotti = null;
         try {
             prodotti = new ProdottoDAO().doRetriveAll();
-            return prodotti;
         } catch (SQLException e) {
            /*
                Possibile Eccezione?
             */
         }
+        return prodotti;
     }
 
     /*
@@ -137,7 +136,7 @@ public class ShopServiceImpl implements  ShopService{
     public List<Ordine> visualizzaOrdiniEffettuati(int id) throws LoadingOrderException {
         List<Ordine> ordini = null;
         try {
-            ordini =
+            ordini = new OrdineDAO().doRetrieveUserById(id);
             return ordini;
         } catch (SQLException e) {
             throw new LoadingOrderException("Errore nel caricamento degli ordini");

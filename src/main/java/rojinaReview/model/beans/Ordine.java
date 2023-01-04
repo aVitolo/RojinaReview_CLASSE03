@@ -31,8 +31,8 @@ public class Ordine {
         this.dataOrdine = dataOrdine;
         this.totale = totale;
         this.id = id;
-        this.pagamento = pagamento;
         this.indirizzo = indirizzo;
+        this.pagamento = pagamento;
         this.stato = stato;
     }
     /* Getter & Setter */
@@ -52,7 +52,6 @@ public class Ordine {
     public void setStato(String stato) {
         this.stato = stato;
     }
-
 
     public java.sql.Date getDataOrdine() {
         return dataOrdine;

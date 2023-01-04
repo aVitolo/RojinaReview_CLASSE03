@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import rojinaReview.model.beans.Carrello;
+import rojinaReview.model.beans.Prodotto;
 import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.utilities.Persona;
 import rojinaReview.model.dao.UtenteDAO;
@@ -79,11 +80,11 @@ public class LoginUser extends HttpServlet {
         if(ospite!=null) {
             int i, j;
             boolean trovato;
-            ArrayList<Carrello.ProdottoCarrello> prodottiDB = carrello.getProdotti();
-            ArrayList<Carrello.ProdottoCarrello> prodottiOspite = ospite.getProdotti();
+            ArrayList<Prodotto> prodottiDB = carrello.getProdotti();
+            ArrayList<Prodotto> prodottiOspite = ospite.getProdotti();
             for (i = 0; i < prodottiOspite.size(); i++) {
                 for (j = 0, trovato = false; j < prodottiDB.size() && !trovato; j++) {
-                    if (prodottiOspite.get(i).getProdotto().getId() == prodottiDB.get(j).getProdotto().getId()) {
+                    if (prodottiOspite.get(i).getId() == prodottiDB.get(j).getId()) {
                         prodottiDB.get(j).setQuantità(prodottiDB.get(j).getQuantità() + prodottiOspite.get(i).getQuantità());
                         trovato = true;
                     }
