@@ -5,6 +5,7 @@ import java.util.List;
 
 import rojinaReview.exception.CheckoutException;
 import rojinaReview.exception.LoadingOrderException;
+import rojinaReview.exception.LoadingShopException;
 import rojinaReview.exception.ProductIDMissingException;
 import rojinaReview.model.beans.Carrello;
 import rojinaReview.model.beans.Ordine;
@@ -17,6 +18,14 @@ import rojinaReview.model.beans.Prodotto;
  */
 public interface ShopService
 {
+    /*
+    Servelet:
+    -shop.ShopServlet
+    -autenticazione.ShopManagment (visualizzazione Shop lato manager, da sviluppare)
+
+ */
+    List<Prodotto> visualizzaShop(String offset, String categoria, String ordine) throws LoadingShopException;
+
     /**
      * Firma del metodo che permette
      * ad Giornalista o un Videogiocatore
