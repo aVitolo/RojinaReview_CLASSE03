@@ -103,14 +103,20 @@ public class SegnalazioneDAO {
 
     }
 
-    /**
-     * Cancella tutti le segnalazioni di un commento
-     * @param idCommento di cui devono essere cancellate le segnalazioni
-     * @throws SQLException
-     */
-    public void deleteReports(int idCommento) throws SQLException {
-        PreparedStatement ps = con.prepareStatement("DELETE FROM segnalazione WHERE id_commento=?");
-        ps.setInt(1, idCommento);
+    public void deleteReport(Segnalazione segnalazione) throws SQLException {
+        PreparedStatement ps = con.prepareStatement("DELETE FROM segnalazione WHERE id_commento=? and id_videogiocatore=?");
+        ps.setInt(1, segnalazione.getId_commento());
+        ps.setInt(2, segnalazione.getId_videogiocatore());
+        ps.executeUpdate();
+    }
+
+    public void doSave(Segnalazione segnalazione) throws SQLException {
+        PreparedStatement ps=con.prepareStatement("INSERT INTO Segnalazione VALUES (?,?,?,?,?)");
+        ps.setInt(1,segnalazione.getId_commento());
+        ps.setInt(2,segnalazione.getId_videogiocatore());
+        ps.setString(3,segnalazione.getMotivo());
+        ps.setString(4,segnalazione.getCommentoAggiuntivo());
+        ps.setDate(5,segnalazione.getDataSegnalazione());
         ps.executeUpdate();
     }
 
