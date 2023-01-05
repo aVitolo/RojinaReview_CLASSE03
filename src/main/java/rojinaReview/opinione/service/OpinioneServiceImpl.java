@@ -97,9 +97,9 @@ public class OpinioneServiceImpl implements OpinioneService{
 
     @Override
     public void gestisciSegnalazione(Segnalazione segnalazione, int flag) throws SQLException {
-        // eliminazione segnalazione
+        // eliminazione segnalazioni
         if(flag==0){
-            new SegnalazioneDAO().deleteReport(segnalazione);
+            new SegnalazioneDAO().deleteReports(segnalazione);
         }
         //ban utente
         if(flag==1){

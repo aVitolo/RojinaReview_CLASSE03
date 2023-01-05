@@ -90,7 +90,7 @@ public class SegnalazioneDAO {
             Segnalazione s = new Segnalazione();
 
             s.setId_commento(rs.getInt(1));
-            s.setId_videogiocatore(rs.getInt(2));
+            s.setId_videogiocatoreSegnalante(rs.getInt(2));
             s.setMotivo(rs.getString(3));
             s.setCommentoAggiuntivo(rs.getString(4));
             s.setDataSegnalazione(rs.getDate(5));
@@ -103,17 +103,16 @@ public class SegnalazioneDAO {
 
     }
 
-    public void deleteReport(Segnalazione segnalazione) throws SQLException {
-        PreparedStatement ps = con.prepareStatement("DELETE FROM segnalazione WHERE id_commento=? and id_videogiocatore=?");
+    public void deleteReports(Segnalazione segnalazione) throws SQLException {
+        PreparedStatement ps = con.prepareStatement("DELETE FROM segnalazione WHERE id_commento=?");
         ps.setInt(1, segnalazione.getId_commento());
-        ps.setInt(2, segnalazione.getId_videogiocatore());
         ps.executeUpdate();
     }
 
     public void doSave(Segnalazione segnalazione) throws SQLException {
         PreparedStatement ps=con.prepareStatement("INSERT INTO Segnalazione VALUES (?,?,?,?,?)");
         ps.setInt(1,segnalazione.getId_commento());
-        ps.setInt(2,segnalazione.getId_videogiocatore());
+        ps.setInt(2,segnalazione.getId_videogiocatoreSegnalante());
         ps.setString(3,segnalazione.getMotivo());
         ps.setString(4,segnalazione.getCommentoAggiuntivo());
         ps.setDate(5,segnalazione.getDataSegnalazione());

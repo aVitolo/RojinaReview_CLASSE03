@@ -3,6 +3,8 @@ package rojinaReview.model.beans;
 import java.sql.Date;
 
 public class Segnalazione {
+    private int id_commento;
+    private int id_videogiocatoreSegnalante;
     private String motivo;
     private String commentoAggiuntivo;
     private java.sql.Date dataSegnalazione;
@@ -27,11 +29,11 @@ public class Segnalazione {
         this.id_commento = id_commento;
     }
 
-    public int getId_videogiocatore() {
+    public int getId_videogiocatoreSegnalante() {
         return id_videogiocatoreSegnalante;
     }
 
-    public void setId_videogiocatore(int id_videogiocatore) {
+    public void setId_videogiocatoreSegnalante(int id_videogiocatore) {
         this.id_videogiocatoreSegnalante = id_videogiocatore;
     }
 
