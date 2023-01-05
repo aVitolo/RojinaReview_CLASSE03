@@ -1,9 +1,12 @@
 package rojinaReview.opinione.service;
 
+import rojinaReview.exception.InsertOpinionException;
+import rojinaReview.exception.LoadingCommentException;
 import rojinaReview.model.beans.Commento;
 import rojinaReview.model.beans.Segnalazione;
 import rojinaReview.model.beans.Parere;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -19,7 +22,7 @@ public interface OpinioneService {
      * @param flag flag che serve a capire per quale tipo di contenuto si vogliono visualizzare i commenti
      * @return la lista di tutti i commenti riguardo quel contenuto
      */
-    List<String>visualizzaCommenti(int id, int flag);
+    List<Commento> visualizzaCommenti(int id, int flag) throws SQLException, LoadingCommentException;
 
     /**
      * Firma del metodo che permette di
@@ -27,7 +30,7 @@ public interface OpinioneService {
      * @param id id dell'utente della quale visualizzare i commenti
      * @return la lista di tutti i commenti dell'utente
      */
-    List<Commento>visualizzaCommentiUtente(int id);
+    List<Commento>visualizzaCommentiUtente(int id) throws LoadingCommentException;
 
     /**
      * Firma del metodo che permette di
@@ -35,7 +38,7 @@ public interface OpinioneService {
      * @param commento Il commento da inserire nel database
      * @param flag flag che serve a capire a quale tipo di contenuto è inserito il commento
      */
-    void inserisciCommento(Commento commento, int flag);
+    void inserisciCommento(Commento commento, int flag) throws InsertOpinionException;
 
     /**
      * Firma del metodo che permette di
@@ -44,7 +47,7 @@ public interface OpinioneService {
      * @param flag flag che serve a capire se il voto si riferisce ad un prodotto o ad un vidogioco
      *
      */
-    void inserisciVoto(Parere parere, int flag);
+    void inserisciVoto(Parere parere, int flag) throws InsertOpinionException;
 
     /**
      * Firma del metodo che permette di
@@ -52,34 +55,34 @@ public interface OpinioneService {
      * @param id id dell'utente della quale visualizzare i voti
      * @return lista dei voti dell'utente
      */
-    List<Parere> visualizzaVoti(int id);
+    List<Parere> visualizzaVoti(int id) throws LoadingCommentException;
 
     /**
      * Firma del metodo che permette di
      * segnalare un commento presente sulla piattaforma
      * @param segnalazione informazioni sul commento segnalato
-     * @param flag flag che serve a capire il contenuto nella quale è presente il commento da segnalare
      */
-    void inviaSegnalazione(Segnalazione segnalazione, int flag);
+    void inviaSegnalazione(Segnalazione segnalazione) throws InsertOpinionException;
 
     /**
      * Firma del metodo che permette di
      * vedere i commenti segnalati
      * @return lista dei commenti segnalati
      */
-    List<Segnalazione> visualizzaCommentiSegnalati();
+    List<Commento> visualizzaCommentiSegnalati() throws LoadingCommentException;
 
     /**
      * Firma del metodo che permette di
      * visualizzare i dettagli di un commento segnalato
      * @param id id della segnalazione
+     * @return
      */
-    Segnalazione visualizzaDettagliCommentoSegnalato(int id);
+    List<Segnalazione> visualizzaDettagliCommentoSegnalato(int id) throws LoadingCommentException;
 
     /**
      * Firma del metodo che permette di
      * gestire una segnalazione bannando l'utente, eliminando il commento o eliminando la segnalazione
      * @param id id della segnalazione
      */
-    void gestisciSegnalazione(int id);
+    void gestisciSegnalazione(Segnalazione segnalazione, int flag) throws SQLException;
 }
