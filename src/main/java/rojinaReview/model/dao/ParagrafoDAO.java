@@ -62,33 +62,35 @@ public class ParagrafoDAO {
         return paragrafi;
     }
 
-    void doSave(ArrayList<Paragrafo> paragrafi, int article, boolean type) throws SQLException {
+    public void doSave(Paragrafo p, int article, boolean type) throws SQLException {
         PreparedStatement ps;
+        ResultSet rs;
+        int article;
         if(type) //recensione
         {
-            for(Paragrafo p : paragrafi)
-            {
-                ps = con.prepareStatement("INSERT INTO paragrafo (titolo, testo, immagine, id_recensione) VALUES (?, ?, ?, ?)");
-                ps.setString(1, p.getTitolo());
-                ps.setString(2, p.getTesto());
-                ps.setString(3, p.getImmagine());
-                ps.setInt(4, article);
+            ps = con.prepareStatement("INSERT INTO paragrafo (titolo, testo, immagine, id_recensione) VALUES (?, ?, ?, ?)");
+            ps.setString(1, p.getTitolo());
+            ps.setString(2, p.getTesto());
+            ps.setString(3, p.getImmagine());
+            ps.setInt(4, article);
 
-                ps.executeUpdate();
-            }
+            ps.executeUpdate();
+
         }
         else if(!type) //notizia
         {
-            for(Paragrafo p : paragrafi)
-            {
-                ps = con.prepareStatement("INSERT INTO paragrafo (titolo, testo, immagine, id_notizia) VALUES (?, ?, ?, ?)");
-                ps.setString(1, p.getTitolo());
-                ps.setString(2, p.getTesto());
-                ps.setString(3, p.getImmagine());
-                ps.setInt(4, article);
+            ps = con.prepareStatement("SELECT id FROM recensione ORDER BY id DESC LIMIT 1");
+            rs = ps.executeQuery();
+            article = rs.getInt(1);
 
-                ps.executeUpdate();
-            }
+            ps = con.prepareStatement("INSERT INTO paragrafo (titolo, testo, immagine, id_notizia) VALUES (?, ?, ?, ?)");
+            ps.setString(1, p.getTitolo());
+            ps.setString(2, p.getTesto());
+            ps.setString(3, p.getImmagine());
+            ps.setInt(4, article);
+
+            ps.executeUpdate();
+
         }
     }
 }

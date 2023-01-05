@@ -6,7 +6,6 @@ import java.util.HashMap;
 
 
 public class Notizia extends Articolo {
-    static public String[] fieldsName = {"Id","Testo","Titolo","Data Caricamento"};
 
     /* Attributes */
 

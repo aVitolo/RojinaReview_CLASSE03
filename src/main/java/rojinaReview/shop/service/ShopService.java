@@ -3,11 +3,10 @@ package rojinaReview.shop.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import rojinaReview.exception.CheckoutException;
-import rojinaReview.exception.LoadingOrderException;
-import rojinaReview.exception.LoadingShopException;
-import rojinaReview.exception.ProductIDMissingException;
-import rojinaReview.model.beans.Carrello;
+import rojinaReview.model.exception.CheckoutException;
+import rojinaReview.model.exception.LoadingOrderException;
+import rojinaReview.model.exception.LoadingShopException;
+import rojinaReview.model.exception.ProductIDMissingException;
 import rojinaReview.model.beans.Ordine;
 import rojinaReview.model.beans.Prodotto;
 

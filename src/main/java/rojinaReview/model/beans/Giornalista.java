@@ -3,9 +3,8 @@ package rojinaReview.model.beans;
 import java.util.ArrayList;
 
 public class Giornalista extends Utente {
-    static public String[] fieldsName = {"Id","Nome","Cognome","Email","Password Hash"};
 
-    private boolean verificato;
+    private boolean verificato; //eventualmente da rimuovere
     private ArrayList<Articolo> articoli;
 
     public Giornalista() {

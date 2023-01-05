@@ -3,12 +3,10 @@ package rojinaReview.model.beans;
 import java.sql.Date;
 
 public class Segnalazione {
-    private int id_commento;
-    private int id_videogiocatore;
     private String motivo;
     private String commentoAggiuntivo;
     private java.sql.Date dataSegnalazione;
-    private String utenteSegnalante;
+    private String videogiocatoreSegnalante;
 
 
     public Segnalazione() {
@@ -18,7 +16,7 @@ public class Segnalazione {
         this.motivo = motivo;
         this.commentoAggiuntivo = commentoAggiuntivo;
         this.dataSegnalazione = dataSegnalazione;
-        this.utenteSegnalante = utenteSegnalante;
+        this.videogiocatoreSegnalante = utenteSegnalante;
     }
 
     public int getId_commento() {
@@ -30,11 +28,11 @@ public class Segnalazione {
     }
 
     public int getId_videogiocatore() {
-        return id_videogiocatore;
+        return id_videogiocatoreSegnalante;
     }
 
     public void setId_videogiocatore(int id_videogiocatore) {
-        this.id_videogiocatore = id_videogiocatore;
+        this.id_videogiocatoreSegnalante = id_videogiocatore;
     }
 
     public String getMotivo() {
@@ -62,10 +60,10 @@ public class Segnalazione {
     }
 
     public String getUtenteSegnalante() {
-        return utenteSegnalante;
+        return videogiocatoreSegnalante;
     }
 
     public void setUtenteSegnalante(String utenteSegnalante) {
-        this.utenteSegnalante = utenteSegnalante;
+        this.videogiocatoreSegnalante = utenteSegnalante;
     }
 }

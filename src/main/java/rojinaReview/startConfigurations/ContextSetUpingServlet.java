@@ -15,81 +15,10 @@ public class ContextSetUpingServlet extends HttpServlet {
 
     public void init(ServletConfig config) throws ServletException {
 
-        ArrayList<Notizia> notizie;
-        NotiziaDAO nDAO;
-        try {
-            nDAO = new NotiziaDAO();
-            notizie = nDAO.doRetrieveLast();
-        } catch (SQLException e) {
-            System.out.println("News Error");
-            throw new RuntimeException(e);
-        }
-        config.getServletContext().setAttribute("notizie", notizie);
 
-        ArrayList<Recensione> recensioni;
-        RecensioneDAO rDAO;
-        try {
-            rDAO = new RecensioneDAO();
-            recensioni = rDAO.doRetrieveLast();
-        } catch (SQLException e) {
-            System.out.println("Reviews ERROR");
-            throw new RuntimeException(e);
-        }
-        config.getServletContext().setAttribute("recensioni", recensioni);
 
-        ArrayList<Prodotto> prodotti;
-        ProdottoDAO pDAO;
-        try {
-            pDAO = new ProdottoDAO();
-            prodotti = pDAO.doRetrieveLast();
-        } catch (SQLException e) {
-            System.out.println("Reviews ERROR");
-            throw new RuntimeException(e);
-        }
-        config.getServletContext().setAttribute("prodotti", prodotti);
 
-        ArrayList<String> tipologie;
-        TipologiaDAO tDAO;
-        try {
-            tDAO = new TipologiaDAO();
-            tipologie = tDAO.doRetrieveAll();
-        } catch (SQLException e) {
-            System.out.println("Tipologie ERROR");
-            throw new RuntimeException(e);
-        }
-        config.getServletContext().setAttribute("tipologie", tipologie);
 
-        ArrayList<String> categorie;
-        CategoriaDAO cDAO;
-        try {
-            cDAO = new CategoriaDAO();
-            categorie = cDAO.doRetrieveAll();
-        } catch (SQLException e) {
-            System.out.println("Categorie ERROR");
-            throw new RuntimeException(e);
-        }
-        config.getServletContext().setAttribute("categorie", categorie);
-
-        ArrayList<String> piattaforme;
-        PiattaformaDAO ptDAO;
-        try {
-            ptDAO = new PiattaformaDAO();
-            piattaforme = ptDAO.doRetrieveAll();
-        } catch (SQLException e) {
-            System.out.println("Piattaforma ERROR");
-            throw new RuntimeException(e);
-        }
-        config.getServletContext().setAttribute("piattaforme", piattaforme);
-
-        ArrayList<String> giochi;
-        VideogiocoDAO gcDAO;
-        try {
-            giochi = new VideogiocoDAO().getGamesNames();
-        } catch (SQLException e) {
-            System.out.println("Gioco ERROR");
-            throw new RuntimeException(e);
-        }
-        config.getServletContext().setAttribute("nomiGiochi", giochi);
     }
 
     @Override

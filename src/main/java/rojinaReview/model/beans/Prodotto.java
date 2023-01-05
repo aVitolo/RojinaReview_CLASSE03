@@ -3,7 +3,6 @@ package rojinaReview.model.beans;
 import java.util.ArrayList;
 
 public class Prodotto extends Contenuto {
-    static public String[] fieldsName = {"Id","Nome","DescrizionesetQuantità","Prezzo","Media Voto","Numero Voti"};
 
     private String categoria;
     private ArrayList<Parere> pareri;

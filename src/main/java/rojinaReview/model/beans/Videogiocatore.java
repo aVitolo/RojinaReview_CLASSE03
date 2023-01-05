@@ -3,7 +3,6 @@ package rojinaReview.model.beans;
 import java.util.ArrayList;
 
 public class Videogiocatore extends Utente {
-    static public String[] fieldsName = {"Email","Nickname","Password Hash","Nome","Cognome","Età"};
 
     private ArrayList<Indirizzo> indirizzi;
     private ArrayList<String> telefoni;
@@ -13,7 +12,6 @@ public class Videogiocatore extends Utente {
     private ArrayList<Segnalazione> segnalazioni;
     private ArrayList<Parere> pareri;
     private Carrello carrello;
-    private boolean bannato;
     private String nickname;
 
     public Videogiocatore(){};

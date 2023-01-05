@@ -1,7 +1,6 @@
 package rojinaReview.rivista.service;
 
-import rojinaReview.model.beans.Articolo;
-import rojinaReview.model.beans.Videogioco;
+import rojinaReview.model.beans.*;
 
 import java.util.ArrayList;
 
@@ -10,6 +9,7 @@ import java.util.ArrayList;
  * Interfaccia per i metodi del sottosistema Rivista.
  */
 public interface RivistaService {
+    //non serve?
     /**
      * Firma del metodo che permette di
      * visualizzare tutti gli articoli
@@ -17,14 +17,25 @@ public interface RivistaService {
      */
     ArrayList<Articolo> visualizzaArticoli();
 
+
+
     /**
      * Firma del metodo che permette di
-     * visualizzare un articolo in base al suo ID
-     * @param id dell'articolo
-     * @param tipo dell'articolo (0 notizia, 1 recensione)
-     * @return l'articolo recuperato
+     * visualizzare una recensione in base al suo ID
+     * @param id della recensione
+     *
+     * @return la recensione recuperata
      */
-    Articolo visualizzaArticoloByID(int id, int tipo);
+    Recensione visualizzaRecensioneByID(int id);
+
+    /**
+     * Firma del metodo che permette di
+     * visualizzare una notizia in base al suo ID
+     * @param id della notizia
+     *
+     * @return la notizia recuperata
+     */
+    Notizia visualizzaNotiziaByID(int id);
 
     /**
      * Firma del metodo che permette di
@@ -43,11 +54,19 @@ public interface RivistaService {
 
     /**
      * Firma del metodo che permette di
-     * inserire un articolo
-     * @param articolo da inserire
+     * inserire una recensione
+     * @param recensione da inserire
      */
 
-    void inserisciArticolo(Articolo articolo);
+    void inserisciRecensione(Recensione recensione);
+
+    /**
+     * Firma del metodo che permette di
+     * inserire una notizia
+     * @param notizia da inserire
+     */
+
+    void inserisciNotizia(Notizia notizia);
 
     /**
      * Firma del metodo che permette di
@@ -58,11 +77,19 @@ public interface RivistaService {
 
     /**
      * Firma del metodo che permette di
-     * visualizzare gli articoli scritti da un giornalista nella sua area utente
-     * @return la lista degli articoli scritti da un giornalista (il giornalista loggato)
+     * visualizzare le recensioni scritte da un giornalista nella sua area utente
+     * @param giornalista di cui si vogliono visualizzare le recensioni
+     * @return la lista delle recensioni scritte da un giornalista (il giornalista loggato)
      */
+    ArrayList<Recensione> visualizzaRecensioniScritte(Giornalista giornalista);
 
-    ArrayList<Articolo> visualizzaArticoliScritti();
+    /**
+     * Firma del metodo che permette di
+     * visualizzare le notizie scritte da un giornalista nella sua area utente
+     * @param giornalista di cui si vogliono visualizzare le notizie
+     * @return la lista delle notizie scritte da un giornalista (il giornalista loggato)
+     */
+    ArrayList<Notizia> visualizzaNotizieScritte(Giornalista giornalista);
 
     /**
      * Firma del metodo che permette di

@@ -4,16 +4,12 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.autenticazione.service.AutenticazioneServiceImpl;
-import rojinaReview.exception.CheckoutException;
-import rojinaReview.exception.VideogiocatoreIDMissingException;
+import rojinaReview.model.exception.CheckoutException;
+import rojinaReview.model.exception.VideogiocatoreIDMissingException;
 import rojinaReview.model.beans.*;
-import rojinaReview.model.dao.IndirizzoDAO;
-import rojinaReview.model.dao.OrdineDAO;
-import rojinaReview.model.dao.PagamentoDAO;
 import rojinaReview.shop.service.ShopServiceImpl;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,6 +17,7 @@ import java.util.Calendar;
 
 @WebServlet(name = "confirmOrderServlet", value = "/confirmOrderServlet")
 public class confirmOrderServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

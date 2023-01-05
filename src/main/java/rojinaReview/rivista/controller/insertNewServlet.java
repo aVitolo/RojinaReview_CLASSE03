@@ -45,7 +45,7 @@ public class insertNewServlet extends HttpServlet {
 
         try {
             new NotiziaDAO().doSave(n, g.getId());
-            new NotiziaDAO().doSaveMentioned((ArrayList<String>)n.getGiochi().values(), g.getId());
+            new NotiziaDAO().doSaveMentioned((ArrayList<String>)n.getGiochi().values());
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -2,15 +2,13 @@ package rojinaReview.shop.controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
-import rojinaReview.exception.ProductIDMissingException;
+import rojinaReview.model.exception.ProductIDMissingException;
 import rojinaReview.model.beans.Carrello;
 import rojinaReview.model.beans.Prodotto;
 import rojinaReview.model.beans.Videogiocatore;
-import rojinaReview.model.dao.ProdottoDAO;
 import rojinaReview.shop.service.ShopServiceImpl;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class addProductCartServlet extends HttpServlet {

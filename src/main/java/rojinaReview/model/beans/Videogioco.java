@@ -18,6 +18,8 @@ public class Videogioco {
     private String casaDiSviluppo;
     private String copertina;
     private HashMap<Integer, String> listaNotizie;
+    private int idRecensione;
+    private String nomeRecensione;
     private ArrayList<Parere> pareri;
 
     /* Constructor */

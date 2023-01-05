@@ -8,7 +8,7 @@ public class Parere {
     private float voto;
     private java.sql.Date dataVotazione;
     private int idProdottoORVideogioco; //id del prodotto o videogioco
-    private boolean type; //false prodotto, true videogioco
+    private int type; //0 prodotto, 3 videogioco
 
     public Parere(){
 
@@ -56,11 +56,11 @@ public class Parere {
         this.idProdottoORVideogioco = idProdottoORVideogioco;
     }
 
-    public boolean isType() {
+    public int isType() {
         return type;
     }
 
-    public void setType(boolean type) {
+    public void setType(int type) {
         this.type = type;
     }
 }

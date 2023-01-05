@@ -85,7 +85,7 @@ public class RecensioneDAO {
 
     public ArrayList<Recensione> doRetrieveByIdJournalist(int giornalista) throws SQLException {
         ArrayList<Recensione> recensioni = new ArrayList<>();
-        PreparedStatement ps = con.prepareStatement("SELECT r.id, r.titolo, r.testo, r.immagine, r.dataScrittura," +
+        PreparedStatement ps = con.prepareStatement("SELECT r.id, r.nome, r.testo, r.immagine, r.dataScrittura," +
                 "r.votoGiornalista FROM recensione r JOIN giornalista g on r.id_giornalista = g.id " +
                 "WHERE r.id_giornalista=? " +
                 "ORDER BY r.dataScrittura DESC ");
@@ -111,7 +111,7 @@ public class RecensioneDAO {
 
     public void doSave(Recensione r, int idGiornalista, int idVideogioco) throws SQLException {
         PreparedStatement ps = con.prepareStatement("INSERT INTO recensione " +
-                "(testo, id_giornalista, id_videogioco, titolo, votoGiornalista, dataScrittura, immagine) VALUES(?, ?, ?, ?, ?, ?, ?)");
+                "(testo, id_giornalista, id_videogioco, nome, votoGiornalista, dataScrittura, immagine) VALUES(?, ?, ?, ?, ?, ?, ?)");
         ps.setString(1, r.getTesto());
         ps.setInt(2, idGiornalista);
         ps.setInt(3, idVideogioco);
@@ -201,6 +201,13 @@ public class RecensioneDAO {
         ps.setInt(1,Id);
         int i = ps.executeUpdate();
         return i == 1;
+    }
+
+    public int doRetrieveLastId() throws SQLException {
+        PreparedStatement ps = con.prepareStatement("SELECT id FROM recensione ORDER BY id DESC LIMIT 1");
+        ResultSet rs = ps.executeQuery();
+        int article = rs.getInt(1);
+        return article;
     }
 
     public String retrieveNome(int idRecensione) {

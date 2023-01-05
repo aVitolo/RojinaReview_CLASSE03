@@ -1,9 +1,9 @@
 package rojinaReview.shop.service;
 
-import rojinaReview.exception.CheckoutException;
-import rojinaReview.exception.LoadingOrderException;
-import rojinaReview.exception.LoadingShopException;
-import rojinaReview.exception.ProductIDMissingException;
+import rojinaReview.model.exception.CheckoutException;
+import rojinaReview.model.exception.LoadingOrderException;
+import rojinaReview.model.exception.LoadingShopException;
+import rojinaReview.model.exception.ProductIDMissingException;
 import rojinaReview.model.beans.Ordine;
 import rojinaReview.model.beans.Prodotto;
 import rojinaReview.model.dao.OrdineDAO;
@@ -18,7 +18,7 @@ public class ShopServiceImpl implements  ShopService{
     /*
     Servelet:
     -shop.ShopServlet
-    -autenticazione.ShopManagment (visualizzazione Shop lato manager, da sviluppare)
+    -shop.ShopManagment (visualizzazione Shop lato manager, da sviluppare)
  */
     @Override
     public List<Prodotto> visualizzaShop(String offset, String categoria, String ordine) throws LoadingShopException {
@@ -59,7 +59,7 @@ public class ShopServiceImpl implements  ShopService{
     }
 
     /*
-        -autenticazione.addProduct (aggiunta prodotto allo Shop lato manager, da sviluppare)
+        -shop.addProduct (aggiunta prodotto allo Shop lato manager, da sviluppare)
      */
     @Override
     public void inserisciProdotto(Prodotto prodotto) throws ProductIDMissingException {
@@ -71,7 +71,7 @@ public class ShopServiceImpl implements  ShopService{
     }
 
     /*
-         -autenticazione.updateProduct (aggiunta prodotto allo Shop lato manager, da sviluppare)
+         -shop.updateProduct (aggiunta prodotto allo Shop lato manager, da sviluppare)
       */
     @Override
     public void modificaProdotto(Prodotto prodotto) throws ProductIDMissingException {
@@ -83,7 +83,7 @@ public class ShopServiceImpl implements  ShopService{
     }
 
     /*
-         -autenticazione.removeProduct (aggiunta prodotto allo Shop lato manager, da sviluppare)
+         -shop.removeProduct (aggiunta prodotto allo Shop lato manager, da sviluppare)
       */
     @Override
     public void cancellaProdotto(int id) throws ProductIDMissingException {

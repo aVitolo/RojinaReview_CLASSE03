@@ -5,6 +5,8 @@ import rojinaReview.model.utilities.ConPool;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class NotiziaDAO {
     private final Connection con;
@@ -125,18 +127,16 @@ public class NotiziaDAO {
     }
 
     //fa l'insert nella table gioco_notizia per i giochi menzionati
-    public void doSaveMentioned(ArrayList<String> mentioned, int idGiornalista) throws SQLException {
-        int idNotizia;
-        PreparedStatement ps = con.prepareStatement("SELECT id FROM Notizia ORDER BY id DESC LIMIT 1"); //prende l'id della notizia appena inserita in insertNewServlet
-        ResultSet rs = ps.executeQuery();
-        if (rs.next())
-            idNotizia = rs.getInt("id");
-        else return;
+    public void doSaveMentioned(HashMap<Integer, String> mentioned) throws SQLException {
+        PreparedStatement ps;
+        ResultSet rs;
+        int idNotizia = new NotiziaDAO(con).doRetrieveLastId();
 
-        for (String s : mentioned) {
+
+        for (Map.Entry<Integer, String> set : mentioned.entrySet()) {
             ps = con.prepareStatement("INSERT INTO videogioco_notizia (id_notizia, id_videogioco) VALUES (?, ?)");
             ps.setInt(1, idNotizia);
-            ps.setInt(2, new VideogiocoDAO().retrieveIdByName(s));
+            ps.setInt(2, set.getKey());
 
             if (ps.executeUpdate() != 1)
                 throw new RuntimeException("Insert error");
@@ -210,6 +210,13 @@ public class NotiziaDAO {
         ps.setInt(1,Id);
         int i = ps.executeUpdate();
         return i == 1;
+    }
+
+    public int doRetrieveLastId() throws SQLException {
+        PreparedStatement ps = con.prepareStatement("SELECT id FROM notiza ORDER BY id DESC LIMIT 1");
+        ResultSet rs = ps.executeQuery();
+        int article = rs.getInt(1);
+        return article;
     }
 
     public Object doRetrieveByGame(int idVideogioco) {

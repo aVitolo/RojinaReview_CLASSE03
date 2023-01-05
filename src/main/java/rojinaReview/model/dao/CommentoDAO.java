@@ -111,6 +111,7 @@ public class CommentoDAO {
             se non setto gli altri parametri viene direttamente messo null o lanciata eccezione?
             proviamo ad utilizzare setNull.
         */
+        //0 prodotto, 1 recensione, 2 notizia
         if(tipo == 0) {
             ps.setInt(4, c.getIdContenuto());
             ps.setNull(5, 6);

@@ -1,6 +1,6 @@
 package rojinaReview.autenticazione.service;
 
-import rojinaReview.exception.VideogiocatoreIDMissingException;
+import rojinaReview.model.exception.VideogiocatoreIDMissingException;
 import rojinaReview.model.beans.*;
 
 import java.util.ArrayList;

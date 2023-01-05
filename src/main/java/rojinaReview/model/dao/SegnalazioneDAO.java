@@ -103,10 +103,14 @@ public class SegnalazioneDAO {
 
     }
 
-    public void deleteReport(int idCommento, int idVideogiocatore) throws SQLException {
-        PreparedStatement ps = con.prepareStatement("DELETE FROM segnalazione WHERE id_commento=? and id_videogiocatore=?");
+    /**
+     * Cancella tutti le segnalazioni di un commento
+     * @param idCommento di cui devono essere cancellate le segnalazioni
+     * @throws SQLException
+     */
+    public void deleteReports(int idCommento) throws SQLException {
+        PreparedStatement ps = con.prepareStatement("DELETE FROM segnalazione WHERE id_commento=?");
         ps.setInt(1, idCommento);
-        ps.setInt(2, idVideogiocatore);
         ps.executeUpdate();
     }
 

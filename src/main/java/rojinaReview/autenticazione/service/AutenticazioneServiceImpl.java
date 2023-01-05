@@ -1,6 +1,6 @@
 package rojinaReview.autenticazione.service;
 
-import rojinaReview.exception.VideogiocatoreIDMissingException;
+import rojinaReview.model.exception.VideogiocatoreIDMissingException;
 import rojinaReview.model.beans.*;
 import rojinaReview.model.dao.IndirizzoDAO;
 import rojinaReview.model.dao.PagamentoDAO;

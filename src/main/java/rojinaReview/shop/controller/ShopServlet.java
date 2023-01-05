@@ -5,7 +5,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.Prodotto;
 import org.json.JSONArray;
-import rojinaReview.exception.LoadingShopException;
+import rojinaReview.model.exception.LoadingShopException;
 import rojinaReview.shop.service.ShopServiceImpl;
 
 import java.io.IOException;
