@@ -3,22 +3,33 @@ package rojinaReview.rivista.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import rojinaReview.exception.LoadingNewsException;
-import rojinaReview.exception.LoadingReviewsException;
 import rojinaReview.model.beans.Carrello;
 import rojinaReview.model.beans.Articolo;
+import rojinaReview.model.exception.LoadingArticlesException;
+import rojinaReview.model.exception.ServiceNotAvailableException;
+import rojinaReview.rivista.service.RivistaService;
 import rojinaReview.rivista.service.RivistaServiceImpl;
 
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 @WebServlet(name = "HomeServlet", value = "/HomeServlet")
 public class HomeServlet extends HttpServlet {
+    private RivistaService rs;
+    private String path;
 
-    private String path = "/WEB-INF/results/mainPage/home.jsp";
+    public HomeServlet() throws ServiceNotAvailableException {
+        try {
+            rs = new RivistaServiceImpl();
+        } catch (SQLException e) {
+            throw new ServiceNotAvailableException("Errore nel servizio rivista");
+        }
+        path = "/WEB-INF/results/mainPage/home.jsp";
+    }
+
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,20 +48,13 @@ public class HomeServlet extends HttpServlet {
             session.setAttribute("prodottiSession", new ArrayList<Prodotto>());
         */
         //eseguo il merge di articoli e recensioni
-        ArrayList<Articolo> articoli = new ArrayList<>();
+        ArrayList<Articolo> articoli = null;
         try {
-
-            articoli.addAll(new RivistaServiceImpl().visualizzaNotizie("0","Piattaforma","Genere","Least Recent"));
-
-            articoli.addAll(new RivistaServiceImpl().visualizzaRecensioni("0","Piattaforma","Genere","Least Recent"));
-        } catch (LoadingReviewsException e) {
-            e.printStackTrace();
-        }
-        catch (LoadingNewsException | SQLException e) {
+            articoli = rs.visualizzaArticoli();
+        } catch (LoadingArticlesException e) {
             e.printStackTrace();
         }
 
-        articoli.sort(Comparator.comparing(a -> a.getId()));
 
         //estraggo l'articolo piu recente per la prima pagina
         Articolo copertina = articoli.remove(0);

@@ -4,19 +4,34 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.model.dao.VideogiocoDAO;
+import rojinaReview.model.exception.LoadingVideogamesException;
+import rojinaReview.model.exception.ServiceNotAvailableException;
+import rojinaReview.rivista.service.RivistaService;
+import rojinaReview.rivista.service.RivistaServiceImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet(name = "journalistGamesServlet", value = "/journalistGamesServlet")
 public class journalistGamesServlet extends HttpServlet {
-    private String path = "/WEB-INF/results/giornalista/journalistGames.jsp";
+    private RivistaService rs;
+    private String path;
+
+    public journalistGamesServlet() throws ServiceNotAvailableException {
+        try {
+            rs = new RivistaServiceImpl();
+        } catch (SQLException e) {
+            throw new ServiceNotAvailableException("Errore nel servizio rivista");
+        }
+        path = "/WEB-INF/results/giornalista/journalistGames.jsp";;
+    }
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            request.setAttribute("giochiGiornalista", new VideogiocoDAO().doRetrieveAll());
-        } catch (SQLException e) {
+            request.setAttribute("giochiGiornalista", rs.visualizzaVideogiochi());
+        } catch (LoadingVideogamesException e) {
             e.printStackTrace();
         }
         request.getRequestDispatcher(path).forward(request, response);

@@ -1,7 +1,7 @@
 package rojinaReview.opinione.service;
 
-import rojinaReview.exception.InsertOpinionException;
-import rojinaReview.exception.LoadingCommentException;
+import rojinaReview.model.exception.InsertOpinionException;
+import rojinaReview.model.exception.LoadingCommentException;
 import rojinaReview.model.beans.Commento;
 import rojinaReview.model.beans.Segnalazione;
 import rojinaReview.model.beans.Parere;

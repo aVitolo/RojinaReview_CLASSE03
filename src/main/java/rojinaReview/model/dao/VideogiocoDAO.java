@@ -95,7 +95,7 @@ public class VideogiocoDAO {
     }
 
 
-    public void doSave(Videogioco g) throws SQLException {
+    public int doSave(Videogioco g) throws SQLException {
         PreparedStatement ps = con.prepareStatement("INSERT INTO videogioco VALUES " +
                 "(?, ?, ?, ?, ?, ?)");
 
@@ -109,6 +109,11 @@ public class VideogiocoDAO {
 
         if (ps.executeUpdate() != 1)
             throw new RuntimeException("Insert error");
+
+        ps = con.prepareStatement("SELECT id FROM videogioco ORDER BY id DESC LIMIT 1");
+        ResultSet rs = ps.executeQuery();
+        int id = rs.getInt(1);
+        return id;
     }
 
     public int retrieveIdByName(String s) {

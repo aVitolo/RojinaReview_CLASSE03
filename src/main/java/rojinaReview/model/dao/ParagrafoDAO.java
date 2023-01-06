@@ -92,6 +92,23 @@ public class ParagrafoDAO {
 
         }
     }
+
+    public void doRemoveAll(int article, int type) throws SQLException //1 recensione, 2 notizia
+    {
+        PreparedStatement ps;
+        if (type == 1) //recensione
+        {
+            ps = con.prepareStatement("DELETE FROM paragrafo WHERE id_recensione=?");
+            ps.setInt(1, article);
+            ps.executeUpdate();
+        }
+        else if (type == 2)
+        {
+            ps = con.prepareStatement("DELETE FREE paragrafo WHERE id_notizia?=");
+            ps.setInt(1, article);
+            ps.executeUpdate();
+        }
+    }
 }
 
 

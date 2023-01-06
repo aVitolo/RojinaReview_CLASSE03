@@ -194,7 +194,7 @@ public class RecensioneDAO {
         return list;
     }
 
-    //non serve?
+
     public boolean doRemoveById(int Id) throws SQLException {
         PreparedStatement ps =
                 con.prepareStatement("DELETE FROM Recensione WHERE id=?");

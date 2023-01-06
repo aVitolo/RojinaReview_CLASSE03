@@ -5,6 +5,8 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.Giornalista;
 import rojinaReview.model.dao.RecensioneDAO;
+import rojinaReview.model.exception.LoadingReviewsException;
+import rojinaReview.model.exception.ServiceNotAvailableException;
 import rojinaReview.rivista.service.RivistaService;
 import rojinaReview.rivista.service.RivistaServiceImpl;
 
@@ -13,10 +15,16 @@ import java.sql.SQLException;
 
 @WebServlet(name = "journalistReviewsServlet", value = "/journalistReviewsServlet")
 public class journalistReviewsServlet extends HttpServlet {
-    private String path = "/WEB-INF/results/giornalista/journalistReviews.jsp";
-    private RivistaService rs = new RivistaServiceImpl();
+    private RivistaService rs;
+    private String path;
 
-    public journalistReviewsServlet() throws SQLException {
+    public journalistReviewsServlet() throws ServiceNotAvailableException {
+        try {
+            rs = new RivistaServiceImpl();
+        } catch (SQLException e) {
+            throw new ServiceNotAvailableException("Errore nel servizio rivista");
+        }
+        path = "/WEB-INF/results/giornalista/journalistReviews.jsp";
     }
 
 
@@ -24,7 +32,11 @@ public class journalistReviewsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Giornalista giornalista = (Giornalista) session.getAttribute("giornalista");
-        request.setAttribute("recensioniGiornalista", rs.visualizzaRecensioniScritte(giornalista));
+        try {
+            request.setAttribute("recensioniGiornalista", rs.visualizzaRecensioniScritte(giornalista));
+        } catch (LoadingReviewsException e) {
+            e.printStackTrace();
+        }
         request.getRequestDispatcher(path).forward(request, response);
     }
 

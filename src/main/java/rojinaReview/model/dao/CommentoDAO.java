@@ -134,6 +134,29 @@ public class CommentoDAO {
         ps.executeUpdate();
     }
 
+    public void deleteAll(int content, int type) throws SQLException//0 prodotto, 1 recensione, 2 notizia
+    {
+        PreparedStatement ps;
+        if(type == 0)
+        {
+            ps = con.prepareStatement("DELETE FROM commento WHERE id_prodotto=?");
+            ps.setInt(1, content);
+            ps.executeUpdate();
+        }
+        else if (type == 1)
+        {
+            ps = con.prepareStatement("DELETE FROM commento WHERE id_recensione=?");
+            ps.setInt(1, content);
+            ps.executeUpdate();
+        }
+        else if (type == 2)
+        {
+            ps = con.prepareStatement("DELETE FROM commento WHERE id_notizia=?");
+            ps.setInt(1, content);
+            ps.executeUpdate();
+        }
+    }
+
     /*
         Neccessario implementare?
      */

@@ -1,4 +1,4 @@
-package rojinaReview.exception;
+package rojinaReview.model.exception;
 
 public class LoadingReviewsException extends Throwable {
     public LoadingReviewsException(String erroreNelCaricamentoDelleRecensioni) {

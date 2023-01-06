@@ -7,6 +7,10 @@ import rojinaReview.model.dao.NotiziaDAO;
 import rojinaReview.model.beans.Notizia;
 
 import org.json.JSONArray;
+import rojinaReview.model.exception.LoadingNewsException;
+import rojinaReview.model.exception.ServiceNotAvailableException;
+import rojinaReview.rivista.service.RivistaService;
+import rojinaReview.rivista.service.RivistaServiceImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -14,7 +18,18 @@ import java.util.ArrayList;
 
 @WebServlet(name = "NotizieServlet", value = "/NotizieServlet")
 public class NotizieServlet extends HttpServlet {
-    private String path = "/WEB-INF/results/mainPage/notizie.jsp";
+    private RivistaService rs;
+    private String path;
+
+    public NotizieServlet() throws ServiceNotAvailableException {
+        try {
+            rs = new RivistaServiceImpl();
+        } catch (SQLException e) {
+            throw new ServiceNotAvailableException("Errore nel servizio rivista");
+        }
+        path = "/WEB-INF/results/mainPage/notizie.jsp";
+    }
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,20 +42,18 @@ public class NotizieServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        ArrayList<Notizia> notizie = new ArrayList<Notizia>();
-        NotiziaDAO nDAO = null;
+        ArrayList<Notizia> notizie  = null;
+        String offset = request.getParameter("offset");
+        String piattafomra = request.getParameter("piattaforma");
+        String tipologia = request.getParameter("tipologia");
+        String ordine = request.getParameter("ordine");
 
         try {
-            nDAO = new NotiziaDAO();
-            String offset = request.getParameter("offset");
-            String piattafomra = request.getParameter("piattaforma");
-            String tipologia = request.getParameter("tipologia");
-            String ordine = request.getParameter("ordine");
-            notizie = nDAO.updateContent(offset, piattafomra, tipologia, ordine);
-        } catch (SQLException e) {
-            System.out.println(e);
-            throw new RuntimeException(e);
+            notizie = rs.visualizzaNotizie(offset, piattafomra, tipologia, ordine);
+        } catch (LoadingNewsException e) {
+            e.printStackTrace();
         }
+
         if (notizie != null) {
             JSONArray json = new JSONArray(notizie);
             response.setContentType("application/json");

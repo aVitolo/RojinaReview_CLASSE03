@@ -1,7 +1,6 @@
 package rojinaReview.rivista.service;
 
-import rojinaReview.exception.LoadingNewsException;
-import rojinaReview.exception.LoadingReviewsException;
+import rojinaReview.model.exception.*;
 import rojinaReview.model.beans.*;
 
 import java.util.ArrayList;
@@ -11,13 +10,13 @@ import java.util.ArrayList;
  * Interfaccia per i metodi del sottosistema Rivista.
  */
 public interface RivistaService {
-    //non serve?
+
     /**
      * Firma del metodo che permette di
-     * visualizzare tutti gli articoli
+     * visualizzare gli articoli nella homepage
      * @return la lista degli articoli
      */
-    ArrayList<Articolo> visualizzaArticoli();
+    ArrayList<Articolo> visualizzaArticoli() throws LoadingArticlesException;
 
 
     ArrayList<Notizia> visualizzaNotizie(String offset, String piattaforma, String tipologia, String ordine) throws LoadingNewsException;
@@ -31,7 +30,7 @@ public interface RivistaService {
      *
      * @return la recensione recuperata
      */
-    Recensione visualizzaRecensioneByID(int id);
+    Recensione visualizzaRecensioneByID(int id) throws LoadingVideogamesException, LoadingReviewsException;
 
     /**
      * Firma del metodo che permette di
@@ -40,14 +39,14 @@ public interface RivistaService {
      *
      * @return la notizia recuperata
      */
-    Notizia visualizzaNotiziaByID(int id);
+    Notizia visualizzaNotiziaByID(int id) throws LoadingNewsException;
 
     /**
      * Firma del metodo che permette di
      * visualizzare tutti i videoghiochi
      * @return la lista dei videogiochi
      */
-    ArrayList<Videogioco> visualizzaVideogiochi();
+    ArrayList<Videogioco> visualizzaVideogiochi() throws LoadingVideogamesException;
 
     /**
      * Firma del metodo che permette di
@@ -55,30 +54,53 @@ public interface RivistaService {
      * @param id del videogioco da recuperare
      * @return il videogioco recuperato
      */
-    Videogioco visualizzaVideogiocoByID(int id);
+    Videogioco visualizzaVideogiocoByID(int id) throws LoadingVideogamesException;
 
     /**
      * Firma del metodo che permette di
      * inserire una recensione
      * @param recensione da inserire
+     * @param giornalista che ha scritto la recensione
      */
-
-    void inserisciRecensione(Recensione recensione);
+    void inserisciRecensione(Recensione recensione, Giornalista giornalista) throws InsertReviewException, InsertCommentException, InsertParagraphException;
 
     /**
      * Firma del metodo che permette di
      * inserire una notizia
      * @param notizia da inserire
+     * @param giornalista che ha scritto la notizia
      */
+    void inserisciNotizia(Notizia notizia, Giornalista giornalista) throws InsertCommentException, InsertNewException, InsertParagraphException;
 
-    void inserisciNotizia(Notizia notizia);
+    /**
+     * Firma del metodo che permette di
+     * modificare una recensione
+     * @param recensione modificata
+     * @param giornalista che ha modificato la recensione
+     */
+    void modificaRecensione(Recensione recensione, Giornalista giornalista) throws RemovingParagraphsException, RemovingCommentsException, RemovingReviewException, InsertParagraphException, InsertReviewException, InsertCommentException;
 
     /**
      * Firma del metodo che permette di
      * modificare un articolo
-     * @param articolo modificato
+     * @param notizia modificata
+     * @param giornalista che ha modificato la notizia
      */
-    void modificaArticolo(Articolo articolo);
+    void modificaNotizia(Notizia notizia, Giornalista giornalista) throws RemovingNewException, RemovingParagraphsException, RemovingCommentsException, InsertParagraphException, InsertNewException, InsertCommentException;
+
+    /**
+     * Firma del metodo che permette di
+     * cancellare una recensione
+     * @param recensione da cancellare
+     */
+    void cancellaRecensione(Recensione recensione) throws RemovingReviewException, RemovingParagraphsException, RemovingCommentsException;
+
+    /**
+     * Firma del metodo che permette di
+     * cancellare una notizia
+     * @param notizia da cancellare
+     */
+    void cancellaNotizia(Notizia notizia) throws RemovingParagraphsException, RemovingNewException, RemovingCommentsException;
 
     /**
      * Firma del metodo che permette di
@@ -86,7 +108,7 @@ public interface RivistaService {
      * @param giornalista di cui si vogliono visualizzare le recensioni
      * @return la lista delle recensioni scritte da un giornalista (il giornalista loggato)
      */
-    ArrayList<Recensione> visualizzaRecensioniScritte(Giornalista giornalista);
+    ArrayList<Recensione> visualizzaRecensioniScritte(Giornalista giornalista) throws LoadingReviewsException;
 
     /**
      * Firma del metodo che permette di
@@ -94,14 +116,14 @@ public interface RivistaService {
      * @param giornalista di cui si vogliono visualizzare le notizie
      * @return la lista delle notizie scritte da un giornalista (il giornalista loggato)
      */
-    ArrayList<Notizia> visualizzaNotizieScritte(Giornalista giornalista);
+    ArrayList<Notizia> visualizzaNotizieScritte(Giornalista giornalista) throws LoadingNewsException;
 
     /**
      * Firma del metodo che permette di
      * inserire un videogioco
      * @param videogioco da inserire
      */
-    void inserisciVideogioco(Videogioco videogioco);
+    void inserisciVideogioco(Videogioco videogioco) throws InsertVideogameException;
 
     /**
      * Firma del metodo che permette di

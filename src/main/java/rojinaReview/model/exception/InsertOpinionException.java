@@ -1,4 +1,4 @@
-package rojinaReview.exception;
+package rojinaReview.model.exception;
 
 public class InsertOpinionException extends Exception{
     public InsertOpinionException(String message){
