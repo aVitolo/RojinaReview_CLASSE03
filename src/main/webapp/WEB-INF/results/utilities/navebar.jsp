@@ -36,7 +36,7 @@
                 <button alt="logout" onclick="document.location.href='./logout'">Logout</button>
             </c:when>
             <c:when test="${sessionScope.get('manager') != null}">
-                <a href="./AdminPanel?className=Utente">Bentornato, <c:out value='${admin.nome}'/></a>
+                <a href="/Rojina_Review_war/managerArea">Bentornato, <c:out value='${manager.nome}'/></a>
                 <button alt="logout" onclick="document.location.href='./logout'">Logout</button>
             </c:when>
             <c:otherwise>

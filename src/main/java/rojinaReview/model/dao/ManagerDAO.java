@@ -24,7 +24,7 @@ public class ManagerDAO implements GenericStaffDAO {
     }
 
     public Manager doRetriveByEmail(String email) throws SQLException, UnsupportedEncodingException {
-        PreparedStatement ps = con.prepareStatement("SELECT * FROM manager WHERE email=?");
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM manager WHERE email=? and verificato=1");
         ps.setString(1, email);
         ResultSet rs = ps.executeQuery();
 

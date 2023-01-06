@@ -330,7 +330,7 @@ create table Segnalazione(
 );
 
 insert into Manager (nome, cognome, email, password,verificato) values
-    ("Andrea", "Vitolo", "zindrè@gmail.com", SHA2('papapa',256),1),
+    ("Andrea", "Vitolo", "zindre@gmail.com", SHA2('papapa',256),1),
     ("Carmine", "Iemmino", "carmineiemmino@gmail.com", SHA2('lalala',256),1),
     ("Carlo", "Colizzi", "carletto@gmail.com", SHA2('bobbaba',256),1);
 

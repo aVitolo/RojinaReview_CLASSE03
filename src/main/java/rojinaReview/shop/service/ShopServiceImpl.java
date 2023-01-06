@@ -24,7 +24,7 @@ public class ShopServiceImpl implements  ShopService{
     public List<Prodotto> visualizzaShop(String offset, String categoria, String ordine) throws LoadingShopException {
         List<Prodotto> prodotti = null;
         try {
-            prodotti = new ProdottoDAO().doRetriveAll();
+            prodotti = new ProdottoDAO().updateContent(offset,categoria,ordine);
             return prodotti;
         } catch (SQLException e) {
             throw new LoadingShopException("Errore nel caricamento dei prodotti");

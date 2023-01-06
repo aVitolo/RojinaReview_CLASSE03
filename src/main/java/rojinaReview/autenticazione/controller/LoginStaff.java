@@ -54,6 +54,8 @@ public class LoginStaff extends HttpServlet {
             } else {
                 String dbPass = tmp.getPassword();
 
+                System.out.println(password);
+                System.out.println(dbPass);
                 //confronta le password
                 if (password.equals(dbPass)) {
                     HttpSession session = request.getSession();
@@ -61,10 +63,9 @@ public class LoginStaff extends HttpServlet {
                         Giornalista g = (Giornalista) tmp;
                         session.setAttribute("giornalista", g);
                     } else if (type == 1) {
-                        Manager a = (Manager) tmp;
-                        session.setAttribute("admin", (Manager) tmp);
+                        Manager m = (Manager) tmp;
+                        session.setAttribute("manager", m);
                     }
-
                     session.removeAttribute("ospite");
                     response.sendRedirect(homePage);
                 } else {

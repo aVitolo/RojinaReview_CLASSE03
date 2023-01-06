@@ -113,4 +113,9 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
     public void negaRegistrazioneManager(int id) {
 
     }
+
+    @Override
+    public ArrayList<Utente> visualizzaRichieste() {
+        return null;
+    }
 }

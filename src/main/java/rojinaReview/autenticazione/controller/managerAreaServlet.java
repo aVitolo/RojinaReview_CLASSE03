@@ -10,7 +10,7 @@ import java.io.IOException;
 
 @WebServlet(name = "journalistAreaServlet", value = "/journalistAreaServlet")
 public class managerAreaServlet extends HttpServlet {
-    private String path = "/WEB-INF/results/giornalista/managerArea.jsp";
+    private String path = "/WEB-INF/results/managerPages/managerArea.jsp";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

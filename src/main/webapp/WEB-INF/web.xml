@@ -352,7 +352,9 @@
         <servlet-class>rojinaReview.autenticazione.controller.visualizzaShopServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>visualizzaRichiesteServlet</servlet-name>
+        <servlet-name>visualizzaShopServlet</servlet-name>
         <url-pattern>/visualizzaShop</url-pattern>
     </servlet-mapping>
+
+
 </web-app>

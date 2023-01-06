@@ -25,7 +25,7 @@ public class GiornalistaDAO implements GenericStaffDAO {
     }
 
     public Giornalista doRetriveByEmail(String email) throws SQLException, UnsupportedEncodingException {
-        PreparedStatement ps = con.prepareStatement("SELECT * FROM Giornalista WHERE email=?");
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM Giornalista WHERE email=? ");
         ps.setString(1, email);
         ResultSet rs = ps.executeQuery();
 

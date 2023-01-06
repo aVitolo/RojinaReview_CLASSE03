@@ -6,15 +6,9 @@
     <title>Area giornalista</title>
     <link rel="stylesheet" href="./css/master.css">
     <link rel="stylesheet" href="./css/notizie.css">
-    <style>
-        img{
-            opacity: 1;
-        }
-    </style>
-
 </head>
 <body>
-<%@ include file="/WEB-INF/results/giornalista/journalistArea.jsp" %>
+<%@ include file="/WEB-INF/results/giornalistaPages/journalistArea.jsp" %>
 <div class="menu" id="addGame">
     <div class="insertGioco">
         <form name="insertGioco" action="/Rojina_Review_war/insertGame" method="post" enctype="multipart/form-data">

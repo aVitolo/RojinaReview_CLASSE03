@@ -10,7 +10,7 @@
 
 <html>
 <head>
-    <title>Area giornalista</title>
+    <title>Area Manager</title>
     <link rel="stylesheet" href="./static/css/master.css">
     <link rel="stylesheet" href="./static/css/managerArea.css">
 </head>

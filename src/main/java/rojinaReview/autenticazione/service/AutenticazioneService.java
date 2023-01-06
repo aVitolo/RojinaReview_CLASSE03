@@ -146,4 +146,9 @@ public interface AutenticazioneService {
      */
     void negaRegistrazioneManager(int id);
 
+    /**
+     * Firma del metodo che permette di
+     * visualizzar ele richieste di registrazione come manager o giornalista
+     */
+    ArrayList<Utente> visualizzaRichieste();
 }

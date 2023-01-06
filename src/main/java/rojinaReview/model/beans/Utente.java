@@ -74,8 +74,9 @@ public abstract class Utente {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 
-            for (int i : hash) {
-                passwordAfterHash.append(String.format("%02x", 0XFF & i));
+            StringBuilder hexString = new StringBuilder();
+            for (int i: hash) {
+                hexString.append(Integer.toHexString(0XFF & i));
             }
             return new String(passwordAfterHash);
         } catch (NoSuchAlgorithmException e) {
