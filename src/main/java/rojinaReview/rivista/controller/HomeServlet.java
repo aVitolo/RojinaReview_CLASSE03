@@ -58,7 +58,6 @@ public class HomeServlet extends HttpServlet {
         //setto gli attributi nella request
         request.setAttribute("copertina", copertina);
         request.setAttribute("articoli", articoli);
-        System.out.println("dispatch");
         //dispatch verso home.jsp
         RequestDispatcher dispatcher =
                 request.getRequestDispatcher(path);

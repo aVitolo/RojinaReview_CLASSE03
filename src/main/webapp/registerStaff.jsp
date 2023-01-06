@@ -12,13 +12,20 @@
 </head>
 <body>
 <div class="center">
-    <h1>Create Account</h1>
-    <form method="post" action="./RegisterUser">
+    <h1>Invia Richiesta</h1>
+    <form method="post" action="./inviaRichiesta">
         <div class="form_input">
-            <input id="nickname" type="text" name="nickname"
+            <input id="Nome" type="text" name="Nome"
                    title="Minimum: 5 letters, Maximum: 30 letters, Don't accepted: {# - ' \ }" required>
             <span></span>
-            <label>Nickname</label>
+            <label>Nome</label>
+        </div>
+
+        <div class="form_input">
+            <input id="Cognome" type="text" name="Cognome"
+                   title="Minimum: 5 letters, Maximum: 30 letters, Don't accepted: {# - ' \ }" required>
+            <span></span>
+            <label>Cognome</label>
         </div>
         <div class="form_input">
             <input id="email" type="email" name="email"
@@ -32,7 +39,7 @@
             <span></span>
             <label>Password</label>
         </div>
-        <input id="registerSubmit" type="submit" onclick="validateInputs()" value="Create Account">
+        <input id="registerSubmit" type="submit" onclick="validateInputs()" value="Invia Richiesta">
     </form>
 </div>
 <c:if test="${message != null}">

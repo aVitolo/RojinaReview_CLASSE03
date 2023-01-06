@@ -13,7 +13,7 @@
 <header id="head">
 
     <section class="bar">
-        <img class="logo" style="cursor:pointer" src="./images/utility/rojinah.png" onclick="location.href='./home'" alt="Logo"/>
+        <img class="logo" style="cursor:pointer" src="./static/images/utility//rojinah.png" onclick="location.href='./home'" alt="Logo"/>
         <button class="expand" onclick="expandMenu()"> ≡</button>
     </section>
 
@@ -35,7 +35,7 @@
                 <a href="/Rojina_Review_war/journalistArea">Bentornato, <c:out value='${giornalista.nome}'/></a>
                 <button alt="logout" onclick="document.location.href='./logout'">Logout</button>
             </c:when>
-            <c:when test="${sessionScope.get('admin') != null}">
+            <c:when test="${sessionScope.get('manager') != null}">
                 <a href="./AdminPanel?className=Utente">Bentornato, <c:out value='${admin.nome}'/></a>
                 <button alt="logout" onclick="document.location.href='./logout'">Logout</button>
             </c:when>
@@ -47,5 +47,5 @@
     </section>
 </header>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="/Rojina_Review_war/js/navebar.js"></script>
+<script type="text/javascript" src="/Rojina_Review_war/static/js/navebar.js"></script>
 </html>

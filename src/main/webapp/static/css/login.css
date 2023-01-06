@@ -15,10 +15,11 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     /* Propietà che permette di spostare gli elementi della classe */
-    height: 400px;
+    height: fit-content;
     width: 400px;
     background: #24262b;
     border-radius: 10px;
+    padding: 2%;
 }
 
 

@@ -249,15 +249,6 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>adminPanel</servlet-name>
-        <servlet-class>rojinaReview.autenticazione.controller.AdminPanel</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>adminPanel</servlet-name>
-        <url-pattern>/AdminPanel</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>proceedToOrderServlet</servlet-name>
         <servlet-class>rojinaReview.shop.controller.proceedToOrderServlet</servlet-class>
     </servlet>
@@ -302,7 +293,6 @@
         <url-pattern>/confirmOrder</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>userChangeDataServlet</servlet-name>
         <servlet-class>rojinaReview.autenticazione.controller.userChangeDataServlet</servlet-class>
@@ -329,7 +319,40 @@
         <servlet-name>addVoteServlet</servlet-name>
         <url-pattern>/addVote</url-pattern>
     </servlet-mapping>
-    
 
+    <servlet>
+        <servlet-name>managerAreaServlet</servlet-name>
+        <servlet-class>rojinaReview.autenticazione.controller.managerAreaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>managerAreaServlet</servlet-name>
+        <url-pattern>/managerArea</url-pattern>
+    </servlet-mapping>
 
+    <servlet>
+        <servlet-name>visualizzaCommentiSegnalatiServlet</servlet-name>
+        <servlet-class>rojinaReview.autenticazione.controller.visualizzaCommentiSegnalatiServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>visualizzaCommentiSegnalatiServlet</servlet-name>
+        <url-pattern>/visualizzaCommentiSegnalati</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>visualizzaRichiesteServlet</servlet-name>
+        <servlet-class>rojinaReview.autenticazione.controller.visualizzaRichiesteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>visualizzaRichiesteServlet</servlet-name>
+        <url-pattern>/visualizzaRichieste</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>visualizzaShopServlet</servlet-name>
+        <servlet-class>rojinaReview.autenticazione.controller.visualizzaShopServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>visualizzaRichiesteServlet</servlet-name>
+        <url-pattern>/visualizzaShop</url-pattern>
+    </servlet-mapping>
 </web-app>
