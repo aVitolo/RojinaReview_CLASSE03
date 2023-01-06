@@ -26,7 +26,6 @@ public class Videogiocatore extends Utente {
         this.segnalazioni = segnalazioni;
         this.pareri = pareri;
         this.carrello = carrello;
-        this.bannato = bannato;
         this.nickname = nickname;
     }
 
@@ -100,14 +99,6 @@ public class Videogiocatore extends Utente {
 
     public void setCarrello(Carrello carrello) {
         this.carrello = carrello;
-    }
-
-    public boolean isBannato() {
-        return bannato;
-    }
-
-    public void setBannato(boolean bannato) {
-        this.bannato = bannato;
     }
 
     public String getNickname() {

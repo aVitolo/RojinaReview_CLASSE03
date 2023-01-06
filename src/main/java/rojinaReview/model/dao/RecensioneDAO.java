@@ -127,26 +127,26 @@ public class RecensioneDAO {
     }
 
 
-    public ArrayList<Recensione> updateContent(String offset, String piattaforma, String tipologia, String ordine) throws SQLException {
+    public ArrayList<Recensione> updateContent(String offset, String piattaforma, String genere, String ordine) throws SQLException {
         ArrayList<Recensione> recensioni = new ArrayList<>();
         int  limit = 12;
 
-        String select = " SELECT r.id, r.titolo, r.testo, r.immagine, r.voto ";
-        String from =   " FROM recensione r";
+        String select = " SELECT r.id, r.nome, r.testo, r.immagine, r.votoGiornalista";
+        String from =   " FROM Recensione r";
         from += (!piattaforma.equals("Piattaforma") ?
-                    " JOIN gioco_piattaforma gp on r.gioco=gp.gioco " :
+                    " JOIN g Videogioco_Piattaforma vp on r.id_videogioco=vp.id_videogioco " :
                     " " );
-        from += (!tipologia.equals("Tipologia") ?
-                    "JOIN gioco_tipologia gt on r.gioco=gt.gioco "
+        from += (!genere.equals("Genere") ?
+                    "JOIN Videogioco_Genere vg on r.id_videogioco=vg.id_videogioco "
                     : " ");
         String where = " WHERE ";
         where += (!piattaforma.equals("Piattaforma") ?
-                    " gp.piattaforma='"+piattaforma+"'" :
+                    " vg.piattaforma='"+piattaforma+"'" :
                     "" );
-        where += (!tipologia.equals("Tipologia") ?
+        where += (!genere.equals("Genere") ?
                     (where.equals(" WHERE ") ?
-                            "gt.tipologia='"+tipologia+"'" :
-                            " AND gt.tipologia='"+tipologia+"'")
+                            "vg.genere='"+genere+"'" :
+                            " AND vg.genere='"+genere+"'")
                     : "");
         if (where.equals(" WHERE ")) where = " ";
         String order =  " ORDER BY ";

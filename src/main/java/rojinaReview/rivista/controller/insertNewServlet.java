@@ -45,7 +45,7 @@ public class insertNewServlet extends HttpServlet {
 
         try {
             new NotiziaDAO().doSave(n, g.getId());
-            new NotiziaDAO().doSaveMentioned((ArrayList<String>)n.getGiochi().values());
+            new NotiziaDAO().doSaveMentioned(n.getGiochi());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -59,7 +59,7 @@ public class insertNewServlet extends HttpServlet {
 
         for (String g : allGames) {
             try {
-                parsedGames.put(new VideogiocoDAO().doRetrieveIdByTitle(g),"g");
+                parsedGames.put(new VideogiocoDAO().retrieveIdByName(g),"g");
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

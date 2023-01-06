@@ -143,28 +143,28 @@ public class NotiziaDAO {
         }
     }
 
-    public ArrayList<Notizia> updateContent(String offset, String piattaforma, String tipologia, String ordina) throws SQLException {
+    public ArrayList<Notizia> updateContent(String offset, String piattaforma, String genere, String ordina) throws SQLException {
         ArrayList<Notizia> notizie = new ArrayList<>();
         int limit = 12;
-        String select = " SELECT n.id, n.titolo, n.testo, n.immagine ";
+        String select = " SELECT n.id, n.nome, n.testo, n.immagine ";
         String from = " FROM notizia n";
         from += (!piattaforma.equals("Piattaforma") ?
-                " JOIN gioco_notizia gn1 on n.id=gn1.notizia JOIN gioco_piattaforma gp on gn1.gioco=gp.gioco "
+                " JOIN create table Videogioco_Notizia gn1 on n.id=gn1.id_notizia JOIN Videogioco_Piattaforma gp on gn1.id_videogioco=gp.id_videogioco "
                 : " ");
-        from += (!tipologia.equals("Tipologia") ?
-                " JOIN gioco_notizia gn2 on n.id=gn2.notizia JOIN gioco_tipologia gt on gn2.gioco=gt.gioco "
+        from += (!genere.equals("Genere") ?
+                " JOIN create table Videogioco_Notizia gn2 on n.id=gn2.id_notizia JOIN Videogioco_Genere gt on gn2.id_videogioco=gt.id_videogioco "
                 : " ");
         String where = " WHERE ";
         where += (!piattaforma.equals("Piattaforma") ?
                 " gp.piattaforma='" + piattaforma + "'" :
                 "");
-        where += (!tipologia.equals("Tipologia") ?
+        where += (!genere.equals("Genere") ?
                 (where.equals(" WHERE ") ?
-                        " gt.tipologia='" + tipologia + "'" :
-                        " AND gt.tipologia='" + tipologia + "'")
+                        " gt.genere='" + genere + "'" :
+                        " AND gt.genere='" + genere + "'")
                 : "");
         if (where.equals(" WHERE ")) where = " ";
-        String order = " ORDER BY n.dataCaricamento " +
+        String order = " ORDER BY n.dataScrittura " +
                 (ordina.equals("Least Recent") ? " ASC " : " DESC ") +
                 " LIMIT " + limit + " OFFSET " + offset;
 

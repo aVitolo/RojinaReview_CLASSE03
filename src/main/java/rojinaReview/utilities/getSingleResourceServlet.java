@@ -64,7 +64,7 @@ public class getSingleResourceServlet extends HttpServlet {
                         {
                             Videogiocatore u = (Videogiocatore) session.getAttribute("utente");
                             request.setAttribute("votoUtente", new ParereDAO().
-                                    doRetrieveUserOpinion(u.getId(), recensioniContext.get(i).getIdVideogioco(), true));
+                                    doRetrieveUserOpinion(u.getId(), recensioniContext.get(i).getIdVideogioco(), 4));
                         }
                     } catch (SQLException e) {
                         e.printStackTrace();
@@ -80,7 +80,7 @@ public class getSingleResourceServlet extends HttpServlet {
                     {
                         Videogiocatore u = (Videogiocatore) session.getAttribute("utente");
                         request.setAttribute("votoUtente", new ParereDAO().
-                                doRetrieveUserOpinion(u.getId(), r.getIdVideogioco(), true));
+                                doRetrieveUserOpinion(u.getId(), r.getIdVideogioco(), 4));
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();

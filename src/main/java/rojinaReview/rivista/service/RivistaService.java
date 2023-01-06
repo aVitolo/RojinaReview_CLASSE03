@@ -1,5 +1,7 @@
 package rojinaReview.rivista.service;
 
+import rojinaReview.exception.LoadingNewsException;
+import rojinaReview.exception.LoadingReviewsException;
 import rojinaReview.model.beans.*;
 
 import java.util.ArrayList;
@@ -18,6 +20,9 @@ public interface RivistaService {
     ArrayList<Articolo> visualizzaArticoli();
 
 
+    ArrayList<Notizia> visualizzaNotizie(String offset, String piattaforma, String tipologia, String ordine) throws LoadingNewsException;
+
+    ArrayList<Recensione> visualizzaRecensioni(String offset, String piattaforma, String tipologia, String ordine) throws LoadingReviewsException;
 
     /**
      * Firma del metodo che permette di

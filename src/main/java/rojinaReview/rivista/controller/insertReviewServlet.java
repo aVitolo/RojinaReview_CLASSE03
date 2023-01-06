@@ -33,7 +33,7 @@ public class insertReviewServlet extends HttpServlet {
         r.setTesto(request.getParameter("testo"));
 
         try {
-            r.setIdVideogioco(new VideogiocoDAO().doRetrieveIdByTitle(request.getParameter("gioco")));
+            r.setIdVideogioco(new VideogiocoDAO().retrieveIdByName(request.getParameter("gioco")));
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -65,7 +65,6 @@ public class ParagrafoDAO {
     public void doSave(Paragrafo p, int article, boolean type) throws SQLException {
         PreparedStatement ps;
         ResultSet rs;
-        int article;
         if(type) //recensione
         {
             ps = con.prepareStatement("INSERT INTO paragrafo (titolo, testo, immagine, id_recensione) VALUES (?, ?, ?, ?)");

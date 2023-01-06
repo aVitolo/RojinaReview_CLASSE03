@@ -111,14 +111,7 @@ public class VideogiocoDAO {
             throw new RuntimeException("Insert error");
     }
 
-    public Videogioco doRetrieveByTitle(String gioco) {
-        return null;
-    }
-
-    public int doRetrieveByTitle(String gioco) {
-        return -1;
-    }
-
     public int retrieveIdByName(String s) {
+        return  -1;
     }
 }

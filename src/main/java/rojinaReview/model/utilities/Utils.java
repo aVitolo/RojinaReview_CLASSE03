@@ -8,7 +8,7 @@ public class Utils {
 
     //funzione che salva un file nella directory del project e restituisce la path
     public static String saveImageWar(String imageType, String fileName, Part filePart) throws IOException {
-        String partialPath = ".." + File.separator + "webapps" + File.separator + "Rojina_Review_war" + File.separator + "images";
+        String partialPath = ".." + File.separator + "webapps" + File.separator + "Rojina_Review_war" +  File.separator + "static" + File.separator + "images";
         String path = partialPath + File.separator + imageType;
 
         OutputStream out = null;
@@ -40,7 +40,7 @@ public class Utils {
 
     public static void saveImageFileSystem(String imageType, String fileName, Part filePart) throws IOException {
         String home = System.getProperty("user.home");
-        String project = File.separator + "IdeaProjects" + File.separator + "RojinaReview" + File.separator + "src" + File.separator + "main" + File.separator + "webapp" + File.separator + "images";
+        String project = File.separator + "IdeaProjects" + File.separator + "RojinaReview" + File.separator + "src" + File.separator + "main" + File.separator + "webapp"  + File.separator + "static"+ File.separator + "images";
         String path = home + project + File.separator + imageType;
 
         OutputStream out = null;

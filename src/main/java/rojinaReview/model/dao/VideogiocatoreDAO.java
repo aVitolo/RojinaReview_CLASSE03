@@ -38,7 +38,6 @@ public class VideogiocatoreDAO {
             v.setCognome(rs.getString(5));
             v.setImmagine(rs.getString(6));
             v.setNickname(rs.getString(7));
-            v.setBannato(rs.getBoolean(8));
 
             return v;
         }
@@ -61,7 +60,6 @@ public class VideogiocatoreDAO {
             v.setCognome(rs.getString(5));
             v.setImmagine(rs.getString(6));
             v.setNickname(rs.getString(7));
-            v.setBannato(rs.getBoolean(8));
 
             return v;
         }
@@ -85,8 +83,6 @@ public class VideogiocatoreDAO {
             v.setCognome(rs.getString(5));
             v.setImmagine(rs.getString(6));
             v.setNickname(rs.getString(7));
-            v.setBannato(rs.getBoolean(8));
-
             return v;
         }
 
@@ -118,7 +114,6 @@ public class VideogiocatoreDAO {
             v.setCognome(rs.getString(5));
             v.setImmagine(rs.getString(6));
             v.setNickname(rs.getString(7));
-            v.setBannato(rs.getBoolean(8));
 
 
             list.add(v);

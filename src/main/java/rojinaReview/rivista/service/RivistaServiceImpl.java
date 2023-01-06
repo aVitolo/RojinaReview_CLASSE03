@@ -1,5 +1,7 @@
 package rojinaReview.rivista.service;
 
+import rojinaReview.exception.LoadingNewsException;
+import rojinaReview.exception.LoadingReviewsException;
 import rojinaReview.model.beans.*;
 import rojinaReview.model.dao.*;
 import rojinaReview.model.utilities.ConPool;
@@ -23,6 +25,32 @@ public class RivistaServiceImpl implements RivistaService{
         this.vDAO = new VideogiocoDAO(this.connection);
         this.cDAO = new CommentoDAO(this.connection);
         this.pDAO = new ParagrafoDAO(this.connection);
+    }
+
+    @Override
+    public ArrayList<Articolo> visualizzaArticoli() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Notizia> visualizzaNotizie(String offset, String piattaforma, String genere, String ordine) throws LoadingNewsException {
+        ArrayList<Notizia> notizie = null;
+        try {
+            notizie = new NotiziaDAO().updateContent(offset,piattaforma,genere,ordine);
+            return notizie;
+        } catch (SQLException e) {
+            throw new LoadingNewsException("Errore nel caricamento delle notizie");
+        }
+    }
+    @Override
+    public ArrayList<Recensione> visualizzaRecensioni(String offset, String piattaforma, String genere, String ordine) throws LoadingReviewsException {
+        ArrayList<Recensione> recensioni = null;
+        try {
+            recensioni = new RecensioneDAO().updateContent(offset,piattaforma,genere,ordine);
+            return recensioni;
+        } catch (SQLException e) {
+            throw new LoadingReviewsException("Errore nel caricamento delle recensioni");
+        }
     }
 
     public Recensione visualizzaRecensioneByID(int id)
@@ -63,6 +91,21 @@ public class RivistaServiceImpl implements RivistaService{
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void inserisciRecensione(Recensione recensione) {
+
+    }
+
+    @Override
+    public void inserisciNotizia(Notizia notizia) {
+
+    }
+
+    @Override
+    public void modificaArticolo(Articolo articolo) {
+
     }
 
     public void inserisciRecensione(Recensione recensione, Giornalista giornalista)
@@ -140,5 +183,15 @@ public class RivistaServiceImpl implements RivistaService{
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void inserisciVideogioco(Videogioco videogioco) {
+
+    }
+
+    @Override
+    public void modificaVideogioco(Videogioco videogioco) {
+
     }
 }

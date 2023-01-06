@@ -18,8 +18,6 @@ public class Commento {
     private int tipo; //0 prodotto, 1 recensione, 2 notizia
     private ArrayList<Segnalazione> segnalazioni;
 
-
-
     /* Constructor */
 
     public Commento() {

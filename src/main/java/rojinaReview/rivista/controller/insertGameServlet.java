@@ -7,6 +7,7 @@ import rojinaReview.model.beans.*;
 import rojinaReview.model.dao.VideogiocatoreDAO;
 import rojinaReview.model.dao.PiattaformaDAO;
 import rojinaReview.model.dao.TipologiaDAO;
+import rojinaReview.model.dao.VideogiocoDAO;
 import rojinaReview.model.utilities.Utils;
 
 import java.io.*;
@@ -63,7 +64,7 @@ public class insertGameServlet extends HttpServlet {
         Utils.saveImageFileSystem(imageType, fileName, filePart);
 
         try {
-            new VideogiocatoreDAO().doSave(g);
+            new VideogiocoDAO().doSave(g);
             new TipologiaDAO().doSave(g.getId(), g.getGeneri());
             new PiattaformaDAO().doSave(g.getId(), g.getPiattaforme());
         } catch (SQLException e) {

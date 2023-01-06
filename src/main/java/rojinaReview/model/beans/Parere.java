@@ -14,7 +14,7 @@ public class Parere {
 
     }
 
-    public Parere(int id, float voto, Date dataVotazione, Integer idProdottoORVideogioco, boolean type) {
+    public Parere(int id, float voto, Date dataVotazione, Integer idProdottoORVideogioco, int type) {
         this.id = id;
         this.voto = voto;
         this.dataVotazione = dataVotazione;

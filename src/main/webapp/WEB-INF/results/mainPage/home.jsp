@@ -5,10 +5,10 @@
 <head>
     <title>Home - Rojina</title>
     <!- includo i fogli di stile -->
-    <link rel="stylesheet" href="./css/home.css">
-    <link rel="stylesheet" href="./css/foot.css">
-    <link rel="stylesheet" href="./css/navebar.css">
-    <link rel="stylesheet" href="./css/master.css">
+    <link rel="stylesheet" href="./static/css/home.css">
+    <link rel="stylesheet" href="./static/css/foot.css">
+    <link rel="stylesheet" href="./static/css/navebar.css">
+    <link rel="stylesheet" href="./static/css/master.css">
 </head>
 <body>
 <div class="container">
@@ -22,7 +22,7 @@
     <section class="home">
         <section class="hot">
             <!-Al fianco della copertina vi e il logo con visulizazzione responsive-->
-            <img src="./images/utility/logoNT.png" alt="logo" class="logo" decoding="async">
+            <img src="./static/images/utility/logoNT.png" alt="logo" class="logo" decoding="async">
             <section class="articolo">
                 <c:choose>
                     <c:when test="${copertina.getClass().simpleName =='Recensione'}">
@@ -35,7 +35,7 @@
                     <img src="<c:out value='${copertina.immagine}'/>" alt="copertina" decoding="async">
                     <div class="articolo-content">
                         <h3><c:out value="${copertina.getClass().simpleName}"/></h3>
-                        <h2><c:out value='${copertina.titolo}'/></h2>
+                        <h2><c:out value='${copertina.nome}'/></h2>
                         <p><c:out value='${fn:substring(copertina.testo, 0, 50)}'/></p>
                         <c:if test="${copertina.getClass().simpleName =='Recensione'}">
                             <p class="parere">${copertina.parere}</p>
@@ -43,7 +43,7 @@
                     </div>
                 </a>
             </section>
-            <img src="./images/utility/logoNT.png" alt="logo" class="logo" decoding="async">
+            <img src="./static/images/utility/logoNT.png" alt="logo" class="logo" decoding="async">
         </section>
 
             <section class="articoli">
@@ -60,10 +60,10 @@
                         <img src="${articolo.immagine}" alt="copertina" decoding="async">
                         <div class="articolo-content">
                             <h3>${articolo.getClass().simpleName}</h3>
-                            <h2>${articolo.titolo}</h2>
+                            <h2>${articolo.nome}</h2>
                             <p>${fn:substring(articolo.testo, 0, 50)}</p>
                             <c:if test="${articolo.getClass().simpleName =='Recensione'}">
-                                <p class="parere">${articolo.parere}</p>
+                                <p class="parere">${articolo.votoGiornalista}</p>
                             </c:if>
                         </div>
                     </a>
@@ -73,7 +73,7 @@
     </section>
 
     <!- includo il footer -->
-    <%@ include file="/html/footer.html" %>
+    <%@ include file="/static/html/footer.html" %>
 </div>
 </body>
 </html>

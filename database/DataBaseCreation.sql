@@ -335,25 +335,25 @@ insert into Manager (nome, cognome, email, password,verificato) values
     ("Carlo", "Colizzi", "carletto@gmail.com", SHA2('bobbaba',256),1);
 
 insert into Giornalista (nome, cognome, email, password, immagine, verificato) values
-    ("Mario", "Dell'Orca", "mario@gmail.com", SHA2('marietto',256), "./images/journalists/Dell'Orca.jpg",1),
-    ("Carla", "Bianchi", "carletta@gmail.com", SHA2('xarla',256), "./images/journalists/Bianchi.jpg",1),
-    ("Giovanni", "Verdi", "giuann@gmail.com", SHA2('johnny',256), "./images/journalists/Verdi.jpg",1),
-    ("Franco", "Neri", "franco@gmail.com", SHA2('francuccio',256), "./images/journalists/Neri.jpg",1),
-    ("Carlo", "Rossi", "carlrossi@gmail.com", SHA2('redcarl',256), "./images/journalists/Rossi.jpg",1),
-    ("Lorenza", "Gialli", "lorenza@gmail.com", SHA2('lorenzina',256), "./images/journalists/Gialli.jpg",1);
+    ("Mario", "Dell'Orca", "mario@gmail.com", SHA2('marietto',256), "./static/images/journalists/Dell'Orca.jpg",1),
+    ("Carla", "Bianchi", "carletta@gmail.com", SHA2('xarla',256), "./static/images/journalists/Bianchi.jpg",1),
+    ("Giovanni", "Verdi", "giuann@gmail.com", SHA2('johnny',256), "./static/images/journalists/Verdi.jpg",1),
+    ("Franco", "Neri", "franco@gmail.com", SHA2('francuccio',256), "./static/images/journalists/Neri.jpg",1),
+    ("Carlo", "Rossi", "carlrossi@gmail.com", SHA2('redcarl',256), "./static/images/journalists/Rossi.jpg",1),
+    ("Lorenza", "Gialli", "lorenza@gmail.com", SHA2('lorenzina',256), "./static/images/journalists/Gialli.jpg",1);
 
 
 insert into Videogiocatore(email,nickname,password,nome,cognome,immagine,bannato)  values
-    ("venebroguppeu@yopmail.com","GamaOnix",SHA2('oemfshif',256), "Paolo", "Dell'Orca", "./images/users/GamaOnix.png",0),
-    ("jaunnureudeilla@yopmail.com","AimZero",SHA2('efkmfeug',256), "Giovanna", "Bianchi", "./images/users/AimZero.png",0),
-    ("frefimeitromo@yopmail.com","ZeroVirus",SHA2('vwnjviecwo',256), "Pio", "Verdi", "./images/users/ZeroVirus.png",0),
-    ("ceuprofraucoudi@yopmail.com","FratmOMisterios",SHA2('nfhuofewoj',256), "Franco", "Neri",  "./images/users/FratmOMisterios.png",0),
-    ("ceubujotawo@yopmail.com","PhantomEagle",SHA2('obufewgou',256), null, null,  "./images/users/PhantomEagle.png",0),
-    ("gralameiddauquau@yopmail.com","GhostSteel",SHA2('nefihouefwpoj',256), "Lorenza", "Gialli",  "./images/users/GhostSteel.png",0),
-    ("febremoulaqui@yopmail.com","PredatorBeta",SHA2('fnkebouewf',256), "Christian", "Rosati",  "./images/users/PredatorBeta.png",0),
-    ("zindre@yopmail.com","BlackDeath",SHA2('jofhouefwpoj',256), null, null, "./images/users/BlackDeath.png",0),
-    ("cazzare@yopmail.com","AbyssWalker",SHA2('cazzare',256), "Carmine", "Franca",  "./images/users/AbyssWalker.png",0),
-    ("oefo@yopmail.com","Papiciacra",SHA2('piefwhouefoj',256), "Fonz", "Cretoso", "./images/users/Papiciacra.png",0),
+    ("venebroguppeu@yopmail.com","GamaOnix",SHA2('oemfshif',256), "Paolo", "Dell'Orca", "./static/images/users/GamaOnix.png",0),
+    ("jaunnureudeilla@yopmail.com","AimZero",SHA2('efkmfeug',256), "Giovanna", "Bianchi", "./static/images/users/AimZero.png",0),
+    ("frefimeitromo@yopmail.com","ZeroVirus",SHA2('vwnjviecwo',256), "Pio", "Verdi", "./static/images/users/ZeroVirus.png",0),
+    ("ceuprofraucoudi@yopmail.com","FratmOMisterios",SHA2('nfhuofewoj',256), "Franco", "Neri",  "./static/images/users/FratmOMisterios.png",0),
+    ("ceubujotawo@yopmail.com","PhantomEagle",SHA2('obufewgou',256), null, null,  "./static/images/users/PhantomEagle.png",0),
+    ("gralameiddauquau@yopmail.com","GhostSteel",SHA2('nefihouefwpoj',256), "Lorenza", "Gialli",  "./static/images/users/GhostSteel.png",0),
+    ("febremoulaqui@yopmail.com","PredatorBeta",SHA2('fnkebouewf',256), "Christian", "Rosati",  "./static/images/users/PredatorBeta.png",0),
+    ("zindre@yopmail.com","BlackDeath",SHA2('jofhouefwpoj',256), null, null, "./static/images/users/BlackDeath.png",0),
+    ("cazzare@yopmail.com","AbyssWalker",SHA2('cazzare',256), "Carmine", "Franca",  "./static/images/users/AbyssWalker.png",0),
+    ("oefo@yopmail.com","Papiciacra",SHA2('piefwhouefoj',256), "Fonz", "Cretoso", "./static/images/users/Papiciacra.png",0),
     ("videogiocatore@gmail.com","User",SHA2('password',256), "Persona", "Normale", null,0);
 
 
@@ -408,26 +408,26 @@ insert into Genere (nome) values
     ("Wargame");
 
 insert into Videogioco (titolo,dataDiRilascio,casaDiSviluppo,mediaVoto,numeroVoti,copertina)values
-    ("Dark Souls","2011-09-22","FromSoftware", 0, 0, "./images/games/Dark Souls.jpg"),
-    ("Dark Souls II","2014-03-11","FromSoftware", 0, 0, "./images/games/Dark Souls II.jpg"),
-    ("Dark Souls III","2016-04-12","FromSoftware", 0, 0, "./images/games/Dark Souls III.jpg"),
-    ("Sekiro Shadows Die Twice","2019-03-22","FromSoftware", 0, 0, "./images/games/Sekiro Shadows Die Twice.jpg"),
-    ("FIFA 20","2019-09-27","EA", 0, 0, "./images/games/FIFA 20.jpg"),
-    ("FIFA 21","2020-10-05","EA", 0, 0, "./images/games/FIFA 21.jpg"),
-    ("FIFA 22","2021-09-26","EA", 0, 0, "./images/games/FIFA 22.jpg"),
-    ("Mario Kart 8","2014-05-29","Nintendo EPD", 0, 0, "./images/games/Mario Kart 8.jpg"),
-    ("The Legend of Zelda Breath of the Wild","2017-03-03","Nintendo EPD", 0, 0, "./images/games/The Legend of Zelda Breath of the Wild.jpg"),
-    ("Bloodborne 2", null,"FromSoftware", 0, 0, "./images/games/Bloodborne 2.jpg"),
-    ("Halo 2","2004-11-09","Bungie Studios", 0, 0, "./images/games/Halo 2.jpg"),
-    ("Halo 3","2007-09-25","Bungie Studios", 0, 0, "./images/games/Halo 3.jpg"),
-    ("Halo 4","2012-11-06","343 Industries", 0, 0, "./images/games/Halo 4.jpg"),
-    ("Halo 5","2015-10.27","343 Industries", 0, 0, "./images/games/Halo 5.jpg"),
-    ("Halo Infinite","2021-12-08","343 Industries", 0, 0, "./images/games/Halo Infinite.jpg"),
-    ("God of War", "2020-11-07", "Santa Monica Studio", 0, 0, "./images/games/God of War.jpg"),
-    ("COD Black Ops 3", "2018-10-10", "Treyarch", 0, 0, "./images/games/COD Black Ops 3.jpg"),
-    ("Rainbow Six Siege", "2017-05-11", "Ubisoft", 0, 0, "./images/games/Rainbow Six Siege.jpg"),
-    ("Red Dead Redemption 2", "2019-03-02", "Rockstar Games", 0, 0, "./images/games/Red Dead Redemption 2.jpg"),
-    ("GTA 5", "2015-09-15", "Rockstar Games", 0, 0, "./images/games/GTA 5.jpg");
+    ("Dark Souls","2011-09-22","FromSoftware", 0, 0, "./static/images/games/Dark Souls.jpg"),
+    ("Dark Souls II","2014-03-11","FromSoftware", 0, 0, "./static/images/games/Dark Souls II.jpg"),
+    ("Dark Souls III","2016-04-12","FromSoftware", 0, 0, "./static/images/games/Dark Souls III.jpg"),
+    ("Sekiro Shadows Die Twice","2019-03-22","FromSoftware", 0, 0, "./static/images/games/Sekiro Shadows Die Twice.jpg"),
+    ("FIFA 20","2019-09-27","EA", 0, 0, "./static/images/games/FIFA 20.jpg"),
+    ("FIFA 21","2020-10-05","EA", 0, 0, "./static/images/games/FIFA 21.jpg"),
+    ("FIFA 22","2021-09-26","EA", 0, 0, "./static/images/games/FIFA 22.jpg"),
+    ("Mario Kart 8","2014-05-29","Nintendo EPD", 0, 0, "./static/images/games/Mario Kart 8.jpg"),
+    ("The Legend of Zelda Breath of the Wild","2017-03-03","Nintendo EPD", 0, 0, "./static/images/games/The Legend of Zelda Breath of the Wild.jpg"),
+    ("Bloodborne 2", null,"FromSoftware", 0, 0, "./static/images/games/Bloodborne 2.jpg"),
+    ("Halo 2","2004-11-09","Bungie Studios", 0, 0, "./static/images/games/Halo 2.jpg"),
+    ("Halo 3","2007-09-25","Bungie Studios", 0, 0, "./static/images/games/Halo 3.jpg"),
+    ("Halo 4","2012-11-06","343 Industries", 0, 0, "./static/images/games/Halo 4.jpg"),
+    ("Halo 5","2015-10.27","343 Industries", 0, 0, "./static/images/games/Halo 5.jpg"),
+    ("Halo Infinite","2021-12-08","343 Industries", 0, 0, "./static/images/games/Halo Infinite.jpg"),
+    ("God of War", "2020-11-07", "Santa Monica Studio", 0, 0, "./static/images/games/God of War.jpg"),
+    ("COD Black Ops 3", "2018-10-10", "Treyarch", 0, 0, "./static/images/games/COD Black Ops 3.jpg"),
+    ("Rainbow Six Siege", "2017-05-11", "Ubisoft", 0, 0, "./static/images/games/Rainbow Six Siege.jpg"),
+    ("Red Dead Redemption 2", "2019-03-02", "Rockstar Games", 0, 0, "./static/images/games/Red Dead Redemption 2.jpg"),
+    ("GTA 5", "2015-09-15", "Rockstar Games", 0, 0, "./static/images/games/GTA 5.jpg");
 
 insert into Videogioco_Piattaforma values
     (1,"Xbox 360"),
@@ -544,33 +544,33 @@ insert into Videogioco_Genere values
     (20, "VR");
 
 insert into Recensione (testo, id_giornalista, id_videogioco, nome, votoGiornalista, dataScrittura,immagine) values
-    ("Il seguito di Dark Souls I...", 2, 2,"Dark Souls torna a colpire",9,"2014-04-11", "./images/reviews/review-Dark Souls II.jpg"),
-    ("Dark Souls 3 richiama i...", 4, 3,"Recensione Dark Souls III",9,"2016-05-12", "./images/reviews/review-Dark Souls III.jpg"),
-    ("Sekiro nuova avventura diversa...",2, 4,"Il gioco From Software più difficile di sempre",9,"2019-04-22", "./images/reviews/review-Sekiro Shadows Die Twice.jpg"),
-    ("Halo 2 fps...", 1, 11,"Master Chief è tornato più in forma che mai",9.5,"2004-11-16", "./images/reviews/review-Halo 2.jpg"),
-    ("Halo 3 è indubbiamente...",  1, 12,"Il ritorno di Master Chief",8.5 ,"2007-10-01", "./images/reviews/review-Halo 3.jpg"),
-    ("Halo 4 si avvicina a cod...", 3,13,"Recensione Halo 4",9,"2022-01-13", "./images/reviews/review-Halo 4.jpg"),
-    ("Halo 5 non lo so...", 6,14,"Recensione Halo 5: Guardians",8.8,"2022-01-3", "./images/reviews/review-Halo 5.jpg"),
-    ("Halo infinite figurati...", 5, 15,"Un ritorno epico",9,current_date(), "./images/reviews/review-Halo Infinite.jpg"),
-    ("GTA 5 è un gioco molto violento...",4, 20, "La saga che non delude mai", 8, "2020-11-09", "./images/reviews/review-GTA 5.jpg"),
-    ("In Rainbow è importante la tattica...", 2, 18, "Il miglior FPS tattico", 9, "2018-05-23", "./images/reviews/review-Rainbow Six Siege.jpg"),
-    ("God of War è sempre una certezza...",3,16, "Il grande ritorno di Kratos", 9.5, "2021-03-11", "./images/reviews/review-God of War.jpg"),
-    ("Black Ops 3 si prospetta come...",2,17, "La Treyarch ci lascia senza parole", 10, "2018-04-04", "./images/reviews/review-COD Black Ops 3.jpg"),
-    ("RDR 2 è mastodontico...",6, 19, "Il GTA ambientato nell'old west", 9.3, "2021-06-11", "./images/reviews/review-Red Dead Redemption 2.jpg"),
-    ("Zelda è ormai la nostra infanzia...", 3, 9, "Il capolavoro Nintendo", 9.5, "2022-03-11","./images/reviews/review-The Legend of Zelda Breath of the Wild.jpg"),
-    ("Mario e corse connubio perfetto...", 5, 8, "Mario&Furious", 7.5, "2021-01-15", "./images/reviews/review-Mario Kart 8.jpg"),
-    ("FIFA 21 si mostra come...", 4, 6, "Il solito gioco di calcio", 6, "2021-02-22", "./images/reviews/review-FIFA 21.jpg"),
-    ("FIFA 20 non è il top...", 3, 5, "FIFA delude", 5, "2020-03-11", "./images/reviews/review-FIFA 20.jpg"),
-    ("Dark Souls è un rpg di tutto...", 2,1, "Il miglior RPG", 9.5, "2018-01-10", "./images/reviews/review-Dark Souls.jpg");
+    ("Il seguito di Dark Souls I...", 2, 2,"Dark Souls torna a colpire",9,"2014-04-11", "./static/images/reviews/review-Dark Souls II.jpg"),
+    ("Dark Souls 3 richiama i...", 4, 3,"Recensione Dark Souls III",9,"2016-05-12", "./static/images/reviews/review-Dark Souls III.jpg"),
+    ("Sekiro nuova avventura diversa...",2, 4,"Il gioco From Software più difficile di sempre",9,"2019-04-22", "./static/images/reviews/review-Sekiro Shadows Die Twice.jpg"),
+    ("Halo 2 fps...", 1, 11,"Master Chief è tornato più in forma che mai",9.5,"2004-11-16", "./static/images/reviews/review-Halo 2.jpg"),
+    ("Halo 3 è indubbiamente...",  1, 12,"Il ritorno di Master Chief",8.5 ,"2007-10-01", "./static/images/reviews/review-Halo 3.jpg"),
+    ("Halo 4 si avvicina a cod...", 3,13,"Recensione Halo 4",9,"2022-01-13", "./static/images/reviews/review-Halo 4.jpg"),
+    ("Halo 5 non lo so...", 6,14,"Recensione Halo 5: Guardians",8.8,"2022-01-3", "./static/images/reviews/review-Halo 5.jpg"),
+    ("Halo infinite figurati...", 5, 15,"Un ritorno epico",9,current_date(), "./static/images/reviews/review-Halo Infinite.jpg"),
+    ("GTA 5 è un gioco molto violento...",4, 20, "La saga che non delude mai", 8, "2020-11-09", "./static/images/reviews/review-GTA 5.jpg"),
+    ("In Rainbow è importante la tattica...", 2, 18, "Il miglior FPS tattico", 9, "2018-05-23", "./static/images/reviews/review-Rainbow Six Siege.jpg"),
+    ("God of War è sempre una certezza...",3,16, "Il grande ritorno di Kratos", 9.5, "2021-03-11", "./static/images/reviews/review-God of War.jpg"),
+    ("Black Ops 3 si prospetta come...",2,17, "La Treyarch ci lascia senza parole", 10, "2018-04-04", "./static/images/reviews/review-COD Black Ops 3.jpg"),
+    ("RDR 2 è mastodontico...",6, 19, "Il GTA ambientato nell'old west", 9.3, "2021-06-11", "./static/images/reviews/review-Red Dead Redemption 2.jpg"),
+    ("Zelda è ormai la nostra infanzia...", 3, 9, "Il capolavoro Nintendo", 9.5, "2022-03-11","./static/images/reviews/review-The Legend of Zelda Breath of the Wild.jpg"),
+    ("Mario e corse connubio perfetto...", 5, 8, "Mario&Furious", 7.5, "2021-01-15", "./static/images/reviews/review-Mario Kart 8.jpg"),
+    ("FIFA 21 si mostra come...", 4, 6, "Il solito gioco di calcio", 6, "2021-02-22", "./static/images/reviews/review-FIFA 21.jpg"),
+    ("FIFA 20 non è il top...", 3, 5, "FIFA delude", 5, "2020-03-11", "./static/images/reviews/review-FIFA 20.jpg"),
+    ("Dark Souls è un rpg di tutto...", 2,1, "Il miglior RPG", 9.5, "2018-01-10", "./static/images/reviews/review-Dark Souls.jpg");
 
 
 insert into Notizia (testo, id_giornalista, nome, dataScrittura, immagine) values
-    ("Halo Infinite è un gioco...", 1,  "Halo Infinite e la community tossica","2022-01-24", "./images/news/new-Halo Infinite e la community tossica.jpg"),
-    ("Doppiaggio in italiano in...", 1,   "La Mod italiana per Dark Souls Remastered arriva domani","2021-10-13", "./images/news/new-La Mod italiana per Dark Souls Remastered arriva domani.jpg"),
-    ("La nintendo...", 1, "I tesori di casa Nintendo","2020-03-03", "./images/news/new-I tesori di casa Nintendo.jpg"),
-    ("Bloodborne 2 è molto atteso...", 2, "Bloodborne 2, rumor o verità","2019-09-12", "./images/news/new-Bloodborne 2, rumor o verità.jpg"),
-    ("Fifa 21 fa sempre cagare...", 2, "FIFA 21 Cosa ci aspettiamo","2022-01-10", "./images/news/new-FIFA 21 Cosa ci aspettiamo.jpg"),
-    ("Fifa 22 fa ancor più cagare...", 2,  "FIFA 22 Cosa ci aspettiamo", "2022-01-29", "./images/news/new-FIFA 22 Cosa ci aspettiamo.jpg");
+    ("Halo Infinite è un gioco...", 1,  "Halo Infinite e la community tossica","2022-01-24", "./static/images/news/new-Halo Infinite e la community tossica.jpg"),
+    ("Doppiaggio in italiano in...", 1,   "La Mod italiana per Dark Souls Remastered arriva domani","2021-10-13", "./static/images/news/new-La Mod italiana per Dark Souls Remastered arriva domani.jpg"),
+    ("La nintendo...", 1, "I tesori di casa Nintendo","2020-03-03", "./static/images/news/new-I tesori di casa Nintendo.jpg"),
+    ("Bloodborne 2 è molto atteso...", 2, "Bloodborne 2, rumor o verità","2019-09-12", "./static/images/news/new-Bloodborne 2, rumor o verità.jpg"),
+    ("Fifa 21 fa sempre cagare...", 2, "FIFA 21 Cosa ci aspettiamo","2022-01-10", "./static/images/news/new-FIFA 21 Cosa ci aspettiamo.jpg"),
+    ("Fifa 22 fa ancor più cagare...", 2,  "FIFA 22 Cosa ci aspettiamo", "2022-01-29", "./static/images/news/new-FIFA 22 Cosa ci aspettiamo.jpg");
 
 insert into Videogioco_Notizia (id_notizia, id_videogioco) values
     (3,9),
@@ -596,11 +596,11 @@ insert into Categoria(nome)  values
     ("Abbigliamento");
 
 insert into Prodotto (nome, descrizione, disponibilità, prezzo, immagine,  mediaVoto, numeroVoti,nome_categoria) values
-    ("Tazza Dark Souls", "Simpatica tazza ispirata a...", 30, 15.00, "./images/products/Tazza Dark Souls.jpg", 0, 0,"Casa"),
-    ("Pupazzo Super Mario", "Dolce pupazzo coccoloso di...", 10, 25.00, "./images/products/Pupazzo Super Mario.jpg", 0, 0,"Giocattoli"),
-    ("T-shirt Zelda", "Splendida t-shirt di...", 20, 30.00, "./images/products/T-shirt Zelda.jpg", 0, 0,"Abbigliamento"),
-    ("Bracciale Bloodborne", "Stiloso bracciale...", 50, 13.00, "./images/products/Bracciale Bloodborne.jpg", 0, 0,"Abbigliamento"),
-    ("Pendente Elden Ring", "Realistico pendente...", 70, 18.00, "./images/products/Pendente Elden Ring.jpg", 0, 0,"Abbigliamento");
+    ("Tazza Dark Souls", "Simpatica tazza ispirata a...", 30, 15.00, "./static/images/products/Tazza Dark Souls.jpg", 0, 0,"Casa"),
+    ("Pupazzo Super Mario", "Dolce pupazzo coccoloso di...", 10, 25.00, "./static/images/products/Pupazzo Super Mario.jpg", 0, 0,"Giocattoli"),
+    ("T-shirt Zelda", "Splendida t-shirt di...", 20, 30.00, "./static/images/products/T-shirt Zelda.jpg", 0, 0,"Abbigliamento"),
+    ("Bracciale Bloodborne", "Stiloso bracciale...", 50, 13.00, "./static/images/products/Bracciale Bloodborne.jpg", 0, 0,"Abbigliamento"),
+    ("Pendente Elden Ring", "Realistico pendente...", 70, 18.00, "./static/images/products/Pendente Elden Ring.jpg", 0, 0,"Abbigliamento");
 
 insert into Commento(id_videogiocatore,testo, dataScrittura,id_prodotto, id_recensione, id_notizia) values
     (8, "T-shirt quasi perfetta...", "2022-04-15 22:58:20",3,null,null),

@@ -42,13 +42,13 @@ public class ParereDAO {
             if (id_videogioco != 0)
             {
                 p.setIdProdottoORVideogioco(id_videogioco);
-                p.setType(true);
+                p.setType(0);
 
             }
             else if (id_prodotto != 0)
             {
                 p.setIdProdottoORVideogioco(id_prodotto);
-                p.setType(false);
+                p.setType(1);
             }
 
 
@@ -62,11 +62,11 @@ public class ParereDAO {
     }
 
     //table Gioco, Prodotto
-    public Parere doRetrieveUserOpinion(int user, int idProdottoORVideogioco, boolean type) throws SQLException {
+    public Parere doRetrieveUserOpinion(int user, int idProdottoORVideogioco, int type) throws SQLException {
         Parere p = new Parere();
         PreparedStatement ps;
         ResultSet rs;
-        if(type) //parere su videogioco
+        if(type==1) //parere su videogioco
         {
             ps = con.prepareStatement("SELECT id, parere, dataVotazione, id_videogioco FROM parere WHERE id_videogioco=? && id_videogiocatore=?");
             ps.setInt(1, idProdottoORVideogioco);
@@ -82,7 +82,7 @@ public class ParereDAO {
 
             }
         }
-        else if(!type) //parere su prodotto
+        else if(type==0) //parere su prodotto
         {
             ps = con.prepareStatement("SELECT id, parere, dataVotazione, id_prodotto FROM parere WHERE id_prodotto=? && id_videogiocatore=?");
             ps.setInt(1, idProdottoORVideogioco);
@@ -94,7 +94,7 @@ public class ParereDAO {
                 p.setVoto(rs.getFloat(2));
                 p.setDataVotazione(rs.getDate(3));
                 p.setIdProdottoORVideogioco(rs.getInt(4));
-                p.setType(!type);
+                p.setType(type);
 
             }
         }
@@ -106,7 +106,7 @@ public class ParereDAO {
         PreparedStatement ps;
         float votoPrecedente = 0;
         int increment = 1;
-        if(p.isType()) //videogioco
+        if(p.isType()==1) //videogioco
         {
             //cancellazione voto precedente
             ps = con.prepareStatement("SELECT parere FROM Parere WHERE id_videogiocatore=? && id_videogioco=?");
@@ -141,7 +141,7 @@ public class ParereDAO {
             ps.setInt(5, p.getIdProdottoORVideogioco());
             ps.executeUpdate();
         }
-        else if(!p.isType()) //prodotto
+        else if(p.isType()==0) //prodotto
         {
             //cancellazione voto precedente
             ps = con.prepareStatement("SELECT parere FROM parere WHERE id_videogiocatore=? && id_prodotto=?");
