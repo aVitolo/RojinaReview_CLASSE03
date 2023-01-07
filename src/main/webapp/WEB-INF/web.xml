@@ -356,5 +356,13 @@
         <url-pattern>/visualizzaShop</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>gestisciRichiesteServlet</servlet-name>
+        <servlet-class>rojinaReview.autenticazione.controller.gestisciRichiesteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>gestisciRichiesteServlet</servlet-name>
+        <url-pattern>/gestisciRichiesteServlet</url-pattern>
+    </servlet-mapping>
 
 </web-app>

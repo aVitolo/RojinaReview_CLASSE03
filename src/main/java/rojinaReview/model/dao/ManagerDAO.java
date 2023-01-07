@@ -65,7 +65,7 @@ public class ManagerDAO implements GenericStaffDAO {
     public void doVerificaManager(int id) throws SQLException, UnsupportedEncodingException {
         Statement stmt = con.createStatement();
         PreparedStatement ps =
-                con.prepareStatement("UPDATE  manager g SET g.verificato=1 WHERE id=?");
+                con.prepareStatement("UPDATE manager g SET g.verificato=1 WHERE id=?");
         ps.setInt(1,id);
         ps.executeUpdate();
     }
@@ -120,7 +120,7 @@ public class ManagerDAO implements GenericStaffDAO {
     //non serve?
     public boolean doRemoveById(int Id) throws SQLException {
         PreparedStatement ps =
-                con.prepareStatement("DELETE FROM Amministratore WHERE id=?");
+                con.prepareStatement("DELETE FROM Manager WHERE id=?");
         ps.setInt(1,Id);
         int i = ps.executeUpdate();
         return i == 1;

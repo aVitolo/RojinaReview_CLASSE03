@@ -104,7 +104,7 @@ public class GiornalistaDAO implements GenericStaffDAO {
     public void doVerificaGiornalista(int id) throws SQLException, UnsupportedEncodingException {
         Statement stmt = con.createStatement();
         PreparedStatement ps =
-                con.prepareStatement("UPDATE  giornalista g SET g.verificato=1 WHERE id=?");
+                con.prepareStatement("UPDATE giornalista g SET g.verificato=1 WHERE id=?");
         ps.setInt(1,id);
         ps.executeUpdate();
     }
@@ -116,7 +116,7 @@ public class GiornalistaDAO implements GenericStaffDAO {
     //non serve?
     public boolean doRemoveById(int id) throws SQLException {
         PreparedStatement ps =
-                con.prepareStatement("DELETE FROM Giornalista WHERE id=?");
+                con.prepareStatement("DELETE FROM giornalista g WHERE g.id=?");
         ps.setInt(1,id);
         int i = ps.executeUpdate();
         return i == 1;

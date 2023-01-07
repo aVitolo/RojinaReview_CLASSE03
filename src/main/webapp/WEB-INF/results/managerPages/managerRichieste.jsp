@@ -18,12 +18,12 @@
             <p>Email</p>
         </div>
         <c:forEach items="${requestScope['giornalisti']}" var="giornalista">
-        <div class="richiesta">
+        <div class="richiesta" id="g${giornalista.id}">
             <p>${giornalista.nome}</p>
             <p>${giornalista.cognome}</p>
             <p>${giornalista.email}</p>
-            <button>Accetta</button>
-            <button>Rifiuta</button>
+            <button onclick="hanldRequest('Giornalista','0','${giornalista.id}')">Rifiuta</button>
+            <button onclick="hanldRequest('Giornalista','1','${giornalista.id}')">Accetta</button>
             </c:forEach>
     </section>
     <section class="richiesta-back">
@@ -34,15 +34,44 @@
             <p>Email</p>
         </div>
         <c:forEach items="${requestScope['managers']}" var="manager">
-            <div class="richiesta">
+            <div class="richiesta" id="m${manager.id}">
                 <p>${manager.nome}</p>
                 <p>${manager.cognome}</p>
                 <p>${manager.email}</p>
-                <button>Accetta</button>
-                <button>Rifiuta</button>
+                <button onclick="hanldRequest('Manager','0','${manager.id}')" >Rifiuta</button>
+                <button onclick="hanldRequest('Manager','1','${manager.id}')" >Accetta</button>
             </div>
         </c:forEach>
     </section>
 </section>
 </body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+    function hanldRequest(table,action,id){
+        servlet = "/Rojina_Review_war/gestisciRichiesteServlet";
+        $.ajax({
+                url: servlet,
+                type: "post",
+                data: {
+                    "table": table,
+                    "action": action,
+                    "id": id,
+                },
+                success: function() {
+                    console.log(id);
+                    if(table==='Manager'){
+                        m='#m'+id;
+                        console.log(m);
+                        $(m).remove();
+                    }
+                    else{
+                        g='#g'+id;
+                        console.log(g);
+                        $(g).remove();
+                    }
+                }
+
+        });
+    }
+</script>
 </html>

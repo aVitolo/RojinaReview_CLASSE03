@@ -121,8 +121,8 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
     public ArrayList<ArrayList<Utente>> visualizzaRichieste() {
         ArrayList<ArrayList<Utente>> inQueeue = new ArrayList<>();
         try {
-            inQueeue.add(new ManagerDAO().doRetriveInQueeue());
             inQueeue.add(new GiornalistaDAO().doRetriveInQueeue());
+            inQueeue.add(new ManagerDAO().doRetriveInQueeue());
             return inQueeue;
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);

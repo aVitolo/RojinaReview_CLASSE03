@@ -18,7 +18,7 @@ h2{
     text-align: center;
 }
 
-.commento input {
+.commento button {
     margin: 5px 5px;
     background: #e91e63;
     border: none;
@@ -27,6 +27,6 @@ h2{
     border-radius: 2px;
 }
 
-.commento input:hover{
+.commento button:hover{
     background: #6B354D;
 }
