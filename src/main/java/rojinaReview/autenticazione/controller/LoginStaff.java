@@ -13,6 +13,7 @@ import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.dao.ManagerDAO;
 import rojinaReview.model.dao.GiornalistaDAO;
 import rojinaReview.model.utilities.GenericStaffDAO;
+import rojinaReview.model.utilities.Utils;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -31,7 +32,7 @@ public class LoginStaff extends HttpServlet {
         //userType = 0 Per i Giornalisti, userType = 1 Per gli Admin
         String userType = request.getParameter("userType");
         //Calcola Hash della password utente
-        password = Utente.calcolaHash(password);
+        password = Utils.calcolaHash(password);
 
         int type = -1;
         Utente tmp = null;

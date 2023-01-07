@@ -89,14 +89,31 @@ public class VideogiocatoreDAO {
         return null;
     }
 
-    public boolean doInsertUser(Videogiocatore user) throws SQLException {
+    public void doInsertUser(Videogiocatore user) throws SQLException {
         PreparedStatement ps =
                 con.prepareStatement("INSERT INTO videogiocatore VALUES(?,?,null,null,null,?,0)");
         ps.setString(1, user.getEmail());
         ps.setString(2, user.getPassword());
         ps.setString(3, user.getNickname());
-        int i = ps.executeUpdate();
-        return i == 1;
+        ResultSet rs;
+        try {
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            if(e.getErrorCode() == 23000) //integrity constraint violation
+            {
+                ps = con.prepareStatement("SELECT email FROM videogiocatore WHERE email=?");
+                ps.setString(1, user.getEmail());
+                rs = ps.executeQuery();
+                if(!rs.next())
+                    throw new SQLException("email");
+
+                ps = con.prepareStatement("SELECT nickname FROM videogiocatore WHERE nickname=?");
+                ps.setString(1, user.getNickname());
+                rs = ps.executeQuery();
+                if(!rs.next())
+                    throw new SQLException("nickname");
+            }
+        }
     }
 
     public ArrayList<Videogiocatore> doRetriveAll() throws SQLException, UnsupportedEncodingException {

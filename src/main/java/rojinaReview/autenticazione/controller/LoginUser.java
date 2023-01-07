@@ -11,6 +11,7 @@ import rojinaReview.model.beans.Prodotto;
 import rojinaReview.model.beans.Utente;
 import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.dao.VideogiocatoreDAO;
+import rojinaReview.model.utilities.Utils;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -48,7 +49,7 @@ public class LoginUser extends HttpServlet {
                     String password = request.getParameter("password");
 
                     //Calcola Hash della password utente
-                    password = Utente.calcolaHash(password);
+                    password = Utils.calcolaHash(password);
 
                     //ottengo la password dell' user nel db
                     String dbPass = this.tmp.getPassword();

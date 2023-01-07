@@ -52,7 +52,7 @@
 
     <servlet>
         <servlet-name>RegisterUser</servlet-name>
-        <servlet-class>rojinaReview.registrazione.controller.RegistrationUser</servlet-class>
+        <servlet-class>rojinaReview.registrazione.controller.RegistrationUserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterUser</servlet-name>

@@ -3,6 +3,9 @@ package rojinaReview.registrazione.service;
 import rojinaReview.model.beans.Giornalista;
 import rojinaReview.model.beans.Manager;
 import rojinaReview.model.beans.Videogiocatore;
+import rojinaReview.model.exception.EmailNotAvailableException;
+import rojinaReview.model.exception.InvalidTextException;
+import rojinaReview.model.exception.NicknameNotAvailableException;
 
 /**
  * @author Carmine Iemmino
@@ -14,7 +17,7 @@ public interface RegistrazioneService {
      * registrare un videogiocatore nel sistema
      * @param videogiocatore da registrare
      */
-    void registraVideogiocatore(Videogiocatore videogiocatore);
+    void registraVideogiocatore(Videogiocatore videogiocatore) throws EmailNotAvailableException, NicknameNotAvailableException, InvalidTextException;
 
     /**
      * Firma del metodo che permette di

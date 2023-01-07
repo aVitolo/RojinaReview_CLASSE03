@@ -1,5 +1,7 @@
 package rojinaReview.model.beans;
 
+import rojinaReview.model.utilities.Utils;
+
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -55,7 +57,7 @@ public abstract class Utente {
     }
 
     public void setPassword(String password) throws UnsupportedEncodingException {
-        this.password = Utente.calcolaHash(password);
+        this.password = Utils.calcolaHash(password);
     }
 
     public String getImmagine() {
@@ -66,23 +68,6 @@ public abstract class Utente {
         this.immagine = immagine;
     }
 
-    /* Password Hashing */
-
-    public static String calcolaHash(String password) throws UnsupportedEncodingException {
-        StringBuilder passwordAfterHash = new StringBuilder();
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-
-            StringBuilder hexString = new StringBuilder();
-            for (int i: hash) {
-                hexString.append(Integer.toHexString(0XFF & i));
-            }
-            return new String(passwordAfterHash);
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public int getId() {
         return id;
