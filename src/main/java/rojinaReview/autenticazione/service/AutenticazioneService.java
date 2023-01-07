@@ -148,7 +148,7 @@ public interface AutenticazioneService {
 
     /**
      * Firma del metodo che permette di
-     * visualizzar ele richieste di registrazione come manager o giornalista
+     * visualizzar le richieste di registrazione come manager o giornalista
      */
-    ArrayList<Utente> visualizzaRichieste();
+    ArrayList<ArrayList<Utente>> visualizzaRichieste();
 }

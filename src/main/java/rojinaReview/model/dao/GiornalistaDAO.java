@@ -1,7 +1,7 @@
 package rojinaReview.model.dao;
 
-import rojinaReview.model.beans.Articolo;
 import rojinaReview.model.beans.Giornalista;
+import rojinaReview.model.beans.Utente;
 import rojinaReview.model.utilities.ConPool;
 import rojinaReview.model.utilities.GenericStaffDAO;
 
@@ -83,6 +83,34 @@ public class GiornalistaDAO implements GenericStaffDAO {
                     null));
         }
         return list;
+    }
+
+    public ArrayList<Utente> doRetriveInQueeue() throws SQLException, UnsupportedEncodingException {
+        ArrayList<Utente> list = new ArrayList<>();
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT g.id,g.nome,g.cognome,g.email FROM Giornalista g WHERE g.verificato=0");
+
+        while(rs.next()){
+            Giornalista g = new Giornalista();
+            g.setId( rs.getInt("id"));
+            g.setCognome(rs.getString("cognome"));
+            g.setNome(rs.getString("nome"));
+            g.setEmail(  rs.getString("email"));
+            list.add(g);
+        }
+        return list;
+    }
+
+    public void doVerificaGiornalista(int id) throws SQLException, UnsupportedEncodingException {
+        Statement stmt = con.createStatement();
+        PreparedStatement ps =
+                con.prepareStatement("UPDATE  giornalista g SET g.verificato=1 WHERE id=?");
+        ps.setInt(1,id);
+        ps.executeUpdate();
+    }
+
+    public void doRemoveFromQueeue(int id) throws SQLException, UnsupportedEncodingException {
+        this.doRemoveById(id);
     }
 
     //non serve?

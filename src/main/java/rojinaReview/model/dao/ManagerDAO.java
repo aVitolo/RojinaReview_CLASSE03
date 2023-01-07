@@ -1,6 +1,7 @@
 package rojinaReview.model.dao;
 
 import rojinaReview.model.beans.Manager;
+import rojinaReview.model.beans.Utente;
 import rojinaReview.model.utilities.ConPool;
 import rojinaReview.model.utilities.GenericStaffDAO;
 
@@ -43,6 +44,34 @@ public class ManagerDAO implements GenericStaffDAO {
         }
 
         return null;
+    }
+
+    public ArrayList<Utente> doRetriveInQueeue() throws SQLException, UnsupportedEncodingException {
+        ArrayList<Utente> list = new ArrayList<>();
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT g.id,g.nome,g.cognome,g.email FROM Manager g WHERE g.verificato=0");
+
+        while(rs.next()){
+            Manager g = new Manager();
+            g.setId( rs.getInt("id"));
+            g.setCognome(rs.getString("cognome"));
+            g.setNome(rs.getString("nome"));
+            g.setEmail(  rs.getString("email"));
+            list.add(g);
+        }
+        return list;
+    }
+
+    public void doVerificaManager(int id) throws SQLException, UnsupportedEncodingException {
+        Statement stmt = con.createStatement();
+        PreparedStatement ps =
+                con.prepareStatement("UPDATE  manager g SET g.verificato=1 WHERE id=?");
+        ps.setInt(1,id);
+        ps.executeUpdate();
+    }
+
+    public void doRemoveFromQueeue(int id) throws SQLException, UnsupportedEncodingException {
+        this.doRemoveById(id);
     }
 
     public Manager doRetrieveById(int manager) throws SQLException, UnsupportedEncodingException {

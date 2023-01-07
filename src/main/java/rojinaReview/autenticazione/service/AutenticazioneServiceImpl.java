@@ -1,10 +1,13 @@
 package rojinaReview.autenticazione.service;
 
+import rojinaReview.model.dao.GiornalistaDAO;
+import rojinaReview.model.dao.ManagerDAO;
 import rojinaReview.model.exception.VideogiocatoreIDMissingException;
 import rojinaReview.model.beans.*;
 import rojinaReview.model.dao.IndirizzoDAO;
 import rojinaReview.model.dao.PagamentoDAO;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -115,7 +118,16 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
     }
 
     @Override
-    public ArrayList<Utente> visualizzaRichieste() {
-        return null;
+    public ArrayList<ArrayList<Utente>> visualizzaRichieste() {
+        ArrayList<ArrayList<Utente>> inQueeue = new ArrayList<>();
+        try {
+            inQueeue.add(new ManagerDAO().doRetriveInQueeue());
+            inQueeue.add(new GiornalistaDAO().doRetriveInQueeue());
+            return inQueeue;
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
