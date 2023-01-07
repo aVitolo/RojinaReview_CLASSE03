@@ -1,0 +1,37 @@
+.wrap{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    text-align: center;
+    align-items: center;
+    margin: 20% 20%;
+    color: white;
+    height: fit-content;
+ }
+
+.richiesta,.richiesta-header{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    text-align: center;
+    align-items: center;
+}
+
+.richiesta-back{
+    background: #24262b;
+}
+
+.wrap button {
+    margin: 5px 5px;
+    background: #e91e63;
+    border: none;
+    cursor: pointer;
+    transtion-duration: .3s;
+    border-radius: 2px;
+}
+
+.wrap button:hover{
+    background: #6B354D;
+}

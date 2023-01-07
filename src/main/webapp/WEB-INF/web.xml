@@ -331,7 +331,7 @@
 
     <servlet>
         <servlet-name>visualizzaCommentiSegnalatiServlet</servlet-name>
-        <servlet-class>rojinaReview.autenticazione.controller.visualizzaCommentiSegnalatiServlet</servlet-class>
+        <servlet-class>rojinaReview.opinione.controller.visualizzaCommentiSegnalatiServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>visualizzaCommentiSegnalatiServlet</servlet-name>
@@ -349,7 +349,7 @@
 
     <servlet>
         <servlet-name>visualizzaShopServlet</servlet-name>
-        <servlet-class>rojinaReview.autenticazione.controller.visualizzaShopServlet</servlet-class>
+        <servlet-class>rojinaReview.shop.controller.visualizzaShopServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>visualizzaShopServlet</servlet-name>

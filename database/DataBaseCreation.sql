@@ -332,7 +332,7 @@ create table Segnalazione(
 insert into Manager (nome, cognome, email, password,verificato) values
     ("Andrea", "Vitolo", "zindre@gmail.com", SHA2('papapa',256),1),
     ("Carmine", "Iemmino", "carmineiemmino@gmail.com", SHA2('lalala',256),1),
-    ("Carlo", "Colizzi", "carletto@gmail.com", SHA2('bobbaba',256),1);
+    ("Carlo", "Colizzi", "carletto@gmail.com", SHA2('bobbaba',256),0);
 
 insert into Giornalista (nome, cognome, email, password, immagine, verificato) values
     ("Mario", "Dell'Orca", "mario@gmail.com", SHA2('marietto',256), "./static/images/journalists/Dell'Orca.jpg",1),
@@ -340,7 +340,8 @@ insert into Giornalista (nome, cognome, email, password, immagine, verificato) v
     ("Giovanni", "Verdi", "giuann@gmail.com", SHA2('johnny',256), "./static/images/journalists/Verdi.jpg",1),
     ("Franco", "Neri", "franco@gmail.com", SHA2('francuccio',256), "./static/images/journalists/Neri.jpg",1),
     ("Carlo", "Rossi", "carlrossi@gmail.com", SHA2('redcarl',256), "./static/images/journalists/Rossi.jpg",1),
-    ("Lorenza", "Gialli", "lorenza@gmail.com", SHA2('lorenzina',256), "./static/images/journalists/Gialli.jpg",1);
+    ("Lorenza", "Gialli", "lorenza@gmail.com", SHA2('lorenzina',256), "./static/images/journalists/Gialli.jpg",1),
+    ("Giuseppe", "D'ambrosio", "presidente@gmail.com", SHA2('lorenzina',256), null,0);
 
 
 insert into Videogiocatore(email,nickname,password,nome,cognome,immagine,bannato)  values
@@ -615,8 +616,10 @@ insert into Commento(id_videogiocatore,testo, dataScrittura,id_prodotto, id_rece
     (10, "Qualcuno mi da un mano su Sekiro?...", "2022-05-15 13:58:20", null,3,null);
 
 insert into Segnalazione(id_commento, id_videogiocatore, motivazione, commentoAggiuntivo, dataSegnalazione) values
-    (2,8,"spam",null,"2018-01-22 13:58:20"),
-    (9,8,"spam",null,"2020-03-05 13:58:20");
+    (2,1,"spam",null,"2018-01-22 13:58:20"),
+    (2,2,"spam",null,"2018-01-22 13:58:22"),
+    (9,1,"spam",null,"2020-03-05 13:58:20"),
+    (9,2,"spam",null,"2018-01-22 13:58:22");
 
 insert into Ordine (stato, dataOrdine, totale, numeroCarta_pagamento, id_videogiocatore, via_videogiocatore, numeroCivico_videogiocatore, città_videogiocatore, cap_videogiocatore) values
     ("in consegna", "2022-05-12",81.20 , "5235213452352134", 3, "mattarella", "232", "Striano", "80040"),

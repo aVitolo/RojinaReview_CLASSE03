@@ -5,10 +5,28 @@
 <head>
     <title>Area Manager</title>
     <link rel="stylesheet" href="./static/css/master.css">
-    <link rel="stylesheet" href="./static/css/notizie.css">
+    <link rel="stylesheet" href="./static/css/segnalazioni.css">
 </head>
 <body>
 <%@ include file="/WEB-INF/results/managerPages/managerArea.jsp" %>
-
+<section class="commenti">
+    <h2>Commenti Segnalati</h2>
+    <div class="commento">
+        <p>Commento</p>
+        <p>Segnalto</p>
+        <p>Contenuto</p>
+        <p>Numero Segnalazioni</p>
+        <p></p>
+    </div>
+    <c:forEach items="${requestScope['segnalazioni']}" var="segnalazione">
+        <div class="commento">
+            <p>${segnalazione.testo}</p>
+            <p>${segnalazione.nicknameVideogiocatore}</p>
+            <p>${segnalazione.nomeContenuto}</p>
+            <p>${segnalazione.numeroSegnalazioni}</p>
+            <button>Dettagli</button>
+        </div>
+    </c:forEach>
+</section>
 </body>
 </html>

@@ -17,6 +17,7 @@ public class Commento {
     private String nomeContenuto;
     private int tipo; //0 prodotto, 1 recensione, 2 notizia
     private ArrayList<Segnalazione> segnalazioni;
+    private int numeroSegnalazioni;
 
     /* Constructor */
 
@@ -105,5 +106,13 @@ public class Commento {
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
+    }
+
+    public int getNumeroSegnalazioni() {
+        return numeroSegnalazioni;
+    }
+
+    public void setNumeroSegnalazioni(int numeroSegnalazioni) {
+        this.numeroSegnalazioni= numeroSegnalazioni;
     }
 }

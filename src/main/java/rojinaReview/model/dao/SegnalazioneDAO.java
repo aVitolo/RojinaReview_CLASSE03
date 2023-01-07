@@ -24,9 +24,66 @@ public class SegnalazioneDAO {
     public ArrayList<Commento> doRetrieveReportedComments() throws SQLException {
         ArrayList<Commento> commenti = new ArrayList<>();
         PreparedStatement ps;
-        ResultSet rs;
+        ResultSet rs,rss;
+
+        ps = con.prepareStatement("SELECT c.id,c.testo,v.nickname,c.id_prodotto,c.id_recensione,c.id_notizia,count(id_commento) "+
+               "FROM commento c "+
+               "JOIN segnalazione s on c.id=s.id_commento "+
+               "JOIN videogiocatore v on v.id=c.id_videogiocatore " +
+               "GROUP BY s.id_commento ");
+        rs = ps.executeQuery();
+        while(rs.next()){
+            Commento c = new Commento();
+            c.setId(rs.getInt(1));
+            c.setTesto(rs.getString(2));
+            c.setNicknameVideogiocatore(rs.getString(3));
+            c.setNumeroSegnalazioni(rs.getInt(7));
+            if(rs.getObject(4)!=null){
+                ps = con.prepareStatement("SELECT p.nome FROM Prodotto p WHERE  p.id=?");
+                ps.setInt(1,rs.getInt(4));
+                rss = ps.executeQuery();
+                if(rss.next())
+                    c.setNomeContenuto(rss.getString(1));
+                else{
+                    //exception
+                }
+            }
+            else if(rs.getObject(5)!=null){
+                System.out.println("Recensione");
+                ps = con.prepareStatement("SELECT p.nome FROM Recensione p WHERE  p.id=?");
+                ps.setInt(1,rs.getInt(5));
+                rss = ps.executeQuery();
+                if(rss.next())
+                    c.setNomeContenuto(rss.getString(1));
+                else{
+                    //exception
+                }
+            }
+            else if(rs.getObject(6)!=null){
+                System.out.println("Notizia");
+                ps = con.prepareStatement("SELECT p.nome FROM Notizia p WHERE  p.id=?");
+                ps.setInt(1,rs.getInt(6));
+                rss = ps.executeQuery();
+                    if(rss.next())
+                        c.setNomeContenuto(rss.getString(1));
+                    else{
+                        //exception
+                    }
+            }
+            else{
+                //exception
+            }
+            commenti.add(c);
+        }
+
+        /*
         //prodotto
-        ps = con.prepareStatement("SELECT c.id, c.testo, c.id_videogiocatore, v.nickname, c.id_prodotto, p.nome FROM commento c JOIN videogiocatore v on v.id = c.id_videogiocatore JOIN prodotto p on p.id = c.id_prodotto JOIN segnalazione s on c.id = s.id_commento and v.id = s.id_videogiocatore");
+        ps = con.prepareStatement("" +
+                "SELECT c.id, c.testo, c.id_videogiocatore, v.nickname, c.id_prodotto, p.nome " +
+                "FROM commento c " +
+                "JOIN videogiocatore v on v.id = c.id_videogiocatore " +
+                "JOIN prodotto p on p.id = c.id_prodotto " +
+                "JOIN segnalazione s on c.id = s.id_commento and v.id = s.id_videogiocatore");
         rs = ps.executeQuery();
         while(rs.next())
         {
@@ -43,7 +100,11 @@ public class SegnalazioneDAO {
             commenti.add(c);
         }
         //recensione
-        ps = con.prepareStatement("SELECT c.id, c.testo, c.id_videogiocatore, v.nickname, c.id_recensione, r.nome FROM commento c JOIN videogiocatore v on v.id = c.id_videogiocatore JOIN recensione r on r.id = c.id_recensione JOIN segnalazione s on c.id = s.id_commento and v.id = s.id_videogiocatore");
+        ps = con.prepareStatement("" +
+                "SELECT c.id, c.testo, c.id_videogiocatore, v.nickname, c.id_recensione, r.nome " +
+                "FROM commento c JOIN videogiocatore v on v.id = c.id_videogiocatore " +
+                "JOIN recensione r on r.id = c.id_recensione " +
+                "JOIN segnalazione s on c.id = s.id_commento and v.id = s.id_videogiocatore");
         rs = ps.executeQuery();
         while(rs.next())
         {
@@ -60,7 +121,12 @@ public class SegnalazioneDAO {
             commenti.add(c);
         }
         //notizia
-        ps = con.prepareStatement("SELECT c.id, c.testo, c.id_videogiocatore, v.nickname, c.id_notizia, n.nome FROM commento c JOIN videogiocatore v on v.id = c.id_videogiocatore JOIN notizia n on n.id = c.id_notizia JOIN segnalazione s on c.id = s.id_commento and v.id = s.id_videogiocatore");
+        ps = con.prepareStatement("" +
+                "SELECT c.id, c.testo, c.id_videogiocatore, v.nickname, c.id_notizia, n.nome " +
+                "FROM commento c " +
+                "JOIN videogiocatore v on v.id = c.id_videogiocatore " +
+                "JOIN notizia n on n.id = c.id_notizia " +
+                "JOIN segnalazione s on c.id = s.id_commento and v.id = s.id_videogiocatore");
         rs = ps.executeQuery();
         while(rs.next())
         {
@@ -76,7 +142,7 @@ public class SegnalazioneDAO {
 
             commenti.add(c);
         }
-
+      */
         return commenti;
 
     }
@@ -98,8 +164,7 @@ public class SegnalazioneDAO {
 
             segnalazioni.add(s);
         }
-
-        return segnalazioni;
+            return segnalazioni;
 
     }
 
