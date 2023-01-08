@@ -370,4 +370,39 @@
         <url-pattern>/gestisciRichiesteServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>formInserimentoProdottoServlet</servlet-name>
+        <servlet-class>rojinaReview.shop.controller.formInserimentoProdottoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>formInserimentoProdottoServlet</servlet-name>
+        <url-pattern>/inserimentoProdotto</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>aggiungiProdottoServlet</servlet-name>
+        <servlet-class>rojinaReview.shop.controller.aggiungiProdottoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>aggiungiProdottoServlet</servlet-name>
+        <url-pattern>/aggiungiProdotto</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>formModificaProdottoServlet</servlet-name>
+        <servlet-class>rojinaReview.shop.controller.formModificaProdottoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>formModificaProdottoServlet</servlet-name>
+        <url-pattern>/formModificaProdottoServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>modificaProdottoServlet</servlet-name>
+        <servlet-class>rojinaReview.shop.controller.modificaProdottoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>modificaProdottoServlet</servlet-name>
+        <url-pattern>/modificaProdottoServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

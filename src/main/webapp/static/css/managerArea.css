@@ -105,19 +105,6 @@ ul li:hover a{
     height: 150;
 }
 
-input[type=submit]{
-    margin: 5px 5px;
-    background: #e91e63;
-    border: none;
-    cursor: pointer;
-    transition-duration: 0.3s;
-    height: 40px;
-    width: 70px;
-    border-radius: 2px;
-    color: white;
-    margin-left: 480;
-}
-
 span.attribute{
     color: #e91e63;
     font-size: 19px;

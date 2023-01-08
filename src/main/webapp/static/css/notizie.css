@@ -91,7 +91,6 @@
 }
 
 @media (max-width: 780px) {
-
     .articoli {
         grid-template-columns: repeat(1, 1fr);
     }

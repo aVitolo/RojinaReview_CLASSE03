@@ -41,7 +41,6 @@ public class RivistaServiceImpl implements RivistaService{
             throw new LoadingArticlesException("Errore nel caricamento degli articoli della home");
         }
         articoli.sort(Comparator.comparing(a -> a.getId()));
-
         return articoli;
     }
 

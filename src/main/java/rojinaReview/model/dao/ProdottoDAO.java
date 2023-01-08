@@ -150,16 +150,28 @@ public class ProdottoDAO {
     }
 
     public void doUpdate(Prodotto prodotto) throws SQLException {
-        PreparedStatement ps =
-                con.prepareStatement("UPDATE Prodotto SET nome=?,descrizione=?,immagine=?,prezzo=?,disponibilità=?,nome_categoria=? WHERE id=?");
-        ps.setString(1,prodotto.getNome());
-        ps.setString(2,prodotto.getTesto());
-        ps.setString(3,prodotto.getImmagine());
-        ps.setFloat(4,prodotto.getPrezzo());
-        ps.setInt(5,prodotto.getQuantità());
-        ps.setString(6,prodotto.getCategoria());
-        ps.setInt(7,prodotto.getId());
-        ps.executeUpdate();
+        PreparedStatement ps;
+        if(prodotto.getImmagine()!=null) {
+            ps = con.prepareStatement("UPDATE Prodotto SET nome=?,descrizione=?,immagine=?,prezzo=?,disponibilità=?,nome_categoria=? WHERE id=?");
+            ps.setString(1, prodotto.getNome());
+            ps.setString(2, prodotto.getTesto());
+            ps.setString(3, prodotto.getImmagine());
+            ps.setFloat(4, prodotto.getPrezzo());
+            ps.setInt(5, prodotto.getQuantità());
+            ps.setString(6, prodotto.getCategoria());
+            ps.setInt(7, prodotto.getId());
+            ps.executeUpdate();
+        }
+        else {
+            ps = con.prepareStatement("UPDATE Prodotto SET nome=?,descrizione=?,prezzo=?,disponibilità=?,nome_categoria=? WHERE id=?");
+            ps.setString(1, prodotto.getNome());
+            ps.setString(2, prodotto.getTesto());
+            ps.setFloat(3, prodotto.getPrezzo());
+            ps.setInt(4, prodotto.getQuantità());
+            ps.setString(5, prodotto.getCategoria());
+            ps.setInt(6, prodotto.getId());
+            ps.executeUpdate();
+        }
     }
 
     public void doSave(Prodotto prodotto) throws SQLException{

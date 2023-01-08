@@ -1,0 +1,137 @@
+body {
+    color: white;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+    /*  overflow permette di indicare il comportamento degli item che superano la Box della classe
+        hidden nasconde gli elementi che superano la box*/
+}
+
+.center {
+    position: absolute;
+    /*position indica il tipo di posizionamento dell' elemento*/
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Propietà che permette di spostare gli elementi della classe */
+    height: fit-content;
+    width: 400px;
+    background: #24262b;
+    border-radius: 10px;
+    padding: 2%;
+}
+
+
+.center h1 {
+    text-align: center; /*Allineo il testo al centro*/
+    padding: 10px; /*Aggiungo 10px di padding*/
+    margin-top: 10px;
+}
+
+.center form {
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+form .form_input {
+    position: relative;
+    margin: 30px 0;
+}
+
+.form_input input {
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+    color: #ffffff;
+}
+
+#radioLogin label{
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin: 1%;
+}
+#radioLogin {
+    display: flex;
+    position: relative;
+}
+
+.form_input input[type="radio"] {
+    height: 20px;
+}
+
+.form_input label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #e91e63;;
+    top: -5px;
+    transform: translateY(-50%); /* Propietà che permette di spostare gli elementi della classe  sull' asse Y*/
+    font-size: 16px;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.form_input span::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #e91e63;
+}
+
+.form_input input:not([type="radio"]):valid ~ label {
+    color: transparent;
+}
+
+button,
+input[type="submit"] {
+    width: 100%;
+    height: 50px;
+    background: #e91e63;
+    border-radius: 25px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+    color: #ffffff;
+    border: transparent;
+}
+
+button {
+    margin: 25%
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background: #6B354D;
+}
+
+.register_link {
+    margin: 30px 0;
+    text-align: center;
+    font-size: 16px;
+    color: #666666;
+}
+
+.register_link a {
+    color: #e91e63;
+    text-decoration: none;
+}
+
+.register_link a:hover {
+    text-decoration: underline;
+}
+
+#error {
+    display: flex;
+    align-items: center;
+}

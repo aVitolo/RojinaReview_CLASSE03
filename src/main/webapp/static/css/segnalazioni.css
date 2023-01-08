@@ -25,6 +25,8 @@ h2{
     cursor: pointer;
     transtion-duration: .3s;
     border-radius: 2px;
+    padding: 2%;
+    color: white;
 }
 
 .commento button:hover{

@@ -23,13 +23,15 @@
     background: #24262b;
 }
 
-.wrap button {
+.wrap button{
     margin: 5px 5px;
     background: #e91e63;
     border: none;
     cursor: pointer;
     transtion-duration: .3s;
     border-radius: 2px;
+    padding: 2%;
+    color :white;
 }
 
 .wrap button:hover{
