@@ -3,6 +3,7 @@ package rojinaReview.autenticazione.service;
 import rojinaReview.model.dao.*;
 import rojinaReview.model.exception.EmailNotExistsException;
 import rojinaReview.model.exception.IncorrectPasswordException;
+import rojinaReview.model.exception.NotVerifiedAccountException;
 import rojinaReview.model.exception.VideogiocatoreIDMissingException;
 import rojinaReview.model.beans.*;
 import rojinaReview.model.utilities.ConPool;
@@ -16,10 +17,14 @@ import java.util.ArrayList;
 public class AutenticazioneServiceImpl implements AutenticazioneService{
     Connection connection;
     private VideogiocatoreDAO vDAO;
+    private GiornalistaDAO gDAO;
+    private ManagerDAO mDAO;
 
     public AutenticazioneServiceImpl() throws SQLException {
         this.connection = ConPool.getConnection();
         vDAO = new VideogiocatoreDAO(this.connection);
+        gDAO = new GiornalistaDAO(this.connection);
+        mDAO = new ManagerDAO(this.connection);
     }
 
 
@@ -46,6 +51,7 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
         {
             if (videogiocatoreDB.getImmagine() == null)
                 videogiocatoreDB.setImmagine("./static/images/utility/defaultImageUser.png"); //immagine di default utente
+
             return videogiocatoreDB;
         }
         else
@@ -53,14 +59,67 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
 
     }
 
-    public Giornalista loginGiornalista(String email, String password)
-    {
-        return null;
+    public Giornalista loginGiornalista(String email, String password) throws EmailNotExistsException, IncorrectPasswordException, NotVerifiedAccountException {
+        String hashedPassword = null;
+        Giornalista giornalistaDB = null;
+
+        try {
+            hashedPassword = Utils.calcolaHash(password);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            giornalistaDB = gDAO.doRetriveByEmail(email);
+        } catch (SQLException e) {
+            if(e.getMessage().equalsIgnoreCase("Invalid email"))
+                throw new EmailNotExistsException();
+        }
+
+        if(!giornalistaDB.isVerificato())
+            throw new NotVerifiedAccountException();
+
+        if(hashedPassword.equals(giornalistaDB.getPassword()))
+        {
+            if(giornalistaDB.getImmagine() == null)
+                giornalistaDB.setImmagine("./static/images/utility/defaultImageUser.png"); //immagine di default utente
+
+            return giornalistaDB;
+        }
+        else
+            throw new IncorrectPasswordException();
+
     }
 
-    public Manager loginManager(String email, String password)
-    {
-        return null;
+    public Manager loginManager(String email, String password) throws EmailNotExistsException, IncorrectPasswordException, NotVerifiedAccountException {
+        String hashedPassword = null;
+        Manager managerDB = null;
+
+        try {
+            hashedPassword = Utils.calcolaHash(password);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            managerDB = mDAO.doRetriveByEmail(email);
+        } catch (SQLException e) {
+            if(e.getMessage().equalsIgnoreCase("Invalid email"))
+                throw new EmailNotExistsException();
+        }
+
+        if(!managerDB.isVerificato())
+            throw new NotVerifiedAccountException();
+
+        if(hashedPassword.equals(managerDB.getPassword()))
+        {
+            if(managerDB.getImmagine() == null)
+                managerDB.setImmagine("./static/images/utility/defaultImageUser.png"); //immagine di default utente
+
+            return managerDB;
+        }
+        else
+            throw new IncorrectPasswordException();
     }
 
 

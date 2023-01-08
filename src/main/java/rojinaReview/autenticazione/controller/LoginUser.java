@@ -22,7 +22,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class LoginUser extends HttpServlet {
-    AutenticazioneService as;
+    private AutenticazioneService as;
     private String loginErrato;
     private String homePage;
 

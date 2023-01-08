@@ -2,6 +2,7 @@ package rojinaReview.autenticazione.service;
 
 import rojinaReview.model.exception.EmailNotExistsException;
 import rojinaReview.model.exception.IncorrectPasswordException;
+import rojinaReview.model.exception.NotVerifiedAccountException;
 import rojinaReview.model.exception.VideogiocatoreIDMissingException;
 import rojinaReview.model.beans.*;
 
@@ -29,7 +30,7 @@ public interface AutenticazioneService {
      * @param password dell'utente da loggare
      * @return utente loggato
      */
-    Giornalista loginGiornalista(String email, String password);
+    Giornalista loginGiornalista(String email, String password) throws EmailNotExistsException, IncorrectPasswordException, NotVerifiedAccountException;
 
     /**
      * Firma del metodo che permette di
@@ -38,7 +39,7 @@ public interface AutenticazioneService {
      * @param password dell'utente da loggare
      * @return utente loggato
      */
-    Manager loginManager(String email, String password);
+    Manager loginManager(String email, String password) throws EmailNotExistsException, IncorrectPasswordException, NotVerifiedAccountException;
 
     /**
      * Firma del metodo che permette di

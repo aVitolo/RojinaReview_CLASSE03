@@ -24,7 +24,7 @@ public class GiornalistaDAO implements GenericStaffDAO {
         this.con = con;
     }
 
-    public Giornalista doRetriveByEmail(String email) throws SQLException, UnsupportedEncodingException {
+    public Giornalista doRetriveByEmail(String email) throws SQLException {
         PreparedStatement ps = con.prepareStatement("SELECT * FROM Giornalista WHERE email=? ");
         ps.setString(1, email);
         ResultSet rs = ps.executeQuery();
@@ -39,8 +39,9 @@ public class GiornalistaDAO implements GenericStaffDAO {
                     rs.getBoolean("verificato"),
                     null);
         }
+        else
+            throw new SQLException("Invalid email");
 
-        return null;
     }
 
     public Giornalista doRetrieveById(int giornalista) throws SQLException {
