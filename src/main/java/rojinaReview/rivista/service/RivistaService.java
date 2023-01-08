@@ -24,14 +24,14 @@ public interface RivistaService {
      * visualizzare le notizie nella sezione notizie
      * @return la lista delle notizie
      */
-    ArrayList<Notizia> visualizzaNotizie(String offset, String piattaforma, String tipologia, String ordine) throws LoadingNewsException;
+    ArrayList<Notizia> visualizzaNotizie(String piattaforma, String tipologia, String ordine) throws LoadingNewsException;
 
     /**
      * Firma del metodo che permette di
      * visualizzare le recensioni nella sezione recensioni
      * @return la lista delle recensioni
      */
-    ArrayList<Recensione> visualizzaRecensioni(String offset, String piattaforma, String tipologia, String ordine) throws LoadingReviewsException;
+    ArrayList<Recensione> visualizzaRecensioni(String piattaforma, String tipologia, String ordine) throws LoadingReviewsException;
 
     /**
      * Firma del metodo che permette di

@@ -28,7 +28,7 @@ public class getSingleResourceServlet extends HttpServlet {
             try {
                 Notizia n = new NotiziaDAO().doRetrieveById(id);
                 request.setAttribute("notizia", n);
-                request.setAttribute("commenti", new CommentoDAO().getCommentById(id, 1));
+                request.setAttribute("commenti", new CommentoDAO().getCommentById(id, 2));
                 request.setAttribute("giornalista", new GiornalistaDAO().doRetrieveById(n.getId_Giornalista()));
                 //1 dovrebbe specificare la colonna idRecensione, guardare DB per verificare la correttezza
             }
@@ -69,7 +69,7 @@ public class getSingleResourceServlet extends HttpServlet {
             try {
                 Prodotto p = new ProdottoDAO().doRetrieveById(id);
                 request.setAttribute("prodotto", p);
-                request.setAttribute("commenti", new CommentoDAO().getCommentById(id, 2));
+                request.setAttribute("commenti", new CommentoDAO().getCommentById(id, 0));
                 if(u != null)
                     request.setAttribute("votoUtente", new ParereDAO().
                             doRetrieveByUserAndIDTable(u.getId(),Integer.toString(p.getId()), false));

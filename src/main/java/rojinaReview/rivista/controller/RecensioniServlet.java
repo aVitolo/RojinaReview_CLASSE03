@@ -40,6 +40,7 @@ public class RecensioniServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
         request.setAttribute("recensioni",recensioni);
+        request.setAttribute("articoli", "reviews");
         RequestDispatcher dispatcher =
                 request.getRequestDispatcher(path);
         dispatcher.forward(request, response);
@@ -54,7 +55,7 @@ public class RecensioniServlet extends HttpServlet {
         String ordine = request.getParameter("ordine");
 
         try {
-            recensioni = rs.visualizzaRecensioni(offset, piattafomra, tipologia, ordine);
+            recensioni = rs.visualizzaRecensioni(piattafomra, tipologia, ordine);
         } catch (LoadingReviewsException e) {
             e.printStackTrace();
         }

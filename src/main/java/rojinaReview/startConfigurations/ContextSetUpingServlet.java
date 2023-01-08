@@ -1,5 +1,6 @@
 package rojinaReview.startConfigurations;
 
+import com.oracle.wls.shaded.org.apache.xml.dtm.ref.sax2dtm.SAX2RTFDTM;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -15,10 +16,16 @@ public class ContextSetUpingServlet extends HttpServlet {
 
     public void init(ServletConfig config) throws ServletException {
 
-
-
-
-
+        try {
+            ArrayList<String>  piattaforme = new PiattaformaDAO().doRetrieveAll();
+            ArrayList<String>  generi = new GenereDAO().doRetrieveAll();
+            ArrayList<String>  categorie = new CategoriaDAO().doRetrieveAll();
+            config.getServletContext().setAttribute("piattaforme", piattaforme);
+            config.getServletContext().setAttribute("generi", generi);
+            config.getServletContext().setAttribute("categorie", categorie);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

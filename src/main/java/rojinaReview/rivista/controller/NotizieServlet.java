@@ -40,6 +40,7 @@ public class NotizieServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
         request.setAttribute("notizie",notizie);
+        request.setAttribute("articoli", "news");
         RequestDispatcher dispatcher =
                 request.getRequestDispatcher(path);
         dispatcher.forward(request, response);
@@ -55,7 +56,7 @@ public class NotizieServlet extends HttpServlet {
         String ordine = request.getParameter("ordine");
 
         try {
-            notizie = rs.visualizzaNotizie(offset, piattafomra, tipologia, ordine);
+            notizie = rs.visualizzaNotizie(piattafomra, tipologia, ordine);
         } catch (LoadingNewsException e) {
             e.printStackTrace();
         }

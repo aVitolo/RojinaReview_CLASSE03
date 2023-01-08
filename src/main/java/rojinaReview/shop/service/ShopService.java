@@ -23,7 +23,7 @@ public interface ShopService
     -autenticazione.ShopManagment (visualizzazione Shop lato manager, da sviluppare)
 
  */
-    List<Prodotto> visualizzaShop(String offset, String categoria, String ordine) throws LoadingShopException;
+    List<Prodotto> visualizzaShop(String categoria, String ordine) throws LoadingShopException;
 
     /**
      * Firma del metodo che permette

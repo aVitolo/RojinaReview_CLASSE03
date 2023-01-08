@@ -31,10 +31,10 @@ public class ShopServiceImpl implements  ShopService{
     -shop.ShopManagment (visualizzazione Shop lato manager, da sviluppare)
  */
     @Override
-    public List<Prodotto> visualizzaShop(String offset, String categoria, String ordine) throws LoadingShopException {
+    public List<Prodotto> visualizzaShop(String categoria, String ordine) throws LoadingShopException {
         List<Prodotto> prodotti = null;
         try {
-            prodotti = pDAO.updateContent(offset,categoria,ordine);
+            prodotti = pDAO.updateContent(categoria,ordine);
             return prodotti;
         } catch (SQLException e) {
             throw new LoadingShopException("Errore nel caricamento dei prodotti");

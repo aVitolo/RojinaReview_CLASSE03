@@ -34,6 +34,7 @@ function resetFilter(text,buttonID,closeID){
     b.innerHTML = text;
     document.getElementById(closeID).classList.toggle("show");
 }
+/*
 var semaforo = 2;
 var articolAtLastRequest;
 var articolAtRequest;
@@ -67,10 +68,10 @@ function yHandler(){
 }
 window.onscroll = yHandler;
 
+*/
+function filter(reset,table) {
 
-function filterOrUpdate(reset,table) {
-
-    var offset,categoria,piattaforma,tipologia,ordine, servlet;
+    var categoria,piattaforma,genere,ordine,servlet;
 
     //se sto filatrato reset === yes quindi il limit è 0 altrimenti il numero di articoli
     if (reset === "yes")
@@ -94,7 +95,7 @@ function filterOrUpdate(reset,table) {
         $.getJSON({
             url: servlet,//la path dipende dalla table passata
             type: "post",
-            data: {"offset":offset,"piattaforma": piattaforma, "genere": genere, "ordine": ordine, "categoria":categoria},
+            data: {"piattaforma": piattaforma, "genere": genere, "ordine": ordine, "categoria":categoria},
             error: function (xhr, status, error) {
                 //alert("error");
             },
@@ -108,10 +109,10 @@ function filterOrUpdate(reset,table) {
                     id = articolo["id"];
                     immagine = articolo.immagine;
                     if(table != "shop") {
-                        titolo = articolo.titolo;
+                        titolo = articolo.nome;
                         testo = articolo.testo;
                         if (table == "reviews")  //recensione e prodotto hanno un voto
-                            voto = articolo.voto;
+                            voto = articolo.votoGiornalista;
                     }
                     else {
                             voto = articolo.mediaVoto;
@@ -135,15 +136,9 @@ function filterOrUpdate(reset,table) {
 
                     newA += a;
                 }
-                if (reset === "yes"){
-                    articoli.innerHTML = newA;
-                    semaforo = 2;
-                    articolAtLastRequest = articolAtRequest = articolAfterRequest = 0;
-                    moreArticol = true;
-                }
-                else
-                    articoli.innerHTML += newA;
+                articoli.innerHTML = newA;
 
+                /*
                 //conto il numero di articoli esattamente dopo la richiesta
                 articolAfterRequest = document.getElementsByClassName('articolo').length;
                 console.log(articolAtLastRequest +" "+ articolAfterRequest +" "+moreArticol);
@@ -152,6 +147,7 @@ function filterOrUpdate(reset,table) {
                     moreArticol = false;
                 //permetto agli altri di fare richieste
                 semaforo = 2;
+                */
             }
         });
     });

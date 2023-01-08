@@ -70,6 +70,7 @@
             <div class="date">
                 <%=c.getDataScrittura()%>
             </div>
+            <button>Segnala</button>
         </div>
         <%}%>
         <%}%>

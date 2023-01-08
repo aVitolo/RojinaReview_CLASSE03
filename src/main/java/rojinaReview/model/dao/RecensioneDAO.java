@@ -128,21 +128,21 @@ public class RecensioneDAO {
     }
 
 
-    public ArrayList<Recensione> updateContent(String offset, String piattaforma, String genere, String ordine) throws SQLException {
+    public ArrayList<Recensione> updateContent(String piattaforma, String genere, String ordine) throws SQLException {
         ArrayList<Recensione> recensioni = new ArrayList<>();
         int  limit = 12;
 
         String select = " SELECT r.id, r.nome, r.testo, r.immagine, r.votoGiornalista";
         String from =   " FROM Recensione r";
         from += (!piattaforma.equals("Piattaforma") ?
-                    " JOIN g Videogioco_Piattaforma vp on r.id_videogioco=vp.id_videogioco " :
+                    " JOIN Videogioco_Piattaforma vp on r.id_videogioco=vp.id_videogioco " :
                     " " );
         from += (!genere.equals("Genere") ?
-                    "JOIN Videogioco_Genere vg on r.id_videogioco=vg.id_videogioco "
+                "JOIN Videogioco_Genere vg on r.id_videogioco=vg.id_videogioco "
                     : " ");
         String where = " WHERE ";
         where += (!piattaforma.equals("Piattaforma") ?
-                    " vg.piattaforma='"+piattaforma+"'" :
+                    " vp.piattaforma='"+piattaforma+"'" :
                     "" );
         where += (!genere.equals("Genere") ?
                     (where.equals(" WHERE ") ?
@@ -151,13 +151,11 @@ public class RecensioneDAO {
                     : "");
         if (where.equals(" WHERE ")) where = " ";
         String order =  " ORDER BY ";
-        order+= (ordine.equals("Highest Vote") ? " r.voto DESC" :
-                    (ordine.equals("Lowest Vote") ? "r.voto ASC" :
+        order+= (ordine.equals("Highest Vote") ? " r.votoGiornalista DESC" :
+                    (ordine.equals("Lowest Vote") ? "r.votoGiornalista ASC" :
                         (ordine.equals("Least Recent")? " r.id ASC " :
-                                " r.id DESC "))) +
-
-                " LIMIT "+ limit +" OFFSET "+ offset;
-
+                                " r.id DESC ")));
+        System.out.println(select + from + where + order);
         PreparedStatement ps =
                 con.prepareStatement(select + from + where + order);
         ResultSet rs = ps.executeQuery();

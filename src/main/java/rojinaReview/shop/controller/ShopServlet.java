@@ -31,6 +31,7 @@ public class ShopServlet extends HttpServlet {
         ArrayList<Prodotto> prodotti  = null;
         prodotti = (ArrayList<Prodotto>) ssi.visualizzaShop();
         request.setAttribute("prodotti",prodotti);
+        request.setAttribute("articoli", "shop");
         RequestDispatcher dispatcher =
                 request.getRequestDispatcher(path);
         dispatcher.forward(request, response);
@@ -48,7 +49,7 @@ public class ShopServlet extends HttpServlet {
             String offset = request.getParameter("offset");
             String categoria = request.getParameter("categoria");
             String ordine = request.getParameter("ordine");
-            prodotti = (ArrayList<Prodotto>) ssi.visualizzaShop(offset, categoria, ordine);
+            prodotti = (ArrayList<Prodotto>) ssi.visualizzaShop(categoria, ordine);
         } catch (LoadingShopException e) {
             e.printStackTrace();
         }

@@ -80,36 +80,27 @@ public class ProdottoDAO {
         return prodotti;
     }
 
-    public ArrayList<Prodotto> updateContent(String offset, String categoria, String ordine) throws SQLException {
+    public ArrayList<Prodotto> updateContent(String categoria, String ordine) throws SQLException {
         ArrayList<Prodotto> prodotti = new ArrayList<>();
-        int limit = 12;
-
         // scelgo gli attributi da prelevare
         String select = " SELECT p.id, p.nome, p.prezzo, p.immagine, p.mediaVoto ";
 
         // eseguo eventualmente dei join per gestire il filtraggio
-        String from =   " FROM prodotto p"+
-                (!categoria.equals("Categoria") ?
-                        " JOIN prodotto_categoria pc on p.id=pc.prodotto " :
-                        " ");
-
+        String from =   " FROM prodotto p";
         String where = " WHERE ";
         // aggiungo eventualemente i confronti per il filtraggio
         where +=  (!categoria.equals("Categoria") ?
-                " pc.categoria='"+categoria+"'"
+                " p.nome_categoria='"+categoria+"'"
                 : "" );
-        // se non ho apportato nessuna modifica rimouvo WHERE per evitare una scorretta formatazzione
         if (where.equals(" WHERE ")) where = " ";
-
         // imposto il parametro secondo il quale ordinare l'output + limite e offset
         String order =  " ORDER BY ";
         order+=  (ordine.equals("Highest Vote") ? " p.mediaVoto DESC" :
                     (ordine.equals("Lowest Vote") ? "p.mediaVoto ASC" :
                         (ordine.equals("Least Recent")? " p.id ASC " :
                             (ordine.equals("Lowest Price")? " p.prezzo ASC " :
-                              " p.prezzo DESC " )))) +
-             " LIMIT "+limit+" OFFSET "+offset;
-
+                              " p.prezzo DESC " ))));
+        System.out.println(select + from + where + order);
         PreparedStatement ps =
                 con.prepareStatement(select + from + where + order);
         ResultSet rs = ps.executeQuery();

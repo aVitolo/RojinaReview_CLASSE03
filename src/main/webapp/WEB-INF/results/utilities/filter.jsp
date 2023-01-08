@@ -47,21 +47,21 @@
         <div id="pDrop" class="dropdown-content">
             <input type="text" placeholder="Search.." id="pInput" onkeyup="filterFunction('pInput','pDrop')">
             <c:forEach items="${applicationScope['piattaforme']}" var="piattaforma">
-                <p onclick="setFilter('${piattaforma.nome}','pButton','pDrop','pClose')"
-                   id="${piattaforma.nome}">${piattaforma.nome}</p>
+                <p onclick="setFilter('${piattaforma}','pButton','pDrop','pClose')"
+                   id="${piattaforma}">${piattaforma}</p>
             </c:forEach>
         </div>
     </div>
 
     <div class="dropdown">
-        <button onclick="expandFilter('tDrop')" class="dropbtn" id="tButton">Tipologia</button>
-        <button onclick="resetFilter('Tipologia','tButton','tClose')" class="closebtn" id="tClose"><span>X</span>
+        <button onclick="expandFilter('tDrop')" class="dropbtn" id="tButton">Genere</button>
+        <button onclick="resetFilter('Genere','tButton','tClose')" class="closebtn" id="tClose"><span>X</span>
         </button>
         <div id="tDrop" class="dropdown-content">
             <input type="text" placeholder="Search.." id="tInput" onkeyup="filterFunction('tInput','tDrop')">
-            <c:forEach items="${applicationScope['tipologie']}" var="tipologia">
-                <p onclick="setFilter('${tipologia.nome}','tButton','tDrop','tClose')"
-                   id="${tipologia.nome}">${tipologia.nome}</p>
+            <c:forEach items="${applicationScope['generi']}" var="genere">
+                <p onclick="setFilter('${genere}','tButton','tDrop','tClose')"
+                   id="${genere}">${genere}</p>
             </c:forEach>
         </div>
     </div>
@@ -75,8 +75,8 @@
         <div id="cDrop" class="dropdown-content">
             <input type="text" placeholder="Search.." id="cInput" onkeyup="filterFunction('cInput','cDrop')">
             <c:forEach items="${applicationScope['categorie']}" var="caterogia">
-                <p onclick="setFilter('${caterogia.nome}','cButton','cDrop','cClose')"
-                   id="${caterogia.nome}">${caterogia.nome}</p>
+                <p onclick="setFilter('${caterogia}','cButton','cDrop','cClose')"
+                   id="${caterogia}">${caterogia}</p>
             </c:forEach>
         </div>
     </div>
