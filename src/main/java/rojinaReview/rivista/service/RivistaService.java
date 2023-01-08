@@ -19,8 +19,18 @@ public interface RivistaService {
     ArrayList<Articolo> visualizzaArticoli() throws LoadingArticlesException;
 
 
+    /**
+     * Firma del metodo che permette di
+     * visualizzare le notizie nella sezione notizie
+     * @return la lista delle notizie
+     */
     ArrayList<Notizia> visualizzaNotizie(String offset, String piattaforma, String tipologia, String ordine) throws LoadingNewsException;
 
+    /**
+     * Firma del metodo che permette di
+     * visualizzare le recensioni nella sezione recensioni
+     * @return la lista delle recensioni
+     */
     ArrayList<Recensione> visualizzaRecensioni(String offset, String piattaforma, String tipologia, String ordine) throws LoadingReviewsException;
 
     /**

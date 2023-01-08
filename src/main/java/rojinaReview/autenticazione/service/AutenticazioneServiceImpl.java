@@ -124,18 +124,18 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
 
 
     @Override
-    public boolean isVideogiocatore(Videogiocatore videogiocatore) {
-        return false;
+    public boolean isVideogiocatore(Utente utente) {
+        return "Videogiocatore".equals(utente.getClass().getSimpleName());
     }
 
     @Override
-    public boolean isGiornalista(Videogiocatore videogiocatore) {
-        return false;
+    public boolean isGiornalista(Utente utente) {
+        return "Giornalista".equals(utente.getClass().getSimpleName());
     }
 
     @Override
-    public boolean isManager(Videogiocatore videogiocatore) {
-        return false;
+    public boolean isManager(Utente utente) {
+        return "Manager".equals(utente.getClass().getSimpleName());
     }
 
     @Override
@@ -173,9 +173,9 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
         ma senza id non e' possibile salvare il "collegamento" pagamento-videogiocatore quindi modifico momentanemente il metodo
      */
     @Override
-    public void inserisciMetodoDiPagamento(int id, Pagamento pagamento) throws VideogiocatoreIDMissingException {
+    public void inserisciMetodoDiPagamento(Pagamento pagamento, Videogiocatore videogiocatore) throws VideogiocatoreIDMissingException {
         try {
-            new PagamentoDAO().doSave(pagamento,id);
+            new PagamentoDAO().doSave(pagamento, videogiocatore.getId());
         } catch (SQLException e) {
             throw new VideogiocatoreIDMissingException("ID non presente nel DB");
         }

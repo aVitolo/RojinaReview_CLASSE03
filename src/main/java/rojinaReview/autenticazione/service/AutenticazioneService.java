@@ -44,26 +44,26 @@ public interface AutenticazioneService {
     /**
      * Firma del metodo che permette di
      * identificare un videogiocatore
-     * @param videogiocatore registrato salvato nella sessione
+     * @param utente registrato salvato nella sessione
      * @return true se l'utente è un videogiocatore altrimenti false
      */
-    boolean isVideogiocatore(Videogiocatore videogiocatore);
+    boolean isVideogiocatore(Utente utente);
 
     /**
      * Firma del metodo che permette di
      * identificare un giornalista
-     * @param videogiocatore registrato salvato nella sessione
+     * @param utente registrato salvato nella sessione
      * @return true se l'utente è un giornalista altrimenti false
      */
-    boolean isGiornalista(Videogiocatore videogiocatore);
+    boolean isGiornalista(Utente utente);
 
     /**
      * Firma del metodo che permette di
      * identificare un manager
-     * @param videogiocatore registrato salvato nella sessione
+     * @param utente registrato salvato nella sessione
      * @return true se l'utente è un manager altrimenti false
      */
-    boolean isManager(Videogiocatore videogiocatore);
+    boolean isManager(Utente utente);
 
     /**
      * Firma del metodo che permette di
