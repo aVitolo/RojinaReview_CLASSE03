@@ -35,7 +35,8 @@ public class RecensioneDAO {
             r.setImmagine(rs.getString(4));
             r.setDataScrittura(rs.getDate(5));
             r.setVotoGiornalista(rs.getFloat(6));
-
+            r.setIdVideogioco(rs.getInt(7));
+            r.setId_Giornalista(rs.getInt(8));
 
             return r;
         }

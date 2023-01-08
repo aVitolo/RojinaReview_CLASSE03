@@ -1,19 +1,20 @@
-<%@ page import="rojinaReview.model.beans.Notizia" %>
-<%@ page import="rojinaReview.model.beans.Commento" %>
+<%@ page import="rojinaReview.model.beans.*" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.HashMap" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<% Notizia n = (Notizia) request.getAttribute("notizia");
+<% Notizia notizia = (Notizia) request.getAttribute("notizia");
     ArrayList<Commento> commenti = (ArrayList<Commento>) request.getAttribute("commenti");
+    Giornalista giornalista = (Giornalista) request.getAttribute("giornalista");
     int canDo = 0; //ospite
     if(session.getAttribute("giornalista") != null || session.getAttribute("admin") != null)
         canDo = 2;
     else if(session.getAttribute("videogiocatore") != null)
         canDo = 1;%>
 <head>
-    <title><%=n.getTitolo()%>
+    <title><%=notizia.getNome()%>
     </title>
     <link rel="stylesheet" href="./static/css/navebar.css">
     <link rel="stylesheet" href="./static/css/foot.css">
@@ -34,24 +35,14 @@
             <p id="type">News</p>
         </div>
         <div id = "articolo-content">
-            <h1>${notizia.titolo}</h1>
+            <h1>${notizia.nome}</h1>
             <p>${notizia.testo}</p>
-            <p>Caricata il ${notizia.dataCaricamento}</p>
+            <p>Caricata il ${notizia.dataScrittura}</p>
         </div>
-        <!--
-        <section id="mentionedGames">
-            <c:if test="${notizia.giochi != null}">
-                <h2>Giochi menzionati:</h2>
-                <% for (String gioco : n.getGiochi()) {%>
-                <a href="/Rojina_Review_war/getGame?name=<%=gioco%>"><h3><%=gioco%></h3></a>
-                <%}%>
-            </c:if>
-        </section>
-        -->
         <div id="card">
             <div id="giornalista">
-                <img src = "${notizia.immagineGiornalista}" alt = "copertina" decoding="async">
-                <h2>${notizia.giornalista} </h2>
+                <img src = "${giornalista.immagine}" alt = "copertina" decoding="async">
+                <h2>${giornalista.nome} </h2>
             </div>
         </div>
     </section>
@@ -63,21 +54,21 @@
 
         <form  id="commentAction" action="/Rojina_Review_war/addComment" method="post" name="commentAction" onsubmit="return canComment('<%=canDo%>');">
             <input type="hidden" name="type" value="notizia">
-            <input type="hidden" name="id" value="<%=n.getId()%>">
+            <input type="hidden" name="id" value="<%=notizia.getId()%>">
             <input type="text" name="commentText" id="toComment" placeholder="Lascia un commento">
             <input type="submit" value="Commenta">
         </form>
         <%if(commenti != null){%>
         <% for (Commento c : commenti) {%>
         <div class="comment">
-            <h4 class="nickname"><%=c.getUtente()%>
+            <h4 class="nickname"><%=c.getNicknameVideogiocatore()%>
             </h4>
             <p class="text">
                 <%=c.getTesto()%>
             </p>
 
             <div class="date">
-                <%=c.getData()%>
+                <%=c.getDataScrittura()%>
             </div>
         </div>
         <%}%>
@@ -85,7 +76,6 @@
     </section>
 </section>
 
-<%@ include file="/html/footer.html" %>
 </body>
 <script type="text/javascript" src="/Rojina_Review_war/static/js/navebar.js"></script>
 </html>

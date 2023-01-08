@@ -36,6 +36,7 @@ public class NotiziaDAO {
             n.setTesto(rs.getString(3));
             n.setImmagine(rs.getString(4));
             n.setDataScrittura(rs.getDate(5));
+            n.setId_Giornalista(rs.getInt(6));
 
             return n;
         }

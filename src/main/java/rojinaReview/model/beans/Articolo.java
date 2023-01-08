@@ -10,7 +10,7 @@ public abstract class Articolo extends Contenuto {
     private ArrayList<Paragrafo> paragrafi;
     private java.sql.Date dataScrittura;
 
-
+    private int id_Giornalista;
 
     /* Constructor */
     public Articolo(){
@@ -37,6 +37,14 @@ public abstract class Articolo extends Contenuto {
 
     public void setDataScrittura(Date dataScrittura) {
         this.dataScrittura = dataScrittura;
+    }
+
+    public int getId_Giornalista() {
+        return id_Giornalista;
+    }
+
+    public void setId_Giornalista(int id_Giornalista) {
+        this.id_Giornalista = id_Giornalista;
     }
 }
 

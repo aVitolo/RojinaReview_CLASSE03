@@ -14,7 +14,7 @@
 
     <section class="bar">
         <img class="logo" style="cursor:pointer" src="./static/images/utility/rojinah.png" onclick="location.href='./home'" alt="Logo"/>
-        <button class="expand" onclick="expandMenu()"> ≡</button>
+        <button class="expand" onclick="expandMenu()">≡</button>
     </section>
 
     <section class="navigazione" id="nav">
