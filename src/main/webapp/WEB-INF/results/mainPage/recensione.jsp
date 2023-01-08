@@ -21,11 +21,11 @@
 <head>
     <title><%=r.getGioco().getTitolo()%> - <%=r.getTitolo()%>
     </title>
-    <link rel="stylesheet" href="./css/navebar.css">
-    <link rel="stylesheet" href="./css/foot.css">
-    <link rel="stylesheet" href="./css/recensione.css">
-    <link rel="stylesheet" href="./css/master.css">
-    <script src="./js/userFunctions.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="./static/css/navebar.css">
+    <link rel="stylesheet" href="./static/css/foot.css">
+    <link rel="stylesheet" href="./static/css/recensione.css">
+    <link rel="stylesheet" href="./static/css/master.css">
+    <script src="./static/js/userFunctions.js" type="text/javascript"></script>
 </head>
 <body>
 

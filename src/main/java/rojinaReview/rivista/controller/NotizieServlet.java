@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 @WebServlet(name = "NotizieServlet", value = "/NotizieServlet")
 public class NotizieServlet extends HttpServlet {
-    private RivistaService rs;
+    private RivistaServiceImpl rs;
     private String path;
 
     public NotizieServlet() throws ServiceNotAvailableException {
@@ -33,7 +33,13 @@ public class NotizieServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("articoli","news");
+        ArrayList<Notizia> notizie  = null;
+        try {
+            notizie = rs.visualizzaNotizie();
+        } catch (LoadingNewsException e) {
+            throw new RuntimeException(e);
+        }
+        request.setAttribute("notizie",notizie);
         RequestDispatcher dispatcher =
                 request.getRequestDispatcher(path);
         dispatcher.forward(request, response);

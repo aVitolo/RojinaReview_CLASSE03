@@ -10,6 +10,7 @@ import rojinaReview.model.beans.*;
 import rojinaReview.shop.service.ShopServiceImpl;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,6 +18,24 @@ import java.util.Calendar;
 
 @WebServlet(name = "confirmOrderServlet", value = "/confirmOrderServlet")
 public class confirmOrderServlet extends HttpServlet {
+
+    private AutenticazioneServiceImpl asi;
+    {
+        try {
+            asi = new AutenticazioneServiceImpl();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private ShopServiceImpl ssi;
+    {
+        try {
+            ssi = new ShopServiceImpl();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -51,7 +70,7 @@ public class confirmOrderServlet extends HttpServlet {
                     boolean newAddress = Boolean.parseBoolean(request.getParameter("address"));
                     if(newAddress) {
                         try {
-                            new AutenticazioneServiceImpl().inserisciIndrizzo(u.getId(),indirizzo);
+                            asi.inserisciIndrizzo(u.getId(),indirizzo);
                             u.getIndirizzi().add(indirizzo);
                         } catch (VideogiocatoreIDMissingException e) {
                             e.printStackTrace();
@@ -81,7 +100,7 @@ public class confirmOrderServlet extends HttpServlet {
                     boolean newPayment = Boolean.parseBoolean(request.getParameter("payment"));
                     if(newPayment){
                         try {
-                            new AutenticazioneServiceImpl().inserisciIndrizzo(u.getId(),indirizzo);
+                            asi.inserisciIndrizzo(u.getId(),indirizzo);
                             u.getPagamenti().add(pagamento);
                         } catch (VideogiocatoreIDMissingException e) {
                             e.printStackTrace();
@@ -100,7 +119,7 @@ public class confirmOrderServlet extends HttpServlet {
             Procedo alla conferma dell'ordine-> shopServiceImpl().checkout();
          */
             try {
-                new ShopServiceImpl().checkout(ordine,u.getId(),(ArrayList<Prodotto>) session.getAttribute("prodotti"));
+                ssi.checkout(ordine,u.getId(),(ArrayList<Prodotto>) session.getAttribute("prodotti"));
                 /*
                     svuotamento carrello sessione
                 */

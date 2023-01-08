@@ -110,6 +110,11 @@ public interface AutenticazioneService {
      */
     void inserisciMetodoDiPagamento(Pagamento pagamento, Videogiocatore videogiocatore) throws VideogiocatoreIDMissingException;
 
+    /*
+        inserisciMetodoDiPagamento(Pagamento pagamento) permette di inserire un nuovo metodo di pagamento nella tabella Pagamento
+        ma senza id non e' possibile salvare il "collegamento" pagamento-videogiocatore quindi modifico momentanemente il metodo
+     */
+
     /**
      * Firma del metodo che permette di
      * visualizzare i metodi di pagamento di un videogiocatore

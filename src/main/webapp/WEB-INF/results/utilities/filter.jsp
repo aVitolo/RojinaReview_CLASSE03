@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href=".static/css/filter.css">
+    <link rel="stylesheet" href="./static/css/filter.css">
     <c:if test = "${articoli == 'shop'}">
         <style>
             .filter {

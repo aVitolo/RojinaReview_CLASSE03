@@ -2,6 +2,7 @@ package rojinaReview.shop.controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
+import rojinaReview.autenticazione.service.AutenticazioneServiceImpl;
 import rojinaReview.model.exception.ProductIDMissingException;
 import rojinaReview.model.beans.Carrello;
 import rojinaReview.model.beans.Prodotto;
@@ -9,12 +10,22 @@ import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.shop.service.ShopServiceImpl;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class addProductCartServlet extends HttpServlet {
+
+    private ShopServiceImpl ssi;
+    {
+        try {
+            ssi = new ShopServiceImpl();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+            this.doPost(request,response);
     }
 
     @Override
@@ -52,7 +63,7 @@ public class addProductCartServlet extends HttpServlet {
             int prodottoID = Integer.parseInt(request.getParameter("prodottoID"));
             Prodotto p = null;
             try {
-                p = new ShopServiceImpl().visualizzaProdotto (prodottoID);
+                p = ssi.visualizzaProdotto (prodottoID);
                 if (p == null) {
                     out = "false";
                 }

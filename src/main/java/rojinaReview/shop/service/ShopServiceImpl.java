@@ -1,19 +1,29 @@
 package rojinaReview.shop.service;
 
+import rojinaReview.model.dao.*;
 import rojinaReview.model.exception.CheckoutException;
 import rojinaReview.model.exception.LoadingOrderException;
 import rojinaReview.model.exception.LoadingShopException;
 import rojinaReview.model.exception.ProductIDMissingException;
 import rojinaReview.model.beans.Ordine;
 import rojinaReview.model.beans.Prodotto;
-import rojinaReview.model.dao.OrdineDAO;
-import rojinaReview.model.dao.ProdottoDAO;
+import rojinaReview.model.utilities.ConPool;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShopServiceImpl implements  ShopService{
+
+    Connection connection;
+    private ProdottoDAO pDAO;
+    private OrdineDAO oDAO;
+    public ShopServiceImpl() throws SQLException {
+        this.connection = ConPool.getConnection();
+        pDAO = new ProdottoDAO(this.connection);
+        oDAO = new OrdineDAO(this.connection);
+    }
 
     /*
     Servelet:
@@ -24,7 +34,7 @@ public class ShopServiceImpl implements  ShopService{
     public List<Prodotto> visualizzaShop(String offset, String categoria, String ordine) throws LoadingShopException {
         List<Prodotto> prodotti = null;
         try {
-            prodotti = new ProdottoDAO().updateContent(offset,categoria,ordine);
+            prodotti = pDAO.updateContent(offset,categoria,ordine);
             return prodotti;
         } catch (SQLException e) {
             throw new LoadingShopException("Errore nel caricamento dei prodotti");
@@ -34,7 +44,7 @@ public class ShopServiceImpl implements  ShopService{
     public List<Prodotto> visualizzaShop() {
         List<Prodotto> prodotti = null;
         try {
-            prodotti = new ProdottoDAO().doRetriveAll();
+            prodotti = pDAO.doRetriveAll();
         } catch (SQLException e) {
            /*
                Possibile Eccezione?
@@ -51,7 +61,7 @@ public class ShopServiceImpl implements  ShopService{
     public Prodotto visualizzaProdotto(int id) throws ProductIDMissingException {
         Prodotto prodotto = null;
         try {
-            prodotto = new ProdottoDAO().doRetrieveById(id);
+            prodotto = pDAO.doRetrieveById(id);
             return prodotto;
         } catch (SQLException e) {
             throw new ProductIDMissingException("ID non presente nel DB");
@@ -64,7 +74,7 @@ public class ShopServiceImpl implements  ShopService{
     @Override
     public void inserisciProdotto(Prodotto prodotto) throws ProductIDMissingException {
         try {
-          new ProdottoDAO().doSave(prodotto);
+            pDAO.doSave(prodotto);
         } catch (SQLException e) {
             throw new ProductIDMissingException("ID non presente nel DB");
         }
@@ -76,7 +86,7 @@ public class ShopServiceImpl implements  ShopService{
     @Override
     public void modificaProdotto(Prodotto prodotto) throws ProductIDMissingException {
         try {
-            new ProdottoDAO().doUpdate(prodotto);
+            pDAO.doUpdate(prodotto);
         } catch (SQLException e) {
             throw new ProductIDMissingException("ID non presente nel DB");
         }
@@ -88,7 +98,7 @@ public class ShopServiceImpl implements  ShopService{
     @Override
     public void cancellaProdotto(int id) throws ProductIDMissingException {
         try {
-            new ProdottoDAO().doRemoveById(id);
+           pDAO.doRemoveById(id);
         } catch (SQLException e) {
             throw new ProductIDMissingException("ID non presente nel DB");
         }
@@ -122,7 +132,7 @@ public class ShopServiceImpl implements  ShopService{
     @Override
     public void checkout(Ordine ordine,int idVideogiocatore, ArrayList<Prodotto> prodottiContext) throws CheckoutException {
         try {
-            new OrdineDAO().confirmOrder(ordine,idVideogiocatore,prodottiContext);
+            oDAO.confirmOrder(ordine,idVideogiocatore,prodottiContext);
         } catch (SQLException e) {
             throw new CheckoutException("Errore in fase di checkout");
         }
@@ -136,7 +146,7 @@ public class ShopServiceImpl implements  ShopService{
     public List<Ordine> visualizzaOrdiniEffettuati(int id) throws LoadingOrderException {
         List<Ordine> ordini = null;
         try {
-            ordini = new OrdineDAO().doRetrieveByUserId(id);
+            ordini = oDAO.doRetrieveByUserId(id);
             return ordini;
         } catch (SQLException e) {
             throw new LoadingOrderException("Errore nel caricamento degli ordini");

@@ -83,7 +83,7 @@ function filterOrUpdate(reset,table) {
     else
     {
         piattaforma = document.getElementById('pButton').innerHTML.toString();
-        tipologia = document.getElementById('tButton').innerHTML.toString();
+        genere = document.getElementById('tButton').innerHTML.toString();
     }
     //sicuramente passerò un criterio di ordinamento
     ordine = document.getElementById('sButton').innerHTML.toString();
@@ -94,7 +94,7 @@ function filterOrUpdate(reset,table) {
         $.getJSON({
             url: servlet,//la path dipende dalla table passata
             type: "post",
-            data: {"offset":offset,"piattaforma": piattaforma, "tipologia": tipologia, "ordine": ordine, "categoria":categoria},
+            data: {"offset":offset,"piattaforma": piattaforma, "genere": genere, "ordine": ordine, "categoria":categoria},
             error: function (xhr, status, error) {
                 //alert("error");
             },

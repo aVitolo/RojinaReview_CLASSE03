@@ -10,19 +10,28 @@ import rojinaReview.shop.service.ShopServiceImpl;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @WebServlet(name = "visualizzaRichiesteServlet", value = "/visualizzaRichiesteServlet")
 public class visualizzaRichiesteServlet extends HttpServlet {
 
     private String path = "/WEB-INF/results/managerPages/managerRichieste.jsp";
-    private AutenticazioneServiceImpl asi = new AutenticazioneServiceImpl();
+    private AutenticazioneServiceImpl asi;
+    {
+        try {
+            asi = new AutenticazioneServiceImpl();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<ArrayList<Utente>> inQueeue = asi.visualizzaRichieste();
-        request.setAttribute("giornalisti",inQueeue.get(0));
-        request.setAttribute("managers",inQueeue.get(1));
-        request.getRequestDispatcher(path).forward(request, response);
+            ArrayList<ArrayList<Utente>> inQueeue = asi.visualizzaRichieste();
+            request.setAttribute("giornalisti",inQueeue.get(0));
+            request.setAttribute("managers",inQueeue.get(1));
+            request.getRequestDispatcher(path).forward(request, response);
     }
 
     @Override

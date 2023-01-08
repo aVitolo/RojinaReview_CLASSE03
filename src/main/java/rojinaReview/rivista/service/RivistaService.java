@@ -141,4 +141,8 @@ public interface RivistaService {
      * @param videogioco modificato
      */
     void modificaVideogioco(Videogioco videogioco);
+
+    ArrayList<Notizia> visualizzaNotizie() throws LoadingNewsException;
+
+    ArrayList<Recensione> visualizzaRecensioni() throws LoadingReviewsException;
 }

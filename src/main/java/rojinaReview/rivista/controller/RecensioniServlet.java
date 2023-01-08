@@ -3,9 +3,11 @@ package rojinaReview.rivista.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import rojinaReview.model.beans.Notizia;
 import rojinaReview.model.beans.Recensione;
 import rojinaReview.model.dao.RecensioneDAO;
 import org.json.JSONArray;
+import rojinaReview.model.exception.LoadingNewsException;
 import rojinaReview.model.exception.LoadingReviewsException;
 import rojinaReview.model.exception.ServiceNotAvailableException;
 import rojinaReview.rivista.service.RivistaService;
@@ -17,7 +19,7 @@ import java.util.ArrayList;
 
 @WebServlet(name = "RecensioneServlet", value = "/RecensioneServlet")
 public class RecensioniServlet extends HttpServlet {
-    private RivistaService rs;
+    private RivistaServiceImpl rs;
     private String path;
 
     public RecensioniServlet() throws ServiceNotAvailableException {
@@ -31,7 +33,13 @@ public class RecensioniServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("articoli","reviews");
+        ArrayList<Recensione> recensioni  = null;
+        try {
+            recensioni = rs.visualizzaRecensioni();
+        } catch (LoadingReviewsException e) {
+            throw new RuntimeException(e);
+        }
+        request.setAttribute("recensioni",recensioni);
         RequestDispatcher dispatcher =
                 request.getRequestDispatcher(path);
         dispatcher.forward(request, response);

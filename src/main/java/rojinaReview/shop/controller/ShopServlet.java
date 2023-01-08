@@ -3,21 +3,34 @@ package rojinaReview.shop.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import rojinaReview.model.beans.Notizia;
 import rojinaReview.model.beans.Prodotto;
 import org.json.JSONArray;
+import rojinaReview.model.exception.LoadingNewsException;
 import rojinaReview.model.exception.LoadingShopException;
 import rojinaReview.shop.service.ShopServiceImpl;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @WebServlet(name = "ShopServlet", value = "/ShopServlet")
 public class ShopServlet extends HttpServlet {
     private String path = "/WEB-INF/results/mainPage/shop.jsp";
 
+    private ShopServiceImpl ssi;
+    {
+        try {
+            ssi = new ShopServiceImpl();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("articoli","shop");
+        ArrayList<Prodotto> prodotti  = null;
+        prodotti = (ArrayList<Prodotto>) ssi.visualizzaShop();
+        request.setAttribute("prodotti",prodotti);
         RequestDispatcher dispatcher =
                 request.getRequestDispatcher(path);
         dispatcher.forward(request, response);
@@ -35,7 +48,7 @@ public class ShopServlet extends HttpServlet {
             String offset = request.getParameter("offset");
             String categoria = request.getParameter("categoria");
             String ordine = request.getParameter("ordine");
-            prodotti = (ArrayList<Prodotto>) new ShopServiceImpl().visualizzaShop(offset, categoria, ordine);
+            prodotti = (ArrayList<Prodotto>) ssi.visualizzaShop(offset, categoria, ordine);
         } catch (LoadingShopException e) {
             e.printStackTrace();
         }

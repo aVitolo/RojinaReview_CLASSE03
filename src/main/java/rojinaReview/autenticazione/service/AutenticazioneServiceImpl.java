@@ -58,7 +58,7 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
             throw new IncorrectPasswordException();
 
     }
-
+    @Override
     public Giornalista loginGiornalista(String email, String password) throws EmailNotExistsException, IncorrectPasswordException, NotVerifiedAccountException {
         String hashedPassword = null;
         Giornalista giornalistaDB = null;
@@ -90,7 +90,7 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
             throw new IncorrectPasswordException();
 
     }
-
+    @Override
     public Manager loginManager(String email, String password) throws EmailNotExistsException, IncorrectPasswordException, NotVerifiedAccountException {
         String hashedPassword = null;
         Manager managerDB = null;
@@ -154,18 +154,13 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
     }
 
     @Override
-    public void inserisciNumeroTelefonico(String telefono) {
+    public void inserisciNumeroTelefonico(String telefono, Videogiocatore videogiocatore) {
 
     }
 
     @Override
-    public ArrayList<String> visualizzaNumeriTelefonici(int id) {
+    public ArrayList<String> visualizzaNumeriTelefonici(Videogiocatore videogiocatore) {
         return null;
-    }
-
-    @Override
-    public void inserisciMetodoDiPagamento(Pagamento pagamento) throws VideogiocatoreIDMissingException {
-
     }
 
     /*
@@ -182,15 +177,40 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
     }
 
     @Override
-    public ArrayList<Pagamento> visualizzaMetodiDiPagamento(int id) {
+    public ArrayList<Pagamento> visualizzaMetodiDiPagamento(Videogiocatore videogiocatore) {
         return null;
     }
 
     @Override
-    public void inserisciIndrizzo(Indirizzo indirizzo) {
+    public void inserisciIndrizzo(Indirizzo indirizzo, Videogiocatore videogiocatore) {
 
     }
+
     @Override
+    public ArrayList<Indirizzo> visualizzaIndirizzi(Videogiocatore videogiocatore) {
+        return null;
+    }
+
+    @Override
+    public void autorizzaRegistrazioneGiornalista(Giornalista giornalista) {
+
+    }
+
+    @Override
+    public void autorizzaRegistrazioneManager(Manager manager) {
+
+    }
+
+    @Override
+    public void negaRegistrazioneGiornalista(Giornalista giornalista) {
+
+    }
+
+    @Override
+    public void negaRegistrazioneManager(Manager manager) {
+
+    }
+
     public void inserisciIndrizzo(int id, Indirizzo indirizzo) throws VideogiocatoreIDMissingException {
         try {
             new IndirizzoDAO().doSave(id,indirizzo);
@@ -198,33 +218,9 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
             throw new VideogiocatoreIDMissingException("ID non presente nel DB");
         }
     }
-    @Override
-    public ArrayList<Indirizzo> visualizzaIndirizzi(int id) {
-        return null;
-    }
 
     @Override
-    public void autorizzaRegistrazioneGiornalista(int id) {
-
-    }
-
-    @Override
-    public void autorizzaRegistrazioneManager(int id) {
-
-    }
-
-    @Override
-    public void negaRegistrazioneGiornalista(int id) {
-
-    }
-
-    @Override
-    public void negaRegistrazioneManager(int id) {
-
-    }
-
-    @Override
-    public ArrayList<ArrayList<Utente>> visualizzaRichieste() {
+    public ArrayList<ArrayList<Utente>> visualizzaRichieste() throws RuntimeException{
         ArrayList<ArrayList<Utente>> inQueeue = new ArrayList<>();
         try {
             inQueeue.add(new GiornalistaDAO().doRetriveInQueeue());

@@ -35,8 +35,8 @@ public class RivistaServiceImpl implements RivistaService{
     public ArrayList<Articolo> visualizzaArticoli() throws LoadingArticlesException {
         ArrayList<Articolo> articoli = new ArrayList<>();
         try {
-            articoli.addAll(nDAO.updateContent("0","Piattaforma","Genere","Least Recent"));
-            articoli.addAll(rDAO.updateContent("0","Piattaforma","Genere","Least Recent"));
+            articoli.addAll(nDAO.doRetriveAll());
+            articoli.addAll(rDAO.doRetriveAll());
         } catch (SQLException e) {
             throw new LoadingArticlesException("Errore nel caricamento degli articoli della home");
         }
@@ -55,9 +55,26 @@ public class RivistaServiceImpl implements RivistaService{
     }
 
     @Override
+    public ArrayList<Notizia> visualizzaNotizie() throws LoadingNewsException {
+        try {
+            return nDAO.doRetriveAll();
+        } catch (SQLException e) {
+            throw new LoadingNewsException("Errore nel caricamento delle notizie");
+        }
+    }
+
+    @Override
     public ArrayList<Recensione> visualizzaRecensioni(String offset, String piattaforma, String genere, String ordine) throws LoadingReviewsException {
         try {
             return rDAO.updateContent(offset,piattaforma,genere,ordine);
+        } catch (SQLException e) {
+            throw new LoadingReviewsException("Errore nel caricamento delle recensioni");
+        }
+    }
+    @Override
+    public ArrayList<Recensione> visualizzaRecensioni() throws LoadingReviewsException {
+        try {
+            return rDAO.doRetriveAll();
         } catch (SQLException e) {
             throw new LoadingReviewsException("Errore nel caricamento delle recensioni");
         }

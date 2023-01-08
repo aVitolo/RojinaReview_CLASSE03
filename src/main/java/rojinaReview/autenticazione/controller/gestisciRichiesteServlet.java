@@ -20,7 +20,16 @@ import java.util.ArrayList;
 public class gestisciRichiesteServlet extends HttpServlet {
 
     private String path = "/WEB-INF/results/managerPages/managerRichieste.jsp";
-    private AutenticazioneServiceImpl asi = new AutenticazioneServiceImpl();
+    private AutenticazioneServiceImpl asi;
+
+    {
+        try {
+            asi = new AutenticazioneServiceImpl();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doPost(request,response);

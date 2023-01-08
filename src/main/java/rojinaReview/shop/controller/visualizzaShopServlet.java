@@ -14,7 +14,15 @@ public class visualizzaShopServlet extends HttpServlet {
 
 
     private String path = "/WEB-INF/results/managerPages/managerShop.jsp";
-    private ShopServiceImpl ssi = new ShopServiceImpl();
+    private ShopServiceImpl ssi;
+    {
+        try {
+            ssi = new ShopServiceImpl();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("prodotti", ssi.visualizzaShop());

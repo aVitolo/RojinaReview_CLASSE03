@@ -13,7 +13,7 @@
 <header id="head">
 
     <section class="bar">
-        <img class="logo" style="cursor:pointer" src="./static/images/utility//rojinah.png" onclick="location.href='./home'" alt="Logo"/>
+        <img class="logo" style="cursor:pointer" src="./static/images/utility/rojinah.png" onclick="location.href='./home'" alt="Logo"/>
         <button class="expand" onclick="expandMenu()"> ≡</button>
     </section>
 
