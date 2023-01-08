@@ -45,7 +45,6 @@ public class LoginStaff extends HttpServlet {
         else
         {
             Utente utente = null;
-
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             int userType = Integer.parseInt(request.getParameter("userType")); //userType = 0 Per i Giornalisti, userType = 1 Per i Manager

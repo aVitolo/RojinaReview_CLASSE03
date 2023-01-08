@@ -1,6 +1,7 @@
 package rojinaReview.model.utilities;
 
 import jakarta.servlet.http.Part;
+import jakarta.xml.bind.DatatypeConverter;
 import rojinaReview.model.beans.Carrello;
 import rojinaReview.model.beans.Prodotto;
 import rojinaReview.model.exception.InvalidTextException;
@@ -29,16 +30,12 @@ public class Utils {
     /* Password Hashing */
 
     public static String calcolaHash(String password) throws UnsupportedEncodingException {
-        StringBuilder passwordAfterHash = new StringBuilder();
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+            String encoded = DatatypeConverter.printHexBinary(hash);
+            return new String(encoded.toLowerCase());
 
-            StringBuilder hexString = new StringBuilder();
-            for (int i: hash) {
-                hexString.append(Integer.toHexString(0XFF & i));
-            }
-            return new String(passwordAfterHash);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }

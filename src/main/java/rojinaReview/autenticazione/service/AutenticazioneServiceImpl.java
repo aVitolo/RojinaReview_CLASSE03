@@ -111,11 +111,13 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
         if(!managerDB.isVerificato())
             throw new NotVerifiedAccountException();
 
+        System.out.println(managerDB.getPassword());
+        System.out.println(hashedPassword);
         if(hashedPassword.equals(managerDB.getPassword()))
         {
+            System.out.println("checked");
             if(managerDB.getImmagine() == null)
                 managerDB.setImmagine("./static/images/utility/defaultImageUser.png"); //immagine di default utente
-
             return managerDB;
         }
         else
