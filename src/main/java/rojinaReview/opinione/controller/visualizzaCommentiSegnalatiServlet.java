@@ -8,12 +8,22 @@ import rojinaReview.opinione.service.OpinioneServiceImpl;
 import rojinaReview.shop.service.ShopServiceImpl;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(name = "visualizzaCommentiSegnalazioniServlet", value = "/visualizzaCommentiSegnalazioniServlet")
 public class visualizzaCommentiSegnalatiServlet extends HttpServlet {
 
     private String path = "/WEB-INF/results/managerPages/managerSegnalazioni.jsp";
-    private OpinioneServiceImpl osi = new OpinioneServiceImpl();
+    private OpinioneServiceImpl osi;
+
+    {
+        try {
+            osi = new OpinioneServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {

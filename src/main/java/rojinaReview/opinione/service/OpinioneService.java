@@ -74,15 +74,17 @@ public interface OpinioneService {
     /**
      * Firma del metodo che permette di
      * visualizzare i dettagli di un commento segnalato
-     * @param id id della segnalazione
-     * @return
+     * @param id id del commento
+     * @return lista delle segnalazioni relative al commento
      */
     List<Segnalazione> visualizzaDettagliCommentoSegnalato(int id) throws LoadingCommentException;
 
     /**
      * Firma del metodo che permette di
      * gestire una segnalazione bannando l'utente, eliminando il commento o eliminando la segnalazione
-     * @param id id della segnalazione
+     * @param segnalazione segnalazione che si vuole gestire
+     * @param flag flag che serve a capire quale operazione effettuare sul commento
+     * @param commento commento segnalato
      */
-    void gestisciSegnalazione(Segnalazione segnalazione, int flag) throws SQLException;
+    void gestisciSegnalazione(Segnalazione segnalazione, int flag, Commento commento) throws SQLException;
 }
