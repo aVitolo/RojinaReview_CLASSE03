@@ -1,5 +1,7 @@
 package rojinaReview.autenticazione.service;
 
+import rojinaReview.model.exception.EmailNotExistsException;
+import rojinaReview.model.exception.IncorrectPasswordException;
 import rojinaReview.model.exception.VideogiocatoreIDMissingException;
 import rojinaReview.model.beans.*;
 
@@ -13,12 +15,30 @@ public interface AutenticazioneService {
 
     /**
      * Firma del metodo che permette di
-     * effettuare il login come videogiocatore, giornalista o manager
+     * effettuare il login come videogiocatore
      * @param email dell'utente da loggare
      * @param password dell'utente da loggare
      * @return utente loggato
      */
-    Videogiocatore login(String email, String password);
+    Videogiocatore loginVideogiocatore(String email, String password) throws EmailNotExistsException, IncorrectPasswordException;
+
+    /**
+     * Firma del metodo che permette di
+     * effettuare il login come giornalista
+     * @param email dell'utente da loggare
+     * @param password dell'utente da loggare
+     * @return utente loggato
+     */
+    Giornalista loginGiornalista(String email, String password);
+
+    /**
+     * Firma del metodo che permette di
+     * effettuare il login come manager
+     * @param email dell'utente da loggare
+     * @param password dell'utente da loggare
+     * @return utente loggato
+     */
+    Manager loginManager(String email, String password);
 
     /**
      * Firma del metodo che permette di

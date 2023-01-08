@@ -6,11 +6,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import rojinaReview.autenticazione.service.AutenticazioneService;
+import rojinaReview.autenticazione.service.AutenticazioneServiceImpl;
 import rojinaReview.model.beans.Carrello;
 import rojinaReview.model.beans.Prodotto;
 import rojinaReview.model.beans.Utente;
 import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.dao.VideogiocatoreDAO;
+import rojinaReview.model.exception.EmailNotExistsException;
+import rojinaReview.model.exception.IncorrectPasswordException;
 import rojinaReview.model.utilities.Utils;
 
 import java.io.IOException;
@@ -18,85 +22,57 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class LoginUser extends HttpServlet {
-    private Videogiocatore tmp;
-    private String loginErrato = "./userLogin.jsp";
-    private String homePage = "./home";
+    AutenticazioneService as;
+    private String loginErrato;
+    private String homePage;
+
+    public LoginUser() throws SQLException {
+        as = new AutenticazioneServiceImpl();
+        loginErrato = "./userLogin.jsp";
+        homePage = "./home";
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
             HttpSession session = request.getSession();
+            RequestDispatcher dispatcherErrato = request.getRequestDispatcher(loginErrato);
+            String message = null;
+
             if (session.getAttribute("utente") != null)
-                response.sendRedirect(homePage);
-            else {
-                //Preleva dalla request l'email
+                response.sendRedirect(homePage); //se si è già loggati si viene reindirizzati alla homepage
+            else
+            {
                 String email = request.getParameter("email");
-
-                //Inizializza la connessione al DB tramite DAO
-                VideogiocatoreDAO uDAO = new VideogiocatoreDAO();
-                this.tmp = uDAO.doRetriveByEmail(email);
-
-                //Verifica se la ricerca dell' utente è andata male, e assegna a tmp il risultato
-                if (this.tmp == null) {
-                    //Il flag a false indica che non è necessario continuare i controlli, l' utente non c' è nel db
-                    String message = "Invalid email";
+                String password = request.getParameter("password");
+                Videogiocatore videogiocatore = null;
+                try {
+                    videogiocatore = as.loginVideogiocatore(email, password);
+                } catch (EmailNotExistsException e) {
+                    message = "Email inesistente";
                     request.setAttribute("message", message);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher(loginErrato);
-                    dispatcher.forward(request, response);
+                    dispatcherErrato.forward(request, response);
+                    return;
+                } catch (IncorrectPasswordException e) {
+                    message = "Password sbagliata";
+                    request.setAttribute("message", message);
+                    dispatcherErrato.forward(request, response);
+                    return;
                 }
-                else {
-                    //Preleva dalla request la password
-                    String password = request.getParameter("password");
 
-                    //Calcola Hash della password utente
-                    password = Utils.calcolaHash(password);
 
-                    //ottengo la password dell' user nel db
-                    String dbPass = this.tmp.getPassword();
-                    //confronta le password
-                    if (password.equals(dbPass)) {
-                        if (this.tmp.getImmagine() == null)
-                            this.tmp.setImmagine("./images/utility/defaultImageUser.png"); //immagine di default utente
-                        //merge dei carrelli
-                        Carrello ospite = (Carrello) session.getAttribute("ospite");
-                        this.tmp.setCarrello(LoginUser.mergeCarts(this.tmp.getCarrello(), ospite));
-                        session.setAttribute("utente", this.tmp);
-                        //rimozione del carrello ospite
-                        session.removeAttribute("ospite");
-                        response.sendRedirect(homePage);
-                    } else {
-                        String message = "Invalid password";
-                        request.setAttribute("message", message);
-                        RequestDispatcher dispatcher = request.getRequestDispatcher(loginErrato);
-                        dispatcher.forward(request, response);
-                    }
-                }
+                //merge dei carrelli
+                Carrello ospite = (Carrello) session.getAttribute("ospite");
+                videogiocatore.setCarrello(Utils.mergeCarts(videogiocatore.getCarrello(), ospite));
+                //rimozione del carrello ospite
+                session.removeAttribute("ospite");
+
+
+                session.setAttribute("utente", videogiocatore);
+                response.sendRedirect(homePage);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
     }
 
-    private static Carrello mergeCarts(Carrello carrello, Carrello ospite) {
-        if(ospite!=null) {
-            int i, j;
-            boolean trovato;
-            ArrayList<Prodotto> prodottiDB = carrello.getProdotti();
-            ArrayList<Prodotto> prodottiOspite = ospite.getProdotti();
-            for (i = 0; i < prodottiOspite.size(); i++) {
-                for (j = 0, trovato = false; j < prodottiDB.size() && !trovato; j++) {
-                    if (prodottiOspite.get(i).getId() == prodottiDB.get(j).getId()) {
-                        prodottiDB.get(j).setQuantità(prodottiDB.get(j).getQuantità() + prodottiOspite.get(i).getQuantità());
-                        trovato = true;
-                    }
-                }
-                //prodotto del carrello ospite non trovato nel DB
-                if (!trovato)
-                    prodottiDB.add(prodottiOspite.get(i));
-            }
-            carrello.setProdotti(prodottiDB); //istruzione penso inutile
-            carrello.setTotale(carrello.getTotale() + ospite.getTotale());
-        }
-        return carrello;
-    }
+
+
 }

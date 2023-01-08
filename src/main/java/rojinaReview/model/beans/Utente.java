@@ -56,7 +56,11 @@ public abstract class Utente {
         this.email = email;
     }
 
-    public void setPassword(String password) throws UnsupportedEncodingException {
+    public void setPassword(String password){
+        this.password = password;
+    }
+
+    public void setPasswordWithHashing(String password) throws UnsupportedEncodingException {
         this.password = Utils.calcolaHash(password);
     }
 

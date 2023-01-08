@@ -1,21 +1,68 @@
 package rojinaReview.autenticazione.service;
 
-import rojinaReview.model.dao.GiornalistaDAO;
-import rojinaReview.model.dao.ManagerDAO;
+import rojinaReview.model.dao.*;
+import rojinaReview.model.exception.EmailNotExistsException;
+import rojinaReview.model.exception.IncorrectPasswordException;
 import rojinaReview.model.exception.VideogiocatoreIDMissingException;
 import rojinaReview.model.beans.*;
-import rojinaReview.model.dao.IndirizzoDAO;
-import rojinaReview.model.dao.PagamentoDAO;
+import rojinaReview.model.utilities.ConPool;
+import rojinaReview.model.utilities.Utils;
 
 import java.io.UnsupportedEncodingException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AutenticazioneServiceImpl implements AutenticazioneService{
+    Connection connection;
+    private VideogiocatoreDAO vDAO;
+
+    public AutenticazioneServiceImpl() throws SQLException {
+        this.connection = ConPool.getConnection();
+        vDAO = new VideogiocatoreDAO(this.connection);
+    }
+
+
+
     @Override
-    public Videogiocatore login(String email, String password) {
+    public Videogiocatore loginVideogiocatore(String email, String password) throws EmailNotExistsException, IncorrectPasswordException {
+        String hashedPassword = null;
+        Videogiocatore videogiocatoreDB = null;
+
+        try {
+            hashedPassword = Utils.calcolaHash(password);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            videogiocatoreDB = vDAO.doRetriveByEmail(email);
+        } catch (SQLException e) {
+            if(e.getMessage().equalsIgnoreCase("Invalid email"))
+                throw new EmailNotExistsException();
+        }
+
+        if(hashedPassword.equals(videogiocatoreDB.getPassword()))
+        {
+            if (videogiocatoreDB.getImmagine() == null)
+                videogiocatoreDB.setImmagine("./static/images/utility/defaultImageUser.png"); //immagine di default utente
+            return videogiocatoreDB;
+        }
+        else
+            throw new IncorrectPasswordException();
+
+    }
+
+    public Giornalista loginGiornalista(String email, String password)
+    {
         return null;
     }
+
+    public Manager loginManager(String email, String password)
+    {
+        return null;
+    }
+
 
     @Override
     public boolean isVideogiocatore(Videogiocatore videogiocatore) {

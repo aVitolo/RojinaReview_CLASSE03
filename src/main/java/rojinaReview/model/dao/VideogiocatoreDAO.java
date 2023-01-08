@@ -24,13 +24,14 @@ public class VideogiocatoreDAO {
     }
 
 
-    public Videogiocatore doRetriveByEmail(String email) throws SQLException, UnsupportedEncodingException {
+    public Videogiocatore doRetriveByEmail(String email) throws SQLException{
         PreparedStatement ps =
                 con.prepareStatement("SELECT * FROM videogiocatore WHERE email=?");
         ps.setString(1, email);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             Videogiocatore v = new Videogiocatore();
+
             v.setId(rs.getInt(1));
             v.setEmail(rs.getString(2));
             v.setPassword(rs.getString(3));
@@ -41,8 +42,11 @@ public class VideogiocatoreDAO {
 
             return v;
         }
+        else
+            throw new SQLException("Invalid email");
 
-        return null;
+
+
     }
 
     public Videogiocatore doRetriveByNickname(String nickname) throws SQLException, UnsupportedEncodingException {

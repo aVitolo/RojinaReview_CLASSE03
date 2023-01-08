@@ -1,12 +1,15 @@
 package rojinaReview.model.utilities;
 
 import jakarta.servlet.http.Part;
+import rojinaReview.model.beans.Carrello;
+import rojinaReview.model.beans.Prodotto;
 import rojinaReview.model.exception.InvalidTextException;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 public class Utils {
 
@@ -39,6 +42,29 @@ public class Utils {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static Carrello mergeCarts(Carrello carrello, Carrello ospite) {
+        if(ospite!=null) {
+            int i, j;
+            boolean trovato;
+            ArrayList<Prodotto> prodottiDB = carrello.getProdotti();
+            ArrayList<Prodotto> prodottiOspite = ospite.getProdotti();
+            for (i = 0; i < prodottiOspite.size(); i++) {
+                for (j = 0, trovato = false; j < prodottiDB.size() && !trovato; j++) {
+                    if (prodottiOspite.get(i).getId() == prodottiDB.get(j).getId()) {
+                        prodottiDB.get(j).setQuantità(prodottiDB.get(j).getQuantità() + prodottiOspite.get(i).getQuantità());
+                        trovato = true;
+                    }
+                }
+                //prodotto del carrello ospite non trovato nel DB
+                if (!trovato)
+                    prodottiDB.add(prodottiOspite.get(i));
+            }
+            carrello.setProdotti(prodottiDB); //istruzione penso inutile
+            carrello.setTotale(carrello.getTotale() + ospite.getTotale());
+        }
+        return carrello;
     }
 
     //funzione che salva un file nella directory del project e restituisce la path
