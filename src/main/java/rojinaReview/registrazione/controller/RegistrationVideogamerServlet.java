@@ -16,13 +16,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet(name = "userCreationCheckServlet", value = "/userCreationCheckServlet")
-public class RegistrationUserServlet extends HttpServlet {
+public class RegistrationVideogamerServlet extends HttpServlet {
     private RegistrazioneService rs;
-    private Videogiocatore tmp;
     private String registrationErrata;
     private String homePage;
 
-    public RegistrationUserServlet() throws SQLException {
+    public RegistrationVideogamerServlet() throws SQLException {
         rs = new RegistrazioneServiceImpl();
         registrationErrata = "./registerUser.jsp";
         homePage = "./home";
@@ -69,7 +68,7 @@ public class RegistrationUserServlet extends HttpServlet {
                 return;
             } catch (InvalidTextException e) {
                 if(e.getMessage().equals("email"))
-                    message = "email non valida"; //aggiungere eventuale spiegazione all'utente della regex
+                    message = "email non valida";
                 if(e.getMessage().equals("nickname"))
                     message = "nickname non valido";
                 if(e.getMessage().equals("password"))

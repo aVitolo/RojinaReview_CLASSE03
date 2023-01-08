@@ -140,4 +140,27 @@ public class GiornalistaDAO implements GenericStaffDAO {
         return giornalisti;
     }
 
+    public void doSendRequestJournalist(Giornalista giornalista) throws SQLException {
+        PreparedStatement ps = con.prepareStatement("INSERT INTO giornalista(email, password, nome, cognome, verificato) VALUES (?,?,?,?,?)");
+        ps.setString(1, giornalista.getEmail());
+        ps.setString(2, giornalista.getPassword());
+        ps.setString(3, giornalista.getNome());
+        ps.setString(4, giornalista.getCognome());
+        ps.setInt(5, 0); //account non verificato
+        ResultSet rs;
+        try{
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            if(e.getErrorCode() == 23000) //integrity constraint violation
+            {
+                ps = con.prepareStatement("SELECT email FROM giornalista WHERE email=?");
+                ps.setString(1, giornalista.getEmail());
+                rs = ps.executeQuery();
+                if(rs.next())
+                    throw new SQLException("email");
+            }
+        }
+
+    }
+
 }

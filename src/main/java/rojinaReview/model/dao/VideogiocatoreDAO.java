@@ -104,13 +104,13 @@ public class VideogiocatoreDAO {
                 ps = con.prepareStatement("SELECT email FROM videogiocatore WHERE email=?");
                 ps.setString(1, user.getEmail());
                 rs = ps.executeQuery();
-                if(!rs.next())
+                if(rs.next())
                     throw new SQLException("email");
 
                 ps = con.prepareStatement("SELECT nickname FROM videogiocatore WHERE nickname=?");
                 ps.setString(1, user.getNickname());
                 rs = ps.executeQuery();
-                if(!rs.next())
+                if(rs.next())
                     throw new SQLException("nickname");
             }
         }

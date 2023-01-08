@@ -24,14 +24,14 @@ public interface RegistrazioneService {
      * registrare un giornalista nel sistema
      * @param giornalista da registare
      */
-    void registraGiornalista(Giornalista giornalista);
+    void registraGiornalista(Giornalista giornalista) throws InvalidTextException, EmailNotAvailableException;
 
     /**
      * Firma del metodo che permette di
      * registrare un manager nel sistema
      * @param manager da registrare
      */
-    void registraManager(Manager manager);
+    void registraManager(Manager manager) throws InvalidTextException, EmailNotAvailableException;
 
 
 }

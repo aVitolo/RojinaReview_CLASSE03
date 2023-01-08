@@ -14,15 +14,21 @@
 <div class="center">
     <h1>Invia Richiesta</h1>
     <form method="post" action="./inviaRichiesta">
+        <div class="form_input" id="radioLogin">
+            <input type="radio" class="radioLogin" id="giornalistaRadio" name="userType" value="0" checked="checked">
+            <label>Giornalista</label>
+            <input type="radio" class="radioLogin" id="amministratoreRadio" name="userType" value="1">
+            <label>Amministratore</label>
+        </div>
         <div class="form_input">
-            <input id="Nome" type="text" name="Nome"
+            <input id="Nome" type="text" name="nome"
                    title="Minimum: 5 letters, Maximum: 30 letters, Don't accepted: {# - ' \ }" required>
             <span></span>
             <label>Nome</label>
         </div>
 
         <div class="form_input">
-            <input id="Cognome" type="text" name="Cognome"
+            <input id="Cognome" type="text" name="cognome"
                    title="Minimum: 5 letters, Maximum: 30 letters, Don't accepted: {# - ' \ }" required>
             <span></span>
             <label>Cognome</label>

@@ -3,6 +3,8 @@ package rojinaReview.registrazione.service;
 import rojinaReview.model.beans.Giornalista;
 import rojinaReview.model.beans.Manager;
 import rojinaReview.model.beans.Videogiocatore;
+import rojinaReview.model.dao.GiornalistaDAO;
+import rojinaReview.model.dao.ManagerDAO;
 import rojinaReview.model.dao.VideogiocatoreDAO;
 import rojinaReview.model.exception.EmailNotAvailableException;
 import rojinaReview.model.exception.InvalidTextException;
@@ -16,10 +18,14 @@ import java.sql.SQLException;
 public class RegistrazioneServiceImpl implements RegistrazioneService{
     private Connection connection;
     private VideogiocatoreDAO vDAO;
+    private GiornalistaDAO gDAO;
+    private ManagerDAO mDAO;
 
     public RegistrazioneServiceImpl() throws SQLException {
         this.connection = ConPool.getConnection();
         vDAO = new VideogiocatoreDAO(this.connection);
+        gDAO = new GiornalistaDAO(this.connection);
+        mDAO = new ManagerDAO(this.connection);
     }
 
     public void registraVideogiocatore(Videogiocatore videogiocatore) throws EmailNotAvailableException, NicknameNotAvailableException, InvalidTextException {
@@ -63,14 +69,65 @@ public class RegistrazioneServiceImpl implements RegistrazioneService{
         }
     }
 
-    public void registraGiornalista(Giornalista giornalista)
-    {
+    public void registraGiornalista(Giornalista giornalista) throws InvalidTextException, EmailNotAvailableException {
+        //Info costanti per validazione input
+        final String[] badCharacters = {"#", "-", " ", "\'", "\""};
+
+        final int passwordMinLenght = 6;
+        final int passwordMaxLenght = 20;
+
+        final int emailMinLenght = 5;
+        final int emailMaxLenght = 30;
+
+        try {
+            Utils.textCheck(giornalista.getEmail(), emailMinLenght, emailMaxLenght, badCharacters);
+        } catch (InvalidTextException e) {
+            throw new InvalidTextException("email invalida");
+        }
+
+        try{
+            Utils.textCheck(giornalista.getPassword(), passwordMinLenght, passwordMaxLenght, badCharacters);
+        } catch (InvalidTextException e){
+            throw new InvalidTextException("password invalida");
+        }
+
+        try {
+            gDAO.doSendRequestJournalist(giornalista);
+        } catch (SQLException e) {
+            if(e.getMessage().equals("email"))
+                throw new EmailNotAvailableException();
+        }
 
     }
 
-    public void registraManager(Manager manager)
-    {
+    public void registraManager(Manager manager) throws InvalidTextException, EmailNotAvailableException {
+        //Info costanti per validazione input
+        final String[] badCharacters = {"#", "-", " ", "\'", "\""};
 
+        final int passwordMinLenght = 6;
+        final int passwordMaxLenght = 20;
+
+        final int emailMinLenght = 5;
+        final int emailMaxLenght = 30;
+
+        try {
+            Utils.textCheck(manager.getEmail(), emailMinLenght, emailMaxLenght, badCharacters);
+        } catch (InvalidTextException e) {
+            throw new InvalidTextException("email invalida");
+        }
+
+        try{
+            Utils.textCheck(manager.getPassword(), passwordMinLenght, passwordMaxLenght, badCharacters);
+        } catch (InvalidTextException e){
+            throw new InvalidTextException("password invalida");
+        }
+
+        try {
+            mDAO.doSendRequestManager(manager);
+        } catch (SQLException e) {
+            if(e.getMessage().equals("email"))
+                throw new EmailNotAvailableException();
+        }
     }
 
 }

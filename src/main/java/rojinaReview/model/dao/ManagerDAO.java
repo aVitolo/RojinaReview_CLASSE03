@@ -1,5 +1,6 @@
 package rojinaReview.model.dao;
 
+import rojinaReview.model.beans.Giornalista;
 import rojinaReview.model.beans.Manager;
 import rojinaReview.model.beans.Utente;
 import rojinaReview.model.utilities.ConPool;
@@ -115,6 +116,29 @@ public class ManagerDAO implements GenericStaffDAO {
             list.add(m);
         }
         return list;
+    }
+
+    public void doSendRequestManager(Manager manager) throws SQLException {
+        PreparedStatement ps = con.prepareStatement("INSERT INTO manager(email, password, nome, cognome, verificato) VALUES (?,?,?,?,?)");
+        ps.setString(1, manager.getEmail());
+        ps.setString(2, manager.getPassword());
+        ps.setString(3, manager.getNome());
+        ps.setString(4, manager.getCognome());
+        ps.setInt(5, 0); //account non verificato
+        ResultSet rs;
+        try{
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            if(e.getErrorCode() == 23000) //integrity constraint violation
+            {
+                ps = con.prepareStatement("SELECT email FROM manager WHERE email=?");
+                ps.setString(1, manager.getEmail());
+                rs = ps.executeQuery();
+                if(rs.next())
+                    throw new SQLException("email");
+            }
+        }
+
     }
 
     //non serve?
