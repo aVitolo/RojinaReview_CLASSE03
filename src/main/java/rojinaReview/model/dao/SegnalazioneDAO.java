@@ -160,7 +160,7 @@ public class SegnalazioneDAO {
             s.setMotivo(rs.getString(3));
             s.setCommentoAggiuntivo(rs.getString(4));
             s.setDataSegnalazione(rs.getDate(5));
-            s.setUtenteSegnalante(rs.getString(6));
+            s.setVideogiocatoreSegnalante(rs.getString(6));
 
             segnalazioni.add(s);
         }

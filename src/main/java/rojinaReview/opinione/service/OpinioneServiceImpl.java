@@ -98,6 +98,7 @@ public class OpinioneServiceImpl implements OpinioneService{
             commenti=sDAO.doRetrieveReportedComments();
             return commenti;
         }catch (SQLException e){
+            e.printStackTrace();
             throw new LoadingCommentException("Errore selezione segnalazioni");
         }
     }

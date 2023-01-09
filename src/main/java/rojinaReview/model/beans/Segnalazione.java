@@ -61,11 +61,11 @@ public class Segnalazione {
         this.dataSegnalazione = dataSegnalazione;
     }
 
-    public String getUtenteSegnalante() {
+    public String getVideogiocatoreSegnalante() {
         return videogiocatoreSegnalante;
     }
 
-    public void setUtenteSegnalante(String utenteSegnalante) {
-        this.videogiocatoreSegnalante = utenteSegnalante;
+    public void setVideogiocatoreSegnalante(String videogiocatoreSegnalante) {
+        this.videogiocatoreSegnalante = videogiocatoreSegnalante;
     }
 }

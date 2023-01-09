@@ -92,11 +92,29 @@
                 <div class="date">
                     <%=c.getDataScrittura()%>
                 </div>
-                <button>Segnala</button>
+                <button onclick="handleRequest(<%=c.getId()%>)">Segnala</button>
             </div>
             <%}%>
         <%}%>
+        <form method="post" action="inviaSegnalazioneServlet" style="display: none; color: red" id="form_segnalazione">
+            <input type="hidden" value="" id="input_id" name="id_commento">
+            <input type="hidden" value="2" name="flag">
+            <input type="hidden" value="<%=recensione.getId()%>" name="id_contenuto">
+            <select name="motivo" style="width: 200px; color: red">
+                <option value="È spam">
+                <option value="Contenuto offensivo">
+                    <textarea rows="10" cols="30" name="commento_aggiuntivo"></textarea>
+                    <button type="submit"> Invia segnalazione</button>
+        </form>
     </section>
 </section>
+
 </body>
+<script type="text/javascript">
+    function handleRequest(id){
+        let form=document.getElementById("form_segnalazione")
+        form.style.display="block"
+        document.getElementById("input_id").setAttribute("value",id)
+    }
+</script>
 </html>
