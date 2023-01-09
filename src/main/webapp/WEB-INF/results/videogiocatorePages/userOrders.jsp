@@ -5,11 +5,11 @@
 <html>
 <head>
     <title>Area videogiocatore</title>
-    <link rel="stylesheet" href="./css/master.css">
-    <link rel="stylesheet" href="./css/orders.css">
+    <link rel="stylesheet" href="./static/css/master.css">
+    <link rel="stylesheet" href="./static/css/orders.css">
 </head>
 <body>
-<%@ include file="/WEB-INF/results/videogiocatore/userArea.jsp" %>
+<%@ include file="/WEB-INF/results/videogiocatorePages/userArea.jsp" %>
 <c:set var="videogiocatore" scope="page" value="${sessionScope['videogiocatore']}" />
 
     <h1 class="currentMenuName">Ordini</h1>

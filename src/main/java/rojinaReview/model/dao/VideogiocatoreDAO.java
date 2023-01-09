@@ -157,6 +157,17 @@ public class VideogiocatoreDAO {
         return i == 1;
     }
 
+    public void update(Videogiocatore videogiocatore) throws SQLException {
+        PreparedStatement ps = con.prepareStatement("UPDATE videogiocatore SET email=?, nickname=?, nome=?, cognome=?, password=? WHERE id=?");
+        ps.setString(1, videogiocatore.getEmail());
+        ps.setString(2, videogiocatore.getNickname());
+        ps.setString(3, videogiocatore.getNome());
+        ps.setString(4, videogiocatore.getCognome());
+        ps.setString(5, videogiocatore.getPassword());
+        ps.setInt(6, videogiocatore.getId());
+        ps.executeUpdate();
+    }
+
 
 }
 

@@ -40,6 +40,14 @@ public interface AutenticazioneService {
 
     /**
      * Firma del metodo che permette di
+     * salvare il carrello di un videogiocatore quando si effettua il logout
+     * @param videogiocatore di cui salvare il carrello
+     */
+    void salvaCarrello(Videogiocatore videogiocatore) throws SavingCartException;
+
+
+    /**
+     * Firma del metodo che permette di
      * identificare un videogiocatore
      * @param utente registrato salvato nella sessione
      * @return true se l'utente è un videogiocatore altrimenti false
@@ -67,21 +75,21 @@ public interface AutenticazioneService {
      * modificare i dati di un videogiocatore
      * @param videogiocatore modificato
      */
-    void modificaVideogiocatore(Videogiocatore videogiocatore);
+    void modificaVideogiocatore(Videogiocatore videogiocatore) throws UpdateDataException;
 
     /**
      * Firma del metodo che permette di
      * modificare i dati di un giornalista
      * @param giornalista modificato
      */
-    void modificaGiornalista(Giornalista giornalista);
+    void modificaGiornalista(Giornalista giornalista) throws UpdateDataException;
 
     /**
      * Firma del metodo che permette di
      * modificare i dati di un manager
      * @param manager modificato
      */
-    void modificaManager(Manager manager);
+    void modificaManager(Manager manager) throws UpdateDataException;
 
     /**
      * Firma del metodo che permette di
@@ -89,7 +97,7 @@ public interface AutenticazioneService {
      * @param telefono da inserire
      * @param videogiocatore a cui appartiene il numero di telefono
      */
-    void inserisciNumeroTelefonico(String telefono, Videogiocatore videogiocatore);
+    void inserisciNumeroTelefonico(String telefono, Videogiocatore videogiocatore) throws InsertNumberException;
 
     /**
      * Firma del metodo che permette di
@@ -97,7 +105,7 @@ public interface AutenticazioneService {
      * @param videogiocatore a cui appartengono i numeri telefonici
      * @return una lista di numeri di telefono
      */
-    ArrayList<String> visualizzaNumeriTelefonici(Videogiocatore videogiocatore);
+    ArrayList<String> visualizzaNumeriTelefonici(Videogiocatore videogiocatore) throws LoadingNumbersException;
 
     /**
      * Firma del metodo che permette di
@@ -105,7 +113,7 @@ public interface AutenticazioneService {
      * @param pagamento da inserire
      * @param videogiocatore a cui appartiene il metodo di pagamento
      */
-    void inserisciMetodoDiPagamento(Pagamento pagamento, Videogiocatore videogiocatore) throws VideogiocatoreIDMissingException;
+    void inserisciMetodoDiPagamento(Pagamento pagamento, Videogiocatore videogiocatore) throws InsertPaymentException;
 
     /*
         inserisciMetodoDiPagamento(Pagamento pagamento) permette di inserire un nuovo metodo di pagamento nella tabella Pagamento
@@ -118,7 +126,7 @@ public interface AutenticazioneService {
      * @param videogiocatore a cui appartengono i metodi di pagamento
      * @return una lista di metodi di pagamento
      */
-    ArrayList<Pagamento> visualizzaMetodiDiPagamento(Videogiocatore videogiocatore);
+    ArrayList<Pagamento> visualizzaMetodiDiPagamento(Videogiocatore videogiocatore) throws LoadingPaymentsException;
 
     /**
      * Firma del metodo che permette di
@@ -126,7 +134,7 @@ public interface AutenticazioneService {
      * @param indirizzo da inserire
      * @param videogiocatore a cui appartiene l'indirizzo
      */
-    void inserisciIndrizzo(Indirizzo indirizzo, Videogiocatore videogiocatore);
+    void inserisciIndrizzo(Indirizzo indirizzo, Videogiocatore videogiocatore) throws InsertAddressException;
 
     /**
      * Firma del metodo che permette di
@@ -134,39 +142,40 @@ public interface AutenticazioneService {
      * @param videogiocatore a cui appartengono gli indirizzi
      * @return una lista di indirizzi
      */
-    ArrayList<Indirizzo> visualizzaIndirizzi(Videogiocatore videogiocatore);
+    ArrayList<Indirizzo> visualizzaIndirizzi(Videogiocatore videogiocatore) throws LoadingAddressesException;
 
     /**
      * Firma del metodo che permette di
      * autorizzare la registrazione di un giornalista
      * @param giornalista da autorizzare
      */
-    void autorizzaRegistrazioneGiornalista(Giornalista giornalista);
+    void autorizzaRegistrazioneGiornalista(Giornalista giornalista) throws AuthorizeException;
 
     /**
      * Firma del metodo che permette di
      * autorizzare la registrazione di un manager
      * @param manager autorizzare
      */
-    void autorizzaRegistrazioneManager(Manager manager);
+    void autorizzaRegistrazioneManager(Manager manager) throws AuthorizeException;
 
     /**
      * Firma del metodo che permette di
      * negare la registrazione ad una persona che si è finta giornalista
      * @param giornalista da rimuovere dal database
      */
-    void negaRegistrazioneGiornalista(Giornalista giornalista);
+    void negaRegistrazioneGiornalista(Giornalista giornalista) throws NotAuthorizeException;
 
     /**
      * Firma del metodo che permette di
      * negare la registrazione ad una persona che si è finta manager
      * @param manager da rimuovere dal database
      */
-    void negaRegistrazioneManager(Manager manager);
+    void negaRegistrazioneManager(Manager manager) throws NotAuthorizeException;
 
     /**
      * Firma del metodo che permette di
      * visualizzar le richieste di registrazione come manager o giornalista
      */
-    ArrayList<ArrayList<Utente>> visualizzaRichieste();
+    ArrayList<ArrayList<Utente>> visualizzaRichieste() throws LoadingRegistrationRequestsException;
+
 }

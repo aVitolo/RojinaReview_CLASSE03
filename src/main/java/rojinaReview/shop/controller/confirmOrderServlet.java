@@ -5,6 +5,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.autenticazione.service.AutenticazioneServiceImpl;
 import rojinaReview.model.exception.CheckoutException;
+import rojinaReview.model.exception.InsertAddressException;
 import rojinaReview.model.exception.VideogiocatoreIDMissingException;
 import rojinaReview.model.beans.*;
 import rojinaReview.shop.service.ShopServiceImpl;
@@ -70,9 +71,10 @@ public class confirmOrderServlet extends HttpServlet {
                     boolean newAddress = Boolean.parseBoolean(request.getParameter("address"));
                     if(newAddress) {
                         try {
-                            asi.inserisciIndrizzo(u.getId(),indirizzo);
+                            asi.inserisciIndrizzo(indirizzo, u);
                             u.getIndirizzi().add(indirizzo);
-                        } catch (VideogiocatoreIDMissingException e) {
+                        }
+                         catch (InsertAddressException e) {
                             e.printStackTrace();
                         }
                     }
@@ -100,12 +102,12 @@ public class confirmOrderServlet extends HttpServlet {
                     boolean newPayment = Boolean.parseBoolean(request.getParameter("payment"));
                     if(newPayment){
                         try {
-                            asi.inserisciIndrizzo(u.getId(),indirizzo);
+                            asi.inserisciIndrizzo(indirizzo, u);
                             u.getPagamenti().add(pagamento);
-                        } catch (VideogiocatoreIDMissingException e) {
+                        } catch (InsertAddressException e) {
                             e.printStackTrace();
                         }
-                        }
+                    }
             /*
                 Setto tutti i campi dell'entita carello
             */

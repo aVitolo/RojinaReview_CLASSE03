@@ -1,4 +1,4 @@
-package rojinaReview.autenticazione.controller;
+package rojinaReview.shop.controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;

@@ -47,7 +47,7 @@ public class ManagerDAO implements GenericStaffDAO {
             throw new SQLException("Invalid email");
     }
 
-    public ArrayList<Utente> doRetriveInQueeue() throws SQLException, UnsupportedEncodingException {
+    public ArrayList<Utente> doRetriveInQueeue() throws SQLException{
         ArrayList<Utente> list = new ArrayList<>();
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT g.id,g.nome,g.cognome,g.email FROM Manager g WHERE g.verificato=0");
@@ -63,7 +63,7 @@ public class ManagerDAO implements GenericStaffDAO {
         return list;
     }
 
-    public void doVerificaManager(int id) throws SQLException, UnsupportedEncodingException {
+    public void doVerificaManager(int id) throws SQLException {
         Statement stmt = con.createStatement();
         PreparedStatement ps =
                 con.prepareStatement("UPDATE manager g SET g.verificato=1 WHERE id=?");
@@ -71,7 +71,7 @@ public class ManagerDAO implements GenericStaffDAO {
         ps.executeUpdate();
     }
 
-    public void doRemoveFromQueeue(int id) throws SQLException, UnsupportedEncodingException {
+    public void doRemoveFromQueeue(int id) throws SQLException{
         this.doRemoveById(id);
     }
 
@@ -150,4 +150,13 @@ public class ManagerDAO implements GenericStaffDAO {
         return i == 1;
     }
 
+    public void update(Manager manager) throws SQLException {
+        PreparedStatement ps = con.prepareStatement("UPDATE manager SET email=?, password=?, nome=?, cognome=? WHERE id=?");
+        ps.setString(1, manager.getEmail());
+        ps.setString(2, manager.getPassword());
+        ps.setString(3, manager.getNome());
+        ps.setString(4, manager.getCognome());
+        ps.setInt(5, manager.getId());
+        ps.executeUpdate();
+    }
 }

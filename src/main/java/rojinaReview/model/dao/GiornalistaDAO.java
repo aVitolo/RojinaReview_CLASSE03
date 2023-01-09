@@ -89,7 +89,7 @@ public class GiornalistaDAO implements GenericStaffDAO {
         return list;
     }
 
-    public ArrayList<Utente> doRetriveInQueeue() throws SQLException, UnsupportedEncodingException {
+    public ArrayList<Utente> doRetriveInQueeue() throws SQLException{
         ArrayList<Utente> list = new ArrayList<>();
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT g.id,g.nome,g.cognome,g.email FROM Giornalista g WHERE g.verificato=0");
@@ -105,7 +105,7 @@ public class GiornalistaDAO implements GenericStaffDAO {
         return list;
     }
 
-    public void doVerificaGiornalista(int id) throws SQLException, UnsupportedEncodingException {
+    public void doVerificaGiornalista(int id) throws SQLException{
         Statement stmt = con.createStatement();
         PreparedStatement ps =
                 con.prepareStatement("UPDATE giornalista g SET g.verificato=1 WHERE id=?");
@@ -113,7 +113,7 @@ public class GiornalistaDAO implements GenericStaffDAO {
         ps.executeUpdate();
     }
 
-    public void doRemoveFromQueeue(int id) throws SQLException, UnsupportedEncodingException {
+    public void doRemoveFromQueeue(int id) throws SQLException{
         this.doRemoveById(id);
     }
 
@@ -167,4 +167,13 @@ public class GiornalistaDAO implements GenericStaffDAO {
 
     }
 
+    public void update(Giornalista giornalista) throws SQLException {
+        PreparedStatement ps = con.prepareStatement("UPDATE giornalista SET email=?, password=?, nome=?, cognome=? WHERE id=?");
+        ps.setString(1, giornalista.getEmail());
+        ps.setString(2, giornalista.getPassword());
+        ps.setString(3, giornalista.getNome());
+        ps.setString(4, giornalista.getCognome());
+        ps.setInt(5, giornalista.getId());
+        ps.executeUpdate();
+    }
 }

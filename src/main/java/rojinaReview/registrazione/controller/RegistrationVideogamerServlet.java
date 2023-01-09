@@ -56,7 +56,7 @@ public class RegistrationVideogamerServlet extends HttpServlet {
 
             videogiocatore.setEmail(email);
             videogiocatore.setNickname(nickname);
-            videogiocatore.setPassword(Utils.calcolaHash(password));
+            videogiocatore.setPassword(password);
 
             try {
                 rs.registraVideogiocatore(videogiocatore);

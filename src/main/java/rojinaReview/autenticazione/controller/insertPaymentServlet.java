@@ -3,9 +3,13 @@ package rojinaReview.autenticazione.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import rojinaReview.autenticazione.service.AutenticazioneService;
+import rojinaReview.autenticazione.service.AutenticazioneServiceImpl;
 import rojinaReview.model.beans.Pagamento;
 import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.dao.PagamentoDAO;
+import rojinaReview.model.exception.InsertPaymentException;
+import rojinaReview.model.exception.VideogiocatoreIDMissingException;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -14,6 +18,8 @@ import java.text.SimpleDateFormat;
 
 @WebServlet(name = "insertPaymentServlet", value = "/insertPaymentServlet")
 public class insertPaymentServlet extends HttpServlet {
+    private AutenticazioneService as;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -21,6 +27,12 @@ public class insertPaymentServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            as = new AutenticazioneServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         String result = "/Rojina_Review_war/userInformations";
         Videogiocatore u = (Videogiocatore) request.getSession().getAttribute("videogiocatore");
         Pagamento p = new Pagamento();
@@ -41,12 +53,11 @@ public class insertPaymentServlet extends HttpServlet {
         p.setNumeroCarta(request.getParameter("numeroCarta"));
 
         try {
-            new PagamentoDAO().doSave(p, u.getId());
-        } catch (SQLException e) {
+            as.inserisciMetodoDiPagamento(p, u);
+        }
+         catch (InsertPaymentException e) {
             e.printStackTrace();
         }
-
-        u.getPagamenti().add(p);
 
         response.sendRedirect(result);
     }

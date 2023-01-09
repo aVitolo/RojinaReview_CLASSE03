@@ -56,7 +56,7 @@ public class RegistrationJournalistORManagerServlet extends HttpServlet {
                 utente = new Manager();
 
             utente.setEmail(email);
-            utente.setPassword(Utils.calcolaHash(password));
+            utente.setPassword(password);
             utente.setNome(nome);
             utente.setCognome(cognome);
 

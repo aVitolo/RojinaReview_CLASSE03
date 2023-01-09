@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.*;
 import rojinaReview.autenticazione.service.AutenticazioneService;
 import rojinaReview.autenticazione.service.AutenticazioneServiceImpl;
 import rojinaReview.model.beans.Utente;
+import rojinaReview.model.exception.LoadingRegistrationRequestsException;
 import rojinaReview.shop.service.ShopServiceImpl;
 
 import java.io.IOException;
@@ -22,15 +23,21 @@ public class visualizzaRichiesteServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            try {
-                asi = new AutenticazioneServiceImpl();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            ArrayList<ArrayList<Utente>> inQueeue = asi.visualizzaRichieste();
-            request.setAttribute("giornalisti",inQueeue.get(0));
-            request.setAttribute("managers",inQueeue.get(1));
-            request.getRequestDispatcher(path).forward(request, response);
+        try {
+            asi = new AutenticazioneServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        ArrayList<ArrayList<Utente>> inQueeue = null;
+        try {
+            inQueeue = asi.visualizzaRichieste();
+        } catch (LoadingRegistrationRequestsException e) {
+            e.printStackTrace();
+        }
+        request.setAttribute("giornalisti",inQueeue.get(0));
+        request.setAttribute("managers",inQueeue.get(1));
+
+        request.getRequestDispatcher(path).forward(request, response);
     }
 
     @Override

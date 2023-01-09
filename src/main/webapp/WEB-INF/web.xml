@@ -183,7 +183,7 @@
 
     <servlet>
         <servlet-name>userOrdersServlet</servlet-name>
-        <servlet-class>rojinaReview.autenticazione.controller.userOrdersServlet</servlet-class>
+        <servlet-class>rojinaReview.shop.controller.userOrdersServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>userOrdersServlet</servlet-name>
@@ -237,7 +237,7 @@
 
     <servlet>
         <servlet-name>getOrderServlet</servlet-name>
-        <servlet-class>rojinaReview.autenticazione.controller.getOrderServlet</servlet-class>
+        <servlet-class>rojinaReview.shop.controller.getOrderServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>getOrderServlet</servlet-name>

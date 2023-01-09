@@ -12,6 +12,7 @@ import rojinaReview.model.exception.NicknameNotAvailableException;
 import rojinaReview.model.utilities.ConPool;
 import rojinaReview.model.utilities.Utils;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -59,6 +60,15 @@ public class RegistrazioneServiceImpl implements RegistrazioneService{
             throw new InvalidTextException("password invalida");
         }
 
+        String unhashedPassword = videogiocatore.getPassword();
+        String hashedPassword = null;
+        try {
+            hashedPassword = Utils.calcolaHash(unhashedPassword);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        videogiocatore.setPassword(hashedPassword);
+
         try {
             vDAO.doInsertUser(videogiocatore);
         } catch (SQLException e) {
@@ -91,6 +101,15 @@ public class RegistrazioneServiceImpl implements RegistrazioneService{
             throw new InvalidTextException("password invalida");
         }
 
+        String unhashedPassword = giornalista.getPassword();
+        String hashedPassword = null;
+        try {
+            hashedPassword = Utils.calcolaHash(unhashedPassword);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        giornalista.setPassword(hashedPassword);
+
         try {
             gDAO.doSendRequestJournalist(giornalista);
         } catch (SQLException e) {
@@ -121,6 +140,15 @@ public class RegistrazioneServiceImpl implements RegistrazioneService{
         } catch (InvalidTextException e){
             throw new InvalidTextException("password invalida");
         }
+
+        String unhashedPassword = manager.getPassword();
+        String hashedPassword = null;
+        try {
+            hashedPassword = Utils.calcolaHash(unhashedPassword);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        manager.setPassword(hashedPassword);
 
         try {
             mDAO.doSendRequestManager(manager);

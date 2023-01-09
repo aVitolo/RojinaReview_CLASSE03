@@ -1,4 +1,4 @@
-package rojinaReview.autenticazione.controller;
+package rojinaReview.shop.controller;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -12,12 +12,14 @@ import java.io.IOException;
 public class getOrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String result = "/WEB-INF/results/ordine.jsp";
+        String result = "/WEB-INF/results/videogiocatorePages/ordine.jsp";
         String home = "./home";
         int id = Integer.parseInt(request.getParameter("id"));
         Videogiocatore u = (Videogiocatore) request.getSession().getAttribute("videogiocatore");
         if(u == null)
             response.sendRedirect(home);
+
+
 
         for (Ordine o : u.getOrdini())
         {

@@ -14,16 +14,22 @@ import java.util.ArrayList;
 public class AutenticazioneServiceImpl implements AutenticazioneService{
     private Connection connection;
     private VideogiocatoreDAO vDAO;
-    private CarrelloDAO cDAO;
     private GiornalistaDAO gDAO;
     private ManagerDAO mDAO;
+    private CarrelloDAO cDAO;
+    private TelefonoDAO tDAO;
+    private PagamentoDAO pDAO;
+    private IndirizzoDAO iDAO;
 
     public AutenticazioneServiceImpl() throws SQLException {
         this.connection = ConPool.getConnection();
         vDAO = new VideogiocatoreDAO(this.connection);
-        cDAO = new CarrelloDAO(this.connection);
         gDAO = new GiornalistaDAO(this.connection);
         mDAO = new ManagerDAO(this.connection);
+        cDAO = new CarrelloDAO(this.connection);
+        tDAO = new TelefonoDAO(this.connection);
+        pDAO = new PagamentoDAO(this.connection);
+        iDAO = new IndirizzoDAO(this.connection);
     }
 
 
@@ -126,6 +132,14 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
             throw new IncorrectPasswordException();
     }
 
+    public void salvaCarrello(Videogiocatore videogiocatore) throws SavingCartException {
+        try {
+            cDAO.doSave(videogiocatore.getCarrello(), videogiocatore.getId());
+        } catch (SQLException e) {
+            throw new SavingCartException();
+        }
+    }
+
 
     @Override
     public boolean isVideogiocatore(Utente utente) {
@@ -143,97 +157,146 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
     }
 
     @Override
-    public void modificaVideogiocatore(Videogiocatore videogiocatore) {
-
-    }
-
-    @Override
-    public void modificaGiornalista(Giornalista giornalista) {
-
-    }
-
-    @Override
-    public void modificaManager(Manager manager) {
-
-    }
-
-    @Override
-    public void inserisciNumeroTelefonico(String telefono, Videogiocatore videogiocatore) {
-
-    }
-
-    @Override
-    public ArrayList<String> visualizzaNumeriTelefonici(Videogiocatore videogiocatore) {
-        return null;
-    }
-
-    /*
-        inserisciMetodoDiPagamento(Pagamento pagamento) permette di inserire un nuovo metodo di pagamento nella tabella Pagamento
-        ma senza id non e' possibile salvare il "collegamento" pagamento-videogiocatore quindi modifico momentanemente il metodo
-     */
-    @Override
-    public void inserisciMetodoDiPagamento(Pagamento pagamento, Videogiocatore videogiocatore) throws VideogiocatoreIDMissingException {
+    public void modificaVideogiocatore(Videogiocatore videogiocatore) throws UpdateDataException {
         try {
-            new PagamentoDAO().doSave(pagamento, videogiocatore.getId());
+            vDAO.update(videogiocatore);
         } catch (SQLException e) {
-            throw new VideogiocatoreIDMissingException("ID non presente nel DB");
+            throw new UpdateDataException();
         }
     }
 
     @Override
-    public ArrayList<Pagamento> visualizzaMetodiDiPagamento(Videogiocatore videogiocatore) {
-        return null;
-    }
-
-    @Override
-    public void inserisciIndrizzo(Indirizzo indirizzo, Videogiocatore videogiocatore) {
-
-    }
-
-    @Override
-    public ArrayList<Indirizzo> visualizzaIndirizzi(Videogiocatore videogiocatore) {
-        return null;
-    }
-
-    @Override
-    public void autorizzaRegistrazioneGiornalista(Giornalista giornalista) {
-
-    }
-
-    @Override
-    public void autorizzaRegistrazioneManager(Manager manager) {
-
-    }
-
-    @Override
-    public void negaRegistrazioneGiornalista(Giornalista giornalista) {
-
-    }
-
-    @Override
-    public void negaRegistrazioneManager(Manager manager) {
-
-    }
-
-    public void inserisciIndrizzo(int id, Indirizzo indirizzo) throws VideogiocatoreIDMissingException {
+    public void modificaGiornalista(Giornalista giornalista) throws UpdateDataException {
         try {
-            new IndirizzoDAO().doSave(id,indirizzo);
+            gDAO.update(giornalista);
         } catch (SQLException e) {
-            throw new VideogiocatoreIDMissingException("ID non presente nel DB");
+            throw new UpdateDataException();
+        }
+
+    }
+
+    @Override
+    public void modificaManager(Manager manager) throws UpdateDataException {
+        try {
+            mDAO.update(manager);
+        } catch (SQLException e) {
+            throw new UpdateDataException();
+        }
+
+    }
+
+    @Override
+    public void inserisciNumeroTelefonico(String telefono, Videogiocatore videogiocatore) throws InsertNumberException {
+        try {
+            tDAO.doSave(videogiocatore.getId(), telefono);
+            videogiocatore.getTelefoni().add(telefono); //aggiungo il numero di telefono all'oggetto nella sessione
+        } catch (SQLException e) {
+            throw new InsertNumberException();
         }
     }
 
     @Override
-    public ArrayList<ArrayList<Utente>> visualizzaRichieste() throws RuntimeException{
+    public ArrayList<String> visualizzaNumeriTelefonici(Videogiocatore videogiocatore) throws LoadingNumbersException {
+        if(videogiocatore.getTelefoni() != null)
+            return videogiocatore.getTelefoni();
+        try {
+            return tDAO.doRetriveByUser(videogiocatore.getId());
+        } catch (SQLException e) {
+            throw new LoadingNumbersException();
+        }
+    }
+
+    @Override
+    public void inserisciMetodoDiPagamento(Pagamento pagamento, Videogiocatore videogiocatore) throws InsertPaymentException {
+        try {
+            pDAO.doSave(pagamento, videogiocatore.getId());
+            videogiocatore.getPagamenti().add(pagamento); //aggiungo il pagamento all'oggetto nella sessione
+        } catch (SQLException e) {
+            throw new InsertPaymentException();
+        }
+    }
+
+    @Override
+    public ArrayList<Pagamento> visualizzaMetodiDiPagamento(Videogiocatore videogiocatore) throws LoadingPaymentsException {
+        if(videogiocatore.getPagamenti() != null)
+            return videogiocatore.getPagamenti();
+        try {
+            return pDAO.doRetrieveByUser(videogiocatore.getId());
+        } catch (SQLException e) {
+            throw new LoadingPaymentsException();
+        }
+    }
+
+    @Override
+    public void inserisciIndrizzo(Indirizzo indirizzo, Videogiocatore videogiocatore) throws InsertAddressException {
+        try {
+            iDAO.doSave(videogiocatore.getId(), indirizzo);
+            videogiocatore.getIndirizzi().add(indirizzo); //aggiungo l'indirizzo all'oggetto nella sessione
+        } catch (SQLException e) {
+            throw new InsertAddressException();
+        }
+
+    }
+
+    @Override
+    public ArrayList<Indirizzo> visualizzaIndirizzi(Videogiocatore videogiocatore) throws LoadingAddressesException {
+        if(videogiocatore.getIndirizzi() != null)
+            return videogiocatore.getIndirizzi();
+        try {
+            return iDAO.doRetriveByUser(videogiocatore.getId());
+        } catch (SQLException e) {
+            throw new LoadingAddressesException();
+        }
+    }
+
+    @Override
+    public void autorizzaRegistrazioneGiornalista(Giornalista giornalista) throws AuthorizeException {
+        try {
+            gDAO.doVerificaGiornalista(giornalista.getId());
+        } catch (SQLException e) {
+        }
+
+    }
+
+    @Override
+    public void autorizzaRegistrazioneManager(Manager manager) throws AuthorizeException {
+        try {
+            mDAO.doVerificaManager(manager.getId());
+        } catch (SQLException e) {
+            throw new AuthorizeException();
+        }
+
+    }
+
+    @Override
+    public void negaRegistrazioneGiornalista(Giornalista giornalista) throws NotAuthorizeException {
+        try {
+            gDAO.doRemoveFromQueeue(giornalista.getId());
+        } catch (SQLException e) {
+            throw new NotAuthorizeException();
+        }
+
+    }
+
+    @Override
+    public void negaRegistrazioneManager(Manager manager) throws NotAuthorizeException {
+        try {
+            mDAO.doRemoveFromQueeue(manager.getId());
+        } catch (SQLException e) {
+            throw new NotAuthorizeException();
+        }
+
+    }
+
+    @Override
+    public ArrayList<ArrayList<Utente>> visualizzaRichieste() throws RuntimeException, LoadingRegistrationRequestsException {
         ArrayList<ArrayList<Utente>> inQueeue = new ArrayList<>();
         try {
-            inQueeue.add(new GiornalistaDAO().doRetriveInQueeue());
-            inQueeue.add(new ManagerDAO().doRetriveInQueeue());
+            inQueeue.add(gDAO.doRetriveInQueeue());
+            inQueeue.add(mDAO.doRetriveInQueeue());
             return inQueeue;
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new LoadingRegistrationRequestsException();
         }
     }
 }

@@ -4,11 +4,11 @@
 <html>
 <head>
     <title>Area videogiocatore</title>
-    <link rel="stylesheet" href="./css/master.css">
+    <link rel="stylesheet" href="./static/css/master.css">
 </head>
 <body>
 <c:set var="videogiocatore" scope="page" value="${sessionScope.get('videogiocatore')}" />
-<%@ include file="/WEB-INF/results/videogiocatore/userArea.jsp" %>
+<%@ include file="/WEB-INF/results/videogiocatorePages/userArea.jsp" %>
 <div class="menu">
     <h1 class="currentMenuName">Profilo</h1>
     <div class="information">
@@ -35,12 +35,7 @@
                 ${videogiocatore.nome} ${videogiocatore.cognome}
             </div>
         </c:if>
-        <c:if test="${videogiocatore.eta != 0}">
-            <div class="userEtà">
-                <h3 class="userAttribute">Età:</h3>
-                    ${videogiocatore.eta}
-            </div>
-        </c:if>
+
 
 
     </div>

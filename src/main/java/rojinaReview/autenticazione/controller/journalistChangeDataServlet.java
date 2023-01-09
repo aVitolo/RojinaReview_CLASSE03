@@ -8,7 +8,7 @@ import java.io.IOException;
 
 @WebServlet(name = "journalistChangeDataServlet", value = "/journalistChangeDataServlet")
 public class journalistChangeDataServlet extends HttpServlet {
-    private String path = "/WEB-INF/results/giornalista/giornalistaModificaDati.jsp";
+    private String path = "/WEB-INF/results/giornalistaPages/giornalistaModificaDati.jsp";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

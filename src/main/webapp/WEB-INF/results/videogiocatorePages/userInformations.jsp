@@ -3,11 +3,11 @@
 <html>
 <head>
     <title>Area videogiocatore</title>
-    <link rel="stylesheet" href=".css/master.css">
+    <link rel="stylesheet" href="./static/css/master.css">
 </head>
 <body>
 <c:set var="videogiocatore" scope="page" value="${sessionScope['videogiocatore']}" />
-<%@ include file="/WEB-INF/results/videogiocatore/userArea.jsp" %>
+<%@ include file="/WEB-INF/results/videogiocatorePages/userArea.jsp" %>
 <div class="menu">
     <h1 class="currentMenuName">Informazioni Utente</h1>
     <div class="informations">
@@ -37,7 +37,7 @@
             <h3 class="userAttribute">Telefoni:</h3>
             <c:forEach items="${videogiocatore.telefoni}" var="telefono">
                 <div class="number">
-                    ${telefono.numero}
+                    ${telefono}
                 </div>
             </c:forEach>
             <div class="insertNumber">
