@@ -38,7 +38,7 @@ public class RivistaServiceImpl implements RivistaService{
             articoli.addAll(nDAO.doRetriveAll());
             articoli.addAll(rDAO.doRetriveAll());
         } catch (SQLException e) {
-            throw new LoadingArticlesException("Errore nel caricamento degli articoli della home");
+            e.printStackTrace();
         }
         articoli.sort(Comparator.comparing(a -> a.getId()));
         return articoli;

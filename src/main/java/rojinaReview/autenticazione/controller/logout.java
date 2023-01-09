@@ -14,9 +14,9 @@ public class logout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            if (request.getSession(false).getAttribute("utente") != null || request.getSession(false).getAttribute("giornalista") != null || request.getSession(false).getAttribute("admin") != null) {
-                if(request.getSession(false).getAttribute("utente") != null){
-                    Videogiocatore u = (Videogiocatore) request.getSession().getAttribute("utente");
+            if (request.getSession(false).getAttribute("videogiocatore") != null || request.getSession(false).getAttribute("giornalista") != null || request.getSession(false).getAttribute("admin") != null) {
+                if(request.getSession(false).getAttribute("videogiocatore") != null){
+                    Videogiocatore u = (Videogiocatore) request.getSession().getAttribute("videogiocatore");
                     new CarrelloDAO().doSave(u.getCarrello(), u.getId());
                 }
                 request.getSession().invalidate();

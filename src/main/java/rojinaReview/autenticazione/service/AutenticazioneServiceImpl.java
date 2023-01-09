@@ -1,10 +1,7 @@
 package rojinaReview.autenticazione.service;
 
 import rojinaReview.model.dao.*;
-import rojinaReview.model.exception.EmailNotExistsException;
-import rojinaReview.model.exception.IncorrectPasswordException;
-import rojinaReview.model.exception.NotVerifiedAccountException;
-import rojinaReview.model.exception.VideogiocatoreIDMissingException;
+import rojinaReview.model.exception.*;
 import rojinaReview.model.beans.*;
 import rojinaReview.model.utilities.ConPool;
 import rojinaReview.model.utilities.Utils;
@@ -15,14 +12,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AutenticazioneServiceImpl implements AutenticazioneService{
-    Connection connection;
+    private Connection connection;
     private VideogiocatoreDAO vDAO;
+    private CarrelloDAO cDAO;
     private GiornalistaDAO gDAO;
     private ManagerDAO mDAO;
 
     public AutenticazioneServiceImpl() throws SQLException {
         this.connection = ConPool.getConnection();
         vDAO = new VideogiocatoreDAO(this.connection);
+        cDAO = new CarrelloDAO(this.connection);
         gDAO = new GiornalistaDAO(this.connection);
         mDAO = new ManagerDAO(this.connection);
     }
@@ -30,7 +29,7 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
 
 
     @Override
-    public Videogiocatore loginVideogiocatore(String email, String password) throws EmailNotExistsException, IncorrectPasswordException {
+    public Videogiocatore loginVideogiocatore(String email, String password) throws EmailNotExistsException, IncorrectPasswordException, LoadingCartException {
         String hashedPassword = null;
         Videogiocatore videogiocatoreDB = null;
 
@@ -51,6 +50,12 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
         {
             if (videogiocatoreDB.getImmagine() == null)
                 videogiocatoreDB.setImmagine("./static/images/utility/defaultImageUser.png"); //immagine di default utente
+
+            try {
+                videogiocatoreDB.setCarrello(cDAO.doRetrieveByUser(videogiocatoreDB.getId()));
+            } catch (SQLException e) {
+                throw new LoadingCartException();
+            }
 
             return videogiocatoreDB;
         }
@@ -104,18 +109,15 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
         try {
             managerDB = mDAO.doRetriveByEmail(email);
         } catch (SQLException e) {
-            if(e.getMessage().equalsIgnoreCase("Invalid email"))
-                throw new EmailNotExistsException();
+            throw new EmailNotExistsException();
         }
 
         if(!managerDB.isVerificato())
             throw new NotVerifiedAccountException();
 
-        System.out.println(managerDB.getPassword());
-        System.out.println(hashedPassword);
+
         if(hashedPassword.equals(managerDB.getPassword()))
         {
-            System.out.println("checked");
             if(managerDB.getImmagine() == null)
                 managerDB.setImmagine("./static/images/utility/defaultImageUser.png"); //immagine di default utente
             return managerDB;

@@ -20,12 +20,7 @@ public class HomeServlet extends HttpServlet {
     private RivistaService rs;
     private String path;
 
-    public HomeServlet() throws ServiceNotAvailableException {
-        try {
-            rs = new RivistaServiceImpl();
-        } catch (SQLException e) {
-            throw new ServiceNotAvailableException("Errore nel servizio rivista");
-        }
+    public HomeServlet() {
         path = "/WEB-INF/results/mainPage/home.jsp";
     }
 
@@ -33,7 +28,11 @@ public class HomeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        try {
+            rs = new RivistaServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         //crea la sessione se non esistente
         ServletContext servCon = request.getServletContext();
         HttpSession session = request.getSession();
@@ -41,13 +40,13 @@ public class HomeServlet extends HttpServlet {
         se non c'e un utente loggato ed accedo per la prima volta alla home
         setto il carrello per l'ospite nella sessione
         */
-        if(session.getAttribute("ospite") == null && session.getAttribute("utente") == null)
+        if(session.getAttribute("ospite") == null && session.getAttribute("videogiocatore") == null)
             session.setAttribute("ospite", new Carrello());
         /*
         if(session.getAttribute("prodottiSession") == null)
             session.setAttribute("prodottiSession", new ArrayList<Prodotto>());
         */
-        //eseguo il merge di articoli e recensioni
+
         ArrayList<Articolo> articoli = null;
         try {
             articoli = rs.visualizzaArticoli();

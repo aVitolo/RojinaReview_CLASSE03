@@ -22,7 +22,7 @@ public class insertPaymentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String result = "/Rojina_Review_war/userInformations";
-        Videogiocatore u = (Videogiocatore) request.getSession().getAttribute("utente");
+        Videogiocatore u = (Videogiocatore) request.getSession().getAttribute("videogiocatore");
         Pagamento p = new Pagamento();
 
         String data = request.getParameter("dataScadenza");

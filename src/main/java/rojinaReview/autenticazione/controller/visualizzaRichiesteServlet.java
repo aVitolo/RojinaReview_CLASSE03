@@ -18,16 +18,15 @@ public class visualizzaRichiesteServlet extends HttpServlet {
 
     private String path = "/WEB-INF/results/managerPages/managerRichieste.jsp";
     private AutenticazioneServiceImpl asi;
-    {
-        try {
-            asi = new AutenticazioneServiceImpl();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            try {
+                asi = new AutenticazioneServiceImpl();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             ArrayList<ArrayList<Utente>> inQueeue = asi.visualizzaRichieste();
             request.setAttribute("giornalisti",inQueeue.get(0));
             request.setAttribute("managers",inQueeue.get(1));

@@ -22,13 +22,7 @@ public class gestisciRichiesteServlet extends HttpServlet {
     private String path = "/WEB-INF/results/managerPages/managerRichieste.jsp";
     private AutenticazioneServiceImpl asi;
 
-    {
-        try {
-            asi = new AutenticazioneServiceImpl();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,6 +31,13 @@ public class gestisciRichiesteServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        {
+            try {
+                asi = new AutenticazioneServiceImpl();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
         String table=request.getParameter("table");
         int action=Integer.parseInt(request.getParameter("action"));
         int id=Integer.parseInt(request.getParameter("id"));

@@ -17,6 +17,7 @@ import rojinaReview.model.dao.GiornalistaDAO;
 import rojinaReview.model.exception.EmailNotExistsException;
 import rojinaReview.model.exception.IncorrectPasswordException;
 import rojinaReview.model.exception.NotVerifiedAccountException;
+import rojinaReview.model.exception.ServiceNotAvailableException;
 import rojinaReview.model.utilities.GenericStaffDAO;
 import rojinaReview.model.utilities.Utils;
 
@@ -28,14 +29,19 @@ public class LoginStaff extends HttpServlet {
     private String loginErrato;
     private String homePage;
 
-    public LoginStaff() throws SQLException {
-        as = new AutenticazioneServiceImpl();
+    public LoginStaff() {
         loginErrato = "./staffLogin.jsp";
         homePage = "/Rojina_Review_war/home";
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            as = new AutenticazioneServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.sendRedirect(loginErrato); //da aggiungere pagina errore di servizio non disponibile
+        }
         HttpSession session = request.getSession();
         RequestDispatcher dispatcherErrato = request.getRequestDispatcher(loginErrato);
         String message;

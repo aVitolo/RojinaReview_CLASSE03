@@ -21,8 +21,7 @@ public class RegistrationVideogamerServlet extends HttpServlet {
     private String registrationErrata;
     private String homePage;
 
-    public RegistrationVideogamerServlet() throws SQLException {
-        rs = new RegistrazioneServiceImpl();
+    public RegistrationVideogamerServlet() {
         registrationErrata = "./registerUser.jsp";
         homePage = "./home";
     }
@@ -30,11 +29,16 @@ public class RegistrationVideogamerServlet extends HttpServlet {
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            rs = new RegistrazioneServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         HttpSession session = request.getSession();
         String message = null;
         RequestDispatcher dispatcherErrato = request.getRequestDispatcher(registrationErrata);
 
-        if (session.getAttribute("utente") != null)
+        if (session.getAttribute("videogiocatore") != null)
             response.sendRedirect(homePage); //se si è già loggati si viene reindirizzati alla homepage
         else {
             //Preleva dalla request l'email
@@ -83,7 +87,7 @@ public class RegistrationVideogamerServlet extends HttpServlet {
             if(session.getAttribute("ospite") != null)
                 videogiocatore.setCarrello((Carrello) session.getAttribute("ospite"));
 
-            session.setAttribute("utente", videogiocatore);
+            session.setAttribute("videogiocatore", videogiocatore);
             response.sendRedirect(homePage);
         }
 

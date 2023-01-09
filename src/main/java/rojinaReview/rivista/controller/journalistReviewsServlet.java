@@ -19,17 +19,17 @@ public class journalistReviewsServlet extends HttpServlet {
     private String path;
 
     public journalistReviewsServlet() throws ServiceNotAvailableException {
-        try {
-            rs = new RivistaServiceImpl();
-        } catch (SQLException e) {
-            throw new ServiceNotAvailableException("Errore nel servizio rivista");
-        }
         path = "/WEB-INF/results/giornalista/journalistReviews.jsp";
     }
 
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            rs = new RivistaServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         HttpSession session = request.getSession();
         Giornalista giornalista = (Giornalista) session.getAttribute("giornalista");
         try {

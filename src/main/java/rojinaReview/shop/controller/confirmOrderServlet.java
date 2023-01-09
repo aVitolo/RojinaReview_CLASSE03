@@ -48,7 +48,7 @@ public class confirmOrderServlet extends HttpServlet {
         Prendo il carello dalla sessione
         */
             HttpSession session = request.getSession();
-            Videogiocatore u = (Videogiocatore) session.getAttribute("utente");
+            Videogiocatore u = (Videogiocatore) session.getAttribute("videogiocatore");
             Carrello carrello = u.getCarrello();
         /*
             Constriuto l'entita ordine

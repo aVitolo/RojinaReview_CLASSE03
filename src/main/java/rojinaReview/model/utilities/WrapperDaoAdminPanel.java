@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class WrapperDaoAdminPanel {
     private static final String amministratoreClass = "Amministratore";
     private static final String giornalistaClass = "Giornalista";
-    private static final String utenteClass = "Utente";
+    private static final String utenteClass = "utente";
     private static final String notiziaClass = "Notizia";
     private static final String recensioneClass = "Recensione";
     private static final String prodottoClass = "Prodotto";

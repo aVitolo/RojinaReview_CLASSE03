@@ -15,6 +15,7 @@ import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.dao.VideogiocatoreDAO;
 import rojinaReview.model.exception.EmailNotExistsException;
 import rojinaReview.model.exception.IncorrectPasswordException;
+import rojinaReview.model.exception.LoadingCartException;
 import rojinaReview.model.utilities.Utils;
 
 import java.io.IOException;
@@ -27,18 +28,24 @@ public class LoginUser extends HttpServlet {
     private String homePage;
 
     public LoginUser() throws SQLException {
-        as = new AutenticazioneServiceImpl();
+
         loginErrato = "./userLogin.jsp";
         homePage = "./home";
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            HttpSession session = request.getSession();
+        try {
+            as = new AutenticazioneServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            response.sendRedirect(loginErrato); //da aggiungere pagina errore servizio
+        }
+        HttpSession session = request.getSession();
             RequestDispatcher dispatcherErrato = request.getRequestDispatcher(loginErrato);
             String message = null;
 
-            if (session.getAttribute("utente") != null)
+            if (session.getAttribute("videogiocatore") != null)
                 response.sendRedirect(homePage); //se si è già loggati si viene reindirizzati alla homepage
             else
             {
@@ -57,6 +64,8 @@ public class LoginUser extends HttpServlet {
                     request.setAttribute("message", message);
                     dispatcherErrato.forward(request, response);
                     return;
+                } catch (LoadingCartException e) {
+                    e.printStackTrace();
                 }
 
 
@@ -67,7 +76,7 @@ public class LoginUser extends HttpServlet {
                 session.removeAttribute("ospite");
 
 
-                session.setAttribute("utente", videogiocatore);
+                session.setAttribute("videogiocatore", videogiocatore);
                 response.sendRedirect(homePage);
             }
 

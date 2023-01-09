@@ -15,7 +15,7 @@ public class getOrderServlet extends HttpServlet {
         String result = "/WEB-INF/results/ordine.jsp";
         String home = "./home";
         int id = Integer.parseInt(request.getParameter("id"));
-        Videogiocatore u = (Videogiocatore) request.getSession().getAttribute("utente");
+        Videogiocatore u = (Videogiocatore) request.getSession().getAttribute("videogiocatore");
         if(u == null)
             response.sendRedirect(home);
 

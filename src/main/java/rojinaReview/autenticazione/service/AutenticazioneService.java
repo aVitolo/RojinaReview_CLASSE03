@@ -1,9 +1,6 @@
 package rojinaReview.autenticazione.service;
 
-import rojinaReview.model.exception.EmailNotExistsException;
-import rojinaReview.model.exception.IncorrectPasswordException;
-import rojinaReview.model.exception.NotVerifiedAccountException;
-import rojinaReview.model.exception.VideogiocatoreIDMissingException;
+import rojinaReview.model.exception.*;
 import rojinaReview.model.beans.*;
 
 import java.util.ArrayList;
@@ -21,7 +18,7 @@ public interface AutenticazioneService {
      * @param password dell'utente da loggare
      * @return utente loggato
      */
-    Videogiocatore loginVideogiocatore(String email, String password) throws EmailNotExistsException, IncorrectPasswordException;
+    Videogiocatore loginVideogiocatore(String email, String password) throws EmailNotExistsException, IncorrectPasswordException, LoadingCartException;
 
     /**
      * Firma del metodo che permette di

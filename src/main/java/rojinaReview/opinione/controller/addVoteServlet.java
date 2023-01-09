@@ -23,7 +23,7 @@ public class addVoteServlet extends HttpServlet {
         String result = "/Rojina_Review_war/getResource?type="+request.getParameter("type")+"&"+"id="+
                 request.getParameter("id")+"&"+"searchDB=true";
         HttpSession session = request.getSession();
-        Videogiocatore u = (Videogiocatore) session.getAttribute("utente");
+        Videogiocatore u = (Videogiocatore) session.getAttribute("videogiocatore");
         String table = request.getParameter("table");
 
         if(table.equals("gioco")){

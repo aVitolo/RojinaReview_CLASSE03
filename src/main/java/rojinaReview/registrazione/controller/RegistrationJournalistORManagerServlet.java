@@ -19,14 +19,18 @@ public class RegistrationJournalistORManagerServlet extends HttpServlet {
     private String registrationErrata;
     private String homePage;
 
-    public RegistrationJournalistORManagerServlet() throws SQLException {
-        rs = new RegistrazioneServiceImpl();
+    public RegistrationJournalistORManagerServlet(){
         registrationErrata = "./registerStaff.jsp";
         homePage = "./home";
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            rs = new RegistrazioneServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         HttpSession session = request.getSession();
         String message = null;
         RequestDispatcher dispatcherErrato = request.getRequestDispatcher(registrationErrata);

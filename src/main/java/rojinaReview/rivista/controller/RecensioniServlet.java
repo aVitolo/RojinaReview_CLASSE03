@@ -22,17 +22,18 @@ public class RecensioniServlet extends HttpServlet {
     private RivistaServiceImpl rs;
     private String path;
 
-    public RecensioniServlet() throws ServiceNotAvailableException {
-        try {
-            rs = new RivistaServiceImpl();
-        } catch (SQLException e) {
-            throw new ServiceNotAvailableException("Errore nel servizio rivista");
-        }
+    public RecensioniServlet() {
+
         path = "/WEB-INF/results/mainPage/recensioni.jsp";
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            rs = new RivistaServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         ArrayList<Recensione> recensioni  = null;
         try {
             recensioni = rs.visualizzaRecensioni();
@@ -48,6 +49,11 @@ public class RecensioniServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            rs = new RivistaServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         ArrayList<Recensione> recensioni = null;
         String offset = request.getParameter("offset");
         String piattafomra = request.getParameter("piattaforma");

@@ -40,7 +40,7 @@ public class updateProductDisponibilityServlet extends HttpServlet {
                 -L'attributo ospite della sessione corrisponde ad un entita Carello
              */
             Carrello cart;
-            Videogiocatore u = (Videogiocatore) request.getSession().getAttribute("utente");
+            Videogiocatore u = (Videogiocatore) request.getSession().getAttribute("videogiocatore");
             if (u != null)
                 cart = u.getCarrello();
             else

@@ -18,7 +18,7 @@ public class userUpdateData extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             HttpSession session = request.getSession();
-            if (session.getAttribute("utente") == null)
+            if (session.getAttribute("videogiocatore") == null)
                 response.sendRedirect(homePage);
             else {
                 String email = request.getParameter("email");

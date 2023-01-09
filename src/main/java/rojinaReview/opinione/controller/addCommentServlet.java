@@ -22,7 +22,7 @@ public class addCommentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String result = "/Rojina_Review_war/getResource?type="+request.getParameter("type")+"&"+"id="+request.getParameter("id");
         HttpSession session = request.getSession();
-        Videogiocatore u = (Videogiocatore) session.getAttribute("utente");
+        Videogiocatore u = (Videogiocatore) session.getAttribute("videogiocatore");
 
         Commento c = new Commento();
         c.setIdVideogiocatore(u.getId());

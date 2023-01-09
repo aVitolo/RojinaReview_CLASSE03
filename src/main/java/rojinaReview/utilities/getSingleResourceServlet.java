@@ -44,9 +44,9 @@ public class getSingleResourceServlet extends HttpServlet {
                 request.setAttribute("commenti", new CommentoDAO().getCommentById(id, 1));
                 request.setAttribute("videogioco",new VideogiocoDAO().doRetrieveById(r.getIdVideogioco()));
                 request.setAttribute("giornalista",new GiornalistaDAO().doRetrieveById(r.getId_Giornalista()));
-                if(session.getAttribute("utente") != null)
+                if(session.getAttribute("videogiocatore") != null)
                 {
-                    Videogiocatore u = (Videogiocatore) session.getAttribute("utente");
+                    Videogiocatore u = (Videogiocatore) session.getAttribute("videogiocatore");
                     request.setAttribute("votoUtente", new ParereDAO().
                             doRetrieveUserOpinion(u.getId(), r.getIdVideogioco(), 4));
                 }
@@ -60,8 +60,8 @@ public class getSingleResourceServlet extends HttpServlet {
             Videogiocatore u = null;
             Carrello carrello = null;
             int quantitàCarrello = 0;
-            if(session.getAttribute("utente") != null){
-                u = (Videogiocatore) session.getAttribute("utente");
+            if(session.getAttribute("videogiocatore") != null){
+                u = (Videogiocatore) session.getAttribute("videogiocatore");
                 carrello = u.getCarrello();
             }
             else if(session.getAttribute("ospite") != null)

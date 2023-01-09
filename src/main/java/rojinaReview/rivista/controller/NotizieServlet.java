@@ -21,18 +21,18 @@ public class NotizieServlet extends HttpServlet {
     private RivistaServiceImpl rs;
     private String path;
 
-    public NotizieServlet() throws ServiceNotAvailableException {
-        try {
-            rs = new RivistaServiceImpl();
-        } catch (SQLException e) {
-            throw new ServiceNotAvailableException("Errore nel servizio rivista");
-        }
+    public NotizieServlet() {
         path = "/WEB-INF/results/mainPage/notizie.jsp";
     }
 
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            rs = new RivistaServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         ArrayList<Notizia> notizie  = null;
         try {
             notizie = rs.visualizzaNotizie();
@@ -48,6 +48,11 @@ public class NotizieServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            rs = new RivistaServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         ArrayList<Notizia> notizie  = null;
         String offset = request.getParameter("offset");

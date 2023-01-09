@@ -30,14 +30,17 @@ public class GiornalistaDAO implements GenericStaffDAO {
         ResultSet rs = ps.executeQuery();
 
         if (rs.next()) {
-            return new Giornalista(rs.getInt("id"),
-                    rs.getString("email"),
-                    rs.getString("password"),
-                    rs.getString("nome"),
-                    rs.getString("cognome"),
-                    rs.getString("immagine"),
-                    rs.getBoolean("verificato"),
-                    null);
+            Giornalista g = new Giornalista();
+
+            g.setId(rs.getInt("id"));
+            g.setEmail(rs.getString("email"));
+            g.setPassword(rs.getString("password"));
+            g.setNome(rs.getString("nome"));
+            g.setCognome(rs.getString("cognome"));
+            g.setImmagine(rs.getString("immagine"));
+            g.setVerificato(rs.getBoolean("verificato"));
+
+            return g;
         }
         else
             throw new SQLException("Invalid email");

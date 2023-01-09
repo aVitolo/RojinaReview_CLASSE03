@@ -17,18 +17,18 @@ public class journalistGamesServlet extends HttpServlet {
     private RivistaService rs;
     private String path;
 
-    public journalistGamesServlet() throws ServiceNotAvailableException {
-        try {
-            rs = new RivistaServiceImpl();
-        } catch (SQLException e) {
-            throw new ServiceNotAvailableException("Errore nel servizio rivista");
-        }
+    public journalistGamesServlet() {
         path = "/WEB-INF/results/giornalista/journalistGames.jsp";;
     }
 
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            rs = new RivistaServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         try {
             request.setAttribute("giochiGiornalista", rs.visualizzaVideogiochi());
         } catch (LoadingVideogamesException e) {

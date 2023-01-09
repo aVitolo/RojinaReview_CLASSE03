@@ -46,8 +46,8 @@ public class addProductCartServlet extends HttpServlet {
              */
             HttpSession session = request.getSession();
             Carrello carrello;
-            if (session.getAttribute("utente") != null) {
-                Videogiocatore u = (Videogiocatore) session.getAttribute("utente");
+            if (session.getAttribute("videogiocatore") != null) {
+                Videogiocatore u = (Videogiocatore) session.getAttribute("videogiocatore");
                 carrello = u.getCarrello();
             } else {
                 if (session.getAttribute("ospite") == null) {

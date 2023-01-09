@@ -26,12 +26,7 @@ public class insertGameServlet extends HttpServlet {
     private RivistaService rs;
     private String path;
 
-    public insertGameServlet() throws ServiceNotAvailableException {
-        try {
-            rs = new RivistaServiceImpl();
-        } catch (SQLException e) {
-            throw new ServiceNotAvailableException("Errore nel servizio rivista");
-        }
+    public insertGameServlet(){
         path = "/Rojina_Review_war/journalistGames";
     }
 
@@ -42,6 +37,11 @@ public class insertGameServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            rs = new RivistaServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         ServletContext context = request.getServletContext();
         ArrayList<String> generi = (ArrayList<String>) context.getAttribute("generi");
         ArrayList<String> piattaforme = (ArrayList<String>) context.getAttribute("piattaforme");
