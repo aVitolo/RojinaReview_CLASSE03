@@ -27,6 +27,7 @@ public class VideogiocoDAO {
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             Videogioco g = new Videogioco();
+
             g.setId(rs.getInt("id"));
             g.setTitolo(rs.getString("titolo"));
             g.setDataDiRilascio(rs.getDate("dataDiRilascio"));

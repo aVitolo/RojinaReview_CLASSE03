@@ -145,4 +145,10 @@ public interface RivistaService {
     ArrayList<Notizia> visualizzaNotizie() throws LoadingNewsException;
 
     ArrayList<Recensione> visualizzaRecensioni() throws LoadingReviewsException;
+
+    Giornalista visualizzaGiornalista(Articolo articolo) throws LoadingJournalistException;
+
+    Videogioco visualizzaVideogioco(Recensione recensione) throws LoadingVideogamesException;
+
+    Recensione visualizzaRecensioneByIDVideogioco(int id) throws LoadingReviewsException;
 }

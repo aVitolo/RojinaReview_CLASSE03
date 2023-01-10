@@ -19,6 +19,7 @@ public class RivistaServiceImpl implements RivistaService{
     private ParagrafoDAO pDAO;
     private GenereDAO gDAO;
     private PiattaformaDAO piattaformaDAO;
+    private GiornalistaDAO giornalistaDAO;
 
     public RivistaServiceImpl() throws SQLException {
         this.connection = ConPool.getConnection();
@@ -29,6 +30,7 @@ public class RivistaServiceImpl implements RivistaService{
         this.pDAO = new ParagrafoDAO(this.connection);
         this.gDAO = new GenereDAO(this.connection);
         this.piattaformaDAO = new PiattaformaDAO(this.connection);
+        this.giornalistaDAO = new GiornalistaDAO(this.connection);
     }
 
     @Override
@@ -259,4 +261,34 @@ public class RivistaServiceImpl implements RivistaService{
     public void modificaVideogioco(Videogioco videogioco) {
 
     }
+
+    public Giornalista visualizzaGiornalista(Articolo articolo) throws LoadingJournalistException {
+        try {
+            return giornalistaDAO.doRetrieveById(articolo.getId_Giornalista());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new LoadingJournalistException();
+        }
+    }
+
+    public Videogioco visualizzaVideogioco(Recensione recensione) throws LoadingVideogamesException {
+        try {
+            return vDAO.doRetrieveById(recensione.getIdVideogioco());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new LoadingVideogamesException();
+        }
+    }
+
+    public Recensione visualizzaRecensioneByIDVideogioco(int id) throws LoadingReviewsException {
+        try {
+            return rDAO.doRetrieveByIdVideogioco(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new LoadingReviewsException();
+        }
+    }
+
+
+
 }

@@ -6,6 +6,9 @@ import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.Commento;
 import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.dao.CommentoDAO;
+import rojinaReview.model.exception.InsertOpinionException;
+import rojinaReview.opinione.service.OpinioneService;
+import rojinaReview.opinione.service.OpinioneServiceImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -13,6 +16,7 @@ import java.util.Calendar;
 
 @WebServlet(name = "addCommentServlet", value = "/addCommentServlet")
 public class addCommentServlet extends HttpServlet {
+    private OpinioneService os;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -20,35 +24,25 @@ public class addCommentServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String result = "/Rojina_Review_war/getResource?type="+request.getParameter("type")+"&"+"id="+request.getParameter("id");
+        try {
+            os = new OpinioneServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String result = "/Rojina_Review_war/getResource?type="+request.getParameter("contenuto")+"&"+"id="+request.getParameter("idContenuto");
         HttpSession session = request.getSession();
-        Videogiocatore u = (Videogiocatore) session.getAttribute("videogiocatore");
+        Videogiocatore videogiocatore = (Videogiocatore) session.getAttribute("videogiocatore");
 
         Commento c = new Commento();
-        c.setIdVideogiocatore(u.getId());
+        c.setIdVideogiocatore(videogiocatore.getId());
         c.setTesto(request.getParameter("commentText"));
         c.setDataScrittura(new java.sql.Timestamp(Calendar.getInstance().getTime().getTime()));
-        c.setId(Integer.parseInt(request.getParameter("id")));
-        /*
-            Integer.parseInt(request.getParameter("type") da modificare con idContenuto
-         */
         c.setIdContenuto(Integer.parseInt(request.getParameter("idContenuto")));
+        c.setTipo(Integer.parseInt(request.getParameter("type")));
 
-        /*
-             Ordini dei check provvisorio
-         */
-        int type = -1;
-        if(request.getParameter("idContenuto").equals("prodotto"))
-            type = 0;
-        else if(request.getParameter("idContenuto").equals("recensione"))
-            type = 1;
-        else if(request.getParameter("idContenuto").equals("notizia"))
-            type = 2;
-        else
-                throw new RuntimeException();// modificare con Eccezione Personalizzata
         try {
-            new CommentoDAO().doSave(c,type);
-        } catch (SQLException e) {
+            os.inserisciCommento(c, videogiocatore);
+        } catch (InsertOpinionException e) {
             e.printStackTrace();
         }
 

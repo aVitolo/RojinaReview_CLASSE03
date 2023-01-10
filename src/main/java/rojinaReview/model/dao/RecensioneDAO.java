@@ -35,8 +35,32 @@ public class RecensioneDAO {
             r.setImmagine(rs.getString(4));
             r.setDataScrittura(rs.getDate(5));
             r.setVotoGiornalista(rs.getFloat(6));
-            r.setIdVideogioco(rs.getInt(7));
-            r.setId_Giornalista(rs.getInt(8));
+            r.setId_Giornalista(rs.getInt(7));
+            r.setIdVideogioco(rs.getInt(8));
+
+            return r;
+        }
+
+        return null;
+
+    }
+
+    public Recensione doRetrieveByIdVideogioco(int videogame) throws SQLException {
+        PreparedStatement ps =
+                con.prepareStatement("SELECT * FROM recensione WHERE id_videogioco=?");
+        ps.setInt(1, videogame);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            Recensione r = new Recensione();
+
+            r.setId(rs.getInt(1));
+            r.setNome(rs.getString(2));
+            r.setTesto(rs.getString(3));
+            r.setImmagine(rs.getString(4));
+            r.setDataScrittura(rs.getDate(5));
+            r.setVotoGiornalista(rs.getFloat(6));
+            r.setId_Giornalista(rs.getInt(7));
+            r.setIdVideogioco(rs.getInt(8));
 
             return r;
         }

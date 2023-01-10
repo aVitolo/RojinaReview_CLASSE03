@@ -265,7 +265,7 @@ create table Prodotto_Ordine(
 
 create table Parere(
     id                      int auto_increment not null,
-    parere                    float not null,
+    voto                    float not null,
     dataVotazione           date not null,
     id_videogiocatore       int not null,
     id_videogioco           int,
@@ -282,13 +282,13 @@ create table Parere(
        references Videogiocatore(id)
        on update cascade,
     primary key(id),
-    check (parere<=10 and parere>=1)
+    check (voto<=10 and voto>=1)
 );
 
 create table Commento(
     id                      int auto_increment not null,
     testo			        tinytext not null,
-    dataScrittura	        date not null,
+    dataScrittura	        datetime not null,
     id_videogiocatore       int not null,
     id_prodotto		        int,
     id_recensione           int,

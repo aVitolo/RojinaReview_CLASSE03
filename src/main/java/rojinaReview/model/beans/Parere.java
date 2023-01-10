@@ -56,7 +56,7 @@ public class Parere {
         this.idProdottoORVideogioco = idProdottoORVideogioco;
     }
 
-    public int isType() {
+    public int getType() {
         return type;
     }
 

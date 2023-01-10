@@ -65,9 +65,11 @@
             <h1 id="mediaVoto"><fmt:formatNumber value="<%=prodotto.getMediaVoto()%>" maxFractionDigits="1"/></h1>
             <h1>(<%=prodotto.getNumeroVoti()%>)</h1>
         <form  id="voteAction" name="voteAction" method="post" action="/Rojina_Review_war/addVote" onsubmit="return canVote('<%=canDo%>');">
-            <input type="hidden" name="type" value="shop">
-            <input type="hidden" name="id" value="<%=prodotto.getId()%>">
-            <input type="hidden" name="table" value="prodotto">
+            <input type="hidden" name="type" value="0">
+            <input type="hidden" name="idProdottoORVideogioco" value="<%=prodotto.getId()%>">
+            <input type="hidden" name="idContenuto" value="<%=prodotto.getId()%>">
+            <input type="hidden" name="contenuto" value="shop">
+            <input type="hidden" name="nome" value="<%=prodotto.getNome()%>">
             <input type="number" name="toVoto" id="toVoto" min="1" max="10" value="1">
             <input type="submit" value="Vota">
         </form>
@@ -83,8 +85,9 @@
         </div>
 
         <form  id="commentAction" action="/Rojina_Review_war/addComment" method="post" name="commentAction" onsubmit="return canComment('<%=canDo%>');">
-            <input type="hidden" name="type" value="prodotto">
-            <input type="hidden" name="id" value="<%=prodotto.getId()%>">
+            <input type="hidden" name="type" value="0">
+            <input type="hidden" name="idContenuto" value="<%=prodotto.getId()%>">
+            <input type="hidden" name="contenuto" value="shop">
             <input type="text" name="commentText" id="toComment" placeholder="Lascia un commento">
             <input type="submit" value="Commenta">
         </form>

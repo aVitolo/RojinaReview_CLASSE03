@@ -3,10 +3,7 @@ package rojinaReview.model.dao;
 import rojinaReview.model.beans.Commento;
 import rojinaReview.model.utilities.ConPool;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Locale;
@@ -64,11 +61,13 @@ public class CommentoDAO {
         while (rs.next())
         {
             Commento c = new Commento();
+
             c.setId(rs.getInt(1));
             c.setTesto(rs.getString(2));
             c.setDataScrittura(rs.getTimestamp(3));
             int idContenuto = 0;
             String contenuto = null;
+            int tipo = -1;
             /*
                 Da testare
              */
@@ -76,22 +75,27 @@ public class CommentoDAO {
             {
                 idContenuto = rs.getInt("id_prodotto");
                 contenuto = new ProdottoDAO(con).retrieveNome(rs.getInt("id_prodotto"));
+                tipo = 0;
             }
 
             else if (rs.getObject("id_recensione") != null)
             {
                 idContenuto = rs.getInt("id_recensione");
                 contenuto = new RecensioneDAO(con).retrieveNome(rs.getInt("id_recensione"));
+                tipo = 1;
             }
 
             else if (rs.getObject("id_notizia") != null)
             {
                 idContenuto = rs.getInt("id_notizia");
                 contenuto = new NotiziaDAO(con).retrieveNome(rs.getInt("id_notizia"));
+                tipo = 2;
             }
 
             c.setIdContenuto(idContenuto);
             c.setNomeContenuto(contenuto);
+            c.setTipo(tipo);
+
             commenti.add(c);
         }
 
@@ -102,27 +106,31 @@ public class CommentoDAO {
 
     }
 
-    public void doSave(Commento c, int tipo) throws SQLException {
-        PreparedStatement ps = con.prepareStatement("INSERT INTO commento VALUES (?, ?, ?, ?, ?, ?)");
+    public void doSave(Commento c, int user) throws SQLException {
+        PreparedStatement ps = con.prepareStatement("INSERT INTO commento (testo, dataScrittura, id_videogiocatore, id_prodotto, id_recensione, id_notizia) VALUES (?, ?, ?, ?, ?, ?)");
         ps.setString(1, c.getTesto());
         ps.setTimestamp(2, c.getDataScrittura());
-        ps.setInt(3, c.getIdVideogiocatore());
+        ps.setInt(3, user);
         /*
             se non setto gli altri parametri viene direttamente messo null o lanciata eccezione?
             proviamo ad utilizzare setNull.
         */
         //0 prodotto, 1 recensione, 2 notizia
+        int tipo = c.getTipo();
         if(tipo == 0) {
             ps.setInt(4, c.getIdContenuto());
-            ps.setNull(5, 6);
+            ps.setNull(5, 0);
+            ps.setNull(6, 0);
         }
         if(tipo == 1) {
+            ps.setNull(4, 0);
             ps.setInt(5, c.getIdContenuto());
-            ps.setNull(4, 6);
+            ps.setNull(6, 0);
         }
         if(tipo == 2) {
+            ps.setNull(4, 0);
+            ps.setNull(5, 0);
             ps.setInt(6, c.getIdContenuto());
-            ps.setNull(5, 4);
         }
         if(ps.executeUpdate() != 1)
             throw new RuntimeException("Insert error");

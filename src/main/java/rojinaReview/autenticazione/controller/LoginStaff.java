@@ -18,7 +18,6 @@ import rojinaReview.model.exception.EmailNotExistsException;
 import rojinaReview.model.exception.IncorrectPasswordException;
 import rojinaReview.model.exception.NotVerifiedAccountException;
 import rojinaReview.model.exception.ServiceNotAvailableException;
-import rojinaReview.model.utilities.GenericStaffDAO;
 import rojinaReview.model.utilities.Utils;
 
 import java.io.IOException;

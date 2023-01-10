@@ -6,21 +6,35 @@ import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.dao.CommentoDAO;
 import rojinaReview.model.dao.ParereDAO;
+import rojinaReview.model.exception.LoadingCommentException;
+import rojinaReview.opinione.service.OpinioneService;
+import rojinaReview.opinione.service.OpinioneServiceImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet(name = "userVotesServlet", value = "/userVotesServlet")
 public class userVotesServlet extends HttpServlet {
+    private OpinioneService os;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String result = "/WEB-INF/results/utente/userVotes.jsp";
-        HttpSession session = request.getSession();
-        Videogiocatore u = (Videogiocatore) session.getAttribute("videogiocatore");
         try {
-            request.setAttribute("commenti", new CommentoDAO().getCommentByUser(u.getId()));
-            request.setAttribute("voti", new ParereDAO().doRetrieveByUser(u.getId()));
+            os = new OpinioneServiceImpl();
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String result = "/WEB-INF/results/videogiocatorePages/userVotes.jsp";
+        HttpSession session = request.getSession();
+        Videogiocatore videogiocatore = (Videogiocatore) session.getAttribute("videogiocatore");
+
+        try {
+            videogiocatore.setCommenti(os.visualizzaCommentiUtente(videogiocatore));
+        } catch (LoadingCommentException e) {
+            e.printStackTrace();
+        }
+        try {
+            videogiocatore.setPareri(os.visualizzaVotiUtente(videogiocatore));
+        } catch (LoadingCommentException e) {
             e.printStackTrace();
         }
 

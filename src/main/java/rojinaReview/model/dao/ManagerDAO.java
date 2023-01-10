@@ -4,13 +4,12 @@ import rojinaReview.model.beans.Giornalista;
 import rojinaReview.model.beans.Manager;
 import rojinaReview.model.beans.Utente;
 import rojinaReview.model.utilities.ConPool;
-import rojinaReview.model.utilities.GenericStaffDAO;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class ManagerDAO implements GenericStaffDAO {
+public class ManagerDAO {
     private final Connection con;
 
     public Connection getCon() {

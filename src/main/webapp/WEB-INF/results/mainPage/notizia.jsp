@@ -53,8 +53,9 @@
         </div>
 
         <form  id="commentAction" action="/Rojina_Review_war/addComment" method="post" name="commentAction" onsubmit="return canComment('<%=canDo%>');">
-            <input type="hidden" name="type" value="notizia">
-            <input type="hidden" name="id" value="<%=notizia.getId()%>">
+            <input type="hidden" name="type" value="2">
+            <input type="hidden" name="idContenuto" value="<%=notizia.getId()%>">
+            <input type="hidden" name="contenuto" value="news">
             <input type="text" name="commentText" id="toComment" placeholder="Lascia un commento">
             <input type="submit" value="Commenta">
         </form>

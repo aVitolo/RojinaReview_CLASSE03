@@ -115,4 +115,16 @@ public class Commento {
     public void setNumeroSegnalazioni(int numeroSegnalazioni) {
         this.numeroSegnalazioni= numeroSegnalazioni;
     }
+
+    public String getResource()
+    {
+        if(tipo == 0)
+            return "shop";
+        else if (tipo == 1)
+            return "reviews";
+        else if (tipo == 2)
+            return "news";
+
+        return null;
+    }
 }

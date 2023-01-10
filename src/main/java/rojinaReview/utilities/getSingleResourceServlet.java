@@ -5,6 +5,13 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.*;
 import rojinaReview.model.dao.*;
+import rojinaReview.model.exception.*;
+import rojinaReview.opinione.service.OpinioneService;
+import rojinaReview.opinione.service.OpinioneServiceImpl;
+import rojinaReview.rivista.service.RivistaService;
+import rojinaReview.rivista.service.RivistaServiceImpl;
+import rojinaReview.shop.service.ShopService;
+import rojinaReview.shop.service.ShopServiceImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -12,13 +19,31 @@ import java.util.ArrayList;
 
 @WebServlet(name = "getSingleResourceServlet", value = "/getSingleResourceServlet")
 public class getSingleResourceServlet extends HttpServlet {
+    private RivistaService rs;
+    private ShopService ss;
+    private OpinioneService os;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            rs = new RivistaServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            ss = new ShopServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
+            os = new OpinioneServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         String type = request.getParameter("type");
         String result = null;
         int id = Integer.parseInt(request.getParameter("id"));
         int i, j;
-        boolean searchDB = Boolean.parseBoolean(request.getParameter("searchDB"));
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
         request.setAttribute("votoUtente", null);
@@ -26,55 +51,80 @@ public class getSingleResourceServlet extends HttpServlet {
 
         if (type.equalsIgnoreCase("news") || type.equalsIgnoreCase("notizia")) {
             try {
-                Notizia n = new NotiziaDAO().doRetrieveById(id);
-                request.setAttribute("notizia", n);
-                request.setAttribute("commenti", new CommentoDAO().getCommentById(id, 2));
-                request.setAttribute("giornalista", new GiornalistaDAO().doRetrieveById(n.getId_Giornalista()));
+                Notizia notizia = rs.visualizzaNotiziaByID(id);
+                request.setAttribute("notizia", notizia);
+                request.setAttribute("commenti", os.visualizzaCommenti(notizia));
+                request.setAttribute("giornalista", rs.visualizzaGiornalista(notizia));
                 //1 dovrebbe specificare la colonna idRecensione, guardare DB per verificare la correttezza
             }
             catch (SQLException e) {
                 e.printStackTrace();
+            } catch (LoadingNewsException e) {
+                e.printStackTrace();
+            } catch (LoadingCommentException e) {
+                e.printStackTrace();
+            } catch (LoadingJournalistException e) {
+                e.printStackTrace();
             }
             result = "/WEB-INF/results/mainPage/notizia.jsp";
         }
-        else if (type.equalsIgnoreCase("reviews") || type.equalsIgnoreCase("recensione")) {
+        else if (type.equalsIgnoreCase("reviews") || type.equalsIgnoreCase("recensione") || type.equalsIgnoreCase("game")) {
             try {
-                Recensione r = new RecensioneDAO().doRetrieveById(id);
-                request.setAttribute("recensione", r);
-                request.setAttribute("commenti", new CommentoDAO().getCommentById(id, 1));
-                request.setAttribute("videogioco",new VideogiocoDAO().doRetrieveById(r.getIdVideogioco()));
-                request.setAttribute("giornalista",new GiornalistaDAO().doRetrieveById(r.getId_Giornalista()));
+                Recensione recensione;
+                if(type.equalsIgnoreCase("game"))
+                    recensione = rs.visualizzaRecensioneByIDVideogioco(id);
+                else
+                    recensione = rs.visualizzaRecensioneByID(id);
+
+                request.setAttribute("recensione", recensione);
+                request.setAttribute("commenti", os.visualizzaCommenti(recensione));
+                request.setAttribute("videogioco", rs.visualizzaVideogioco(recensione));
+                request.setAttribute("giornalista",rs.visualizzaGiornalista(recensione));
                 if(session.getAttribute("videogiocatore") != null)
                 {
-                    Videogiocatore u = (Videogiocatore) session.getAttribute("videogiocatore");
-                    request.setAttribute("votoUtente", new ParereDAO().
-                            doRetrieveUserOpinion(u.getId(), r.getIdVideogioco(), 4));
+                    Videogiocatore videogiocatore = (Videogiocatore) session.getAttribute("videogiocatore");
+                    request.setAttribute("votoUtente", os.visualizzaVotoUtente(videogiocatore, recensione));
                 }
             }
             catch (SQLException e) {
+                e.printStackTrace();
+            } catch (LoadingReviewsException e) {
+                e.printStackTrace();
+            } catch (LoadingVideogamesException e) {
+                e.printStackTrace();
+            } catch (LoadingCommentException e) {
+                e.printStackTrace();
+            } catch (LoadingJournalistException e) {
+                e.printStackTrace();
+            } catch (LoadingOpinionException e) {
                 e.printStackTrace();
             }
             result = "/WEB-INF/results/mainPage/recensione.jsp";
         }
         else if (type.equalsIgnoreCase("shop") || type.equalsIgnoreCase("prodotto")) {
-            Videogiocatore u = null;
+            Videogiocatore videogiocatore = null;
             Carrello carrello = null;
             int quantitàCarrello = 0;
             if(session.getAttribute("videogiocatore") != null){
-                u = (Videogiocatore) session.getAttribute("videogiocatore");
-                carrello = u.getCarrello();
+                videogiocatore = (Videogiocatore) session.getAttribute("videogiocatore");
+                carrello = videogiocatore.getCarrello();
             }
             else if(session.getAttribute("ospite") != null)
                 carrello = (Carrello) session.getAttribute("ospite");
             try {
-                Prodotto p = new ProdottoDAO().doRetrieveById(id);
-                request.setAttribute("prodotto", p);
-                request.setAttribute("commenti", new CommentoDAO().getCommentById(id, 0));
-                if(u != null)
-                    request.setAttribute("votoUtente", new ParereDAO().
-                            doRetrieveByUserAndIDTable(u.getId(),Integer.toString(p.getId()), false));
+                Prodotto prodotto = ss.visualizzaProdotto(id);
+                request.setAttribute("prodotto", prodotto);
+                request.setAttribute("commenti", os.visualizzaCommenti(prodotto));
+                if(videogiocatore != null)
+                    request.setAttribute("votoUtente", os.visualizzaVotoUtente(videogiocatore, prodotto));
             }
             catch (SQLException e) {
+                e.printStackTrace();
+            } catch (ProductIDMissingException e) {
+                e.printStackTrace();
+            } catch (LoadingCommentException e) {
+                e.printStackTrace();
+            } catch (LoadingOpinionException e) {
                 e.printStackTrace();
             }
             //per aggiornare in real-time la quantità disponibile
