@@ -1,5 +1,6 @@
 package rojinaReview.shop.service;
 
+import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.dao.*;
 import rojinaReview.model.exception.CheckoutException;
 import rojinaReview.model.exception.LoadingOrderException;
@@ -130,9 +131,9 @@ public class ShopServiceImpl implements  ShopService{
          ArrayList<Prodotto> prodottiContext
      */
     @Override
-    public void checkout(Ordine ordine,int idVideogiocatore, ArrayList<Prodotto> prodottiContext) throws CheckoutException {
+    public void checkout(Ordine ordine, Videogiocatore videogiocatore) throws CheckoutException {
         try {
-            oDAO.confirmOrder(ordine,idVideogiocatore,prodottiContext);
+            oDAO.confirmOrder(ordine,videogiocatore.getId());
         } catch (SQLException e) {
             throw new CheckoutException("Errore in fase di checkout");
         }
@@ -143,11 +144,9 @@ public class ShopServiceImpl implements  ShopService{
        autenticazione.userOrderServlet
      */
     @Override
-    public List<Ordine> visualizzaOrdiniEffettuati(int id) throws LoadingOrderException {
-        List<Ordine> ordini = null;
+    public ArrayList<Ordine> visualizzaOrdiniEffettuati(Videogiocatore videogiocatore) throws LoadingOrderException {
         try {
-            ordini = oDAO.doRetrieveByUserId(id);
-            return ordini;
+            return oDAO.doRetrieveByUserId(videogiocatore.getId());
         } catch (SQLException e) {
             throw new LoadingOrderException("Errore nel caricamento degli ordini");
         }

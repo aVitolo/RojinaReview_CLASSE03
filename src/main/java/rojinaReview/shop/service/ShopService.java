@@ -3,6 +3,7 @@ package rojinaReview.shop.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.exception.CheckoutException;
 import rojinaReview.model.exception.LoadingOrderException;
 import rojinaReview.model.exception.LoadingShopException;
@@ -86,18 +87,17 @@ public interface ShopService
      * Firma del metodo che permette
      * ad un Videogicoatore
      * di rimuovere un prodotto al carello
-     * @param ordin per la persistenza
-     * @param id del videogiocatore
-     * @param prodottiContext , lista prodotti nella sessione da aggiornare
+     * @param ordine per la persistenza
+     * @param videogiocatore che sta acquistando
      */
-    void checkout(Ordine ordine, int id, ArrayList<Prodotto>prodottiContext) throws CheckoutException;
+    void checkout(Ordine ordine, Videogiocatore videogiocatore) throws CheckoutException;
 
     /**
      * Firma del metodo che permette
      * ad un Videogicoatore
      * di visualziare gli ordini effettuati
-     * @param id del videogiocatore
+     * @param videogiocatore di cui si devono visualizzare gli ordini
      */
-    List<Ordine>visualizzaOrdiniEffettuati(int id) throws LoadingOrderException;
+    ArrayList<Ordine>visualizzaOrdiniEffettuati(Videogiocatore videogiocatore) throws LoadingOrderException;
 
 }

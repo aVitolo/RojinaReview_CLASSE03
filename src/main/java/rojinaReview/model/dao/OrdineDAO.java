@@ -36,6 +36,7 @@ public class OrdineDAO {
             o.setTotale(rs.getFloat(4));
             o.setPagamento(new Pagamento(rs.getString(5), rs.getString(6), rs.getString(7), rs.getDate(8)));
             o.setIndirizzo(new Indirizzo(rs.getString(9), rs.getString(10), rs.getString(11), rs.getInt(12)));
+            o.setProdotti(new ArrayList<>());
 
             //o.setProdotti(); //settare i prodotti non in questo metodo ma bensì nell'implementazione dell'interfaccia quando si va nei dettagli dell'ordine?
 
@@ -50,7 +51,7 @@ public class OrdineDAO {
                 p.setImmagine(rsInt.getString(3));
                 p.setPrezzo(rsInt.getFloat(4));
                 p.setCategoria(rsInt.getString(5));
-                p.setQuantità(rs.getInt(6));
+                p.setQuantità(rsInt.getInt(6));
 
                 o.getProdotti().add(p);
             }
@@ -64,7 +65,7 @@ public class OrdineDAO {
 
 
 
-    public void confirmOrder(Ordine o, int user, ArrayList<Prodotto> prodottiContext) throws SQLException {
+    public void confirmOrder(Ordine o, int user) throws SQLException {
         int idOrdine = 0;
         ArrayList<Prodotto> prodotti = o.getProdotti();
         PreparedStatement ps;
@@ -113,12 +114,6 @@ public class OrdineDAO {
             ps.setInt(2, p.getId());
             ps.executeUpdate();
 
-            //aggiorno la disponibilità nel context
-            if (prodottiContext != null) {
-                for (Prodotto pContext : prodottiContext)
-                    if (pContext.getId() == p.getId())
-                        pContext.setQuantità(pContext.getQuantità() - p.getQuantità());
-            }
             ps = con.prepareStatement("INSERT INTO prodotto_ordine VALUES (?, ?, ?, ?)");
             ps.setInt(1, p.getId());
             ps.setInt(2, idOrdine);

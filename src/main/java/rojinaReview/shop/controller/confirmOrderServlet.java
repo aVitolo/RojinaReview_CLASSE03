@@ -121,7 +121,7 @@ public class confirmOrderServlet extends HttpServlet {
             Procedo alla conferma dell'ordine-> shopServiceImpl().checkout();
          */
             try {
-                ssi.checkout(ordine,u.getId(),(ArrayList<Prodotto>) session.getAttribute("prodotti"));
+                ssi.checkout(ordine,u);
                 /*
                     svuotamento carrello sessione
                 */
