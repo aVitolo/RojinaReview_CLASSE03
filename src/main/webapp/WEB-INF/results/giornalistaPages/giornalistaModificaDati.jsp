@@ -4,8 +4,8 @@
 <html>
 <head>
     <title>Area giornalista</title>
-    <link rel="stylesheet" href="./css/master.css">
-    <link rel="stylesheet" href="./css/notizie.css">
+    <link rel="stylesheet" href="./static/css/master.css">
+    <link rel="stylesheet" href="./static/css/notizie.css">
     <style>
         section{
             margin: 25%;
@@ -21,7 +21,7 @@
 
 </head>
 <body>
-<%@ include file="/WEB-INF/results/giornalista/journalistArea.jsp" %>
+<%@ include file="/WEB-INF/results/giornalistaPages/journalistArea.jsp" %>
 <%@ page import="rojinaReview.model.beans.Giornalista" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% Giornalista g = (Giornalista) session.getAttribute("giornalista");%>
@@ -31,17 +31,26 @@
 <table>
     <tr>
         <th>
+            <p>Email</p>
+        </th>
+        <th>
+            <p>Password</p>
+        </th>
+        <th>
             <p>Nome</p>
         </th>
         <th>
             <p>Cognome</p>
         </th>
-        <th>
-            <p>Email</p>
-        </th>
     </tr>
     <tr>
         <form id="journalistUpdate" method="POST" action="./journalistUpdateData">
+            <td>
+                <input type="text" value="<%=g.getEmail()%>" name="email">
+            </td>
+            <td>
+                <input type="password"  name="password">
+            </td>
             <td>
                 <input type="text" value="<%=g.getNome()%>" name="nome">
             </td>
@@ -49,23 +58,12 @@
                 <input type="text" value="<%=g.getCognome()%>" name="cognome">
             </td>
             <td>
-                <input type="text" value="<%=g.getEmail()%>" name="email">
-            </td>
-            <td>
-                <input type="button" value="Aggiorna" onclick="info()">
+                <input type="submit" value="Aggiorna">
             </td>
         </form>
     </tr>
 </table>
 </section>
-<script>
-    function info() {
-        let resoult = confirm("Cambiando i seguenti dati sarai disconnesso, Sei sicuro? \n(Potrai riloggare subito dopo!!)");
-        if (resoult === true) {
-            document.getElementById("journalistUpdate").submit();
-        }
-    }
-</script>
 </div>
 </body>
 </html>

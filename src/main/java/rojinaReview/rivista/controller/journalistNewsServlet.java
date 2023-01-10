@@ -20,7 +20,7 @@ public class journalistNewsServlet extends HttpServlet {
 
     public journalistNewsServlet()  {
 
-        path = "/WEB-INF/results/giornalista/journalistNews.jsp";
+        path = "/WEB-INF/results/giornalistaPages/journalistNews.jsp";
     }
 
 

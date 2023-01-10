@@ -239,6 +239,7 @@ public class RivistaServiceImpl implements RivistaService{
         try {
             videogioco.setId(vDAO.doSave(videogioco));
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new InsertVideogameException("Errore nell'inserimento videogioco");
         }
         try {

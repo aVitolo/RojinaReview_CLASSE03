@@ -96,7 +96,9 @@ public class VideogiocoDAO {
 
 
     public int doSave(Videogioco g) throws SQLException {
-        PreparedStatement ps = con.prepareStatement("INSERT INTO videogioco VALUES " +
+        int id = 0;
+        PreparedStatement ps = con.prepareStatement("INSERT INTO videogioco (titolo, dataDiRilascio, casaDiSviluppo, mediaVoto, numeroVoti, copertina) " +
+                "VALUES " +
                 "(?, ?, ?, ?, ?, ?)");
 
         ps.setString(1, g.getTitolo());
@@ -112,7 +114,9 @@ public class VideogiocoDAO {
 
         ps = con.prepareStatement("SELECT id FROM videogioco ORDER BY id DESC LIMIT 1");
         ResultSet rs = ps.executeQuery();
-        int id = rs.getInt(1);
+        if(rs.next())
+            id = rs.getInt(1);
+
         return id;
     }
 

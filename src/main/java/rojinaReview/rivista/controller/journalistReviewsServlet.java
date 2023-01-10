@@ -19,7 +19,7 @@ public class journalistReviewsServlet extends HttpServlet {
     private String path;
 
     public journalistReviewsServlet() throws ServiceNotAvailableException {
-        path = "/WEB-INF/results/giornalista/journalistReviews.jsp";
+        path = "/WEB-INF/results/giornalistaPages/journalistReviews.jsp";
     }
 
 

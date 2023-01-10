@@ -4,8 +4,8 @@
 <html>
 <head>
     <title>Area giornalista</title>
-    <link rel="stylesheet" href="./css/master.css">
-    <link rel="stylesheet" href="./css/recensioni.css">
+    <link rel="stylesheet" href="./static/css/master.css">
+    <link rel="stylesheet" href="./static/css/recensioni.css">
     <style>
         img{
             opacity: 1;
@@ -14,7 +14,7 @@
 
 </head>
 <body>
-<%@ include file="/WEB-INF/results/giornalista/journalistArea.jsp" %>
+<%@ include file="/WEB-INF/results/giornalistaPages/journalistArea.jsp" %>
 <div class="menu" id="addRecensione">
     <div class="insertRecensione">
         <form name="insertRecensione" action="/Rojina_Review_war/insertReview" method="post"
@@ -41,9 +41,9 @@
                 <div class="articolo">
                     <img src="${articolo.immagine}" , alt="copertina" decoding="async">
                     <div class="articolo-content">
-                        <h2>${articolo.titolo}</h2>
+                        <h2>${articolo.nome}</h2>
                         <p>${fn:substring(articolo.testo, 0, 50)}</p>
-                        <p class="parere">${articolo.parere}</p>
+                        <p class="parere">${articolo.votoGiornalista}</p>
                     </div>
                 </div>
             </a>

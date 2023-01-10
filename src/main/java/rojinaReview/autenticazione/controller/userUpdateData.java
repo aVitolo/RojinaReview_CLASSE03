@@ -32,7 +32,8 @@ public class userUpdateData extends HttpServlet {
 
         if (session.getAttribute("videogiocatore") == null)
             response.sendRedirect(homePage);
-        else {
+        else
+        {
             Videogiocatore videogiocatore = (Videogiocatore) session.getAttribute("videogiocatore");
 
             videogiocatore.setEmail(request.getParameter("email"));

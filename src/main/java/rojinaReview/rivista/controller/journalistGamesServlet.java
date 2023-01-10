@@ -18,7 +18,7 @@ public class journalistGamesServlet extends HttpServlet {
     private String path;
 
     public journalistGamesServlet() {
-        path = "/WEB-INF/results/giornalista/journalistGames.jsp";;
+        path = "/WEB-INF/results/giornalistaPages/journalistGames.jsp";;
     }
 
 

@@ -62,20 +62,12 @@
                 <input type="text" value="<%=u.getCognome()%>" name="cognome">
             </td>
             <td>
-                <input type="button" value="Aggiorna" onclick="info()">
+                <input type="submit" value="Aggiorna">
             </td>
         </form>
     </tr>
 </table>
 </section>
-<script>
-    function info() {
-        let resoult = confirm("Cambiando i seguenti dati sarai disconnesso, Sei sicuro? \n(Potrai riloggare subito dopo!!)");
-        if (resoult === true) {
-            document.getElementById("userUpdate").submit();
-        }
-    }
-</script>
 </body>
 </html>
 

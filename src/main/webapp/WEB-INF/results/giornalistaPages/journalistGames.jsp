@@ -4,8 +4,8 @@
 <html>
 <head>
     <title>Area giornalista</title>
-    <link rel="stylesheet" href="./css/master.css">
-    <link rel="stylesheet" href="./css/notizie.css">
+    <link rel="stylesheet" href="./static/css/master.css">
+    <link rel="stylesheet" href="./static/css/notizie.css">
 </head>
 <body>
 <%@ include file="/WEB-INF/results/giornalistaPages/journalistArea.jsp" %>
@@ -22,16 +22,16 @@
             <span class="attribute">Copertina: </span>
             <input type="file" id="copertina" name="copertina">
             <br>
-            <span id="tipologia" class="attribute">Tipologia: </span>
-            <c:forEach items="${applicationScope['tipologie']}" var="tipologia">
-                <input type="checkbox" id="${tipologia.nome}" name="${tipologia.nome}" value="${tipologia.nome}">
-                <label for="${tipologia.nome}">${tipologia.nome}&nbsp;&nbsp;</label>
+            <span id="tipologia" class="attribute">Genere: </span>
+            <c:forEach items="${applicationScope['generi']}" var="genere">
+                <input type="checkbox" id="${genere}" name="${genere}" value="${genere}">
+                <label for="${genere}">${genere}&nbsp;&nbsp;</label>
             </c:forEach>
             <br>
             <span id="piattaforma" class="attribute">Piattaforma: </span>
             <c:forEach items="${applicationScope['piattaforme']}" var="piattaforma">
-                <input type="checkbox" id="${piattaforma.nome}" name="${piattaforma.nome}" value="${piattaforma.nome}">
-                <label for="${piattaforma.nome}">${piattaforma.nome}&nbsp;&nbsp;</label>
+                <input type="checkbox" id="${piattaforma}" name="${piattaforma}" value="${piattaforma}">
+                <label for="${piattaforma}">${piattaforma}&nbsp;&nbsp;</label>
             </c:forEach>
 
             <br>
@@ -40,13 +40,13 @@
     </div>
 
     <section class="articoli">
-        <c:forEach items="${requestScope['giochiGiornalista']}" var="articolo">
+        <c:forEach items="${requestScope['giochiGiornalista']}" var="videogioco">
             <div class="articolo">
-                <img src="${articolo.copertina}" , alt="copertina" decoding="async">
+                <img src="${videogioco.copertina}" , alt="copertina" decoding="async">
                 <div class="articolo-content">
-                    <h2>${articolo.titolo}</h2>
-                    <p>${articolo.casaDiSviluppo}</p>
-                    <p class="parere">${articolo.mediaVoto}</p>
+                    <h2>${videogioco.titolo}</h2>
+                    <p>${videogioco.casaDiSviluppo}</p>
+                    <p class="parere">${videogioco.mediaVoto}</p>
                 </div>
             </div>
         </c:forEach>

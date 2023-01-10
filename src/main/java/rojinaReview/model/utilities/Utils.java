@@ -93,7 +93,7 @@ public class Utils {
 
         }
 
-        return "." + File.separator + "images" + File.separator + imageType + File.separator + fileName;
+        return "." + File.separator + "static" + File.separator + "images" + File.separator + imageType + File.separator + fileName;
     }
 
     public static void saveImageFileSystem(String imageType, String fileName, Part filePart) throws IOException {

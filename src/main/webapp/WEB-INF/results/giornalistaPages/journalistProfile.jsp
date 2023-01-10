@@ -4,10 +4,10 @@
 <html>
 <head>
     <title>Area Giornalista</title>
-    <link rel="stylesheet" href="./css/master.css">
+    <link rel="stylesheet" href="./static/css/master.css">
 </head>
 <body>
-<%@ include file="/WEB-INF/results/giornalista/journalistArea.jsp" %>
+<%@ include file="/WEB-INF/results/giornalistaPages/journalistArea.jsp" %>
 <div class="menu" id="profilo">
     <h1 class="currentMenuName">Profilo</h1>
     <div class="information">

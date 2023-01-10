@@ -11,8 +11,8 @@
 <html>
 <head>
     <title>Area giornalista</title>
-    <link rel="stylesheet" href="./css/master.css">
-    <link rel="stylesheet" href="./css/journalistArea.css">
+    <link rel="stylesheet" href="./static/css/master.css">
+    <link rel="stylesheet" href="./static/css/journalistArea.css">
 </head>
 <body>
 <div class="sidebar">
@@ -20,7 +20,7 @@
 
     <div id="homeButton">
         <a href="/Rojina_Review_war/home">
-            <img id="logo" src="./images/utility/rojinah.png">
+            <img id="logo" src="./static/images/utility/rojinah.png">
         </a>
     </div>
     <ul class="journalistMenu">
