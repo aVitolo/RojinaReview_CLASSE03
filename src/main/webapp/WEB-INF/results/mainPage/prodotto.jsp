@@ -110,7 +110,7 @@
         <%}%>
         <form method="post" action="inviaSegnalazioneServlet" style="display: none; color: red" id="form_segnalazione">
             <input type="hidden" value="" id="input_id" name="id_commento">
-            <input type="hidden" value="2" name="flag">
+            <input type="hidden" value="0" name="flag">
             <input type="hidden" value="<%=prodotto.getId()%>" name="id_contenuto">
             <select name="motivo" style="width: 200px; color: red">
                 <option value="È spam">
