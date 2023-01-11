@@ -10,7 +10,7 @@
 <body>
 <%@ include file="/WEB-INF/results/managerPages/managerArea.jsp" %>
 <div class="center">
-  <form method="post" action="./aggiungiProdotto">
+  <form method="post" action="./aggiungiProdotto"  enctype="multipart/form-data">
     <div class="form_input">
       <input id="Nome" type="text" name="nome" required>
       <span></span>
@@ -32,11 +32,11 @@
       <label>Prezzo</label>
     </div>
     <div>
-      <input type="radio" class="radioCategoria" id="casaRadio" name="productType" value="0" checked="checked">
+      <input type="radio" class="radioCategoria" id="casaRadio" name="productType" value="Casa" checked="checked">
       <label>Casa</label>
-      <input type="radio" class="radioCategoria" id="giocattoliRadio" name="productType" value="1">
+      <input type="radio" class="radioCategoria" id="giocattoliRadio" name="productType" value="Giocattoli">
       <label>Giocattoli</label>
-      <input type="radio" class="radioCategoria" id="abbigliamentoRadio" name="productType" value="1">
+      <input type="radio" class="radioCategoria" id="abbigliamentoRadio" name="productType" value="Abbigliamento">
       <label>Abbigliamento</label>
     </div>
     <div class="form_input">

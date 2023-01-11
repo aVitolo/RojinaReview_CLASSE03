@@ -10,7 +10,7 @@
 <body>
 <%@ include file="/WEB-INF/results/managerPages/managerArea.jsp" %>
 <div class="center">
-  <form method="post" action="./modificaProdotto">
+  <form method="post" action="./modificaProdotto"  enctype="multipart/form-data">
     <div class="form_input">
       <input id="Nome" type="text" name="nome" value="${prodotto.nome}" required>
       <span></span>
@@ -53,7 +53,7 @@
       <label>Foto Prodotto</label>
     </div>
     <div class="form_input" style="visibility: hidden">
-      <input id="idProdotto" type="hidden" value="${prodotto.id}">
+      <input id="idProdotto" type="hidden" value="${prodotto.id}"  name="id">
     </div>
     <input id="registerSubmit" type="submit" onclick="validateInputs()" value="Invia Richiesta">
   </form>

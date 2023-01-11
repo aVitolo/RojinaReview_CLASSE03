@@ -98,7 +98,7 @@ public class Utils {
 
     public static void saveImageFileSystem(String imageType, String fileName, Part filePart) throws IOException {
         String home = System.getProperty("user.home");
-        String project = File.separator + "IdeaProjects" + File.separator + "RojinaReview" + File.separator + "src" + File.separator + "main" + File.separator + "webapp"  + File.separator + "static"+ File.separator + "images";
+        String project = File.separator + "IdeaProjects" + File.separator + "RojinaReview_CLASSE03" + File.separator + "src" + File.separator + "main" + File.separator + "webapp"  + File.separator + "static"+ File.separator + "images";
         String path = home + project + File.separator + imageType;
 
         OutputStream out = null;

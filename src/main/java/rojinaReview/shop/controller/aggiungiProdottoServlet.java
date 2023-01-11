@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet(name = "aggiungioProdottoServlet", value = "/aggiungioProdottoServlet")
+@MultipartConfig
 public class aggiungiProdottoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -19,11 +20,11 @@ public class aggiungiProdottoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String result = "/Rojina_Review_war/visualizzaShopServlet";
+
         //prodotto da inserire preso dal form
         Prodotto prodotto = new Prodotto();
         prodotto.setNome(request.getParameter("nome"));
-        prodotto.setTesto(request.getParameter("descizione"));
+        prodotto.setTesto(request.getParameter("descrizione"));
         prodotto.setCategoria(request.getParameter("productType"));
         prodotto.setPrezzo(Float.parseFloat(request.getParameter("prezzo")));
         prodotto.setQuantità(Integer.parseInt(request.getParameter("quantita")));
@@ -39,7 +40,7 @@ public class aggiungiProdottoServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        String result = "/Rojina_Review_war/visualizzaShop";
         response.sendRedirect(result);
     }
 }
