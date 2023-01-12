@@ -18,9 +18,6 @@ import java.sql.SQLException;
 
 public class inviaSegnalazioneServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println(request.getParameter("id_commento"));
-        System.out.println(request.getParameter("motivo"));
-        System.out.println(request.getParameter("commento_aggiuntivo"));
         int flag= Integer.parseInt(request.getParameter("flag"));
         java.sql.Date date= new java.sql.Date(System.currentTimeMillis());
         Videogiocatore utente= (Videogiocatore) request.getSession().getAttribute("videogiocatore");

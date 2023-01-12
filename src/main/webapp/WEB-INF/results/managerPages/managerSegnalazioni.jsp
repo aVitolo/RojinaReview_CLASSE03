@@ -24,7 +24,7 @@
             <p>${segnalazione.nicknameVideogiocatore}</p>
             <p>${segnalazione.nomeContenuto}</p>
             <p>${segnalazione.numeroSegnalazioni}</p>
-            <button>Dettagli</button>
+            <a href="/Rojina_Review_war/getReportedCommentDetails?idCommento=${segnalazione.id}"> <button>Dettagli</button></a>
         </div>
     </c:forEach>
 </section>

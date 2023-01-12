@@ -113,8 +113,8 @@
             <input type="hidden" value="0" name="flag">
             <input type="hidden" value="<%=prodotto.getId()%>" name="id_contenuto">
             <select name="motivo" style="width: 200px; color: red">
-                <option value="È spam">
-                <option value="Contenuto offensivo">
+                <option value="È spam">È spam</option>
+                <option value="Contenuto offensivo">Contenuto offensivo</option>
                     <textarea rows="10" cols="30" name="commento_aggiuntivo"></textarea>
                     <button type="submit"> Invia segnalazione</button>
         </form>
