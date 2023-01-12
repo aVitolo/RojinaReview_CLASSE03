@@ -65,7 +65,8 @@
     resize: none;
 }
 
-#comments input[type=submit]{
+#comments input[type=submit],
+button.segnalaB{
     margin: 5px 5px;
     background: #e91e63;
     border: none;
@@ -76,9 +77,15 @@
     color: #ffffff;
     height: 40px;
     width: 70px;
+    font-weight: bold;
 }
 
-#comments input[type=submit]:hover{
+button.segnalaB{
+    width: fit-content;
+}
+
+#comments input[type=submit]:hover,
+button.segnalaB:hover{
     background: #6B354D;
 }
 

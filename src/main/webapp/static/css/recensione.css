@@ -66,21 +66,30 @@
     resize: none;
 }
 
-input[type=submit]{
+#comments input[type=submit],
+button.segnalaB{
     margin: 5px 5px;
     background: #e91e63;
     border: none;
     cursor: pointer;
     transition-duration: 0.3s;
+    border-radius: 2px;
+    font-size: 16px;
+    color: #ffffff;
     height: 40px;
     width: 70px;
-    border-radius: 2px;
-    color: white;
+    font-weight: bold;
 }
 
-input[type=submit]:hover{
+button.segnalaB{
+    width: fit-content;
+}
+
+#comments input[type=submit]:hover,
+button.segnalaB:hover{
     background: #6B354D;
 }
+
 
 #votoRecensione{
     position: relative;

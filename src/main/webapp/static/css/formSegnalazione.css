@@ -1,0 +1,54 @@
+#form_segnalazione{
+    flex-direction: column;
+    background: #24262b;
+    align-items: center;
+    position: fixed;
+    top: 40%;
+    padding: 2%;
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    width: 300px;
+}
+
+#form_segnalazione button{
+    width: 100%;
+    height: 50px;
+    background: #e91e63;
+    border-radius: 25px;
+    cursor: pointer;
+    outline: none;
+    color: #ffffff;
+    border: transparent;
+    margin: 2%;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+#form_segnalazione button:hover {
+    background: #6B354D;
+}
+
+#form_segnalazione textarea{
+    background: none;
+    height: 157px;
+    width: fit-content;
+    outline: none;
+    color: white;
+    border: none;
+    overflow: auto;
+    outline: none;
+    border-bottom: solid 2px #6B354D;
+    font-size: 18px;
+    font-weight: 700;
+}
+#form_segnalazione select{
+    background:  #24262b;
+    color:white;
+    border: none;
+    overflow: auto;
+    outline: none;
+    font-size: 18px;
+    font-weight: 700;
+}

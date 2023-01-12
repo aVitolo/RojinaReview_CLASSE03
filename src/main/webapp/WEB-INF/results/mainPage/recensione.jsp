@@ -23,10 +23,11 @@
     <link rel="stylesheet" href="./static/css/foot.css">
     <link rel="stylesheet" href="./static/css/recensione.css">
     <link rel="stylesheet" href="./static/css/master.css">
+    <link rel="stylesheet" href="./static/css/formSegnalazione.css">
     <script src="./static/js/userFunctions.js" type="text/javascript"></script>
 </head>
 <body>
-
+<div id="page">
 <%@ include file="/WEB-INF/results/utilities/navebar.jsp" %>
 <section id="wrap">
 
@@ -87,35 +88,39 @@
             <div class="comment">
                 <h4 class="nickname"><%=c.getNicknameVideogiocatore()%>
                 </h4>
-                <p class="text">
-                    <%=c.getTesto()%>
-                </p>
-
+                <div style="display: flex; justify-content: space-between;">
+                    <p class="text">
+                        <%=c.getTesto()%>
+                    </p>
+                    <button class="segnalaB" onclick="handleRequest(<%=c.getId()%>)">Segnala</button>
+                </div>
                 <div class="date">
                     <%=c.getDataScrittura()%>
                 </div>
-                <button onclick="handleRequest(<%=c.getId()%>)">Segnala</button>
             </div>
             <%}%>
         <%}%>
-        <form method="post" action="inviaSegnalazioneServlet" style="display: none; color: red" id="form_segnalazione">
-            <input type="hidden" value="" id="input_id" name="id_commento">
-            <input type="hidden" value="2" name="flag">
-            <input type="hidden" value="<%=recensione.getId()%>" name="id_contenuto">
-            <select name="motivo" style="width: 200px; color: red">
-                <option value="È spam">È spam</option>
-                <option value="Contenuto offensivo">Contenuto offensivo</option>
-                    <textarea rows="10" cols="30" name="commento_aggiuntivo"></textarea>
-                    <button type="submit"> Invia segnalazione</button>
-        </form>
     </section>
 </section>
-
+</div>
+<form method="post" action="inviaSegnalazioneServlet" style="display: none;" id="form_segnalazione">
+    <input type="hidden" value="" id="input_id" name="id_commento">
+    <input type="hidden" value="2" name="flag">
+    <input type="hidden" value="<%=recensione.getId()%>" name="id_contenuto">
+    <select name="motivo">
+        <option value="Spam">Spam</option>
+        <option value="Contenuto offensivo">Contenuto offensivo</option>
+        <textarea rows="10" cols="30" name="commento_aggiuntivo"></textarea>
+        <button type="submit"> Invia segnalazione</button>
+</form>
 </body>
 <script type="text/javascript">
     function handleRequest(id){
+        let page=document.getElementById("page")
+        page.style.opacity="0.5"
+
         let form=document.getElementById("form_segnalazione")
-        form.style.display="block"
+        form.style.display="flex"
         document.getElementById("input_id").setAttribute("value",id)
     }
 </script>
