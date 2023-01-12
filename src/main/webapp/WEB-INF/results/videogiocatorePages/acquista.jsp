@@ -58,7 +58,7 @@
             <h1 id="tot" style="text-align: center">Totale ${carello.totale} </h1>
         </div>
         <c:if test="${sessionScope.get('videogiocatore') != null}">
-            <form method="post" action="/Rojina_Review_war/confirmOrder">
+            <form method="post" action="./confirmOrder" >
                 <div class="address">
                     <h2>Indirizzo di spedizione</h2>
                     <c:forEach items="${sessionScope['videogiocatore'].indirizzi}" var="indirizzo" varStatus="loop">
@@ -149,10 +149,18 @@
         if (div.className === "form-input")
             div.className = "hide";
         let input = div.getElementsByTagName('input');
+
         input[0].value = input1;
         input[1].value = input2;
         input[2].value = input3;
         input[3].value = input4;
+        if(divId==='newPayment') {
+            d = new Date();
+            d.setFullYear(input4.substring(1, 5), input4.substring(6, 8) - 1, input4.substring(9, 11));
+            input[3].valueAsDate = d;
+        }
+        else
+            input[3].value = input4;
     }
 
     function  removeFromCart(idProdotto){
