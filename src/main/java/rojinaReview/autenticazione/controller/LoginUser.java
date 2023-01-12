@@ -68,6 +68,10 @@ public class LoginUser extends HttpServlet {
                     e.printStackTrace();
                 }
 
+                videogiocatore.setPagamenti(new ArrayList<>());
+                videogiocatore.setIndirizzi(new ArrayList<>());
+                videogiocatore.setTelefoni(new ArrayList<>());
+                videogiocatore.setOrdini(new ArrayList<>());
 
                 //merge dei carrelli
                 Carrello ospite = (Carrello) session.getAttribute("ospite");

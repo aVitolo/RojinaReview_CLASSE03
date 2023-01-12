@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.*;
 import rojinaReview.autenticazione.service.AutenticazioneServiceImpl;
 import rojinaReview.model.exception.CheckoutException;
 import rojinaReview.model.exception.InsertAddressException;
+import rojinaReview.model.exception.InsertPaymentException;
 import rojinaReview.model.exception.VideogiocatoreIDMissingException;
 import rojinaReview.model.beans.*;
 import rojinaReview.shop.service.ShopServiceImpl;
@@ -72,7 +73,6 @@ public class confirmOrderServlet extends HttpServlet {
                     if(newAddress) {
                         try {
                             asi.inserisciIndrizzo(indirizzo, u);
-                            u.getIndirizzi().add(indirizzo);
                         }
                          catch (InsertAddressException e) {
                             e.printStackTrace();
@@ -102,9 +102,8 @@ public class confirmOrderServlet extends HttpServlet {
                     boolean newPayment = Boolean.parseBoolean(request.getParameter("payment"));
                     if(newPayment){
                         try {
-                            asi.inserisciIndrizzo(indirizzo, u);
-                            u.getPagamenti().add(pagamento);
-                        } catch (InsertAddressException e) {
+                            asi.inserisciMetodoDiPagamento(pagamento, u);
+                        } catch (InsertPaymentException e) {
                             e.printStackTrace();
                         }
                     }
@@ -131,14 +130,6 @@ public class confirmOrderServlet extends HttpServlet {
                 e.printStackTrace();
             }
 
-        /*
-            Insierisco il nuovo orinde nella lista degli oridini
-            Eliminabile?
-         */
-            u.getOrdini().add(0, ordine);
-        /*
-            reindirizzo il videogiocatore alla home
-         */
             String home = "/Rojina_Review_war/home";
             response.sendRedirect(home);
     }

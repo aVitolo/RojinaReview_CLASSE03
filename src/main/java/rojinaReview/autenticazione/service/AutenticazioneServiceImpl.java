@@ -197,7 +197,7 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
 
     @Override
     public ArrayList<String> visualizzaNumeriTelefonici(Videogiocatore videogiocatore) throws LoadingNumbersException {
-        if(videogiocatore.getTelefoni() != null)
+        if(videogiocatore.getTelefoni().size() != 0)
             return videogiocatore.getTelefoni();
         try {
             return tDAO.doRetriveByUser(videogiocatore.getId());
@@ -218,7 +218,7 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
 
     @Override
     public ArrayList<Pagamento> visualizzaMetodiDiPagamento(Videogiocatore videogiocatore) throws LoadingPaymentsException {
-        if(videogiocatore.getPagamenti() != null)
+        if(videogiocatore.getPagamenti().size() != 0)
             return videogiocatore.getPagamenti();
         try {
             return pDAO.doRetrieveByUser(videogiocatore.getId());
@@ -240,7 +240,7 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
 
     @Override
     public ArrayList<Indirizzo> visualizzaIndirizzi(Videogiocatore videogiocatore) throws LoadingAddressesException {
-        if(videogiocatore.getIndirizzi() != null)
+        if(videogiocatore.getIndirizzi().size() != 0)
             return videogiocatore.getIndirizzi();
         try {
             return iDAO.doRetriveByUser(videogiocatore.getId());

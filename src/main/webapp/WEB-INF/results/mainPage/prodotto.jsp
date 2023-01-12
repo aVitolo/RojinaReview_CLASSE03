@@ -15,7 +15,7 @@
     Integer quantitàCarrello = (Integer) request.getAttribute("quantitàCarrello");
     Parere parere = (Parere) request.getAttribute("votoUtente");
     int canDo = 0; //ospite
-    if(session.getAttribute("giornalista") != null || session.getAttribute("admin") != null)
+    if(session.getAttribute("giornalista") != null || session.getAttribute("manager") != null)
         canDo = 2;
     else if(session.getAttribute("videogiocatore") != null)
         canDo = 1;%>

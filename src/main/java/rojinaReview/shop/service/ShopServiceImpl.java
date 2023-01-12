@@ -134,6 +134,7 @@ public class ShopServiceImpl implements  ShopService{
     public void checkout(Ordine ordine, Videogiocatore videogiocatore) throws CheckoutException {
         try {
             oDAO.confirmOrder(ordine,videogiocatore.getId());
+            videogiocatore.getOrdini().add(ordine);
         } catch (SQLException e) {
             throw new CheckoutException("Errore in fase di checkout");
         }

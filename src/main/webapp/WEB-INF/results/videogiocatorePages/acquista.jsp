@@ -5,9 +5,9 @@
 <html>
 <head>
     <title>Rojina Review</title>
-    <link rel="stylesheet" href="./css/acquista.css">
-    <link rel="stylesheet" href="./css/navebar.css">
-    <link rel="stylesheet" href="./css/master.css">
+    <link rel="stylesheet" href="./static/css/acquista.css">
+    <link rel="stylesheet" href="./static/css/navebar.css">
+    <link rel="stylesheet" href="./static/css/master.css">
 </head>
 <body>
 <%@ include file="/WEB-INF/results/utilities/navebar.jsp" %>
@@ -28,30 +28,30 @@
         </c:if>
         <div class="products">
             <c:forEach items="${carello.prodotti}" var="prodotto">
-                <div class="product" id="${prodotto.prodotto.id}">
+                <div class="product" id="${prodotto.id}">
                     <section>
-                        <a href="/Rojina_Review_war/getResource?type=shop&id=${prodotto.prodotto.id}">
-                            <img class="productImg" src="${prodotto.prodotto.immagine}">
+                        <a href="/Rojina_Review_war/getResource?type=shop&id=${prodotto.id}">
+                            <img class="productImg" src="${prodotto.immagine}">
                         </a>
                     </section>
                     <section>
-                        <h3 class="productName">${prodotto.prodotto.nome}</h3>
+                        <h3 class="productName">${prodotto.nome}</h3>
                         <div style="
                              display: flex;
                              justify-content: center;
                              ">
-                            <h3 class="price">${prodotto.prezzoAttuale}</h3>
+                            <h3 class="price">${prodotto.prezzo}</h3>
                             <h3>€</h3>
                         </div>
-                        <label class="updateArticol"><input type="number" min="1" max="${prodotto.prodotto.disponibilità}" value="${prodotto.quantità}">Quantita</label>
+                        <label class="updateArticol"><input type="number" min="1"  value="${prodotto.quantità}">Quantità</label>
                         <div style="
                              display: flex;
                              justify-content: center;
                              ">
-                            <h3 class="subtotal"><fmt:formatNumber value="${prodotto.prezzoAttuale * prodotto.quantità}" maxFractionDigits="3"/></h3>
+                            <h3 class="subtotal"><fmt:formatNumber value="${prodotto.prezzo * prodotto.quantità}" maxFractionDigits="3"/></h3>
                             <h3>€</h3>
                         </div>
-                        <button class="deleteArticol" onclick='removeFromCart("${prodotto.prodotto.id}")'>Rimuovi</button>
+                        <button class="deleteArticol" onclick='removeFromCart("${prodotto.id}")'>Rimuovi</button>
                     </section>
                 </div>
             </c:forEach>
@@ -118,7 +118,7 @@
                         <label for="dataScadenza">
                             Data Scadenza
                         </label>
-                        <input type="text" id="dataScadenza" name="dataScadenza" required="required">
+                        <input type="date" id="dataScadenza" name="dataScadenza" required="required">
                     </div>
                 </div>
                 <input type="submit" value="Acquista">
