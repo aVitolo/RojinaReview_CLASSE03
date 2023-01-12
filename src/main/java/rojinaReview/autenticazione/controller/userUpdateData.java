@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.*;
 import rojinaReview.autenticazione.service.AutenticazioneService;
 import rojinaReview.autenticazione.service.AutenticazioneServiceImpl;
 import rojinaReview.model.beans.Videogiocatore;
+import rojinaReview.model.exception.InvalidTextException;
 import rojinaReview.model.exception.UpdateDataException;
 import rojinaReview.model.utilities.ConPool;
 import rojinaReview.model.utilities.Utils;
@@ -37,7 +38,12 @@ public class userUpdateData extends HttpServlet {
             Videogiocatore videogiocatore = (Videogiocatore) session.getAttribute("videogiocatore");
 
             videogiocatore.setEmail(request.getParameter("email"));
-            videogiocatore.setPassword(Utils.calcolaHash(request.getParameter("password")));
+            try {
+                Utils.textCheckPassword(request.getParameter("password"));
+                videogiocatore.setPassword(Utils.calcolaHash(request.getParameter("password")));
+            } catch (InvalidTextException e) {
+                e.printStackTrace(); //da aggiungere pagina errore "nuova password non valida"
+            }
             videogiocatore.setNickname(request.getParameter("nickname"));
             videogiocatore.setNome(request.getParameter("nome"));
             videogiocatore.setCognome(request.getParameter("cognome"));

@@ -59,7 +59,7 @@ public class RegistrationVideogamerServlet extends HttpServlet {
             videogiocatore.setPassword(password);
 
             try {
-                rs.registraVideogiocatore(videogiocatore);
+                videogiocatore.setId(rs.registraVideogiocatore(videogiocatore));
             } catch (EmailNotAvailableException e) {
                 message = "email già in uso";
                 request.setAttribute("message", message);
@@ -86,6 +86,8 @@ public class RegistrationVideogamerServlet extends HttpServlet {
 
             if(session.getAttribute("ospite") != null)
                 videogiocatore.setCarrello((Carrello) session.getAttribute("ospite"));
+            else
+                videogiocatore.setCarrello(new Carrello());
 
             session.setAttribute("videogiocatore", videogiocatore);
             response.sendRedirect(homePage);

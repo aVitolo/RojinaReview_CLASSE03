@@ -115,10 +115,6 @@ public interface AutenticazioneService {
      */
     void inserisciMetodoDiPagamento(Pagamento pagamento, Videogiocatore videogiocatore) throws InsertPaymentException;
 
-    /*
-        inserisciMetodoDiPagamento(Pagamento pagamento) permette di inserire un nuovo metodo di pagamento nella tabella Pagamento
-        ma senza id non e' possibile salvare il "collegamento" pagamento-videogiocatore quindi modifico momentanemente il metodo
-     */
 
     /**
      * Firma del metodo che permette di

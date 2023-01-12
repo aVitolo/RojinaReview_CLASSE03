@@ -81,11 +81,7 @@ public class RegistrationJournalistORManagerServlet extends HttpServlet {
                 return;
             }
 
-            //Giornalista o manager ha passato tutti i controlli e può essere registrato nel DB
-            if(tipo == 0)
-                session.setAttribute("giornalista", utente);
-            else if(tipo == 1)
-                session.setAttribute("manager", utente);
+
 
             response.sendRedirect(homePage);
         }

@@ -5,22 +5,20 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.autenticazione.service.AutenticazioneService;
 import rojinaReview.autenticazione.service.AutenticazioneServiceImpl;
-import rojinaReview.model.beans.Giornalista;
+import rojinaReview.model.beans.Manager;
+import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.exception.InvalidTextException;
 import rojinaReview.model.exception.UpdateDataException;
-import rojinaReview.model.utilities.ConPool;
 import rojinaReview.model.utilities.Utils;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-@WebServlet(name = "journalistUpdateData", value = "/journalistUpdateData")
-public class journalistUpdateData extends HttpServlet {
+@WebServlet(name = "managerUpdateDataServlet", value = "/managerUpdateDataServlet")
+public class managerUpdateDataServlet extends HttpServlet {
     private AutenticazioneService as;
+    private String path = "/WEB-INF/results/managerPages/managerModificaDati.jsp";
     private String homePage = "./home";
-    private String path = "/WEB-INF/results/giornalistaPages/giornalistaModificaDati.jsp";
 
 
     @Override
@@ -30,32 +28,32 @@ public class journalistUpdateData extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         HttpSession session = request.getSession();
-        if (session.getAttribute("giornalista") == null)
-            response.sendRedirect(homePage);
-        else
-        {
-            Giornalista giornalista = (Giornalista) session.getAttribute("giornalista");
 
-            giornalista.setEmail(request.getParameter("email"));
+        if (session.getAttribute("manager") == null)
+            response.sendRedirect(homePage);
+        else {
+            Manager manager = (Manager) session.getAttribute("manager");
+
+            manager.setEmail(request.getParameter("email"));
             try {
                 Utils.textCheckPassword(request.getParameter("password"));
-                giornalista.setPassword(Utils.calcolaHash(request.getParameter("password")));
+                manager.setPassword(Utils.calcolaHash(request.getParameter("password")));
             } catch (InvalidTextException e) {
                 e.printStackTrace(); //da aggiungere pagina errore "nuova password non valida"
             }
-            giornalista.setNome(request.getParameter("nome"));
-            giornalista.setCognome(request.getParameter("cognome"));
+            manager.setNome(request.getParameter("nome"));
+            manager.setCognome(request.getParameter("cognome"));
 
             try {
-                as.modificaGiornalista(giornalista);
+                as.modificaManager(manager);
             } catch (UpdateDataException e) {
                 e.printStackTrace();
             }
 
-            request.getRequestDispatcher(path).forward(request, response);
-        }
 
+            request.getRequestDispatcher(path).forward(request, response);
+
+        }
     }
 }

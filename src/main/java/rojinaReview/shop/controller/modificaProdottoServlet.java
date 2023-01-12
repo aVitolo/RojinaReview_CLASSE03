@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet(name = "modificaProdottoServlet", value = "/modificaProdottoServlet")
+@MultipartConfig
 public class modificaProdottoServlet extends HttpServlet {
     ShopServiceImpl ssi;
 
@@ -25,22 +26,27 @@ public class modificaProdottoServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Prodotto prodotto = new Prodotto();
         prodotto.setNome(request.getParameter("nome"));
-        prodotto.setTesto(request.getParameter("descizione"));
+        prodotto.setTesto(request.getParameter("descrizione"));
         prodotto.setCategoria(request.getParameter("productType"));
         prodotto.setPrezzo(Float.parseFloat(request.getParameter("prezzo")));
         prodotto.setQuantità(Integer.parseInt(request.getParameter("quantita")));
         prodotto.setId(Integer.parseInt(request.getParameter("id")));
         if(request.getPart("foto")==null){
-            prodotto.setImmagine("null");
+            prodotto.setImmagine(null);
         }
         else{
-        Part filePart = request.getPart("foto");
-        String imageType = "products";
-        String fileName = prodotto.getNome() + ".jpg";
-        prodotto.setImmagine(Utils.saveImageWar(imageType, fileName, filePart));
-        Utils.saveImageFileSystem(imageType, fileName, filePart);
+            Part filePart = request.getPart("foto");
+            String imageType = "products";
+            String fileName = prodotto.getNome() + ".jpg";
+            prodotto.setImmagine(Utils.saveImageWar(imageType, fileName, filePart));
+            Utils.saveImageFileSystem(imageType, fileName, filePart);
         }
 
         try {
@@ -48,10 +54,7 @@ public class modificaProdottoServlet extends HttpServlet {
         } catch (ProductIDMissingException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String result = "/Rojina_Review_war/visualizzaShop";
+        response.sendRedirect(result);
     }
 }

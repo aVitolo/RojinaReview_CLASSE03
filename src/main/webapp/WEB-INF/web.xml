@@ -407,6 +407,6 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>modificaProdottoServlet</servlet-name>
-        <url-pattern>/modificaProdottoServlet</url-pattern>
+        <url-pattern>/modificaProdotto</url-pattern>
     </servlet-mapping>
 </web-app>

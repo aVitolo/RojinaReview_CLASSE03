@@ -13,7 +13,7 @@
 <body>
 <div class="center">
     <h1>Invia Richiesta</h1>
-    <form method="post" action="./inviaRichiesta">
+    <form method="post" action="./RegistrationJournalistORManagerServlet">
         <div class="form_input" id="radioLogin">
             <input type="radio" class="radioLogin" id="giornalistaRadio" name="userType" value="0" checked="checked">
             <label>Giornalista</label>
