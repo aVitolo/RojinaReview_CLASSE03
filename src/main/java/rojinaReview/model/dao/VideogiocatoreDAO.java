@@ -93,17 +93,23 @@ public class VideogiocatoreDAO {
         return null;
     }
 
-    public void doInsertUser(Videogiocatore user) throws SQLException {
+    public int doInsertUser(Videogiocatore user) throws SQLException
+    {
         PreparedStatement ps =
-                con.prepareStatement("INSERT INTO videogiocatore VALUES(?,?,null,null,null,?,0)");
+                con.prepareStatement("INSERT INTO videogiocatore (email, password, nome, cognome, immagine, nickname, bannato) VALUES (?,?,null,null,null,?,0)");
         ps.setString(1, user.getEmail());
         ps.setString(2, user.getPassword());
         ps.setString(3, user.getNickname());
         ResultSet rs;
         try {
             ps.executeUpdate();
+            ps = con.prepareStatement("SELECT id FROM videogiocatore ORDER BY id DESC LIMIT 1");
+            rs = ps.executeQuery();
+            if(rs.next())
+                return rs.getInt(1);
         } catch (SQLException e) {
-            if(e.getErrorCode() == 23000) //integrity constraint violation
+            e.printStackTrace();
+            if(e.getClass().getSimpleName().equalsIgnoreCase("SQLIntegrityConstraintViolationException")) //integrity constraint violation
             {
                 ps = con.prepareStatement("SELECT email FROM videogiocatore WHERE email=?");
                 ps.setString(1, user.getEmail());
@@ -118,6 +124,8 @@ public class VideogiocatoreDAO {
                     throw new SQLException("nickname");
             }
         }
+
+        return 0;
     }
 
     public ArrayList<Videogiocatore> doRetriveAll() throws SQLException, UnsupportedEncodingException {
@@ -151,7 +159,7 @@ public class VideogiocatoreDAO {
     //non serve?
     public boolean doRemoveByEmail(String email) throws SQLException {
         PreparedStatement ps =
-                con.prepareStatement("DELETE FROM Utente WHERE email=?");
+                con.prepareStatement("DELETE FROM videogiocatore WHERE email=?");
         ps.setString(1,email);
         int i = ps.executeUpdate();
         return i == 1;

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Utils {
 
     //Funzione che verifica se l' input è valido
-    public static void textCheck(String text, int MinLenght, int MaxLenght, String[] badCharacters) throws InvalidTextException {
+    private static void textCheck(String text, int MinLenght, int MaxLenght, String[] badCharacters) throws InvalidTextException {
         if (text.length() >= MinLenght && text.length() <= MaxLenght) {
             for (int i = 0; i < badCharacters.length; i++) {
                 if (text.contains(badCharacters[i])) {
@@ -25,6 +25,32 @@ public class Utils {
             return;
         }
         throw new InvalidTextException();
+    }
+
+    public static void textCheckPassword(String password) throws InvalidTextException {
+        //Info costanti per validazione input
+        final String[] badCharacters = {"#", "-", " ", "\'", "\""};
+        final int passwordMinLenght = 6;
+        final int passwordMaxLenght = 20;
+
+        textCheck(password, passwordMinLenght, passwordMaxLenght, badCharacters);
+    }
+
+    public static void textCheckEmail(String email) throws InvalidTextException {
+        //Info costanti per validazione input
+        final String[] badCharacters = {"#", "-", " ", "\'", "\""};
+        final int emailMinLenght = 5;
+        final int emailMaxLenght = 30;
+
+        textCheck(email, emailMinLenght, emailMaxLenght, badCharacters);
+    }
+
+    public  static void textCheckNickname(String nickname) throws InvalidTextException {
+        final String[] badCharacters = {"#", "-", " ", "\'", "\""};
+        final int nickNameMinLenght = 5;
+        final int nickNameMaxLenght = 30;
+
+        textCheck(nickname, nickNameMinLenght, nickNameMaxLenght, badCharacters);
     }
 
     /* Password Hashing */

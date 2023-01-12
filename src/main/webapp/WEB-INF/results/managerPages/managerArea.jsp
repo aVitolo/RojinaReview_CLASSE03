@@ -24,6 +24,11 @@
     </div>
     <ul class="managerMenu">
         <li>
+            <a href="./managerUpdateDataAreaServlet">
+                <span class="menuName">Modifica dati</span>
+            </a>
+        </li>
+        <li>
             <a href="/Rojina_Review_war/visualizzaShop">
                 <span class="menuName">Shop</span>
             </a>

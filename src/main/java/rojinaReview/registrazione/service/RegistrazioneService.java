@@ -16,22 +16,25 @@ public interface RegistrazioneService {
      * Firma del metodo che permette di
      * registrare un videogiocatore nel sistema
      * @param videogiocatore da registrare
+     * @return l'id del videogiocatore appena registrato
      */
-    void registraVideogiocatore(Videogiocatore videogiocatore) throws EmailNotAvailableException, NicknameNotAvailableException, InvalidTextException;
+    int registraVideogiocatore(Videogiocatore videogiocatore) throws EmailNotAvailableException, NicknameNotAvailableException, InvalidTextException;
 
     /**
      * Firma del metodo che permette di
      * registrare un giornalista nel sistema
      * @param giornalista da registare
+     * @return l'id del giornalista appena registrato
      */
-    void registraGiornalista(Giornalista giornalista) throws InvalidTextException, EmailNotAvailableException;
+    int registraGiornalista(Giornalista giornalista) throws InvalidTextException, EmailNotAvailableException;
 
     /**
      * Firma del metodo che permette di
      * registrare un manager nel sistema
      * @param manager da registrare
+     * @return l'id del manager appena registrato
      */
-    void registraManager(Manager manager) throws InvalidTextException, EmailNotAvailableException;
+    int registraManager(Manager manager) throws InvalidTextException, EmailNotAvailableException;
 
 
 }

@@ -29,33 +29,21 @@ public class RegistrazioneServiceImpl implements RegistrazioneService{
         mDAO = new ManagerDAO(this.connection);
     }
 
-    public void registraVideogiocatore(Videogiocatore videogiocatore) throws EmailNotAvailableException, NicknameNotAvailableException, InvalidTextException {
-        //Info costanti per validazione input
-        final String[] badCharacters = {"#", "-", " ", "\'", "\""};
-
-        final int passwordMinLenght = 6;
-        final int passwordMaxLenght = 20;
-
-        final int nickNameMinLenght = 5;
-        final int nickNameMaxLenght = 30;
-
-        final int emailMinLenght = 5;
-        final int emailMaxLenght = 30;
-
+    public int registraVideogiocatore(Videogiocatore videogiocatore) throws EmailNotAvailableException, NicknameNotAvailableException, InvalidTextException {
         try {
-            Utils.textCheck(videogiocatore.getEmail(), emailMinLenght, emailMaxLenght, badCharacters);
+            Utils.textCheckEmail(videogiocatore.getEmail());
         } catch (InvalidTextException e) {
             throw new InvalidTextException("email invalida");
         }
 
         try{
-            Utils.textCheck(videogiocatore.getNickname(), nickNameMinLenght, nickNameMaxLenght, badCharacters);
+            Utils.textCheckNickname(videogiocatore.getNickname());
         } catch (InvalidTextException e){
             throw new InvalidTextException("nickname invalido");
         }
 
         try{
-            Utils.textCheck(videogiocatore.getPassword(), passwordMinLenght, passwordMaxLenght, badCharacters);
+            Utils.textCheckPassword(videogiocatore.getPassword());
         } catch (InvalidTextException e){
             throw new InvalidTextException("password invalida");
         }
@@ -70,33 +58,26 @@ public class RegistrazioneServiceImpl implements RegistrazioneService{
         videogiocatore.setPassword(hashedPassword);
 
         try {
-            vDAO.doInsertUser(videogiocatore);
+            return vDAO.doInsertUser(videogiocatore);
         } catch (SQLException e) {
             if(e.getMessage().equals("email"))
                 throw new EmailNotAvailableException();
             else if (e.getMessage().equals("nickname"))
                 throw new NicknameNotAvailableException();
         }
+
+        return 0;
     }
 
-    public void registraGiornalista(Giornalista giornalista) throws InvalidTextException, EmailNotAvailableException {
-        //Info costanti per validazione input
-        final String[] badCharacters = {"#", "-", " ", "\'", "\""};
-
-        final int passwordMinLenght = 6;
-        final int passwordMaxLenght = 20;
-
-        final int emailMinLenght = 5;
-        final int emailMaxLenght = 30;
-
+    public int registraGiornalista(Giornalista giornalista) throws InvalidTextException, EmailNotAvailableException {
         try {
-            Utils.textCheck(giornalista.getEmail(), emailMinLenght, emailMaxLenght, badCharacters);
+            Utils.textCheckEmail(giornalista.getEmail());
         } catch (InvalidTextException e) {
             throw new InvalidTextException("email invalida");
         }
 
         try{
-            Utils.textCheck(giornalista.getPassword(), passwordMinLenght, passwordMaxLenght, badCharacters);
+            Utils.textCheckPassword(giornalista.getPassword());
         } catch (InvalidTextException e){
             throw new InvalidTextException("password invalida");
         }
@@ -117,26 +98,19 @@ public class RegistrazioneServiceImpl implements RegistrazioneService{
                 throw new EmailNotAvailableException();
         }
 
+        return 0;
+
     }
 
-    public void registraManager(Manager manager) throws InvalidTextException, EmailNotAvailableException {
-        //Info costanti per validazione input
-        final String[] badCharacters = {"#", "-", " ", "\'", "\""};
-
-        final int passwordMinLenght = 6;
-        final int passwordMaxLenght = 20;
-
-        final int emailMinLenght = 5;
-        final int emailMaxLenght = 30;
-
+    public int registraManager(Manager manager) throws InvalidTextException, EmailNotAvailableException {
         try {
-            Utils.textCheck(manager.getEmail(), emailMinLenght, emailMaxLenght, badCharacters);
+            Utils.textCheckEmail(manager.getEmail());
         } catch (InvalidTextException e) {
             throw new InvalidTextException("email invalida");
         }
 
         try{
-            Utils.textCheck(manager.getPassword(), passwordMinLenght, passwordMaxLenght, badCharacters);
+            Utils.textCheckPassword(manager.getPassword());
         } catch (InvalidTextException e){
             throw new InvalidTextException("password invalida");
         }
@@ -156,6 +130,8 @@ public class RegistrazioneServiceImpl implements RegistrazioneService{
             if(e.getMessage().equals("email"))
                 throw new EmailNotAvailableException();
         }
+
+        return 0;
     }
 
 }

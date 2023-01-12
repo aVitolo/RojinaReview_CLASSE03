@@ -29,6 +29,7 @@ public class visualizzaCommentiSegnalatiServlet extends HttpServlet {
         try {
             request.setAttribute("segnalazioni", osi.visualizzaCommentiSegnalati());
         } catch (LoadingCommentException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
         request.getRequestDispatcher(path).forward(request, response);
