@@ -26,13 +26,12 @@ public class modificaProdottoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        {
-            try {
-                ssi = new ShopServiceImpl();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+        try {
+            ssi = new ShopServiceImpl();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+
         Prodotto prodotto = new Prodotto();
 
         prodotto.setNome(request.getParameter("nome"));
