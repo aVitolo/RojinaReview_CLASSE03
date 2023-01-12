@@ -18,7 +18,7 @@ public interface AutenticazioneService {
      * @param password dell'utente da loggare
      * @return utente loggato
      */
-    Videogiocatore loginVideogiocatore(String email, String password) throws EmailNotExistsException, IncorrectPasswordException, LoadingCartException;
+    Videogiocatore loginVideogiocatore(String email, String password) throws EmailNotExistsException, IncorrectPasswordException, LoadingCartException, BannedUserException, BannedUserException;
 
     /**
      * Firma del metodo che permette di

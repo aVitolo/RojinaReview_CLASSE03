@@ -26,7 +26,7 @@ public class VideogiocatoreDAO {
 
     public Videogiocatore doRetriveByEmail(String email) throws SQLException{
         PreparedStatement ps =
-                con.prepareStatement("SELECT * FROM videogiocatore WHERE email=?");
+                con.prepareStatement("SELECT * FROM videogiocatore WHERE email=? and bannato=0");
         ps.setString(1, email);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {

@@ -52,11 +52,11 @@ public class OpinioneServiceImpl implements OpinioneService{
     public ArrayList<Commento> visualizzaCommenti(Contenuto contenuto) throws LoadingCommentException {
         try {
             if(isProdotto(contenuto))
-                return cDAO.getCommentById(contenuto.getId(), 0);
+                return cDAO.getCommentByContentId(contenuto.getId(), 0);
             if(isRecensione(contenuto))
-                return cDAO.getCommentById(contenuto.getId(), 1);
+                return cDAO.getCommentByContentId(contenuto.getId(), 1);
             if(isNotizia(contenuto))
-                return cDAO.getCommentById(contenuto.getId(), 2);
+                return cDAO.getCommentByContentId(contenuto.getId(), 2);
         }catch (SQLException e){
             throw new LoadingCommentException("Errore nel caricamento dei commenti");
         }
@@ -149,7 +149,6 @@ public class OpinioneServiceImpl implements OpinioneService{
         try{
             return sDAO.doRetrieveReportedComments();
         }catch (SQLException e){
-            e.printStackTrace();
             throw new LoadingCommentException("Errore selezione segnalazioni");
         }
     }
@@ -164,20 +163,23 @@ public class OpinioneServiceImpl implements OpinioneService{
     }
 
     @Override
-    public void gestisciSegnalazione(Segnalazione segnalazione, int flag, Commento commento) throws SQLException {
+    public void gestisciSegnalazione(int flag, int commento) throws SQLException {
         // eliminazione segnalazioni
-        if(flag==0){
-            sDAO.deleteReports(segnalazione);
+        if (flag == 0) {
+            sDAO.deleteReports(commento);
         }
         //ban utente
-        if(flag==1){
-            sDAO.deleteReports(segnalazione);
-            vDAO.banUser(commento.getIdVideogiocatore());
+        else if (flag == 1) {
+            Commento c = cDAO.getCommentById(commento);
+            vDAO.banUser(c.getIdVideogiocatore());
+            cDAO.deleteComment(commento);
         }
         //rimozione commento
-        if(flag==2){
-            sDAO.deleteReports(segnalazione);
-            cDAO.deleteComment(commento.getId());
+        else if (flag == 2) {
+            cDAO.deleteComment(commento);
+        }
+        else {
+            //exception
         }
     }
 }

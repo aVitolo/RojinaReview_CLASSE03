@@ -27,6 +27,14 @@ public class visualizzaDettagliCommentoSegnalatoServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            request.setAttribute("id",request.getParameter("id"));
+            request.setAttribute("segnalazioni", osi.visualizzaDettagliCommentoSegnalato
+                    (Integer.parseInt(request.getParameter("id"))));
+        } catch (LoadingCommentException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
         request.getRequestDispatcher(path).forward(request, response);
     }
 

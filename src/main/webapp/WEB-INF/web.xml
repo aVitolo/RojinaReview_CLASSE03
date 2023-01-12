@@ -409,4 +409,23 @@
         <servlet-name>modificaProdottoServlet</servlet-name>
         <url-pattern>/modificaProdotto</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>visualizzaCommentiSegnalazioniServlet</servlet-name>
+        <servlet-class>rojinaReview.opinione.controller.visualizzaDettagliCommentoSegnalatoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>visualizzaCommentiSegnalazioniServlet</servlet-name>
+        <url-pattern>/dettagliSegnalazione</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>gestisicSegnalazionServlet</servlet-name>
+        <servlet-class>rojinaReview.opinione.controller.gestisicSegnalazionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>gestisicSegnalazionServlet</servlet-name>
+        <url-pattern>/gestisicSegnalazion</url-pattern>
+    </servlet-mapping>
+
 </web-app>

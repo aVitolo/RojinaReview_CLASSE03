@@ -149,13 +149,16 @@ public class SegnalazioneDAO {
 
     public ArrayList<Segnalazione> doRetrieveReportsForComment(int commento) throws SQLException {
         ArrayList<Segnalazione> segnalazioni = new ArrayList<>();
-        PreparedStatement ps = con.prepareStatement("SELECT s.id_commento, s.id_videogiocatore, s.motivazione, s.commentoAggiuntivo, s.dataSegnalazione, v.nickname FROM segnalazione s JOIN commento c on c.id = s.id_commento JOIN videogiocatore v on v.id = s.id_videogiocatore");
+        PreparedStatement ps = con.prepareStatement("" +
+                "SELECT s.id_commento, s.id_videogiocatore, s.motivazione, s.commentoAggiuntivo, s.dataSegnalazione, v.nickname " +
+                "FROM segnalazione s " +
+                "JOIN videogiocatore v on v.id = s.id_videogiocatore");
         ResultSet rs = ps.executeQuery();
         while(rs.next())
         {
             Segnalazione s = new Segnalazione();
 
-            s.setId_commento(rs.getInt(1));
+            s.setId_commento(rs.getInt(1)); //rimuovibile
             s.setId_videogiocatoreSegnalante(rs.getInt(2));
             s.setMotivo(rs.getString(3));
             s.setCommentoAggiuntivo(rs.getString(4));
@@ -168,9 +171,9 @@ public class SegnalazioneDAO {
 
     }
 
-    public void deleteReports(Segnalazione segnalazione) throws SQLException {
+    public void deleteReports(int commento) throws SQLException {
         PreparedStatement ps = con.prepareStatement("DELETE FROM segnalazione WHERE id_commento=?");
-        ps.setInt(1, segnalazione.getId_commento());
+        ps.setInt(1, commento);
         ps.executeUpdate();
     }
 

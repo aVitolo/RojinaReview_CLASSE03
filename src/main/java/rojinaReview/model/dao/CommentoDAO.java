@@ -20,7 +20,7 @@ public class CommentoDAO {
     }
 
     /*table: Prodotto-Recensione-Notizia*/
-    public ArrayList<Commento> getCommentById(int id, int tipo) throws SQLException {
+    public ArrayList<Commento> getCommentByContentId(int id, int tipo) throws SQLException {
         String stringType = null;
         if(tipo == 0)
             stringType = "id_prodotto";
@@ -45,13 +45,23 @@ public class CommentoDAO {
 
             commenti.add(c);
             }
-
-
-
         return commenti;
 
     }
+    public Commento getCommentById(int id) throws SQLException {
+        String query = "SELECT c.id, c.id_videogiocatore FROM commento c where id=?";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        Commento c = new Commento();
+        if (rs.next()) {
+            c.setId(rs.getInt(1));
+            c.setIdVideogiocatore(rs.getInt(2));
+            return c;
 
+        }
+        return null;
+    }
     public ArrayList<Commento> getCommentsByUser(int user) throws SQLException {
         ArrayList<Commento> commenti = new ArrayList<>();
         PreparedStatement ps = con.prepareStatement("SELECT id, testo, dataScrittura, id_prodotto, id_recensione, id_notizia FROM commento WHERE id_videogiocatore=?");
@@ -165,10 +175,4 @@ public class CommentoDAO {
         }
     }
 
-    /*
-        Neccessario implementare?
-     */
-    public ArrayList<Commento> getCommentByUser(int id) {
-        return null;
-    }
 }

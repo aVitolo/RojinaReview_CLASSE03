@@ -9,10 +9,8 @@ import jakarta.servlet.http.HttpSession;
 import rojinaReview.autenticazione.service.AutenticazioneService;
 import rojinaReview.autenticazione.service.AutenticazioneServiceImpl;
 import rojinaReview.model.beans.Carrello;
-import rojinaReview.model.beans.Prodotto;
-import rojinaReview.model.beans.Utente;
 import rojinaReview.model.beans.Videogiocatore;
-import rojinaReview.model.dao.VideogiocatoreDAO;
+import rojinaReview.model.exception.BannedUserException;
 import rojinaReview.model.exception.EmailNotExistsException;
 import rojinaReview.model.exception.IncorrectPasswordException;
 import rojinaReview.model.exception.LoadingCartException;
@@ -64,9 +62,16 @@ public class LoginUser extends HttpServlet {
                     request.setAttribute("message", message);
                     dispatcherErrato.forward(request, response);
                     return;
+                } catch (BannedUserException e) {
+                    message = "Utente Bannato";
+                    request.setAttribute("message", message);
+                    dispatcherErrato.forward(request, response);
+                    return;
                 } catch (LoadingCartException e) {
                     e.printStackTrace();
                 }
+
+
 
                 videogiocatore.setPagamenti(new ArrayList<>());
                 videogiocatore.setIndirizzi(new ArrayList<>());

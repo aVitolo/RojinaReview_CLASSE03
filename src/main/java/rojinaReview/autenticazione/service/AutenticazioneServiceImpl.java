@@ -35,21 +35,24 @@ public class AutenticazioneServiceImpl implements AutenticazioneService{
 
 
     @Override
-    public Videogiocatore loginVideogiocatore(String email, String password) throws EmailNotExistsException, IncorrectPasswordException, LoadingCartException {
+    public Videogiocatore loginVideogiocatore(String email, String password) throws EmailNotExistsException, IncorrectPasswordException, LoadingCartException, BannedUserException {
         String hashedPassword = null;
         Videogiocatore videogiocatoreDB = null;
-
-        try {
-            hashedPassword = Utils.calcolaHash(password);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
 
         try {
             videogiocatoreDB = vDAO.doRetriveByEmail(email);
         } catch (SQLException e) {
             if(e.getMessage().equalsIgnoreCase("Invalid email"))
                 throw new EmailNotExistsException();
+        }
+
+        if (videogiocatoreDB==null)
+            throw new BannedUserException();
+
+        try {
+            hashedPassword = Utils.calcolaHash(password);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
 
         if(hashedPassword.equals(videogiocatoreDB.getPassword()))

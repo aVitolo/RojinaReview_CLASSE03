@@ -117,5 +117,6 @@ public interface OpinioneService {
      * @param flag che serve a capire quale operazione effettuare sul commento
      * @param commento segnalato
      */
-    void gestisciSegnalazione(Segnalazione segnalazione, int flag, Commento commento) throws SQLException;
+    void gestisciSegnalazione(int flag, int commento) throws SQLException;
+
 }

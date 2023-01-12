@@ -1,0 +1,42 @@
+.commenti{
+    margin: 20% 20%;
+    background: #24262b;
+    color: white;
+    height: fit-content;
+}
+
+.commento{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    text-align: center;
+    align-items: center;
+}
+.opzioni{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    text-align: center;
+    align-items: center;
+}
+
+h2{
+    text-align: center;
+}
+
+.opzioni button {
+    margin: 5px 5px;
+    background: #e91e63;
+    border: none;
+    cursor: pointer;
+    transtion-duration: .3s;
+    border-radius: 2px;
+    padding: 2%;
+    color: white;
+}
+
+.opzioni button:hover{
+    background: #6B354D;
+}
