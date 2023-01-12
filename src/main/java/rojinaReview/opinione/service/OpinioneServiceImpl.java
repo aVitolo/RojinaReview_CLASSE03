@@ -155,9 +155,9 @@ public class OpinioneServiceImpl implements OpinioneService{
     }
 
     @Override
-    public ArrayList<Segnalazione> visualizzaDettagliCommentoSegnalato(Commento commento) throws LoadingCommentException {
+    public ArrayList<Segnalazione> visualizzaDettagliCommentoSegnalato(int idCommento) throws LoadingCommentException {
         try{
-            return sDAO.doRetrieveReportsForComment(commento.getId());
+            return sDAO.doRetrieveReportsForComment(idCommento);
         } catch (SQLException e){
             throw new LoadingCommentException("Errore selezione segnalazione");
         }

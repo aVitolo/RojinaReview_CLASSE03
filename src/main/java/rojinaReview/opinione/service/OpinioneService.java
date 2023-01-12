@@ -105,10 +105,10 @@ public interface OpinioneService {
     /**
      * Firma del metodo che permette di
      * visualizzare i dettagli di un commento segnalato
-     * @param commento di cui visualizzare i dettagli
+     * @param idCommento id del commento di cui visualizzare i dettagli
      * @return lista delle segnalazioni relative al commento
      */
-    ArrayList<Segnalazione> visualizzaDettagliCommentoSegnalato(Commento commento) throws LoadingCommentException;
+    ArrayList<Segnalazione> visualizzaDettagliCommentoSegnalato(int idCommento) throws LoadingCommentException;
 
     /**
      * Firma del metodo che permette di
