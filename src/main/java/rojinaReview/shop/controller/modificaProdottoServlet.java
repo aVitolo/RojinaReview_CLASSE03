@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.Prodotto;
 import rojinaReview.model.exception.ProductIDMissingException;
 import rojinaReview.model.utilities.Utils;
+import rojinaReview.shop.service.ShopService;
 import rojinaReview.shop.service.ShopServiceImpl;
 
 import java.io.IOException;
@@ -14,15 +15,9 @@ import java.sql.SQLException;
 @WebServlet(name = "modificaProdottoServlet", value = "/modificaProdottoServlet")
 @MultipartConfig
 public class modificaProdottoServlet extends HttpServlet {
-    ShopServiceImpl ssi;
+    private ShopService ssi;
 
-    {
-        try {
-            ssi = new ShopServiceImpl();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,7 +26,14 @@ public class modificaProdottoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            ssi = new ShopServiceImpl();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         Prodotto prodotto = new Prodotto();
+
         prodotto.setNome(request.getParameter("nome"));
         prodotto.setTesto(request.getParameter("descrizione"));
         prodotto.setCategoria(request.getParameter("productType"));

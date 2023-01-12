@@ -150,6 +150,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>confirmOrderServlet</servlet-name>
+        <servlet-class>rojinaReview.shop.controller.confirmOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>confirmOrderServlet</servlet-name>
+        <url-pattern>/confirmOrder</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>logout</servlet-name>
         <servlet-class>rojinaReview.autenticazione.controller.logout</servlet-class>
     </servlet>
@@ -293,14 +302,7 @@
         <url-pattern>/addComment</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>confirmOrderServlet</servlet-name>
-        <servlet-class>rojinaReview.shop.controller.confirmOrderServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>confirmOrderServlet</servlet-name>
-        <url-pattern>/confirmOrder</url-pattern>
-    </servlet-mapping>
+
 
     <servlet>
         <servlet-name>userChangeDataServlet</servlet-name>

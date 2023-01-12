@@ -3,6 +3,7 @@ package rojinaReview.shop.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import rojinaReview.model.beans.Carrello;
 import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.exception.CheckoutException;
 import rojinaReview.model.exception.LoadingOrderException;
@@ -72,16 +73,18 @@ public interface ShopService
      * ad un Videogicoatore
      * di aggiungere un prodotto al carello
      * @param prodotto da aggiungere al carello
+     * @param carrello a cui aggiungere il prodotto
      */
-    void aggiungiProdottoAlCarrello(Prodotto prodotto);
+    void aggiungiProdottoAlCarrello(Prodotto prodotto, Carrello carrello);
 
     /**
      * Firma del metodo che permette
      * ad un Videogicoatore
      * di rimuovere un prodotto al carello
-     * @param prodotto da rimuovere dal carello
+     * @param prodotto da rimuovere dal carrello
+     * @param carrello da cui rimuovere il prodotto
      */
-    void rimuoviProdottoDalCarrello(Prodotto prodotto);
+    void rimuoviProdottoDalCarrello(Prodotto prodotto, Carrello carrello);
 
     /**
      * Firma del metodo che permette

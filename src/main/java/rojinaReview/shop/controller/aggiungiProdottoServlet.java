@@ -5,7 +5,10 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.Prodotto;
 import rojinaReview.model.dao.ProdottoDAO;
+import rojinaReview.model.exception.ProductIDMissingException;
 import rojinaReview.model.utilities.Utils;
+import rojinaReview.shop.service.ShopService;
+import rojinaReview.shop.service.ShopServiceImpl;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -13,6 +16,7 @@ import java.sql.SQLException;
 @WebServlet(name = "aggiungioProdottoServlet", value = "/aggiungioProdottoServlet")
 @MultipartConfig
 public class aggiungiProdottoServlet extends HttpServlet {
+    private ShopService ss;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doPost(request,response);
@@ -20,9 +24,15 @@ public class aggiungiProdottoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            ss = new ShopServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         //prodotto da inserire preso dal form
         Prodotto prodotto = new Prodotto();
+
         prodotto.setNome(request.getParameter("nome"));
         prodotto.setTesto(request.getParameter("descrizione"));
         prodotto.setCategoria(request.getParameter("productType"));
@@ -36,8 +46,8 @@ public class aggiungiProdottoServlet extends HttpServlet {
         Utils.saveImageFileSystem(imageType, fileName, filePart);
 
         try {
-            new ProdottoDAO().doSave(prodotto);
-        } catch (SQLException e) {
+            ss.inserisciProdotto(prodotto);
+        } catch (ProductIDMissingException e) {
             e.printStackTrace();
         }
         String result = "/Rojina_Review_war/visualizzaShop";

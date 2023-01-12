@@ -5,11 +5,15 @@ import jakarta.servlet.http.*;
 import rojinaReview.model.beans.Carrello;
 import rojinaReview.model.beans.Prodotto;
 import rojinaReview.model.beans.Videogiocatore;
+import rojinaReview.shop.service.ShopService;
+import rojinaReview.shop.service.ShopServiceImpl;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class removeFromCartServlet extends HttpServlet {
+    private ShopService ss;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doPost(request,response);
@@ -17,6 +21,11 @@ public class removeFromCartServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            ss = new ShopServiceImpl();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
 
         String resp="-1";
@@ -46,19 +55,14 @@ public class removeFromCartServlet extends HttpServlet {
                 Da documentazione questa operazione dovrebbe svolgerla shopService.rimuoviProdottoDalCarrello(Prodotto prodotto)
              */
             id = Integer.parseInt(request.getParameter("id"));
-            ArrayList<Prodotto> prodotti = cart.getProdotti();
-            Prodotto prodottoDaRimuovere = null;
-            for (Prodotto p : prodotti)
-                if (p.getId() == id) {
-                    prodottoDaRimuovere = p;
-                    break;
-                }
-            if(prodottoDaRimuovere!= null) {
-                prodotti.remove(prodottoDaRimuovere);
-                cart.setTotale(cart.getTotale()-(prodottoDaRimuovere.getPrezzo()*prodottoDaRimuovere.getQuantità()));
-                resp = String.valueOf(cart.getTotale());
-                System.out.println(resp);
-            }
+            Prodotto prodottoDaRimuovere = new Prodotto();
+            prodottoDaRimuovere.setId(id);
+            ss.rimuoviProdottoDalCarrello(prodottoDaRimuovere, cart);
+
+
+
+            resp = String.valueOf(cart.getTotale());
+
         }
         response.getWriter().print(resp);
     }

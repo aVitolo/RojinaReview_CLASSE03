@@ -7,6 +7,7 @@ import rojinaReview.model.exception.ProductIDMissingException;
 import rojinaReview.model.beans.Carrello;
 import rojinaReview.model.beans.Prodotto;
 import rojinaReview.model.beans.Videogiocatore;
+import rojinaReview.shop.service.ShopService;
 import rojinaReview.shop.service.ShopServiceImpl;
 
 import java.io.IOException;
@@ -15,14 +16,8 @@ import java.util.ArrayList;
 
 public class addProductCartServlet extends HttpServlet {
 
-    private ShopServiceImpl ssi;
-    {
-        try {
-            ssi = new ShopServiceImpl();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    private ShopService ssi;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             this.doPost(request,response);
@@ -30,6 +25,11 @@ public class addProductCartServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            ssi = new ShopServiceImpl();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         /*
             String out indice il numero di prodotti nel carello?
          */
@@ -39,7 +39,8 @@ public class addProductCartServlet extends HttpServlet {
          */
         if(request.getParameter("prodottoID") == null || request.getParameter("quantita") == null)
             out = "0";
-        else {
+        else
+        {
             /*
                 -Verifico se il carello appertiene ad un utente loggato o ad un ospite
                 -L'attributo ospite della sessione corrisponde ad un entita Carello
@@ -63,7 +64,7 @@ public class addProductCartServlet extends HttpServlet {
             int prodottoID = Integer.parseInt(request.getParameter("prodottoID"));
             Prodotto p = null;
             try {
-                p = ssi.visualizzaProdotto (prodottoID);
+                p = ssi.visualizzaProdotto(prodottoID);
                 if (p == null) {
                     out = "false";
                 }
@@ -80,28 +81,18 @@ public class addProductCartServlet extends HttpServlet {
                     altrimenti lo aggiungo al carelllo e setto la quantità
                 Da documentazione questa operazione dovrebbe svolgerla shopServicea.ggiungiProdottoAlCarrello(Prodotto prodotto)
              */
-            boolean trovato = false;
             int quantità = Integer.parseInt(request.getParameter("quantita"));
-            for (int i = 0; i < carrello.getProdotti().size() && !trovato; i++)
-                if (carrello.getProdotti().get(i).getId() == prodottoID) {
-                    trovato = true;
-                    carrello.getProdotti().get(i).setQuantità(carrello.getProdotti().get(i).getQuantità() + quantità);
-                }
+            p.setQuantità(quantità);
+            ssi.aggiungiProdottoAlCarrello(p, carrello);
 
-            if (!trovato) {
-                p.setQuantità(quantità);
-                carrello.getProdotti().add(p);
-            }
 
-            /*
-                Aggiorno i dati del carello
-             */
-            carrello.setTotale(carrello.getTotale() + p.getPrezzo() * quantità);
             out = String.valueOf(carrello.getProdotti().size());
         }
+
         /*
         Invio la nuova dimnesione del carello alla jps per modificare la pagina HTML?
          */
         response.getWriter().print(out);
     }
+
 }
