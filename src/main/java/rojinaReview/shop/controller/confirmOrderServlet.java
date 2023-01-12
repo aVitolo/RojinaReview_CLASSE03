@@ -3,12 +3,14 @@ package rojinaReview.shop.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import rojinaReview.autenticazione.service.AutenticazioneService;
 import rojinaReview.autenticazione.service.AutenticazioneServiceImpl;
 import rojinaReview.model.exception.CheckoutException;
 import rojinaReview.model.exception.InsertAddressException;
 import rojinaReview.model.exception.InsertPaymentException;
 import rojinaReview.model.exception.VideogiocatoreIDMissingException;
 import rojinaReview.model.beans.*;
+import rojinaReview.shop.service.ShopService;
 import rojinaReview.shop.service.ShopServiceImpl;
 
 import java.io.IOException;
@@ -21,23 +23,11 @@ import java.util.Calendar;
 @WebServlet(name = "confirmOrderServlet", value = "/confirmOrderServlet")
 public class confirmOrderServlet extends HttpServlet {
 
-    private AutenticazioneServiceImpl asi;
-    {
-        try {
-            asi = new AutenticazioneServiceImpl();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    private AutenticazioneService asi;
+    private ShopService ssi;
 
-    private ShopServiceImpl ssi;
-    {
-        try {
-            ssi = new ShopServiceImpl();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,6 +36,20 @@ public class confirmOrderServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        {
+            try {
+                asi = new AutenticazioneServiceImpl();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        {
+            try {
+                ssi = new ShopServiceImpl();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
         /*
         Prendo il carello dalla sessione
         */

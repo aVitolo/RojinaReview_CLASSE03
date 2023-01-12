@@ -17,16 +17,17 @@ public class visualizzaDettagliCommentoSegnalatoServlet extends HttpServlet {
     private String path = "/WEB-INF/results/managerPages/managerDettagliSegnalazione.jsp";
     private OpinioneServiceImpl osi;
 
-    {
+
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         try {
             osi = new OpinioneServiceImpl();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(path).forward(request, response);
     }
 

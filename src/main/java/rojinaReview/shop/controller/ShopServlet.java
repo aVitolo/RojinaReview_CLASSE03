@@ -8,6 +8,7 @@ import rojinaReview.model.beans.Prodotto;
 import org.json.JSONArray;
 import rojinaReview.model.exception.LoadingNewsException;
 import rojinaReview.model.exception.LoadingShopException;
+import rojinaReview.shop.service.ShopService;
 import rojinaReview.shop.service.ShopServiceImpl;
 
 import java.io.IOException;
@@ -18,16 +19,16 @@ import java.util.ArrayList;
 public class ShopServlet extends HttpServlet {
     private String path = "/WEB-INF/results/mainPage/shop.jsp";
 
-    private ShopServiceImpl ssi;
-    {
+    private ShopService ssi;
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             ssi = new ShopServiceImpl();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         ArrayList<Prodotto> prodotti  = null;
         prodotti = (ArrayList<Prodotto>) ssi.visualizzaShop();
         request.setAttribute("prodotti",prodotti);

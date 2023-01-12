@@ -10,7 +10,7 @@
     ArrayList<Commento> commenti = (ArrayList<Commento>) request.getAttribute("commenti");
     Videogioco videogioco = (Videogioco) request.getAttribute("videogioco");
     Parere parere = (Parere) request.getAttribute("votoUtente");
-    Giornalista giornalista = (Giornalista) request.getAttribute("giornalista");
+    Giornalista giornalistaArticolo = (Giornalista) request.getAttribute("giornalistaArticolo");
     int canDo = 0; //ospite
     if(session.getAttribute("giornalista") != null || session.getAttribute("admin") != null)
          canDo = 2;
@@ -45,7 +45,7 @@
 
     <section id="votiUtenti">
         <h1> Il vostro parere </h1>
-        <h1 id="mediaVoto"><fmt:formatNumber value="${parere}" maxFractionDigits="1"/></h1>
+        <h1 id="mediaVoto"><fmt:formatNumber value="<%=videogioco.getMediaVoto()%>" maxFractionDigits="1"/></h1>
         <h1>(<%=videogioco.getNumeroVoti()%>)</h1>
         <form  id="voteAction" name="voteAction" method="post" action="/Rojina_Review_war/addVote" onsubmit="return canVote('<%=canDo%>');">
             <input type="hidden" name="type" value="3">
@@ -64,8 +64,8 @@
 
     <div id="card">
         <div id="giornalista">
-            <img src = "${giornalista.immagine}" alt = "copertina" decoding="async">
-            <h1>${giornalista.nome} </h1>
+            <img src = "${giornalistaArticolo.immagine}" alt = "copertina" decoding="async">
+            <h1>${giornalistaArticolo.nome} ${giornalistaArticolo.cognome}</h1>
         </div>
     </div>
 

@@ -5,17 +5,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<% Notizia notizia = (Notizia) request.getAttribute("notizia");
+<%
     ArrayList<Commento> commenti = (ArrayList<Commento>) request.getAttribute("commenti");
-    Giornalista giornalista = (Giornalista) request.getAttribute("giornalista");
     int canDo = 0; //ospite
-    if(session.getAttribute("giornalista") != null || session.getAttribute("admin") != null)
+    if(session.getAttribute("giornalista") != null || session.getAttribute("manager") != null)
         canDo = 2;
     else if(session.getAttribute("videogiocatore") != null)
         canDo = 1;%>
+
+<c:set var="giornalistaArticolo" scope="page" value="${requestScope.get('giornalista')}" />
+<c:set var="notizia" scope="page" value="${requestScope.get('notizia')}" />
 <head>
-    <title><%=notizia.getNome()%>
-    </title>
+    <title>${notizia.nome}</title>
     <link rel="stylesheet" href="./static/css/navebar.css">
     <link rel="stylesheet" href="./static/css/foot.css">
     <link rel="stylesheet" href="./static/css/notizia.css">
@@ -41,8 +42,8 @@
         </div>
         <div id="card">
             <div id="giornalista">
-                <img src = "${giornalista.immagine}" alt = "copertina" decoding="async">
-                <h2>${giornalista.nome} </h2>
+                <img src = "${giornalistaArticolo.immagine}" alt = "copertina" decoding="async">
+                <h2>${giornalistaArticolo.nome} ${giornalistaArticolo.cognome} </h2>
             </div>
         </div>
     </section>
@@ -54,7 +55,7 @@
 
         <form  id="commentAction" action="/Rojina_Review_war/addComment" method="post" name="commentAction" onsubmit="return canComment('<%=canDo%>');">
             <input type="hidden" name="type" value="2">
-            <input type="hidden" name="idContenuto" value="<%=notizia.getId()%>">
+            <input type="hidden" name="idContenuto" value="${notizia.id}">
             <input type="hidden" name="contenuto" value="news">
             <input type="text" name="commentText" id="toComment" placeholder="Lascia un commento">
             <input type="submit" value="Commenta">
@@ -78,7 +79,7 @@
         <form method="post" action="inviaSegnalazioneServlet" style="display: none; color: red" id="form_segnalazione">
             <input type="hidden" value="" id="input_id" name="id_commento">
             <input type="hidden" value="2" name="flag">
-            <input type="hidden" value="<%=notizia.getId()%>" name="id_contenuto">
+            <input type="hidden" value="${notizia.id}" name="id_contenuto">
             <select name="motivo" style="width: 200px; color: red">
                 <option value="È spam">È spam</option>
                 <option value="Contenuto offensivo">Contenuto offensivo</option>

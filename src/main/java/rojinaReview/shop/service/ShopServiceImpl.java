@@ -1,5 +1,6 @@
 package rojinaReview.shop.service;
 
+import rojinaReview.model.beans.Carrello;
 import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.dao.*;
 import rojinaReview.model.exception.CheckoutException;
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class ShopServiceImpl implements  ShopService{
 
-    Connection connection;
+    private Connection connection;
     private ProdottoDAO pDAO;
     private OrdineDAO oDAO;
     public ShopServiceImpl() throws SQLException {
@@ -110,8 +111,18 @@ public class ShopServiceImpl implements  ShopService{
        -shop.addProductCartServlet
      */
     @Override
-    public void aggiungiProdottoAlCarrello(Prodotto prodotto) {
+    public void aggiungiProdottoAlCarrello(Prodotto prodotto, Carrello carrello) {
+        int quantitàAggiunta = prodotto.getQuantità();
+        boolean trovato = false;
+        for (int i = 0; i < carrello.getProdotti().size() && !trovato; i++)
+            if (carrello.getProdotti().get(i).getId() == prodotto.getId()) {
+                trovato = true;
+                carrello.getProdotti().get(i).setQuantità(carrello.getProdotti().get(i).getQuantità() + quantitàAggiunta);
+            }
+        if (!trovato)
+            carrello.getProdotti().add(prodotto);
 
+        carrello.setTotale(carrello.getTotale() + prodotto.getPrezzo() * quantitàAggiunta);
     }
 
     /*
@@ -119,8 +130,16 @@ public class ShopServiceImpl implements  ShopService{
      -shop.removeFromCartServlet
      */
     @Override
-    public void rimuoviProdottoDalCarrello(Prodotto prodotto) {
+    public void rimuoviProdottoDalCarrello(Prodotto prodotto, Carrello carrello) {
+        ArrayList<Prodotto> prodotti = carrello.getProdotti();
+        for (Prodotto p : prodotti)
+            if (p.getId() == prodotto.getId()) {
+                prodotto = p;
+                break;
+            }
 
+        prodotti.remove(prodotto);
+        carrello.setTotale(carrello.getTotale()-(prodotto.getPrezzo()*prodotto.getQuantità()));
     }
     /*
     Servlet:

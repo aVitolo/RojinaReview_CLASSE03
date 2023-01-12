@@ -54,8 +54,7 @@ public class getSingleResourceServlet extends HttpServlet {
                 Notizia notizia = rs.visualizzaNotiziaByID(id);
                 request.setAttribute("notizia", notizia);
                 request.setAttribute("commenti", os.visualizzaCommenti(notizia));
-                request.setAttribute("giornalista", rs.visualizzaGiornalista(notizia));
-                //1 dovrebbe specificare la colonna idRecensione, guardare DB per verificare la correttezza
+                request.setAttribute("giornalistaArticolo", rs.visualizzaGiornalista(notizia));
             }
             catch (SQLException e) {
                 e.printStackTrace();
@@ -79,7 +78,7 @@ public class getSingleResourceServlet extends HttpServlet {
                 request.setAttribute("recensione", recensione);
                 request.setAttribute("commenti", os.visualizzaCommenti(recensione));
                 request.setAttribute("videogioco", rs.visualizzaVideogioco(recensione));
-                request.setAttribute("giornalista",rs.visualizzaGiornalista(recensione));
+                request.setAttribute("giornalistaArticolo",rs.visualizzaGiornalista(recensione));
                 if(session.getAttribute("videogiocatore") != null)
                 {
                     Videogiocatore videogiocatore = (Videogiocatore) session.getAttribute("videogiocatore");
