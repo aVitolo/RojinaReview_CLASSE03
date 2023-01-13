@@ -19,13 +19,13 @@
     <textarea type="text" id="Descrizione" name="descrizione" required>${prodotto.testo}</textarea>
 
     <div class="form_input">
-      <p>Quantita</p>
-      <input id="Quantita" type="text" name="quantita" value="${prodotto.quantità}" required>
+      <p>Quantità</p>
+      <input id="Quantita" type="number" name="quantita" min="0" value="${prodotto.quantità}" required>
     </div>
 
     <div class="form_input">
       <p>Prezzo</p>
-      <input id="Prezzo" type="text" name="prezzo" value="${prodotto.prezzo}" required>
+      <input id="Prezzo" type="number" name="prezzo" min="0" value="${prodotto.prezzo}" required>
 
     </div>
     <div>
@@ -42,7 +42,7 @@
       <input type="radio" class="radioCategoria" id="abbigliamentoRadio" name="productType" value="Abbigliamento"
         <c:if test="${prodotto.categoria =='Abbigliamento'}">
                checked="checked">
-        </c:if>>
+        </c:if>
       <label>Abbigliamento</label>
     </div>
     <div class="form_input">
@@ -51,7 +51,7 @@
     <div class="form_input" style="visibility: hidden">
       <input id="idProdotto" type="hidden" value="${prodotto.id}"  name="id">
     </div>
-    <input id="registerSubmit" type="submit" onclick="validateInputs()" value="Invia Richiesta">
+    <input id="registerSubmit" type="submit" onclick="validateInputs()" value="Modifica prodotto">
   </form>
 </div>
 </body>
