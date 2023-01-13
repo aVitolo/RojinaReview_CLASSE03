@@ -53,14 +53,8 @@ public class getSingleResourceServlet extends HttpServlet {
             try {
                 Notizia notizia = rs.visualizzaNotiziaByID(id);
                 request.setAttribute("notizia", notizia);
-                request.setAttribute("commenti", os.visualizzaCommenti(notizia));
                 request.setAttribute("giornalistaArticolo", rs.visualizzaGiornalista(notizia));
-            }
-            catch (SQLException e) {
-                e.printStackTrace();
             } catch (LoadingNewsException e) {
-                e.printStackTrace();
-            } catch (LoadingCommentException e) {
                 e.printStackTrace();
             } catch (LoadingJournalistException e) {
                 e.printStackTrace();
@@ -76,7 +70,6 @@ public class getSingleResourceServlet extends HttpServlet {
                     recensione = rs.visualizzaRecensioneByID(id);
 
                 request.setAttribute("recensione", recensione);
-                request.setAttribute("commenti", os.visualizzaCommenti(recensione));
                 request.setAttribute("videogioco", rs.visualizzaVideogioco(recensione));
                 request.setAttribute("giornalistaArticolo",rs.visualizzaGiornalista(recensione));
                 if(session.getAttribute("videogiocatore") != null)
@@ -84,14 +77,9 @@ public class getSingleResourceServlet extends HttpServlet {
                     Videogiocatore videogiocatore = (Videogiocatore) session.getAttribute("videogiocatore");
                     request.setAttribute("votoUtente", os.visualizzaVotoUtente(videogiocatore, recensione));
                 }
-            }
-            catch (SQLException e) {
-                e.printStackTrace();
             } catch (LoadingReviewsException e) {
                 e.printStackTrace();
             } catch (LoadingVideogamesException e) {
-                e.printStackTrace();
-            } catch (LoadingCommentException e) {
                 e.printStackTrace();
             } catch (LoadingJournalistException e) {
                 e.printStackTrace();
@@ -113,15 +101,9 @@ public class getSingleResourceServlet extends HttpServlet {
             try {
                 Prodotto prodotto = ss.visualizzaProdotto(id);
                 request.setAttribute("prodotto", prodotto);
-                request.setAttribute("commenti", os.visualizzaCommenti(prodotto));
                 if(videogiocatore != null)
                     request.setAttribute("votoUtente", os.visualizzaVotoUtente(videogiocatore, prodotto));
-            }
-            catch (SQLException e) {
-                e.printStackTrace();
             } catch (ProductIDMissingException e) {
-                e.printStackTrace();
-            } catch (LoadingCommentException e) {
                 e.printStackTrace();
             } catch (LoadingOpinionException e) {
                 e.printStackTrace();

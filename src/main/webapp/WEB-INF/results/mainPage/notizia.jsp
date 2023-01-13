@@ -6,7 +6,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <%
-    ArrayList<Commento> commenti = (ArrayList<Commento>) request.getAttribute("commenti");
+    Notizia notizia = (Notizia) request.getAttribute("notizia");
+    ArrayList<Commento> commenti = notizia.getCommenti();
+    ArrayList<Paragrafo> paragrafi = notizia.getParagrafi();
     int canDo = 0; //ospite
     if(session.getAttribute("giornalista") != null || session.getAttribute("manager") != null)
         canDo = 2;
@@ -14,7 +16,6 @@
         canDo = 1;%>
 
 <c:set var="giornalistaArticolo" scope="page" value="${requestScope.get('giornalista')}" />
-<c:set var="notizia" scope="page" value="${requestScope.get('notizia')}" />
 <head>
     <title>${notizia.nome}</title>
     <link rel="stylesheet" href="./static/css/navebar.css">

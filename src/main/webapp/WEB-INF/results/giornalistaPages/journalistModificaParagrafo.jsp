@@ -12,7 +12,7 @@
 <%@ include file="/WEB-INF/results/giornalistaPages/journalistArea.jsp" %>
 <div class="center">
 
-  <form method="get" action="./modificaParagrafo"  enctype="multipart/form-data">
+  <form method="post" action="./modificaParagrafo"  enctype="multipart/form-data">
 
     <div class="form_input">
       <p>Titolo</p>
@@ -22,7 +22,7 @@
     <textarea type="text" id="testo" name="testo" required>${paragrafo.testo}</textarea>
 
     <div class="form_input">
-      <input id="foto" type="file" name="foto">
+      <input id="foto" type="file" name="immagine">
     </div>
 
     <div class="form_input" style="visibility: hidden">

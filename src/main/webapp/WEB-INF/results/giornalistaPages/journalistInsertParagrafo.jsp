@@ -17,13 +17,13 @@
 
     <div class="form_input">
       <p>Titolo</p>
-      <input type="text" id="titolo" name="titolo" required value="">
+      <input type="text" id="titolo" name="titolo"  required>
     </div>
 
     <textarea type="text" id="testo" name="testo" required>Inserisci testo ...</textarea>
 
     <div class="form_input">
-      <input type="file" id="foto" name="immagine">
+      <input type="file" id="foto" name="immagine" accept=".jpg">
     </div>
 
     <div style="display: flex; justify-content: space-evenly;">

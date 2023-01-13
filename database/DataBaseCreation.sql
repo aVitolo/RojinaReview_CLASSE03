@@ -174,7 +174,7 @@ create table Videogioco_Notizia(
 
 create table Paragrafo(
   id_paragrafo  int auto_increment not null,
-  titolo 	    varchar(100) unique,
+  titolo 	    varchar(100),
   testo		    text not null,
   immagine 	    varchar(100),
   id_notizia    int,
@@ -428,7 +428,8 @@ insert into Videogioco (titolo,dataDiRilascio,casaDiSviluppo,mediaVoto,numeroVot
     ("COD Black Ops 3", "2018-10-10", "Treyarch", 0, 0, "./static/images/games/COD Black Ops 3.jpg"),
     ("Rainbow Six Siege", "2017-05-11", "Ubisoft", 0, 0, "./static/images/games/Rainbow Six Siege.jpg"),
     ("Red Dead Redemption 2", "2019-03-02", "Rockstar Games", 0, 0, "./static/images/games/Red Dead Redemption 2.jpg"),
-    ("GTA 5", "2015-09-15", "Rockstar Games", 0, 0, "./static/images/games/GTA 5.jpg");
+    ("GTA 5", "2015-09-15", "Rockstar Games", 0, 0, "./static/images/games/GTA 5.jpg"),
+    ("Elden Ring", "2022-07-11", "From Software", 0, 0, "./static/images/games/Elden Ring.jpg");
 
 insert into Videogioco_Piattaforma values
     (1,"Xbox 360"),

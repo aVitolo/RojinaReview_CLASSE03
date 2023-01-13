@@ -21,17 +21,17 @@
     </div>
 
     <div class="form_input">
-      <p>Gioco</p>
-      <input type="text" id="gioco" name="gioco"  required>
+      <p>Videogioco</p>
+      <input type="text" id="gioco" name="videogioco"  required>
     </div>
 
     <textarea type="text" id="testo" name="testo" required></textarea>
     <div class="form_input">
       <p>Voto</p>
-      <input type="range" id="parere" name="parere" min="0" max="10" value="8" required>
+      <input type="number" id="parere" name="parere" min="0" max="10" value="8" required>
     </div>
     <div class="form_input">
-      <input type="file" id="foto" name="immagine required">
+      <input type="file" id="foto" name="immagine" required>
     </div>
     <div style="display: flex; justify-content: space-evenly;">
       <input id="registerSubmit" type="submit" onclick="freeStore()" value="Inserisci Recensione">

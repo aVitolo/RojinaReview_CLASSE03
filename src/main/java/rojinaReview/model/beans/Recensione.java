@@ -8,9 +8,9 @@ public class Recensione extends Articolo {
 
     /* Attributes */
 
-    public float votoGiornalista;
-    public String nomeVideogioco;
-    public int idVideogioco;
+    private float votoGiornalista;
+    private String nomeVideogioco;
+    private int idVideogioco;
 
     /* Constructor */
 

@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 @WebServlet(name = "insertParagrafoServlet", value = "/insertParagrafoServlet")
-@MultipartConfig
+@MultipartConfig(maxFileSize = 1024*1024*10)
 public class insertParagrafoServlet extends HttpServlet {
     private String path = "/Rojina_Review_war/formInsertReview";
     @Override
@@ -30,14 +30,20 @@ public class insertParagrafoServlet extends HttpServlet {
         Paragrafo p = new Paragrafo();
         p.setTitolo(request.getParameter("titolo"));
         p.setTesto(request.getParameter("testo"));
-        /*
-        Part filePart = request.getPart("foto");
-        String imageType = "products";
-        String fileName = p.getTitolo() + ".jpg";
-        p.setImmagine(Utils.saveImageWar(imageType, fileName, filePart));
-         */
+
+        if(request.getPart("immagine").getSize() <= 0)
+            p.setImmagine(null);
+        else{
+            Part filePart = request.getPart("immagine");
+            String imageType = "paragraphs";
+            String fileName = p.getTitolo() + p.getTesto().substring(0,3)  + ".jpg"; //per evitare tra notizie e recensioni diverse immagini con stesso nome per via dello stesso titolo paragrafo
+            p.setImmagine(Utils.saveImageWar(imageType, fileName, filePart));
+            Utils.saveImageFileSystem(imageType, fileName, filePart);
+        }
+
         paragrafi.add(p);
         session.setAttribute("paragrafi", paragrafi);
+
         response.sendRedirect(path);
     }
 }
