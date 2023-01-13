@@ -1,0 +1,11 @@
+.paragrafo{
+    display: flex;
+    justify-content: space-between;
+}
+
+.titoloParagrafo{
+   font-size: 18px;
+   font-weight: 700;
+   align-self: center;
+   color: white;
+}

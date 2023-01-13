@@ -61,9 +61,8 @@ form .form_input {
 }
 
 button,
-input[type="submit"] {
-    width: 100%;
-    height: 50px;
+input[type="submit"],
+.center a{
     background: #e91e63;
     border-radius: 25px;
     font-size: 18px;
@@ -72,7 +71,10 @@ input[type="submit"] {
     outline: none;
     color: #ffffff;
     border: transparent;
+    padding: 2%;
 }
+
+
 
 button {
     margin: 25%

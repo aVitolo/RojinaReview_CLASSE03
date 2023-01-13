@@ -4,22 +4,22 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.Paragrafo;
-import rojinaReview.model.beans.Recensione;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "formInsertReviewServlet", value = "/formInsertReviewServlet")
-public class formInsertReviewServlet extends HttpServlet {
-    private String path = "/WEB-INF/results/giornalistaPages/journalistInsertReviews.jsp";
+@WebServlet(name = "rimuoviParagrafoServlet", value = "/rimuoviParagrafoServlet")
+public class rimuoviParagrafoServlet extends HttpServlet {
+    private String path = "/Rojina_Review_war/formInsertReview";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if(session.getAttribute("recensione")==null)
-            session.setAttribute("recensione", new Recensione());
-        RequestDispatcher dispatcher =
-                request.getRequestDispatcher(path);
-        dispatcher.forward(request, response);
+        if(session.getAttribute("paragrafi")!=null) {
+            ArrayList<Paragrafo> paragrafi = (ArrayList<Paragrafo>) session.getAttribute("paragrafi");
+            paragrafi.remove(Integer.parseInt(request.getParameter("id")));
+            session.setAttribute("paragrafi", paragrafi);
+            response.sendRedirect(path);
+        }
     }
 
     @Override

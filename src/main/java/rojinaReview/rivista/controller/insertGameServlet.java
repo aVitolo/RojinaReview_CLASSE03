@@ -85,8 +85,6 @@ public class insertGameServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-
-
         response.sendRedirect(path);
 
     }

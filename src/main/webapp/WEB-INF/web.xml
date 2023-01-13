@@ -439,4 +439,49 @@
         <url-pattern>/formInsertReview</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>formInsertParagrafoServlet</servlet-name>
+        <servlet-class>rojinaReview.rivista.controller.formInsertParagrafoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>formInsertParagrafoServlet</servlet-name>
+        <url-pattern>/formInsertParagrafo</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>insertParagrafoServlet</servlet-name>
+        <servlet-class>rojinaReview.rivista.controller.insertParagrafoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>insertParagrafoServlet</servlet-name>
+        <url-pattern>/insertParagrafo</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>rimuoviParagrafoServlet</servlet-name>
+        <servlet-class>rojinaReview.rivista.controller.rimuoviParagrafoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>rimuoviParagrafoServlet</servlet-name>
+        <url-pattern>/rimuoviParagrafo</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>formModificaParagrafoServlet</servlet-name>
+        <servlet-class>rojinaReview.rivista.controller.formModificaParagrafoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>formModificaParagrafoServlet</servlet-name>
+        <url-pattern>/formModificaParagrafo</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>modificaParagrafoServlet</servlet-name>
+        <servlet-class>rojinaReview.rivista.controller.modificaParagrafoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>modificaParagrafoServlet</servlet-name>
+        <url-pattern>/modificaParagrafo</url-pattern>
+    </servlet-mapping>
+
 </web-app>
