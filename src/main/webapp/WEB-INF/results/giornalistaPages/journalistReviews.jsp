@@ -6,49 +6,61 @@
     <title>Area giornalista</title>
     <link rel="stylesheet" href="./static/css/master.css">
     <link rel="stylesheet" href="./static/css/recensioni.css">
-    <style>
-        img{
-            opacity: 1;
-        }
-    </style>
-
 </head>
 <body>
 <%@ include file="/WEB-INF/results/giornalistaPages/journalistArea.jsp" %>
-<div class="menu" id="addRecensione">
-    <div class="insertRecensione">
-        <form name="insertRecensione" action="/Rojina_Review_war/insertReview" method="post"
-              enctype="multipart/form-data">
-            <label for="titolo" class="labelRecensioni">Titolo: </label>
-            <input type="text" id="titolo" name="titolo">
-            <label for="gioco" class="labelRecensioni">Gioco: </label>
-            <input type="text" id="gioco" name="gioco">
-            <label for="testo" class="labelRecensioni">Testo: </label>
-            <input type="text" id="testo" name="testo">
-            <br>
-            <label for="parere" class="labelRecensioni">Voto: </label>
-            <input type="range" id="parere" name="parere" min="0" max="10">
-            <label for="immagine" class="labelRecensioni">Immagine: </label>
-            <input type="file" id="immagine" name="immagine">
 
-            <input type="submit" value="Submit">
-        </form>
-    </div>
+    <style>
+        a.modifica {
+            margin: 5px 5px;
+            background: #e91e63;
+            border: none;
+            cursor: pointer;
+            transtion-duration: .3s;
+            border-radius: 2px;
+            color: white;
+            padding: 2%;
+        }
 
-    <section class="articoli">
-        <c:forEach items="${requestScope['recensioniGiornalista']}" var="articolo">
-            <a href="/Rojina_Review_war/getResource?type=reviews&id=${articolo.id}">
-                <div class="articolo">
-                    <img src="${articolo.immagine}" , alt="copertina" decoding="async">
-                    <div class="articolo-content">
-                        <h2>${articolo.nome}</h2>
-                        <p>${fn:substring(articolo.testo, 0, 50)}</p>
-                        <p class="parere">${articolo.votoGiornalista}</p>
-                    </div>
-                </div>
-            </a>
-        </c:forEach>
+        a.modifica:hover{
+            background: #6B354D;
+        }
+        a.inserisci {
+            margin: 0;
+            top:0;
+            right: 0;
+            padding: 1%;
+            position: fixed;
+            background: #24262b;
+            border: none;
+            cursor: pointer;
+            transtion-duration: .3s;
+            border-radius: 2px;
+            color: white;
+        }
+
+        a.inserisci:hover{
+            color: #e91e63;
+        }
+    </style>
+    <section>
+        <a class="inserisci" href="/Rojina_Review_war/formInsertReview">Inserisci recensione</a>
     </section>
-</div>
+    <section class="recensioni" style="background: none">
+        <section class="articoli">
+            <c:forEach items="${requestScope['recensioniGiornalista']}" var="articolo">
+                    <div class="articolo">
+                        <img src="${articolo.immagine}" , alt="copertina" decoding="async">
+                        <div class="articolo-content">
+                            <h2>${articolo.nome}</h2>
+                            <p>${fn:substring(articolo.testo, 0, 50)}</p>
+                            <p class="parere">${articolo.votoGiornalista}</p>
+                            <a class="modifica">Modifica Rcensione</a>
+                        </div>
+                    </div>
+            </c:forEach>
+        </section>
+    </section>
+
 </body>
 </html>

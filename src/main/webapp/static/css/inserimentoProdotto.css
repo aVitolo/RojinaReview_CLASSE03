@@ -16,7 +16,7 @@ body {
     transform: translate(-50%, -50%);
     /* Propietà che permette di spostare gli elementi della classe */
     height: fit-content;
-    width: 400px;
+    width: 800px;
     background: #24262b;
     border-radius: 10px;
     padding: 2%;
@@ -48,15 +48,9 @@ form .form_input {
     background: none;
     outline: none;
     color: #ffffff;
+    border-bottom: solid 1px  #e91e63 ;
 }
 
-#radioLogin label{
-    position: relative;
-    top: auto;
-    left: auto;
-    transform: none;
-    margin: 1%;
-}
 #radioLogin {
     display: flex;
     position: relative;
@@ -64,32 +58,6 @@ form .form_input {
 
 .form_input input[type="radio"] {
     height: 20px;
-}
-
-.form_input label {
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    color: #e91e63;;
-    top: -5px;
-    transform: translateY(-50%); /* Propietà che permette di spostare gli elementi della classe  sull' asse Y*/
-    font-size: 16px;
-    pointer-events: none;
-    transition: .5s;
-}
-
-.form_input span::before {
-    content: '';
-    position: absolute;
-    top: 40px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: #e91e63;
-}
-
-.form_input input:not([type="radio"]):valid ~ label {
-    color: transparent;
 }
 
 button,
@@ -134,4 +102,19 @@ input[type="submit"]:hover {
 #error {
     display: flex;
     align-items: center;
+}
+
+textarea{
+    width: -webkit-fill-available;
+    height: 300px;
+    background: none;
+    color: white;
+    border: none;
+    overflow: auto;
+    outline: none;
+    font-size: 18px;
+}
+
+p{
+    color: #e91e63;
 }

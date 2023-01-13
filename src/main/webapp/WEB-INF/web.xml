@@ -430,4 +430,13 @@
         <url-pattern>/gestisicSegnalazion</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>formInsertReviewServlet</servlet-name>
+        <servlet-class>rojinaReview.rivista.controller.formInsertReviewServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>formInsertReviewServlet</servlet-name>
+        <url-pattern>/formInsertReview</url-pattern>
+    </servlet-mapping>
+
 </web-app>
