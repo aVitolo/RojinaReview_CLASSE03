@@ -140,6 +140,7 @@ public class OpinioneServiceImpl implements OpinioneService{
         try {
             sDAO.doSave(segnalazione);
         }catch (SQLException e){
+            e.printStackTrace();
             throw new InsertOpinionException("Errore nel caricamento dei voti");
         }
     }

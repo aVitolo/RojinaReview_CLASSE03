@@ -72,3 +72,12 @@ function canBuy(canDo) {
     } else
         return true;
 }
+
+function showError(flag){
+    if(flag==1){
+        alert("Devi aggiungere dettagli alla tua segnalazione")
+    }
+    if (flag==2){
+        alert("Seleziona un motivo valido")
+    }
+}

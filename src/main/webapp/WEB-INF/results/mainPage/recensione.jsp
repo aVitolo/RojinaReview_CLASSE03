@@ -15,7 +15,8 @@
     if(session.getAttribute("giornalista") != null || session.getAttribute("admin") != null)
          canDo = 2;
     else if(session.getAttribute("videogiocatore") != null)
-        canDo = 1;%>
+        canDo = 1;
+    %>
 <head>
     <title><%=recensione.getNomeVideogioco()%> - <%=recensione.getNome()%>
     </title>
@@ -27,6 +28,22 @@
     <script src="./static/js/userFunctions.js" type="text/javascript"></script>
 </head>
 <body>
+<%    if(session.getAttribute("error")!=null){
+    String error= (String) session.getAttribute("error");
+    session.removeAttribute("error");
+    if(error.equals("noComm")){%>
+        <script>
+            showError(1)
+        </script>
+    <%
+    }
+    else if(error.equals("noMot")){%>
+        <script>
+            showError(1)
+        </script>
+<%  }
+}%>
+    }%>
 <div id="page">
 <%@ include file="/WEB-INF/results/utilities/navebar.jsp" %>
 <section id="wrap">
@@ -106,11 +123,13 @@
 <form method="post" action="inviaSegnalazioneServlet" style="display: none;" id="form_segnalazione">
     <p id="closeForm" onclick="reset()">X</p>
     <input type="hidden" value="" id="input_id" name="id_commento">
-    <input type="hidden" value="2" name="flag">
+    <input type="hidden" value="1" name="flag">
     <input type="hidden" value="<%=recensione.getId()%>" name="id_contenuto">
     <select name="motivo">
+        <option value="Seleziona un motivo">Seleziona una motivazione</option>
         <option value="Spam">Spam</option>
         <option value="Contenuto offensivo">Contenuto offensivo</option>
+        <option value="Altro">Altro</option></select>
         <textarea rows="10" cols="30" name="commento_aggiuntivo"></textarea>
         <button type="submit"> Invia segnalazione</button>
 </form>
