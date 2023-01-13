@@ -34,6 +34,21 @@
 </head>
 
 <body>
+<%if(session.getAttribute("error")!=null){
+    String error= (String) session.getAttribute("error");
+    session.removeAttribute("error");
+    if(error.equals("noComm")){%>
+        <script>
+            showError(1)
+        </script>
+<%
+    }
+    else if(error.equals("noMot")){%>
+        <script>
+            showError(1)
+        </script>
+<%  }
+}%>
 <div id="page">
 <%@ include file="/WEB-INF/results/utilities/navebar.jsp" %>
 <section id="wrap">
@@ -122,8 +137,10 @@
     <input type="hidden" value="2" name="flag">
     <input type="hidden" value="<%=prodotto.getId()%>"  name="id_contenuto">
     <select name="motivo">
+        <option value="Seleziona un motivo">Seleziona una motivazione</option>
         <option value="Spam">Spam</option>
         <option value="Contenuto offensivo">Contenuto offensivo</option>
+        <option value="Altro">Altro</option></select>
         <textarea rows="10" cols="30" name="commento_aggiuntivo"></textarea>
         <button type="submit"> Invia segnalazione</button>
 </form>
