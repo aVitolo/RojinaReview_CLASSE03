@@ -10,27 +10,26 @@
 <body>
 <%@ include file="/WEB-INF/results/managerPages/managerArea.jsp" %>
 <div class="center">
+
   <form method="post" action="./aggiungiProdotto"  enctype="multipart/form-data">
+
     <div class="form_input">
+      <p>Nome</p>
       <input id="Nome" type="text" name="nome" required>
-      <span></span>
-      <label>Nome</label>
     </div>
+
+    <textarea type="text" id="testo" name="descrizione" required>Inserisci testo ...</textarea>
+
     <div class="form_input">
-      <input id="Descrizione" type="text" name="descrizione" required>
-      <span></span>
-      <label>Descrizine</label>
-    </div>
-    <div class="form_input">
+      <p>Quantita</p>
       <input id="Quantita" type="text" name="quantita" required>
-      <span></span>
-      <label>Quantita</label>
     </div>
+
     <div class="form_input">
+      <p>Prezzo</p>
       <input id="Prezzo" type="text" name="prezzo" required>
-      <span></span>
-      <label>Prezzo</label>
     </div>
+
     <div>
       <input type="radio" class="radioCategoria" id="casaRadio" name="productType" value="Casa" checked="checked">
       <label>Casa</label>
@@ -39,11 +38,12 @@
       <input type="radio" class="radioCategoria" id="abbigliamentoRadio" name="productType" value="Abbigliamento">
       <label>Abbigliamento</label>
     </div>
+
     <div class="form_input">
       <input type="file" id="foto" name="foto">
-      <label>Foto Prodotto</label>
     </div>
-    <input id="registerSubmit" type="submit" onclick="validateInputs()" value="Invia Richiesta">
+
+    <input id="registerSubmit" type="submit" onclick="validateInputs()" value="Invia Prodotto">
   </form>
 </div>
 </body>
