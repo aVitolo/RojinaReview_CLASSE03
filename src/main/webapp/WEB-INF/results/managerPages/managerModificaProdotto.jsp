@@ -46,7 +46,7 @@
       <label>Abbigliamento</label>
     </div>
     <div class="form_input">
-      <input id="fotoProdotto" type="file" name="foto">
+      <input id="fotoProdotto" type="file" name="foto" accept=".jpg">
     </div>
     <div class="form_input" style="visibility: hidden">
       <input id="idProdotto" type="hidden" value="${prodotto.id}"  name="id">
