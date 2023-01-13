@@ -128,6 +128,7 @@ public class RivistaServiceImpl implements RivistaService{
         try {
             rDAO.doSave(recensione, giornalista.getId(), recensione.getNomeVideogioco());
         } catch (SQLIntegrityConstraintViolationException e) {
+            e.printStackTrace();
             throw new InsertReviewException("Videogioco non presente");
         } catch (SQLException e) {
             e.printStackTrace();

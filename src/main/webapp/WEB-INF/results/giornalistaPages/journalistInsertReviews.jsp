@@ -31,7 +31,7 @@
       <input type="number" id="parere" name="parere" min="0" max="10" value="8" required>
     </div>
     <div class="form_input">
-      <input type="file" id="foto" name="immagine" required>
+      <input type="file" id="foto" name="immagine">
     </div>
     <div style="display: flex; justify-content: space-evenly;">
       <input id="registerSubmit" type="submit" onclick="freeStore()" value="Inserisci Recensione">

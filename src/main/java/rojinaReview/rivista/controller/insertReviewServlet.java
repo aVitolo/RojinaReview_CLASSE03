@@ -57,11 +57,17 @@ public class insertReviewServlet extends HttpServlet {
         recensione.setCommenti(new ArrayList<>());
         recensione.setParagrafi(paragrafi);
 
-        Part filePart = request.getPart("immagine");
-        String imageType = "reviews";
-        String fileName = "review-" + recensione.getNomeVideogioco() + ".jpg";
-        recensione.setImmagine(Utils.saveImageWar(imageType, fileName, filePart));
-        Utils.saveImageFileSystem(imageType, fileName, filePart);
+        if(request.getPart("immagine").getSize() <= 0)
+            recensione.setImmagine(null);
+        else
+        {
+            Part filePart = request.getPart("immagine");
+            String imageType = "reviews";
+            String fileName = "review-" + recensione.getNomeVideogioco() + ".jpg";
+            recensione.setImmagine(Utils.saveImageWar(imageType, fileName, filePart));
+            Utils.saveImageFileSystem(imageType, fileName, filePart);
+        }
+
 
         try {
             rs.inserisciRecensione(recensione, giornalista);
