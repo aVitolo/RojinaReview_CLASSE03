@@ -33,6 +33,10 @@
             <label>Password</label>
         </div>
         <input id="registerSubmit" type="submit" onclick="validateInputs()" value="Create Account">
+        <div class="register_link">
+            <p><a href="./userLogin.jsp">Login</a></p>
+            <p><a href="./home">Torna alla home</a></p>
+        </div>
     </form>
 </div>
 <c:if test="${message != null}">

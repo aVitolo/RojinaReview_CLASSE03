@@ -33,7 +33,8 @@
         </div>
         <input type="submit" value="Login">
         <div class="register_link">
-            <a href="./registerStaff.jsp">Invia richiesta</a>
+            <p><a href="./registerStaff.jsp">Invia Richiesta</a></p>
+            <p><a href="./home">Torna alla home</a></p>
         </div>
     </form>
 </div>

@@ -92,7 +92,7 @@
                     <p class="text">
                         <%=c.getTesto()%>
                     </p>
-                    <button class="segnalaB" onclick="handleRequest(<%=c.getId()%>)">Segnala</button>
+                    <button class="segnalaB" onclick="handleRequest(<%=c.getId()%>,<%=canDo%>)">Segnala</button>
                 </div>
                 <div class="date">
                     <%=c.getDataScrittura()%>
@@ -104,6 +104,7 @@
 </section>
 </div>
 <form method="post" action="inviaSegnalazioneServlet" style="display: none;" id="form_segnalazione">
+    <p id="closeForm" onclick="reset()">X</p>
     <input type="hidden" value="" id="input_id" name="id_commento">
     <input type="hidden" value="2" name="flag">
     <input type="hidden" value="<%=recensione.getId()%>" name="id_contenuto">
@@ -115,13 +116,23 @@
 </form>
 </body>
 <script type="text/javascript">
-    function handleRequest(id){
-        let page=document.getElementById("page")
-        page.style.opacity="0.5"
+    function handleRequest(id,canDo){
+        if(canReport(canDo)) {
+            let page = document.getElementById("page")
+            page.style.opacity = "0.5"
 
-        let form=document.getElementById("form_segnalazione")
-        form.style.display="flex"
-        document.getElementById("input_id").setAttribute("value",id)
+            let form = document.getElementById("form_segnalazione")
+            form.style.display = "flex"
+            document.getElementById("input_id").setAttribute("value", id)
+        }
+    }
+
+    function reset(){
+        let page = document.getElementById("page")
+        page.style.opacity = "1"
+
+        let form = document.getElementById("form_segnalazione")
+        form.style.display = "none"
     }
 </script>
 </html>

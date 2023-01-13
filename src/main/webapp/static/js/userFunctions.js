@@ -40,6 +40,18 @@ function canComment(canDo) {
         return true;
 }
 
+function canReport(canDo) {
+    if (canDo == 0) {
+        alert("Devi essere registrato per segnalare!");
+        return false;
+    }
+    if (canDo == 2) {
+        alert("Giornalisti e amministratori non possono segnalare!")
+        return false;
+    }
+    if (canDo == 1)
+        return true;
+}
 function canVote(canDo) {
     if (canDo == 0) {
         alert("Devi essere registrato per votare!");

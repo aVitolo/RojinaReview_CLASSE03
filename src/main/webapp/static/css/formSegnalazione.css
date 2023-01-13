@@ -52,3 +52,14 @@
     font-size: 18px;
     font-weight: 700;
 }
+
+#closeForm{
+    cursor: pointer;
+    color: #e91e63;
+    align-self: flex-end;
+    font-weight: bold;
+}
+
+#closeForm:hover {
+    color: #6B354D;
+}
