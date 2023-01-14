@@ -1,6 +1,7 @@
 <%@ page import="rojinaReview.model.beans.*" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -9,6 +10,7 @@
     Notizia notizia = (Notizia) request.getAttribute("notizia");
     ArrayList<Commento> commenti = notizia.getCommenti();
     ArrayList<Paragrafo> paragrafi = notizia.getParagrafi();
+    HashMap<Integer, String> mentionedGames = notizia.getGiochi();
     int canDo = 0; //ospite
     if(session.getAttribute("giornalista") != null || session.getAttribute("manager") != null)
         canDo = 2;
@@ -16,6 +18,9 @@
         canDo = 1;%>
 
 <c:set var="giornalistaArticolo" scope="page" value="${requestScope.get('giornalista')}" />
+<c:set var="notizia" value="${requestScope.get('notizia')}"/>
+<c:set var="paragrafi" value="${notizia.paragrafi}"/>
+
 <head>
     <title>${notizia.nome}</title>
     <link rel="stylesheet" href="./static/css/navebar.css">
@@ -55,7 +60,20 @@
         <div id = "articolo-content">
             <h1>${notizia.nome}</h1>
             <p>${notizia.testo}</p>
+            <c:forEach items="${paragrafi}" var="paragrafo">
+                <h2>${paragrafo.titolo}</h2>
+                <c:if test="${paragrafo.immagine != null}">
+                    <img src = "${paragrafo.immagine}" alt="immagineParagrafo" decoding="async">
+                </c:if>
+                <p>${paragrafo.testo}</p>
+            </c:forEach>
             <p>Caricata il ${notizia.dataScrittura}</p>
+        </div>
+        <div id="mentionedGames">
+            <%for(Map.Entry<Integer, String> set : mentionedGames.entrySet()){%>
+                <a href="/Rojina_Review_war/getResource?type=game&id=<%=set.getKey()%>"><%=set.getValue()%> &nbsp &nbsp &nbsp</a>
+            <%}%>
+
         </div>
         <div id="card">
             <div id="giornalista">

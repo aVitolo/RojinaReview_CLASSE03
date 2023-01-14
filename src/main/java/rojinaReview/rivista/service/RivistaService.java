@@ -166,4 +166,6 @@ public interface RivistaService {
      */
     ArrayList<String> visualizzaGeneri() throws LoadingGenresException;
 
+    ArrayList<String> visualizzaNomiVideogiochi() throws LoadingVideogamesException;
+
 }

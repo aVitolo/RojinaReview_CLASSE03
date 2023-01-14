@@ -14,18 +14,22 @@ import java.util.ArrayList;
 @WebServlet(name = "insertParagrafoServlet", value = "/insertParagrafoServlet")
 @MultipartConfig(maxFileSize = 1024*1024*10)
 public class insertParagrafoServlet extends HttpServlet {
-    private String path = "/Rojina_Review_war/formInsertReview";
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         HttpSession session = request.getSession();
         if(session.getAttribute("paragrafi")==null)
             session.setAttribute("paragrafi", new ArrayList<Paragrafo>());
         ArrayList<Paragrafo> paragrafi = ( ArrayList<Paragrafo>) session.getAttribute("paragrafi");
+        String path = null;
+        if(session.getAttribute("recensione") != null)
+            path = "/Rojina_Review_war/formInsertReview";
+        else if(session.getAttribute("notizia") != null)
+            path = "/Rojina_Review_war/formInsertNew";
 
         Paragrafo p = new Paragrafo();
         p.setTitolo(request.getParameter("titolo"));

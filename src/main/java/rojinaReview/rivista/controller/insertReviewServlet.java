@@ -79,6 +79,8 @@ public class insertReviewServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+        session.removeAttribute("paragrafi");
+
         response.sendRedirect(result);
     }
 

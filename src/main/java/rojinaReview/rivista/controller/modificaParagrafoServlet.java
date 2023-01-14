@@ -14,11 +14,16 @@ import java.util.Enumeration;
 @MultipartConfig(maxFileSize = 1024*1024*10)
 public class modificaParagrafoServlet extends HttpServlet {
 
-    private String path = "/Rojina_Review_war/formInsertReview";
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
+        String path = null;
+        if(session.getAttribute("recensione") != null)
+            path = "/Rojina_Review_war/formInsertReview";
+        else if(session.getAttribute("notizia") != null)
+            path = "/Rojina_Review_war/formInsertNew";
         if (session.getAttribute("paragrafi") != null) {
             ArrayList<Paragrafo> paragrafi = (ArrayList<Paragrafo>) session.getAttribute("paragrafi");
             System.out.println(paragrafi.get(0).toString());

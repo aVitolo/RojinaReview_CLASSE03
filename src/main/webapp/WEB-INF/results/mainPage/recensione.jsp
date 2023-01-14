@@ -13,7 +13,7 @@
     Parere parere = (Parere) request.getAttribute("votoUtente");
     Giornalista giornalistaArticolo = (Giornalista) request.getAttribute("giornalistaArticolo");
     int canDo = 0; //ospite
-    if(session.getAttribute("giornalista") != null || session.getAttribute("admin") != null)
+    if(session.getAttribute("giornalista") != null || session.getAttribute("manager") != null)
          canDo = 2;
     else if(session.getAttribute("videogiocatore") != null)
         canDo = 1;
@@ -22,7 +22,7 @@
 <c:set var="recensione" value="${requestScope.get('recensione')}"/>
 <c:set var="paragrafi" value="${recensione.paragrafi}"/>
 <head>
-    <title><%=recensione.getNomeVideogioco()%> - <%=recensione.getNome()%>
+    <title><%=recensione.getNome()%>
     </title>
     <link rel="stylesheet" href="./static/css/navebar.css">
     <link rel="stylesheet" href="./static/css/foot.css">

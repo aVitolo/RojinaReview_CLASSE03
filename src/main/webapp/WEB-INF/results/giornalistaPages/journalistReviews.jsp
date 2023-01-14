@@ -55,7 +55,7 @@
                             <h2>${articolo.nome}</h2>
                             <p>${fn:substring(articolo.testo, 0, 50)}</p>
                             <p class="parere">${articolo.votoGiornalista}</p>
-                            <a class="modifica">Modifica Rcensione</a>
+                            <a class="modifica">Modifica recensione</a>
                         </div>
                     </div>
             </c:forEach>

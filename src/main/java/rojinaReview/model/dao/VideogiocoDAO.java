@@ -71,6 +71,17 @@ public class VideogiocoDAO {
         return giochi;
     }
 
+    public ArrayList<String> doRetrieveAllNames() throws SQLException {
+        ArrayList<String> giochi = new ArrayList<>();
+        PreparedStatement ps = con.prepareStatement("SELECT titolo FROM videogioco");
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next())
+            giochi.add(rs.getString("titolo"));
+
+        return giochi;
+    }
+
     //utilizzata per vedere i giochi menzionati in una notizia
     public ArrayList<String> getGiocoByIdNotizia(int id) throws SQLException {
         PreparedStatement ps =
@@ -121,7 +132,17 @@ public class VideogiocoDAO {
         return id;
     }
 
-    public int retrieveIdByName(String s) {
-        return  -1;
+    public int retrieveIdByName(String s) throws SQLException {
+        int videogioco = 0;
+        PreparedStatement ps = con.prepareStatement("SELECT id FROM videogioco WHERE titolo=?");
+        ps.setString(1, s);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next())
+            videogioco = rs.getInt("id");
+        else
+            throw new SQLException();
+
+        return videogioco;
+
     }
 }

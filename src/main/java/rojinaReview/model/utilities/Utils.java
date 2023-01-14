@@ -4,13 +4,16 @@ import jakarta.servlet.http.Part;
 import jakarta.xml.bind.DatatypeConverter;
 import rojinaReview.model.beans.Carrello;
 import rojinaReview.model.beans.Prodotto;
+import rojinaReview.model.dao.VideogiocoDAO;
 import rojinaReview.model.exception.InvalidTextException;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Utils {
 
@@ -150,6 +153,25 @@ public class Utils {
                 filecontent.close();
 
         }
+    }
+
+    //funzione usata nell'inserimento notizia per parsare i giochi menzionati
+    public static HashMap<Integer, String> parseGames(String toParse, ArrayList<String> allGames) throws SQLException {
+        VideogiocoDAO vDAO = new VideogiocoDAO();
+        HashMap<Integer, String> parsedGames = new HashMap<>();
+
+        for (String g : allGames)
+            if(toParse.contains(g)) {
+                try {
+                    parsedGames.put(vDAO.retrieveIdByName(g), g);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    continue;
+                }
+            }
+
+
+        return parsedGames;
     }
 }
 

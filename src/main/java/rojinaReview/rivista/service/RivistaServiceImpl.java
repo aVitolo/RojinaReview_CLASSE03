@@ -101,8 +101,10 @@ public class RivistaServiceImpl implements RivistaService{
             notizia = nDAO.doRetrieveById(id);
             notizia.setCommenti(cDAO.getCommentByContentId(notizia.getId(), 2));
             notizia.setParagrafi(pDAO.doRetrieveAllByArticle(notizia.getId(), false));
+            notizia.setGiochi(nDAO.doRetrieveMentionedGames(id));
             return notizia;
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new LoadingNewsException("Errore nel caricamento notizia");
         }
     }
@@ -157,6 +159,7 @@ public class RivistaServiceImpl implements RivistaService{
         try {
             nDAO.doSave(notizia, giornalista.getId());
         } catch (SQLException e) {
+            e.printStackTrace();
            throw new InsertNewException("Errore nell'inserimento della notizia");
         }
 
@@ -170,8 +173,9 @@ public class RivistaServiceImpl implements RivistaService{
 
         for(Paragrafo p : notizia.getParagrafi()){
             try {
-                pDAO.doSave(p, rDAO.doRetrieveLastId(), false);
+                pDAO.doSave(p, nDAO.doRetrieveLastId(), false);
             } catch (SQLException e) {
+                e.printStackTrace();
                 throw new InsertParagraphException("Errore nell'inserimento dei paragrafi");
             }
         }
@@ -179,6 +183,7 @@ public class RivistaServiceImpl implements RivistaService{
         try {
             nDAO.doSaveMentioned(notizia.getGiochi());
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new InsertNewException("Errore nell'inserimento dei giochi menzionati");
         }
 
@@ -245,6 +250,7 @@ public class RivistaServiceImpl implements RivistaService{
         try {
             return nDAO.doRetrieveByIdJournalist(giornalista.getId());
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new LoadingNewsException("Errore nel caricamento delle notizie del giornalista");
         }
     }
@@ -323,6 +329,16 @@ public class RivistaServiceImpl implements RivistaService{
         } catch (SQLException e) {
             e.printStackTrace();
             throw new LoadingGenresException();
+        }
+    }
+
+    @Override
+    public ArrayList<String> visualizzaNomiVideogiochi() throws LoadingVideogamesException {
+        try {
+            return vDAO.doRetrieveAllNames();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new LoadingVideogamesException();
         }
     }
 

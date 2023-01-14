@@ -9,6 +9,7 @@ import rojinaReview.model.dao.*;
 import rojinaReview.model.exception.LoadingCategoriesException;
 import rojinaReview.model.exception.LoadingGenresException;
 import rojinaReview.model.exception.LoadingPlatformsException;
+import rojinaReview.model.exception.LoadingVideogamesException;
 import rojinaReview.rivista.service.RivistaService;
 import rojinaReview.rivista.service.RivistaServiceImpl;
 import rojinaReview.shop.service.ShopService;
@@ -40,14 +41,19 @@ public class ContextSetUpingServlet extends HttpServlet {
             ArrayList<String>  piattaforme = rs.visualizzaPiattaforme();
             ArrayList<String>  generi = rs.visualizzaGeneri();
             ArrayList<String>  categorie = ss.visualizzaCategorie();
+            ArrayList<String> allGames = rs.visualizzaNomiVideogiochi();
+
             config.getServletContext().setAttribute("piattaforme", piattaforme);
             config.getServletContext().setAttribute("generi", generi);
             config.getServletContext().setAttribute("categorie", categorie);
+            config.getServletContext().setAttribute("nomiGiochi", allGames);
         } catch (LoadingPlatformsException e) {
             e.printStackTrace();
         } catch (LoadingGenresException e) {
             e.printStackTrace();
         } catch (LoadingCategoriesException e) {
+            e.printStackTrace();
+        } catch (LoadingVideogamesException e) {
             e.printStackTrace();
         }
     }

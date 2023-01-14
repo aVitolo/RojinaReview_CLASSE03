@@ -93,7 +93,7 @@ public class NotiziaDAO {
 
     public ArrayList<Notizia> doRetrieveByIdJournalist(int giornalista) throws SQLException {
         ArrayList<Notizia> notizie = new ArrayList<>();
-        PreparedStatement ps = con.prepareStatement("SELECT n.id, n.titolo, n.testo, n.immagine, n.dataScrittura " +
+        PreparedStatement ps = con.prepareStatement("SELECT n.id, n.nome, n.testo, n.immagine, n.dataScrittura " +
                 "FROM notizia n JOIN giornalista g on g.id = n.id_giornalista WHERE n.id_giornalista=? ORDER BY n.dataScrittura DESC");
         ps.setInt(1, giornalista);
         ResultSet rs = ps.executeQuery();
@@ -114,7 +114,7 @@ public class NotiziaDAO {
     }
 
     public void doSave(Notizia n, int idGiornalista) throws SQLException {
-        PreparedStatement ps = con.prepareStatement("INSERT INTO Notizia (testo, id_giornalista, titolo, dataScrittura, immagine) VALUES" +
+        PreparedStatement ps = con.prepareStatement("INSERT INTO Notizia (testo, id_giornalista, nome, dataScrittura, immagine) VALUES" +
                 "(?, ?, ?, ?, ?)");
 
         ps.setString(1, n.getTesto());
@@ -130,8 +130,8 @@ public class NotiziaDAO {
     //fa l'insert nella table gioco_notizia per i giochi menzionati
     public void doSaveMentioned(HashMap<Integer, String> mentioned) throws SQLException {
         PreparedStatement ps;
-        ResultSet rs;
         int idNotizia = new NotiziaDAO(con).doRetrieveLastId();
+        System.out.println(idNotizia);
 
 
         for (Map.Entry<Integer, String> set : mentioned.entrySet()) {
@@ -213,9 +213,12 @@ public class NotiziaDAO {
     }
 
     public int doRetrieveLastId() throws SQLException {
-        PreparedStatement ps = con.prepareStatement("SELECT id FROM notiza ORDER BY id DESC LIMIT 1");
+        int article = 0;
+        PreparedStatement ps = con.prepareStatement("SELECT id FROM notizia ORDER BY id DESC LIMIT 1");
         ResultSet rs = ps.executeQuery();
-        int article = rs.getInt(1);
+        if(rs.next())
+            article = rs.getInt(1);
+
         return article;
     }
 
@@ -225,5 +228,28 @@ public class NotiziaDAO {
 
     public String retrieveNome(int idNotizia) {
         return null;
+    }
+
+    public HashMap<Integer, String> doRetrieveMentionedGames(int idNotizia) throws SQLException {
+        HashMap<Integer, String> mentionedGames = new HashMap<>();
+        int idVideogioco = 0;
+        String nomeVideogioco = null;
+        PreparedStatement ps = con.prepareStatement("SELECT id_videogioco FROM videogioco_notizia WHERE id_notizia=?");
+        ps.setInt(1, idNotizia);
+        ResultSet rs = ps.executeQuery();
+        ResultSet rsInt;
+        while (rs.next())
+        {
+            idVideogioco = rs.getInt("id_videogioco");
+            ps = con.prepareStatement("SELECT titolo FROM videogioco WHERE id=?");
+            ps.setInt(1, idVideogioco);
+            rsInt = ps.executeQuery();
+            if(rsInt.next())
+                nomeVideogioco = rsInt.getString("titolo");
+
+            mentionedGames.put(idVideogioco, nomeVideogioco);
+        }
+
+        return mentionedGames;
     }
 }
