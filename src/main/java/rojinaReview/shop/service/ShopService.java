@@ -5,10 +5,7 @@ import java.util.List;
 
 import rojinaReview.model.beans.Carrello;
 import rojinaReview.model.beans.Videogiocatore;
-import rojinaReview.model.exception.CheckoutException;
-import rojinaReview.model.exception.LoadingOrderException;
-import rojinaReview.model.exception.LoadingShopException;
-import rojinaReview.model.exception.ProductIDMissingException;
+import rojinaReview.model.exception.*;
 import rojinaReview.model.beans.Ordine;
 import rojinaReview.model.beans.Prodotto;
 
@@ -103,4 +100,10 @@ public interface ShopService
      */
     ArrayList<Ordine>visualizzaOrdiniEffettuati(Videogiocatore videogiocatore) throws LoadingOrderException;
 
+    /**
+     * Firma del metodo che permette di
+     * visualizzare tutte le categorie presenti
+     * @return la lista di categorie
+     */
+    ArrayList<String> visualizzaCategorie() throws LoadingCategoriesException;
 }

@@ -7,18 +7,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <% Recensione recensione = (Recensione) request.getAttribute("recensione");
-    ArrayList<Commento> commenti = (ArrayList<Commento>) request.getAttribute("commenti");
+    ArrayList<Commento> commenti = recensione.getCommenti();
+    ArrayList<Paragrafo> paragrafi = recensione.getParagrafi();
     Videogioco videogioco = (Videogioco) request.getAttribute("videogioco");
     Parere parere = (Parere) request.getAttribute("votoUtente");
     Giornalista giornalistaArticolo = (Giornalista) request.getAttribute("giornalistaArticolo");
     int canDo = 0; //ospite
-    if(session.getAttribute("giornalista") != null || session.getAttribute("admin") != null)
+    if(session.getAttribute("giornalista") != null || session.getAttribute("manager") != null)
          canDo = 2;
     else if(session.getAttribute("videogiocatore") != null)
         canDo = 1;
     %>
+
+<c:set var="recensione" value="${requestScope.get('recensione')}"/>
+<c:set var="paragrafi" value="${recensione.paragrafi}"/>
 <head>
-    <title><%=recensione.getNomeVideogioco()%> - <%=recensione.getNome()%>
+    <title><%=recensione.getNome()%>
     </title>
     <link rel="stylesheet" href="./static/css/navebar.css">
     <link rel="stylesheet" href="./static/css/foot.css">
@@ -57,6 +61,13 @@
             <h1>${recensione.nome}</h1>
             <p id="votoRecensione">${recensione.votoGiornalista}</p>
             <p>${recensione.testo}</p>
+            <c:forEach items="${paragrafi}" var="paragrafo">
+                <h2>${paragrafo.titolo}</h2>
+                <c:if test="${paragrafo.immagine != null}">
+                    <img src = "${paragrafo.immagine}" alt="immagineParagrafo" decoding="async">
+                </c:if>
+                <p>${paragrafo.testo}</p>
+            </c:forEach>
             <p>Caricata il ${recensione.dataScrittura}</p>
         </div>
     </section>

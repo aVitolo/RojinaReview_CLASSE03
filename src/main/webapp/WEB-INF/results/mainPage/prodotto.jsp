@@ -11,7 +11,7 @@
 
 <html>
 <% Prodotto prodotto = (Prodotto) request.getAttribute("prodotto");
-    ArrayList<Commento> commenti = (ArrayList<Commento>) request.getAttribute("commenti");
+    ArrayList<Commento> commenti = prodotto.getCommenti();
     Integer quantitàCarrello = (Integer) request.getAttribute("quantitàCarrello");
     Parere parere = (Parere) request.getAttribute("votoUtente");
     int canDo = 0; //ospite

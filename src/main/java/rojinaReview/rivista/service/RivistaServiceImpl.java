@@ -7,6 +7,7 @@ import rojinaReview.model.utilities.ConPool;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -82,8 +83,12 @@ public class RivistaServiceImpl implements RivistaService{
     }
 
     public Recensione visualizzaRecensioneByID(int id) throws LoadingReviewsException {
+        Recensione recensione;
         try {
-            return rDAO.doRetrieveById(id);
+            recensione = rDAO.doRetrieveById(id);
+            recensione.setCommenti(cDAO.getCommentByContentId(recensione.getId(), 1));
+            recensione.setParagrafi(pDAO.doRetrieveAllByArticle(recensione.getId(), true));
+            return recensione;
         } catch (SQLException e) {
             throw new LoadingReviewsException("Errore nel caricamento della recensione");
         }
@@ -91,9 +96,15 @@ public class RivistaServiceImpl implements RivistaService{
 
     public Notizia visualizzaNotiziaByID(int id) throws LoadingNewsException //da aggiungere in questo metodo il setting dell'hashmap
     {
+        Notizia notizia;
         try {
-            return nDAO.doRetrieveById(id);
+            notizia = nDAO.doRetrieveById(id);
+            notizia.setCommenti(cDAO.getCommentByContentId(notizia.getId(), 2));
+            notizia.setParagrafi(pDAO.doRetrieveAllByArticle(notizia.getId(), false));
+            notizia.setGiochi(nDAO.doRetrieveMentionedGames(id));
+            return notizia;
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new LoadingNewsException("Errore nel caricamento notizia");
         }
     }
@@ -117,9 +128,12 @@ public class RivistaServiceImpl implements RivistaService{
 
     public void inserisciRecensione(Recensione recensione, Giornalista giornalista) throws InsertReviewException, InsertCommentException, InsertParagraphException {
         try {
-            rDAO.doSave(recensione, giornalista.getId(), recensione.idVideogioco);
+            rDAO.doSave(recensione, giornalista.getId(), recensione.getNomeVideogioco());
+        } catch (SQLIntegrityConstraintViolationException e) {
+            e.printStackTrace();
+            throw new InsertReviewException("Videogioco non presente");
         } catch (SQLException e) {
-            throw new InsertReviewException("Errore nell'inserimento della recensione");
+            e.printStackTrace();
         }
 
         for(Commento c : recensione.getCommenti()) { //inutile perché all'inserimento dell'articolo non ci saranno commenti
@@ -134,6 +148,7 @@ public class RivistaServiceImpl implements RivistaService{
             try {
                 pDAO.doSave(p, rDAO.doRetrieveLastId(), true);
             } catch (SQLException e) {
+                e.printStackTrace();
                 throw new InsertParagraphException("Errore nell'inserimento dei paragrafi");
             }
         }
@@ -144,6 +159,7 @@ public class RivistaServiceImpl implements RivistaService{
         try {
             nDAO.doSave(notizia, giornalista.getId());
         } catch (SQLException e) {
+            e.printStackTrace();
            throw new InsertNewException("Errore nell'inserimento della notizia");
         }
 
@@ -157,8 +173,9 @@ public class RivistaServiceImpl implements RivistaService{
 
         for(Paragrafo p : notizia.getParagrafi()){
             try {
-                pDAO.doSave(p, rDAO.doRetrieveLastId(), false);
+                pDAO.doSave(p, nDAO.doRetrieveLastId(), false);
             } catch (SQLException e) {
+                e.printStackTrace();
                 throw new InsertParagraphException("Errore nell'inserimento dei paragrafi");
             }
         }
@@ -166,6 +183,7 @@ public class RivistaServiceImpl implements RivistaService{
         try {
             nDAO.doSaveMentioned(notizia.getGiochi());
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new InsertNewException("Errore nell'inserimento dei giochi menzionati");
         }
 
@@ -232,6 +250,7 @@ public class RivistaServiceImpl implements RivistaService{
         try {
             return nDAO.doRetrieveByIdJournalist(giornalista.getId());
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new LoadingNewsException("Errore nel caricamento delle notizie del giornalista");
         }
     }
@@ -281,14 +300,47 @@ public class RivistaServiceImpl implements RivistaService{
     }
 
     public Recensione visualizzaRecensioneByIDVideogioco(int id) throws LoadingReviewsException {
+        Recensione recensione;
         try {
-            return rDAO.doRetrieveByIdVideogioco(id);
+            recensione = rDAO.doRetrieveByIdVideogioco(id);
+            recensione.setCommenti(cDAO.getCommentByContentId(recensione.getId(), 1));
+            recensione.setParagrafi(pDAO.doRetrieveAllByArticle(recensione.getId(), true));
+            return recensione;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new LoadingReviewsException();
         }
     }
 
+    @Override
+    public ArrayList<String> visualizzaPiattaforme() throws LoadingPlatformsException {
+        try {
+            return piattaformaDAO.doRetrieveAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new LoadingPlatformsException();
+        }
+    }
+
+    @Override
+    public ArrayList<String> visualizzaGeneri() throws LoadingGenresException {
+        try {
+            return gDAO.doRetrieveAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new LoadingGenresException();
+        }
+    }
+
+    @Override
+    public ArrayList<String> visualizzaNomiVideogiochi() throws LoadingVideogamesException {
+        try {
+            return vDAO.doRetrieveAllNames();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new LoadingVideogamesException();
+        }
+    }
 
 
 }

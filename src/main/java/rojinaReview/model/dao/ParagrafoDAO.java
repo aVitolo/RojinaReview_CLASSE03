@@ -78,10 +78,6 @@ public class ParagrafoDAO {
         }
         else if(!type) //notizia
         {
-            ps = con.prepareStatement("SELECT id FROM recensione ORDER BY id DESC LIMIT 1");
-            rs = ps.executeQuery();
-            article = rs.getInt(1);
-
             ps = con.prepareStatement("INSERT INTO paragrafo (titolo, testo, immagine, id_notizia) VALUES (?, ?, ?, ?)");
             ps.setString(1, p.getTitolo());
             ps.setString(2, p.getTesto());
@@ -104,7 +100,7 @@ public class ParagrafoDAO {
         }
         else if (type == 2)
         {
-            ps = con.prepareStatement("DELETE FREE paragrafo WHERE id_notizia?=");
+            ps = con.prepareStatement("DELETE FROM paragrafo WHERE id_notizia=?");
             ps.setInt(1, article);
             ps.executeUpdate();
         }

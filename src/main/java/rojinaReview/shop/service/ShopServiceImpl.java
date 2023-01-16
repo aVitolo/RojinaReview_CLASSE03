@@ -3,10 +3,7 @@ package rojinaReview.shop.service;
 import rojinaReview.model.beans.Carrello;
 import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.dao.*;
-import rojinaReview.model.exception.CheckoutException;
-import rojinaReview.model.exception.LoadingOrderException;
-import rojinaReview.model.exception.LoadingShopException;
-import rojinaReview.model.exception.ProductIDMissingException;
+import rojinaReview.model.exception.*;
 import rojinaReview.model.beans.Ordine;
 import rojinaReview.model.beans.Prodotto;
 import rojinaReview.model.utilities.ConPool;
@@ -21,10 +18,15 @@ public class ShopServiceImpl implements  ShopService{
     private Connection connection;
     private ProdottoDAO pDAO;
     private OrdineDAO oDAO;
+    private CategoriaDAO cDAO;
+    private CommentoDAO commentoDAO;
+
     public ShopServiceImpl() throws SQLException {
         this.connection = ConPool.getConnection();
         pDAO = new ProdottoDAO(this.connection);
         oDAO = new OrdineDAO(this.connection);
+        cDAO = new CategoriaDAO(this.connection);
+        commentoDAO = new CommentoDAO(this.connection);
     }
 
     /*
@@ -64,6 +66,7 @@ public class ShopServiceImpl implements  ShopService{
         Prodotto prodotto = null;
         try {
             prodotto = pDAO.doRetrieveById(id);
+            prodotto.setCommenti(commentoDAO.getCommentByContentId(prodotto.getId(), 0));
             return prodotto;
         } catch (SQLException e) {
             throw new ProductIDMissingException("ID non presente nel DB");
@@ -169,6 +172,16 @@ public class ShopServiceImpl implements  ShopService{
             return oDAO.doRetrieveByUserId(videogiocatore.getId());
         } catch (SQLException e) {
             throw new LoadingOrderException("Errore nel caricamento degli ordini");
+        }
+    }
+
+    @Override
+    public ArrayList<String> visualizzaCategorie() throws LoadingCategoriesException {
+        try {
+            return cDAO.doRetrieveAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new LoadingCategoriesException();
         }
     }
 }

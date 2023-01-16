@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet(name = "modificaProdottoServlet", value = "/modificaProdottoServlet")
-@MultipartConfig
+@MultipartConfig(maxFileSize = 1024*1024*10)
 public class modificaProdottoServlet extends HttpServlet {
     private ShopService ssi;
 
@@ -40,7 +40,7 @@ public class modificaProdottoServlet extends HttpServlet {
         prodotto.setPrezzo(Float.parseFloat(request.getParameter("prezzo")));
         prodotto.setQuantità(Integer.parseInt(request.getParameter("quantita")));
         prodotto.setId(Integer.parseInt(request.getParameter("id")));
-        if(request.getPart("foto")==null){
+        if(request.getPart("foto").getSize() <= 0){
             prodotto.setImmagine(null);
         }
         else{

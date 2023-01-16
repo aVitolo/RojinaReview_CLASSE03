@@ -151,4 +151,21 @@ public interface RivistaService {
     Videogioco visualizzaVideogioco(Recensione recensione) throws LoadingVideogamesException;
 
     Recensione visualizzaRecensioneByIDVideogioco(int id) throws LoadingReviewsException;
+
+    /**
+     * Firma del metodo che permette di
+     * visualizzare tutte le piattaforme presenti
+     * @return la lista di piattaforme
+     */
+    ArrayList<String> visualizzaPiattaforme() throws LoadingPlatformsException;
+
+    /**
+     * Firma del metodo che permette di
+     * visualizzare tutti i generi presenti
+     * @return la lista di generi
+     */
+    ArrayList<String> visualizzaGeneri() throws LoadingGenresException;
+
+    ArrayList<String> visualizzaNomiVideogiochi() throws LoadingVideogamesException;
+
 }

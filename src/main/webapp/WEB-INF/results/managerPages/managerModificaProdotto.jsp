@@ -12,24 +12,21 @@
 <div class="center">
   <form method="post" action="./modificaProdotto"  enctype="multipart/form-data">
     <div class="form_input">
+      <p>Nome</p>
       <input id="Nome" type="text" name="nome" value="${prodotto.nome}" required>
-      <span></span>
-      <label>Nome</label>
     </div>
+
+    <textarea type="text" id="Descrizione" name="descrizione" required>${prodotto.testo}</textarea>
+
     <div class="form_input">
-      <input id="Descrizione" type="text" name="descrizione" value="${prodotto.testo}" required>
-      <span></span>
-      <label>Descrizine</label>
+      <p>Quantità</p>
+      <input id="Quantita" type="number" name="quantita" min="0" value="${prodotto.quantità}" required>
     </div>
+
     <div class="form_input">
-      <input id="Quantita" type="text" name="quantita" value="${prodotto.quantità}" required>
-      <span></span>
-      <label>Quantita</label>
-    </div>
-    <div class="form_input">
-      <input id="Prezzo" type="text" name="prezzo" value="${prodotto.prezzo}" required>
-      <span></span>
-      <label>Prezzo</label>
+      <p>Prezzo</p>
+      <input id="Prezzo" type="number" name="prezzo" min="0" value="${prodotto.prezzo}" required>
+
     </div>
     <div>
       <input type="radio" class="radioCategoria" id="casaRadio" name="productType" value="Casa"
@@ -45,17 +42,16 @@
       <input type="radio" class="radioCategoria" id="abbigliamentoRadio" name="productType" value="Abbigliamento"
         <c:if test="${prodotto.categoria =='Abbigliamento'}">
                checked="checked">
-        </c:if>>
+        </c:if>
       <label>Abbigliamento</label>
     </div>
     <div class="form_input">
-      <input id="fotoProdotto" type="file">
-      <label>Foto Prodotto</label>
+      <input id="fotoProdotto" type="file" name="foto" accept=".jpg">
     </div>
     <div class="form_input" style="visibility: hidden">
       <input id="idProdotto" type="hidden" value="${prodotto.id}"  name="id">
     </div>
-    <input id="registerSubmit" type="submit" onclick="validateInputs()" value="Invia Richiesta">
+    <input id="registerSubmit" type="submit" onclick="validateInputs()" value="Modifica prodotto">
   </form>
 </div>
 </body>

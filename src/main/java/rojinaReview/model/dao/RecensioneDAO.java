@@ -134,8 +134,17 @@ public class RecensioneDAO {
         return recensioni;
     }
 
-    public void doSave(Recensione r, int idGiornalista, int idVideogioco) throws SQLException {
-        PreparedStatement ps = con.prepareStatement("INSERT INTO recensione " +
+    public void doSave(Recensione r, int idGiornalista, String nomeVideogioco) throws SQLException {
+        int idVideogioco = 0;
+        PreparedStatement ps = con.prepareStatement("SELECT id FROM videogioco WHERE titolo=?");
+        ps.setString(1, nomeVideogioco);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next())
+            idVideogioco = rs.getInt(1);
+        else
+            throw new SQLIntegrityConstraintViolationException();
+
+        ps = con.prepareStatement("INSERT INTO recensione " +
                 "(testo, id_giornalista, id_videogioco, nome, votoGiornalista, dataScrittura, immagine) VALUES(?, ?, ?, ?, ?, ?, ?)");
         ps.setString(1, r.getTesto());
         ps.setInt(2, idGiornalista);
@@ -143,7 +152,10 @@ public class RecensioneDAO {
         ps.setString(4, r.getNome());
         ps.setFloat(5, r.getVotoGiornalista());
         ps.setDate(6, r.getDataScrittura());
-        ps.setString(7, r.getImmagine());
+        if(r.getImmagine() == null) //per agevolare i test cases, da rimuovere
+            ps.setString(7, "nonPresente");
+        else
+            ps.setString(7, r.getImmagine());
 
         if(ps.executeUpdate() != 1)
             throw new RuntimeException("Insert error");
@@ -229,7 +241,12 @@ public class RecensioneDAO {
     public int doRetrieveLastId() throws SQLException {
         PreparedStatement ps = con.prepareStatement("SELECT id FROM recensione ORDER BY id DESC LIMIT 1");
         ResultSet rs = ps.executeQuery();
-        int article = rs.getInt(1);
+        int article = 0;
+        if(rs.next())
+            article = rs.getInt(1);
+        else
+            throw new SQLException();
+
         return article;
     }
 
