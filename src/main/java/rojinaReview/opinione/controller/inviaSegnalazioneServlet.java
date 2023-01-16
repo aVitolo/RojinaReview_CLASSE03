@@ -50,6 +50,7 @@ public class inviaSegnalazioneServlet extends HttpServlet {
         segnalazione.setDataSegnalazione(date);
         if(motivo.toLowerCase().equals("altro") && commento.equals("")){
             request.getSession(false).setAttribute("error","noComm");
+            response.getWriter().write("noComm");
             System.out.println(address);
             //response.sendRedirect(addressForError);
             //request.getRequestDispatcher(addressForError).forward(request,response);
@@ -57,6 +58,7 @@ public class inviaSegnalazioneServlet extends HttpServlet {
         }
         else if(motivo.toLowerCase().contains("seleziona")){
             request.getSession(false).setAttribute("error","noMot");
+            response.getWriter().write("noMot");
             response.sendRedirect(address);
         }
         else {
@@ -66,6 +68,7 @@ public class inviaSegnalazioneServlet extends HttpServlet {
                 e.printStackTrace();
             }
             System.out.println(address);
+            response.getWriter().write("segnalazioneOK");
             response.sendRedirect(address);
         }
     }
