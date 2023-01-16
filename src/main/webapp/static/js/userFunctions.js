@@ -80,4 +80,8 @@ function showError(flag){
     if (flag==2){
         alert("Seleziona un motivo valido")
     }
+    if(flag==3){
+        console.log("C")
+        alert("Il commento non può essere vuoto")
+    }
 }

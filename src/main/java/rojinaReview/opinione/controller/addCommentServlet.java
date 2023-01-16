@@ -23,29 +23,43 @@ public class addCommentServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             os = new OpinioneServiceImpl();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        String result = "/Rojina_Review_war/getResource?type="+request.getParameter("contenuto")+"&"+"id="+request.getParameter("idContenuto");
+        String result = "/Rojina_Review_war/getResource?type=" + request.getParameter("contenuto") + "&" + "id=" + request.getParameter("idContenuto");
         HttpSession session = request.getSession();
         Videogiocatore videogiocatore = (Videogiocatore) session.getAttribute("videogiocatore");
 
         Commento c = new Commento();
+        String commento = request.getParameter("commentText");
         c.setIdVideogiocatore(videogiocatore.getId());
         c.setTesto(request.getParameter("commentText"));
         c.setDataScrittura(new java.sql.Timestamp(Calendar.getInstance().getTime().getTime()));
         c.setIdContenuto(Integer.parseInt(request.getParameter("idContenuto")));
         c.setTipo(Integer.parseInt(request.getParameter("type")));
 
-        try {
-            os.inserisciCommento(c, videogiocatore);
-        } catch (InsertOpinionException e) {
-            e.printStackTrace();
+        if (commento.equals("")) {
+            System.out.println("A");
+            request.getSession(false).setAttribute("error", "commEmpty");
+            response.getWriter().write("commEmpty");
+            response.sendRedirect(result);
         }
-
-        response.sendRedirect(result);
+        else if(commento.length()>256){
+            request.getSession(false).setAttribute("error", "commLong");
+            response.getWriter().write("commLong");
+            response.sendRedirect(result);
+        }
+        else {
+            try {
+                os.inserisciCommento(c, videogiocatore);
+            } catch (InsertOpinionException e) {
+                e.printStackTrace();
+            }
+            response.getWriter().write("commentoOK");
+            response.sendRedirect(result);
+        }
     }
 }

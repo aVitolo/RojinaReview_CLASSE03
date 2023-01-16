@@ -18,7 +18,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -48,9 +47,6 @@ public class RegistationVideogamerServletTest {
         when(request.getParameter("nickname")).thenReturn("testt");
         when(request.getParameter("password")).thenReturn("testtesttest");
         when(request.getRequestDispatcher("./registerUser.jsp")).thenReturn(requestDispatcher);
-
-
-
 
         StringWriter stringWriter = new StringWriter();
         PrintWriter writer=new PrintWriter(stringWriter);

@@ -45,9 +45,15 @@
     }
     else if(error.equals("noMot")){%>
         <script>
-            showError(1)
+            showError(2)
         </script>
-<%  }
+
+<% }
+    else if(error.equals("commEmpty")){%>
+        <script>
+            showError(3)
+        </script>
+    <%}
 }%>
 <div id="page">
 <%@ include file="/WEB-INF/results/utilities/navebar.jsp" %>

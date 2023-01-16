@@ -175,4 +175,10 @@ public class CommentoDAO {
         }
     }
 
+    public void deleteByText(String text) throws SQLException {
+        PreparedStatement ps = con.prepareStatement("DELETE FROM commento WHERE testo=? AND id>10");
+        ps.setString(1, text);
+        ps.executeUpdate();
+    }
+
 }
