@@ -28,7 +28,7 @@ public class RegistrationVideogamerServlet extends HttpServlet {
 
 
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             rs = new RegistrazioneServiceImpl();
         } catch (SQLException e) {
@@ -63,11 +63,13 @@ public class RegistrationVideogamerServlet extends HttpServlet {
             } catch (EmailNotAvailableException e) {
                 message = "email già in uso";
                 request.setAttribute("message", message);
+                response.getWriter().write("EmailUsata");
                 dispatcherErrato.forward(request, response);
                 return;
             } catch (NicknameNotAvailableException e) {
                 message = "nickname già in uso";
                 request.setAttribute("message", message);
+                response.getWriter().write("NicknameUsato");
                 dispatcherErrato.forward(request, response);
                 return;
             } catch (InvalidTextException e) {
@@ -88,7 +90,7 @@ public class RegistrationVideogamerServlet extends HttpServlet {
                 videogiocatore.setCarrello((Carrello) session.getAttribute("ospite"));
             else
                 videogiocatore.setCarrello(new Carrello());
-
+            response.getWriter().write("registrazioneOK");
             session.setAttribute("videogiocatore", videogiocatore);
             response.sendRedirect(homePage);
         }

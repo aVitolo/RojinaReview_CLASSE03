@@ -1,6 +1,9 @@
 package rojinaReview.model.dao;
 
+import rojinaReview.model.beans.Commento;
+import rojinaReview.model.beans.Parere;
 import rojinaReview.model.beans.Prodotto;
+import rojinaReview.model.exception.ProductIdNotFoundException;
 import rojinaReview.model.utilities.ConPool;
 
 import java.sql.*;
@@ -27,6 +30,8 @@ public class ProdottoDAO {
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         Prodotto p = new Prodotto();
+        p.setPareri(new ArrayList<Parere>());
+        p.setCommenti(new ArrayList<Commento>());
         if (rs.next()) {
             p.setId(rs.getInt(1));
             p.setNome(rs.getString(2));
@@ -46,14 +51,16 @@ public class ProdottoDAO {
 
     }
 
-    public String doRetrieveNameById(int id) throws SQLException {
+    public String doRetrieveNameById(int id) throws SQLException, ProductIdNotFoundException {
         PreparedStatement ps = con.prepareStatement("SELECT nome FROM prodotto WHERE id=?");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         if(rs.next())
             return rs.getString(1);
+        else
+            throw new ProductIdNotFoundException(""+id);
 
-        return null;
+        //return null;
     }
 
 
