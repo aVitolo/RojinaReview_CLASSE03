@@ -1,12 +1,10 @@
 package rojinaReview.model.dao;
 
+import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
 import rojinaReview.model.beans.Paragrafo;
 import rojinaReview.model.utilities.ConPool;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class ParagrafoDAO {
@@ -73,7 +71,14 @@ public class ParagrafoDAO {
             ps.setString(3, p.getImmagine());
             ps.setInt(4, article);
 
-            ps.executeUpdate();
+
+            try{
+                ps.executeUpdate();
+            } catch (MysqlDataTruncation e)
+            {
+                new RecensioneDAO(con).deleteLast();
+                throw new SQLException();
+            }
 
         }
         else if(type == 2) //notizia
@@ -84,7 +89,12 @@ public class ParagrafoDAO {
             ps.setString(3, p.getImmagine());
             ps.setInt(4, article);
 
-            ps.executeUpdate();
+            try{
+                ps.executeUpdate();
+            } catch (MysqlDataTruncation e)
+            {
+                throw new SQLException();
+            }
 
         }
     }

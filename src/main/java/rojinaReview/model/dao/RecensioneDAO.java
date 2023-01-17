@@ -253,5 +253,17 @@ public class RecensioneDAO {
     public String retrieveNome(int idRecensione) {
         return null;
     }
+
+    public void deleteLast() throws SQLException {
+        PreparedStatement ps = con.prepareStatement("SELECT id FROM recensione ORDER BY id DESC LIMIT 1");
+        ResultSet rs = ps.executeQuery();
+        if(rs.next())
+        {
+            ps = con.prepareStatement("DELETE FROM recensione WHERE id=?");
+            ps.setInt(1, rs.getInt("id"));
+
+            ps.executeUpdate();
+        }
+    }
 }
 
