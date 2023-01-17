@@ -1,6 +1,6 @@
 package rojinaReview.model.dao;
 
-import rojinaReview.model.utilities.ConPool;
+import rojinaReview.utilities.ConPool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

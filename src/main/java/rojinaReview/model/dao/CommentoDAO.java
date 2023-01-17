@@ -1,12 +1,11 @@
 package rojinaReview.model.dao;
 
 import rojinaReview.model.beans.Commento;
-import rojinaReview.model.utilities.ConPool;
+import rojinaReview.utilities.ConPool;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Locale;
 
 public class CommentoDAO {
     private Connection con;

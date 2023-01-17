@@ -7,12 +7,10 @@ import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.Giornalista;
 import rojinaReview.model.beans.Paragrafo;
 import rojinaReview.model.beans.Recensione;
-import rojinaReview.model.dao.RecensioneDAO;
-import rojinaReview.model.dao.VideogiocoDAO;
 import rojinaReview.model.exception.InsertCommentException;
 import rojinaReview.model.exception.InsertParagraphException;
 import rojinaReview.model.exception.InsertReviewException;
-import rojinaReview.model.utilities.Utils;
+import rojinaReview.utilities.Utils;
 import rojinaReview.rivista.service.RivistaService;
 import rojinaReview.rivista.service.RivistaServiceImpl;
 

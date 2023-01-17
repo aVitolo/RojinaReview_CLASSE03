@@ -14,7 +14,7 @@ import rojinaReview.model.exception.BannedUserException;
 import rojinaReview.model.exception.EmailNotExistsException;
 import rojinaReview.model.exception.IncorrectPasswordException;
 import rojinaReview.model.exception.LoadingCartException;
-import rojinaReview.model.utilities.Utils;
+import rojinaReview.utilities.Utils;
 
 import java.io.IOException;
 import java.sql.SQLException;

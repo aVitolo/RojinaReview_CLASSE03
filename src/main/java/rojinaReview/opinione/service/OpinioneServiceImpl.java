@@ -8,12 +8,11 @@ import rojinaReview.model.dao.CommentoDAO;
 import rojinaReview.model.dao.ParereDAO;
 import rojinaReview.model.dao.SegnalazioneDAO;
 import rojinaReview.model.exception.LoadingOpinionException;
-import rojinaReview.model.utilities.ConPool;
+import rojinaReview.utilities.ConPool;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class OpinioneServiceImpl implements OpinioneService{
     private Connection connection;

@@ -8,13 +8,10 @@ import rojinaReview.autenticazione.service.AutenticazioneServiceImpl;
 import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.exception.InvalidTextException;
 import rojinaReview.model.exception.UpdateDataException;
-import rojinaReview.model.utilities.ConPool;
-import rojinaReview.model.utilities.Utils;
+import rojinaReview.utilities.Utils;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 @WebServlet(name = "userUpdateData", value = "/userUpdateData")
 public class userUpdateData extends HttpServlet {

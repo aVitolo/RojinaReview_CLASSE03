@@ -8,17 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import rojinaReview.autenticazione.service.AutenticazioneService;
 import rojinaReview.autenticazione.service.AutenticazioneServiceImpl;
-import rojinaReview.model.beans.Manager;
-import rojinaReview.model.beans.Giornalista;
 import rojinaReview.model.beans.Utente;
-import rojinaReview.model.beans.Videogiocatore;
-import rojinaReview.model.dao.ManagerDAO;
-import rojinaReview.model.dao.GiornalistaDAO;
 import rojinaReview.model.exception.EmailNotExistsException;
 import rojinaReview.model.exception.IncorrectPasswordException;
 import rojinaReview.model.exception.NotVerifiedAccountException;
-import rojinaReview.model.exception.ServiceNotAvailableException;
-import rojinaReview.model.utilities.Utils;
 
 import java.io.IOException;
 import java.sql.SQLException;

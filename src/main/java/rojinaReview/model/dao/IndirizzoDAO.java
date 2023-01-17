@@ -1,7 +1,7 @@
 package rojinaReview.model.dao;
 
 import rojinaReview.model.beans.Indirizzo;
-import rojinaReview.model.utilities.ConPool;
+import rojinaReview.utilities.ConPool;
 
 import java.sql.*;
 import java.util.ArrayList;

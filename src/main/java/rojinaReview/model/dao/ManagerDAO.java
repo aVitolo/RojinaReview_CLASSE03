@@ -1,9 +1,8 @@
 package rojinaReview.model.dao;
 
-import rojinaReview.model.beans.Giornalista;
 import rojinaReview.model.beans.Manager;
 import rojinaReview.model.beans.Utente;
-import rojinaReview.model.utilities.ConPool;
+import rojinaReview.utilities.ConPool;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.*;

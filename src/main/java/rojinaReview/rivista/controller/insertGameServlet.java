@@ -4,13 +4,8 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.*;
-import rojinaReview.model.dao.VideogiocatoreDAO;
-import rojinaReview.model.dao.PiattaformaDAO;
-import rojinaReview.model.dao.TipologiaDAO;
-import rojinaReview.model.dao.VideogiocoDAO;
 import rojinaReview.model.exception.InsertVideogameException;
-import rojinaReview.model.exception.ServiceNotAvailableException;
-import rojinaReview.model.utilities.Utils;
+import rojinaReview.utilities.Utils;
 import rojinaReview.rivista.service.RivistaService;
 import rojinaReview.rivista.service.RivistaServiceImpl;
 

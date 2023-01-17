@@ -1,4 +1,4 @@
-package rojinaReview.model.utilities;
+package rojinaReview.utilities;
 
 import jakarta.servlet.http.Part;
 import jakarta.xml.bind.DatatypeConverter;

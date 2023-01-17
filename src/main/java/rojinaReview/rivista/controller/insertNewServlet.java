@@ -6,12 +6,10 @@ import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.Giornalista;
 import rojinaReview.model.beans.Notizia;
 import rojinaReview.model.beans.Paragrafo;
-import rojinaReview.model.dao.NotiziaDAO;
-import rojinaReview.model.dao.VideogiocoDAO;
 import rojinaReview.model.exception.InsertCommentException;
 import rojinaReview.model.exception.InsertNewException;
 import rojinaReview.model.exception.InsertParagraphException;
-import rojinaReview.model.utilities.Utils;
+import rojinaReview.utilities.Utils;
 import rojinaReview.rivista.service.RivistaService;
 import rojinaReview.rivista.service.RivistaServiceImpl;
 
@@ -19,8 +17,6 @@ import java.io.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
 @WebServlet(name = "insertNewServlet", value = "/insertNew")
 @MultipartConfig(maxFileSize = 1024*1024*10)

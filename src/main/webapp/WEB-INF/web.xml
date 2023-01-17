@@ -10,7 +10,7 @@
 
     <servlet>
         <servlet-name>ContextSetUpingServlet</servlet-name>
-        <servlet-class>rojinaReview.startConfigurations.ContextSetUpingServlet</servlet-class>
+        <servlet-class>rojinaReview.utilities.ContextSetUpingServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
 

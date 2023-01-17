@@ -8,7 +8,6 @@ import rojinaReview.model.beans.Videogiocatore;
 import rojinaReview.model.exception.EmailNotAvailableException;
 import rojinaReview.model.exception.InvalidTextException;
 import rojinaReview.model.exception.NicknameNotAvailableException;
-import rojinaReview.model.utilities.Utils;
 import rojinaReview.registrazione.service.RegistrazioneService;
 import rojinaReview.registrazione.service.RegistrazioneServiceImpl;
 

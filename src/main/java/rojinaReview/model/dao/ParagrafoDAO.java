@@ -2,7 +2,7 @@ package rojinaReview.model.dao;
 
 import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
 import rojinaReview.model.beans.Paragrafo;
-import rojinaReview.model.utilities.ConPool;
+import rojinaReview.utilities.ConPool;
 
 import java.sql.*;
 import java.util.ArrayList;

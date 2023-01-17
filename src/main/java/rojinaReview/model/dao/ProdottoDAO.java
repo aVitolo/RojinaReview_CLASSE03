@@ -4,7 +4,7 @@ import rojinaReview.model.beans.Commento;
 import rojinaReview.model.beans.Parere;
 import rojinaReview.model.beans.Prodotto;
 import rojinaReview.model.exception.ProductIdNotFoundException;
-import rojinaReview.model.utilities.ConPool;
+import rojinaReview.utilities.ConPool;
 
 import java.sql.*;
 import java.util.ArrayList;

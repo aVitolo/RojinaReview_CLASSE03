@@ -2,7 +2,7 @@ package rojinaReview.model.dao;
 
 import rojinaReview.model.beans.Carrello;
 import rojinaReview.model.beans.Prodotto;
-import rojinaReview.model.utilities.ConPool;
+import rojinaReview.utilities.ConPool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

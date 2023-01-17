@@ -6,7 +6,7 @@ import rojinaReview.model.dao.*;
 import rojinaReview.model.exception.*;
 import rojinaReview.model.beans.Ordine;
 import rojinaReview.model.beans.Prodotto;
-import rojinaReview.model.utilities.ConPool;
+import rojinaReview.utilities.ConPool;
 
 import java.sql.Connection;
 import java.sql.SQLException;

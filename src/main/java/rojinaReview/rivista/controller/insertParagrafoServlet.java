@@ -1,13 +1,12 @@
 package rojinaReview.rivista.controller;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import rojinaReview.model.beans.Notizia;
 import rojinaReview.model.beans.Paragrafo;
-import rojinaReview.model.utilities.Utils;
+import rojinaReview.utilities.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;

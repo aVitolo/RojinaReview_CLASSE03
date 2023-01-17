@@ -3,7 +3,7 @@ package rojinaReview.rivista.service;
 import rojinaReview.model.exception.*;
 import rojinaReview.model.beans.*;
 import rojinaReview.model.dao.*;
-import rojinaReview.model.utilities.ConPool;
+import rojinaReview.utilities.ConPool;
 
 import java.sql.Connection;
 import java.sql.SQLException;

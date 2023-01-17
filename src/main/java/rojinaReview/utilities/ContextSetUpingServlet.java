@@ -1,4 +1,4 @@
-package rojinaReview.startConfigurations;
+package rojinaReview.utilities;
 
 import com.oracle.wls.shaded.org.apache.xml.dtm.ref.sax2dtm.SAX2RTFDTM;
 import jakarta.servlet.*;

@@ -1,8 +1,7 @@
 package rojinaReview.model.dao;
 
 import rojinaReview.model.beans.Videogiocatore;
-import rojinaReview.model.beans.Videogioco;
-import rojinaReview.model.utilities.ConPool;
+import rojinaReview.utilities.ConPool;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.*;

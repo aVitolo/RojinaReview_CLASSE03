@@ -7,7 +7,7 @@ import rojinaReview.model.beans.Giornalista;
 import rojinaReview.model.beans.Notizia;
 import rojinaReview.model.beans.Paragrafo;
 import rojinaReview.model.exception.*;
-import rojinaReview.model.utilities.Utils;
+import rojinaReview.utilities.Utils;
 import rojinaReview.rivista.service.RivistaService;
 import rojinaReview.rivista.service.RivistaServiceImpl;
 
@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Map;
 
 @WebServlet(name = "updateNewServlet", value = "/updateNew")
 @MultipartConfig(maxFileSize = 1024*1024*10)

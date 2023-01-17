@@ -1,12 +1,5 @@
 package rojinaReview.model.beans;
 
-import rojinaReview.model.utilities.Utils;
-
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 public abstract class Utente {
 
     private int id;

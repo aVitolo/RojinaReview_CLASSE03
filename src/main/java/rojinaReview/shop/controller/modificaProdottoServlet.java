@@ -5,7 +5,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.Prodotto;
 import rojinaReview.model.exception.ProductIDMissingException;
-import rojinaReview.model.utilities.Utils;
+import rojinaReview.utilities.Utils;
 import rojinaReview.shop.service.ShopService;
 import rojinaReview.shop.service.ShopServiceImpl;
 

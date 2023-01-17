@@ -9,8 +9,8 @@ import rojinaReview.model.dao.VideogiocatoreDAO;
 import rojinaReview.model.exception.EmailNotAvailableException;
 import rojinaReview.model.exception.InvalidTextException;
 import rojinaReview.model.exception.NicknameNotAvailableException;
-import rojinaReview.model.utilities.ConPool;
-import rojinaReview.model.utilities.Utils;
+import rojinaReview.utilities.ConPool;
+import rojinaReview.utilities.Utils;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;

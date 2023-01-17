@@ -3,8 +3,8 @@ package rojinaReview.autenticazione.service;
 import rojinaReview.model.dao.*;
 import rojinaReview.model.exception.*;
 import rojinaReview.model.beans.*;
-import rojinaReview.model.utilities.ConPool;
-import rojinaReview.model.utilities.Utils;
+import rojinaReview.utilities.ConPool;
+import rojinaReview.utilities.Utils;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;

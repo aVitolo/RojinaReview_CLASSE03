@@ -5,11 +5,10 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.Notizia;
 import rojinaReview.model.beans.Paragrafo;
-import rojinaReview.model.utilities.Utils;
+import rojinaReview.utilities.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 
 @WebServlet(name = "modificaParagrafoServlet", value = "/modificaParagrafoServlet")
 @MultipartConfig(maxFileSize = 1024*1024*10)

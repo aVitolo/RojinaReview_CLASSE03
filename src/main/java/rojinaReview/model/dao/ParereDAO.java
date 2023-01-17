@@ -1,7 +1,7 @@
 package rojinaReview.model.dao;
 
 
-import rojinaReview.model.utilities.ConPool;
+import rojinaReview.utilities.ConPool;
 import rojinaReview.model.beans.Parere;
 
 import java.sql.Connection;
