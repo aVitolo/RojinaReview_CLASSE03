@@ -35,9 +35,9 @@ public class formModificaNotiziaServlet extends HttpServlet {
 
 
         Notizia notizia = null;
-        if(notiziaSession == null)
+        int idNotizia = Integer.parseInt(request.getParameter("id"));
+        if(notiziaSession == null || notiziaSession.getId() != idNotizia)
         {
-            int idNotizia = Integer.parseInt(request.getParameter("id"));
             try {
                 notizia = rs.visualizzaNotiziaByID(idNotizia);
             } catch (LoadingNewsException e) {

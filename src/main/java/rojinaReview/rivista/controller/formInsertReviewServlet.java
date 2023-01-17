@@ -16,9 +16,13 @@ public class formInsertReviewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.removeAttribute("notizia");
-        session.removeAttribute("paragrafi");
         if(session.getAttribute("recensione")==null)
             session.setAttribute("recensione", new Recensione());
+
+        session.setAttribute("idArticle", 0);
+        session.setAttribute("type", 1);
+        session.setAttribute("update", false);
+
         RequestDispatcher dispatcher =
                 request.getRequestDispatcher(path);
         dispatcher.forward(request, response);
