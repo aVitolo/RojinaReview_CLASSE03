@@ -96,7 +96,7 @@ public interface RivistaService {
      * @param notizia modificata
      * @param giornalista che ha modificato la notizia
      */
-    void modificaNotizia(Notizia notizia, Giornalista giornalista) throws RemovingNewException, RemovingParagraphsException, RemovingCommentsException, InsertParagraphException, InsertNewException, InsertCommentException;
+    void modificaNotizia(Notizia notizia, Giornalista giornalista) throws RemovingNewException, RemovingParagraphsException, RemovingCommentsException, InsertParagraphException, InsertNewException, InsertCommentException, UpdateDataException;
 
     /**
      * Firma del metodo che permette di

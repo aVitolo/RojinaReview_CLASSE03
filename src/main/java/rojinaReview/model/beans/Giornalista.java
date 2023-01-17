@@ -9,6 +9,7 @@ public class Giornalista extends Utente {
 
     public Giornalista() {
         super();
+        articoli = new ArrayList<>();
     }
 
     public Giornalista(int id, String nome, String cognome, String email, String password, String immagine, boolean verificato, ArrayList<Articolo> articoli) {

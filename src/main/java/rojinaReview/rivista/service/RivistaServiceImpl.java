@@ -146,7 +146,7 @@ public class RivistaServiceImpl implements RivistaService{
 
         for(Paragrafo p : recensione.getParagrafi()){
             try {
-                pDAO.doSave(p, rDAO.doRetrieveLastId(), true);
+                pDAO.doSave(p, rDAO.doRetrieveLastId(), 1);
             } catch (SQLException e) {
                 e.printStackTrace();
                 throw new InsertParagraphException("Errore nell'inserimento dei paragrafi");
@@ -173,7 +173,7 @@ public class RivistaServiceImpl implements RivistaService{
 
         for(Paragrafo p : notizia.getParagrafi()){
             try {
-                pDAO.doSave(p, nDAO.doRetrieveLastId(), false);
+                pDAO.doSave(p, nDAO.doRetrieveLastId(), 2);
             } catch (SQLException e) {
                 e.printStackTrace();
                 throw new InsertParagraphException("Errore nell'inserimento dei paragrafi");
@@ -181,7 +181,7 @@ public class RivistaServiceImpl implements RivistaService{
         }
 
         try {
-            nDAO.doSaveMentioned(notizia.getGiochi());
+            nDAO.doSaveMentioned(notizia.getGiochi(), nDAO.doRetrieveLastId());
         } catch (SQLException e) {
             e.printStackTrace();
             throw new InsertNewException("Errore nell'inserimento dei giochi menzionati");
@@ -190,15 +190,40 @@ public class RivistaServiceImpl implements RivistaService{
 
     }
 
-    //da modificare in seguito con una vera modifica
+    //da implementare in seguito con una vera modifica
     public void modificaRecensione(Recensione recensione, Giornalista giornalista) throws RemovingParagraphsException, RemovingCommentsException, RemovingReviewException, InsertParagraphException, InsertReviewException, InsertCommentException {
         cancellaRecensione(recensione);
         inserisciRecensione(recensione, giornalista);
     }
 
-    public void modificaNotizia(Notizia notizia, Giornalista giornalista) throws RemovingNewException, RemovingParagraphsException, RemovingCommentsException, InsertParagraphException, InsertNewException, InsertCommentException {
-        cancellaNotizia(notizia);
-        inserisciNotizia(notizia, giornalista);
+    public void modificaNotizia(Notizia notizia, Giornalista giornalista) throws RemovingNewException, RemovingParagraphsException, RemovingCommentsException, InsertParagraphException, InsertNewException, InsertCommentException, UpdateDataException {
+        try {
+            nDAO.doUpdate(notizia);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new UpdateDataException();
+        }
+
+        for(Paragrafo p : notizia.getParagrafi())
+        {
+            try {
+                if(p.getId() != 0) //il paragrafo deve essere aggiornato e non aggiunto
+                    pDAO.doUpdate(p, notizia.getId());
+                else
+                    pDAO.doSave(p, notizia.getId(), 2);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                throw new UpdateDataException();
+            }
+        }
+
+        try {
+            nDAO.deleteMentioned(notizia.getId());
+            nDAO.doSaveMentioned(notizia.getGiochi(), notizia.getId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new UpdateDataException();
+        }
     }
 
     public void cancellaRecensione(Recensione recensione) throws RemovingReviewException, RemovingParagraphsException, RemovingCommentsException {

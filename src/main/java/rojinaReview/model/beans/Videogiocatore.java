@@ -14,7 +14,17 @@ public class Videogiocatore extends Utente {
     private Carrello carrello;
     private String nickname;
 
-    public Videogiocatore(){};
+    public Videogiocatore(){
+        super();
+        indirizzi = new ArrayList<>();
+        telefoni = new ArrayList<>();
+        pagamenti = new ArrayList<>();
+        ordini = new ArrayList<>();
+        commenti = new ArrayList<>();
+        segnalazioni = new ArrayList<>();
+        pareri = new ArrayList<>();
+        carrello = new Carrello();
+    };
 
     public Videogiocatore(int id, String nome, String cognome, String email, String password, String immagine, ArrayList<Indirizzo> indirizzi, ArrayList<String> telefoni, ArrayList<Pagamento> pagamenti, ArrayList<Ordine> ordini, ArrayList<Commento> commenti, ArrayList<Segnalazione> segnalazioni, ArrayList<Parere> pareri, Carrello carrello, boolean bannato, String nickname) {
         super(id, nome, cognome, email, password, immagine);

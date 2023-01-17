@@ -54,7 +54,7 @@
                         <div class="articolo-content">
                             <h2>${articolo.nome}</h2>
                             <p>${fn:substring(articolo.testo, 0, 50)}</p>
-                            <a class="modifica">Modifica notizia</a>
+                            <a class="modifica" href="/Rojina_Review_war/formModificaNotizia?id=${articolo.id}">Modifica notizia</a>
                         </div>
                     </div>
                 </a>
@@ -63,4 +63,11 @@
     </section>
 </div>
 </body>
+<script>
+
+    localStorage.removeItem("titolo");
+    localStorage.removeItem("testo");
+    localStorage.removeItem('gioco');
+
+</script>
 </html>

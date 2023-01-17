@@ -11,7 +11,9 @@ public abstract class Contenuto {
     private String immagine;
     private ArrayList<Commento> commenti;
 
-    public Contenuto(){}
+    public Contenuto(){
+        commenti = new ArrayList<>();
+    }
 
     public Contenuto(int id, String nome, String testo, String immagine, ArrayList<Commento> commenti) {
         this.id = id;

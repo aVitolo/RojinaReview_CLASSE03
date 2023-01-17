@@ -1,8 +1,6 @@
 package rojinaReview.model.beans;
 
 public class Manager extends Utente {
-    static public String[] fieldsName = {"Id","Nome","Cognome","Email","Password Hash"};
-
     private boolean verificato; //eventualmente da modificare
 
     public Manager() {

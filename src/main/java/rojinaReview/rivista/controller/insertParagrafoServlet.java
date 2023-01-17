@@ -5,6 +5,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
+import rojinaReview.model.beans.Notizia;
 import rojinaReview.model.beans.Paragrafo;
 import rojinaReview.model.utilities.Utils;
 
@@ -29,7 +30,13 @@ public class insertParagrafoServlet extends HttpServlet {
         if(session.getAttribute("recensione") != null)
             path = "/Rojina_Review_war/formInsertReview";
         else if(session.getAttribute("notizia") != null)
-            path = "/Rojina_Review_war/formInsertNew";
+            if(!(boolean) session.getAttribute("update"))
+                path = "/Rojina_Review_war/formInsertNew";
+            else
+            {
+                Notizia notizia = (Notizia) session.getAttribute("notizia");
+                path = "/Rojina_Review_war/formModificaNotizia?id=" + notizia.getId();
+            }
 
         Paragrafo p = new Paragrafo();
         p.setTitolo(request.getParameter("titolo"));

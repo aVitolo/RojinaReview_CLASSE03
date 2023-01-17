@@ -12,7 +12,7 @@ public class Carrello {
     /* Constructors */
 
     public Carrello() {
-        this.prodotti = new ArrayList<>();
+        prodotti = new ArrayList<>();
     }
 
     public Carrello(ArrayList<Prodotto> prodotti,

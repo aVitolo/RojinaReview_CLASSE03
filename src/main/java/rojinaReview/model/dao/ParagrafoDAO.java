@@ -62,10 +62,10 @@ public class ParagrafoDAO {
         return paragrafi;
     }
 
-    public void doSave(Paragrafo p, int article, boolean type) throws SQLException {
+    public void doSave(Paragrafo p, int article, int type) throws SQLException {
         PreparedStatement ps;
         ResultSet rs;
-        if(type) //recensione
+        if(type == 1) //recensione
         {
             ps = con.prepareStatement("INSERT INTO paragrafo (titolo, testo, immagine, id_recensione) VALUES (?, ?, ?, ?)");
             ps.setString(1, p.getTitolo());
@@ -76,7 +76,7 @@ public class ParagrafoDAO {
             ps.executeUpdate();
 
         }
-        else if(!type) //notizia
+        else if(type == 2) //notizia
         {
             ps = con.prepareStatement("INSERT INTO paragrafo (titolo, testo, immagine, id_notizia) VALUES (?, ?, ?, ?)");
             ps.setString(1, p.getTitolo());
@@ -98,13 +98,36 @@ public class ParagrafoDAO {
             ps.setInt(1, article);
             ps.executeUpdate();
         }
-        else if (type == 2)
+        else if (type == 2) //notizia
         {
             ps = con.prepareStatement("DELETE FROM paragrafo WHERE id_notizia=?");
             ps.setInt(1, article);
             ps.executeUpdate();
         }
     }
+
+    public void doUpdate(Paragrafo p, int id) throws SQLException {
+        PreparedStatement ps;
+        if(p.getImmagine() != null)
+        {
+            ps = con.prepareStatement("UPDATE paragrafo SET titolo=?, testo=?, immagine=? WHERE id_paragrafo=?");
+            ps.setString(1, p.getTitolo());
+            ps.setString(2, p.getTesto());
+            ps.setString(3, p.getImmagine());
+            ps.setInt(4, p.getId());
+        }
+        else
+        {
+            ps = con.prepareStatement("UPDATE paragrafo SET titolo=?, testo=? WHERE id_paragrafo=?");
+            ps.setString(1, p.getTitolo());
+            ps.setString(2, p.getTesto());
+            ps.setInt(3, p.getId());
+        }
+
+        ps.executeUpdate();
+    }
+
+
 }
 
 

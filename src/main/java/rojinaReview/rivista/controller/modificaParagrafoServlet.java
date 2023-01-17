@@ -3,6 +3,7 @@ package rojinaReview.rivista.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import rojinaReview.model.beans.Notizia;
 import rojinaReview.model.beans.Paragrafo;
 import rojinaReview.model.utilities.Utils;
 
@@ -23,11 +24,16 @@ public class modificaParagrafoServlet extends HttpServlet {
         if(session.getAttribute("recensione") != null)
             path = "/Rojina_Review_war/formInsertReview";
         else if(session.getAttribute("notizia") != null)
-            path = "/Rojina_Review_war/formInsertNew";
+            if(!(boolean) session.getAttribute("update"))
+                path = "/Rojina_Review_war/formInsertNew";
+            else
+            {
+                Notizia notizia = (Notizia) session.getAttribute("notizia");
+                path = "/Rojina_Review_war/formModificaNotizia?id=" + notizia.getId();
+            }
+
         if (session.getAttribute("paragrafi") != null) {
             ArrayList<Paragrafo> paragrafi = (ArrayList<Paragrafo>) session.getAttribute("paragrafi");
-            System.out.println(paragrafi.get(0).toString());
-            System.out.println();
             Paragrafo paragrafo = paragrafi.get(Integer.parseInt(request.getParameter("id")));
             paragrafo.setTesto(request.getParameter("testo"));
             paragrafo.setTitolo(request.getParameter("titolo"));

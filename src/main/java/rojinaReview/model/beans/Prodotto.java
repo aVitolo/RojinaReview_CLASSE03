@@ -16,7 +16,10 @@ public class Prodotto extends Contenuto {
 
     /* Construct */
 
-    public Prodotto(){}
+    public Prodotto(){
+        super();
+        pareri = new ArrayList<>();
+    }
 
     public Prodotto(int id, String nome, String testo, String immagine, ArrayList<Commento> commenti, String categoria, ArrayList<Parere> pareri, int quantità, int numeroVoti, float mediaVoto, float prezzo) {
         super(id, nome, testo, immagine, commenti);

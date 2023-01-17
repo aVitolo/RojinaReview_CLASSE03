@@ -63,4 +63,9 @@
     </section>
 
 </body>
+<script>
+    localStorage.removeItem("titolo");
+    localStorage.removeItem("testo");
+    localStorage.removeItem('videogiochi')
+</script>
 </html>

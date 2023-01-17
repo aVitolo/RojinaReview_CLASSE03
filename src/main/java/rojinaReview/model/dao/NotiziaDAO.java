@@ -128,10 +128,8 @@ public class NotiziaDAO {
     }
 
     //fa l'insert nella table gioco_notizia per i giochi menzionati
-    public void doSaveMentioned(HashMap<Integer, String> mentioned) throws SQLException {
+    public void doSaveMentioned(HashMap<Integer, String> mentioned, int idNotizia) throws SQLException {
         PreparedStatement ps;
-        int idNotizia = new NotiziaDAO(con).doRetrieveLastId();
-        System.out.println(idNotizia);
 
 
         for (Map.Entry<Integer, String> set : mentioned.entrySet()) {
@@ -252,4 +250,39 @@ public class NotiziaDAO {
 
         return mentionedGames;
     }
+
+    public void doUpdate(Notizia notizia) throws SQLException {
+        PreparedStatement ps;
+        if(notizia.getImmagine() != null)
+        {
+            ps = con.prepareStatement("UPDATE notizia SET nome=?, testo=?, immagine=?, dataScrittura=? WHERE id=?");
+            ps.setString(1, notizia.getNome());
+            ps.setString(2, notizia.getTesto());
+            ps.setString(3, notizia.getImmagine());
+            ps.setDate(4, notizia.getDataScrittura());
+            ps.setInt(5, notizia.getId());
+        }
+        else
+        {
+            ps = con.prepareStatement("UPDATE notizia SET nome=?, testo=?, dataScrittura=? WHERE id=?");
+            ps.setString(1, notizia.getNome());
+            ps.setString(2, notizia.getTesto());
+            ps.setDate(3, notizia.getDataScrittura());
+            ps.setInt(4, notizia.getId());
+        }
+
+
+        ps.executeUpdate();
+    }
+
+
+    public void deleteMentioned(int idNotizia) throws SQLException {
+        PreparedStatement ps;
+        ps = con.prepareStatement("DELETE FROM videogioco_notizia WHERE id_notizia=?");
+        ps.setInt(1, idNotizia);
+        ps.executeUpdate();
+    }
+
+
+
 }

@@ -15,6 +15,7 @@ public abstract class Articolo extends Contenuto {
     /* Constructor */
     public Articolo(){
         super();
+        paragrafi = new ArrayList<>();
     }
 
     public Articolo(int id, String nome, String testo, String immagine, ArrayList<Commento> commenti, ArrayList<Paragrafo> paragrafi, Date dataScrittura) {

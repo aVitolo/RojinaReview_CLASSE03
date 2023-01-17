@@ -17,7 +17,7 @@ public class Videogioco {
     private String titolo;
     private String casaDiSviluppo;
     private String copertina;
-    private HashMap<Integer, String> listaNotizie;
+    private HashMap<Integer, String> listaNotizie; //eventualmente da rimuovere
     private int idRecensione;
     private String nomeRecensione;
     private ArrayList<Parere> pareri;
@@ -25,6 +25,9 @@ public class Videogioco {
     /* Constructor */
 
     public Videogioco() {
+        piattaforme = new ArrayList<>();
+        generi = new ArrayList<>();
+        pareri = new ArrayList<>();
     }
 
     public Videogioco(int id, ArrayList<String> piattaforme, ArrayList<String> generi, Date dataDiRilascio, float mediaVoto, int numeroVoti, String titolo, String casaDiSviluppo, String copertina, HashMap<Integer, String> listaNotizie, ArrayList<Parere> pareri) {

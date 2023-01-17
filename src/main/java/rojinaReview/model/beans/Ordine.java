@@ -18,6 +18,9 @@ public class Ordine {
     /* Costructor */
 
     public Ordine() {
+        prodotti = new ArrayList<>();
+        indirizzo = new Indirizzo();
+        pagamento = new Pagamento();
     }
 
     public Ordine(ArrayList<Prodotto> prodotti,

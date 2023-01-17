@@ -22,6 +22,7 @@ public class Commento {
     /* Constructor */
 
     public Commento() {
+        segnalazioni = new ArrayList<>();
 
     }
 
