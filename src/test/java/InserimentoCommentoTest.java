@@ -5,7 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.junit.jupiter.api.*;
 import rojinaReview.model.beans.Videogiocatore;
-import rojinaReview.model.dao.CommentoDAO;
+import rojinaReview.model.dao.opinioneDAO.CommentoDAO;
 import rojinaReview.opinione.controller.addCommentServlet;
 import rojinaReview.registrazione.service.RegistrazioneService;
 

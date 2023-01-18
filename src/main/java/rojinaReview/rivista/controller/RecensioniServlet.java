@@ -3,14 +3,9 @@ package rojinaReview.rivista.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import rojinaReview.model.beans.Notizia;
 import rojinaReview.model.beans.Recensione;
-import rojinaReview.model.dao.RecensioneDAO;
 import org.json.JSONArray;
-import rojinaReview.model.exception.LoadingNewsException;
 import rojinaReview.model.exception.LoadingReviewsException;
-import rojinaReview.model.exception.ServiceNotAvailableException;
-import rojinaReview.rivista.service.RivistaService;
 import rojinaReview.rivista.service.RivistaServiceImpl;
 
 import java.io.IOException;

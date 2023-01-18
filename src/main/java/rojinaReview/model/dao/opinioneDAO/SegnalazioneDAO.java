@@ -1,4 +1,4 @@
-package rojinaReview.model.dao;
+package rojinaReview.model.dao.opinioneDAO;
 
 import rojinaReview.model.beans.Commento;
 import rojinaReview.model.beans.Segnalazione;

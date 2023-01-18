@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.*;
 import rojinaReview.model.beans.Videogiocatore;
-import rojinaReview.model.dao.VideogiocatoreDAO;
+import rojinaReview.model.dao.autenticazioneDAO.VideogiocatoreDAO;
 import rojinaReview.model.exception.EmailNotAvailableException;
 import rojinaReview.model.exception.InvalidTextException;
 import rojinaReview.model.exception.NicknameNotAvailableException;

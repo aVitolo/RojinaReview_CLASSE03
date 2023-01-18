@@ -1,4 +1,4 @@
-package rojinaReview.model.dao;
+package rojinaReview.model.dao.rivistaDAO;
 
 import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
 import rojinaReview.model.beans.Paragrafo;

@@ -1,6 +1,5 @@
 package rojinaReview.autenticazione.controller;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,14 +9,11 @@ import rojinaReview.autenticazione.service.AutenticazioneServiceImpl;
 import rojinaReview.model.beans.Giornalista;
 import rojinaReview.model.beans.Manager;
 import rojinaReview.model.beans.Utente;
-import rojinaReview.model.dao.GiornalistaDAO;
-import rojinaReview.model.dao.ManagerDAO;
 import rojinaReview.model.exception.AuthorizeException;
 import rojinaReview.model.exception.NotAuthorizeException;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 @WebServlet(name = "gestisciRichiestaServlet", value = "/gestisciRichiestaServlet")
 public class gestisciRichiesteServlet extends HttpServlet {

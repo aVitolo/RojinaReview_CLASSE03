@@ -1,4 +1,4 @@
-package rojinaReview.model.dao;
+package rojinaReview.model.dao.shopDAO;
 
 import rojinaReview.model.beans.*;
 import rojinaReview.utilities.ConPool;

@@ -1,4 +1,4 @@
-package rojinaReview.model.dao;
+package rojinaReview.model.dao.rivistaDAO;
 
 import rojinaReview.model.beans.Notizia;
 import rojinaReview.utilities.ConPool;

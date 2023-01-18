@@ -1,12 +1,12 @@
 package rojinaReview.opinione.service;
 
 import rojinaReview.model.beans.*;
-import rojinaReview.model.dao.VideogiocatoreDAO;
+import rojinaReview.model.dao.autenticazioneDAO.VideogiocatoreDAO;
 import rojinaReview.model.exception.InsertOpinionException;
 import rojinaReview.model.exception.LoadingCommentException;
-import rojinaReview.model.dao.CommentoDAO;
-import rojinaReview.model.dao.ParereDAO;
-import rojinaReview.model.dao.SegnalazioneDAO;
+import rojinaReview.model.dao.opinioneDAO.CommentoDAO;
+import rojinaReview.model.dao.opinioneDAO.ParereDAO;
+import rojinaReview.model.dao.opinioneDAO.SegnalazioneDAO;
 import rojinaReview.model.exception.LoadingOpinionException;
 import rojinaReview.utilities.ConPool;
 

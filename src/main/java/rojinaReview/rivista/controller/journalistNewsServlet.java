@@ -4,9 +4,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.Giornalista;
-import rojinaReview.model.dao.NotiziaDAO;
 import rojinaReview.model.exception.LoadingNewsException;
-import rojinaReview.model.exception.ServiceNotAvailableException;
 import rojinaReview.rivista.service.RivistaService;
 import rojinaReview.rivista.service.RivistaServiceImpl;
 

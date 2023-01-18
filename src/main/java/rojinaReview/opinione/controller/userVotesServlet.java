@@ -4,8 +4,6 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 import rojinaReview.model.beans.Videogiocatore;
-import rojinaReview.model.dao.CommentoDAO;
-import rojinaReview.model.dao.ParereDAO;
 import rojinaReview.model.exception.LoadingCommentException;
 import rojinaReview.opinione.service.OpinioneService;
 import rojinaReview.opinione.service.OpinioneServiceImpl;

@@ -4,7 +4,7 @@ import jakarta.servlet.http.Part;
 import jakarta.xml.bind.DatatypeConverter;
 import rojinaReview.model.beans.Carrello;
 import rojinaReview.model.beans.Prodotto;
-import rojinaReview.model.dao.VideogiocoDAO;
+import rojinaReview.model.dao.rivistaDAO.VideogiocoDAO;
 import rojinaReview.model.exception.InvalidTextException;
 
 import java.io.*;

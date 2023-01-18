@@ -7,9 +7,7 @@ import rojinaReview.autenticazione.service.AutenticazioneService;
 import rojinaReview.autenticazione.service.AutenticazioneServiceImpl;
 import rojinaReview.model.beans.Pagamento;
 import rojinaReview.model.beans.Videogiocatore;
-import rojinaReview.model.dao.PagamentoDAO;
 import rojinaReview.model.exception.InsertPaymentException;
-import rojinaReview.model.exception.VideogiocatoreIDMissingException;
 
 import java.io.IOException;
 import java.sql.SQLException;

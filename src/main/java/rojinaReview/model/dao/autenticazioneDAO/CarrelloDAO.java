@@ -1,7 +1,8 @@
-package rojinaReview.model.dao;
+package rojinaReview.model.dao.autenticazioneDAO;
 
 import rojinaReview.model.beans.Carrello;
 import rojinaReview.model.beans.Prodotto;
+import rojinaReview.model.dao.shopDAO.ProdottoDAO;
 import rojinaReview.utilities.ConPool;
 
 import java.sql.Connection;

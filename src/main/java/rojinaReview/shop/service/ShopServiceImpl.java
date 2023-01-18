@@ -2,7 +2,10 @@ package rojinaReview.shop.service;
 
 import rojinaReview.model.beans.Carrello;
 import rojinaReview.model.beans.Videogiocatore;
-import rojinaReview.model.dao.*;
+import rojinaReview.model.dao.opinioneDAO.CommentoDAO;
+import rojinaReview.model.dao.shopDAO.CategoriaDAO;
+import rojinaReview.model.dao.shopDAO.OrdineDAO;
+import rojinaReview.model.dao.shopDAO.ProdottoDAO;
 import rojinaReview.model.exception.*;
 import rojinaReview.model.beans.Ordine;
 import rojinaReview.model.beans.Prodotto;

@@ -3,9 +3,7 @@ package rojinaReview.rivista.controller;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
-import rojinaReview.model.dao.VideogiocoDAO;
 import rojinaReview.model.exception.LoadingVideogamesException;
-import rojinaReview.model.exception.ServiceNotAvailableException;
 import rojinaReview.rivista.service.RivistaService;
 import rojinaReview.rivista.service.RivistaServiceImpl;
 

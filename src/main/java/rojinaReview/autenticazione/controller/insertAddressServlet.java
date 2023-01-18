@@ -7,7 +7,6 @@ import rojinaReview.autenticazione.service.AutenticazioneService;
 import rojinaReview.autenticazione.service.AutenticazioneServiceImpl;
 import rojinaReview.model.beans.Indirizzo;
 import rojinaReview.model.beans.Videogiocatore;
-import rojinaReview.model.dao.IndirizzoDAO;
 import rojinaReview.model.exception.InsertAddressException;
 
 import java.io.IOException;

@@ -1,6 +1,9 @@
-package rojinaReview.model.dao;
+package rojinaReview.model.dao.opinioneDAO;
 
 import rojinaReview.model.beans.Commento;
+import rojinaReview.model.dao.rivistaDAO.NotiziaDAO;
+import rojinaReview.model.dao.rivistaDAO.RecensioneDAO;
+import rojinaReview.model.dao.shopDAO.ProdottoDAO;
 import rojinaReview.utilities.ConPool;
 
 import java.sql.*;

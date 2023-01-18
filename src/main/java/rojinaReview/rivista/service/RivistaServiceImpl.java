@@ -1,8 +1,10 @@
 package rojinaReview.rivista.service;
 
+import rojinaReview.model.dao.autenticazioneDAO.GiornalistaDAO;
+import rojinaReview.model.dao.opinioneDAO.CommentoDAO;
+import rojinaReview.model.dao.rivistaDAO.*;
 import rojinaReview.model.exception.*;
 import rojinaReview.model.beans.*;
-import rojinaReview.model.dao.*;
 import rojinaReview.utilities.ConPool;
 
 import java.sql.Connection;

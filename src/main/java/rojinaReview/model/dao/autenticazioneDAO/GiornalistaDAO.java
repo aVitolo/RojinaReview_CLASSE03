@@ -1,4 +1,4 @@
-package rojinaReview.model.dao;
+package rojinaReview.model.dao.autenticazioneDAO;
 
 import rojinaReview.model.beans.Giornalista;
 import rojinaReview.model.beans.Utente;

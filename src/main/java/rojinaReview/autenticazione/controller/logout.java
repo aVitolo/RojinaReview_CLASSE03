@@ -5,7 +5,6 @@ import jakarta.servlet.http.*;
 import rojinaReview.autenticazione.service.AutenticazioneService;
 import rojinaReview.autenticazione.service.AutenticazioneServiceImpl;
 import rojinaReview.model.beans.Videogiocatore;
-import rojinaReview.model.dao.CarrelloDAO;
 import rojinaReview.model.exception.SavingCartException;
 
 import java.io.IOException;
